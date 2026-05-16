@@ -1,0 +1,170 @@
+## Claims (cite these by ID inline as [cNNN])
+- c2509 [definition | ghCSGRgVB_o @ 26-36s]
+  Token Embeddings are also called Vector Embeddings or Word Embeddings, though Word Embeddings is not entirely accurate terminology.
+- c2528 [definition | ghCSGRgVB_o @ 1078-1087s]
+  Token embeddings map words into a vector space where each word is represented as a vector with a fixed number of dimensions.
+- c2531 [code | ghCSGRgVB_o @ 1013-1026s]
+  import gensim.downloader as api
+  model = api.load("word2vec-google-news-300")
+  word_vectors = model
+  print(word_vectors['computer'])
+- c2555 [definition | ghCSGRgVB_o @ 2288-2302s]
+  torch.nn.Embedding is a lookup table that stores embeddings of a fixed dictionary and size, used to store word embeddings and retrieve them using indices.
+- c2556 [code | ghCSGRgVB_o @ 2288-2302s]
+  embedding_layer = torch.nn.Embedding(num_embeddings=6, embedding_dim=3)
+- c2559 [code | ghCSGRgVB_o @ 2391-2399s]
+  embedding_layer.weight
+- c2575 [definition | ghCSGRgVB_o @ 2946-2962s]
+  An embedding layer maps vocabulary IDs to dense vectors of a specified embedding dimension.
+- c2577 [code | ghCSGRgVB_o @ 2983-2991s]
+  embedding = torch.nn.Embedding(vocab_size, embedding_dim)
+  # Example: torch.nn.Embedding(4, 5) creates a 4x5 embedding matrix
+- c2978 [definition | mk-6cFebjis @ 3084-3124s]
+  Input-output pairs for LLM training are constructed based on context size, where each pair contains multiple prediction tasks corresponding to predicting the next word at each position.
+- c2980 [definition | mk-6cFebjis @ 3175-3202s]
+  A data loader is a PyTorch tool that processes data by creating input-output target pairs using a sliding window approach.
+- c2981 [definition | mk-6cFebjis @ 3262-3298s]
+  In a data loader implementation, the input tensor X contains rows representing input contexts, and the target tensor Y contains corresponding prediction targets which are the input shifted by one word.
+- c2984 [definition | mk-6cFebjis @ 3657-3680s]
+  Batch size specifies how many input-output pairs are processed before updating model parameters.
+- c2986 [definition | mk-6cFebjis @ 3686-3691s]
+  The number of workers parameter in a data loader specifies how many threads are used for parallel processing on the CPU.
+- c2993 [definition | mk-6cFebjis @ 4206-4262s]
+  An embedding layer weight matrix is a lookup table that stores vector embeddings for each token ID in the vocabulary, with dimensions of (vocabulary_size, embedding_dimension).
+- c2998 [code | mk-6cFebjis @ 4381-4407s]
+  torch.nn.Embedding(num_embeddings, embedding_dim)
+  # Creates an embedding layer with num_embeddings rows and embedding_dim columns
+  # Stores embeddings of a fixed dictionary and size
+- c3003 [code | mk-6cFebjis @ 4641-4672s]
+  vocab_size = 50257
+  embedding_dim = 256
+  token_embedding_layer = torch.nn.Embedding(vocab_size, embedding_dim)
+  # Creates embedding matrix with 50257 rows and 256 columns
+- c3006 [definition | mk-6cFebjis @ 4988-5010s]
+  Token embedding does not take into account the position of words in a sequence, so identical words at different positions receive the same embedding vector.
+- c3008 [definition | mk-6cFebjis @ 5032-5054s]
+  Positional encoding is a technique that injects additional positional information into large language models to complement token embeddings.
+- c3010 [definition | mk-6cFebjis @ 5190-5212s]
+  Relative positional encoding emphasizes the relative distance between tokens rather than their absolute positions in the sequence.
+- c3276 [definition | ufrPLpKnapU @ 247-249s]
+  Positional Encoding is the final step in LLM data pre-processing that encodes information about the position of tokens in a sequence.
+- c3292 [equation | ufrPLpKnapU @ 1120-1127s]
+  PE_{(pos,2i)} = sin(pos/10000^{2i/d_{model}})
+- c3293 [equation | ufrPLpKnapU @ 1120-1127s]
+  PE_{(pos,2i+1)} = cos(pos/10000^{2i/d_{model}})
+- c3300 [definition | ufrPLpKnapU @ 1357-1401s]
+  A token embedding matrix (or embedding layer) requires two quantities: the vector dimension (the size each token is projected to) and the vocabulary size (the number of unique token ids).
+- c3303 [code | ufrPLpKnapU @ 1419-1433s]
+  torch.nn.Embedding(num_embeddings, embedding_dim) creates an embedding layer that stores embeddings of a fixed dictionary and size, functioning as a lookup table that retrieves embeddings using token indices.
+- c3317 [definition | ufrPLpKnapU @ 1838-1853s]
+  An embedding layer is a lookup table that maps token IDs to their corresponding vector representations.
+- c3329 [code | ufrPLpKnapU @ 2412-2438s]
+  torch.arange(max_length) creates a sequence of integers from 0 to max_length-1, used to index into the positional embedding lookup table.
+- c3348 [definition | ufrPLpKnapU @ 2860-2875s]
+  Absolute positional embeddings and relative positional embeddings are two different approaches to encoding position information.
+- c3342 [fact | ufrPLpKnapU @ 2665-2690s]
+  Positional embeddings are added to token embeddings using Python broadcasting, where the same positional embedding vectors are added to each row of the token embedding matrix.
+- c2568 [fact | ghCSGRgVB_o @ 2648-2663s]
+  The embedding weight matrix functions both as a matrix of weights for vector embeddings and as a lookup table for finding vector representations by token ID.
+- c3287 [fact | ufrPLpKnapU @ 939-977s]
+  Both absolute and relative positional embeddings enable large language models to understand the order and relationship between tokens, leading to more accurate and context-aware predictions.
+- c3017 [fact | mk-6cFebjis @ 5405-5418s]
+  Token embeddings have shape 8 by 4 by 256 and positional embeddings have shape 4 by 256.
+- c2541 [fact | ghCSGRgVB_o @ 1600-1626s]
+  Token embeddings for large language models are created by converting token IDs into embedding vectors using an embedding weight matrix.
+- c3023 [fact | mk-6cFebjis @ 5545-5610s]
+  The LLM data pre-processing pipeline consists of four stages: tokenization, token embeddings, positional embeddings, and input embeddings.
+- c2594 [fact | ghCSGRgVB_o @ 3570-3578s]
+  Token embeddings alone do not encode positional information about where words appear in a sentence.
+- c2515 [fact | ghCSGRgVB_o @ 142-148s]
+  Token embeddings serve as the input to training large language models such as GPT.
+- c3283 [fact | ufrPLpKnapU @ 521-596s]
+  In absolute positional embedding, the same token receives different final embeddings when it appears at different positions in the sequence because different positional embeddings are added to the same token embedding.
+- c2992 [fact | mk-6cFebjis @ 4140-4167s]
+  Token embeddings are generated by training a neural network to create vector representations for each word in the vocabulary.
+- c3295 [fact | ufrPLpKnapU @ 1192-1208s]
+  The terms positional encoding and positional embedding are used interchangeably to refer to vectors in a higher dimensional space.
+- c3331 [fact | ufrPLpKnapU @ 2406-2454s]
+  Passing positions 0, 1, 2, and 3 to the positional embedding lookup table generates four 256-dimensional positional embedding vectors.
+- c3290 [fact | ufrPLpKnapU @ 1032-1048s]
+  GPT models (GPT-3, GPT-4) use absolute positional embeddings that are optimized during the training process.
+- c2524 [design_decision | ghCSGRgVB_o @ 869-911s]
+  Token embeddings are created by training a neural network on textual data to learn vector representations where semantically similar words have similar vectors.
+- c3018 [fact | mk-6cFebjis @ 5418-5433s]
+  When adding token embeddings and positional embeddings in Python, broadcasting converts the 4 by 256 positional embedding tensor into 8 by 4 by 256 by duplicating values eight times.
+- c2585 [fact | ghCSGRgVB_o @ 3321-3331s]
+  In convolutional neural networks, spatial features of an image are exploited before giving it as input for training, similar to how token embeddings work.
+- c2511 [fact | ghCSGRgVB_o @ 44-50s]
+  Token is a broader term than word, which is why Token Embeddings is the preferred terminology.
+- c2514 [architecture | ghCSGRgVB_o @ 57-148s]
+  The large language model workflow has three main steps: (1) tokenizing input text into tokens, (2) converting tokens into token IDs, and (3) converting token IDs into token embeddings, which serve as input to training the model.
+- c2534 [fact | ghCSGRgVB_o @ 1255-1273s]
+  Word embeddings encode semantic properties such that masculine words (king, man) and feminine words (queen, woman) are distinguishable through vector operations.
+- c3335 [fact | ufrPLpKnapU @ 2571-2588s]
+  The same positional embedding values are added to each row of the token embeddings across all 8 batches during the broadcasting operation.
+- c3280 [fact | ufrPLpKnapU @ 440-452s]
+  It is important to inject additional position information to the large language model along with capturing semantic meaning through token embeddings.
+- c3321 [architecture | ufrPLpKnapU @ 1882-1910s]
+  The embedding layer operates as a lookup mechanism that retrieves pre-stored vector representations indexed by token IDs.
+- c3021 [fact | mk-6cFebjis @ 5487-5512s]
+  Positional embedding matrix values are initialized randomly, similar to token embedding initialization.
+- c3022 [fact | mk-6cFebjis @ 5514-5538s]
+  Both token embedding and positional embedding values must be optimized during the training process of large language models.
+- c2579 [fact | ghCSGRgVB_o @ 3020-3045s]
+  An embedding layer lookup operation retrieves only the embedding vectors corresponding to the input IDs, without computing embeddings for unused vocabulary IDs.
+- c2523 [fact | ghCSGRgVB_o @ 742-755s]
+  Vector embeddings can capture semantic meaning between words, whereas random number assignment and one-hot encoding cannot.
+- c2538 [fact | ghCSGRgVB_o @ 1515-1532s]
+  The norm of the vector difference between two word embeddings is an indicator of how semantically close or distant the words are in meaning.
+- c2521 [architecture | ghCSGRgVB_o @ 615-656s]
+  Vector embeddings are constructed by representing each word as a vector where each dimension corresponds to a semantic feature (e.g., has_a_tail, is_eatable, has_4_legs, makes_sound, is_a_pet).
+- c3320 [fact | ufrPLpKnapU @ 1918-1930s]
+  Each token in the input batch is converted to a single 256-dimensional embedding vector.
+- c2526 [fact | ghCSGRgVB_o @ 929-936s]
+  Creating token embeddings for large vocabularies is computationally expensive, which is one reason why training large language models like GPT takes a huge amount of time.
+- c3275 [fact | ufrPLpKnapU @ 175-189s]
+  Without token embeddings, the semantic relationship between related words like 'dog' and 'puppy' or 'cat' and 'kitten' is lost.
+- c3012 [fact | mk-6cFebjis @ 5224-5227s]
+  GPT uses absolute positional encoding.
+- c3327 [fact | ufrPLpKnapU @ 2271-2384s]
+  The same four positional embedding vectors are reused across all input sequences in a batch because positions are identical across sequences.
+- c3011 [fact | mk-6cFebjis @ 5218-5224s]
+  Absolute positional encoding is well-suited for tasks where fixed order of tokens is crucial, such as sequence generation.
+- c3000 [fact | mk-6cFebjis @ 4440-4467s]
+  Token embedding values are learned and optimized during the LLM training process, not fixed at initialization.
+- c3001 [fact | mk-6cFebjis @ 4582-4595s]
+  The embedding layer is a lookup operation that retrieves rows from the embedding layer weight matrix using token IDs.
+- c2581 [fact | ghCSGRgVB_o @ 3102-3173s]
+  The output of embedding(token_ids) is equivalent to X @ W.T where X is the one-hot encoded input matrix and W.T is the transposed weight matrix of a linear layer.
+- c3015 [fact | mk-6cFebjis @ 5277-5288s]
+  The size of the positional embedding matrix is determined by the context length (number of positions) and the embedding dimension.
+- c2563 [fact | ghCSGRgVB_o @ 2497-2506s]
+  The first row of the embedding matrix is the vector for token ID 0, the second row is the vector for token ID 1, and so on.
+- c2587 [fact | ghCSGRgVB_o @ 3348-3362s]
+  Vector arithmetic on word embeddings can encode semantic relationships, such as king - man + woman = queen.
+- c3341 [fact | ufrPLpKnapU @ 2655-2665s]
+  The number of positional embedding vectors needed equals the context length, with one vector for each position.
+- c3277 [fact | ufrPLpKnapU @ 290-309s]
+  In token embedding, the same token ID always maps to the same vector representation regardless of its position in the input sequence.
+- c3333 [fact | ufrPLpKnapU @ 2517-2544s]
+  The positional embedding matrix has shape 4 by 256, where 4 is the sequence length and 256 is the embedding dimension, with one 256-dimensional vector per position.
+- c3013 [fact | mk-6cFebjis @ 5237-5248s]
+  Relative positional encoding is suitable for tasks like language modeling or long sequences where the same phrase can appear in different parts of the sequence.
+- c2571 [fact | ghCSGRgVB_o @ 2781-2791s]
+  You can pass multiple token IDs to the embedding layer in a single command to retrieve all their vector embeddings at once.
+- c2590 [architecture | ghCSGRgVB_o @ 3437-3442s]
+  The token embedding weight matrix has dimensions of vocabulary size (rows) by vector dimension (columns); for GPT-2, this is 50257 rows by 768 columns.
+- c2536 [fact | ghCSGRgVB_o @ 1420-1428s]
+  Semantically unrelated word pairs (paper-water) have low similarity scores in Word2Vec embeddings.
+- c3285 [fact | ufrPLpKnapU @ 838-868s]
+  Relative positional encoding allows models to generalize better to sequences of varying lengths, even if the model was trained on sequences of different lengths.
+- c2532 [fact | ghCSGRgVB_o @ 1196-1254s]
+  Vector arithmetic on word embeddings preserves semantic relationships: king + woman - man ≈ queen.
+- c3328 [fact | ufrPLpKnapU @ 2337-2379s]
+  Only four positional embedding vectors are needed, one for each position (first, second, third, fourth) in the sequence.
+- c3296 [design_decision | ufrPLpKnapU @ 1240-1246s]
+  In this hands-on implementation, input tokens are encoded into a 256-dimensional vector space for demonstration purposes.
+- c3339 [fact | ufrPLpKnapU @ 2626-2630s]
+  Every token ID in a batch is converted into a vector of size 256.
+- c2549 [fact | ghCSGRgVB_o @ 1905-1934s]
+  Training data provides information about semantic relationships between words, which is used to optimize embedding weight parameters.

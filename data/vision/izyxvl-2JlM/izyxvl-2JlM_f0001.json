@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "OpenAI GPT-2 Weights",
+  "extracted_text": "All the official weights (from 124M to 1.5B) for the Tensorflow release of GPT-2\n\nAbout Dataset\n\nDirectly retrieved from the original repository: https://github.com/openai/gpt-2\n\nThe model itself is licensed under MIT.\n\nThe banner image comes from the 6-months follow-up post: https://openai.com/blog/gpt-2-6-month-follow-up/\n\nAll rights belong to OpenAI.\n\nUsability\n8.75\n\nLicense\nOther (specified in description)\n\nExpected update frequency\nNever\n\nTags\nExercise\nNLP",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "izyxvl-2JlM_f0001",
+  "video_id": "izyxvl-2JlM",
+  "timestamp_sec": 377.299667,
+  "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0001.jpg"
+}

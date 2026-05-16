@@ -1,0 +1,74 @@
+[
+  {
+    "frame_id": "_xH-jXNFRjA_f0000",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 91.666333,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0000.jpg",
+    "phash": "f887f0d387f08760",
+    "edge_density": 0.04422966452205882,
+    "sha256": "94147936acd95bcdc5d24c9bc9173ab8931d9740a7e48f822fdd4b75cf1bb41b"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0001",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 102.733,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0001.jpg",
+    "phash": "817e017f7b017f60",
+    "edge_density": 0.043050130208333336,
+    "sha256": "e4f16f8451726fad284300cd0b05f6ed8e1c263e7c8f392e7b05bbfc32772b0b"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0002",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 564.033,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0002.jpg",
+    "phash": "9be41b57a45a3ac4",
+    "edge_density": 0.10630106209150327,
+    "sha256": "ac6f3fa8105a79e35aff9ba45aae4b4362f68f8dc161b768a0dc17372293eeba"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0003",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 959.633,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0003.jpg",
+    "phash": "b7c83257a8cc3754",
+    "edge_density": 0.09365468409586056,
+    "sha256": "9499ec2b8ef0f1fc18ed6c110fe17a007ec812854a3a529704db5623b45e457c"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0004",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 990.999667,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0004.jpg",
+    "phash": "d9a6867986c2b659",
+    "edge_density": 0.1046036730664488,
+    "sha256": "11ddee4b4eae66971d1bc46fb915e3d7a92f2fe0e1a22a5e6ad0d49afef0a50f"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0005",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 998.533,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0005.jpg",
+    "phash": "f080fe8383fe80fc",
+    "edge_density": 0.05306681049155773,
+    "sha256": "28faabcdd00485fb60d047a7aeb4da1bd6e2e4d7a2f86fe758887c8a44201436"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0006",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 1072.333,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0006.jpg",
+    "phash": "d47faa2a542a5754",
+    "edge_density": 0.11982815478622004,
+    "sha256": "cf1d3477dd6773742590e3c4feb1861d371e0a46688b0ae38962d0256fd1e14a"
+  },
+  {
+    "frame_id": "_xH-jXNFRjA_f0007",
+    "video_id": "_xH-jXNFRjA",
+    "timestamp_sec": 1078.799667,
+    "path": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0007.jpg",
+    "phash": "a17f017e068ece4d",
+    "edge_density": 0.11273041768790851,
+    "sha256": "b7d746ff968f98c991fe3a00c29b8ac6873395a147788ea66a3639fa213d13c6"
+  }
+]

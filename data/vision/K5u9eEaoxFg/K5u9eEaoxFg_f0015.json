@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing the transformation of input (1x3x6) through weight matrices (Wk, Wq, Wv) to produce queries, keys, and values, with annotations for reshaping dimensions and unrolling the last dimension to include multiple heads and head dimension.",
+  "diagram_elements": [
+    "Input (1x3x6)",
+    "Wk (weight matrix)",
+    "Wq (weight matrix)",
+    "Wv (weight matrix)",
+    "Queries (1x3x6)",
+    "Values (1x3x6)",
+    "d_out",
+    "m_tokens",
+    "Step (4): Unroll last dimension of Keys, Queries and Values",
+    "Step (5): Unroll last dimension of Keys, Queries and Values to include num_heads and head_dim"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0015",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1174.366333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0015.jpg"
+}

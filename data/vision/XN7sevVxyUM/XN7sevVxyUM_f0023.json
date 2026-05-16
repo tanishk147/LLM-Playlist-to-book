@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Published as a conference paper at ICLR 2015",
+  "extracted_text": "We used the tokenization script from the open-source machine translation package, Moses.\nIn this paper, by a \"hidden unit\", we always mean the gated hidden unit (see Appendix A.1.1).",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Two heatmap matrices (a) and (b) showing correlation patterns with French and English text labels on axes, with white and gray squares indicating varying levels of correlation on a black background.",
+  "diagram_elements": [
+    "Matrix (a) - left heatmap with French labels",
+    "Matrix (b) - right heatmap with French labels",
+    "White and gray squares indicating correlation strength",
+    "<end> markers at bottom of matrices"
+  ],
+  "confidence": 0.85,
+  "frame_id": "XN7sevVxyUM_f0023",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2433.499667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0023.jpg"
+}

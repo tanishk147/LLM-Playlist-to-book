@@ -1,0 +1,21 @@
+transformer attention self-attention multi-head cross-attention KV-cache rotary RoPE
+ALiBi positional embedding tokenizer BPE byte-pair WordPiece SentencePiece subword
+layer-norm RMSNorm pre-norm post-norm residual softmax logits cross-entropy perplexity
+gradient backpropagation Adam AdamW LAMB cosine warmup learning-rate weight-decay
+mixed-precision FP16 BF16 FP8 quantization GPTQ AWQ LoRA QLoRA PEFT adapter
+fine-tuning instruction-tuning RLHF DPO PPO reward-model preference
+embedding token vocabulary dense sparse activation GELU SiLU SwiGLU ReLU dropout
+encoder decoder GPT BERT T5 LLaMA Mistral Mixtral Falcon
+context-length sequence-length attention-mask causal-mask padding-mask
+mini-batch gradient-accumulation distributed-training data-parallel tensor-parallel
+pipeline-parallel ZeRO DeepSpeed FSDP Megatron
+inference KV-cache speculative-decoding beam-search greedy temperature top-k top-p
+sampling nucleus repetition-penalty stop-token EOS BOS
+dataset corpus webcrawl Common-Crawl C4 OpenWebText The-Pile RefinedWeb
+checkpoint shard safetensors HuggingFace
+loss-function NLL MLE autoregressive masked-language-modeling next-token-prediction
+attention-pattern induction-head circuit interpretability mechanistic
+scaling-law Chinchilla compute-optimal parameter-count FLOPs
+hidden-dim head-dim n-heads n-layers n-ctx d-model d-ff feed-forward
+matrix-multiplication GEMM CUDA Triton FlashAttention PyTorch
+embedding-matrix output-projection unembedding tied-weights

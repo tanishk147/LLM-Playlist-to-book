@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "First Law of Robotics",
+  "extracted_text": "A robot may not injure a human being or, through inaction, allow a human being to come to harm.\n\nThe GPT-2 is built using transformer decoder blocks. BERT, on the other hand, uses transformer encoder blocks. We will examine the difference in a following section. But one key difference between the two is that GPT2, like traditional language models, outputs one token at a time. Let's for example prompt a well-trained GPT-2 to recite the first law of robotics:\n\nOutput\nA robot may not injure a human being\n\nThe way these models actually work is that after each token is produced, that token is added to the sequence of",
+  "code": null,
+  "math": null,
+  "diagram_summary": "GPT-2 model generating tokens sequentially: showing output tokens 'A robot may not injure a human being' produced one at a time from the GPT-2 model.",
+  "diagram_elements": [
+    "Output tokens: A, robot, may, not, injure, a, human, being",
+    "GPT-2 model box",
+    "Arrow pointing from GPT-2 to token sequence"
+  ],
+  "confidence": 0.92,
+  "frame_id": "xbaYCf2FHSY_f0038",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 1800.299667,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0038.jpg"
+}

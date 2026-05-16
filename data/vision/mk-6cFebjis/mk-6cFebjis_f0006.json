@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Embedding \u2014 PyTorch 2.4 documentation",
+  "extracted_text": "PyTorch\nhttps://pytorch.org \u203a stable \u203a torch.nn.Embedding.html\n\nA simple lookup table that stores embeddings of a fixed dictionary and size. This module is often used to store word embeddings and retrieve them using indices.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "mk-6cFebjis_f0006",
+  "video_id": "mk-6cFebjis",
+  "timestamp_sec": 4394.733,
+  "source_image": "data/frames/mk-6cFebjis/mk-6cFebjis_f0006.jpg"
+}

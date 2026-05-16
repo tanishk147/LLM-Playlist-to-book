@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": "We can also implement dropout after this\n\nVector = Attention * Values\n(b, num_heads, num_tokens)\n(b, num_heads)\n(b, num_tokens, head_dim)\n(1, 2, 3, 3)\n(1, 2, 3, 3)\n(1, 2, 3, 3)\n(b, num_heads, num_tokens, head_dim)",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention computation showing three terminal outputs representing intermediate tensor shapes and dimensions during attention mechanism calculation with dropout implementation.",
+  "diagram_elements": [
+    "Final attention scores",
+    "Values tensor",
+    "Context vectors output",
+    "Tensor shape (1, 2, 3, 3)",
+    "Batch dimension",
+    "Number of heads",
+    "Number of tokens",
+    "Head dimension"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0067",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2848.666333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0067.jpg"
+}

@@ -1,0 +1,8 @@
+frame:0    pts:452970  pts_time:5.033
+lavfi.scene_score=1.000000
+frame:1    pts:49898970 pts_time:554.433
+lavfi.scene_score=1.000000
+frame:2    pts:50138970 pts_time:557.099667
+lavfi.scene_score=1.000000
+frame:3    pts:66635970 pts_time:740.399667
+lavfi.scene_score=1.000000

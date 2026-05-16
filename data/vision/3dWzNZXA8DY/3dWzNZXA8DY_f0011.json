@@ -1,0 +1,20 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Test Drawing",
+  "extracted_text": "Test Drawing\n\nClear\nUndo\n\nOr Select an MNIST Sample:\n\n0 1 2 3 4 5 6 7 8 9 3 2 2 0 1",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Interactive drawing interface with a black canvas for digit input, clear/undo buttons, and MNIST digit samples displayed as numbered tiles below.",
+  "diagram_elements": [
+    "Black drawing canvas",
+    "Clear button",
+    "Undo button",
+    "MNIST sample digits (0-9 and additional samples)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "3dWzNZXA8DY_f0011",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 1381.633,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0011.jpg"
+}

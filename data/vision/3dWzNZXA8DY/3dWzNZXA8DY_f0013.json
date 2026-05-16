@@ -1,0 +1,22 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Or Select an MNIST Sample:",
+  "extracted_text": "Or Select an MNIST Sample:\n\nPredicted Digit: 7",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Interactive MNIST digit selector showing a grid of handwritten digit samples (0-9) with one digit (7) highlighted by a blue box, and a predicted digit output of 7.",
+  "diagram_elements": [
+    "MNIST sample grid",
+    "Selected digit (7) with blue border",
+    "Predicted Digit: 7",
+    "Predict button",
+    "Close button",
+    "Undo button"
+  ],
+  "confidence": 0.85,
+  "frame_id": "3dWzNZXA8DY_f0013",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 1394.599667,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0013.jpg"
+}

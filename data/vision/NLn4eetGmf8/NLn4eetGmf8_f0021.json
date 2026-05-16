@@ -1,0 +1,23 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Generative AI History: Long Short Term Memory \u2013 1997",
+  "extracted_text": "LONG SHORT-TERM MEMORY NEURAL NETWORKS\n\nLSTMs are a specialized type of RNN designed to address the vanishing gradient problem, which occurs when training RNNs on long sequences.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "LSTM Recurrent Unit diagram showing the internal architecture with gates (input, forget, output) represented by colored nodes (red and blue circles) connected by lines, illustrating the flow of information through the cell.",
+  "diagram_elements": [
+    "LSTM Recurrent Unit",
+    "Cell state",
+    "Input gate",
+    "Forget gate",
+    "Output gate",
+    "Tanh activation",
+    "Sigmoid activation"
+  ],
+  "confidence": 0.85,
+  "frame_id": "NLn4eetGmf8_f0021",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 2061.933,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0021.jpg"
+}

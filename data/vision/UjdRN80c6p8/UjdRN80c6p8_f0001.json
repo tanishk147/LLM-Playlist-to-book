@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Google Search Results for 'torch.nn.Parameter'\n\nPyTorch\nhttps://pytorch.org \u203a torch.nn.parameter.Parameter.html\nParameter \u2014 PyTorch 2.4 documentation\nA kind of Tensor that is to be considered a module parameter. Parameters are Tensor subclasses, that have a very special property when used with Module s.\n\nStack Overflow\nhttps://stackoverflow.com \u203a questions \u203a understanding-t...\nUnderstanding `torch.nn.Parameter()`\ntorch.nn.Parameter is used to explicitly specify which tensors should be treated as the model's learnable parameters. So that those tensors are ...\n4 answers \u00b7 Top answer: I will break it down for you. Tensors, as you might know, are multi dim...\n\nHow to update a part of torch.nn.Parameter - Stack Overflow - 3 Jul 2022\nWhat is meaning of nn.Parameter - Stack Overflow - 17 Jul 2021\ntorch.nn.Parameter to nn.Module - Stack Overflow - 22 May 2023\nBest way to define a scalar using nn.Parameter in Pytorch - 22 Sept 2020\nMore results from stackoverflow.com\n\nPyTorch Forums\nhttps://discuss.pytorch.org \u203a practical-usage-of-nn-varia...\nPractical usage of nn.Variable() and nn.Parameter()\n8 Apr 2022 \u2014 nn.Parameter s wrap tensors and are trainable. They are initialized in nn.Module s and trained afterwards. If you are writing a custom ...\n\nGitHub\nhttps://github.com \u203a pytorch \u203a pytorch \u203a blob \u203a parameter",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "UjdRN80c6p8_f0001",
+  "video_id": "UjdRN80c6p8",
+  "timestamp_sec": 1070.299667,
+  "source_image": "data/frames/UjdRN80c6p8/UjdRN80c6p8_f0001.jpg"
+}

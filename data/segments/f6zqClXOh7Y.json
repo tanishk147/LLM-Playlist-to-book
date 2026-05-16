@@ -1,0 +1,2947 @@
+{
+  "video_id": "f6zqClXOh7Y",
+  "segments": [
+    {
+      "id": "f6zqClXOh7Y_000",
+      "title": "Recap of classification finetuning",
+      "ts_start": 0.0,
+      "ts_end": 213.0,
+      "segments": [
+        {
+          "ts_start": 4.65,
+          "ts_end": 10.77,
+          "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "f6zqClXOh7Y_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Step 2: Creating dataloaders",
+              "extracted_text": "Text messages are of varying length\n\nTo batch these messages, we have 2 options:\n\n(1) Truncate all messages to length of shortest m\n\n(2) Pad all messages to length of longest messa",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "f6zqClXOh7Y_f0000",
+              "video_id": "f6zqClXOh7Y",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 11.57,
+          "ts_end": 17.89,
+          "text": "In the last lecture, we started learning about fine-tuning, about large language models fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 18.31,
+          "ts_end": 29.06,
+          "text": "And we saw that fine-tuning essentially is adapting a pre-trained model to a specific task by training the model on additional data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 29.81,
+          "ts_end": 33.29,
+          "text": "And then we saw that there are essentially two types of fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 33.29,
+          "ts_end": 38.77,
+          "text": "The first type is instruction fine-tuning, and the second type is classification fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 39.68,
+          "ts_end": 47.76,
+          "text": "We went a step further in the previous lecture, and we started working on a hands-on project, which was based on classification fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 48.86,
+          "ts_end": 52.88,
+          "text": "The problem which we considered was that of email classification.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 53.86,
+          "ts_end": 61.18,
+          "text": "And the whole goal in this problem was for us to use a large language model for a specific task.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 61.48,
+          "ts_end": 63.74,
+          "text": "And that task was to look at emails.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 64.86,
+          "ts_end": 70.42,
+          "text": "And to classify them into either of the two categories, either spam or not a spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 72.16,
+          "ts_end": 79.72,
+          "text": "So in the last lecture, what we did was we looked at the first two steps, which I've mentioned in stage one over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 79.86,
+          "ts_end": 83.44,
+          "text": "We downloaded the email dataset and we pre-processed the dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 83.8,
+          "ts_end": 88.14,
+          "text": "So let me quickly revise what all we implemented in the previous lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 88.44,
+          "ts_end": 94.46,
+          "text": "So here's the email dataset, which we collected from the UC Irvine machine learning repository.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 95.72,
+          "ts_end": 102.7,
+          "text": "It had a data of around 747 spam emails and more than 3000 not spam emails.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 103.58,
+          "ts_end": 105.9,
+          "text": "Not spam is also called HAM over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 106.02,
+          "ts_end": 108.88,
+          "text": "So it's basically a classification between HAM and spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 109.83,
+          "ts_end": 113.39,
+          "text": "What we did then in the code was that we downloaded this dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 113.63,
+          "ts_end": 117.63,
+          "text": "So here you can see that we had a function for downloading and unzipping the dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 118.07,
+          "ts_end": 120.63,
+          "text": "And we took a look at the form of the dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 120.91,
+          "ts_end": 126.15,
+          "text": "So we saw that every point or every entry was a function of the data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 126.17,
+          "ts_end": 131.97,
+          "text": "So every entry in the data was essentially a text and then there was a label, HAM, which means no spam and spam, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 132.21,
+          "ts_end": 140.23,
+          "text": "And then we saw that there were 4825 entries for no spam and there were only 747 entries for a spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 140.73,
+          "ts_end": 143.29,
+          "text": "What we did next was that we balanced the dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 143.65,
+          "ts_end": 152.07,
+          "text": "We randomly sampled 747 entries from no spam so that the entries of both spam as well as no spam is equal to 747.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 152.89,
+          "ts_end": 156.17,
+          "text": "Then what we did was instead of having spam and HAM as labels,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 156.17,
+          "ts_end": 157.25,
+          "text": "we encoded them.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 157.41,
+          "ts_end": 161.25,
+          "text": "So HAM was encoded to zero and spam is encoded to one.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 161.95,
+          "ts_end": 166.73,
+          "text": "Finally, we took the entire dataset and we split it into training, testing and validation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 167.09,
+          "ts_end": 176.07,
+          "text": "We used 70% of the data for training, 10% of the data for validation and the remaining 20% of the data for testing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 177.36,
+          "ts_end": 181.9,
+          "text": "And we converted our data frames into CSV files.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 182.14,
+          "ts_end": 186.64,
+          "text": "So at this stage where we are in right now, we have the CSV files for the training,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 186.9,
+          "ts_end": 189.22,
+          "text": "the validation data, the validation data and the testing data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 190.53,
+          "ts_end": 194.53,
+          "text": "Eventually, what we need to do is that we need to use a large language model architecture,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 194.83,
+          "ts_end": 196.61,
+          "text": "something like what I've defined over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 197.03,
+          "ts_end": 202.4,
+          "text": "What will feed into this architecture is the input text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 203.19,
+          "ts_end": 206.73,
+          "text": "And what we will aim to get out of this is whether it's a spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 207.8,
+          "ts_end": 211.67,
+          "text": "So whether it's a spam or it's not a spam.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "f6zqClXOh7Y_001",
+      "title": "Datasets and Dataloaders introduction",
+      "ts_start": 213.0,
+      "ts_end": 354.0,
+      "segments": [
+        {
+          "ts_start": 213.17,
+          "ts_end": 217.57,
+          "text": "However, to reach this model stage, there is still one more step which needs to be done.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 217.67,
+          "ts_end": 219.67,
+          "text": "And that is the main purpose of today's lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 219.69,
+          "ts_end": 223.59,
+          "text": "In today's lecture, we are going to learn about creating data loaders.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 224.16,
+          "ts_end": 231.72,
+          "text": "So if you remember, we have learned about data loaders earlier when we looked at LLM preprocessing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 231.78,
+          "ts_end": 238.02,
+          "text": "And we saw that input target pairs in a large language model needed to be fed through a data loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 238.04,
+          "ts_end": 239.86,
+          "text": "It's just better to manage the data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 240.02,
+          "ts_end": 247.71,
+          "text": "And at that time, we had utilized the dataset and dataset and data loader in PyTorch.",
+          "frame_ids": [
+            "f6zqClXOh7Y_f0001"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 247.93,
+          "ts_end": 250.79,
+          "text": "So if you type dataset and data loader syntax, you will get the data loader.",
+          "frame_ids": [
+            "f6zqClXOh7Y_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Datasets & DataLoaders",
+              "extracted_text": "Code for processing data samples can get messy and hard to maintain; we ideally want our dataset code to be decoupled from our model training code for better readability and modularity. PyTorch provides two data primitives:\n\ntorch.utils.data.DataLoader and torch.utils.data.Dataset that allow you to use pre-loaded datasets as well as your own data. Dataset stores the samples and their corresponding labels, and DataLoader wraps an iterable around the Dataset to enable easy access to the samples.\n\nPyTorch domain libraries provide a number of pre-loaded datasets (such as FashionMNIST) that subclass torch.utils.data.Dataset and implement functions specific to the particular data. They can be used to prototype and benchmark your model. You can find them here: Image Datasets, Text Datasets, and Audio Datasets\n\nLoading a Dataset\n\nHere is an example of how to load the Fashion-MNIST dataset from TorchVision. Fashion-MNIST is a dataset of Zalando's article images consisting of 60,000 training examples and 10,000 test examples. Each example comprises a 28x28 grayscale image and an associated label from one of 10 classes.",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "f6zqClXOh7Y_f0002",
+              "video_id": "f6zqClXOh7Y",
+              "timestamp_sec": 250.699667,
+              "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 250.81,
+          "ts_end": 258.19,
+          "text": "PyTorch, you will see that PyTorch provides torch.utils.dataloader, torch.utils.data.dataset",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 258.19,
+          "ts_end": 265.73,
+          "text": "that allows us to use our own dataset to essentially we can get easy access to samples, we can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 265.73,
+          "ts_end": 270.54,
+          "text": "easily run batches on our data, we can even do parallel processing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 270.8,
+          "ts_end": 274.12,
+          "text": "So it's highly recommended to use datasets and data loaders.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 274.22,
+          "ts_end": 279.54,
+          "text": "I'll explain to you what these mean exactly and that's the main purpose of today's lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 279.54,
+          "ts_end": 284.16,
+          "text": "Essentially, you can think of today's lecture as okay, we have got the dataset, how do we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 284.16,
+          "ts_end": 290.7,
+          "text": "bucket them into input target pairs so that we manage the data quite effectively, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 291.51,
+          "ts_end": 292.87,
+          "text": "Okay, so let's see.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 293.69,
+          "ts_end": 299.33,
+          "text": "Ultimately, at the end of the lecture, we want to get to a stage like this where let's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 299.36,
+          "ts_end": 306.42,
+          "text": "say an email is given, we want to convert this email into tokens and we want every single",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 306.42,
+          "ts_end": 309.04,
+          "text": "image to be converted into the same number of tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 309.04,
+          "ts_end": 314.06,
+          "text": "So that one, so this is one full batch, you can see that this batch consists of eight",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 314.06,
+          "ts_end": 318.6,
+          "text": "emails and all the emails have a length of 120 tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 319.14,
+          "ts_end": 326.69,
+          "text": "This will be my input and corresponding to each input email, there is either zero or",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 326.69,
+          "ts_end": 326.87,
+          "text": "one.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 327.01,
+          "ts_end": 331.03,
+          "text": "So here's my input tensor over here and this is my target tensor over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 331.78,
+          "ts_end": 336.7,
+          "text": "The reason I'm creating data loaders and the reason we are using this dataset and data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 336.7,
+          "ts_end": 340.14,
+          "text": "loaders is ultimately we want to take our dataset and convert it.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 340.38,
+          "ts_end": 345.44,
+          "text": "Into input target batches like these, so this is just one batch, we'll have multiple batches",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 345.44,
+          "ts_end": 347.68,
+          "text": "since we have 747 samples.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 347.9,
+          "ts_end": 350.08,
+          "text": "So this is a batch of only eight samples.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 351.16,
+          "ts_end": 353.84,
+          "text": "So this is where we want to reach at the end of the lecture.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "f6zqClXOh7Y_002",
+      "title": "Equal text length for all data samples",
+      "ts_start": 354.0,
+      "ts_end": 506.0,
+      "segments": [
+        {
+          "ts_start": 354.44,
+          "ts_end": 361.5,
+          "text": "But at the start of the lecture, we are at this point where we have text and here I've",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 361.5,
+          "ts_end": 366.92,
+          "text": "provided a snippet of what each email looks like and we have labels as zero or one.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 366.98,
+          "ts_end": 368.18,
+          "text": "This is where we are right now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 368.52,
+          "ts_end": 369.2,
+          "text": "But here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 369.2,
+          "ts_end": 373.94,
+          "text": "If you see, we want every text email to be of the same token length, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 374.36,
+          "ts_end": 379.22,
+          "text": "However, if you look at the email length, the email length is not the same.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 379.3,
+          "ts_end": 381.96,
+          "text": "One email might be longer, one email might be shorter.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 382.4,
+          "ts_end": 388.18,
+          "text": "How do we make sure that all the email or all the text messages rather are of the same length?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 388.94,
+          "ts_end": 393.14,
+          "text": "So the first problem is that in our dataset, the text messages are of varying length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 393.72,
+          "ts_end": 396.04,
+          "text": "But we want to create a batch like this, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 396.08,
+          "ts_end": 399.84,
+          "text": "And when we are dealing with batches, every row here should",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 399.84,
+          "ts_end": 399.98,
+          "text": "have the same length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 400.0,
+          "ts_end": 401.1,
+          "text": "They should have the same number of columns.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 401.34,
+          "ts_end": 405.22,
+          "text": "So we need to somehow make sure that every text message has the same length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 405.77,
+          "ts_end": 407.81,
+          "text": "And there are two options to do this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 408.05,
+          "ts_end": 413.49,
+          "text": "First what we do is that you check all the emails and then you find that email which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 413.49,
+          "ts_end": 414.43,
+          "text": "has the shortest length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 414.61,
+          "ts_end": 421.02,
+          "text": "So let's say, let's say there are five emails right now and whose lengths I've given to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 421.02,
+          "ts_end": 423.68,
+          "text": "be representative by these sizes.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 423.82,
+          "ts_end": 424.58,
+          "text": "There are five emails.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 424.76,
+          "ts_end": 428.56,
+          "text": "The first option is that you just look at the shortest length, which is this, and you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 428.56,
+          "ts_end": 430.32,
+          "text": "truncate all other emails to this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 431.83,
+          "ts_end": 435.73,
+          "text": "And you get rid of the remaining part in all these other images.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 436.41,
+          "ts_end": 440.01,
+          "text": "So then the size of all the emails will be the same or the text messages.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 440.19,
+          "ts_end": 441.97,
+          "text": "And then we can group them in a batch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 442.41,
+          "ts_end": 446.05,
+          "text": "Can you think of what the disadvantage would be of this particular approach?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 447.92,
+          "ts_end": 452.54,
+          "text": "The disadvantage would be that we'll use all of this information which is present",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 453.18,
+          "ts_end": 454.66,
+          "text": "otherwise in the longer text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 455.06,
+          "ts_end": 462.22,
+          "text": "So if the dataset consists of emails, which are much longer than this shorter, shortest email,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 462.32,
+          "ts_end": 462.92,
+          "text": "then we'll lose all the information.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 462.92,
+          "ts_end": 463.76,
+          "text": "We'll lose all of that data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 464.08,
+          "ts_end": 465.92,
+          "text": "So this is not a recommended approach.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 466.28,
+          "ts_end": 469.04,
+          "text": "So what can we do as an alternative approach?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 469.34,
+          "ts_end": 471.88,
+          "text": "Well, the alternative approach is as follows.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 472.02,
+          "ts_end": 474.14,
+          "text": "What if we use the longest?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 474.56,
+          "ts_end": 480.78,
+          "text": "So what if we use the first, let me rub this so that all of us are on the same page.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 481.0,
+          "ts_end": 482.52,
+          "text": "Okay, so I've rubbed this now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 482.86,
+          "ts_end": 485.76,
+          "text": "So what if we use the longest email?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 487.17,
+          "ts_end": 492.31,
+          "text": "Let's say this is the longest email and then for all the other emails, we pair them with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 492.31,
+          "ts_end": 493.11,
+          "text": "certain tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 493.94,
+          "ts_end": 499.0,
+          "text": "We pair them, which means we add additional tokens till they reach the longest email.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 500.62,
+          "ts_end": 504.4,
+          "text": "So this is what we are actually going to do because this will make sure that we don't",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 504.4,
+          "ts_end": 505.66,
+          "text": "lose out on any information.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "f6zqClXOh7Y_003",
+      "title": "End of text padding",
+      "ts_start": 506.0,
+      "ts_end": 782.0,
+      "segments": [
+        {
+          "ts_start": 506.35,
+          "ts_end": 509.27,
+          "text": "So your question would be what are we going to pair them with?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 509.39,
+          "ts_end": 513.03,
+          "text": "We are going to pair them with a token which is called as the end of text token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 516.79,
+          "ts_end": 518.41,
+          "text": "I'll talk about this in a moment.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 519.11,
+          "ts_end": 524.55,
+          "text": "But first, let me illustrate what does it mean by we are going to pair all the messages",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 525.49,
+          "ts_end": 526.83,
+          "text": "to match the length of the email.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 526.83,
+          "ts_end": 533.29,
+          "text": "So the way this looks like is that let's say we have a first text message, we tokenize",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 533.29,
+          "ts_end": 534.33,
+          "text": "it first, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 534.53,
+          "ts_end": 540.59,
+          "text": "And the way to tokenize any given sentence is basically we are going to use the byte",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 540.59,
+          "ts_end": 541.27,
+          "text": "pair encoder.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 541.45,
+          "ts_end": 546.91,
+          "text": "So if you have followed the previous lectures, there is this library called TikToken and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 546.91,
+          "ts_end": 550.25,
+          "text": "TikToken is a tokenizer library which OpenAI uses.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 550.53,
+          "ts_end": 555.03,
+          "text": "What this TikToken does is that you give it any sentence, it converts it into a bunch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 555.03,
+          "ts_end": 555.81,
+          "text": "of token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 555.81,
+          "ts_end": 561.01,
+          "text": "Now, it's a byte pair encoder, which means every word is not equal to one token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 561.49,
+          "ts_end": 566.31,
+          "text": "Let's say if you have given the word hello world, this will not just be two tokens simply",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 566.77,
+          "ts_end": 568.85,
+          "text": "or three tokens because of the spacebar.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 569.25,
+          "ts_end": 571.51,
+          "text": "Byte pair encoder is a sub word tokenizer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 571.79,
+          "ts_end": 573.65,
+          "text": "So it's a bit more complex than that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 574.01,
+          "ts_end": 581.21,
+          "text": "And based on this tokenizer, every sentence will be converted into a bunch of tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 581.47,
+          "ts_end": 586.11,
+          "text": "So the first step is that we are going to take input messages and we are going to tokenize",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 586.13,
+          "ts_end": 592.51,
+          "text": "them using the byte pair encoder tokenizer, which is the one which also GPT models use.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 592.89,
+          "ts_end": 596.43,
+          "text": "So every text is going to be converted into token IDs like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 596.57,
+          "ts_end": 599.63,
+          "text": "Now, of course, some text would be longer, some would be shorter.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 599.81,
+          "ts_end": 601.73,
+          "text": "So the number of token IDs won't match.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 602.23,
+          "ts_end": 607.41,
+          "text": "What we are then going to do is that let's say I have only three text messages in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 607.41,
+          "ts_end": 607.85,
+          "text": "data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 607.97,
+          "ts_end": 609.75,
+          "text": "This looks to be the longest, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 610.11,
+          "ts_end": 614.55,
+          "text": "So what I'll do is that for the other ones, I'm going to pair this with a token called",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 614.55,
+          "ts_end": 622.33,
+          "text": "token name 50256 until the length of all the token IDs is the same.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 622.75,
+          "ts_end": 624.75,
+          "text": "Now what is this 50256?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 624.97,
+          "ts_end": 628.55,
+          "text": "Let me show you what this 50256 is.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 628.73,
+          "ts_end": 633.73,
+          "text": "So here's what I'm showing you on the screen right now is the vocabulary which is used",
+          "frame_ids": [
+            "f6zqClXOh7Y_f0003"
+          ],
+          "visuals": [
+            {
+              "category": "code",
+              "skip": false,
+              "title": null,
+              "extracted_text": "Tokenization is skipped for long lines for performance reasons. This can be configured via editor.maxTokenizationLineLength.",
+              "code": {
+                "language": "json",
+                "content": "{\"!\": 0, \"\\\"\": 1, \"#\": 2, \"$\": 3, \"%\": 4, \"&\": 5, \"'\": 6, \"(\": 7, \")\": 8, \"*\": 9, \"+\": 10, \",\": 11, \"-\": 12, \".\": 13, \"/\": 14, \"0\": 15, \"1\": 16, \"2\": 17, \"3\": 18, \"4\": 19, \"5\": 20, \"6\": 21, \"7\": 22, \"8\": 23, \"9\": 24, \":\": 25, \";\": 26, \"<\": 27, \"=\": 28, \">\": 29, \"?\": 30, \"@\": 31, \"A\": 32, \"B\": 33, \"C\": 34, \"D\": 35, \"E\": 36, \"F\": 37, \"G\": 38, \"H\": 39, \"I\": 40, \"J\": 41, \"K\": 42, \"L\": 43, \"M\": 44, \"N\": 45, \"O\": 46, \"P\": 47, \"Q\": 48, \"R\": 49, \"S\": 50, \"T\": 51, \"U\": 52, \"V\": 53, \"W\": 54, \"X\": 55, \"Y\": 56, \"Z\": 57, \"[\": 58, \"\\\\\": 59, \"]\": 60, \"^\": 61, \"_\": 62, \"`\": 63, \"a\": 64, \"b\": 65, \"c\": 66, \"d\": 67, \"e\": 68, \"f\": 69, \"g\": 70, \"h\": 71, \"i\": 72, \"j\": 73, \"k\": 74, \"l\": 75, \"m\": 76, \"n\": 77, \"o\": 78, \"p\": 79, \"q\": 80, \"r\": 81, \"s\": 82, \"t\": 83, \"u\": 84, \"v\": 85, \"w\": 86, \"x\": 87, \"y\": 88, \"z\": 89, \"{\": 90, \"|\": 91, \"}\": 92, \"~\": 93, \"\\u00a1\": 94, \"\\u00a2\": 95, \"\\u00a3\": 96, \"\\u00a4\": 97, \"\\u00a5\": 98, \"\\u00a6\": 99, \"\\u00a7\": 100, \"\\u00a8\": 101, \"\\u00a9\": 102, \"\\u00aa\": 103, \"\\u00ab\": 104, \"\\u00ac\": 105, \"\\u00ad\": 106, \"\\u00ae\": 107, \"\\u00af\": 108, \"\\u00b0\": 109, \"\\u00b1\": 110, \"\\u00b2\": 111, \"\\u00b3\": 112, \"\\u00b4\": 113, \"\\u00b5\": 114, \"\\u00b6\": 115, \"\\u00b7\": 116, \"\\u00b8\": 117, \"\\u00b9\": 118, \"\\u00ba\": 119, \"\\u00bb\": 120, \"\\u00bc\": 121, \"\\u00bd\": 122, \"\\u00c0\": 124, \"\\u00c1\": 125"
+              },
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "f6zqClXOh7Y_f0003",
+              "video_id": "f6zqClXOh7Y",
+              "timestamp_sec": 628.966333,
+              "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0003.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 633.73,
+          "ts_end": 634.57,
+          "text": "by GPT-2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 634.75,
+          "ts_end": 639.05,
+          "text": "What is meant by vocabulary is that there are tokens and every token has an associated",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 639.05,
+          "ts_end": 640.73,
+          "text": "token ID, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 640.99,
+          "ts_end": 643.53,
+          "text": "So now if you scroll down to the end of this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 643.53,
+          "ts_end": 651.45,
+          "text": "You will see that the vocabulary size which GPT-2 uses is essentially 50257.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 652.28,
+          "ts_end": 654.42,
+          "text": "So it starts with zero, the token ID.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 654.62,
+          "ts_end": 658.36,
+          "text": "And if you look at the last entry in this vocabulary, it's this end of text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 658.78,
+          "ts_end": 662.78,
+          "text": "And the token ID corresponding to this end of text is 50256.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 663.22,
+          "ts_end": 668.78,
+          "text": "This signifies that we have reached the end of a document and or end of a sentence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 668.88,
+          "ts_end": 670.52,
+          "text": "And then we are starting the next sentence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 670.96,
+          "ts_end": 674.24,
+          "text": "So typically this end of text token is used by GPT-2 users.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 674.24,
+          "ts_end": 678.28,
+          "text": "The token ID is used by while training GPT-2 to distinguish between separate document sources.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 679.08,
+          "ts_end": 683.72,
+          "text": "And what this vocabulary means is that essentially if you are given any text right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 684.46,
+          "ts_end": 689.08,
+          "text": "It's first, the text is essentially converted into a bunch of tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 689.42,
+          "ts_end": 695.06,
+          "text": "And then those tokens are assigned token IDs based on this vocabulary or based on this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 695.06,
+          "ts_end": 695.46,
+          "text": "dictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 695.92,
+          "ts_end": 701.5,
+          "text": "So it's kind of the you can think of it like a dictionary, Oxford dictionary, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 701.56,
+          "ts_end": 703.24,
+          "text": "You have words and you have their meanings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 703.62,
+          "ts_end": 704.26,
+          "text": "Similarly, the dictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 704.28,
+          "ts_end": 707.18,
+          "text": "Here you have words and there is a token ID associated with each word.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 707.5,
+          "ts_end": 709.56,
+          "text": "So remember this 50256.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 709.7,
+          "ts_end": 711.2,
+          "text": "That's essentially the end of text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 711.44,
+          "ts_end": 717.08,
+          "text": "What we are going to do here is that all the text messages which have a lesser number of",
+          "frame_ids": [
+            "f6zqClXOh7Y_f0004"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "Text tokenization and padding pipeline showing three example texts being converted to token IDs and padded to the longest sequence length using padding token 50256.",
+              "diagram_elements": [
+                "Input text message",
+                "Tokenize texts",
+                "Token IDs",
+                "Pad to longest sequence",
+                "Padded token IDs",
+                "Padding token 50256",
+                "No padding in this last example because it is the longest message"
+              ],
+              "confidence": 0.92,
+              "frame_id": "f6zqClXOh7Y_f0004",
+              "video_id": "f6zqClXOh7Y",
+              "timestamp_sec": 711.699667,
+              "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0004.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 717.48,
+          "ts_end": 722.76,
+          "text": "token IDs, we are going to append them with this end of text as the padding token 50256.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 723.46,
+          "ts_end": 726.02,
+          "text": "Ideally we can use any token as the padding token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 726.16,
+          "ts_end": 730.76,
+          "text": "But the thing is the end of text just is make symbolic sense, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 730.82,
+          "ts_end": 733.74,
+          "text": "Because it signifies that there are no additional.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 734.48,
+          "ts_end": 735.42,
+          "text": "Letters over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 735.66,
+          "ts_end": 741.06,
+          "text": "So when the model will encounter end of text, it will not get confused by any random word.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 741.56,
+          "ts_end": 744.64,
+          "text": "So that way, that's why we have used 50256.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 746.48,
+          "ts_end": 746.96,
+          "text": "Okay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 747.04,
+          "ts_end": 751.5,
+          "text": "So overall the workflow which we are going to follow is going to look like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 751.6,
+          "ts_end": 756.92,
+          "text": "We have the, we have the input text, which is the CSV files in the code right now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 757.16,
+          "ts_end": 760.08,
+          "text": "We have the train validation and test input text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 760.22,
+          "ts_end": 764.56,
+          "text": "We are going to use a tokenizer and we are going to convert this input text into a bunch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 764.56,
+          "ts_end": 765.34,
+          "text": "of token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 765.82,
+          "ts_end": 770.24,
+          "text": "Then what we are going to do is that we are going to look for that sentence or that email",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 770.24,
+          "ts_end": 772.38,
+          "text": "in our dataset, which is the longest email.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 772.68,
+          "ts_end": 777.5,
+          "text": "And then we are going to make sure that all the text messages have that same length by",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 777.95,
+          "ts_end": 781.63,
+          "text": "padding them with this end of text token of 50256.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "f6zqClXOh7Y_004",
+      "title": "Coding the Spam Dataset class in Python",
+      "ts_start": 782.0,
+      "ts_end": 1370.0,
+      "segments": [
+        {
+          "ts_start": 782.13,
+          "ts_end": 786.47,
+          "text": "Now let me take you through code and show you how this is exactly implemented.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 788.28,
+          "ts_end": 788.76,
+          "text": "Okay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 788.9,
+          "ts_end": 790.4,
+          "text": "So yeah.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 793.69,
+          "ts_end": 797.61,
+          "text": "So as we have seen earlier, we first need to implement a PyTorch dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 798.15,
+          "ts_end": 803.57,
+          "text": "Which specifies exactly how the data is loaded and processed before we can instantiate the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 803.57,
+          "ts_end": 804.15,
+          "text": "data loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 804.29,
+          "ts_end": 805.79,
+          "text": "So there are two things here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 805.83,
+          "ts_end": 808.27,
+          "text": "There is a dataset and a data loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 809.37,
+          "ts_end": 812.23,
+          "text": "Dataset specifies the how, how the data is supposed to be loaded.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 812.37,
+          "ts_end": 817.83,
+          "text": "What are the input and target pairs and data loader essentially, then we can instantiate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 817.83,
+          "ts_end": 818.53,
+          "text": "the data loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 818.59,
+          "ts_end": 820.35,
+          "text": "But first the dataset needs to be defined.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 820.63,
+          "ts_end": 824.59,
+          "text": "So that's why initially what we are going to do is we are going to define the spam dataset",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 824.59,
+          "ts_end": 825.11,
+          "text": "class.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 825.98,
+          "ts_end": 828.02,
+          "text": "What this class is going to do is that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 828.24,
+          "ts_end": 831.74,
+          "text": "First of all, it's going to identify the longest sequence in the training dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 832.18,
+          "ts_end": 833.88,
+          "text": "Why do we need the longest sequence?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 834.06,
+          "ts_end": 838.1,
+          "text": "Because we are going to make sure that all the sequences are of the same length as the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 838.1,
+          "ts_end": 838.68,
+          "text": "longest sequence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 839.28,
+          "ts_end": 843.76,
+          "text": "Second, what it does is that it takes every text message and then it converts it into",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 843.76,
+          "ts_end": 844.32,
+          "text": "token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 844.58,
+          "ts_end": 849.48,
+          "text": "And finally, the most important thing it does is that it ensures that all the other sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 850.12,
+          "ts_end": 853.96,
+          "text": "are padded with a padding token to match the length of the longest sequence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 854.68,
+          "ts_end": 858.22,
+          "text": "Essentially this spam dataset class is going to perform all of the three steps.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 858.22,
+          "ts_end": 859.72,
+          "text": "Which we described over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 861.27,
+          "ts_end": 864.41,
+          "text": "So let's get right into it and start understanding the class.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 864.67,
+          "ts_end": 869.47,
+          "text": "When you create an instance of the spam dataset class, you will need to specify some things.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 869.53,
+          "ts_end": 871.53,
+          "text": "So first you have to specify the CSV file.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 871.65,
+          "ts_end": 875.95,
+          "text": "So imagine that we have given the training data CSV file, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 876.25,
+          "ts_end": 880.51,
+          "text": "And second, you have to specify what is the tokenizer which you are using.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 880.61,
+          "ts_end": 886.81,
+          "text": "We are going to use this TikToken library, a byte pair encoder tokenizer to convert the,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 888.28,
+          "ts_end": 889.14,
+          "text": "to convert.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 889.24,
+          "ts_end": 889.74,
+          "text": "Essentially.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 889.74,
+          "ts_end": 894.34,
+          "text": "The sentence into a bunch of tokens, and then those tokens will be converted into token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 894.34,
+          "ts_end": 894.66,
+          "text": "IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 896.92,
+          "ts_end": 897.36,
+          "text": "Right.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 897.5,
+          "ts_end": 899.32,
+          "text": "Then we have to specify the max length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 899.44,
+          "ts_end": 905.62,
+          "text": "So this max length is basically, if you look at the output batch, which we saw, the max",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 905.62,
+          "ts_end": 912.26,
+          "text": "length will be the maximum length of the email in the entire dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 912.44,
+          "ts_end": 914.92,
+          "text": "So we are going to look at that email, which has the longest length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 915.16,
+          "ts_end": 919.36,
+          "text": "But here, what we have given is that we have even given a provision for the user to externally",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 919.36,
+          "ts_end": 920.64,
+          "text": "define the maximum length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 920.64,
+          "ts_end": 921.72,
+          "text": "That is also possible.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 923.66,
+          "ts_end": 926.44,
+          "text": "Now the pad token ID is 50256.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 926.56,
+          "ts_end": 930.92,
+          "text": "This means that all the emails, which have a length shorter than the maximum length,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 931.04,
+          "ts_end": 933.08,
+          "text": "we are going to pad them with 50256.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 933.92,
+          "ts_end": 938.68,
+          "text": "So the first step, as we have seen on the whiteboard over here, first step is this tokenization,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 938.9,
+          "ts_end": 939.04,
+          "text": "right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 939.38,
+          "ts_end": 943.62,
+          "text": "So what we are going to do is that we are going to take the tokenizer and this will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 943.62,
+          "ts_end": 945.44,
+          "text": "be the byte pair encoder tokenizer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 946.65,
+          "ts_end": 951.73,
+          "text": "We are going to take the TEXT, which is the text file.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 952.17,
+          "ts_end": 952.61,
+          "text": "And we are going to take the text file.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 952.61,
+          "ts_end": 956.85,
+          "text": "And then what we are going to do is that we are going to take every single sentence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 956.85,
+          "ts_end": 960.01,
+          "text": "and then we are going to convert that sentence into a bunch of token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 960.23,
+          "ts_end": 965.69,
+          "text": "So tokenizer.encode takes sentences, converts it into tokens, and then using the vocabulary,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 965.81,
+          "ts_end": 967.45,
+          "text": "converts those tokens into token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 967.97,
+          "ts_end": 971.11,
+          "text": "So this data is pd.readcsv.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 971.35,
+          "ts_end": 973.65,
+          "text": "So let's say we have passed the CSV file.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 973.97,
+          "ts_end": 979.33,
+          "text": "First we'll store the data of the CSV file into this data object.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 979.61,
+          "ts_end": 982.33,
+          "text": "And then what we'll do is that we'll look at every single.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 982.33,
+          "ts_end": 987.95,
+          "text": "Email or text message in this data and convert it into a bunch of token IDs to get a sense",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 987.95,
+          "ts_end": 989.75,
+          "text": "of the visual representation of this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 989.81,
+          "ts_end": 990.43,
+          "text": "Take a look here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 990.85,
+          "ts_end": 995.75,
+          "text": "So at this first step, what we are doing is that we are taking every single text message",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 995.75,
+          "ts_end": 998.15,
+          "text": "and converting it into a bunch of token IDs, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 999.2,
+          "ts_end": 1004.3,
+          "text": "Now if the user has not specified a maximum length here, what we'll first do is we'll",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1004.3,
+          "ts_end": 1008.16,
+          "text": "find the maximum length of the text message in the entire data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1008.32,
+          "ts_end": 1012.06,
+          "text": "And that will be found through this longest encoded length token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1012.24,
+          "ts_end": 1012.72,
+          "text": "And then what we are going to do is that we are going to look at the maximum length of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1012.74,
+          "ts_end": 1013.06,
+          "text": "the text message in the entire data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1013.06,
+          "ts_end": 1014.2,
+          "text": "And we'll use the longest encoded length function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1014.6,
+          "ts_end": 1018.0,
+          "text": "And if you scroll down below, you will see the longest encoded length.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1018.12,
+          "ts_end": 1023.44,
+          "text": "What it does is that it just finds the length of all of the text messages, and then it returns",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1023.44,
+          "ts_end": 1028.68,
+          "text": "the maximum length among all the text messages.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1029.18,
+          "ts_end": 1033.62,
+          "text": "So now max length variable contains the longest email length, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1034.39,
+          "ts_end": 1039.09,
+          "text": "This is if the user does not specify the max length, if the user has specified the max",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1039.09,
+          "ts_end": 1042.45,
+          "text": "length, then the max length will be equal to whatever the user has specified.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1042.87,
+          "ts_end": 1049.27,
+          "text": "awesome now if there are some sequences in the data set which are longer than the maximum length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1049.27,
+          "ts_end": 1053.95,
+          "text": "this might happen if the user has specified the max length and there are some sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1053.95,
+          "ts_end": 1059.39,
+          "text": "which are longer than the maximum length we'll have to truncate those text messages so that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1060.13,
+          "ts_end": 1065.59,
+          "text": "their length equals the maximum length if the maximum length is selected from the data itself",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1065.59,
+          "ts_end": 1073.16,
+          "text": "this problem will not arise right now this is the next part which is the most important what we do",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1073.16,
+          "ts_end": 1082.64,
+          "text": "is that for all the text messages we are going to append the token ids this pad token id which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1082.64,
+          "ts_end": 1087.96,
+          "text": "is 50256 we are going to append it and how many such token ids we are going to append we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1087.96,
+          "ts_end": 1093.92,
+          "text": "going to append how many of our token ids which are needed to get that text message to the maximum",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1093.92,
+          "ts_end": 1100.58,
+          "text": "length so that is essentially shown in this step we are going to append the token ids append the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1101.1,
+          "ts_end": 1104.14,
+          "text": "50257 token id to all the text messages so that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1104.24,
+          "ts_end": 1108.42,
+          "text": "all of them have the same size and what is that size that size is max length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1111.17,
+          "ts_end": 1116.45,
+          "text": "great and then finally this function is the most important what this function will do is that it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1116.45,
+          "ts_end": 1122.61,
+          "text": "will uh create two such tensors it will create a tensor name encoded and it will create a tensor",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1122.61,
+          "ts_end": 1130.62,
+          "text": "name label the tensor name encoded basically uh will will make sure that every text message has uh",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1131.84,
+          "ts_end": 1136.72,
+          "text": "has this kind of encoding in terms of token ids like this what i've",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1136.96,
+          "ts_end": 1142.0,
+          "text": "done on the screen right now so let me just rename this a bit so this matrix which you are seeing on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1142.0,
+          "ts_end": 1149.64,
+          "text": "the screen right now and let me mark it this this matrix here that is the encoding matrix or the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1149.64,
+          "ts_end": 1156.88,
+          "text": "encoded uh let me check the name here the name is encoded so this is the encoded matrix or tensor i",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1156.88,
+          "ts_end": 1161.28,
+          "text": "should call it and this matrix which i'm or this tensor which i'm highlighting right now that is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1161.28,
+          "ts_end": 1168.07,
+          "text": "the label so what this data set will do is that the main function it will is the get item function and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1168.37,
+          "ts_end": 1173.63,
+          "text": "when you call get item it will convert the data set into two tensors the encoded tensor and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1173.63,
+          "ts_end": 1179.13,
+          "text": "labels tensor the encoded will make sure that every sentence in the data set is converted into",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1179.13,
+          "ts_end": 1184.31,
+          "text": "a bunch of token ids and all of the sentences have equal length so that they can be batched together",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1184.86,
+          "ts_end": 1188.03,
+          "text": "and then the labels and tensor will just have zeros or ones",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1189.53,
+          "ts_end": 1198.42,
+          "text": "right so this is essentially uh what we are doing in the spam data set class okay now uh i've just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1198.42,
+          "ts_end": 1198.92,
+          "text": "written",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1199.56,
+          "ts_end": 1205.8,
+          "text": "here what the spam data set class does the spam data set class loads the data from the csv files",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1205.8,
+          "ts_end": 1211.54,
+          "text": "which we have created earlier tokenizes the text using the gpt2 tokenizer from tick token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1212.06,
+          "ts_end": 1217.71,
+          "text": "and then allows us to pad or truncate the sequences to uniform length defined by either",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1217.71,
+          "ts_end": 1222.37,
+          "text": "the longest sequence or predefined maximum length if the user defines their own maximum length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1223.1,
+          "ts_end": 1228.48,
+          "text": "what we can now do is we can create an instance of the spam data set class using the train.csv file",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1229.72,
+          "ts_end": 1235.36,
+          "text": "which we obtained in the previous lecture and here you can see i do not set the maximum length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1235.36,
+          "ts_end": 1239.96,
+          "text": "so the maximum length is computed from the data set itself and when you print the maximum length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1239.96,
+          "ts_end": 1245.68,
+          "text": "you can see that it's 120. that makes sense uh since the longest sequence in our data set",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1245.68,
+          "ts_end": 1250.24,
+          "text": "contains no more than 120 tokens it seems like a common length for text messages",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1250.24,
+          "ts_end": 1257.64,
+          "text": "so one sentence is around 15 to 20 tokens let's say so six sentences uh then that's the maximum",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1257.64,
+          "ts_end": 1257.94,
+          "text": "length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1260.64,
+          "ts_end": 1266.26,
+          "text": "and we can handle sequences of up to 1024 tokens because the context length of gpt2 which we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1266.26,
+          "ts_end": 1274.79,
+          "text": "defined as the model here is 1024 right so you can pass max length max up to a maximum value of 1024",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1274.79,
+          "ts_end": 1281.8,
+          "text": "over here when you call this function now what we are going to do is that we are also going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1282.4,
+          "ts_end": 1287.1,
+          "text": "pad the validation and test data sets to match the length of the longest training sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1288.0,
+          "ts_end": 1291.36,
+          "text": "it is important to note that any validation and test samples",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1291.96,
+          "ts_end": 1296.6,
+          "text": "the length of the longest training examples are truncated so now what we are going to do is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1296.6,
+          "ts_end": 1301.58,
+          "text": "when we create an instance of the spam data set class for the validation and the test data set",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1302.06,
+          "ts_end": 1305.68,
+          "text": "we pass in the maximum length and that maximum length will be equal to 120",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1306.65,
+          "ts_end": 1312.43,
+          "text": "which is the maximum length in the training data set so we will encounter this loop where maximum",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1312.43,
+          "ts_end": 1317.69,
+          "text": "length has been defined so there might be some sequences in the trade testing and validation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1317.69,
+          "ts_end": 1321.79,
+          "text": "set which are larger than the maximum length so we will need to truncate those sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1322.21,
+          "ts_end": 1328.51,
+          "text": "that's what i've written over here uh however one thing to note is that you can even set the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1328.51,
+          "ts_end": 1333.07,
+          "text": "maximum length equal to none here there is no such requirement that the maximum length which you set",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1333.07,
+          "ts_end": 1339.07,
+          "text": "here has to be equal to the maximum length in the training data set uh you can try out by setting",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1339.07,
+          "ts_end": 1346.52,
+          "text": "this to none as well okay now uh so here you can see that you can create instances of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1346.52,
+          "ts_end": 1352.34,
+          "text": "validation data set and the testing data set as well and then you can print out the maximum length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1353.36,
+          "ts_end": 1358.44,
+          "text": "now if you print out the maximum length it will just be equal to 120 because we have passed in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1358.44,
+          "ts_end": 1364.26,
+          "text": "that so if you print out the maximum length you can see that it's 120 because we passed in this",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "f6zqClXOh7Y_005",
+      "title": "Coding the Data Loaders",
+      "ts_start": 1370.0,
+      "ts_end": 1784.0,
+      "segments": [
+        {
+          "ts_start": 1373.58,
+          "ts_end": 1379.34,
+          "text": "right now the data set will serve as an input to the data loader so remember there are two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1379.34,
+          "ts_end": 1385.23,
+          "text": "things here first uh we have to implement a data set and the data set will then be",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1385.41,
+          "ts_end": 1390.43,
+          "text": "served as an input to the data loader so now what we are going to do next is that we are going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1390.43,
+          "ts_end": 1398.49,
+          "text": "use the data set as the input and then we will instantiate data loaders right uh okay so in when",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1398.49,
+          "ts_end": 1404.23,
+          "text": "we create or when we pass the data set as an input to the data loader remember that we can set the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1404.23,
+          "ts_end": 1409.41,
+          "text": "batch size and we can also set the number of workers that's for parallel processing so here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1409.41,
+          "ts_end": 1413.87,
+          "text": "what we are doing is that we are setting the batch size equal to 8 and we are setting the number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1413.87,
+          "ts_end": 1414.87,
+          "text": "workers equal to 0.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1415.57,
+          "ts_end": 1420.05,
+          "text": "setting number of workers equal to 0 is just for the sake of simplicity we don't want any parallel",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1420.05,
+          "ts_end": 1428.19,
+          "text": "processing here drop last equal to true means that if the last batch has a smaller data we just drop",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1428.19,
+          "ts_end": 1436.38,
+          "text": "it uh great so now here you can see train loader you create an instance of the data loader and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1436.38,
+          "ts_end": 1441.54,
+          "text": "you pass in the train data set as the input you similarly you can create the validation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1441.54,
+          "ts_end": 1446.0,
+          "text": "loader and the test loader as well so now this test loader validation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1446.28,
+          "ts_end": 1450.78,
+          "text": "loader and trail loader when you run this part they will be initialized and then you can use",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1450.78,
+          "ts_end": 1456.36,
+          "text": "these loaders to essentially create entire data sets in this format what i am showing to you on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1456.36,
+          "ts_end": 1461.62,
+          "text": "the screen right now so for example when you run the training data loader and you can extract",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1461.62,
+          "ts_end": 1468.06,
+          "text": "batches from it now you can extract the first batch and then it will give you the encoded and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1468.06,
+          "ts_end": 1472.2,
+          "text": "the labels you can extract the second batch you can extract the eighth batch in a very easy manner",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1473.22,
+          "ts_end": 1476.44,
+          "text": "so after you run this what we can now do is that we can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1476.82,
+          "ts_end": 1481.48,
+          "text": "run a test to make sure that the data loaders are working and indeed returning batches of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1481.48,
+          "ts_end": 1487.18,
+          "text": "expected size so here what i am doing is that i am iterating through the training data loader",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1487.76,
+          "ts_end": 1492.62,
+          "text": "right till the end and then then i am going to print the input batch dimension and the label",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1492.62,
+          "ts_end": 1498.26,
+          "text": "batch dimension so if you iterate through the training loader till the end you will see that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1498.26,
+          "ts_end": 1504.4,
+          "text": "the input batch dimension has the size of 8 by 120. can you think what this means and the label",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1504.4,
+          "ts_end": 1506.48,
+          "text": "batch dimensions has storage dot size 8.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1506.92,
+          "ts_end": 1510.34,
+          "text": "can you try to think what this means you can pause the video here for a moment",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1512.0,
+          "ts_end": 1517.92,
+          "text": "so these input bad dimension means that since the batch size was 8 every input batch has 8 rows",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1517.92,
+          "ts_end": 1524.7,
+          "text": "and 120 columns because the maximum token id length was 120. so this is exactly what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1524.7,
+          "ts_end": 1527.8,
+          "text": "i've shown you over here right on the screen what you're seeing right now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1528.36,
+          "ts_end": 1538.61,
+          "text": "uh on the screen what you're seeing is if you look at yeah if you look at this first tensor this right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1538.61,
+          "ts_end": 1544.53,
+          "text": "here what i'm showing with the arrow right now that that's the input batch and if you look at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1544.53,
+          "ts_end": 1550.09,
+          "text": "this input batch you'll see that it has eight rows and it has 120 columns so that's why the size here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1550.09,
+          "ts_end": 1559.45,
+          "text": "is 8 by 120 okay similarly you can look at the labels labels tensor and here you can see that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1559.45,
+          "ts_end": 1566.25,
+          "text": "it just has eight rows over here and it can either have zeros or ones so that's why the size here is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1566.25,
+          "ts_end": 1574.66,
+          "text": "eight and this what i'm showing here is just one batch remember that there are 747 uh examples",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1574.66,
+          "ts_end": 1583.33,
+          "text": "corresponding to spam and 747 examples corresponding to no spam so if you add these both together you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1583.33,
+          "ts_end": 1588.99,
+          "text": "will get that the total number of data which we have is 1494 right out of that the training data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1588.99,
+          "ts_end": 1595.99,
+          "text": "is 70 percent right so we will have batches corresponding to that so 70 percent of 1494",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1595.99,
+          "ts_end": 1598.05,
+          "text": "let's see so 0.7",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1598.07,
+          "ts_end": 1611.0,
+          "text": "into 1494 uh that's 1045 and i think we have printed this above uh yeah 1045 so the training",
+          "frame_ids": [
+            "f6zqClXOh7Y_f0005",
+            "f6zqClXOh7Y_f0006"
+          ],
+          "visuals": [
+            {
+              "category": "code",
+              "skip": false,
+              "title": null,
+              "extracted_text": "To ensure that the data loaders are working and are indeed returning batches of the expected shape, dimensions of the last batch:\n\nTrain loader:\nInput batch dimensions: torch.Size([8, 120])\nLabel batch dimensions torch.Size([8])\n\nAs we can see, the input batches consist of 8 training examples with 120 tokens each, as expected.\n\nThe label tensor stores the class labels corresponding to the 8 training examples.",
+              "code": {
+                "language": "python",
+                "content": "print(\"Train loader:\")\nfor input_batch, target_batch in train_loader:\n    pass\n\nprint(\"Input batch dimensions:\", input_batch.shape)\nprint(\"Label batch dimensions\", target_batch.shape)"
+              },
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.92,
+              "frame_id": "f6zqClXOh7Y_f0006",
+              "video_id": "f6zqClXOh7Y",
+              "timestamp_sec": 1604.466333,
+              "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0006.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1611.0,
+          "ts_end": 1619.78,
+          "text": "data set overall has 1045 samples right so the training data set overall has the training data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1619.78,
+          "ts_end": 1630.12,
+          "text": "set overall has 1045 samples in the training data set and now if each batch has eight such samples",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1630.12,
+          "ts_end": 1631.38,
+          "text": "the batch size",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1631.38,
+          "ts_end": 1636.3,
+          "text": "is eight right which means each batch will have eight samples if each batch has eight samples",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1636.8,
+          "ts_end": 1645.82,
+          "text": "eight samples in each batch how many batches do you think will be in the training data set so then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1645.82,
+          "ts_end": 1654.56,
+          "text": "the number of batches will be number of batches will be 1045 divided by 8 which is approximately",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1654.56,
+          "ts_end": 1660.31,
+          "text": "130 batches and we can actually test this what i have done at the end of this code is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1660.85,
+          "ts_end": 1665.59,
+          "text": "i have printed the length of the training loader which will give me the number of training batches",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1665.59,
+          "ts_end": 1670.73,
+          "text": "and here we can see that we have 130 training batches and that exactly fits our intuition which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1670.73,
+          "ts_end": 1675.75,
+          "text": "we have written on the whiteboard similarly what you can do is that you can print out the length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1675.75,
+          "ts_end": 1680.27,
+          "text": "of the validation loader the length of the test loader as well and you will see that there are 19",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1680.27,
+          "ts_end": 1686.85,
+          "text": "validation batches and 38 test batches remember that we have 20 percent of the data as test",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1686.85,
+          "ts_end": 1692.07,
+          "text": "and 10 percent of the data as validation that's why the number of test batches are exactly two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1692.07,
+          "ts_end": 1694.35,
+          "text": "times that of the number of validation batches",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1695.55,
+          "ts_end": 1696.15,
+          "text": "and why",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1696.23,
+          "ts_end": 1701.19,
+          "text": "does the length of the training loader give you the number of batches because if you print out one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1701.19,
+          "ts_end": 1707.45,
+          "text": "batch that has eight eight samples right so actually the training loader this is just one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1707.45,
+          "ts_end": 1713.83,
+          "text": "batch so the training loader dimensions will be so one batch of the training loader has the dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1713.83,
+          "ts_end": 1721.77,
+          "text": "of uh eight eight rows and 120 column right and there are 130 such batches so if you print out the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1721.77,
+          "ts_end": 1726.63,
+          "text": "dimension of the entire training loader it will be 130 by 8 by 120 it will be a three dimensional",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1726.87,
+          "ts_end": 1739.1,
+          "text": "tensor similarly for the testing loader the dimensions would be uh 38 38 8 120 and for the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1739.1,
+          "ts_end": 1747.69,
+          "text": "validation the dimensions would be 19 8 120 the dimensions of the validation loader right so now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1747.69,
+          "ts_end": 1753.27,
+          "text": "until this part this concludes the data preparation steps which means that now we have got these data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1753.27,
+          "ts_end": 1758.01,
+          "text": "loaders we have got the training loader validation loader and test loader through these data loaders",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1758.01,
+          "ts_end": 1764.99,
+          "text": "we can easily extract the batches the input batch and the label batch which we need at any time",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1764.99,
+          "ts_end": 1770.31,
+          "text": "and that just better so now we have created input and target pairs remember when we trained the llm",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1770.31,
+          "ts_end": 1777.08,
+          "text": "the target pair here was also a token id representation it was just shifted from the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1777.08,
+          "ts_end": 1782.3,
+          "text": "input to the right by one so the difference here is that the target pair here are zero and ones",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "f6zqClXOh7Y_006",
+      "title": "Recap and next steps",
+      "ts_start": 1784.0,
+      "ts_end": 1863.0,
+      "segments": [
+        {
+          "ts_start": 1790.4,
+          "ts_end": 1795.38,
+          "text": "over in the previous lecture we saw downloading the data set and pre-processing the data set in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1795.38,
+          "ts_end": 1800.62,
+          "text": "today's lecture we saw how to create data loaders for the training data set the validation data set",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1800.62,
+          "ts_end": 1805.68,
+          "text": "and the testing data set in the next lectures we are going to start looking at the stage two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1805.68,
+          "ts_end": 1810.64,
+          "text": "which is we are going to initialize the llm model we are going to load the pre-trained weights we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1810.64,
+          "ts_end": 1813.4,
+          "text": "are going to modify the model for fine tuning and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1813.4,
+          "ts_end": 1813.66,
+          "text": "finalize the llm model and then finalize the llm model and then finalize the llm model and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1813.66,
+          "ts_end": 1816.94,
+          "text": "finally in the subsequent lectures will evaluate the fine-tuned model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1817.66,
+          "ts_end": 1823.22,
+          "text": "So we have done the hard work of data pre-processing, data cleaning and using data sets and data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1823.22,
+          "ts_end": 1827.94,
+          "text": "loaders which is usually so important before we directly jump to the model training itself.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1828.67,
+          "ts_end": 1834.71,
+          "text": "So I hope you all are liking these lectures, I usually try to maintain an approach of white",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1834.71,
+          "ts_end": 1841.19,
+          "text": "board plus coding since my aim is to train ML engineers who are not just good at using",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1841.19,
+          "ts_end": 1846.33,
+          "text": "chat GPT but I want every one of you who are following these lectures to have a very",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1846.33,
+          "ts_end": 1851.73,
+          "text": "strong fundamental and theoretical understanding because that's what's lacking in today's engineers.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1852.71,
+          "ts_end": 1856.37,
+          "text": "Thanks a lot everyone and I look forward to seeing you in the next lecture.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

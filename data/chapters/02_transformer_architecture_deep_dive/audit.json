@@ -1,0 +1,15 @@
+{
+  "chapter_id": "transformer_architecture_deep_dive",
+  "title": "The Transformer Architecture: Encoders, Decoders, BERT, and GPT",
+  "summary": {
+    "grounded": 119,
+    "unsupported": 1,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 36
+  },
+  "stripped_sentence_indices": [
+    8,
+    9
+  ]
+}

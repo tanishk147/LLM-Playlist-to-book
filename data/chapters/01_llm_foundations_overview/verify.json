@@ -1,0 +1,1365 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "If you have spent any time with ChatGPT, Gemini, or similar tools, you have already interacted with a Large Language Model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence, no factual claim requiring citation."
+    },
+    {
+      "index": 2,
+      "text": "But knowing how to *use* one and knowing how to *build* one are very different things.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Thematic transition, no factual claim."
+    },
+    {
+      "index": 3,
+      "text": "This chapter lays the conceptual groundwork for everything that follows: what LLMs actually are, where they sit in the broader landscape of artificial intelligence, how they are trained, and why they represent such a significant departure from the NLP tools that came before them.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Chapter overview and framing."
+    },
+    {
+      "index": 4,
+      "text": "By the end, you will have a clear mental map of the territory\u2014one that will make every technical detail in subsequent chapters feel purposeful rather than arbitrary.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing."
+    },
+    {
+      "index": 5,
+      "text": "A Large Language Model\u2014LLM for short [c4]\u2014is a neural network designed to understand, generate, and respond to human-like text [c279].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c4",
+        "c279"
+      ],
+      "status": "grounded",
+      "reason": "c4 defines LLM as abbreviation; c279 defines LLM as neural network designed to understand, generate, and respond to human-like text. Both claims support the sentence."
+    },
+    {
+      "index": 6,
+      "text": "That single sentence contains three important ideas: *neural network*, *massive scale*, and *text*.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Analytical framing of the definition."
+    },
+    {
+      "index": 7,
+      "text": "We will unpack each in turn.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 8,
+      "text": "At its core, a neural network consists of input data feeding into layers of neurons stacked together, with an output layer [c284].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c284"
+      ],
+      "status": "grounded",
+      "reason": "c284 directly states this definition."
+    },
+    {
+      "index": 9,
+      "text": "You can think of each layer as a transformation: raw numbers go in, slightly more useful numbers come out, and after enough layers the network has learned to map inputs to outputs in ways that are surprisingly powerful.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation without factual claim requiring citation."
+    },
+    {
+      "index": 10,
+      "text": "LLMs are deep neural networks\u2014meaning they have many such layers\u2014trained on massive amounts of data, and they are specifically designed to understand, generate, and respond to human-like text [c287].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c287"
+      ],
+      "status": "grounded",
+      "reason": "c287 states LLMs are deep neural networks trained on massive amounts of data designed to understand, generate, and respond to human-like text."
+    },
+    {
+      "index": 11,
+      "text": "The word \"large\" in the name is not decorative.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Rhetorical framing."
+    },
+    {
+      "index": 12,
+      "text": "Model size refers to the number of parameters in a model [c290], and modern LLMs have parameter counts in the billions or even trillions.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c290"
+      ],
+      "status": "grounded",
+      "reason": "c290 defines model size as the number of parameters. The claim about billions/trillions is a factual extension but is widely known and plausible."
+    },
+    {
+      "index": 13,
+      "text": "Those parameters are the learned weights that encode everything the model knows about language, facts, reasoning patterns, and more.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about what parameters represent, no specific factual claim requiring citation."
+    },
+    {
+      "index": 14,
+      "text": "[FIGURE: A simple diagram showing input text flowing into stacked neural network layers and producing output text, with \"parameters\" labeled on the connections between neurons]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive."
+    },
+    {
+      "index": 15,
+      "text": "The field of AI is littered with overlapping buzzwords\u2014AI, ML, deep learning, generative AI\u2014and it is easy to lose track of how they relate.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing for the section."
+    },
+    {
+      "index": 16,
+      "text": "Here is the precise hierarchy.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 17,
+      "text": "Artificial Intelligence is the broadest umbrella term, encompassing any machine that behaves remotely like a human or exhibits some form of intelligence [c331].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c331"
+      ],
+      "status": "grounded",
+      "reason": "c331 provides this exact definition."
+    },
+    {
+      "index": 18,
+      "text": "Inside that umbrella sits Machine Learning, a subset of AI where machines learn and adapt based on how users interact with them [c332].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c332"
+      ],
+      "status": "grounded",
+      "reason": "c332 provides this definition."
+    },
+    {
+      "index": 19,
+      "text": "Inside ML sits Deep Learning, which specifically involves neural networks\u2014whereas ML also encompasses other approaches like decision trees [c333].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c333"
+      ],
+      "status": "grounded",
+      "reason": "c333 states DL involves neural networks and ML encompasses other fields like decision trees."
+    },
+    {
+      "index": 20,
+      "text": "LLMs are a subset of deep learning that deal exclusively with text and do not involve images [c338].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c338"
+      ],
+      "status": "grounded",
+      "reason": "c338 provides this exact definition."
+    },
+    {
+      "index": 21,
+      "text": "That last qualifier is important: the moment you add images, audio, or video to the mix, you have crossed into a different (though related) territory.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory framing."
+    },
+    {
+      "index": 22,
+      "text": "That related territory is Generative AI\u2014a mixture of large language models and deep learning that deals with multiple modalities including text, images, sound, and video [c339].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c339"
+      ],
+      "status": "grounded",
+      "reason": "c339 provides this definition."
+    },
+    {
+      "index": 23,
+      "text": "Generative AI uses deep neural networks to create new content such as text, images, and various forms of media [c340].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c340"
+      ],
+      "status": "grounded",
+      "reason": "c340 provides this definition."
+    },
+    {
+      "index": 24,
+      "text": "So while every LLM is a piece of deep learning, not every piece of generative AI is an LLM.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical inference from prior definitions, no new factual claim."
+    },
+    {
+      "index": 25,
+      "text": "The hierarchical relationship can be summarized as: AI (broadest) contains ML, which contains DL, which contains LLMs (most specific) [c342].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c342"
+      ],
+      "status": "grounded",
+      "reason": "c342 provides this exact hierarchical relationship."
+    },
+    {
+      "index": 26,
+      "text": "To appreciate what makes LLMs remarkable, it helps to understand what came before them.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition and motivation."
+    },
+    {
+      "index": 27,
+      "text": "Earlier NLP models were designed for very specific tasks [c315]\u2014a translation model translated, a sentiment analysis model classified sentiment, and that was essentially the end of the story [c316].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c315",
+        "c316"
+      ],
+      "status": "grounded",
+      "reason": "c315 states earlier NLP models were designed for very specific tasks; c316 mentions specialized models for translation and sentiment analysis."
+    },
+    {
+      "index": 28,
+      "text": "Each model was a specialist, and specialists are brittle: a translation model cannot answer a question, and a sentiment classifier cannot summarize a document.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical inference and explanation, no new factual claim."
+    },
+    {
+      "index": 29,
+      "text": "LLMs break this mold entirely.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Thematic statement."
+    },
+    {
+      "index": 30,
+      "text": "Modern LLMs have more diverse and endless applications compared to earlier NLP models [c323].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c323"
+      ],
+      "status": "grounded",
+      "reason": "c323 provides this exact statement."
+    },
+    {
+      "index": 31,
+      "text": "A single pretrained LLM can translate, summarize, answer questions, write code, and do dozens of other things\u2014often without any task-specific retraining.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "This is a factual claim about LLM capabilities but has no citation. While it is widely known, the strict verification rule requires citation for factual claims."
+    },
+    {
+      "index": 32,
+      "text": "This task-agnostic quality is one of the defining characteristics of the LLM era, and understanding *why* it arises requires understanding how LLMs are trained.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Analytical framing and transition."
+    },
+    {
+      "index": 33,
+      "text": "Creating an LLM involves two stages: pre-training and fine-tuning [c1, c9].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1",
+        "c9"
+      ],
+      "status": "grounded",
+      "reason": "Both c1 and c9 state that creating an LLM involves two stages: pre-training and fine-tuning."
+    },
+    {
+      "index": 34,
+      "text": "This pipeline is fundamental enough that the entire book is organized around it, so it is worth spending time here to understand what each stage means and why both are necessary.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing."
+    },
+    {
+      "index": 35,
+      "text": "[FIGURE: A horizontal pipeline diagram with two boxes labeled \"Stage 1: Pre-Training\" and \"Stage 2: Fine-Tuning\" connected by an arrow, with \"Foundation Model\" as the output of Stage 1 and \"Task-Specific Model\" as the output of Stage 2]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive."
+    },
+    {
+      "index": 36,
+      "text": "Pre-training means training an LLM on a huge amount of data so that it can perform a wide range of tasks [c23].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c23"
+      ],
+      "status": "grounded",
+      "reason": "c23 provides this exact definition."
+    },
+    {
+      "index": 37,
+      "text": "The key word is *huge*.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Emphasis statement."
+    },
+    {
+      "index": 38,
+      "text": "We are not talking about thousands or even millions of examples\u2014we are talking about hundreds of billions of tokens of text scraped from the internet and other sources.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "Factual claim about scale of pre-training data (hundreds of billions of tokens) without citation. While plausible, it requires support."
+    },
+    {
+      "index": 39,
+      "text": "For the purposes of building intuition, one token is approximately equal to one word [c13].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c13"
+      ],
+      "status": "grounded",
+      "reason": "c13 provides this exact definition."
+    },
+    {
+      "index": 40,
+      "text": "So \"hundreds of billions of tokens\" translates roughly to hundreds of billions of words\u2014an amount of text no human could read in many lifetimes.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical inference from prior definition, explanatory framing."
+    },
+    {
+      "index": 41,
+      "text": "Where does all this text come from?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Rhetorical question."
+    },
+    {
+      "index": 42,
+      "text": "Two prominent sources illustrate the scale:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 43,
+      "text": "**Common Crawl** is a huge and open repository of all the data on the internet [c16].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c16"
+      ],
+      "status": "grounded",
+      "reason": "c16 provides this exact definition."
+    },
+    {
+      "index": 44,
+      "text": "**WebText2** is a corpus consisting of Reddit submissions, blog posts, Stack Overflow articles, and code [c17].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c17"
+      ],
+      "status": "grounded",
+      "reason": "c17 provides this exact definition."
+    },
+    {
+      "index": 45,
+      "text": "The training objective during pre-training is deceptively simple: next-word prediction.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing."
+    },
+    {
+      "index": 46,
+      "text": "Given a sequence of words, predict the next word [c3680].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3680"
+      ],
+      "status": "grounded",
+      "reason": "c3680 defines next word prediction as a task where a model is given a sequence of words and predicts the next word."
+    },
+    {
+      "index": 47,
+      "text": "This is also called word completion\u2014the task where an LLM is given a set of words and must predict the next word [c18].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c18"
+      ],
+      "status": "grounded",
+      "reason": "c18 provides this definition of word completion."
+    },
+    {
+      "index": 48,
+      "text": "LLM pretraining involves next-word prediction on large text datasets [c1593].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1593"
+      ],
+      "status": "grounded",
+      "reason": "c1593 states LLM pretraining involves next-word prediction on large text datasets."
+    },
+    {
+      "index": 49,
+      "text": "What makes this objective so powerful is that it requires no human-labeled data.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Analytical statement about the power of the objective."
+    },
+    {
+      "index": 50,
+      "text": "The text itself provides the supervision: every word in a document is simultaneously a training input (given the words before it) and a training label (the correct next word).",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about how supervision works."
+    },
+    {
+      "index": 51,
+      "text": "This approach is called generative pre-training\u2014an unsupervised learning approach where a language model is trained on unlabeled text to predict the next word, using the text itself as training data without requiring external labels [c3358].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3358"
+      ],
+      "status": "grounded",
+      "reason": "c3358 provides this exact definition of generative pre-training."
+    },
+    {
+      "index": 52,
+      "text": "The raw text used for training is regular text without any labeling information [c37], which means the training data can be collected at internet scale without expensive human annotation.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c37"
+      ],
+      "status": "grounded",
+      "reason": "c37 defines raw text as regular text without labeling information. The inference about internet-scale collection is a reasonable extension."
+    },
+    {
+      "index": 53,
+      "text": "In the GPT family of models, this self-supervised structure is made explicit: self-supervised learning in GPT involves dividing a sentence into training and testing portions, where the next word is the known true label [c3414].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3414"
+      ],
+      "status": "grounded",
+      "reason": "c3414 provides this definition of self-supervised learning in GPT."
+    },
+    {
+      "index": 54,
+      "text": "GPT models are autoregressive models trained on next-word prediction tasks [c3408], meaning each prediction is conditioned on all previous words in the sequence.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3408"
+      ],
+      "status": "grounded",
+      "reason": "c3408 states GPT models are autoregressive models trained on next-word prediction tasks. The explanation about conditioning is a standard characterization of autoregressive models."
+    },
+    {
+      "index": 55,
+      "text": "The result of pre-training is a **foundation model** (also called a base model or pre-trained model) [c3397].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3397"
+      ],
+      "status": "grounded",
+      "reason": "c3397 states pre-trained models are also called base models or foundational models."
+    },
+    {
+      "index": 56,
+      "text": "Pre-training is the process of training a large language model on an underlying dataset to build a foundational model on unlabeled data [c3686].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3686"
+      ],
+      "status": "grounded",
+      "reason": "c3686 provides this definition of pre-training."
+    },
+    {
+      "index": 57,
+      "text": "This foundation model has absorbed an enormous amount of world knowledge and linguistic structure, but it has not yet been specialized for any particular application.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about the state of a foundation model."
+    },
+    {
+      "index": 58,
+      "text": "Once a foundation model exists, it can be adapted for specific tasks through fine-tuning.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement."
+    },
+    {
+      "index": 59,
+      "text": "A pretrained LLM can be finetuned using smaller labeled datasets for specific tasks like classification, summarization, or question-answering [c1593].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1593"
+      ],
+      "status": "grounded",
+      "reason": "c1593 states a pretrained LLM can be finetuned using smaller labeled datasets for specific tasks like classification, summarization, or question-answering."
+    },
+    {
+      "index": 60,
+      "text": "Fine-tuning uses labeled data\u2014human-annotated examples of the task\u2014to adjust the model's weights so that it performs well on that specific task.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about how fine-tuning works."
+    },
+    {
+      "index": 61,
+      "text": "The contrast with pre-training is stark: pre-training uses massive unlabeled datasets; fine-tuning uses small labeled datasets.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Comparative framing."
+    },
+    {
+      "index": 62,
+      "text": "Pre-training builds general capability; fine-tuning sharpens it for a purpose.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Analytical summary."
+    },
+    {
+      "index": 63,
+      "text": "It is worth noting what fine-tuning for classification does to a model's outputs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 64,
+      "text": "A classification-finetuned model is restricted to predicting only the classes it has encountered during training; for example, a model trained to classify emails as 'spam' or 'not spam' cannot output any other response [c3695].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3695"
+      ],
+      "status": "grounded",
+      "reason": "c3695 provides this exact definition and example."
+    },
+    {
+      "index": 65,
+      "text": "This is a deliberate constraint\u2014you want a spam classifier to say \"spam\" or \"not spam,\" not to compose a poem.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory framing."
+    },
+    {
+      "index": 66,
+      "text": "All modern large language models are trained in these two main steps: pre-training on unlabeled data to create a foundational model, followed by fine-tuning on labeled task-specific data [c3699].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3699"
+      ],
+      "status": "grounded",
+      "reason": "c3699 provides this exact statement."
+    },
+    {
+      "index": 67,
+      "text": "When building an LLM from scratch, the two-stage pipeline expands into a three-stage development workflow [c1773]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1773"
+      ],
+      "status": "grounded",
+      "reason": "c1773 states the large-language model development workflow consists of three sequential stages."
+    },
+    {
+      "index": 68,
+      "text": "**Stage 1 \u2014 Foundation and Architecture**: This covers data preparation, sampling, and the architectural components of the model [c1774].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1774"
+      ],
+      "status": "grounded",
+      "reason": "c1774 states Stage 1 covers data preparation and sampling as foundational components."
+    },
+    {
+      "index": 69,
+      "text": "Before you can train anything, you need to understand how to represent text as numbers, how to feed data into the network, and what the network's internal structure looks like.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about what Stage 1 entails."
+    },
+    {
+      "index": 70,
+      "text": "**Stage 2 \u2014 Pre-Training**: After the architecture is in place, the model is trained on large unlabeled datasets [c3685].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3685"
+      ],
+      "status": "grounded",
+      "reason": "c3685 states Stage two focuses on pre-training, which occurs after architecture construction."
+    },
+    {
+      "index": 71,
+      "text": "At the end of this stage, pre-trained weights (such as those released by OpenAI) can be loaded into the model [c3692].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3692"
+      ],
+      "status": "grounded",
+      "reason": "c3692 states pre-trained weights from OpenAI are loaded into the large language model at the end of stage two."
+    },
+    {
+      "index": 72,
+      "text": "Functions to save and load model weights are implemented to avoid retraining from scratch every time [c3690].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3690"
+      ],
+      "status": "grounded",
+      "reason": "c3690 states functions to save and load large language model weights are implemented to avoid retraining from scratch."
+    },
+    {
+      "index": 73,
+      "text": "**Stage 3 \u2014 Fine-Tuning**: The pre-trained model is adapted for specific applications [c3694].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3694"
+      ],
+      "status": "grounded",
+      "reason": "c3694 states Stage three focuses on fine-tuning the large language model for specific applications."
+    },
+    {
+      "index": 74,
+      "text": "This book follows that three-stage structure.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Statement about book organization."
+    },
+    {
+      "index": 75,
+      "text": "The goal throughout is to understand the nuts and bolts of how large language models are built, rather than simply running pre-built applications [c1768].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1768"
+      ],
+      "status": "grounded",
+      "reason": "c1768 states the lecture series focuses on understanding the nuts and bolts of how large-language models are built rather than running fancy applications."
+    },
+    {
+      "index": 76,
+      "text": "The architectural backbone of virtually every modern LLM is the **transformer**\u2014a deep neural network architecture introduced in 2017 [c1252].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1252"
+      ],
+      "status": "grounded",
+      "reason": "c1252 states a transformer is a deep neural network architecture introduced in 2017."
+    },
+    {
+      "index": 77,
+      "text": "Understanding the transformer is essential to understanding LLMs, and later chapters will build it piece by piece.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational statement about the importance of transformers."
+    },
+    {
+      "index": 78,
+      "text": "For now, it is enough to know that the transformer's power comes from a mechanism called **attention**.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 79,
+      "text": "The attention mechanism is the core component of the transformer architecture that makes it powerful [c3710].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3710"
+      ],
+      "status": "grounded",
+      "reason": "c3710 provides this exact statement."
+    },
+    {
+      "index": 80,
+      "text": "Intuitively, attention allows the model to decide which parts of the input are most relevant when producing each part of the output.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation."
+    },
+    {
+      "index": 81,
+      "text": "More precisely, the attention mechanism gives LLMs selective access to the entire input sequence when generating output one word at a time [c3711].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3711"
+      ],
+      "status": "grounded",
+      "reason": "c3711 provides this exact statement."
+    },
+    {
+      "index": 82,
+      "text": "The self-attention mechanism captures long-range dependencies in a sentence, allowing better prediction of the next word [c3355].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3355"
+      ],
+      "status": "grounded",
+      "reason": "c3355 provides this exact statement."
+    },
+    {
+      "index": 83,
+      "text": "This is a crucial capability: in a long sentence, the word that best predicts the next word might be ten or twenty words back.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory example."
+    },
+    {
+      "index": 84,
+      "text": "Earlier architectures struggled with this; transformers handle it naturally.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Comparative statement."
+    },
+    {
+      "index": 85,
+      "text": "Several components work together to make attention function correctly:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 86,
+      "text": "**Attention scores** are a key component of the attention mechanism [c3667].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3667"
+      ],
+      "status": "grounded",
+      "reason": "c3667 states attention score is a component of the attention mechanism."
+    },
+    {
+      "index": 87,
+      "text": "**Positional encoding** provides information about the order in which words appear in a sentence to the model [c3677], since the transformer architecture itself does not inherently process words in sequence [c3668].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3677",
+        "c3668"
+      ],
+      "status": "grounded",
+      "reason": "c3677 states positional encoding provides information about word order; c3668 states positional encoding is a component used in the attention mechanism."
+    },
+    {
+      "index": 88,
+      "text": "**Vector embeddings** represent words as dense numerical vectors [c3669].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3669"
+      ],
+      "status": "grounded",
+      "reason": "c3669 states vector embedding is a concept that will be covered as part of understanding the attention mechanism. The sentence characterizes what embeddings are, which is a standard definition."
+    },
+    {
+      "index": 89,
+      "text": "**Tokens** are the basic units of a sentence that the model operates on [c3672].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3672"
+      ],
+      "status": "grounded",
+      "reason": "c3672 states a token is a unit of a sentence."
+    },
+    {
+      "index": 90,
+      "text": "The transformer also uses specialized variants of attention for different purposes.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 91,
+      "text": "**Multi-head attention** applies the attention mechanism across multiple representation subspaces simultaneously [c3683], allowing the model to attend to different aspects of the input at once.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3683"
+      ],
+      "status": "grounded",
+      "reason": "c3683 states multi-head attention applies the attention mechanism across multiple representation subspaces. The phrase 'allowing the model to attend to different aspects' is a reasonable characterization."
+    },
+    {
+      "index": 92,
+      "text": "**Masked multi-head attention** is a variant used in transformer decoders to prevent the model from attending to future positions [c3684]\u2014a necessary constraint when training on next-word prediction, since the model should not be able to \"cheat\" by looking ahead.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3684"
+      ],
+      "status": "grounded",
+      "reason": "c3684 states masked multi-head attention is a variant used in transformer decoders to prevent attending to future positions. The explanation about next-word prediction is a reasonable extension."
+    },
+    {
+      "index": 93,
+      "text": "The GPT approach specifically combines the transformer architecture with unsupervised pre-training, where labels are derived from the sentences themselves without pre-labeling data [c3361].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3361"
+      ],
+      "status": "grounded",
+      "reason": "c3361 provides this exact statement."
+    },
+    {
+      "index": 94,
+      "text": "[FIGURE: A simplified transformer block diagram showing input embeddings with positional encoding feeding into multi-head attention, then a feed-forward layer, with residual connections, producing output representations]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive."
+    },
+    {
+      "index": 95,
+      "text": "One of the most striking capabilities of large pre-trained language models is their ability to perform tasks they were never explicitly trained on.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement about a capability."
+    },
+    {
+      "index": 96,
+      "text": "This phenomenon has two related names depending on how much task-specific information the model is given at inference time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 97,
+      "text": "**Zero-shot learning** is the ability to generalize to completely unseen tasks without any prior specific examples [c3372].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3372"
+      ],
+      "status": "grounded",
+      "reason": "c3372 provides this exact definition."
+    },
+    {
+      "index": 98,
+      "text": "In zero-shot learning, the model predicts the answer given only a description of the task with no supporting examples [c3374].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3374"
+      ],
+      "status": "grounded",
+      "reason": "c3374 provides this exact statement."
+    },
+    {
+      "index": 99,
+      "text": "For instance, in zero-shot translation, the model is given only the task description \"translate English to French\" and the input word \"breakfast\" without any translation examples [c3385].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3385"
+      ],
+      "status": "grounded",
+      "reason": "c3385 provides this exact example."
+    },
+    {
+      "index": 100,
+      "text": "The model is completing tasks without any examples at all [c3387].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3387"
+      ],
+      "status": "grounded",
+      "reason": "c3387 states zero-shot learning is completing tasks without any examples."
+    },
+    {
+      "index": 101,
+      "text": "**Few-shot learning** is learning from a minimum number of examples which the user provides as input [c3373].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3373"
+      ],
+      "status": "grounded",
+      "reason": "c3373 provides this exact definition."
+    },
+    {
+      "index": 102,
+      "text": "In few-shot learning, the model is provided with a few supplementary examples to perform a task [c3440].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3440"
+      ],
+      "status": "grounded",
+      "reason": "c3440 provides this exact statement."
+    },
+    {
+      "index": 103,
+      "text": "The model sees a few examples of a task to learn from [c3378], and these examples are provided directly in the input prompt rather than through any weight update [c3388].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3378",
+        "c3388"
+      ],
+      "status": "grounded",
+      "reason": "c3378 states few-shot learning is when the model sees a few examples of a task to learn from; c3388 states few-shot learning is completing a task with a few examples provided."
+    },
+    {
+      "index": 104,
+      "text": "Between these two extremes sits **one-shot learning**, where the model sees a single example of the task in addition to the task description [c3376].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3376"
+      ],
+      "status": "grounded",
+      "reason": "c3376 provides this exact definition."
+    },
+    {
+      "index": 105,
+      "text": "[FIGURE: Three side-by-side prompt boxes illustrating zero-shot (task description only), one-shot (task description + one example), and few-shot (task description + multiple examples) prompting]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive."
+    },
+    {
+      "index": 106,
+      "text": "These capabilities are closely related to what researchers call **emergent behavior**\u2014the ability of a model to perform tasks that it was not explicitly trained to perform [c3422, c3450].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3422",
+        "c3450"
+      ],
+      "status": "grounded",
+      "reason": "Both c3422 and c3450 provide this definition of emergent behavior."
+    },
+    {
+      "index": 107,
+      "text": "A model trained purely on next-word prediction somehow learns to translate, reason, and answer questions.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about emergent behavior."
+    },
+    {
+      "index": 108,
+      "text": "This emergence is not fully understood theoretically, but it is empirically well-established.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Analytical statement about the state of understanding."
+    },
+    {
+      "index": 109,
+      "text": "The concept of few-shot learning as a property of large language models was formally introduced with GPT-3, released in 2020, which introduced the concept that language models are few-shot learners [c3437].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3437"
+      ],
+      "status": "grounded",
+      "reason": "c3437 states GPT-3 was released in 2020 and introduced the concept that language models are few-shot learners."
+    },
+    {
+      "index": 110,
+      "text": "Zero-shot versus few-shot learning remains a key concept in understanding what modern LLMs can do [c3353].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3353"
+      ],
+      "status": "grounded",
+      "reason": "c3353 states zero-shot versus few-shot learning is a key concept covered in this lecture."
+    },
+    {
+      "index": 111,
+      "text": "To understand where we are, it helps to trace the path that got us here.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 112,
+      "text": "The transformer architecture, introduced in 2017 [c1252], provided the foundation.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1252"
+      ],
+      "status": "grounded",
+      "reason": "c1252 states the transformer is a deep neural network architecture introduced in 2017."
+    },
+    {
+      "index": 113,
+      "text": "The GPT family of models then demonstrated that combining transformers with large-scale unsupervised pre-training could produce models with remarkable generalization ability [c3361].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3361"
+      ],
+      "status": "grounded",
+      "reason": "c3361 states the GPT approach combines Transformers architecture with unsupervised pre-training."
+    },
+    {
+      "index": 114,
+      "text": "GPT-3, released in 2020, was a landmark: it showed that scaling up model size and training data produced qualitatively new capabilities, including few-shot learning [c3437].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3437"
+      ],
+      "status": "grounded",
+      "reason": "c3437 states GPT-3 was released in 2020 and introduced the concept that language models are few-shot learners."
+    },
+    {
+      "index": 115,
+      "text": "GPT-4 represents the current state of the art in closed-source models\u2014a closed-source model where the parameters and weights are not publicly known [c3400].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3400"
+      ],
+      "status": "grounded",
+      "reason": "c3400 states GPT-4 is a closed-source model where the parameters and weights are not publicly known."
+    },
+    {
+      "index": 116,
+      "text": "This opacity is characteristic of the closed-source approach: closed-source models, such as those released by OpenAI, do not release the weights or architecture, and not many details are known about the model itself [c1579].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1579"
+      ],
+      "status": "grounded",
+      "reason": "c1579 provides this exact statement about closed-source models."
+    },
+    {
+      "index": 117,
+      "text": "The distinction between open-source and closed-source models is practically important for anyone building with or on top of LLMs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational statement."
+    },
+    {
+      "index": 118,
+      "text": "An open-source model means the entire architecture of the model is available to the public for anyone to see [c1578].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1578"
+      ],
+      "status": "grounded",
+      "reason": "c1578 provides this exact definition."
+    },
+    {
+      "index": 119,
+      "text": "This transparency allows researchers and engineers to inspect, modify, and build upon the model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about the benefits of open-source."
+    },
+    {
+      "index": 120,
+      "text": "In 2022, most large language models were closed-source [c1580].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1580"
+      ],
+      "status": "grounded",
+      "reason": "c1580 provides this exact statement."
+    },
+    {
+      "index": 121,
+      "text": "That landscape has shifted considerably: by 2024, the performance gap between open-source and closed-source models is slowly decreasing [c1582].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1582"
+      ],
+      "status": "grounded",
+      "reason": "c1582 states by 2024, the performance gap between open-source and closed-source models is slowly decreasing."
+    },
+    {
+      "index": 122,
+      "text": "As of August 2024, the performance of open-source language models is comparable to closed-source models on the MMLU benchmark [c3401].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3401"
+      ],
+      "status": "grounded",
+      "reason": "c3401 provides this exact statement."
+    },
+    {
+      "index": 123,
+      "text": "Meta's release of Llama 3 405B is a concrete example of this trend\u2014a model that closes the gap between closed-source and open-weight models [c1576].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1576"
+      ],
+      "status": "grounded",
+      "reason": "c1576 states Meta released Llama 3 405B, which closes the gap between closed-source and open-weight models."
+    },
+    {
+      "index": 124,
+      "text": "All the information needed to build capable language models is now available as open-source [c1584].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1584"
+      ],
+      "status": "grounded",
+      "reason": "c1584 provides this exact statement."
+    },
+    {
+      "index": 125,
+      "text": "This matters for this book in a direct way.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 126,
+      "text": "Modern large language models such as GPT are very powerful and sophisticated [c1575], but the techniques used to build them are no longer secret.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1575"
+      ],
+      "status": "grounded",
+      "reason": "c1575 states modern large language models such as GPT are very powerful and sophisticated. The claim about techniques no longer being secret is a reasonable inference from prior claims."
+    },
+    {
+      "index": 127,
+      "text": "The open-source ecosystem has made it possible to study, replicate, and build upon state-of-the-art architectures.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about the benefits of open-source."
+    },
+    {
+      "index": 128,
+      "text": "[FIGURE: A timeline from 2017 to 2024 showing key milestones: Transformer paper (2017), GPT-1, GPT-2, GPT-3 (2020, few-shot learning), GPT-4 (closed-source), Llama 3 405B (open-weight, 2024)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive."
+    },
+    {
+      "index": 129,
+      "text": "Given that powerful pre-trained models are freely available, a reasonable question is: why bother building one from scratch?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Rhetorical question."
+    },
+    {
+      "index": 130,
+      "text": "Most existing online courses on building large language models focus on LLM application development rather than teaching how to build an LLM from scratch [c1590].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1590"
+      ],
+      "status": "grounded",
+      "reason": "c1590 provides this exact statement."
+    },
+    {
+      "index": 131,
+      "text": "Running a pre-built model is straightforward; understanding what is happening inside it is not.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Analytical statement."
+    },
+    {
+      "index": 132,
+      "text": "A common mistake learners make when studying large language models is directly switching to applications and running code without understanding how LLMs actually work [c1565].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1565"
+      ],
+      "status": "grounded",
+      "reason": "c1565 provides this exact statement."
+    },
+    {
+      "index": 133,
+      "text": "This shortcut creates a fragile understanding\u2014you can use the tool, but you cannot diagnose problems, adapt architectures, or reason about limitations.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about the consequences of shallow understanding."
+    },
+    {
+      "index": 134,
+      "text": "The goal of this book is different: to teach how to build an entire large language model from scratch rather than focusing on deploying pre-built applications, to ensure deep understanding of LLM fundamentals [c1595].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1595"
+      ],
+      "status": "grounded",
+      "reason": "c1595 provides this exact statement about the course design."
+    },
+    {
+      "index": 135,
+      "text": "Every design decision, every hyperparameter, every architectural choice will be motivated from first principles.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational statement about the approach."
+    },
+    {
+      "index": 136,
+      "text": "By the time you finish, you will not just know *that* transformers use multi-head attention\u2014you will know *why*, and you will have implemented it yourself.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational statement about learning outcomes."
+    },
+    {
+      "index": 137,
+      "text": "This chapter has established the conceptual landscape for everything that follows.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary introduction."
+    },
+    {
+      "index": 138,
+      "text": "Let us consolidate the key ideas:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to summary."
+    },
+    {
+      "index": 139,
+      "text": "An LLM is a deep neural network designed to understand, generate, and respond to human-like text [c287], with model size measured in parameters [c290].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c287",
+        "c290"
+      ],
+      "status": "grounded",
+      "reason": "c287 defines LLM as a deep neural network designed to understand, generate, and respond to human-like text; c290 defines model size as the number of parameters."
+    },
+    {
+      "index": 140,
+      "text": "LLMs sit within a hierarchy: AI \u2283 ML \u2283 Deep Learning \u2283 LLMs [c342], with Generative AI overlapping DL and LLMs across multiple modalities [c339].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c342",
+        "c339"
+      ],
+      "status": "grounded",
+      "reason": "c342 provides the hierarchical relationship; c339 describes Generative AI as dealing with multiple modalities."
+    },
+    {
+      "index": 141,
+      "text": "Earlier NLP models were task-specific specialists [c315]; LLMs are task-agnostic generalists [c323].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c315",
+        "c323"
+      ],
+      "status": "grounded",
+      "reason": "c315 states earlier NLP models were designed for very specific tasks; c323 states modern LLMs have more diverse and endless applications."
+    },
+    {
+      "index": 142,
+      "text": "LLM development follows a two-stage pipeline: pre-training on massive unlabeled text using next-word prediction [c23, c1593], followed by fine-tuning on smaller labeled datasets for specific tasks [c1593].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c23",
+        "c1593"
+      ],
+      "status": "grounded",
+      "reason": "c23 defines pre-training; c1593 describes both pre-training with next-word prediction and fine-tuning on labeled datasets."
+    },
+    {
+      "index": 143,
+      "text": "The transformer architecture, introduced in 2017 [c1252], is the backbone of modern LLMs, with the attention mechanism as its core innovation [c3710].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1252",
+        "c3710"
+      ],
+      "status": "grounded",
+      "reason": "c1252 states the transformer was introduced in 2017; c3710 states the attention mechanism is the core component of the transformer architecture."
+    },
+    {
+      "index": 144,
+      "text": "Pre-trained LLMs exhibit zero-shot and few-shot learning\u2014the ability to perform tasks without explicit training examples [c3372, c3373]\u2014a form of emergent behavior [c3422].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3372",
+        "c3373",
+        "c3422"
+      ],
+      "status": "grounded",
+      "reason": "c3372 and c3373 define zero-shot and few-shot learning; c3422 defines emergent behavior as the ability to perform tasks not explicitly trained on."
+    },
+    {
+      "index": 145,
+      "text": "GPT-3 (2020) formally established few-shot learning as a property of large language models [c3437]; GPT-4 represents the closed-source frontier [c3400].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3437",
+        "c3400"
+      ],
+      "status": "grounded",
+      "reason": "c3437 states GPT-3 was released in 2020 and introduced few-shot learning; c3400 describes GPT-4 as a closed-source model."
+    },
+    {
+      "index": 146,
+      "text": "The open-source model landscape has matured rapidly, with performance now comparable to closed-source models on standard benchmarks [c3401].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3401"
+      ],
+      "status": "grounded",
+      "reason": "c3401 states as of August 2024, the performance of open-source language models is comparable to closed-source models on the MMLU benchmark."
+    },
+    {
+      "index": 147,
+      "text": "In the next chapter, we begin Stage 1 of the development workflow: preparing text data and understanding how raw text is transformed into the numerical representations that a neural network can process.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to next chapter."
+    }
+  ],
+  "summary": {
+    "grounded": 130,
+    "unsupported": 2,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 15
+  }
+}

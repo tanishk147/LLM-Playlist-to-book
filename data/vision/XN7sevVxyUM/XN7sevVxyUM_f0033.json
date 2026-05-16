@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Attention Is All You Need",
+  "extracted_text": "Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in this paper solely for use in journalistic or scholarly works.\n\nAshish Vaswani*\nGoogle Brain\navaswani@google.com\n\nNoam Shazeer*\nGoogle Brain\nnoam@google.com\n\nNiki Parmar*\nGoogle Research\nnikip@google.com\n\nJakob Uszkoreit*\nGoogle Research\nusz@google.com",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0033",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2657.999667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0033.jpg"
+}

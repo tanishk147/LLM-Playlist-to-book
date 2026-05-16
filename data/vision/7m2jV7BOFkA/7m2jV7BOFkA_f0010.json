@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "As we can see based on the test set instructions, given responses, and the model's responses, the model performs relatively well.\n\nThe answers to the first instruction is clearly correct, while the second answer and the third answers are not correct.\n\nThis is because we have done the fine-tuning for only 1 epoch due to hardware limitations. To get better results, we need to increase the epochs to at least\n\nMost importantly, we can see that model evaluation is not as straightforward as in the previous chapter, where we simply calculated the percentage of correct spam/non-spam class labels to obtain the classification accuracy.\n\nIn practice, instruction-finetuned LLMs such as chatbots are evaluated via multiple approaches:\n\n1. Short-answer and multiple choice benchmarks such as MMLU (\"Measuring Massive Multitask Language Understanding,\" https://arxiv.org/abs/2009.03, which test the general knowledge of a model.\n\n2. Human preference comparison to other LLMs, such as LMSYS chatbot arena (https://arena.lmsys.org).\n\n3. Automated conversational benchmarks, where another LLM like GPT-4 is used to evaluate the responses, such as AlpacaEval (https://tatsulab.github.io/alpaca_eval/), completes the request.\n\nConsidering the scale of the task at hand, we will implement an approach similar to method 3, which involves evaluating the responses automatically using an LLM.\n\nThis will allow us to efficiently assess the quality of the generated responses without the need for extensive human involvement, thereby saving time and resources, while still obtaining meaningful performance indicators.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "7m2jV7BOFkA_f0010",
+  "video_id": "7m2jV7BOFkA",
+  "timestamp_sec": 3077.966333,
+  "source_image": "data/frames/7m2jV7BOFkA/7m2jV7BOFkA_f0010.jpg"
+}

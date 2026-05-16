@@ -1,0 +1,2476 @@
+{
+  "video_id": "-bsa3fCNGg4",
+  "duration_sec": 1691.1093125,
+  "segments": [
+    {
+      "ts_start": 6.03,
+      "ts_end": 14.27,
+      "text": "Hello everyone, welcome to the third lecture in the Building Large Language Models, LLMs from Scratch series.",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Lecture3 : Stages of building LLMs",
+          "extracted_text": "Creating an LLM = Pretraining + Finetuning\n\nPretraining:\n- Training on a large, diverse dataset\n\nRefinement:\n- training on diverse...",
+          "code": null,
+          "math": null,
+          "diagram_summary": "A flowchart showing the two-stage process of creating an LLM: pretraining on large diverse datasets and refinement/finetuning on diverse data.",
+          "diagram_elements": [
+            "Creating an LLM",
+            "Pretraining",
+            "Finetuning",
+            "Training on a large, diverse dataset",
+            "Refinement training on diverse..."
+          ],
+          "confidence": 0.75,
+          "frame_id": "-bsa3fCNGg4_f0000",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 6.466333,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 15.06,
+      "ts_end": 21.84,
+      "text": "Today, we are going to cover the topic which is titled Stages of Building Large Language Models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 22.78,
+      "ts_end": 27.78,
+      "text": "In this lecture, I am going to call large language models as LLMs henceforth.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 28.0,
+      "ts_end": 33.9,
+      "text": "So, whenever I use the term LLM, you can think of the terminology as large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 33.9,
+      "ts_end": 36.68,
+      "text": "So, let's get started with today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 37.18,
+      "ts_end": 41.1,
+      "text": "In the previous lectures, we have covered a couple of important things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 41.28,
+      "ts_end": 53.1,
+      "text": "In the last lecture, we looked at the basics of large language models, where the terminology LLM is actually derived from, then LLMs versus earlier NLP models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 53.92,
+      "ts_end": 61.56,
+      "text": "We also saw that what's the secret sauce behind large language models, what really makes LLMs so good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 61.56,
+      "ts_end": 65.58,
+      "text": "Then we looked at the difference between terminologies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 66.02,
+      "ts_end": 70.92,
+      "text": "What is LLM, what is Gen AI, deep learning, machine learning, artificial intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 71.64,
+      "ts_end": 75.38,
+      "text": "What are the similarities and differences between all of these terms.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 77.05,
+      "ts_end": 81.67,
+      "text": "And then finally, we also took a look at some applications of large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 82.5,
+      "ts_end": 90.16,
+      "text": "If you have not gone through the previous lecture, I would highly encourage you to quickly go through that lecture before watching the current one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 90.24,
+      "ts_end": 91.38,
+      "text": "Since the flow.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 91.74,
+      "ts_end": 92.34,
+      "text": "Of.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 92.52,
+      "ts_end": 97.98,
+      "text": "lectures has been organized in a very specific manner if you are watching this lecture as the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 97.98,
+      "ts_end": 105.88,
+      "text": "first one in this series welcome to this series so now in the stages of building llms there are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 105.88,
+      "ts_end": 112.24,
+      "text": "basically two stages which we are going to look at creating an llm involves the first stage which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 112.24,
+      "ts_end": 119.57,
+      "text": "called as pre-training and second stage which is called as fine tuning in this series we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 119.57,
+      "ts_end": 124.65,
+      "text": "to build our own llm from scratch right so we are going to be looking at both of these stages",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 125.25,
+      "ts_end": 131.43,
+      "text": "for this you need to first understand what exactly is pre-training and you also have to understand",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 131.43,
+      "ts_end": 136.75,
+      "text": "what exactly is fine tuning so let us initially look at pre-training first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 137.46,
+      "ts_end": 145.13,
+      "text": "basically pre-training just means training on a large and diverse data set what does this mean",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 145.13,
+      "ts_end": 149.83,
+      "text": "so we have all interacted with chat gpt right let me show you an interaction right now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 150.05,
+      "ts_end": 160.92,
+      "text": "uh let me open my chat gpt prompt and let me interact with it okay so let me ask here itself",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 161.16,
+      "ts_end": 165.76,
+      "text": "quizme on ancient civilizations can you test my knowledge on ancient civilizations right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 165.76,
+      "ts_end": 172.82,
+      "text": "i am interacting with this large language model here now pre-training basically answers the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 172.82,
+      "ts_end": 179.74,
+      "text": "question how can this llm interact so effectively with me how is it able to answer all of my questions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 181.04,
+      "ts_end": 186.5,
+      "text": "understand what I am speaking as a human and how is it able to respond so accurately and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 186.5,
+      "ts_end": 187.02,
+      "text": "so correctly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 187.52,
+      "ts_end": 193.56,
+      "text": "And the way LLMs do that is because they are trained on a huge and diverse set of data.",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0001"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Model and Architectures",
+          "extracted_text": "Table 2.1: Sizes, architectures, and learning hyper-parameters (batch size in tokens and learning rate) of the models which we trained. All models were trained for a total of 300 billion tokens.\n\n2.1 Model and Architectures\n\nWe use the same model and architecture as GPT-2 [RWC+19], including the modified initialization, pre-normalization, and reversible tokenization described therein, with the exception that we use alternating dense and locally banded sparse attention patterns in the layers of the transformer, similar to the Sparse Transformer [CJSS19]. To study the dependence of ML performance on model size, we train 8 different sizes of model, ranging over three orders of magnitude from 125 million parameters to 175 billion parameters, with the last being the model we call GPT-3. Previous work [KMH+20]",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.92,
+          "frame_id": "-bsa3fCNGg4_f0001",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 191.333,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0001.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 194.62,
+      "ts_end": 201.06,
+      "text": "So GPT-3 which was the precursor or which came before GPT-4 which is right now the latest",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 201.62,
+      "ts_end": 210.56,
+      "text": "LLM by OpenAI, GPT-3 had 175 billion parameters and it was trained on a huge amount or a huge",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 210.56,
+      "ts_end": 211.52,
+      "text": "corpus of data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 211.72,
+      "ts_end": 213.72,
+      "text": "So let me just show you that data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 213.82,
+      "ts_end": 217.96,
+      "text": "This is the original paper on GPT-3 which I am showing on the screen right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 218.04,
+      "ts_end": 220.0,
+      "text": "I am sure it has a huge number of citations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 220.18,
+      "ts_end": 224.52,
+      "text": "But I just want to show you the places from where they got their data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 224.88,
+      "ts_end": 227.7,
+      "text": "So look at the amount of data which was used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 228.02,
+      "ts_end": 231.68,
+      "text": "For now you can think of one token as equal to one word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 232.47,
+      "ts_end": 237.47,
+      "text": "There is a bit of detailing here but that's not the scope of today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 237.63,
+      "ts_end": 240.79,
+      "text": "So for the purposes of this lecture, just think of one token to be equal to one word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 241.99,
+      "ts_end": 242.51,
+      "text": "Approximately.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 243.25,
+      "ts_end": 249.44,
+      "text": "So when GPT-3 was trained, they took 60% of data from Common Crawl.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 249.62,
+      "ts_end": 253.3,
+      "text": "Common Crawl is basically, let me show you what Common Crawl is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 253.38,
+      "ts_end": 257.76,
+      "text": "So if you type Common Crawl on Google, you will be taken through this which is basically",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 257.76,
+      "ts_end": 261.28,
+      "text": "a huge and open repository of all the data on the internet.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 261.66,
+      "ts_end": 265.8,
+      "text": "So they took 410 billion words from this data set.",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0002"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 265.94,
+      "ts_end": 266.6,
+      "text": "Imagine this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 267.04,
+      "ts_end": 270.8,
+      "text": "Let's say one word is, let's say one sentence is 410 billion words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 270.82,
+      "ts_end": 271.3,
+      "text": "This is 10 words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 271.48,
+      "ts_end": 275.7,
+      "text": "This means 41 billion sentences were taken from the Common Crawl.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 276.39,
+      "ts_end": 282.35,
+      "text": "20 billion words or around 1 to 2 billion sentences were taken from webtext2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 282.53,
+      "ts_end": 289.14,
+      "text": "So if you search webtext2, here you will see, this is a corpus of a huge amount of data",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0003"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 289.14,
+      "ts_end": 293.54,
+      "text": "which consists of Reddit submissions, let's say.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 294.05,
+      "ts_end": 300.38,
+      "text": "Then blog posts, stack overflow articles, codes, all of this data was incorporated as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 300.38,
+      "ts_end": 301.04,
+      "text": "the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 301.62,
+      "ts_end": 305.92,
+      "text": "Not just that, they also show you the data which they got from books.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 306.1,
+      "ts_end": 311.92,
+      "text": "So from a large number of books, they got around 12 billion plus 55 billion, which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 311.92,
+      "ts_end": 314.98,
+      "text": "67 billion words from books.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 315.28,
+      "ts_end": 322.58,
+      "text": "And from Wikipedia, GPT-3 got 3 billion words as training data from Wikipedia.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 323.02,
+      "ts_end": 329.64,
+      "text": "So overall, GPT-3 was trained on 300 billion tokens or approximately 300 billion words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 329.94,
+      "ts_end": 331.6,
+      "text": "And you can think of it as training data from Wikipedia.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 331.6,
+      "ts_end": 335.32,
+      "text": "And you can think of it as when kids are growing up, their parents teach them about stuff,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 335.44,
+      "ts_end": 335.6,
+      "text": "right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 335.7,
+      "ts_end": 337.08,
+      "text": "And then they remember that stuff.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 337.97,
+      "ts_end": 345.29,
+      "text": "The reason LLMs like what I showed you here perform here right now, perform so well is",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Fine-tuning GPT models has been implemented in various industries to enhance performance for specific tasks",
+          "extracted_text": "Fine-tuning GPT models has been implemented in various industries to enhance performance for specific tasks. Here are some notable examples across different sectors:\n\n1. Airline Industry\nSK Telecom fine-tuned GPT-4 to improve customer service interactions specifically for telecom-related conversations in Korean. This resulted in significant performance improvements, including a 35% increase in conversation summarization quality and a 33% increase in intent recognition accuracy. This approach could be similarly applied in the airline industry to enhance customer service by handling queries and providing information more accurately in multiple languages (OpenAI).\n\n2. Healthcare\nIn the healthcare industry, fine-tuning GPT models can assist in medical diagnosis, summarizing medical records, and matching patients to clinical trials. By training on domain-specific data, these models can understand medical terminologies and provide more accurate and context-aware responses. For example, a fine-tuned model can help in automating the summarization of patient records, thus aiding healthcare professionals in quickly accessing critical information (Top AI Company)",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "-bsa3fCNGg4_f0004",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 340.233,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 345.29,
+      "ts_end": 348.05,
+      "text": "because they are trained on a huge amount of data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 349.3,
+      "ts_end": 357.8,
+      "text": "So initially, when large language models were actually trained on this data, they were trained",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 357.8,
+      "ts_end": 360.62,
+      "text": "for the task which is called as word completion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 360.88,
+      "ts_end": 361.54,
+      "text": "Which means?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 361.54,
+      "ts_end": 376.82,
+      "text": "You are given a set of words, let's say you are given this sentence, the lion is in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 376.82,
+      "ts_end": 378.1,
+      "text": "dash.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 379.98,
+      "ts_end": 382.74,
+      "text": "So this next word is not known.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 383.12,
+      "ts_end": 388.66,
+      "text": "And chat GPT then predicts or LLMs then predict this word as let's say forest.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 389.5,
+      "ts_end": 394.96,
+      "text": "LLMs were trained on this type of a task initially with such a huge amount of data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 395.42,
+      "ts_end": 397.4,
+      "text": "What really surprised people?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 397.4,
+      "ts_end": 404.46,
+      "text": "Was that even if you train the LLM for this simple task, it turns out that it can do a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 404.46,
+      "ts_end": 406.7,
+      "text": "wide range of other tasks as well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 407.1,
+      "ts_end": 415.61,
+      "text": "So for example, when OpenAI released a paper in 2018 related to pre-training, which we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 415.61,
+      "ts_end": 419.59,
+      "text": "are, which is what we are discussing right now, here is what they have written.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 419.75,
+      "ts_end": 425.09,
+      "text": "So I am showing you this blog post from OpenAI, and they have written this sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 425.25,
+      "ts_end": 426.99,
+      "text": "Please look at this sentence carefully.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 426.99,
+      "ts_end": 435.79,
+      "text": "We also noticed that we can use the underlying language model to begin to perform tasks without",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 435.79,
+      "ts_end": 437.23,
+      "text": "even training on them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 438.6,
+      "ts_end": 444.36,
+      "text": "For example, performance on tasks like picking the right answer to a multiple choice question",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 444.36,
+      "ts_end": 447.94,
+      "text": "steadily increases as the underlying language model improves.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 448.64,
+      "ts_end": 454.36,
+      "text": "This means that even though you just train the LLM for predicting the next world like",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 454.36,
+      "ts_end": 459.78,
+      "text": "how I mentioned to you before, it turned out that the LLM can also do variety of other",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 459.78,
+      "ts_end": 465.54,
+      "text": "things such as translation, such as answering multiple choice question, such as summarizing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 465.54,
+      "ts_end": 468.08,
+      "text": "a text, then sentiment detection etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 469.14,
+      "ts_end": 473.74,
+      "text": "In fact, it can do all of these analysis, sentiment analysis, linguistic acceptability,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 473.9,
+      "ts_end": 479.16,
+      "text": "question answering and we did not specifically train the LLM on any of these tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 479.38,
+      "ts_end": 484.89,
+      "text": "Still, just even if it is trained for predicting the next world, it could do all of these tasks",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 484.89,
+      "ts_end": 486.11,
+      "text": "so well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 486.39,
+      "ts_end": 491.11,
+      "text": "And that's why LLMs have become so much popular than natural language processing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 491.43,
+      "ts_end": 496.59,
+      "text": "Because in NLP, let's say you want to make a language translator, you need to train it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 496.59,
+      "ts_end": 496.95,
+      "text": "separately.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 497.29,
+      "ts_end": 502.51,
+      "text": "Let's say you want to make a quiz answer chatbot, you need to train it separately.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 503.13,
+      "ts_end": 509.81,
+      "text": "Let's say you want to make an AI which detects emotion from the text, you have to train a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 509.81,
+      "ts_end": 510.81,
+      "text": "separate NLP model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 511.19,
+      "ts_end": 514.87,
+      "text": "But with pre-training LLMs, you get one model which is a separate LLP model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 514.87,
+      "ts_end": 518.83,
+      "text": "Which can do all of these tasks on its own without ever being trained for these tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 519.37,
+      "ts_end": 524.27,
+      "text": "So when I am interacting with GPT right now and when let's say I am answering asking the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 524.27,
+      "ts_end": 537.77,
+      "text": "question generate four MCQs for me in the topic of Egyptian civilization, it will generate",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 537.77,
+      "ts_end": 539.61,
+      "text": "those MCQs for me, right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 539.99,
+      "ts_end": 545.67,
+      "text": "And it was specifically not really trained for generating these questions but the pre-training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 545.67,
+      "ts_end": 546.41,
+      "text": "was so good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 546.41,
+      "ts_end": 552.41,
+      "text": "And it was done for such a huge amount of data that it is good enough to perform other",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0005",
+        "-bsa3fCNGg4_f0006"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Figure 2.2: Total compute used during training",
+          "extracted_text": "Based on the analysis in Scaling Laws For [KMH+20] we train much larger models on many fewer tokens than is typical. As a consequence, our model is almost 10x larger than RoBERTa-Large (355M params), both models took roughly 50 percent of the compute during pre-training. Methodology for these calculations can be found in Appendix D.\n\nTable 2.2: Datasets used to train GPT-3. \"Weight in training mix\" refers to the fraction of our training batches that are drawn from a given dataset, which we intentionally do not make proportional to the size. As a result, when we train for 300 billion tokens, some datasets are seen up to 3.4 times during training, while others are seen less than once.\n\nA major methodological concern with language models pretrained on a broad swath of intern",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Table showing datasets used to train GPT-3 with columns for Dataset, Quantity (tokens), Weight in training mix, and Epochs elapsed training for 300B tokens.",
+          "diagram_elements": [
+            "Common Crawl (filtered): 410 billion tokens, 60%, 0.44 epochs",
+            "WebText2: 19 billion tokens, 22%, 2.9 epochs",
+            "Books1: 12 billion tokens, 8%, 1.9 epochs",
+            "Books2: 55 billion tokens, 8%, 0.43 epochs",
+            "Wikipedia: 3 billion tokens, 3%, 3.4 epochs"
+          ],
+          "confidence": 0.92,
+          "frame_id": "-bsa3fCNGg4_f0005",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 547.366333,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0005.jpg"
+        },
+        {
+          "category": "other",
+          "skip": false,
+          "title": "Generate 4 MCQs for me in the topic of Egyptian civilization",
+          "extracted_text": "Certainly! Here are four multiple-choice questions on the topic of Egyptian civilization:\n\nQuestion 1:\nWhat was the primary writing system used in ancient Egypt?\nA) Cuneiform\nB) Hieroglyphics\nC) Latin\nD) Sanskrit\n\nQuestion 2:\nWho was the ancient Egyptian god of the underworld?\nA) Ra\nB) Osiris\nC) Anubis\nD) Horus\n\nQuestion 3:",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "-bsa3fCNGg4_f0006",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 550.999667,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0006.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 552.41,
+      "ts_end": 553.35,
+      "text": "tasks as well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 554.16,
+      "ts_end": 559.24,
+      "text": "For example, here is an app or a dashboard which we ourselves have created at our company.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 559.44,
+      "ts_end": 565.02,
+      "text": "If you want to generate let's say MCQ questions and you can give certain things like I want",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 565.02,
+      "ts_end": 570.32,
+      "text": "one hard question, one medium question, one easy question and the total number of questions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 570.32,
+      "ts_end": 575.58,
+      "text": "I want is three and the grade level is five and the topic I want let's say is photosynthesis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 576.76,
+      "ts_end": 579.96,
+      "text": "Maybe I can put grade level to seventh and then I click on generate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 581.68,
+      "ts_end": 587.32,
+      "text": "You will see that this is an LLM which generates this MCQ question which is one hard, one medium",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 587.32,
+      "ts_end": 588.06,
+      "text": "and one easy.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 588.61,
+      "ts_end": 594.07,
+      "text": "So we are making an API call to GPT-4 for this which was not specifically trained for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 594.07,
+      "ts_end": 597.31,
+      "text": "this MCQ generation but it does a wonderful job of this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 597.65,
+      "ts_end": 600.15,
+      "text": "So that's essentially what pre-training is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 600.25,
+      "ts_end": 606.41,
+      "text": "Pre-training means training an LLM on a huge amount of data so that it can do a wide range",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 606.41,
+      "ts_end": 607.07,
+      "text": "of tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 607.25,
+      "ts_end": 607.89,
+      "text": "That's it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 608.01,
+      "ts_end": 614.17,
+      "text": "So then you must be thinking that what's the second thing called fine-tuning because you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 614.17,
+      "ts_end": 619.37,
+      "text": "can get all of your work done just on GPT-4 which is probably only pre-trained.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 620.11,
+      "ts_end": 625.01,
+      "text": "So why is the second stage which is fine-tuning, why is that really needed?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 625.47,
+      "ts_end": 632.53,
+      "text": "The reason fine-tuning is important is because let's say you are a manager of an airline",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 632.53,
+      "ts_end": 635.99,
+      "text": "company or you are the CEO of an airline company.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 635.99,
+      "ts_end": 644.0,
+      "text": "And you want to develop a chatbot so that users can interact with the chatbot and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 644.0,
+      "ts_end": 644.74,
+      "text": "chatbot responds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 645.02,
+      "ts_end": 649.78,
+      "text": "Let's say user can ask some question like, hey, what's the price for the Lufthansa airline",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 649.78,
+      "ts_end": 652.02,
+      "text": "which leaves at 6 pm.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 652.88,
+      "ts_end": 657.58,
+      "text": "Now the response which you want is very specific to your company.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 658.35,
+      "ts_end": 665.09,
+      "text": "The response which you want is not generic response which is collected from all the places",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 665.09,
+      "ts_end": 665.99,
+      "text": "on the internet.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 666.44,
+      "ts_end": 672.44,
+      "text": "So if you just use the pre-trained model and if you use that model to build the chatbot,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 672.58,
+      "ts_end": 676.7,
+      "text": "it has been trained on a huge amount of data, not just your company data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 676.86,
+      "ts_end": 679.96,
+      "text": "Maybe the pre-trained model does not even have access to your company data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 680.24,
+      "ts_end": 682.92,
+      "text": "So the answer which will come is pretty generic.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 683.12,
+      "ts_end": 685.52,
+      "text": "It will not be specific to your company.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 685.7,
+      "ts_end": 688.14,
+      "text": "It will not be specific to your application.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 689.66,
+      "ts_end": 696.2,
+      "text": "Secondly, as I showed you before, we can use ChatGPT to generate multiple choice question.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 696.28,
+      "ts_end": 696.84,
+      "text": "But let's say you want to generate multiple choice question.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 696.86,
+      "ts_end": 701.48,
+      "text": "Let's say if you are a very big educational company and if you want to develop really",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 701.48,
+      "ts_end": 707.4,
+      "text": "very high quality questions, maybe you should not just rely on the pre-trained model and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 707.4,
+      "ts_end": 712.42,
+      "text": "you should fine-tune the model so that it's better for your specific application.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 713.32,
+      "ts_end": 720.42,
+      "text": "So the main purposes of fine-tuning are, it is basically a refinement on the pre-training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 720.42,
+      "ts_end": 722.26,
+      "text": "on a much narrower data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 722.42,
+      "ts_end": 724.98,
+      "text": "So let's say you are a bank, JP Morgan.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 725.18,
+      "ts_end": 727.16,
+      "text": "And if you have collected a huge amount of data, let's say you are a bank, JP Morgan.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 727.16,
+      "ts_end": 729.92,
+      "text": "And if you have collected a huge amount of data which is not publicly available, what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 729.92,
+      "ts_end": 735.54,
+      "text": "you can do, you can take the pre-trained model and then you can give your own data set and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 735.54,
+      "ts_end": 741.6,
+      "text": "then train the model again on your data set so that when it answers, it answers in such",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 741.6,
+      "ts_end": 743.42,
+      "text": "a way which is specific to your company.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 744.73,
+      "ts_end": 749.85,
+      "text": "So fine-tuning is needed if you want to build an application which is specific to a particular",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 749.85,
+      "ts_end": 751.55,
+      "text": "task or a particular domain.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 751.91,
+      "ts_end": 757.81,
+      "text": "If you are a general user, if you are a student who just wants to, let's say, use ChatGPT to get questions,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 757.89,
+      "ts_end": 763.25,
+      "text": "to get information about certain things, then you can just use GPT-4.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 763.39,
+      "ts_end": 766.35,
+      "text": "You will not need fine-tuning too much.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 766.43,
+      "ts_end": 772.75,
+      "text": "But if you are a big company, let's say, and if you are wanting to deploy LLM applications",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 772.75,
+      "ts_end": 776.21,
+      "text": "in the real world on your data set, you will need fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 776.73,
+      "ts_end": 781.19,
+      "text": "Let me give you some examples of this which are mentioned on OpenAI's website also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 781.59,
+      "ts_end": 786.37,
+      "text": "So OpenAI actually mentions so many things on their blog posts and their website, which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 786.37,
+      "ts_end": 787.67,
+      "text": "not many people know about.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 787.77,
+      "ts_end": 788.13,
+      "text": "So let me give you some examples of this which are mentioned on OpenAI's website also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 788.5,
+      "ts_end": 793.6,
+      "text": "So let's say, let's look at this company called SK Telecom, and it wanted to build a chatbot",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 793.6,
+      "ts_end": 799.5,
+      "text": "to improve customer service interactions for telecom-related conversations in Korean.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 800.21,
+      "ts_end": 806.41,
+      "text": "Now if it just used the GPT-4, it's not suited for this particular requirement, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 806.51,
+      "ts_end": 811.49,
+      "text": "GPT-4 maybe is not trained on telecom conversations in Korean.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 811.63,
+      "ts_end": 814.23,
+      "text": "So the training data did not involve this probably.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 814.47,
+      "ts_end": 818.61,
+      "text": "So what this SK Telecom will do is that it will fine-tune the conversations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 818.61,
+      "ts_end": 820.93,
+      "text": "So it will be able to do GPT-4 by using its own training data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 821.11,
+      "ts_end": 825.15,
+      "text": "So that it gets a fine-tuned model which is specific for its purpose.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 825.39,
+      "ts_end": 830.91,
+      "text": "As you can see for SK Telecom, this resulted in significant improvement in performance,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 831.59,
+      "ts_end": 838.49,
+      "text": "35% increase in conversation summarization quality and 33% increase in intent recognition",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 838.49,
+      "ts_end": 839.13,
+      "text": "accuracy.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 839.63,
+      "ts_end": 841.09,
+      "text": "That just one example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 842.5,
+      "ts_end": 847.48,
+      "text": "The second example which you can see is an example called Harvey.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 847.48,
+      "ts_end": 854.58,
+      "text": "Harvey. So Harvey is basically an AI legal tool for attorneys. So now imagine that if you have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 854.58,
+      "ts_end": 862.2,
+      "text": "OpenAI, if you just use GPT-4 without fine tuning, what if GPT-4 is not trained on legal cases?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 862.64,
+      "ts_end": 870.4,
+      "text": "What if the data does not cover the legal cases which happened in countries? So then that's not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 870.4,
+      "ts_end": 876.94,
+      "text": "a good tool for attorneys, right? Attorneys ideally or lawyers want an AI tool which is trained",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 876.94,
+      "ts_end": 884.7,
+      "text": "on legal case history. So as you have seen here, while foundational models, so pre-trained models",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 884.7,
+      "ts_end": 889.92,
+      "text": "are also called foundational models. While foundational models were strong at reasoning,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 890.36,
+      "ts_end": 896.76,
+      "text": "they lacked the extensive knowledge of legal case history and other knowledge required for legal",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 896.76,
+      "ts_end": 903.77,
+      "text": "work. So the training data set lacked the knowledge of legal case history and that's why",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 903.77,
+      "ts_end": 908.75,
+      "text": "if you were to build such an AI tool which can assist lawyers and attorneys,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.47,
+      "ts_end": 915.21,
+      "text": "you have to include the specific legal case history data and that's why you will have to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 915.21,
+      "ts_end": 921.02,
+      "text": "fine-tune the LLM further. Remember one key terminology which I used here, the pre-trained",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 921.02,
+      "ts_end": 926.62,
+      "text": "data or the pre-trained model is also called as the foundational model and the fine-tuning happens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 926.62,
+      "ts_end": 934.09,
+      "text": "after that. So here's Harvey basically, harvey.ai, you can go to this link right now. So this is a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 934.09,
+      "ts_end": 939.53,
+      "text": "trusted legal AI platform and if you are thinking how different is it from GPT-4,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 940.59,
+      "ts_end": 946.37,
+      "text": "you have your answer. This is a fine-tuned model which is specifically fine-tuned on data sets",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 946.37,
+      "ts_end": 953.51,
+      "text": "which include legal case history and as you can see Harvey works with the world's best legal teams.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 953.71,
+      "ts_end": 961.51,
+      "text": "It works really well. Here is another article which says JPMorgan Chase unveils AI-powered LLM",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0008"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": "JPMorgan Chase unveils AI-powered LLM Suite; may replace research analysts",
+          "extracted_text": "Home / World News / JPMorgan Chase unveils AI-powered LLM Suite; may replace research analysts\n\nUS financial services major JPMorgan Chase's new large language model, functioning as a 'research analyst', has already be rolled for more than 50,000 employees\n\nSensex 78484.77 \u2193(-3.08%) -2497.18\nNifty 24056.80 \u2193(-2.67%) -660.90\nNifty Midcap 55917.60 \u2193(-3.45%) -1996.05\nNifty Smallcap 8413.75 \u2193(-4.12%) -361.20\nNifty 5000",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "-bsa3fCNGg4_f0008",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 955.833,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0008.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 961.51,
+      "ts_end": 967.17,
+      "text": "suite may replace research analysis. Now you might be thinking if GPT-4 is already there,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 967.29,
+      "ts_end": 970.33,
+      "text": "why did JPMorgan unveil its own AI-powered LLM?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 971.39,
+      "ts_end": 977.71,
+      "text": "The reason is because it's fine-tuned with their own data. It's fine-tuned for their employees",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 977.71,
+      "ts_end": 984.45,
+      "text": "specifically. Maybe the JPMorgan's data is not available publicly to anyone. So only they have",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0009"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": "JPMorgan Chase unveils AI-powered LLM Suite; may replace research analysts",
+          "extracted_text": "Home / World News / JPMorgan Chase unveils AI-powered LLM Suite; may replace research analysts\n\nUS financial services major JPMorgan Chase's new large language model, functioning as a 'research analyst', has already be rolled for more than 50,000 employees",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "-bsa3fCNGg4_f0009",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 983.466333,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0009.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 984.45,
+      "ts_end": 989.75,
+      "text": "the data and they have trained the LLM which is fine-tuned so that the answers are specific for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 989.75,
+      "ts_end": 1000.08,
+      "text": "their company. Okay, so I showed you examples in the telecommunication sector which is this SK",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0010",
+        "-bsa3fCNGg4_f0011"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Custom-Trained Model",
+          "extracted_text": "various parameter efficient fine-tuning (PEFT) methods at a larger scale. It's particularly helpful for organizations that need support setting up efficient training data pipelines, evaluation systems, and bespoke parameters and methods to maximize model performance for their use case or task.\n\nFor example, SK Telecom, a telecommunications operator serving over 30 million subscribers in South Korea, wanted to customize a model to be an expert in the telecommunications domain with an initial focus on customer service. They worked with OpenAI to fine-tune GPT-4 to improve its performance in telecom-related conversations in the Korean language. Over the course of multiple weeks, SKT and OpenAI drove meaningful performance improvement in telecom customer service tasks\u2014a 35% increase in conversation summarization quality, a 33% increase in intent recognition accuracy, and an increase in satisfaction scores from 3.6 to 4.5 (out of 5) when comparing the fine-tuned model to GPT-4.\n\nIn some cases, organizations need to train a purpose-built model from scratch that understands their business, industry, or domain. Fully custom-trained models imbue new knowledge from a specific domain by modifying key steps of the model training process",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "-bsa3fCNGg4_f0010",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 991.366333,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0010.jpg"
+        },
+        {
+          "category": "slide",
+          "skip": false,
+          "title": null,
+          "extracted_text": "understands their business, industry, or domain. Fully custom-trained models imbue new knowledge from a specific domain by modifying key steps of the model training process using novel mid-training and post-training techniques. Organizations that see success with a fully custom-trained model often have large quantities of proprietary data\u2014millions of examples or billions of tokens\u2014that they want to use to teach the model new knowledge or complex, unique behaviors for highly specific use cases.\n\nFor example, Harvey, an AI-native legal tool for attorneys, partnered with OpenAI to create a custom-trained large language model for case law. While foundation models were strong at reasoning, they lacked the extensive knowledge of legal case history and other knowledge required for legal work. After testing out prompt engineering, RAG, and fine-tuning, Harvey worked with our team to add the depth of context needed to the model\u2014the equivalent of 10 billion tokens worth of data. Our team modified every step of the model training process, from domain-specific mid-training to customizing post-training processes and incorporating expert attorney feedback. The resulting model achieved an 83% increase in factual responses and attorneys preferred the customized model's outputs 97% of the time over GPT-4.",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "-bsa3fCNGg4_f0011",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 996.133,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0011.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1000.08,
+      "ts_end": 1002.84,
+      "text": "Telecom. I showed you examples in the legal sector.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1003.6,
+      "ts_end": 1009.18,
+      "text": "Which is the example of Harvey and then I also showed you examples in the economics or banking",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0012"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": "Replace research analysts",
+          "extracted_text": "US financial services major JPMorgan Chase's new large language model, functioning as a 'research analyst', has already be rolled for more than 50,000 employees",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "-bsa3fCNGg4_f0012",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 1006.499667,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0012.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1009.18,
+      "ts_end": 1014.76,
+      "text": "sector. Essentially you will see that when you go to a production level or when you think of startups",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1014.76,
+      "ts_end": 1022.18,
+      "text": "or industries you will definitely need fine-tuning. Directly using GPT-4 is good for students because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1022.18,
+      "ts_end": 1027.02,
+      "text": "it satisfies their purposes but fine-tuning is needed as you build more advanced applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1028.36,
+      "ts_end": 1034.46,
+      "text": "So these are the two stages of building an LLM. The first stage is pre-training as I mentioned.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1034.68,
+      "ts_end": 1039.66,
+      "text": "And the second stage is fine-tuning. I hope you have understood up till this point. If something",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1039.66,
+      "ts_end": 1046.22,
+      "text": "is unclear please put it in the comment section of this particular video. Now just so that this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1046.22,
+      "ts_end": 1050.94,
+      "text": "explain this concept is explained to you in a better manner I have created this pre-training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1050.94,
+      "ts_end": 1057.04,
+      "text": "plus fine-tuning schematic so that you can go through this schematic step by step to get a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1057.04,
+      "ts_end": 1063.62,
+      "text": "visual representation. So let's start with the first block. The first block is the data on which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1064.88,
+      "ts_end": 1069.58,
+      "text": "students are trained on. Whether you do pre-training and later whether you do fine-tuning you cannot",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1069.58,
+      "ts_end": 1076.4,
+      "text": "get anywhere without data. So the data is either internet text, books, media, research articles.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1077.52,
+      "ts_end": 1085.92,
+      "text": "We saw this data over here right. You need a huge amount of data and you need to train the large",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1085.92,
+      "ts_end": 1091.42,
+      "text": "language model on this data set. This data set can include billions or even trillions of words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1091.98,
+      "ts_end": 1094.98,
+      "text": "Now one more point which I want to raise here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1095.1,
+      "ts_end": 1100.66,
+      "text": "Is the computational cost for training the LLM right. So you're training this LLM on a huge",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1100.66,
+      "ts_end": 1105.68,
+      "text": "amount of data which is also the second step of this schematic. Now to train this you need",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1105.68,
+      "ts_end": 1112.36,
+      "text": "computational power. You need computational units and it's not possible for normal students or even",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1112.36,
+      "ts_end": 1117.34,
+      "text": "for normal people who don't have access to powerful GPUs to do this. Just to give you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1117.34,
+      "ts_end": 1123.38,
+      "text": "a sense of the cost. The total pre-training cost for GPT-3 is 4.6 million dollars.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1124.84,
+      "ts_end": 1125.5,
+      "text": "This is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1125.5,
+      "ts_end": 1133.35,
+      "text": "a huge amount. 4.6 million dollars. Think about it. For pre-training of GPT-3 it costs this much.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1134.45,
+      "ts_end": 1139.95,
+      "text": "So the first two steps in this schematic which is collecting this huge amount of data and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1139.95,
+      "ts_end": 1145.57,
+      "text": "training the LLM requires a lot of computational power, requires a lot of computational energy and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1145.57,
+      "ts_end": 1151.58,
+      "text": "of course a lot of money. So when you train a pre-trained LLM like this it's also called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1151.58,
+      "ts_end": 1156.4,
+      "text": "as foundational model and it is this also is awesome. It has huge amount of capability.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1156.62,
+      "ts_end": 1161.42,
+      "text": "It is like I'm interacting with GPT-4 right now. It's a foundational model. It's a pre-trained model.",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0013"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": null,
+          "extracted_text": "Fine-tuning of LLMs has been implemented in various industries to enhance performance for specific tasks. Here are some notable examples across different sectors:\n\n1. Airline Industry\n\nSK Telecom fine-tuned GPT-4 to improve customer service interactions specifically for telecom-related conversations in Korean. This resulted in significant performance improvements, including a 35% increase in conversation summarization quality and a 33% increase in intent recognition accuracy. This approach could be similarly applied in the airline industry to enhance customer service by handling queries and providing information more accurately in multiple languages (OpenAI).\n\n2. Healthcare\n\nIn the healthcare industry, fine-tuning GPT models can assist in medical diagnosis, summarizing medical records, and matching patients to clinical trials. By training on domain-specific data, these models can understand medical terminologies and provide more accurate and context-aware responses. For example, a fine-tuned model can help in automating the summarization of patient records, thus aiding healthcare professionals in quickly accessing critical information",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.92,
+          "frame_id": "-bsa3fCNGg4_f0013",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 1157.799667,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0013.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1161.68,
+      "ts_end": 1168.92,
+      "text": "It still has huge amount of capabilities. And then the third step in this is fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1169.54,
+      "ts_end": 1175.74,
+      "text": "And fine tuning is also so the third step as I mentioned is fine tuned LLM and after fine tuning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1175.74,
+      "ts_end": 1180.68,
+      "text": "you can get specific applications like you can build your own personal assistant, you can build",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1180.68,
+      "ts_end": 1185.8,
+      "text": "a language translation bot, you can build a summarization assistant, you can build your own",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1185.8,
+      "ts_end": 1186.78,
+      "text": "classification bot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1187.42,
+      "ts_end": 1192.12,
+      "text": "So if you are a company or an industry or a startup who is looking for these specific applications",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1192.12,
+      "ts_end": 1200.22,
+      "text": "using your own data you will fine tune the pre-trained LLM on the label data set. That's the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1200.22,
+      "ts_end": 1207.84,
+      "text": "three steps. So the first step is data, second step is training the foundational model and the third",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1207.84,
+      "ts_end": 1215.31,
+      "text": "step is fine tuning on the specific task. Now there is also one thing between unlabeled data and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1215.31,
+      "ts_end": 1215.93,
+      "text": "labeled data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1218.48,
+      "ts_end": 1224.21,
+      "text": "So you usually don't label the data set. It's an unsupervised learning task and it's also called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1224.21,
+      "ts_end": 1230.17,
+      "text": "auto regression because if you are considering a sentence and predicting the next world the part of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1230.17,
+      "ts_end": 1235.43,
+      "text": "the sentence is used for training and the next world is used for forecasting or testing and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1235.43,
+      "ts_end": 1241.47,
+      "text": "for the next set of training the earlier forecasted world is used as training. It's fine if you don't",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1241.47,
+      "ts_end": 1247.03,
+      "text": "understand this terminology right now but just remember that pre-training is done on unlabeled text data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1251.47,
+      "ts_end": 1257.63,
+      "text": "let's say if you are doing a classification task right or if you want a specific LLM task which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1257.63,
+      "ts_end": 1264.15,
+      "text": "classifies emails as spam or no spam you will need to provide labels for which emails were spam which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1264.15,
+      "ts_end": 1272.82,
+      "text": "were not spam etc. So generally for fine tuning we will have a labeled data set. Let's say Harvey",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1272.82,
+      "ts_end": 1279.32,
+      "text": "you're considering the case of Harvey which we saw for legal data we had these case studies legal case",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1279.6,
+      "ts_end": 1284.64,
+      "text": "studies right you will need to provide those case studies and mention that for these questions these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1284.64,
+      "ts_end": 1289.6,
+      "text": "were the answers in this particular case study etc. So in a sense that becomes labeled data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1291.12,
+      "ts_end": 1296.66,
+      "text": "So please keep this pre-training plus fine-tuning schematic in mind what many students do is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1296.66,
+      "ts_end": 1301.7,
+      "text": "they do not understand the difference between pre-training and fine-tuning and they also don't",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1301.7,
+      "ts_end": 1306.54,
+      "text": "understand why is it called pre-training in the first place shouldn't it just be training ideally",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1306.61,
+      "ts_end": 1310.37,
+      "text": "it should just be called as training but it's called pre-training because there is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1310.37,
+      "ts_end": 1310.61,
+      "text": "also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1310.75,
+      "ts_end": 1316.41,
+      "text": "this fine-tuning component so it's just a terminology thing so if you understand this then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1316.41,
+      "ts_end": 1322.11,
+      "text": "you will get a better clarity of when you interact with GPT you are essentially interacting with the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1322.11,
+      "ts_end": 1330.73,
+      "text": "pre-train or a foundational model okay so I hope you have understood this schematic and I hope you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1330.73,
+      "ts_end": 1335.63,
+      "text": "have understood the difference between pre-training and fine-tuning now I want to just show you the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1335.63,
+      "ts_end": 1340.79,
+      "text": "steps which are needed for building an LLM which basically summarizes what all we have covered in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1340.79,
+      "ts_end": 1341.49,
+      "text": "today's lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1341.87,
+      "ts_end": 1348.61,
+      "text": "so the first step is to train on a large corpus of text data which is also called raw text remember",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1348.61,
+      "ts_end": 1353.45,
+      "text": "some of these terminologies keep on appearing everywhere they actually mean something very",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1353.45,
+      "ts_end": 1359.03,
+      "text": "simple but they just sound a bit fancy so raw text is just basically training on a large corpus of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1359.03,
+      "ts_end": 1364.73,
+      "text": "text data a more formal definition of raw text is regular text without any labeling information",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1365.59,
+      "ts_end": 1371.65,
+      "text": "so raw text means text which does not come with predefined labels so first you train on such a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1371.87,
+      "ts_end": 1378.19,
+      "text": "way of using such kind of a raw text and you need a huge amount of raw text the second task is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1378.19,
+      "ts_end": 1384.31,
+      "text": "first training stage of an LLM and this is called as pre-training as we already saw this task involves",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1384.31,
+      "ts_end": 1389.49,
+      "text": "creation of an initially pre-trained LLM which is also called as the base or a foundational model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1390.15,
+      "ts_end": 1396.41,
+      "text": "GPT-4 for example what we saw in the paper this paper over here I will also be sharing the link to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1396.41,
+      "ts_end": 1401.95,
+      "text": "this paper in the information section uh this paper is a pre-trained model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1402.62,
+      "ts_end": 1408.88,
+      "text": "and it is actually capable of text completion but it also turns out it's capable of many other things",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1408.88,
+      "ts_end": 1415.62,
+      "text": "like as we saw over here sentiment analysis question answering etc so pre-training also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1415.62,
+      "ts_end": 1424.15,
+      "text": "gives the LLM a lot of other powers so that is step number two step number three after obtaining",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1424.15,
+      "ts_end": 1431.83,
+      "text": "the pre-trained LLM the LLM is further trained on label data and this is fine-tuning so let me just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1433.37,
+      "ts_end": 1439.37,
+      "text": "called as fine tuning and we saw a number of applications of this in different areas we saw",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1439.37,
+      "ts_end": 1445.47,
+      "text": "applications in the legal area then we saw applications in the commute telecommunication",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1445.47,
+      "ts_end": 1451.55,
+      "text": "sector this sk telecom harvey we also saw an application related to jp morgan chase",
+      "frame_ids": [
+        "-bsa3fCNGg4_f0014"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": null,
+          "extracted_text": "In some cases, organizations need to train a purpose-built model from scratch that understands their business, industry, or domain. Fully custom-trained models imbue new knowledge from a specific domain by modifying key steps of the model training process using novel mid-training and post-training techniques. Organizations that see success with a fully custom-trained model often have large quantities of proprietary data\u2014millions of examples or billions of tokens\u2014that they want to use to teach the model new knowledge or complex, unique behaviors for highly specific use cases.\n\nFor example, Harvey, an AI-native legal tool for attorneys, partnered with OpenAI to create a custom-trained large language model for case law. While foundation models were strong at reasoning, they lacked the extensive knowledge of legal case history and other knowledge required for legal work. After testing out prompt engineering, RAG, and fine-tuning, Harvey worked with our team to add the depth of context needed to the model\u2014the equivalent of 10 billion tokens worth of data. Our team modified every step of the model training process, from domain-specific mid-training to customizing post-training processes and incorporating expert attorney feedback. The resulting model achieved an",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "-bsa3fCNGg4_f0014",
+          "video_id": "-bsa3fCNGg4",
+          "timestamp_sec": 1447.099667,
+          "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0014.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1451.55,
+      "ts_end": 1457.75,
+      "text": "so fine tuning is essential as and when you go into production and if you want a really powerful",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1457.75,
+      "ts_end": 1463.64,
+      "text": "model trained specifically on your data set even within fine tuning there are usually two",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1463.64,
+      "ts_end": 1468.8,
+      "text": "categories the first category it's called instruction fine tuning and second is called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1468.8,
+      "ts_end": 1474.56,
+      "text": "fine tuning for classification tasks so let's say you're an education company and if you want to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1476.02,
+      "ts_end": 1482.32,
+      "text": "if you want to or let's say if you're a company like a text translation company which converts",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1482.32,
+      "ts_end": 1487.96,
+      "text": "english into french so here you might need to give some sort of an instruction like this is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1487.96,
+      "ts_end": 1488.62,
+      "text": "the english language",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1488.64,
+      "ts_end": 1494.2,
+      "text": "and you convert it into the french language so you might need to give instruction answer pairs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1494.2,
+      "ts_end": 1499.14,
+      "text": "as label data set so the label data set means showing that okay these are all the english",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1499.14,
+      "ts_end": 1504.18,
+      "text": "language these are all the french language use this to further fine tune what you already know",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1504.8,
+      "ts_end": 1509.7,
+      "text": "so that's called as instruction fine tuning even for airline customer support let's say",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1509.7,
+      "ts_end": 1514.42,
+      "text": "someone is asking a question and then the customer support response you might have a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1514.42,
+      "ts_end": 1518.44,
+      "text": "label data set which consists of usually for this instruction these are the responses",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1518.64,
+      "ts_end": 1524.71,
+      "text": "let's say and then you give this label data for fine tuning the second type of fine tuning is for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1524.71,
+      "ts_end": 1530.33,
+      "text": "classification even here you need a label data let's say you want to build an ai agent which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1530.33,
+      "ts_end": 1536.53,
+      "text": "classifies emails into spam and no spam you need to give a label data set which consists of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1536.53,
+      "ts_end": 1543.33,
+      "text": "text and the associated labels maybe you will give 10 000 emails and maybe 5000 are spam 5000",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1543.33,
+      "ts_end": 1548.21,
+      "text": "are not spam as the training data to this llm and then you will fine tune it further",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1549.16,
+      "ts_end": 1555.68,
+      "text": "so remember pre-training usually does not need label data and pre-training is so pre-training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1555.68,
+      "ts_end": 1561.52,
+      "text": "does not need any without any labeling information that's also fine but for fine tuning you typically",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1561.52,
+      "ts_end": 1568.48,
+      "text": "need a labeled data set okay so this actually brings us to the end of today's lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1568.98,
+      "ts_end": 1574.2,
+      "text": "where we covered about the two stages of building an llm in particular pre-training and fine tuning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1575.24,
+      "ts_end": 1580.6,
+      "text": "in pre-training we saw that you have to train on a big corpus of diverse data and you need a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1580.66,
+      "ts_end": 1586.08,
+      "text": "lot of computational power pre-training is not possible unless you have first of all access to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1586.08,
+      "ts_end": 1592.93,
+      "text": "gpu and access to this kind of money 4.6 million dollars for pre-training gpt3 and then the third",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1592.93,
+      "ts_end": 1598.69,
+      "text": "step so after data after pre-training those are the first two steps final step is fine tuning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1599.29,
+      "ts_end": 1605.59,
+      "text": "which is usually done on a labeled data set and using fine tune fine tuned llm you can do specific",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1605.59,
+      "ts_end": 1610.83,
+      "text": "tasks such as classification summarization uh translation and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1610.85,
+      "ts_end": 1615.91,
+      "text": "building your own chatbot so nowadays you must have seen companies are building their own llm",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1615.91,
+      "ts_end": 1621.61,
+      "text": "specific chatbots all of these companies will do some kind of fine tuning they never use just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1621.61,
+      "ts_end": 1626.63,
+      "text": "foundational models you will see that big companies never only use foundational model they",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1626.63,
+      "ts_end": 1632.63,
+      "text": "will have to go that next step of fine tuning and that is much more expensive rather than using the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1632.63,
+      "ts_end": 1639.13,
+      "text": "foundational model i hope you are understanding these lectures and i'm keeping it a bit visual",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1639.67,
+      "ts_end": 1642.05,
+      "text": "so that there is some sort of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1642.23,
+      "ts_end": 1648.59,
+      "text": "visually visual stimulation as you learn so and i'm also writing these notes on a whiteboard so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1648.59,
+      "ts_end": 1653.55,
+      "text": "that you if you see someone doing this hands-on in front of you you will also remain motivated",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1653.55,
+      "ts_end": 1660.09,
+      "text": "for these lectures i encourage you to also write down some key points in a notebook or in a miro",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1660.09,
+      "ts_end": 1665.24,
+      "text": "whiteboard like i am doing right now in the next lecture we are going to start looking at basic",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1665.24,
+      "ts_end": 1670.62,
+      "text": "introduction to transformers and we'll also have a brief look at attention is all you need paper",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1671.24,
+      "ts_end": 1672.28,
+      "text": "we'll have maybe two",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1672.36,
+      "ts_end": 1678.56,
+      "text": "to three more lectures on this initial modules and then we'll dive into coding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1679.93,
+      "ts_end": 1684.39,
+      "text": "so thank you everyone and i look forward to seeing you in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 15,
+  "frames_with_content": 13
+}

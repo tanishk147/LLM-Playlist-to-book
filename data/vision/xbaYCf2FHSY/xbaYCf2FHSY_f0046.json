@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "without needing any prior examples or specific context. My training includes a broad range of knowledge and patterns, allowing me to handle many tasks based solely on the instructions or queries provided at the moment. So, even without examples, I can often understand and respond accurately to a wide variety of prompts.\n\nConvert \"breakfast\" into French\n\nThe French word for \"breakfast\" is \"petit d\u00e9jeuner.\"",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "xbaYCf2FHSY_f0046",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 2659.299667,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0046.jpg"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Diagram showing predictions for sequences with logits output for the 4th token, with arrows and annotations highlighting specific logit values.",
+  "diagram_elements": [
+    "Predictions for sequence 1",
+    "Predictions for sequence 2",
+    "logits[:, -1, :] output",
+    "Logits for the 4th token",
+    "Numerical logit values (1.2, 1.5, -0.6, etc.)"
+  ],
+  "confidence": 0.65,
+  "frame_id": "F1Sm7z2R96w_f0004",
+  "video_id": "F1Sm7z2R96w",
+  "timestamp_sec": 1549.033,
+  "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0004.jpg"
+}

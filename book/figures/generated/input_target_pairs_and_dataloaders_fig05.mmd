@@ -1,0 +1,17 @@
+graph LR
+    A["Raw Text"] --> B["Tokenizer"]
+    B --> C["Token IDs"]
+    C --> D["Sliding Window"]
+    D --> E["GPTDatasetV1"]
+    E --> F["DataLoader"]
+    F --> G["Batched X, Y Tensors"]
+    G --> H["Embedding Layer"]
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
+    style E fill:#fce4ec
+    style F fill:#fff9c4
+    style G fill:#f1f8e9
+    style H fill:#ede7f6

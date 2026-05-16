@@ -1,0 +1,24 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "1045+149+300\n1494\nMaths solver",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Google calculator interface showing a math computation with result 1494 and a scientific calculator keypad with trigonometric and logarithmic functions.",
+  "diagram_elements": [
+    "Search query: 1045+149+300",
+    "Result display: 1494",
+    "Calculator buttons: Rad, Deg, x!, (, ), %, AC",
+    "Function buttons: Inv, sin, ln, 7, 8, 9, +",
+    "Function buttons: \u03c0, cos, log, 4, 5, 6, \u00d7",
+    "Function buttons: e, tan, \u221a, 1, 2, 3, \u2212",
+    "Function buttons: Ans, EXP, x^, 0, ., =, +",
+    "Maths solver button"
+  ],
+  "confidence": 0.95,
+  "frame_id": "yZpy_hsC1bE_f0004",
+  "video_id": "yZpy_hsC1bE",
+  "timestamp_sec": 1474.299667,
+  "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0004.jpg"
+}

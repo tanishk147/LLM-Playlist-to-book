@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "idx = [[10, 23, 45, 67, 89, 123, 56, 78],  # First sequence\n      [9, 8, 7, 6, 5, 4, 3, 2]]           # Second sequence"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "F1Sm7z2R96w_f0001",
+  "video_id": "F1Sm7z2R96w",
+  "timestamp_sec": 1343.566333,
+  "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0001.jpg"
+}

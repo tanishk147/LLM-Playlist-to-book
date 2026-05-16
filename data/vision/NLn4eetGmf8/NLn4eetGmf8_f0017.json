@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Street scene with two potholes detected and labeled with confidence scores: one pothole with 0.68 confidence and another with 0.55 confidence, both highlighted in magenta with red bounding boxes.",
+  "diagram_elements": [
+    "pothole 0.68",
+    "pothole 0.55",
+    "red bounding box (left)",
+    "red bounding box (right)",
+    "magenta segmentation mask (left)",
+    "magenta segmentation mask (right)"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0017",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 1930.599667,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0017.jpg"
+}

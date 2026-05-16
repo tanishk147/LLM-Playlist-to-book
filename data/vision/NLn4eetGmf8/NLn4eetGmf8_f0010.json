@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Introduction to Vector Embeddings",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Vector embeddings process: a set of objects (Object 1, 2, 3) are fed into an Embedding Model, which outputs high-dimensional vector representations visualized as a 3D scatter plot of colored points.",
+  "diagram_elements": [
+    "Object 1",
+    "Object 2",
+    "Object 3",
+    "Set of Objects",
+    "Embedding Model",
+    "3D vector space visualization",
+    "colored point clusters"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0010",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 796.299667,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0010.jpg"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Neural Machine Translation - Sequence to Sequence Model with Attention",
+  "extracted_text": "Second, an attention decoder does an extra step before producing its output. In order to focus on the parts of the output that are relevant to this decoding time step, the decoder does the following:\n\n\u2022 Look at the set of encoder hidden states it received \u2013 each encoder hidden state is most associated with a certain word in the input sentence",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence-to-sequence neural machine translation architecture with attention: three encoder RNNs process input and pass hidden states to two attention decoder RNNs in the decoding stage.",
+  "diagram_elements": [
+    "Encoder RNN (three instances)",
+    "Encoder hidden states (orange boxes)",
+    "Attention Decoder RNN (two instances)",
+    "Encoding Stage",
+    "Decoding Stage"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0018",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2310.266333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0018.jpg"
+}

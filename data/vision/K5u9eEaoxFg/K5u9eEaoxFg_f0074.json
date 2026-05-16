@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing queries, keys, and values being processed through multiple attention heads (Head 1, Head 2) with tensor transformations and concatenation, followed by attention weight computation.",
+  "diagram_elements": [
+    "Queries matrix",
+    "Keys.transpose(2, 3)",
+    "Head 1",
+    "Head 2",
+    "tensor output shapes (1, 2, 3, 3)",
+    "(b, num_heads, num_tokens, head_dim)",
+    "Step 8: Find attention weights",
+    "Mask attention scores to implement"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0074",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2887.399667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0074.jpg"
+}

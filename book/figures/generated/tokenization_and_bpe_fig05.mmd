@@ -1,0 +1,12 @@
+graph TD
+    A["(1) Tokenization"] --> B["Word based"]
+    A --> C["Subword based<br/>BPE tokenizer"]
+    A --> D["Character based"]
+    E["(2) Token embeddings"] --> F["Converting token IDs<br/>to vectors"]
+    G["(3) Positional embeddings"] --> H["Encoding information<br/>about position"]
+    I["(4) Input embeddings"] --> J["Token embeddings +<br/>Positional embeddings"]
+    
+    style A fill:#e1f5ff
+    style E fill:#e1f5ff
+    style G fill:#e1f5ff
+    style I fill:#e1f5ff

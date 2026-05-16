@@ -1,0 +1,15 @@
+{
+  "chapter_id": "llm_foundations_overview",
+  "title": "Large Language Models: Foundations and Landscape",
+  "summary": {
+    "grounded": 130,
+    "unsupported": 2,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 15
+  },
+  "stripped_sentence_indices": [
+    31,
+    38
+  ]
+}

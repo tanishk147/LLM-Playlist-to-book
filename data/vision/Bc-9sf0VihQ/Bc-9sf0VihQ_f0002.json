@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "torch.optim.Optimizer.state_dict",
+  "extracted_text": "Optimizer.state_dict()[source]\n\nReturns the state of the optimizer as a dict.\n\nIt contains two entries:\n\n\u2022 state: a Dict holding current optimization state. Its content differs between optimizer classes, but some common characteristics hold. For example, state is saved per parameter, and the parameter itself is NOT saved. state is a Dictionary mapping parameter ids to a Dict with state corresponding to each parameter.\n\n\u2022 param_groups: a List containing all parameter groups where each parameter group is a Dict. Each parameter group contains metadata specific to the optimizer, such as learning rate and weight decay, as well as a List of parameter IDs of the parameters in the group.\n\nNOTE: The parameter IDs may look like indices but they are just IDs associating state with param_group. When loading from a state_dict, the optimizer will zip the param_group params (int IDs) and the optimizer param_groups (actual nn.Parameter s) in order to match state WITHOUT additional verification.\n\nA returned state dict might look something like:",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "Bc-9sf0VihQ_f0002",
+  "video_id": "Bc-9sf0VihQ",
+  "timestamp_sec": 557.099667,
+  "source_image": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0002.jpg"
+}

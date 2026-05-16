@@ -1,0 +1,27 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "head\\_dim = Q = 3"
+  ],
+  "diagram_summary": "Multi-head attention architecture showing decomposition of input into 6 heads and 2 heads, with initialization of trainable weight matrices (Wk, Wq, Wv) of dimension 6\u00d76, and corresponding tensor outputs displayed below.",
+  "diagram_elements": [
+    "divide (d_out)",
+    "num_heads",
+    "head_dim = Q = 3",
+    "Initialize trainable weight matrices",
+    "key, query, value (Wk, Wq, Wv)",
+    "6\u00d76",
+    "6\u00d76",
+    "Wk tensor",
+    "Wv tensor"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0071",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2878.866333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0071.jpg"
+}

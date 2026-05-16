@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing the decomposition of a query vector into attention weights and values, with three terminal output examples demonstrating tensor shapes and numerical outputs for different attention head configurations.",
+  "diagram_elements": [
+    "Query Vector",
+    "Attention Weights",
+    "Values",
+    "b, num_heads",
+    "num_tokens, head_dim",
+    "Final attention scores",
+    "Context vectors",
+    "Terminal output 1: (1, 2, 3, 3)",
+    "Terminal output 2: (1, 2, 3, 3)",
+    "Terminal output 3: (1, 2, 3, 3) with context vectors"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0077",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2897.033,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0077.jpg"
+}

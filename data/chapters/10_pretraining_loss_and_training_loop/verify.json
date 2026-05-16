@@ -1,0 +1,2408 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Pre-Training: Loss Functions, the Training Loop, and Evaluation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "By this point in the book, you have a working GPT model that can accept token sequences and produce logits.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 2,
+      "text": "The architecture is in place.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 3,
+      "text": "What remains is the machinery that actually *teaches* the model to produce useful logits\u2014the loss function, the training loop, and the evaluation metrics that tell you whether training is going in the right direction.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "This chapter covers all three, then closes with a look at decoding strategies that make the model's output more interesting at inference time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 5,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 6,
+      "text": "### The Big Picture: What Pre-Training Is Doing",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 7,
+      "text": "Before diving into code, it is worth being precise about what pre-training means for a language model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 8,
+      "text": "Large language models are autoregressive models where input-output pairs are constructed from the text itself without any pre-labeling [c3753].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3753"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 9,
+      "text": "There is no human annotator deciding what the correct answer is; the training signal comes entirely from the structure of the text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 10,
+      "text": "The model sees a sequence of tokens and must predict the next one.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 11,
+      "text": "If it predicts well, the loss is low; if it predicts poorly, the loss is high, and the parameters are adjusted accordingly.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 12,
+      "text": "The key structural idea is simple: targets are the input token sequence shifted by one position, creating input-output pairs for training [c542].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c542"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 13,
+      "text": "If your input is `[\"The\", \"cat\", \"sat\"]`, your target is `[\"cat\", \"sat\", \"on\"]`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 14,
+      "text": "Every token in the input simultaneously acts as a context element for predicting the next token and as a target for the token that came before it.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 15,
+      "text": "This is what makes language modeling so data-efficient\u2014a single sentence of length $N$ yields $N-1$ training examples.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 16,
+      "text": "Context size is the maximum number of tokens an LLM can see before it predicts the next token [c3754].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3754"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 17,
+      "text": "The dataloader that feeds training uses two parameters to control how it sweeps through the corpus: `max_length`, which specifies the context size (number of tokens to consider at once) [c3822], and `stride`, which specifies how many steps to advance before creating the next input-output pair [c3823].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3822",
+        "c3823"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 18,
+      "text": "A stride equal to the context size gives non-overlapping windows; a stride of 1 gives maximally overlapping windows and more training examples from the same text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 19,
+      "text": "A dataloader loops over the entire dataset and creates input-output pairs based on a specified context size and stride [c3821].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3821"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 20,
+      "text": "The PyTorch `DataLoader` is useful for processing data in batches and makes batch processing more convenient [c3826].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3826"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 21,
+      "text": "Two additional parameters worth knowing: the `shuffle` parameter shuffles the dataset order when batches are created, which is sometimes useful for generalization [c3828], and the `drop_last` parameter drops the last batch if its size is smaller than the specified batch size [c3829], which prevents shape mismatches during training.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3828",
+        "c3829"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 22,
+      "text": "One epoch is going through the entire training set once [c1613].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1613"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 23,
+      "text": "In practice, LLMs are trained for many epochs on large corpora, but even a single epoch over a large enough dataset can produce a capable model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 24,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 25,
+      "text": "### Loss Functions: A Taxonomy",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 26,
+      "text": "Before focusing on the specific loss used for language models, it is useful to survey the landscape of loss functions.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 27,
+      "text": "Different tasks call for different choices, and understanding the alternatives sharpens your intuition for why cross-entropy is the right tool here.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 28,
+      "text": "#### Regression Losses",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 29,
+      "text": "Regression losses measure the discrepancy between a continuous prediction $f(x_i)$ and a continuous target $y_i$.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 30,
+      "text": "**Mean Bias Error** simply averages the signed errors [c474]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c474"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 31,
+      "text": "$$\\mathcal{L}_{MBE} = \\frac{1}{N} \\sum_{i=1}^{N} (y_i - f(x_i))$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 32,
+      "text": "Because positive and negative errors cancel, MBE is rarely used as a training objective\u2014it is more useful as a diagnostic.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 33,
+      "text": "**Mean Absolute Error** takes the absolute value before averaging, so errors cannot cancel [c475]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c475"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 34,
+      "text": "$$\\mathcal{L}_{MAE} = \\frac{1}{N} \\sum_{i=1}^{N} |y_i - f(x_i)|$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 35,
+      "text": "MAE is robust to outliers but has a non-differentiable point at zero, which can complicate gradient-based optimization.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 36,
+      "text": "**Mean Squared Error** squares the errors, penalizing large deviations more heavily [c476]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c476"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 37,
+      "text": "$$\\mathcal{L}_{MSE} = \\frac{1}{N} \\sum_{i=1}^{N} (y_i - f(x_i))^2$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 38,
+      "text": "MSE is the workhorse of regression.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 39,
+      "text": "Its gradient is smooth everywhere, but it is sensitive to outliers because squaring amplifies large errors.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 40,
+      "text": "**Root Mean Squared Error** brings the loss back to the same units as the target [c477]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c477"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 41,
+      "text": "$$\\mathcal{L}_{RMSE} = \\sqrt{\\frac{1}{N} \\sum_{i=1}^{N} (y_i - f(x_i))^2}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 42,
+      "text": "**Huber Loss** is a hybrid that behaves like MSE for small errors and like MAE for large errors, giving you the best of both worlds [c478]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c478"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 43,
+      "text": "$$\\mathcal{L}_{Huber} = \\begin{cases} \\frac{(y_i - f(x_i))^2}{2} & \\text{if } |y_i - f(x_i)| \\leq \\delta \\\\ \\delta|y_i - f(x_i)| - \\frac{\\delta}{2} & \\text{otherwise} \\end{cases}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 44,
+      "text": "The hyperparameter $\\delta$ controls the transition point between the two regimes.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 45,
+      "text": "**Log-Cosh Loss** is another smooth approximation to MAE [c479]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c479"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 46,
+      "text": "$$\\mathcal{L}_{LogCosh} = \\frac{1}{N} \\sum_{i=1}^{N} \\log(\\cosh(f(x_i) - y_i))$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 47,
+      "text": "#### Classification Losses",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "Classification losses operate on probability distributions rather than continuous values.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 49,
+      "text": "**Binary Cross-Entropy** is used when there are exactly two classes [c480]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c480"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 50,
+      "text": "$$\\mathcal{L}_{BCE} = -\\frac{1}{N} \\sum_{i=1}^{N} [y_i \\log(p_i) + (1-y_i) \\log(1-p_i)]$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 51,
+      "text": "**Hinge Loss** is the loss behind support vector machines [c481]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c481"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 52,
+      "text": "$$\\mathcal{L}_{Hinge} = \\max(0, 1 - (f(x) \\cdot y))$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 53,
+      "text": "**Cross-Entropy Loss** generalizes binary cross-entropy to $M$ classes [c482]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c482"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 54,
+      "text": "$$\\mathcal{L}_{CE} = -\\frac{1}{N} \\sum_{i=1}^{N} \\sum_{c=1}^{M} y_{i,c} \\log(f(x_i)_c)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 55,
+      "text": "**Kullback-Leibler Divergence** measures how one probability distribution differs from another [c483]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c483"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 56,
+      "text": "$$\\mathcal{L}_{KL} = -\\sum_{i=1}^{N} y_i \\cdot \\log\\left(\\frac{y_i}{f(x_i)}\\right)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 57,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 58,
+      "text": "### Cross-Entropy Loss for Language Models",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 59,
+      "text": "Language modeling is a classification problem: at each position, the model must classify the next token as one of the $V$ tokens in the vocabulary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 60,
+      "text": "Cross-entropy loss is therefore the natural choice.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 61,
+      "text": "Cross entropy loss measures the difference between two probability distributions, specifically between predicted logits and target indices in language model training [c550].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c550"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 62,
+      "text": "Intuitively, the model outputs a probability distribution over the vocabulary, and the loss measures how much probability mass the model assigned to the *correct* token.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 63,
+      "text": "If the model is confident and correct, the loss is near zero; if the model is confident and wrong, the loss is large.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 64,
+      "text": "#### From Logits to Loss: The Mechanics",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 65,
+      "text": "Recall the forward pass of the GPT model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 66,
+      "text": "The transformer block is the main engine of the GPT architecture that transforms input embedding vectors into context vectors [c3775].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3775"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 67,
+      "text": "Context vectors are richer representations than input embedding vectors because they encode both semantic meaning of a token and information about how that token relates to other tokens in the sequence [c3776].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3776"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 68,
+      "text": "After the transformer blocks, a final linear projection produces logits\u2014the raw output values produced by the GPT model architecture before normalization into probabilities [c3779].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3779"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 69,
+      "text": "A logit tensor is converted into a softmax tensor, which is a probability tensor [c3785].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3785"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 70,
+      "text": "Once you have probabilities, cross-entropy loss is computed by taking the logarithm of the target probabilities, summing them, taking the mean, and then negating the result [c3790].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3790"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 71,
+      "text": "This is equivalent to negative log likelihood (NLL)\u2014the negative of the logarithm of the target probabilities [c3791].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3791"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 72,
+      "text": "More precisely, cross entropy loss is computed as: negative mean of log probabilities at target indices, or $-\\frac{1}{N} \\sum \\log(p_i)$ where $p_i$ are probabilities at target indices [c552].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c552"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 73,
+      "text": "To see why this formula makes sense: if the model assigns probability 1.0 to the correct token, $\\log(1.0) = 0$, so the loss is 0.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 74,
+      "text": "If the model assigns probability 0.01 to the correct token, $\\log(0.01) \\approx -4.6$, so the loss is 4.6.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 75,
+      "text": "The negative sign turns the negative log-probability into a positive loss value that we want to minimize.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 76,
+      "text": "#### Implementing Cross-Entropy in PyTorch",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 77,
+      "text": "PyTorch provides `torch.nn.functional.cross_entropy`, which accepts raw logits (not softmax probabilities) and handles the softmax and log internally for numerical stability.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 78,
+      "text": "The function signature is straightforward:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 79,
+      "text": "# Source: [c581]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 80,
+      "text": "torch.nn.functional.cross_entropy(logit_tensor, target_tensor)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 81,
+      "text": "The function expects logits of shape `(batch_size, num_classes)` and targets of shape `(batch_size,)` containing integer class indices.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 82,
+      "text": "For language modeling, the \"classes\" are vocabulary tokens, so `num_classes` equals the vocabulary size.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 83,
+      "text": "#### Flattening for Batched Sequences",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 84,
+      "text": "In practice, the model produces logits of shape `(batch_size, sequence_length, vocab_size)`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 85,
+      "text": "For example, with a batch of 2 sequences each of length 3 and a vocabulary of 50,257 tokens (the GPT-2 vocabulary size), the logits tensor has shape `(2, 3, 50257)`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 86,
+      "text": "PyTorch's cross-entropy function expects a 2D logits tensor, so you need to flatten the first two dimensions:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 87,
+      "text": "# Source: [c569]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 88,
+      "text": "logits_flat = logits.view(-1, 50257)  # Flatten first two dimensions from (2, 3, 50257) to (6, 50257)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 89,
+      "text": "The `-1` in `view(-1, 50257)` tells PyTorch to infer the first dimension automatically.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 90,
+      "text": "After flattening, you have 6 independent prediction problems (one per token position per sequence in the batch), each asking: \"given the context up to this point, which of the 50,257 tokens comes next?\"",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 91,
+      "text": "The same operation can be written more concisely:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 92,
+      "text": "# Source: [c555]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 93,
+      "text": "torch.nn.functional.cross_entropy(logits_flat, targets_flat)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 94,
+      "text": "And in a slightly different notation that emphasizes the dataset-level view:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 95,
+      "text": "# Source: [c3851]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 96,
+      "text": "nn.functional.cross_entropy(flattened_logits, flattened_target_batch)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 97,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 98,
+      "text": "### Perplexity: A More Interpretable Metric",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 99,
+      "text": "Raw cross-entropy loss values are hard to interpret in isolation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 100,
+      "text": "A loss of 3.5 is better than a loss of 4.0, but what does that mean in practice?",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "Perplexity provides a more intuitive framing.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 102,
+      "text": "Perplexity measures how well the probability distribution predicted by the model matches the actual distribution of words in the dataset [c572].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c572"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 103,
+      "text": "Concretely, perplexity is a metric for measuring loss that is calculated as $e$ raised to the loss value [c582]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c582"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 104,
+      "text": "$$\\text{Perplexity} = \\exp(\\text{loss})$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 105,
+      "text": "[c574]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c574"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 106,
+      "text": "Intuitively, perplexity can be thought of as the effective vocabulary size the model is \"confused\" between at each step.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 107,
+      "text": "A perplexity of 1 means the model is perfectly certain (it always assigns probability 1 to the correct token).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 108,
+      "text": "A perplexity of 50,257 means the model is completely random\u2014it treats every token in the vocabulary as equally likely.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 109,
+      "text": "A well-trained GPT-2 model achieves perplexity in the tens to low hundreds on standard benchmarks.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 110,
+      "text": "The relationship $\\text{Perplexity} = \\exp(\\text{loss})$ means that reducing loss by 1 nat (one unit of natural-log loss) cuts perplexity by a factor of $e \\approx 2.718$.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 111,
+      "text": "This is why even small improvements in loss translate to meaningful improvements in generation quality.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 112,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 113,
+      "text": "### The Training Loop",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 114,
+      "text": "With the loss function defined, we can now build the training loop.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 115,
+      "text": "The pre-training algorithm consists of three steps: finding the loss, performing the backward pass to get loss gradients, and updating parameters based on those gradients [c1622].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1622"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 116,
+      "text": "#### The Forward Pass",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 117,
+      "text": "The forward pass runs the model on a batch of inputs to produce logits, then computes the loss against the targets.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 118,
+      "text": "In terms of the model's internal computation:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 119,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 120,
+      "text": "Token IDs are looked up in the embedding table.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 121,
+      "text": "Token embedding parameters scale as vocabulary size \u00d7 embedding dimension [c1630].\n2.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1630"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 122,
+      "text": "Positional embeddings are added.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 123,
+      "text": "Positional embedding parameters scale as context size \u00d7 embedding dimension [c1631].\n3.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1631"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 124,
+      "text": "The combined embeddings pass through the transformer blocks, which produce context vectors [c3775, c3776].\n4.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3775",
+        "c3776"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 125,
+      "text": "A final linear layer projects context vectors to logits.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 126,
+      "text": "Final layer parameters scale as embedding dimension \u00d7 vocabulary size [c1644].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1644"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 127,
+      "text": "The embedding dimension is the size of the vector space into which token embeddings are projected to capture semantic meaning [c495].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c495"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 128,
+      "text": "The number of attention heads specifies how many self-attention mechanism blocks exist within one transformer block [c496].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c496"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 129,
+      "text": "#### The Backward Pass",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "The backward pass is the most important step in the pre-training loop because it calculates the gradients of the loss [c1616].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1616"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 131,
+      "text": "In PyTorch, this is a single call:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 132,
+      "text": "# Source: [c1624]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 133,
+      "text": "loss.backward()",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 134,
+      "text": "This call traverses the computation graph in reverse, computing the gradient of the loss with respect to every parameter in the model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 135,
+      "text": "These gradients tell the optimizer which direction to move each parameter to reduce the loss.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 136,
+      "text": "#### Parameter Updates",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 137,
+      "text": "Once gradients are computed, the optimizer updates the parameters.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 138,
+      "text": "The fundamental update rule is [c1618]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1618"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 139,
+      "text": "$$p_{\\text{new}} = p_{\\text{old}} - \\text{step\\_size} \\times \\text{loss\\_gradient}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "This is gradient descent: move each parameter in the direction that reduces the loss, scaled by the learning rate (step size).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 141,
+      "text": "In practice, LLM pre-training uses the AdamW optimizer rather than vanilla gradient descent.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 142,
+      "text": "AdamW adapts the learning rate for each parameter individually and includes weight decay regularization, which helps prevent overfitting.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 143,
+      "text": "[GAP: Explicit code for the full training loop including optimizer initialization, zero_grad, loss.backward, and optimizer.step is not present in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 144,
+      "text": "#### Utility Functions for Text and Tokens",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 145,
+      "text": "During training and evaluation, it is useful to convert between text and token IDs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 146,
+      "text": "The `text_to_token_ids` function converts text input into token IDs using the tiktoken tokenizer [c538].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c538"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 147,
+      "text": "The `token_ids_to_text` function converts token IDs back into text, serving as the reverse of `text_to_token_ids` [c539].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c539"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "Tiktoken provides a byte pair encoder that operates at character and sub-word level [c3817].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3817"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 149,
+      "text": "In the context of language model training, \"target\" refers to the true values that the model should predict [c502].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c502"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 150,
+      "text": "The `X` tensor represents the input and `Y` represents the target tensor (the actual desired output values) in LLM input-output pair construction [c3763].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3763"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 151,
+      "text": "Input-target pairs are created from training data by pairing inputs with their corresponding target outputs [c3767].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3767"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 152,
+      "text": "Target output is the expected output sequence that corresponds to a given input sequence, which the LLM should learn to predict during training [c3770].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3770"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 153,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 154,
+      "text": "### Evaluating the Model During Training",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 155,
+      "text": "Training a model without monitoring its progress is like driving without looking at the road.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 156,
+      "text": "You need to track both training loss and validation loss to understand whether the model is learning and whether it is generalizing.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 157,
+      "text": "#### Training Loss vs. Validation Loss",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 158,
+      "text": "Training loss measures how well the model fits the data it is currently being trained on.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 159,
+      "text": "Validation loss measures how well the model generalizes to data it has never seen.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 160,
+      "text": "The gap between these two numbers is the primary diagnostic for overfitting.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 161,
+      "text": "When training on a small dataset, overfitting is a real concern.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 162,
+      "text": "The model may memorize the training examples rather than learning generalizable patterns, leading to low training loss but high validation loss.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 163,
+      "text": "This is especially common when the model has many parameters relative to the amount of training data.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 164,
+      "text": "[GAP: Explicit code for the evaluate_model function, the train_model_simple function, and the loss-plotting routine is not present in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 165,
+      "text": "#### Interpreting Learning Curves",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 166,
+      "text": "A healthy learning curve shows both training and validation loss decreasing together over time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 167,
+      "text": "If training loss decreases but validation loss plateaus or increases, the model is overfitting.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 168,
+      "text": "If both losses plateau at a high value, the model may be underfitting\u2014perhaps the learning rate is too low, or the model is too small for the task.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 169,
+      "text": "[FIGURE: Two-panel plot showing training loss and validation loss curves over epochs; left panel shows healthy convergence (both curves decreasing), right panel shows overfitting (training loss decreasing, validation loss increasing)]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 170,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 171,
+      "text": "### Generating Text During Training",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 172,
+      "text": "It is useful to periodically generate text samples during training to get a qualitative sense of how the model is progressing.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 173,
+      "text": "Even before the loss has converged, you can often see the model transitioning from random-looking output to grammatically plausible text to semantically coherent text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 174,
+      "text": "The simplest generation strategy is greedy decoding: greedy decoding is the process of always selecting the token with the highest probability as the next token using `torch.argmax` [c3045].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3045"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 175,
+      "text": "In PyTorch, `torch.argmax(input, dim=-1)` returns the indices of the maximum value along the last dimension (columns) [c547].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c547"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 176,
+      "text": "Greedy decoding is deterministic\u2014given the same input, it always produces the same output.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 177,
+      "text": "This is useful for reproducibility but can lead to repetitive or degenerate text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 178,
+      "text": "We will address this with better decoding strategies later in the chapter.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 179,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 180,
+      "text": "### Decoding Strategies: Beyond Greedy",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 181,
+      "text": "LLM decoding strategies are techniques used to control randomness and improve quality when generating the next token in sequence [c750].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c750"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 182,
+      "text": "The naive decoding strategy selects the generated token corresponding to the largest probability score among all tokens in the vocabulary [c751].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c751"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 183,
+      "text": "While simple, this greedy approach has well-known failure modes: it tends to produce repetitive text and can get stuck in loops.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 184,
+      "text": "Two complementary strategies address these problems: temperature scaling and top-k sampling.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 185,
+      "text": "Top-k sampling and temperature scaling are decoding strategies that help avoid overfitting [c798].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c798"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 186,
+      "text": "#### Temperature Scaling",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 187,
+      "text": "Temperature scaling is a technique used in Large Language Models to control randomness and diversity in generated text [c3025].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3025"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 188,
+      "text": "More precisely, temperature scaling is dividing the logits by a number greater than zero to control the probability distribution and token selection process [c3058].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3058"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 189,
+      "text": "Temperature scaling is a decoding strategy where logits are divided by a temperature value before applying softmax to convert them into probabilities [c753].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c753"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 190,
+      "text": "Temperature is a parameter that controls the entropy of the probability distribution over tokens in language model sampling [c3074].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3074"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 191,
+      "text": "Temperature scaling adjusts the sharpness of probability distributions to either sharpen or flatten them, helping prevent overfitting through multinomial sampling [c801].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c801"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 192,
+      "text": "To see how this works in practice, consider two extremes:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 193,
+      "text": "**Low temperature (e.g., 0.1):** Dividing logits by a small number makes them larger in magnitude, which sharpens the softmax distribution.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 194,
+      "text": "The highest-probability token gets even more probability mass, and the distribution approaches a one-hot vector.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 195,
+      "text": "The model becomes more deterministic and \"confident.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 196,
+      "text": "# Source: [c3061]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 197,
+      "text": "next_token_logits_2 = next_token_logits / 0.1",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 198,
+      "text": "**High temperature (e.g., 5):** Dividing logits by a large number makes them smaller in magnitude, which flattens the softmax distribution.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 199,
+      "text": "Probability mass spreads more evenly across tokens, and the model becomes more random and \"creative.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 200,
+      "text": "# Source: [c3063]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 201,
+      "text": "next_token_logits_3 = next_token_logits / 5",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 202,
+      "text": "Temperature scaling is a decoding strategy used to control randomness in model predictions [c1719].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1719"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 203,
+      "text": "Temperature scaling is a technique for controlling randomness when sampling the next token from a probability distribution [c3032].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3032"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 204,
+      "text": "#### Multinomial Sampling",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 205,
+      "text": "Once you have a probability distribution (whether temperature-scaled or not), you need a way to sample from it.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 206,
+      "text": "The probability distribution used for sampling the next token is the multinomial probability distribution [c3036].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3036"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 207,
+      "text": "Sampling from a distribution means drawing values where the outcome is not predetermined; for a multinomial distribution, samples are drawn according to the probability scores of mutually exclusive outcomes [c3037].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3037"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 208,
+      "text": "The multinomial distribution is used for $k$ mutually exclusive outcomes, each with corresponding probabilities, where $n$ independent trials are conducted to predict outcomes [c3038].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3038"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 209,
+      "text": "Multinomial distribution sampling selects the next token probabilistically proportional to its probability score rather than deterministically choosing the maximum probability token [c754].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c754"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 210,
+      "text": "The multinomial function samples the next token proportional to its probability score [c3049].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3049"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 211,
+      "text": "PyTorch's `torch.multinomial` implements this directly.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 212,
+      "text": "Here is a simple example with four tokens having weights `[0, 10, 3, 0]`:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 213,
+      "text": "# Source: [c3039]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 214,
+      "text": "weights = torch.tensor([0, 10, 3, 0], dtype=torch.float)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 215,
+      "text": "Token 0 and token 3 have zero weight, so they are never sampled.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 216,
+      "text": "Token 1 has weight 10 and token 2 has weight 3, so token 1 is sampled roughly 77% of the time and token 2 roughly 23% of the time.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 217,
+      "text": "By default, `torch.multinomial` samples without replacement.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 218,
+      "text": "If you ask for more samples than there are non-zero-weight tokens, you get an error:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 219,
+      "text": "# Source: [c3040]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 220,
+      "text": "torch.multinomial(weights, 5)  # ERROR without replacement",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 221,
+      "text": "For token generation, you typically want sampling with replacement (each draw is independent):",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 222,
+      "text": "# Source: [c3041]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 223,
+      "text": "torch.multinomial(weights, 4, replacement=True)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 224,
+      "text": "#### Top-K Sampling",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 225,
+      "text": "Even with temperature scaling, multinomial sampling can occasionally select very low-probability tokens, producing nonsensical output.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 226,
+      "text": "Top-k sampling addresses this by restricting the candidate set.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 227,
+      "text": "Top-K sampling is a decoding strategy that restricts sampled tokens to the top K most likely tokens and excludes all other tokens [c760].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c760"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 228,
+      "text": "Top-k sampling restricts the sample tokens to the top k most likely tokens and excludes all other tokens [c762].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c762"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 229,
+      "text": "More precisely, top-k sampling is a method that selects only the top k tokens with the highest logits for the next token prediction [c769].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c769"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 230,
+      "text": "Top-k sampling restricts sampled tokens to the top k most likely tokens, preventing random or low-probability tokens from becoming the next token [c802].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c802"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 231,
+      "text": "The implementation uses two PyTorch operations.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 232,
+      "text": "First, find the top-k logits:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 233,
+      "text": "# Source: [c771]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 234,
+      "text": "torch.topk(logits, k=3) returns the top 3 values and their indices",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 235,
+      "text": "Then, set all other logits to negative infinity so that softmax assigns them zero probability:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 236,
+      "text": "# Source: [c773]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 237,
+      "text": "torch.where(condition, logits, -inf) replaces logits that don't meet the condition with negative infinity",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 238,
+      "text": "After masking, apply softmax to the remaining logits to get a valid probability distribution, then sample from it using `torch.multinomial`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 239,
+      "text": "[FIGURE: Diagram showing top-k filtering: a bar chart of token probabilities, with the top-3 bars highlighted and all others set to zero, followed by renormalization]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 240,
+      "text": "#### Combining Temperature and Top-K",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 241,
+      "text": "In practice, temperature scaling and top-k sampling are used together.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 242,
+      "text": "The typical pipeline is:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 243,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 244,
+      "text": "Compute logits from the model.\n2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 245,
+      "text": "Divide logits by the temperature parameter.\n3.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 246,
+      "text": "Keep only the top-k logits; set the rest to $-\\infty$.\n4.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 247,
+      "text": "Apply softmax to get probabilities.\n5.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 248,
+      "text": "Sample from the resulting distribution using `torch.multinomial`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 249,
+      "text": "This combination gives you control over both the sharpness of the distribution (temperature) and the size of the candidate set (top-k).",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 250,
+      "text": "A common default is temperature around 1.0 and $k$ around 50, but these are hyperparameters that should be tuned for your specific application.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 251,
+      "text": "[GAP: Explicit code for the combined generate function incorporating temperature and top-k is not present in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 252,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 253,
+      "text": "### Putting It All Together",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 254,
+      "text": "Let us trace through a complete training iteration to consolidate everything covered in this chapter.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 255,
+      "text": "**Step 1: Load a batch.** The dataloader produces a batch of input tensors `X` and target tensors `Y`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 256,
+      "text": "Both have shape `(batch_size, context_length)`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 257,
+      "text": "The targets are the inputs shifted by one position [c542].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c542"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 258,
+      "text": "**Step 2: Forward pass.** The model processes `X` through its embedding layers, transformer blocks, and final linear layer to produce logits of shape `(batch_size, context_length, vocab_size)`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 259,
+      "text": "**Step 3: Compute loss.** Flatten the logits and targets, then compute cross-entropy loss:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 260,
+      "text": "# Source: [c569]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 261,
+      "text": "logits_flat = logits.view(-1, 50257)  # Flatten first two dimensions from (2, 3, 50257) to (6, 50257)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 262,
+      "text": "**Step 4: Backward pass.** Compute gradients:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 263,
+      "text": "# Source: [c1624]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 264,
+      "text": "loss.backward()",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 265,
+      "text": "**Step 5: Update parameters.** The optimizer applies the update rule $p_{\\text{new}} = p_{\\text{old}} - \\text{step\\_size} \\times \\text{loss\\_gradient}$ [c1618] to every parameter in the model.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1618"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 266,
+      "text": "**Step 6: Evaluate.** Periodically compute validation loss and perplexity ($\\exp(\\text{loss})$ [c574]) to track generalization.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c574"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 267,
+      "text": "**Step 7: Generate.** Periodically generate text samples using temperature scaling and top-k sampling to get a qualitative sense of model quality.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 268,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 269,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 270,
+      "text": "This chapter has covered the core machinery of LLM pre-training:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 271,
+      "text": "- **Loss functions.** We surveyed the landscape of regression and classification losses, then focused on cross-entropy loss, which is the appropriate choice for language modeling because next-token prediction is a classification problem over the vocabulary [c550].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c550"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 272,
+      "text": "- **Cross-entropy mechanics.** The loss is computed as the negative mean log-probability at target indices [c552].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c552"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 273,
+      "text": "In PyTorch, `torch.nn.functional.cross_entropy` handles the softmax and log internally for numerical stability [c581].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c581"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 274,
+      "text": "- **Perplexity.** A more interpretable metric defined as $\\exp(\\text{loss})$ [c574], perplexity measures how well the model's predicted distribution matches the actual distribution of words [c572].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c574",
+        "c572"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 275,
+      "text": "- **The training loop.** Pre-training consists of a forward pass to compute loss, a backward pass to compute gradients [c1616], and a parameter update step [c1618, c1622].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1616",
+        "c1618",
+        "c1622"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 276,
+      "text": "- **Evaluation.** Tracking both training and validation loss reveals whether the model is learning and whether it is overfitting.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 277,
+      "text": "- **Decoding strategies.** Temperature scaling [c753] and top-k sampling [c760] are complementary techniques that improve generation quality by controlling the randomness and candidate set of the next-token distribution.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c753",
+        "c760"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 278,
+      "text": "With these tools in hand, you have everything you need to train a GPT model from scratch on real text data.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 279,
+      "text": "The next chapter will look at how to scale this process and what happens when you train on much larger datasets.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    }
+  ],
+  "summary": {
+    "grounded": 75,
+    "unsupported": 114,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 91
+  }
+}

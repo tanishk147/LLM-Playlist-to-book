@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Step 7 of attention mechanism: finding attention scores by computing Queries * Keys.Transpose(2,3), with three terminal windows showing the Queries matrix, Keys.transpose operation, and the resulting computation for Head 1.",
+  "diagram_elements": [
+    "Step 7: Find attention scores",
+    "Queries * Keys.Transpose(2,3)",
+    "Queries matrix",
+    "Keys.transpose(2, 3)",
+    "Head 1",
+    "Terminal output showing tensor values"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0037",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1833.133,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0037.jpg"
+}

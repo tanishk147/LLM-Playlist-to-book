@@ -1,0 +1,24 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "Transposed Queries matrix:\ntensor([[[\u22120.4888, 0.2361, 2.8463],\n         [\u22122.3531, \u22120.7912, 1.2578],\n         [\u22121.5745, 0.2893, 1.1454]]\n\n        [[\u22120.2184, 5.4503, \u22121.8915],\n         [ 2.0534, \u22124.3369, 3.2125],\n         [ 0.9021, 1.5632, 0.6930]])\n\nTransposed Keys matrix:\ntensor([[[[ 0.4143, \u22121.4023, \u22122.7131],\n          [ 1.1957, 1.3712, 0.6885],\n          [\u22120.1226, 0.1155, 0.4755]],\n\n         [[ 3.4907, \u22122.1993, 0.2381],\n          [\u22121.5484, 4.2152, 2.1248],\n          [\u22120.0176, 0.8339, 0.7582]]])\n\nTransposed Values matrix:\ntensor([[[\u22123.6194, 2.0935, 1.3879],"
+  },
+  "math": null,
+  "diagram_summary": "Multi-head attention visualization showing transposed Queries, Keys, and Values matrices with numerical tensor data, annotated with arrows pointing to Head 1 and Head 2 outputs.",
+  "diagram_elements": [
+    "Queries matrix (1,2,3,3)",
+    "Keys matrix",
+    "Values matrix",
+    "Head 1",
+    "Head 2"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0026",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1698.199667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0026.jpg"
+}

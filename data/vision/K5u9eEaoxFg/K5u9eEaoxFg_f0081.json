@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Diagram showing tensor flattening operation: multiple token outputs are flattened into rows, with annotations showing the transformation from multi-dimensional tensor structure to flattened representation.",
+  "diagram_elements": [
+    "tensor with numerical values",
+    "Search function",
+    "b, num_tokens, num_heads, head_dim labels",
+    "Token 1",
+    "Flatten each token output into each row",
+    "Flattened tensor output"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0081",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3052.466333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0081.jpg"
+}

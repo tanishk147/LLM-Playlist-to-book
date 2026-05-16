@@ -1,0 +1,32 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-step process for implementing multi-head attention in a CNN: Step 1 shows tensor operations with batch and token dimensions; Step 2 decides output dimension and number of heads; Step 3 initializes trainable weight matrices for key, query, and value projections.",
+  "diagram_elements": [
+    "torch.tensor with shape [1, 6, 2.0]",
+    "batch = 1",
+    "num_tokens = 6",
+    "d_in = 6",
+    "Step 2: Decide d_out and num_heads",
+    "d_out = 6",
+    "num_heads = 2",
+    "head_dim = 6",
+    "Step 3: Initialize trainable weight matrices",
+    "Wk (key projection)",
+    "Wq (query projection)",
+    "Wv (value projection)",
+    "(6x6) \u2192 d_in \u00d7 d_out",
+    "Wq tensor",
+    "Wk tensor",
+    "Wv tensor"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0006",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 866.299667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0006.jpg"
+}

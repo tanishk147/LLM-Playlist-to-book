@@ -1,0 +1,27 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Or Select an MNIST Sample:\n\n6 1 4 2 5 3 7 8 9 3 2 0 1\n0 1 0 0 1 1\n\nPredict\nClose\nClear\nUndo",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Interactive MNIST digit classifier interface with a drawing canvas, sample digit selector buttons, and training metrics displayed on the right showing loss and accuracy curves over batches and epochs.",
+  "diagram_elements": [
+    "Drawing canvas (black area)",
+    "Clear button",
+    "Undo button",
+    "MNIST sample digit buttons (0-9)",
+    "Predict button",
+    "Close button",
+    "Training metrics panel",
+    "Loss vs Batch graph",
+    "onEpochEnd callback graph",
+    "Loss vs Epoch curve",
+    "Accuracy vs Epoch curve"
+  ],
+  "confidence": 0.75,
+  "frame_id": "3dWzNZXA8DY_f0012",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 1384.366333,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0012.jpg"
+}

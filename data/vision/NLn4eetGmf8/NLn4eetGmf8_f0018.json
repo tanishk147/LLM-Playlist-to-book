@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Timeline showing the evolution of neural network architectures from 1980 to 2017, progressing from Recurrent Neural Networks to Long Short-Term Memory Networks to Transformers, with increasing complexity represented by cylindrical shapes labeled Bam!, Double Bam!!, and Triple Bam!!!",
+  "diagram_elements": [
+    "Recurrent Neural Networks (1980)",
+    "Long Short-Term Memory Networks (1997)",
+    "Transformers (2017)",
+    "Bam!",
+    "Double Bam!!",
+    "Triple Bam!!!",
+    "Dotted arrows showing progression"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0018",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 2009.599667,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0018.jpg"
+}

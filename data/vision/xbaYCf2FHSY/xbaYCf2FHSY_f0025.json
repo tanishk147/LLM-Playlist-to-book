@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Language Models are Few-Shot Learners",
+  "extracted_text": "Tom B. Brown*    Benjamin Mann*    Nick Ryder*    Melanie Subbiah*\n\nJared Kaplan\u2020    Prafulla Dhariwal    Arvind Neelakantan    Pranav Shyam    Girish Sastry\n\nAmanda Askell    Sandhini Agarwal    Ariel Herbert-Voss    Gretchen Krueger    Tom Henighan\n\nRewon Child    Aditya Ramesh    Daniel M. Ziegler    Jeffrey Wu    Clemens Winter\n\nChristopher Hesse    Mark Chen    Eric Sigler    Mateusz Litwin    Scott Gray\n\nBenjamin Chess    Jack Clark    Christopher Berner\n\nSam McCandlish    Alec Radford    Ilya Sutskever    Dario Amodei\n\nOpenAI\n\nAbstract\n\nRecent work has demonstrated substantial gains on many NLP tasks and benchmarks by pre-training on a large corpus of text followed by fine-tuning on a specific task. While typically task-specific in architecture, this method still requires task-specific fine-tuning datasets of thousands or tens of thousands of examples. By contrast, humans can generally perform a new language task from only a few examples or from simple instructions \u2013 something which current NLP systems still largely struggle with. Here we show that scaling up language models greatly improves task-agnostic, few-shot performance, sometimes even reaching competitiveness with prior state-of-the-art fine-tuning approaches.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "xbaYCf2FHSY_f0025",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 1107.266333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0025.jpg"
+}

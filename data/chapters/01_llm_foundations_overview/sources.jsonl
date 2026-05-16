@@ -1,0 +1,161 @@
+## Claims (cite these by ID inline as [cNNN])
+- c1 [definition | -bsa3fCNGg4 @ 6-14s]
+  Creating an LLM consists of two stages: Pretraining and Finetuning.
+- c4 [definition | -bsa3fCNGg4 @ 23-34s]
+  LLM is an abbreviation for Large Language Models.
+- c9 [definition | -bsa3fCNGg4 @ 106-125s]
+  Creating an LLM involves two stages: pre-training and fine-tuning.
+- c13 [definition | -bsa3fCNGg4 @ 228-242s]
+  For the purposes of this lecture, one token is approximately equal to one word.
+- c16 [definition | -bsa3fCNGg4 @ 253-261s]
+  Common Crawl is a huge and open repository of all the data on the internet.
+- c17 [definition | -bsa3fCNGg4 @ 282-301s]
+  WebText2 is a corpus consisting of Reddit submissions, blog posts, Stack Overflow articles, and code.
+- c18 [definition | -bsa3fCNGg4 @ 358-389s]
+  Word completion is the task where an LLM is given a set of words and must predict the next word.
+- c23 [definition | -bsa3fCNGg4 @ 600-608s]
+  Pre-training means training an LLM on a huge amount of data so that it can perform a wide range of tasks.
+- c37 [definition | -bsa3fCNGg4 @ 1342-1372s]
+  Raw text is regular text without any labeling information, used for training large language models on a large corpus of text data.
+- c279 [definition | 3dWzNZXA8DY @ 5-13s]
+  A Large Language Model (LLM) is a neural network designed to understand, generate and respond to human-like text.
+- c284 [definition | 3dWzNZXA8DY @ 193-202s]
+  A neural network consists of input data feeding into layers of neurons stacked together, with an output layer.
+- c287 [definition | 3dWzNZXA8DY @ 365-380s]
+  LLMs are deep neural networks trained on massive amounts of data designed to understand, generate, and respond to human-like text.
+- c290 [definition | 3dWzNZXA8DY @ 426-430s]
+  Model size refers to the number of parameters in a model.
+- c331 [definition | 3dWzNZXA8DY @ 1143-1156s]
+  Artificial Intelligence (AI) is the broadest umbrella term that encompasses any machine behaving remotely like humans or exhibiting some form of intelligence.
+- c332 [definition | 3dWzNZXA8DY @ 1232-1239s]
+  Machine Learning (ML) is a subset of AI where machines learn and adapt based on how users interact with them.
+- c333 [definition | 3dWzNZXA8DY @ 1247-1255s]
+  Deep Learning (DL) is a subset of ML that specifically involves neural networks, whereas ML encompasses neural networks plus other fields like decision trees.
+- c338 [definition | 3dWzNZXA8DY @ 1409-1430s]
+  Large Language Models (LLMs) are a subset of deep learning that deal exclusively with text and do not involve images.
+- c339 [definition | 3dWzNZXA8DY @ 1437-1451s]
+  Generative AI is a mixture of large language models and deep learning that deals with multiple modalities including text, images, sound, and video.
+- c340 [definition | 3dWzNZXA8DY @ 1458-1469s]
+  Generative AI uses deep neural networks to create new content such as text, images, and various forms of media.
+- c1252 [definition | NLn4eetGmf8 @ 151-158s]
+  A transformer is a deep neural network architecture introduced in 2017.
+- c1578 [definition | Xpr8D6LeAtw @ 405-416s]
+  An open-source model means the entire architecture of the model is available to the public for anyone to see.
+- c1579 [definition | Xpr8D6LeAtw @ 416-427s]
+  Closed-source models, such as those released by OpenAI, do not release the weights or architecture, and not many details are known about the model itself.
+- c1593 [definition | Xpr8D6LeAtw @ 788-807s]
+  LLM pretraining involves next-word prediction on large text datasets, after which a pretrained LLM can be finetuned using smaller labeled datasets for specific tasks like classification, summarization, or question-answering.
+- c3349 [definition | xbaYCf2FHSY @ 5-12s]
+  Zero-shot learning is the ability to generalize to new tasks without examples of those tasks.
+- c3353 [definition | xbaYCf2FHSY @ 70-78s]
+  Zero-shot versus few-shot learning is a key concept covered in this lecture.
+- c3355 [definition | xbaYCf2FHSY @ 110-125s]
+  Self-attention mechanism captures long-range dependencies in a sentence, allowing better prediction of the next word.
+- c3358 [definition | xbaYCf2FHSY @ 173-243s]
+  Generative pre-training is an unsupervised learning approach where a language model is trained on unlabeled text to predict the next word, using the text itself as training data without requiring external labels.
+- c3372 [definition | xbaYCf2FHSY @ 597-606s]
+  Zero-shot learning is the ability to generalize to completely unseen tasks without any prior specific examples.
+- c3373 [definition | xbaYCf2FHSY @ 607-613s]
+  Few-shot learning is learning from a minimum number of examples which the user provides as input.
+- c3374 [definition | xbaYCf2FHSY @ 632-641s]
+  In zero-shot learning, the model predicts the answer given only a description with no supporting examples.
+- c3376 [definition | xbaYCf2FHSY @ 659-668s]
+  One-shot learning means the model sees a single example of the task in addition to the task description.
+- c3378 [definition | xbaYCf2FHSY @ 690-695s]
+  Few-shot learning is when the model sees a few examples of a task to learn from.
+- c3387 [definition | xbaYCf2FHSY @ 1084-1089s]
+  Zero-shot learning is completing tasks without any examples.
+- c3388 [definition | xbaYCf2FHSY @ 1090-1095s]
+  Few-shot learning is completing a task with a few examples provided.
+- c3397 [definition | xbaYCf2FHSY @ 1356-1365s]
+  Pre-trained models are also called base models or foundational models, which can be used later for fine-tuning.
+- c3408 [definition | xbaYCf2FHSY @ 1641-1657s]
+  GPT models are autoregressive models trained on next word prediction tasks.
+- c3414 [definition | xbaYCf2FHSY @ 1856-1900s]
+  Self-supervised learning in GPT involves dividing a sentence into training and testing portions, where the next word is the known true label.
+- c3422 [definition | xbaYCf2FHSY @ 2474-2484s]
+  Emergent behavior is the ability of a model to perform tasks that the model wasn't explicitly trained to perform.
+- c3439 [definition | xbaYCf2FHSY @ 2632-2639s]
+  In zero-shot learning, the model can perform a task without being provided any examples.
+- c3440 [definition | xbaYCf2FHSY @ 2639-2643s]
+  In few-shot learning, the model is provided with a few supplementary examples to perform a task.
+- c3450 [definition | xbaYCf2FHSY @ 2810-2817s]
+  Emergent behavior is the ability of a language model to perform tasks that it was not explicitly trained to perform.
+- c3667 [definition | z9fgKz1Drlc @ 244-249s]
+  Attention score is a component of the attention mechanism that needs to be understood when implementing attention from scratch.
+- c3668 [definition | z9fgKz1Drlc @ 244-254s]
+  Positional encoding is a component used in the attention mechanism to encode position information.
+- c3669 [definition | z9fgKz1Drlc @ 244-254s]
+  Vector embedding is a concept that will be covered as part of understanding the attention mechanism.
+- c3672 [definition | z9fgKz1Drlc @ 284-289s]
+  A token is a unit of a sentence.
+- c3677 [definition | z9fgKz1Drlc @ 343-355s]
+  Positional encoding is a technique that provides information about the order in which words appear in a sentence to the pre-training model.
+- c3680 [definition | z9fgKz1Drlc @ 374-383s]
+  Next word prediction is a task where a model is given a sequence of words and predicts the next word in the sequence.
+- c3683 [definition | z9fgKz1Drlc @ 416-420s]
+  Multi-head attention is a component of the transformer architecture that applies attention mechanism across multiple representation subspaces.
+- c3684 [definition | z9fgKz1Drlc @ 420-424s]
+  Masked multi-head attention is a variant of multi-head attention used in transformer decoders to prevent attending to future positions.
+- c3686 [definition | z9fgKz1Drlc @ 454-466s]
+  Pre-training is the process of training a large language model on an underlying dataset to build a foundational model on unlabeled data.
+- c3695 [definition | z9fgKz1Drlc @ 578-635s]
+  A classification-finetuned model is restricted to predicting only the classes it has encountered during training; for example, a model trained to classify emails as 'spam' or 'not spam' cannot output any other response.
+- c3710 [definition | z9fgKz1Drlc @ 963-980s]
+  The attention mechanism is the core component of the transformer architecture that makes it powerful.
+- c3711 [definition | z9fgKz1Drlc @ 980-991s]
+  Attention mechanism gives LLMs selective access to the entire input sequence when generating output one word at a time.
+- c1773 [architecture | _xH-jXNFRjA @ 142-156s]
+  The large-language model development workflow consists of three sequential stages: stage 1 (foundation and architecture), stage 2 (pre-training), and stage 3 (fine-tuning).
+- c3694 [design_decision | z9fgKz1Drlc @ 562-573s]
+  Stage three of the LLM development series focuses on fine-tuning the large language model for specific applications.
+- c3437 [fact | xbaYCf2FHSY @ 2599-2608s]
+  GPT-3 was released in 2020 and introduced the concept that language models are few-shot learners.
+- c3655 [fact | z9fgKz1Drlc @ 59-65s]
+  The previous lecture covered the differences between zero-shot and few-shot learning.
+- c323 [fact | 3dWzNZXA8DY @ 841-845s]
+  Modern LLMs have more diverse and endless applications compared to earlier NLP models.
+- c3685 [design_decision | z9fgKz1Drlc @ 441-454s]
+  Stage two of the LLM development series focuses on pre-training, which occurs after data assembly and large language model architecture construction.
+- c3401 [fact | xbaYCf2FHSY @ 1505-1513s]
+  As of August 2024, the performance of open-source language models is comparable to closed-source models on the MMLU benchmark.
+- c1768 [fact | _xH-jXNFRjA @ 59-72s]
+  The lecture series focuses on understanding the nuts and bolts of how large-language models are built rather than running fancy applications.
+- c1582 [fact | Xpr8D6LeAtw @ 451-457s]
+  By 2024, the performance gap between open-source and closed-source models is slowly decreasing.
+- c1580 [fact | Xpr8D6LeAtw @ 432-438s]
+  In 2022, most large language models were closed-source.
+- c3692 [fact | z9fgKz1Drlc @ 525-543s]
+  Pre-trained weights from OpenAI are loaded into the large language model at the end of stage two.
+- c3699 [fact | z9fgKz1Drlc @ 797-852s]
+  All modern large language models are trained in two main steps: pre-training on unlabeled data to create a foundational model, followed by fine-tuning on labeled task-specific data.
+- c1584 [fact | Xpr8D6LeAtw @ 466-471s]
+  All the information needed to build capable language models is now available as open-source models.
+- c342 [architecture | 3dWzNZXA8DY @ 1485-1493s]
+  The hierarchical relationship of AI terminology is: AI (broadest) contains ML, which contains DL, which contains LLMs (most specific).
+- c1575 [fact | Xpr8D6LeAtw @ 347-388s]
+  Modern large language models such as GPT are very powerful and sophisticated.
+- c316 [fact | 3dWzNZXA8DY @ 734-746s]
+  Earlier NLP models included specialized models for language translation and sentiment analysis.
+- c1576 [fact | Xpr8D6LeAtw @ 393-397s]
+  Meta released Llama 3 405B, which closes the gap between closed-source and open-weight models.
+- c1590 [fact | Xpr8D6LeAtw @ 629-646s]
+  Most existing online courses on building large language models focus on LLM application development rather than teaching how to build an LLM from scratch.
+- c3690 [design_decision | z9fgKz1Drlc @ 505-520s]
+  Functions to save and load large language model weights are implemented to avoid retraining the LLM from scratch every time.
+- c3400 [fact | xbaYCf2FHSY @ 1474-1484s]
+  GPT-4 is a closed-source model where the parameters and weights are not publicly known.
+- c1565 [fact | Xpr8D6LeAtw @ 88-109s]
+  A common mistake learners make when studying large language models is directly switching to applications and running code without understanding how LLMs actually work.
+- c3385 [fact | xbaYCf2FHSY @ 1024-1035s]
+  In zero-shot learning for translation, the model is given only the task description 'translate English to French' and the input word 'breakfast' without any translation examples.
+- c3361 [fact | xbaYCf2FHSY @ 297-320s]
+  The GPT approach combines Transformers architecture with unsupervised pre-training, where labels are derived from the sentences themselves without pre-labeling data.
+- c1595 [design_decision | Xpr8D6LeAtw @ 873-882s]
+  The course is designed to teach students how to build an entire large language model from scratch rather than focusing on deploying pre-built applications, to ensure deep understanding of LLM fundamentals.
+- c1765 [fact | _xH-jXNFRjA @ 10-18s]
+  This video is a conclusion video summarizing the Build Large Language Models from Scratch lecture series.
+- c1774 [fact | _xH-jXNFRjA @ 161-163s]
+  Stage 1 covers data preparation and sampling as foundational components for building a large-language model.
+- c315 [design_decision | 3dWzNZXA8DY @ 726-740s]
+  Earlier NLP models were designed for very specific tasks, unlike LLMs which are task-agnostic.

@@ -1,0 +1,27 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Generating text from output tensors",
+  "extracted_text": "Review of how an LLM generates text:\n\n1st iteration:\nThe input context for the model: Hello |\nThe next generated token: I\nThe token generated in the previous round is appended to the input for the next iteration: am\n\n2nd iteration:\nThe input context grows in each iteration: Hello | I am a model:",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Diagram showing how an LLM generates text iteratively: the input context grows with each iteration as newly generated tokens are appended, demonstrating the autoregressive generation process.",
+  "diagram_elements": [
+    "The input context for the model",
+    "The next generated token",
+    "The token generated in the previous round is appended to the input for the next iteration",
+    "The input context grows in each iteration",
+    "1st iteration",
+    "2nd iteration",
+    "Hello",
+    "I",
+    "am",
+    "a",
+    "model"
+  ],
+  "confidence": 0.85,
+  "frame_id": "F1Sm7z2R96w_f0000",
+  "video_id": "F1Sm7z2R96w",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0000.jpg"
+}

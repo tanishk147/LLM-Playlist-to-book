@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "json",
+    "content": "{\n  \"instruction\": \"Give three tips for staying healthy.\",\n  \"input\": \"\",\n  \"output\": \"1.Eat a balanced diet and make sure to include plenty of fruits and vegetables. \\n2. Exercise regularly to keep your body active and strong. \\n3. Get enough sleep and maintain a consistent sleep schedule.\"\n},\n{\n  \"instruction\": \"What are the three primary colors?\",\n  \"input\": \"\",\n  \"output\": \"The three primary colors are red, blue, and yellow.\"\n},\n{\n  \"instruction\": \"Describe the structure of an atom.\",\n  \"input\": \"\",\n  \"output\": \"An atom is made up of a nucleus, which contains protons and neutrons, surrounded by electrons that travel in orbits around the nucleus. The protons and neutrons have a positive charge, while the electrons have a negative charge, resulting in an overall neutral atom. The number of each particle determines the atomic number and the type of atom.\"\n},\n{\n  \"instruction\": \"How can we reduce air pollution?\",\n  \"input\": \"\",\n  \"output\": \"There are a number of ways to reduce air pollution, such as shifting to renewable energy sources, encouraging the use of public transportation, prohibiting the burning of fossil fuels, implementing policies to reduce emissions from industrial sources, and implementing vehicle emissions standards. Additionally, individuals can do their part to reduce air pollution by reducing car use, avoiding burning materials such as wood, and changing to energy efficient appliances.\"\n},\n{\n  \"instruction\": \"Describe a time when you had to make a difficult decision.\",\n  \"input\": \"\",\n  \"output\": \"I was assigned to lead a project with a tight deadline and a limited budget. I had to prioritize the most important features and allocate resources accordingly. I had to make a difficult decision to extend the deadline, but I had to stretch the team\\u2019s resources even further and increase the budget. Although it was a risky decision, I ultimately decided to go ahead with it to ensure that the project was completed on time and that the client\\u2019s expectations were met. The project was eventually successfully completed and this was seen as a testament to my leadership and decision-making abilities.\"\n},\n{\n  \"instruction\": \"Identify the odd one out.\",\n  \"input\": \"Twitter, Instagram, Telegram\",\n  \"output\": \"Telegram\"\n},\n{\n  \"instruction\": \"Explain why the following fraction is equivalent to 1/4\",\n  \"input\": \"4/16\",\n  \"output\": \"The fraction 4/16 is equivalent to 1/4 because both numerators and denominators are divisible by 4. Dividing both the top and bottom numbers by 4 yields the\n},\n{\n  \"instruction\": \"Write a short story in third person narration about a protagonist who has to make an important career decision.\",\n  \"input\": \"\","
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "egFqsJQ9kuY_f0001",
+  "video_id": "egFqsJQ9kuY",
+  "timestamp_sec": 167.133,
+  "source_image": "data/frames/egFqsJQ9kuY/egFqsJQ9kuY_f0001.jpg"
+}

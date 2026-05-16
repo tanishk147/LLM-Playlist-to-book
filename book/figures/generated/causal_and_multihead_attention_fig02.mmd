@@ -1,0 +1,15 @@
+graph LR
+    A["Input Tensor<br/>(b, T, d_in)"] --> B["Linear Projection<br/>Query (Wq)"]
+    A --> C["Linear Projection<br/>Key (Wk)"]
+    A --> D["Linear Projection<br/>Value (Wv)"]
+    B --> E["Reshape & Transpose<br/>(b, num_heads, T, head_dim)"]
+    C --> E
+    D --> E
+    E --> F["Scaled Dot-Product<br/>Attention per Head"]
+    F --> G["Transpose & Reshape<br/>(b, T, d_out)"]
+    G --> H["Output Projection"]
+    H --> I["Output Tensor<br/>(b, T, d_out)"]
+    
+    style A fill:#e1f5ff
+    style I fill:#e1f5ff
+    style F fill:#fff9c4

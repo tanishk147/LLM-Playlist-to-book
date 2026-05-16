@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Model and Architectures",
+  "extracted_text": "Table 2.1: Sizes, architectures, and learning hyper-parameters (batch size in tokens and learning rate) of the models which we trained. All models were trained for a total of 300 billion tokens.\n\n2.1 Model and Architectures\n\nWe use the same model and architecture as GPT-2 [RWC+19], including the modified initialization, pre-normalization, and reversible tokenization described therein, with the exception that we use alternating dense and locally banded sparse attention patterns in the layers of the transformer, similar to the Sparse Transformer [CJSS19]. To study the dependence of ML performance on model size, we train 8 different sizes of model, ranging over three orders of magnitude from 125 million parameters to 175 billion parameters, with the last being the model we call GPT-3. Previous work [KMH+20]",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "-bsa3fCNGg4_f0001",
+  "video_id": "-bsa3fCNGg4",
+  "timestamp_sec": 191.333,
+  "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0001.jpg"
+}

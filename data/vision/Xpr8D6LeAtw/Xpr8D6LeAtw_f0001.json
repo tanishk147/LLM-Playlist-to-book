@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "E.L.I.Z.A. Talking",
+  "extracted_text": "Welcome to\nEEEEEE  LL      IIII  ZZZZZZ    AAAAA\nEE      LL      II    ZZ        AA    AA\nEEEEE   LL      II    ZZ        AAAAAAA\nEE      LL      II    ZZ        AA    AA\nEEEEEE  LLLLLL  IIII  ZZZZZZ    AA    AA\n\nELIZA is a mock (Rogerian) psychotherapist.\nThe original program was described by Joseph Weizenbaum in 1966.\nThis implementation (\"elizabot.js\") by Norbert Landsteiner 2005.\nGraphics and real-time text to speech integration added in 2013.\n\n**** Type or click the microphone-button below for voice input. ****\n\nVOICE SETUP\nPlease choose an accent to be used by ELIZA (speech output):\n\n[1]  English - US\n[2]  English - EN\n\n> \u2588",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "Xpr8D6LeAtw_f0001",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 216.166333,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0001.jpg"
+}

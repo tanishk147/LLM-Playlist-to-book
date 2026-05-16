@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Transformers for Language Modeling",
+  "extracted_text": "One great way to experiment with GPT-2 is using the AllenAI GPT-2 Explorer. It uses GPT-2 to display ten possible predictions for the next word (alongside their probability score). You can select a word then see the next list of predictions to continue writing the passage.\n\nTransformers for Language Modeling\n\nAs we've seen in The Illustrated Transformer, the original transformer model is made up of an encoder and decoder \u2013 each is a stack of what we can call transformer blocks. That architecture was appropriate because the model tackled",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Four GPT-2 model variants shown with increasing parameter counts: Small (117M), Medium (345M), Large (762M), and Extra Large (1,542M), each represented with the OpenAI logo.",
+  "diagram_elements": [
+    "GPT-2 SMALL - 117M Parameters",
+    "GPT-2 MEDIUM - 345M Parameters",
+    "GPT-2 LARGE - 762M Parameters",
+    "GPT-2 EXTRA LARGE - 1,542M Parameters"
+  ],
+  "confidence": 0.92,
+  "frame_id": "xbaYCf2FHSY_f0043",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 2585.766333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0043.jpg"
+}

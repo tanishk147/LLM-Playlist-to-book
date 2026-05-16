@@ -1,0 +1,28 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Intro to Instruction Finetuning",
+  "extracted_text": "(1) Pretrained LLMs are good at text completion.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage pipeline for instruction finetuning: Stage 1 shows building an LLM from data preparation, attention mechanism, and LLM architecture; Stage 2 shows pretraining the LLM; Stage 3 shows finetuning with a foundation model, classifier, and personal assistant using instruction dataset.",
+  "diagram_elements": [
+    "Data preparation",
+    "Attention mechanism",
+    "LLM architecture",
+    "Building an LLM",
+    "Training loop",
+    "Model evaluation",
+    "Load pretrained",
+    "Finetuning",
+    "Foundation model",
+    "Classifier",
+    "Personal assistant",
+    "Instruction dataset"
+  ],
+  "confidence": 0.85,
+  "frame_id": "1bLhvqZzdaQ_f0000",
+  "video_id": "1bLhvqZzdaQ",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/1bLhvqZzdaQ/1bLhvqZzdaQ_f0000.jpg"
+}

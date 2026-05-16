@@ -1,0 +1,2262 @@
+{
+  "video_id": "r7unILsP0Es",
+  "segments": [
+    {
+      "id": "r7unILsP0Es_000",
+      "title": "Instruction finetuning process",
+      "ts_start": 0.0,
+      "ts_end": 313.0,
+      "segments": [
+        {
+          "ts_start": 4.69,
+          "ts_end": 10.71,
+          "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "r7unILsP0Es_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Finetuning the model (Step 5)",
+              "extracted_text": "We will load GPT-2(355M) model weights\n\n(a) Loss function. Cross entropy loss\n(similar to the one used for pre-training the LLM)\n\n(b) Run training loop on instruction dataset",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Flowchart showing training steps: one epoch passes over training set, batches determined by training set size, reset loss gradients, calculate loss, backward pass, update weights using loss gradients, print training and validation losses, with optional steps for tracking training progress.",
+              "diagram_elements": [
+                "1) For each training epoch",
+                "2) For each batch in training set",
+                "3) Reset loss gradients from previous epoch",
+                "4) Calculate loss on current batch",
+                "5) Backward pass to calculate loss gradients",
+                "6) Update weights using loss gradients",
+                "7) Print training and validation set losses",
+                "8) New: Calculate classification accuracy",
+                "These are the usual steps used for training deep neural networks in PyTorch",
+                "Optional steps for tracking the training progress"
+              ],
+              "confidence": 0.85,
+              "frame_id": "r7unILsP0Es_f0000",
+              "video_id": "r7unILsP0Es",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/r7unILsP0Es/r7unILsP0Es_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 11.21,
+          "ts_end": 18.85,
+          "text": "Today, we are actually going to fine-tune the model which we have been developing for the past 4-5 lectures.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 19.39,
+          "ts_end": 27.51,
+          "text": "We have been looking at an example where we do have a pre-trained LLM, but the LLM is not really good enough to understand or follow instructions.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 27.51,
+          "ts_end": 35.66,
+          "text": "So, we want to employ instruction fine-tuning and to do this, we have been following these three stages.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 35.82,
+          "ts_end": 43.92,
+          "text": "The stage 1 is preparing the dataset. We have implemented this stage where we downloaded the data and formatted it using the Alpaca prompt format.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 44.2,
+          "ts_end": 54.45,
+          "text": "Then, we divided the dataset into multiple batches and then we created the training, testing, and the validation data loaders.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 56.1,
+          "ts_end": 58.94,
+          "text": "That was the stage 1 on preparing the dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 59.62,
+          "ts_end": 68.42,
+          "text": "In stage 2, which is fine-tuning the LLM, what we have done in the previous lecture is that we have the LLM architecture, which looks something like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 68.92,
+          "ts_end": 73.42,
+          "text": "And we have loaded this LLM architecture with pre-trained weights from GPT model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 73.8,
+          "ts_end": 83.3,
+          "text": "So, we have used the pre-trained weights from GPT-2, 355 million parameter model, and we have kept our architecture ready now with these pre-trained weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 83.84,
+          "ts_end": 87.58,
+          "text": "And now, the stage is set for us to fine-tune the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 87.68,
+          "ts_end": 89.14,
+          "text": "What this means is that,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 89.62,
+          "ts_end": 92.1,
+          "text": "we already have pre-trained weights, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 92.2,
+          "ts_end": 97.4,
+          "text": "But we have not yet trained this LLM on dataset, on the instruction dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 98.71,
+          "ts_end": 106.09,
+          "text": "This is the instruction dataset which we have been using in this hands-on example and which we will fine-tune the LLM on.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 106.33,
+          "ts_end": 111.35,
+          "text": "So, this is a dataset which consists of 1100 instruction input-output pairs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 112.16,
+          "ts_end": 116.88,
+          "text": "And our hope is that when we train the weights of the LLM again,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 117.88,
+          "ts_end": 123.54,
+          "text": "using this instruction dataset, it will get much much better at responding to instructions.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 124.0,
+          "ts_end": 127.28,
+          "text": "So, let me show you in code where we ended the previous lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 127.5,
+          "ts_end": 132.24,
+          "text": "In the previous lecture, we just had the pre-trained LLM without any fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 132.46,
+          "ts_end": 139.82,
+          "text": "And we asked the LLM the question that we use this particular input and instruction.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 140.14,
+          "ts_end": 146.64,
+          "text": "So, the instruction was convert the active sentence to passive and the sentence was the chef cooks the meal every day.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 147.36,
+          "ts_end": 154.0,
+          "text": "The output which the LLM gave was the chef cooks the meal every day and instruction convert the active sentence to passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 154.5,
+          "ts_end": 158.52,
+          "text": "Basically, it just regenerated the same thing what we had given as input.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 158.72,
+          "ts_end": 164.36,
+          "text": "It was not able to convert the text from active to passive at all.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 165.84,
+          "ts_end": 173.7,
+          "text": "So, as you can see, the response section was created but the LLM simply repeats the original input sentence and part of the instruction",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 174.2,
+          "ts_end": 177.84,
+          "text": "and it fails to really convert the active sentence to the passive sentence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 177.84,
+          "ts_end": 179.44,
+          "text": "or to passive voice as requested.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 180.04,
+          "ts_end": 187.3,
+          "text": "This is the stage which we are in right now and we want to really improve the LLM performance when it receives an instruction.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 187.86,
+          "ts_end": 194.28,
+          "text": "So, what we will be doing is that if you look at this architecture, there are number of areas where there are trainable parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 194.7,
+          "ts_end": 202.9,
+          "text": "Token embedding has trainable weights, positional embedding has trainable weights, layer normalization has the scale and shift parameters which are trainable.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 203.24,
+          "ts_end": 207.54,
+          "text": "The multi-head attention has the query key and value weight matrices which are trainable.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 207.84,
+          "ts_end": 210.74,
+          "text": "Again, layer normalization has trainable scale and shift.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 210.92,
+          "ts_end": 213.44,
+          "text": "The feed forward neural network has trainable weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 213.6,
+          "ts_end": 219.32,
+          "text": "The final layer normalization and the final output layer also has trainable weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 220.07,
+          "ts_end": 226.57,
+          "text": "We will train this architecture again on this particular data set which I just showed you this instruction data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 226.57,
+          "ts_end": 232.27,
+          "text": "so that the weights are optimized and the LLM can answer the instructions pretty well.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 232.59,
+          "ts_end": 235.71,
+          "text": "So, then your question would be why did we pre-train the LLM?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 235.71,
+          "ts_end": 239.17,
+          "text": "If we are training the LLM again on this specific data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 239.33,
+          "ts_end": 246.19,
+          "text": "Well, the reason we pre-train the LLM is because now the model essentially starts from a knowledgeable state.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 246.55,
+          "ts_end": 251.27,
+          "text": "So, due to pre-training, the model starts from a knowledgeable state instead of a random state.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 251.59,
+          "ts_end": 258.97,
+          "text": "If we just started from a random state, then it would have been extremely difficult for the model to learn everything based on this limited data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 259.33,
+          "ts_end": 265.03,
+          "text": "At least through pre-training, the model is able to understand so many things such as the semantic meaning of words",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 265.03,
+          "ts_end": 267.61,
+          "text": "when it's given a text, it knows what to respond.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 267.85,
+          "ts_end": 269.81,
+          "text": "It cannot follow instructions, that's fine.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 269.97,
+          "ts_end": 273.23,
+          "text": "But at least it can know the semantic meaning between different words.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 273.37,
+          "ts_end": 279.02,
+          "text": "It knows a lot about the language itself due to pre-training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 279.18,
+          "ts_end": 284.98,
+          "text": "And that helps us to set a foundational knowledge base before we fine-tune on the specific data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 285.26,
+          "ts_end": 289.24,
+          "text": "So, fine-tuning as a process always comes after the pre-training stage.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 289.83,
+          "ts_end": 292.87,
+          "text": "So, let's go ahead and begin the fine-tuning process now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 293.11,
+          "ts_end": 294.75,
+          "text": "Before we do the fine-tuning,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 294.75,
+          "ts_end": 295.75,
+          "text": "we need two things.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 295.85,
+          "ts_end": 299.67,
+          "text": "We first of all need to understand the training loop, which is this loop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 299.79,
+          "ts_end": 301.95,
+          "text": "And the second, we need to understand the loss function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 302.7,
+          "ts_end": 312.76,
+          "text": "One thing I would like to mention here is that the training loop and the loss function is exactly the same as the training loop and the loss function which we had looked at when we pre-trained the model.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "r7unILsP0Es_001",
+      "title": "Understanding the finetuning training loop",
+      "ts_start": 313.0,
+      "ts_end": 382.0,
+      "segments": [
+        {
+          "ts_start": 313.26,
+          "ts_end": 315.7,
+          "text": "So, just to revise, here is the training loop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 315.82,
+          "ts_end": 318.56,
+          "text": "What we do is that we go through each batch in the data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 318.86,
+          "ts_end": 320.7,
+          "text": "We calculate the loss gradients.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 320.86,
+          "ts_end": 323.44,
+          "text": "We reset the loss gradients in a new epoch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 323.44,
+          "ts_end": 328.0,
+          "text": "Then we calculate the loss on a current batch and then do the backward pass.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 328.36,
+          "ts_end": 335.58,
+          "text": "In the backward pass, we essentially calculate the gradient of the loss, the partial derivative of the gradient of the loss with respect to all of the parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 335.98,
+          "ts_end": 339.46,
+          "text": "And remember that here we have 355 million parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 340.36,
+          "ts_end": 344.06,
+          "text": "We will calculate the partial gradient of the loss with respect to all of these.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 344.2,
+          "ts_end": 351.36,
+          "text": "And in the update step, we will use a gradient descent based optimizer, which looks something like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 351.36,
+          "ts_end": 360.28,
+          "text": "So, this is the simplest form of gradient descent, wnew is equal to wold minus alpha times the partial derivative of loss with respect to w.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 360.8,
+          "ts_end": 367.16,
+          "text": "And we will do this many times and we will hope that the parameters eventually get to a stage where the loss function is minimized.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 367.62,
+          "ts_end": 377.12,
+          "text": "So, if the loss function landscape looks something like this, initially we start somewhere here and then we later go down to the bottom of this valley and hope that the loss function is minimized.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "r7unILsP0Es_002",
+      "title": "Understanding the finetuning loss function",
+      "ts_start": 382.0,
+      "ts_end": 560.0,
+      "segments": [
+        {
+          "ts_start": 382.5,
+          "ts_end": 386.26,
+          "text": "And the loss function is essentially obtained from the input and target pairs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 386.56,
+          "ts_end": 392.58,
+          "text": "So, remember when we created this data loader, every data loader essentially has input and target pairs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 394.9,
+          "ts_end": 397.26,
+          "text": "So, let me write this down over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 397.4,
+          "ts_end": 400.42,
+          "text": "So, let's say we looked at, we are looking at batch number 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 401.46,
+          "ts_end": 404.44,
+          "text": "Batch number 1 has 8 samples, sample 1, sample 2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 404.56,
+          "ts_end": 408.32,
+          "text": "So, each batch has 8 samples because we have set the batch size to be 8.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 408.34,
+          "ts_end": 412.76,
+          "text": "And in each sample, we have the input and we have the target.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 414.95,
+          "ts_end": 422.27,
+          "text": "And since it's the next token prediction task, the target is just the input which is shifted to the right by 1 and we add the end of x token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 422.71,
+          "ts_end": 427.96,
+          "text": "You can think of the target as the true value, which we have, true value.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 428.48,
+          "ts_end": 431.54,
+          "text": "And then to get the loss, we'll need a predicted value, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 433.56,
+          "ts_end": 435.76,
+          "text": "So, I'm going to write here predicted value.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 438.03,
+          "ts_end": 440.95,
+          "text": "And the predicted value is obtained from the generate function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 441.45,
+          "ts_end": 443.21,
+          "text": "So, remember in the last lecture,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 443.33,
+          "ts_end": 448.45,
+          "text": "we discussed about the generate function where given an input, we generate the next token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 448.91,
+          "ts_end": 457.47,
+          "text": "So, essentially what happens is that when an input text or a sequence of input tokens passes through this GPT architecture,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 458.25,
+          "ts_end": 460.11,
+          "text": "which I have shown to you right now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 460.17,
+          "ts_end": 463.73,
+          "text": "So, let's say the input instruction is convert active to passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 463.95,
+          "ts_end": 466.21,
+          "text": "It will pass through this GPT architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 466.71,
+          "ts_end": 471.43,
+          "text": "And then when it comes out of the GPT architecture, we have something called as the logit tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 471.43,
+          "ts_end": 474.79,
+          "text": "That is then converted into a tensor of probabilities.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 475.55,
+          "ts_end": 480.59,
+          "text": "And through this tensor of probabilities, we get the predicted output of the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 480.67,
+          "ts_end": 483.45,
+          "text": "That's not the true value, but that's the predicted value.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 483.91,
+          "ts_end": 488.67,
+          "text": "And then based on the true value and the predicted value, we then compute the loss function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 489.52,
+          "ts_end": 496.1,
+          "text": "So, based on the true value and the predicted value, both of these values will be needed to then calculate the loss function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 496.64,
+          "ts_end": 500.24,
+          "text": "And this loss function is the categorical cross entropy loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 500.76,
+          "ts_end": 503.32,
+          "text": "Or rather, it is the cross entropy loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 506.53,
+          "ts_end": 511.19,
+          "text": "The simplest way to think about cross entropy loss is that it's negative of the logarithm.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 511.51,
+          "ts_end": 517.41,
+          "text": "So, essentially, since probabilities are involved, we want the probability to be as close to 1 as possible,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 517.55,
+          "ts_end": 521.63,
+          "text": "so that the loss function decreases and becomes as close to 0.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 523.58,
+          "ts_end": 529.78,
+          "text": "I am not going into the details of this because we have already covered this in a lot of detail when we learnt about LLM pre-training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 530.08,
+          "ts_end": 533.32,
+          "text": "But I am just giving you a qualitative flavor for you to understand",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 533.32,
+          "ts_end": 536.2,
+          "text": "what is the loss which we are trying to minimize over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 536.42,
+          "ts_end": 539.22,
+          "text": "So, this is the loss function which is the cross entropy loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 539.4,
+          "ts_end": 544.22,
+          "text": "Once the loss function is defined, then all we need to do is learn the training loop on the instruction dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 545.0,
+          "ts_end": 548.62,
+          "text": "So, the dataset is already divided into input and target pairs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 549.46,
+          "ts_end": 557.58,
+          "text": "And we have spent the last 3-4 lectures dividing the dataset into input target pairs and constructing these data loaders.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "r7unILsP0Es_003",
+      "title": "Coding the finetuning training loop in Python",
+      "ts_start": 560.0,
+      "ts_end": 1042.0,
+      "segments": [
+        {
+          "ts_start": 560.87,
+          "ts_end": 562.83,
+          "text": "So, now I am going to take you to the code.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 562.83,
+          "ts_end": 564.91,
+          "text": "And we are going to fine tune this model together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 566.58,
+          "ts_end": 567.06,
+          "text": "Great.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 567.42,
+          "ts_end": 574.78,
+          "text": "So, we have already done the hard work when we implemented the dataset processing including the batching and creating the data loaders.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 575.0,
+          "ts_end": 579.86,
+          "text": "Now, we can reuse the loss calculation and training functions which we have implemented in pre-training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 580.3,
+          "ts_end": 586.0,
+          "text": "So, as I told you, here are some functions which I have collected here and we will be reusing these functions.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 586.28,
+          "ts_end": 589.92,
+          "text": "The first function is the calculation of the loss on a batch of data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 590.08,
+          "ts_end": 593.42,
+          "text": "So, here you can see is the cross entropy loss which I have mentioned",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 594.18,
+          "ts_end": 594.88,
+          "text": "over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 596.58,
+          "ts_end": 598.0,
+          "text": "The cross entropy loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 598.38,
+          "ts_end": 604.36,
+          "text": "And then when we want to calculate the loss over the entire data loader, we just take a summation of all of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 605.1,
+          "ts_end": 608.68,
+          "text": "summation of losses calculated in individual batches.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 608.78,
+          "ts_end": 612.62,
+          "text": "And then to normalize the total loss, we just divide by the number of batches.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 612.8,
+          "ts_end": 615.66,
+          "text": "That's what's happening in the calculation of loss in a loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 615.8,
+          "ts_end": 621.68,
+          "text": "So, this same function can be used and if you want to calculate it for the training data loader, we pass the train loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 621.76,
+          "ts_end": 624.72,
+          "text": "If you want to calculate the loss for the testing or validation,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 624.94,
+          "ts_end": 628.08,
+          "text": "we pass the test loader or validation loader respectively.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 628.76,
+          "ts_end": 631.42,
+          "text": "Then the training loop which I have described over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 632.84,
+          "ts_end": 640.14,
+          "text": "This training loop or I should mark this entire thing, this entire training loop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 641.16,
+          "ts_end": 645.02,
+          "text": "We have written a code for this before when we looked at pre-training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 645.32,
+          "ts_end": 651.14,
+          "text": "And this essentially the most important part of this code is the backward pass where the gradients of the loss are calculated.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 651.79,
+          "ts_end": 653.54,
+          "text": "And then we do this optimizer step.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 653.82,
+          "ts_end": 656.86,
+          "text": "So, here I implemented a simple vanilla gradient descent.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 656.86,
+          "ts_end": 660.46,
+          "text": "The actual optimizer which is used is ADAM with weight decay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 660.66,
+          "ts_end": 664.9,
+          "text": "So, you can either use ADAM or you can use ADAM with weight decay which is ADAMW.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 665.62,
+          "ts_end": 667.82,
+          "text": "That's the optimizer we will be using.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 668.04,
+          "ts_end": 674.5,
+          "text": "And then the remaining of the code is just about printing the loss which we obtain at different iterations.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 674.96,
+          "ts_end": 681.32,
+          "text": "And then visualizing the testing loss, visualizing the validation loss and visualizing the training loss together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 681.66,
+          "ts_end": 685.48,
+          "text": "So, as you can see here, we are going to print the training loss and the validation loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 688.68,
+          "ts_end": 693.92,
+          "text": "So, initially before we even begin the training, let us first calculate the training and the validation loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 695.16,
+          "ts_end": 697.88,
+          "text": "Initially, the training has not yet happened on this dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 698.48,
+          "ts_end": 702.04,
+          "text": "On this dataset, I have not yet run the training loop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 702.12,
+          "ts_end": 704.2,
+          "text": "I just want to see the loss at the initial moment.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 704.42,
+          "ts_end": 711.44,
+          "text": "So, here if you see, this is equivalent to being at this early point where the training has not yet started.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 711.54,
+          "ts_end": 713.2,
+          "text": "So, the loss will naturally be very high.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 713.36,
+          "ts_end": 715.98,
+          "text": "I just want to see the training and the validation loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 715.98,
+          "ts_end": 720.52,
+          "text": "So, the training loss is 3.82 and the validation loss is 3.76.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 720.86,
+          "ts_end": 724.28,
+          "text": "So, this is pretty high and we want to bring both of these losses together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 724.86,
+          "ts_end": 727.8,
+          "text": "Now, the model is prepared and the data loaders are prepared.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 727.94,
+          "ts_end": 730.06,
+          "text": "We can now proceed to train the model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 731.29,
+          "ts_end": 742.17,
+          "text": "So, now the code which we are implementing below, it sets up the training process including initializing the optimizer, setting the number of epochs and defining the evaluation frequency.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 742.93,
+          "ts_end": 745.69,
+          "text": "So, here you can see we define the optimizer which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 745.69,
+          "ts_end": 747.33,
+          "text": "Torch.optim.adamw.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 747.65,
+          "ts_end": 752.67,
+          "text": "So, let me just Torch.optim.adamw.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 753.85,
+          "ts_end": 757.51,
+          "text": "So, this is the Adam with weight decay optimizer which we are going to use.",
+          "frame_ids": [
+            "r7unILsP0Es_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "AdamW",
+              "extracted_text": "Implements AdamW algorithm.",
+              "code": {
+                "language": "python",
+                "content": "CLASS torch.optim.AdamW(params, lr=0.001, betas=(0.9, 0.999), eps=1e-08, weight_decay=0.01, amsgrad=False, maximize=False, foreach=None, capturable=False, differentiable=False, fused=None) [SOURCE]"
+              },
+              "math": [
+                "\\gamma",
+                "\\beta",
+                "\\hat{\\beta}",
+                "\\theta",
+                "f \\theta",
+                "\\epsilon",
+                "\\lambda",
+                "m",
+                "v",
+                "\\hat{v}^{max}",
+                "t",
+                "g_t",
+                "\\partial f_t \\theta_t",
+                "g_t",
+                "\\partial f_t \\theta_t",
+                "\\theta_t",
+                "\\theta_t",
+                "\\gamma \\lambda \\theta_t",
+                "m_t",
+                "\\beta m_t",
+                "\\beta g_t",
+                "v_t",
+                "\\beta v_t",
+                "\\beta g_t",
+                "\\bar{m}_t",
+                "m_t",
+                "\\beta^t",
+                "\\bar{v}_t"
+              ],
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "r7unILsP0Es_f0002",
+              "video_id": "r7unILsP0Es",
+              "timestamp_sec": 755.733,
+              "source_image": "data/frames/r7unILsP0Es/r7unILsP0Es_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 757.65,
+          "ts_end": 759.67,
+          "text": "If you don't know how Adam works, it's fine.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 759.83,
+          "ts_end": 765.05,
+          "text": "But it's the most widely used optimizer I would say in machine learning algorithms these days.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 765.17,
+          "ts_end": 768.79,
+          "text": "It keeps a track of the gradients of the loss function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 768.95,
+          "ts_end": 770.91,
+          "text": "It keeps a track of the gradient square also.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 772.69,
+          "ts_end": 775.17,
+          "text": "And it's just very useful to prevent",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 776.11,
+          "ts_end": 780.26,
+          "text": "local minima and to accelerate the convergence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 781.32,
+          "ts_end": 784.88,
+          "text": "That's why the Adam or the Adam W optimizer is predominantly used.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 785.02,
+          "ts_end": 790.9,
+          "text": "We are using a learning rate of 0.00005 and the weight decay of 0.1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 791.1,
+          "ts_end": 796.64,
+          "text": "Now, please note that these are hyper parameters which means that you can change them and you might obtain better results.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 796.98,
+          "ts_end": 801.66,
+          "text": "These are just some parameters which we have used right now and they lead to reasonably good results.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 801.66,
+          "ts_end": 815.14,
+          "text": "I encourage all of you who are watching this video and who will later receive access to this code file to change these hyper parameters as much as possible so that you see the results for yourself and you see how the results are improving or not improving.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 815.32,
+          "ts_end": 816.86,
+          "text": "You learn a lot through this process.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 818.22,
+          "ts_end": 820.04,
+          "text": "So, this is the train model simple.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 820.16,
+          "ts_end": 822.56,
+          "text": "We define the train model simple code over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 822.76,
+          "ts_end": 824.36,
+          "text": "We need to pass in the model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 825.16,
+          "ts_end": 826.72,
+          "text": "We need to pass in the model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 826.8,
+          "ts_end": 831.44,
+          "text": "We need to pass in the train loader, the validation loader, the optimizer which is the Adam W.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 831.44,
+          "ts_end": 834.02,
+          "text": "The device which is CPU in my case.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 834.16,
+          "ts_end": 837.9,
+          "text": "I will come to this device in a lot of detail very soon.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 838.18,
+          "ts_end": 840.36,
+          "text": "Then we have to specify the number of epochs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 840.4,
+          "ts_end": 842.5,
+          "text": "So, I have defined the number of epochs equal to 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 842.84,
+          "ts_end": 844.76,
+          "text": "We have to specify evaluation frequency.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 845.18,
+          "ts_end": 849.7,
+          "text": "So, here you see when we start printing out after every 5 batches I am printing out the results.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 849.96,
+          "ts_end": 854.78,
+          "text": "You can change this based on after how many iterations you want to print out the results.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 855.12,
+          "ts_end": 858.62,
+          "text": "All of this is mentioned in this part of the code where evaluation frequency.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 859.22,
+          "ts_end": 861.18,
+          "text": "Another parameter is evaluation iterations.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 861.44,
+          "ts_end": 868.42,
+          "text": "Which also shows essentially evaluation iterations is after how many iterations you are calculating the loss on the evaluation dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 868.88,
+          "ts_end": 873.82,
+          "text": "And evaluation frequency mentions after how much frequency you want to display that loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 874.32,
+          "ts_end": 876.78,
+          "text": "So, here we are setting both to be equal to 5.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 876.92,
+          "ts_end": 882.86,
+          "text": "Which means that after 5 batches are processed the evaluation loss will be calculated and it will be printed also.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 883.87,
+          "ts_end": 886.39,
+          "text": "Then we have to give a start context.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 886.89,
+          "ts_end": 889.31,
+          "text": "So, as I have mentioned over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 890.19,
+          "ts_end": 896.61,
+          "text": "We have to give a starting context to evaluate the generated responses during training based on the first validation set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 897.01,
+          "ts_end": 902.73,
+          "text": "So, the first validation which we are giving is format input and that is validation data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 902.89,
+          "ts_end": 906.23,
+          "text": "So, that is the first validation data which we are going to give as the start context.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 906.53,
+          "ts_end": 911.51,
+          "text": "And that is because if you see the example which we have taken over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 911.63,
+          "ts_end": 914.81,
+          "text": "The example which we have checked is validation data 0.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 915.15,
+          "ts_end": 918.39,
+          "text": "And that is convert the active sentence to passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 918.39,
+          "ts_end": 919.75,
+          "text": "The chef cooks the meal everyday.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 919.97,
+          "ts_end": 924.07,
+          "text": "Now, for this same example we want to check what the fine tuned LLM response.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 924.39,
+          "ts_end": 927.07,
+          "text": "So, that is why we have used this as the start context.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 928.61,
+          "ts_end": 934.51,
+          "text": "So, the number of tokens which will be printed or the output will be starting from this particular instruction.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 936.64,
+          "ts_end": 937.12,
+          "text": "Alright.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 937.4,
+          "ts_end": 944.84,
+          "text": "So, now one thing which I would like to mention over here is that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 945.7,
+          "ts_end": 951.4,
+          "text": "The time it took for me to run this code and the configuration of the laptop which I am using.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 951.8,
+          "ts_end": 953.52,
+          "text": "So, first thing to note is that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 953.64,
+          "ts_end": 955.8,
+          "text": "I am using number of epochs equal to 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 955.92,
+          "ts_end": 958.38,
+          "text": "Because if I use number of epochs equal to 2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 958.46,
+          "ts_end": 962.28,
+          "text": "It crashes my laptop and it takes a huge amount of time for the training process.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 962.86,
+          "ts_end": 963.74,
+          "text": "That is number 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 963.9,
+          "ts_end": 966.52,
+          "text": "Number 2, I am not using a GPU over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 966.62,
+          "ts_end": 968.34,
+          "text": "Which I highly recommend you to do.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 968.48,
+          "ts_end": 970.04,
+          "text": "I am using a simple CPU.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 970.26,
+          "ts_end": 972.98,
+          "text": "So, my configuration here is MacBook Air 2020.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 975.0,
+          "ts_end": 977.88,
+          "text": "So, if I type MacBook Air 2020 configuration.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 979.78,
+          "ts_end": 983.8,
+          "text": "Yeah, this is the configuration which I am using right now.",
+          "frame_ids": [
+            "r7unILsP0Es_f0003"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 983.8,
+          "ts_end": 985.92,
+          "text": "I just have 8 GB of RAM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 987.04,
+          "ts_end": 991.26,
+          "text": "I think I have 8 GB of RAM over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 991.42,
+          "ts_end": 994.34,
+          "text": "And I am not using a GPU, I am running it on a CPU.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 994.54,
+          "ts_end": 996.08,
+          "text": "So, this is a pretty basic configuration.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 996.52,
+          "ts_end": 1002.4,
+          "text": "But I want to run it on a basic configuration to show you the results even without using fancy GPUs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1002.8,
+          "ts_end": 1004.98,
+          "text": "So, if you have access to GPU.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1005.26,
+          "ts_end": 1012.66,
+          "text": "I would highly recommend you to connect to a Google Colab GPU instance or rent out an AWS EC2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1012.66,
+          "ts_end": 1014.88,
+          "text": "Or a GPU instance from Amazon.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1015.1,
+          "ts_end": 1017.04,
+          "text": "I will make a tutorial on it pretty soon.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1017.56,
+          "ts_end": 1021.58,
+          "text": "But here you see I am using number of epochs equal to 1 on my CPU MacBook Air.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1021.86,
+          "ts_end": 1027.08,
+          "text": "And when I run this, you will see that just for one epoch, it took 2 hours for me to run this code.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1027.56,
+          "ts_end": 1032.36,
+          "text": "Now, if I would have changed this to 2, it would have taken 4 to 5 hours plus it was crashing my system.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1032.86,
+          "ts_end": 1034.98,
+          "text": "So, I am not on a very optimal system here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1035.12,
+          "ts_end": 1040.84,
+          "text": "But if you have a laptop with minimal configurations, I have written this code so that it will run on your end as well.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "r7unILsP0Es_004",
+      "title": "Monitoring the finetuned LLM results",
+      "ts_start": 1042.0,
+      "ts_end": 1377.0,
+      "segments": [
+        {
+          "ts_start": 1045.27,
+          "ts_end": 1047.39,
+          "text": "You will see that the training loss goes on decreasing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1047.87,
+          "ts_end": 1051.33,
+          "text": "I am doing only one epoch and there are 115 batches here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1051.63,
+          "ts_end": 1055.95,
+          "text": "So, it runs for all of those batches for one epoch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1056.05,
+          "ts_end": 1060.79,
+          "text": "And then you can see that the training loss has decreased and the validation loss has also decreased sufficiently.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1061.59,
+          "ts_end": 1063.01,
+          "text": "Now, let us see the response.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1063.53,
+          "ts_end": 1069.47,
+          "text": "So, I am also printing out the response based on the start context.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1069.55,
+          "ts_end": 1071.99,
+          "text": "So, now the instruction was that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1072.57,
+          "ts_end": 1076.81,
+          "text": "Instruction was convert the active to passive. The chef cooks the meal every day.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1076.93,
+          "ts_end": 1078.13,
+          "text": "And here is the response.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1078.45,
+          "ts_end": 1080.61,
+          "text": "The meal is prepared every day by the chef.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1080.75,
+          "ts_end": 1081.39,
+          "text": "End of text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1081.99,
+          "ts_end": 1082.87,
+          "text": "Isn't that awesome?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1083.29,
+          "ts_end": 1085.75,
+          "text": "This is almost close to the correct passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1085.89,
+          "ts_end": 1091.51,
+          "text": "Hence, the correct passive answer is the meal is prepared or the meal is cooked every day by the chef.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1091.65,
+          "ts_end": 1094.39,
+          "text": "And here instead, it is the meal is prepared every day by the chef.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1094.83,
+          "ts_end": 1096.81,
+          "text": "So, it is almost exactly correct.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1097.15,
+          "ts_end": 1101.61,
+          "text": "Whereas earlier, if you saw the earlier output without fine tuning the LLM,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1102.09,
+          "ts_end": 1105.69,
+          "text": "So, without fine tuning the LLM, it could not convert the active into passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1105.79,
+          "ts_end": 1108.61,
+          "text": "It just recycled the same text which we had given in the instruction.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1109.09,
+          "ts_end": 1114.03,
+          "text": "But right now, when we fine tuned the large language model on this custom data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1114.29,
+          "ts_end": 1118.23,
+          "text": "So, this was the data set with 1100 instruction input output pairs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1118.63,
+          "ts_end": 1123.31,
+          "text": "When we fine tuned the large language model on this, we can see that the response is passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1123.47,
+          "ts_end": 1126.53,
+          "text": "In the passive tense, which is awesome, which is exactly what we wanted.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1126.89,
+          "ts_end": 1129.47,
+          "text": "And then the LLM continues with the rest of the generation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1129.47,
+          "ts_end": 1138.27,
+          "text": "But essentially, here I have demonstrated that using fine tuning and just by training on one epoch,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1138.29,
+          "ts_end": 1144.81,
+          "text": "just by training for one epoch on a machine which has no GPU, you can still obtain good results.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1144.87,
+          "ts_end": 1151.53,
+          "text": "In two hours, you are able to generate active tense, the chef cooks the meal every day to passive tense.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1151.63,
+          "ts_end": 1153.33,
+          "text": "The meal is prepared every day by the chef.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1153.67,
+          "ts_end": 1158.77,
+          "text": "So, I have checked this for two epochs on a system with a better configuration.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1158.77,
+          "ts_end": 1164.49,
+          "text": "And just with two epochs, you can get it to the correct response that the meal is cooked by the chef every day instead of prepared.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1165.14,
+          "ts_end": 1169.76,
+          "text": "So, just by increasing the number of epochs from 1 to 2, you actually get to the correct answer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1171.56,
+          "ts_end": 1174.7,
+          "text": "So, as we can see based on the output above, the model trains well.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1174.82,
+          "ts_end": 1180.4,
+          "text": "As we can tell based on the decreasing training loss and the validation loss values.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1180.84,
+          "ts_end": 1188.48,
+          "text": "And based on the response text, we can see that the model almost correctly follows the instruction to convert the input sentence from active to passive.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1188.58,
+          "ts_end": 1188.88,
+          "text": "Awesome.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1190.08,
+          "ts_end": 1194.76,
+          "text": "We will have an evaluation section later in which we will learn how to evaluate the responses of our LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1194.86,
+          "ts_end": 1198.48,
+          "text": "We cannot just qualitatively say that this is good, this looks good, etc.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1198.76,
+          "ts_end": 1201.28,
+          "text": "There is a whole separate field of LLM evaluation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1201.84,
+          "ts_end": 1204.5,
+          "text": "And that's the subject of active research right now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1204.58,
+          "ts_end": 1209.54,
+          "text": "If you have quantitative mathematical answers, it's very easy to say you scored this much.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1209.68,
+          "ts_end": 1213.76,
+          "text": "But what if the answer is qualitative like the response which we just got right now?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1213.86,
+          "ts_end": 1215.88,
+          "text": "How do we evaluate LLMs in that case?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1216.12,
+          "ts_end": 1218.28,
+          "text": "We will look at that in one of the next lectures.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1218.28,
+          "ts_end": 1221.22,
+          "text": "But for now, let's just go ahead and plot the losses.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1221.5,
+          "ts_end": 1226.84,
+          "text": "So, here you can see I have plotted the training loss and I have plotted the validation loss for one epoch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1227.28,
+          "ts_end": 1235.44,
+          "text": "And you can see that the model's performance on both the training loss and the validation training and validation set improves substantially over the course of the training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1235.82,
+          "ts_end": 1244.34,
+          "text": "There is a rapid decrease in losses during the initial phase, which indicates that the model is quickly learning meaningful patterns and representations from the data.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1244.34,
+          "ts_end": 1257.44,
+          "text": "Then, as training proceeds to the second epoch, the losses continue to decrease but at a much slower rate, suggesting that the model is fine-tuning its learned representations and then it's converging to a stable solution.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1258.08,
+          "ts_end": 1259.94,
+          "text": "That's how you should evaluate this plot.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1260.2,
+          "ts_end": 1265.78,
+          "text": "Already, we can see that the validation loss is still a bit higher and the training loss has the potential to go down further.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1266.14,
+          "ts_end": 1271.9,
+          "text": "But due to memory and compute limitations, I was not able to increase the number of epochs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1272.42,
+          "ts_end": 1274.86,
+          "text": "But I highly encourage you to do so.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1274.88,
+          "ts_end": 1283.78,
+          "text": "If you do have the compute power, if you do not, and even if you reach this stage, it's awesome because now you have implemented fine-tuning on your own local machine.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1286.63,
+          "ts_end": 1297.35,
+          "text": "So, while the loss plot indicates that the model is training effectively, the most crucial aspect is its performance in terms of response quality and correctness.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1297.81,
+          "ts_end": 1303.87,
+          "text": "So, although the loss function looks good, as I mentioned earlier, we need a way to evaluate the responses of this model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1303.99,
+          "ts_end": 1306.21,
+          "text": "We need a way to say whether the responses are good or not.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1306.23,
+          "ts_end": 1306.79,
+          "text": "Whether the responses make sense?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1306.95,
+          "ts_end": 1309.73,
+          "text": "How well the responses look qualitatively?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1309.75,
+          "ts_end": 1311.97,
+          "text": "Do they really answer the question which has been posed?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1312.25,
+          "ts_end": 1318.05,
+          "text": "And that's why there is a separate lecture which we will devote to evaluating the large language models in this case.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1319.14,
+          "ts_end": 1327.49,
+          "text": "So, today was a very important lecture because we successfully fine-tuned the instruction large language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1327.65,
+          "ts_end": 1332.71,
+          "text": "And we demonstrated that without using this fine-tuning data set, the model cannot follow instructions.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1333.05,
+          "ts_end": 1335.17,
+          "text": "But when you use the fine-tuning data set,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1335.17,
+          "ts_end": 1337.35,
+          "text": "it really learns to follow instructions very well.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1337.51,
+          "ts_end": 1340.57,
+          "text": "And I will demonstrate this further in the next lectures as well.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1340.75,
+          "ts_end": 1347.17,
+          "text": "But one of the outputs, so if the input is something like this, rewrite the sentence using a simile.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1347.39,
+          "ts_end": 1349.71,
+          "text": "Simile means using similar kind of meaning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1350.11,
+          "ts_end": 1351.65,
+          "text": "So, the car is very fast.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1351.79,
+          "ts_end": 1354.57,
+          "text": "The correct response is the car is as fast as lightning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1354.67,
+          "ts_end": 1357.85,
+          "text": "And our model predicts the car is as fast as a bullet.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1358.11,
+          "ts_end": 1358.83,
+          "text": "Awesome, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1358.95,
+          "ts_end": 1365.57,
+          "text": "It really learns how to answer based on the instruction which has been provided.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1365.59,
+          "ts_end": 1369.57,
+          "text": "Sometimes it does make mistakes because we are training for only one epoch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1369.75,
+          "ts_end": 1374.31,
+          "text": "But we can clearly see that if you train it for more epochs, it will get better and better and better.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1374.43,
+          "ts_end": 1376.03,
+          "text": "And it's learning the instructions.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "r7unILsP0Es_005",
+      "title": "Recap and next steps",
+      "ts_start": 1377.0,
+      "ts_end": 1427.0,
+      "segments": [
+        {
+          "ts_start": 1377.31,
+          "ts_end": 1378.63,
+          "text": "So, thanks a lot everyone.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1378.77,
+          "ts_end": 1385.75,
+          "text": "This brings us to the end of today's lecture where we learnt about LLM fine-tuning",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1385.75,
+          "ts_end": 1390.23,
+          "text": "which is probably the most important step in instruction fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1390.41,
+          "ts_end": 1395.99,
+          "text": "So, now if you look at this flow chart, let me rub all of this and show you till where we have reached.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1396.13,
+          "ts_end": 1402.15,
+          "text": "In this flow chart, we have reached this stage where we even inspected the modeling loss.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1402.35,
+          "ts_end": 1404.91,
+          "text": "So, we have finished stage 1 which is preparing the dataset.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1405.21,
+          "ts_end": 1407.79,
+          "text": "We have finished stage 2, fine-tuning the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1407.89,
+          "ts_end": 1411.87,
+          "text": "In the next lecture, we will move to stage 3 which is evaluating the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1412.19,
+          "ts_end": 1413.45,
+          "text": "So, thanks a lot everyone.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1413.67,
+          "ts_end": 1417.45,
+          "text": "I hope you are liking these lectures which are a mix of whiteboard plus coding approach.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1417.91,
+          "ts_end": 1420.23,
+          "text": "I look forward to seeing you in the next lecture.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Dropout",
+  "extracted_text": "CLASS torch.nn.Dropout(p=0.5, inplace=False) [SOURCE]\n\nDuring training, randomly zeroes some of the elements of the input tensor with probability p.\n\nThe zeroed elements are chosen independently for each forward call and are sampled from a Bernoulli distribution.\n\nEach channel will be zeroed out independently on every forward call.\n\nThis has proven to be an effective technique for regularization and preventing the co-adaptation of neurons as described in the paper Improving neural networks by preventing co-adaptation of feature detectors.\n\nFurthermore, the outputs are scaled by a factor of \u2014 during training. This means that during evaluation the module simply computes an identity function.\n\nParameters\n\u2022 p (float) \u2013 probability of an element to be zeroed. Default: 0.5\n\u2022 inplace (bool) \u2013 If set to True, will do this operation in-place. Default: False\n\nShape:\n\u2022 Input: . Input can be of any shape\n\u2022 Output: . Output is of the same shape as input",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "dvH6lFGhFrs_f0003",
+  "video_id": "dvH6lFGhFrs",
+  "timestamp_sec": 1845.399667,
+  "source_image": "data/frames/dvH6lFGhFrs/dvH6lFGhFrs_f0003.jpg"
+}

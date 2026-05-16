@@ -1,0 +1,23 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 LLM training and Validation loss",
+  "extracted_text": "Topics 1-3 are covered in this section\n\nIn the previous section, we introduced the loss computation to evaluate how well the model performs.\n\nIn this section, we apply the loss to the entire dataset, which we split into a training and validation portion\n\nImplement functions to save and load the LLM weights to use or continue training the LLM later\n\nAs the end of this chapter, load pretrained weights from OpenAI into our LLM model",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Flowchart showing LLM training pipeline with 7 numbered steps: Text generation, Text evaluation, Loss & validation losses, LLM training function, Text generation strategies, Weight saving & loading, and Pretrained weights from OpenAI, with interconnecting arrows showing dependencies.",
+  "diagram_elements": [
+    "Text generation",
+    "Text evaluation",
+    "Loss & validation losses",
+    "LLM training function",
+    "Text generation strategies",
+    "Weight saving & loading",
+    "Pretrained weights from OpenAI"
+  ],
+  "confidence": 0.85,
+  "frame_id": "zuj_NJNouAA_f0000",
+  "video_id": "zuj_NJNouAA",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0000.jpg"
+}

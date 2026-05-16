@@ -1,0 +1,25 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Pretraining an LLM involves next-word prediction on large text datasets",
+  "extracted_text": "Figure 1.3 Pretraining an LLM involves next-word prediction on large text datasets. A pretrained LLM can then be finetuned using a smaller labeled dataset.\n\nAs illustrated in Figure 1.3, the first step in creating an LLM is to train it on a large corpus of text data, sometimes referred to as raw text. Here, \"raw\" refers to the fact that this data is just regular text without any labeling information.[1]. (Filtering may be applied, such as removing formatting characters or documents in unknown languages.)\n\nThis first training stage of an LLM is also known as pretraining, creating an initial pretrained LLM, often called a base or foundation model. A typical example of such a model is the GPT-3 model (the precursor of the original model offered in ChatGPT). This model is trained on a large corpus of text data from the internet and books. However, it also has limited few-shot capabilities, which means it can learn to perform new tasks based on only a few examples instead of needing extensive training data. This is further illustrated in the next section, Introducing the transformer architecture.\n\nAfter obtaining a pretrained LLM from training on large text datasets, where the LLM is trained to predict the next word in the text, we can further train the LLM on labeled data, also known as finetuning.\n\nThe two most popular categories of finetuning LLMs include instruction-finetuning and finetuning for classification tasks. In instruction-finetuning, the labeled dataset consists of instruction-answer pairs. For example, an instruction could be a query to translate a sentence, followed by the correctly translated text. In classification finetuning, the labeled dataset consists of texts associated with class labels, for example, emails labeled with spam and non-spam.\n\nIn this book, we will cover both code implementations for pretraining and finetuning an",
+  "code": null,
+  "math": null,
+  "diagram_summary": "LLM pretraining and finetuning workflow: raw text data is preprocessed and used to train a pretrained LLM through next-word prediction, which can then be finetuned on labeled datasets for classification, summarization, or personal assistant tasks.",
+  "diagram_elements": [
+    "Internet texts, Books, Wikipedia",
+    "Raw, unlabeled text (billions of tokens)",
+    "Train",
+    "Pretrained LLM (foundation model)",
+    "Labeled dataset",
+    "Train",
+    "Text completion, Few-shot capabilities",
+    "Classification, Summarization, Q&A, Personal assistant",
+    "Finetuned LLM"
+  ],
+  "confidence": 0.92,
+  "frame_id": "Xpr8D6LeAtw_f0019",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 791.666333,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0019.jpg"
+}

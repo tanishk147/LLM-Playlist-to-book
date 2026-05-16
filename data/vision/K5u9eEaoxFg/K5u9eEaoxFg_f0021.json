@@ -1,0 +1,21 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "Reshaped Values matrix:\ntensor([[[[-3.6194,  2.0935,  1.3879],\n          [ 2.1231, -1.2262, -0.2556]],\n\n         [[1.1106, -0.4063, -0.5588],\n          [1.8222,  1.8721,  0.4929]]],\n\n        [[[-1.6594,  0.1052, -0.0468],\n          [ 0.8916, -1.4384, -0.5651]]]], dtype=torch.float64)"
+  },
+  "math": null,
+  "diagram_summary": "Tensor reshaping visualization showing a 3D matrix being reshaped into a 4D tensor with dimensions (1, 4, 3, 2, 3).",
+  "diagram_elements": [
+    "Red bracket annotations highlighting grouped matrix rows",
+    "Green arrow and dimension notation showing reshape to (1, 4, 3, 2, 3)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0021",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1423.066333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0021.jpg"
+}

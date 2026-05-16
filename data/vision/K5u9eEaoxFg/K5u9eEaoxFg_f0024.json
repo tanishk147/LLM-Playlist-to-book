@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "(1,0,2,3)\nTransposed Queries matrix\ntensor([[[4-0.4888, 0.2361, 2.8463],\n         [-2.3531, -0.7912, 1.2578],\n         [-2.5745, 0.2893, 1.1454]]  Head 1\n\n        [[-0.2184, 5.4503, -1.8915],\n         [ 2.0534, -4.3369, 3.2125],\n         [ 0.9021, 1.5632, 0.6930]]  Head 2\n\nTransposed Keys matrix:\ntensor([[[[ 0.4143, -1.4023, -2.7131],\n          [ 1.1957, 1.3712, 0.6885],\n          [-0.1226, 0.1155, 0.4755]],  Head 1\n\n         [[ 3.4907, -2.1993, 0.2381],\n          [-1.5484, 4.2152, 2.1248],\n          [-0.0176, 0.8339, 0.7582]]])  Head 2\n\nTransposed Values matrix:"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0024",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1660.633,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0024.jpg"
+}

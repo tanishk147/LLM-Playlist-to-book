@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "la2 = torch.tensor([2, 8, 1])\n\n* embedding dimension = 5\n\n* embedding = torch.nn.Embedding(4, 5)\n\n* embedding weight:\nParameter containing:\ntensor([[ 0.3374, -0.1778, -0.3035, -0.5880,  1.5810],\n        [ 1.3010,  1.2753, -0.2010, -0.1606, -0.4815],\n        [ 0.6957, -1.8861, -1.1589,  0.3255, -0.6315],\n        [-2.8400, -0.7849, -1.4096, -0.4076,  0.7953]], requires_grad=True)\n\n* embedding(idx):"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "ghCSGRgVB_o_f0015",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 3005.699667,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0015.jpg"
+}

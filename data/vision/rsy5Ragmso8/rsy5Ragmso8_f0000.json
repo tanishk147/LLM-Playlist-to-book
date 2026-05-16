@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture 7: Tokenization",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A two-stage diagram showing Stage 1 and Stage 2 of a tokenization process, with Stage 1 containing boxes for Attention mechanism and LLM architecture, and Stage 2 containing boxes for Training loop and Model evaluation.",
+  "diagram_elements": [
+    "Stage 1",
+    "Stage 2",
+    "Attention mechanism",
+    "LLM architecture",
+    "Training loop",
+    "Model evaluation"
+  ],
+  "confidence": 0.85,
+  "frame_id": "rsy5Ragmso8_f0000",
+  "video_id": "rsy5Ragmso8",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/rsy5Ragmso8/rsy5Ragmso8_f0000.jpg"
+}

@@ -1,0 +1,4769 @@
+{
+  "video_id": "3dWzNZXA8DY",
+  "duration_sec": 2021.2970625,
+  "segments": [
+    {
+      "ts_start": 4.87,
+      "ts_end": 12.59,
+      "text": "Hello everyone, welcome to the second lecture in the Building Large Language Models from Scratch series.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Lecture 2: Intro to LLMs",
+          "extracted_text": "\u2460 What is a Large Language Model (LLM)\n\nNeural networks designed to understand, generate and respond to human like text.\n\nDeep Neural Networks trained on massive amounts of text data.",
+          "code": null,
+          "math": null,
+          "diagram_summary": "A neural network architecture diagram showing input data flowing through multiple layers (Layer 1 to Layer N) with interconnected neurons, producing output.",
+          "diagram_elements": [
+            "Input Data",
+            "Neuron",
+            "Layer 1",
+            "Layer N",
+            "Output Layer",
+            "Output"
+          ],
+          "confidence": 0.92,
+          "frame_id": "3dWzNZXA8DY_f0000",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 13.37,
+      "ts_end": 23.81,
+      "text": "The previous lecture was an introduction to the entire series and in that lecture I described about what we are planning to cover in this playlist",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 23.81,
+      "ts_end": 31.79,
+      "text": "and I mentioned about our end goal of learning the nuts and bolts of building a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 31.79,
+      "ts_end": 40.51,
+      "text": "In this series, we are not just going to look at applications, we are going to understand how things really work from a very, very fundamental level.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 41.65,
+      "ts_end": 51.23,
+      "text": "So let's get started. My name is Dr. Raj Dandekar and I graduated with a PhD from Massachusetts Institute of Technology in 2022.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 51.91,
+      "ts_end": 58.03,
+      "text": "Since two years, I have been in India working on our vision to make AI accessible to all.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 58.39,
+      "ts_end": 60.89,
+      "text": "This playlist is a part of that vision.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 60.89,
+      "ts_end": 63.72,
+      "text": "So let's get started with today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 64.26,
+      "ts_end": 67.3,
+      "text": "Today, we are going to cover six major aspects.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 67.72,
+      "ts_end": 71.9,
+      "text": "First, we are going to learn about what exactly is a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 72.72,
+      "ts_end": 78.4,
+      "text": "Secondly, we are going to learn about what does large mean in the large language model terminology.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 79.78,
+      "ts_end": 87.74,
+      "text": "Third, we are going to see what's the difference between modern large language models and earlier NLP models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 88.4,
+      "ts_end": 91.26,
+      "text": "Fourth, we are going to see what's the secret sauce.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 91.82,
+      "ts_end": 94.16,
+      "text": "What really makes them so good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 95.04,
+      "ts_end": 99.8,
+      "text": "Fifth, we are going to see the difference between these terminologies, which you might have heard.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 100.7,
+      "ts_end": 105.1,
+      "text": "LLM, generative AI, deep learning, machine learning, artificial intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 105.38,
+      "ts_end": 107.22,
+      "text": "It's getting so confusing, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 107.36,
+      "ts_end": 110.84,
+      "text": "The number of terminologies just keep increasing day by day.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 111.18,
+      "ts_end": 113.86,
+      "text": "How do we know which terminology means what?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 115.1,
+      "ts_end": 120.5,
+      "text": "And then in the last section, I'm going to discuss about the applications of LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 120.7,
+      "ts_end": 121.74,
+      "text": "And what all?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 122.42,
+      "ts_end": 124.08,
+      "text": "And the cool stuff we can build with LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 125.57,
+      "ts_end": 130.49,
+      "text": "So with this, we'll get started with the part one or section one of today's lecture,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 130.67,
+      "ts_end": 134.53,
+      "text": "which is explaining what is a large language model in the first place.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 135.2,
+      "ts_end": 144.36,
+      "text": "Now, unless you have been living under a rock, it might, you would have definitely heard of LLMs, open AI, generative AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 144.56,
+      "ts_end": 151.24,
+      "text": "So you might have heard about the term large language model, but you might not be knowing what it exactly is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 151.34,
+      "ts_end": 153.28,
+      "text": "You might have even used chat GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 153.28,
+      "ts_end": 167.24,
+      "text": "Without knowing what an LLM is at its simplest form, an LLM is just a neural network, which is designed to understand, generate, and respond to human like text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 168.53,
+      "ts_end": 170.13,
+      "text": "There are two key things here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 170.25,
+      "ts_end": 176.19,
+      "text": "An LLM is a neural network, which is designed to understand, generate, and respond to human like text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 176.67,
+      "ts_end": 180.27,
+      "text": "Let me explain the two parts separately first neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 180.93,
+      "ts_end": 183.51,
+      "text": "So I'm assuming people who are coming to the series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 183.51,
+      "ts_end": 185.89,
+      "text": "Please know a bit about neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 185.97,
+      "ts_end": 187.55,
+      "text": "If you don't, it's totally fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 188.01,
+      "ts_end": 189.99,
+      "text": "I'll explain all those basics as well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 190.61,
+      "ts_end": 193.17,
+      "text": "But a neural network essentially looks like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 193.31,
+      "ts_end": 201.63,
+      "text": "We have input data, which feeds into a layer of neurons and bunch of these layers are stacked together and we have the output layer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 202.46,
+      "ts_end": 213.26,
+      "text": "The reason it's called a neural network, it's because these neurons represent the circuitry in our brain, or they do so in a very symbolic sense.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 214.28,
+      "ts_end": 216.6,
+      "text": "That's why this name deep neural network comes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 217.39,
+      "ts_end": 226.43,
+      "text": "And deep neural networks are shown to have a huge number of applications in image detection, text generation, self-driving cars.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 227.26,
+      "ts_end": 232.98,
+      "text": "Then let's say if you want to detect whether a patient has brain tumor or not, they have a huge number of applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 233.4,
+      "ts_end": 244.93,
+      "text": "So LLMs are essentially just neural networks, which are designed for very generic type of text related applications, such as understanding, generating, and responding to human like text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 244.95,
+      "ts_end": 252.07,
+      "text": "What does it mean to understand, generate, and respond to human like text?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 252.37,
+      "ts_end": 258.21,
+      "text": "So the simplest way to demonstrate what does that mean is taking you to ChatGPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 259.2,
+      "ts_end": 263.18,
+      "text": "I'm sure all of you who are seeing this lecture have used ChatGPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 263.32,
+      "ts_end": 266.38,
+      "text": "Here you can see on the drop down, I'm using GPT-4.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 266.72,
+      "ts_end": 270.0,
+      "text": "You might be on GPT-4.0 or GPT-4.0 Mini.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 270.48,
+      "ts_end": 273.88,
+      "text": "So you can ask basically any question to ChatGPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 273.98,
+      "ts_end": 275.38,
+      "text": "See, here you can see the chat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 275.4,
+      "ts_end": 278.86,
+      "text": "Here there are some questions or here there are some prompts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 278.96,
+      "ts_end": 281.56,
+      "text": "So I'll click on this prompt and click on plan a relaxing day.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 281.84,
+      "ts_end": 287.52,
+      "text": "And you see, can you help me to plan a relaxing day that focuses on activities for rejuvenation?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 287.78,
+      "ts_end": 291.52,
+      "text": "To start, can you ask me what my favorite forms of relaxation are?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 291.76,
+      "ts_end": 298.78,
+      "text": "And you see the ChatGPT responds like a human, absolutely, to help craft the perfect day of relaxation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 299.12,
+      "ts_end": 301.54,
+      "text": "Could you share your favorite forms of relaxation?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 301.98,
+      "ts_end": 304.62,
+      "text": "For instance, do you prefer spending time outdoors?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 305.4,
+      "ts_end": 307.68,
+      "text": "Engaging in activities like reading or yoga?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 308.22,
+      "ts_end": 311.54,
+      "text": "Or perhaps trying creative pursuits like painting or cooking?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 311.72,
+      "ts_end": 313.68,
+      "text": "So I'll write here reading a book.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 315.83,
+      "ts_end": 317.59,
+      "text": "Let's see what ChatGPT responds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 318.07,
+      "ts_end": 319.85,
+      "text": "And then ChatGPT says, great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 320.05,
+      "ts_end": 322.93,
+      "text": "Reading can be a central part of a rejuvenating day.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 323.15,
+      "ts_end": 325.37,
+      "text": "Here is a plan focused around your enjoyment.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 325.67,
+      "ts_end": 328.55,
+      "text": "And then it tells me to do morning meditation for 30 minutes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 328.75,
+      "ts_end": 330.79,
+      "text": "Healthy breakfast for 45 minutes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 330.95,
+      "ts_end": 332.27,
+      "text": "Reading time for 2 hours.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 332.49,
+      "ts_end": 334.01,
+      "text": "Nature walk for 1 hour.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 335.15,
+      "ts_end": 338.51,
+      "text": "So you can see it's almost like I'm talking with a human.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 338.85,
+      "ts_end": 341.37,
+      "text": "So that's the second part of the LLM definition.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 341.89,
+      "ts_end": 347.21,
+      "text": "Large language models understand, generate, and respond to human-like text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 347.39,
+      "ts_end": 349.13,
+      "text": "And they also respond like humans.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 350.86,
+      "ts_end": 354.72,
+      "text": "So ChatGPT, the demonstration which I just showed you, is an LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 354.84,
+      "ts_end": 359.48,
+      "text": "But what many people don't know about or they don't think about LLMs is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 359.48,
+      "ts_end": 365.08,
+      "text": "at the core of LLM, they are just neural networks which are designed to do these things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 365.38,
+      "ts_end": 374.14,
+      "text": "So if anyone asks you what an LLM is, tell them that they are deep neural networks trained on massive amount of data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 374.14,
+      "ts_end": 380.24,
+      "text": "which help to do specific tasks such as understanding, generating, and respond to human-like text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 380.4,
+      "ts_end": 383.38,
+      "text": "And in many cases, they also respond like humans.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 383.78,
+      "ts_end": 386.92,
+      "text": "This is getting better and better as I'm making this lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 387.1,
+      "ts_end": 391.81,
+      "text": "And LLMs are in fact sounding more and more like humans.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 391.91,
+      "ts_end": 393.63,
+      "text": "And that has led to huge problems.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 394.25,
+      "ts_end": 396.23,
+      "text": "Maybe we'll create a separate lecture on that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 396.23,
+      "ts_end": 403.75,
+      "text": "So that's the first section which we dealt with today, which is what is a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 404.25,
+      "ts_end": 404.73,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 405.05,
+      "ts_end": 409.51,
+      "text": "The second question you might be thinking is why is it called a large language model?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 410.05,
+      "ts_end": 411.79,
+      "text": "Why not just a language model?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 412.37,
+      "ts_end": 415.41,
+      "text": "After all, it's just a model dealing with language, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 415.49,
+      "ts_end": 418.59,
+      "text": "Why do we specifically have this one more large term here?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 419.14,
+      "ts_end": 425.61,
+      "text": "And the reason is because until LLMs came into the picture, model sizes were not very big.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 425.73,
+      "ts_end": 427.05,
+      "text": "And when I mean model size,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 427.05,
+      "ts_end": 429.55,
+      "text": "I mean the number of parameters in the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 430.03,
+      "ts_end": 436.05,
+      "text": "But LLMs, if you know about the number of parameters which they deal with, you'll be shocked.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 436.86,
+      "ts_end": 441.0,
+      "text": "LLMs typically have billions of parameters, billion, one billion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 441.28,
+      "ts_end": 443.56,
+      "text": "It's a huge number of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 443.94,
+      "ts_end": 447.9,
+      "text": "And now there are even some LLMs which are trillions of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 448.64,
+      "ts_end": 450.66,
+      "text": "We can't even think of those numbers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 450.9,
+      "ts_end": 452.94,
+      "text": "But it's huge number of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 453.42,
+      "ts_end": 455.96,
+      "text": "So let me show you a visual here.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0001"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Model Name",
+          "extracted_text": "Model Name | n_params | n_layers | d_model | n_heads | d_head\nGPT-3 Small | 125M | 12 | 768 | 12 | 64\nGPT-3 Medium | 350M | 24 | 1024 | 16 | 64\nGPT-3 Large | 760M | 24 | 1536 | 16 | 96\nGPT-3 XL | 1.3B | 24 | 2048 | 24 | 128\nGPT-3 2.7B | 2.7B | 32 | 2560 | 32 | 80\nGPT-3 6.7B | 6.7B | 32 | 4096 | 32 | 128\nGPT-3 13B | 13.0B | 40 | 5140 | 40 | 128\nGPT-3 175B or \"GPT-3\" | 175.0B | 96 | 12288 | 96 | 128",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "3dWzNZXA8DY_f0001",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 454.699667,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0001.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 456.12,
+      "ts_end": 457.1,
+      "text": "So this is a table.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 457.1,
+      "ts_end": 459.28,
+      "text": "This is a table which shows the number of parameters in GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 459.86,
+      "ts_end": 462.5,
+      "text": "As you know, we are at GPT-4 right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 463.06,
+      "ts_end": 469.9,
+      "text": "So GPT-3, which was the earlier version of GPT, you can see GPT-3 small had 125 million parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 470.94,
+      "ts_end": 473.12,
+      "text": "GPT-3 medium had 350 million.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 473.76,
+      "ts_end": 476.0,
+      "text": "GPT-3 large had 760 million.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 476.38,
+      "ts_end": 479.68,
+      "text": "And if you see GPT-3 13b had 13 billion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 480.16,
+      "ts_end": 484.32,
+      "text": "GPT-3 175b had 175 billion parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 484.32,
+      "ts_end": 489.48,
+      "text": "So usually the second term here is the number of parameters in the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 489.58,
+      "ts_end": 493.52,
+      "text": "So here it's 175b which is 175 billion parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 494.02,
+      "ts_end": 496.86,
+      "text": "And GPT-4 has even more number of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 497.7,
+      "ts_end": 500.18,
+      "text": "That's why they are called large language models.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0002"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": "175B parameters",
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Comparison of GPT model sizes showing parameter counts and decoder layers across three versions: GPT-1 (117M parameters, 12 decoders, 512 token size), GPT-2 (1.5B parameters, 48 decoders, 1024 token size), and GPT-3 (175B parameters, 96 decoders, 2048 token size).",
+          "diagram_elements": [
+            "GPT-1: 117M parameters, 12 decoders, 512 token size",
+            "GPT-2: 1.5B parameters, 48 decoders, 1024 token size",
+            "GPT-3: 175B parameters, 96 decoders, 2048 token size"
+          ],
+          "confidence": 0.95,
+          "frame_id": "3dWzNZXA8DY_f0002",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 500.133,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0002.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 500.78,
+      "ts_end": 507.4,
+      "text": "So here is another graph which shows the comparison between GPT-1, GPT-2 and GPT-3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 507.54,
+      "ts_end": 512.92,
+      "text": "So as you go from GPT-1 to 2 to 3, the LLMs also become better and better and better.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 512.92,
+      "ts_end": 516.5,
+      "text": "But their number of parameters also increase tremendously.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 516.9,
+      "ts_end": 521.4,
+      "text": "If you see from GPT-1 to GPT-2 there is a factor of 100.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 521.66,
+      "ts_end": 525.24,
+      "text": "So the parameters increase from 100 million to almost 1 billion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 525.5,
+      "ts_end": 527.16,
+      "text": "So actually there is a factor of 10 here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 527.67,
+      "ts_end": 531.16,
+      "text": "But from GPT-2 to GPT-3 there is a factor of 100.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 531.96,
+      "ts_end": 534.84,
+      "text": "So GPT-2 had only 1.5 billion parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 535.08,
+      "ts_end": 538.74,
+      "text": "But GPT-3 had 175 billion parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 539.99,
+      "ts_end": 542.29,
+      "text": "You see there are some other terminologies also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 542.29,
+      "ts_end": 544.15,
+      "text": "Like GPT-1 had 12 decoders.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 544.67,
+      "ts_end": 545.77,
+      "text": "GPT-2 had 48.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 546.03,
+      "ts_end": 547.27,
+      "text": "And GPT-3 had 96.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 547.83,
+      "ts_end": 550.25,
+      "text": "If you don't know what this means, it's totally fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 550.43,
+      "ts_end": 552.37,
+      "text": "We are going to cover that in this series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 553.27,
+      "ts_end": 555.35,
+      "text": "Token size. Take a look at token size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 555.69,
+      "ts_end": 557.77,
+      "text": "GPT-1 has a token size of 512.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 558.35,
+      "ts_end": 559.95,
+      "text": "GPT-2 has 1024.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 560.51,
+      "ts_end": 561.97,
+      "text": "GPT-3 has 2048.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 562.76,
+      "ts_end": 564.66,
+      "text": "It's fine if you don't know what it means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 564.82,
+      "ts_end": 567.16,
+      "text": "Just you can see everything is generally increasing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 568.76,
+      "ts_end": 571.44,
+      "text": "Now here is a graph which shows the model size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 571.44,
+      "ts_end": 576.06,
+      "text": "In artificial intelligence type of models over the period of years.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 576.3,
+      "ts_end": 579.96,
+      "text": "So this graph is plotted from 1950 to 2022.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 580.46,
+      "ts_end": 582.16,
+      "text": "And it was published in Nature.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 583.04,
+      "ts_end": 584.58,
+      "text": "So it is a reliable graph.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 584.78,
+      "ts_end": 587.12,
+      "text": "On the y-axis there are number of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 587.4,
+      "ts_end": 591.8,
+      "text": "So if you see in 1950 number of parameters was around just 10 to 100.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 593.28,
+      "ts_end": 594.48,
+      "text": "In log scale.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 594.58,
+      "ts_end": 596.22,
+      "text": "So this y-axis is in log scale.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 596.36,
+      "ts_end": 600.6,
+      "text": "So 1950 to 1960 models barely had 1000-10000 parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 600.6,
+      "ts_end": 605.78,
+      "text": "Then in 1980 to 2000 models started having around 100000 parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 606.32,
+      "ts_end": 614.66,
+      "text": "But it's only in 2020 that we have reached 100 million, 1 billion and even almost close to 1 trillion number of parameters now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 615.03,
+      "ts_end": 618.59,
+      "text": "And you can see the orange symbol here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 618.73,
+      "ts_end": 622.51,
+      "text": "So mostly these parameters are for LLMs which is for language tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 622.87,
+      "ts_end": 628.47,
+      "text": "I am just zooming in here to show you that the orange symbols here have the largest number of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 628.47,
+      "ts_end": 635.24,
+      "text": "I hope this has convinced you why these models are called large number of models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 635.48,
+      "ts_end": 639.12,
+      "text": "We are living in an age where the number of parameters are unprecedented.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 639.68,
+      "ts_end": 640.68,
+      "text": "They are huge number.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 641.2,
+      "ts_end": 643.68,
+      "text": "That's why it's called as large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 643.94,
+      "ts_end": 652.08,
+      "text": "I am sure by the time this video is released and maybe one year after that we would have reached the parameter size of 1 trillion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 653.98,
+      "ts_end": 658.26,
+      "text": "Now the reason that is the first part of the terminology large.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 658.48,
+      "ts_end": 660.42,
+      "text": "Then why are they called language models?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 660.58,
+      "ts_end": 664.72,
+      "text": "And that's pretty clear if you remember the example which I showed you over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 664.92,
+      "ts_end": 667.04,
+      "text": "These models only deal with language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 667.16,
+      "ts_end": 672.04,
+      "text": "They do not deal with other modalities like image or video let's say.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 672.16,
+      "ts_end": 673.28,
+      "text": "They only deal with language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 673.46,
+      "ts_end": 674.82,
+      "text": "LLMs only deal with language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 675.38,
+      "ts_end": 679.5,
+      "text": "So these models do a wide range of natural language processing tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 679.64,
+      "ts_end": 689.76,
+      "text": "So anything related to language such as question answering, translation, sentiment analysis and so many more tasks which all of you definitely might have explored with ChatGPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 691.14,
+      "ts_end": 697.1,
+      "text": "That's why they are called language models because they generally do a wide range of tasks related to language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 698.24,
+      "ts_end": 702.68,
+      "text": "So this is the meaning behind the terminology large and language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 703.42,
+      "ts_end": 706.16,
+      "text": "That covers the second aspect of today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 706.4,
+      "ts_end": 711.0,
+      "text": "And now we come to the third aspect which is why have LLMs become so popular?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 711.16,
+      "ts_end": 714.36,
+      "text": "Didn't we have the field of natural language processing before also?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 714.58,
+      "ts_end": 715.72,
+      "text": "And that's true.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 715.9,
+      "ts_end": 720.58,
+      "text": "Natural language processing as a field has been existing much before LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 725.6,
+      "ts_end": 733.94,
+      "text": "But LLP models if you look at the models which came before LLMs they were designed for very specific tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 734.32,
+      "ts_end": 739.98,
+      "text": "So for example there is one particular NLP model which might be designed for language translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 740.36,
+      "ts_end": 746.28,
+      "text": "There might be one specific NLP model which might be for sentiment analysis let's say.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 747.38,
+      "ts_end": 751.38,
+      "text": "LLMs on the other hand can do a wide range of NLP tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 751.38,
+      "ts_end": 759.7,
+      "text": "So it turns out that if you train a GPT for text completion that same architecture works well for language translation also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 760.08,
+      "ts_end": 762.04,
+      "text": "And it's pretty generic that way.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 763.04,
+      "ts_end": 766.34,
+      "text": "That's one difference between LLMs and earlier NLP models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 766.64,
+      "ts_end": 769.66,
+      "text": "Earlier NLP models were designed for specific tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 769.96,
+      "ts_end": 773.26,
+      "text": "Modern LLMs can do a wide range of NLP tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 773.9,
+      "ts_end": 776.7,
+      "text": "The second difference is based on an application.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 777.02,
+      "ts_end": 779.4,
+      "text": "So earlier LLM models could not...",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 780.9,
+      "ts_end": 787.18,
+      "text": "Earlier LLM models or earlier language models I should say could not write an email from custom instructions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 787.46,
+      "ts_end": 789.76,
+      "text": "It was very difficult for them to do that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 790.02,
+      "ts_end": 796.96,
+      "text": "Now if you think of modern LLMs such as ChatGPT and this task is almost trivial for ChatGPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 797.18,
+      "ts_end": 811.95,
+      "text": "So if I go to ChatGPT right now and I say draft an email for me to send to a colleague or to send to a friend of mine to book movie tickets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 811.95,
+      "ts_end": 822.47,
+      "text": "Let's say and I'll just zoom in here and see ChatGPT not only starts drafting the email but it also has inserted emojis and everything here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 822.93,
+      "ts_end": 825.09,
+      "text": "It's a trivial task for ChatGPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 825.21,
+      "ts_end": 831.95,
+      "text": "But you might be surprised to know that this trivial task was very hard to do for earlier NLP models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 832.43,
+      "ts_end": 837.09,
+      "text": "And that's the big difference between LLMs versus earlier NLP models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 837.25,
+      "ts_end": 837.77,
+      "text": "They are broad.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 837.91,
+      "ts_end": 840.77,
+      "text": "They can do a wide range of generic tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 841.03,
+      "ts_end": 843.27,
+      "text": "And second is their applications are endless.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 843.29,
+      "ts_end": 845.11,
+      "text": "Much more than the earlier models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 845.33,
+      "ts_end": 848.47,
+      "text": "And that's why we are even having this playlist in the first place.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 849.62,
+      "ts_end": 851.24,
+      "text": "So that's point number three.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 851.44,
+      "ts_end": 855.36,
+      "text": "Point number four is what you all must be thinking about.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 855.52,
+      "ts_end": 856.92,
+      "text": "That LLMs are so good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 857.02,
+      "ts_end": 859.18,
+      "text": "They can do these amazing tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 859.36,
+      "ts_end": 860.94,
+      "text": "They can almost behave like humans.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 861.14,
+      "ts_end": 863.48,
+      "text": "But what makes LLMs so good?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 863.66,
+      "ts_end": 865.04,
+      "text": "What is the secret sauce?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 866.38,
+      "ts_end": 871.84,
+      "text": "Typically there has to be a secret sauce which makes LLMs so much better than NLP.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 872.16,
+      "ts_end": 874.08,
+      "text": "What is that magic bullet?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 874.12,
+      "ts_end": 878.28,
+      "text": "And usually people say that there is no secret sauce to things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 878.4,
+      "ts_end": 880.88,
+      "text": "Things just gradually improve over a period of time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 881.08,
+      "ts_end": 883.66,
+      "text": "But in this case there is a specific secret sauce.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 883.98,
+      "ts_end": 886.92,
+      "text": "And that is the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 888.55,
+      "ts_end": 892.29,
+      "text": "So you see here I have added the logo of secret sauce.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 892.73,
+      "ts_end": 896.11,
+      "text": "And for LLMs the secret sauce is transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 896.87,
+      "ts_end": 899.33,
+      "text": "Don't worry if you know what it means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 899.57,
+      "ts_end": 900.33,
+      "text": "What is transformer?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 900.43,
+      "ts_end": 903.71,
+      "text": "For all you know you might be thinking of the Transformers movie.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 903.71,
+      "ts_end": 907.95,
+      "text": "In which there are these cars which get converted into mechanical robots.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 908.33,
+      "ts_end": 911.85,
+      "text": "So that might be your first thought when you hear about Transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 912.09,
+      "ts_end": 916.17,
+      "text": "Of course people who know about this know exactly what I am talking about here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 916.29,
+      "ts_end": 917.55,
+      "text": "But for people who don't know.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 918.25,
+      "ts_end": 922.57,
+      "text": "This is the only transformer you know.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 922.91,
+      "ts_end": 924.75,
+      "text": "This playlist is perfect for you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 925.66,
+      "ts_end": 929.32,
+      "text": "Because you will understand what does transformer really mean.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 929.56,
+      "ts_end": 931.36,
+      "text": "And what it actually means is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 931.46,
+      "ts_end": 933.82,
+      "text": "It is summarized by this one schematic over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 934.0,
+      "ts_end": 937.68,
+      "text": "This is what a transformer architecture looks like.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 938.02,
+      "ts_end": 940.86,
+      "text": "And you might be confused by all of these terminologies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 940.92,
+      "ts_end": 942.4,
+      "text": "What is input embedding?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 942.42,
+      "ts_end": 943.74,
+      "text": "What is multi attention head?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 943.84,
+      "ts_end": 945.74,
+      "text": "What is speed forward here?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 945.88,
+      "ts_end": 947.44,
+      "text": "What does add and norm mean here?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 947.64,
+      "ts_end": 948.94,
+      "text": "What is output embedding?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 949.06,
+      "ts_end": 950.78,
+      "text": "There are so many things which look confusing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 951.06,
+      "ts_end": 951.96,
+      "text": "And it is fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 952.44,
+      "ts_end": 957.48,
+      "text": "But we are going to learn about this secret sauce in a lot of detail in this playlist.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 958.1,
+      "ts_end": 961.44,
+      "text": "There is one paper which was introduced in 2017.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0005"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Attention Is All You Need",
+          "extracted_text": "Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in this paper solely for use in journalistic or scholarly works.\n\nAshish Vaswani*\nGoogle Brain\navaswani@google.com\n\nNoam Shazeer*\nGoogle Brain\nnoam@google.com\n\nNiki Parmar*\nGoogle Research\nnikip@google.com\n\nJakob Uszkoreit*\nGoogle Research\nusz@google.com\n\nLlion Jones*\nGoogle Research\nllion@google.com\n\nAidan N. Gomez\u2020,1\nUniversity of Toronto\naidan@cs.toronto.edu\n\n\u0141ukasz Kaiser*\nGoogle Brain\nlukaszkaiser@google.com\n\nIllia Polosukhin*,1\nillia.polosukhin@gmail.com\n\nAbstract\n\nThe dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "3dWzNZXA8DY_f0005",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 958.799667,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0005.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 961.72,
+      "ts_end": 963.4,
+      "text": "Which really changed the game.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 964.0,
+      "ts_end": 966.6,
+      "text": "That paper is what I am showing you on the screen right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 966.74,
+      "ts_end": 968.66,
+      "text": "It is called attention is all you need.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 969.24,
+      "ts_end": 973.78,
+      "text": "It was published by 8 authors from Google brain.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 974.14,
+      "ts_end": 977.62,
+      "text": "And this introduced the architecture of transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 977.92,
+      "ts_end": 980.2,
+      "text": "So the schematic which I showed you on the white board.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 980.28,
+      "ts_end": 982.14,
+      "text": "Is this schematic which they had in the paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 982.58,
+      "ts_end": 985.52,
+      "text": "Can you guess how many citations this paper has today?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 987.2,
+      "ts_end": 989.54,
+      "text": "It has more than 100,000 citations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 989.68,
+      "ts_end": 991.6,
+      "text": "In just a matter of 5 years.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 992.14,
+      "ts_end": 994.26,
+      "text": "So people say that research is boring.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 994.26,
+      "ts_end": 996.54,
+      "text": "And research does not have any external reward.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 997.36,
+      "ts_end": 998.74,
+      "text": "In this case it does.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 998.94,
+      "ts_end": 1001.36,
+      "text": "If you are one of the few authors on this paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1001.52,
+      "ts_end": 1003.8,
+      "text": "You have 100,000 citations in 5 years.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1004.02,
+      "ts_end": 1007.06,
+      "text": "And you completely revolutionize the field of artificial intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1008.15,
+      "ts_end": 1009.47,
+      "text": "So this is that paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1009.59,
+      "ts_end": 1010.97,
+      "text": "And it is a 15 page paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1011.19,
+      "ts_end": 1012.59,
+      "text": "But if you try to read it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1012.65,
+      "ts_end": 1013.53,
+      "text": "It is very dense.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1014.15,
+      "ts_end": 1017.01,
+      "text": "To understand this paper really takes a lot of time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1017.17,
+      "ts_end": 1018.71,
+      "text": "And it really takes a lot of effort.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1019.13,
+      "ts_end": 1021.49,
+      "text": "There are some YouTube videos to explain this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1021.59,
+      "ts_end": 1023.05,
+      "text": "But I don't think any of them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1023.05,
+      "ts_end": 1027.07,
+      "text": "Do justice to really explaining everything from scratch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1027.59,
+      "ts_end": 1031.45,
+      "text": "Every single page of this paper can be 3 to 4 videos.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1031.73,
+      "ts_end": 1033.17,
+      "text": "So if you think about it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1033.23,
+      "ts_end": 1036.47,
+      "text": "These 15 pages contain huge amount of information.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1037.15,
+      "ts_end": 1040.49,
+      "text": "And we will be devoting lectures to different sections here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1040.59,
+      "ts_end": 1042.03,
+      "text": "Such as positional encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1042.29,
+      "ts_end": 1043.65,
+      "text": "What is this dot product attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1043.93,
+      "ts_end": 1045.23,
+      "text": "What is this attention formula.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1045.87,
+      "ts_end": 1047.33,
+      "text": "What is key query value.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1047.59,
+      "ts_end": 1048.95,
+      "text": "What is multi head attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1049.29,
+      "ts_end": 1050.97,
+      "text": "We will be figuring all of that out.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1051.51,
+      "ts_end": 1052.49,
+      "text": "So don't worry.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1052.49,
+      "ts_end": 1053.13,
+      "text": "At this stage.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1053.33,
+      "ts_end": 1055.39,
+      "text": "If you don't know what a transformer means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1055.61,
+      "ts_end": 1058.23,
+      "text": "Even if you have just this image in mind of a transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1059.05,
+      "ts_end": 1059.91,
+      "text": "It is awesome.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1060.11,
+      "ts_end": 1061.35,
+      "text": "You have come to the perfect place.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1063.41,
+      "ts_end": 1063.89,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1064.01,
+      "ts_end": 1065.83,
+      "text": "So as I said.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1065.97,
+      "ts_end": 1066.59,
+      "text": "Do not worry.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1066.75,
+      "ts_end": 1068.83,
+      "text": "We will learn all about this secret sauce.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1069.07,
+      "ts_end": 1071.41,
+      "text": "Which is the transformers in the subsequent lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1072.3,
+      "ts_end": 1075.22,
+      "text": "That covers the fourth point of today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1075.44,
+      "ts_end": 1077.24,
+      "text": "And now we come to the fifth point.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1077.42,
+      "ts_end": 1079.42,
+      "text": "Which is all about terminologies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1079.52,
+      "ts_end": 1079.72,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1080.02,
+      "ts_end": 1083.86,
+      "text": "So there are so many words people are throwing around randomly these days.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1083.86,
+      "ts_end": 1084.1,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1084.16,
+      "ts_end": 1085.92,
+      "text": "It feels just getting confusing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1086.06,
+      "ts_end": 1087.04,
+      "text": "More and more confusing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1087.32,
+      "ts_end": 1089.16,
+      "text": "So people talk about LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1089.28,
+      "ts_end": 1090.88,
+      "text": "People talk about Gen AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1091.34,
+      "ts_end": 1092.98,
+      "text": "They talk about deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1094.04,
+      "ts_end": 1095.7,
+      "text": "They talk about machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1095.94,
+      "ts_end": 1098.34,
+      "text": "And artificial intelligence is one more term.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1098.5,
+      "ts_end": 1099.86,
+      "text": "What are the similarities.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1100.1,
+      "ts_end": 1102.46,
+      "text": "What are the differences between all of these terms.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1102.8,
+      "ts_end": 1105.32,
+      "text": "So if you look at this particular graph here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1105.58,
+      "ts_end": 1106.34,
+      "text": "Or figure.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1106.46,
+      "ts_end": 1108.34,
+      "text": "It kind of sums up everything perfectly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1108.7,
+      "ts_end": 1110.46,
+      "text": "Start from the outermost sphere.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1110.68,
+      "ts_end": 1112.4,
+      "text": "Or the broadest domain.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1112.62,
+      "ts_end": 1113.9,
+      "text": "That is artificial intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1113.9,
+      "ts_end": 1115.78,
+      "text": "That is the biggest umbrella.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1116.22,
+      "ts_end": 1119.16,
+      "text": "Under this big umbrella comes a smaller umbrella.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1119.2,
+      "ts_end": 1120.3,
+      "text": "Which is machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1120.68,
+      "ts_end": 1124.64,
+      "text": "Under this machine learning comes yet another smaller umbrella.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1124.66,
+      "ts_end": 1126.04,
+      "text": "Which is called deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1126.38,
+      "ts_end": 1127.76,
+      "text": "And within that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1127.96,
+      "ts_end": 1129.24,
+      "text": "The smallest umbrella.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1129.5,
+      "ts_end": 1131.0,
+      "text": "That is the large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1131.32,
+      "ts_end": 1134.28,
+      "text": "And this is what we are going to make a playlist on.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1134.42,
+      "ts_end": 1137.56,
+      "text": "Or this is the playlist which you are watching right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1138.46,
+      "ts_end": 1140.62,
+      "text": "So what is the differences between these.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1140.8,
+      "ts_end": 1143.42,
+      "text": "So first the broadest umbrella is artificial intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1143.42,
+      "ts_end": 1146.66,
+      "text": "And this contains all the other umbrellas.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1147.34,
+      "ts_end": 1151.82,
+      "text": "So any machine which is remotely behaving like humans.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1151.9,
+      "ts_end": 1153.74,
+      "text": "Or it has some sort of intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1153.82,
+      "ts_end": 1155.48,
+      "text": "That comes under the bucket of AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1155.74,
+      "ts_end": 1156.82,
+      "text": "That is the biggest bucket.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1157.14,
+      "ts_end": 1158.4,
+      "text": "So you might be thinking.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1158.52,
+      "ts_end": 1160.54,
+      "text": "What is the difference between AI and ML.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1160.66,
+      "ts_end": 1160.8,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1161.54,
+      "ts_end": 1163.22,
+      "text": "So look at this example.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0006"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": "Lufthansa Chat Assistant",
+          "extracted_text": "Hi, I'm Elisa, your Lufthansa Chat Assistant.\nHere is a selection of topics I can help you with:\n\nFlight cancelled: check alternatives and rebook for free\n\nFlight not cancelled: calculate the cost for rebooking\n\nTravel plans changed: refund your ticket\n\nFAQ: receive information on COVID-19 travel regulations\n\nYou can choose one of the topics or type your question into the text field below.\n\nHi Elisa\n\nHello!\n\nPlease type here...",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "3dWzNZXA8DY_f0006",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1162.433,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0006.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1163.42,
+      "ts_end": 1165.48,
+      "text": "This is Lufthansa flight chat assistant.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1166.3,
+      "ts_end": 1167.7,
+      "text": "And so it says.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1167.78,
+      "ts_end": 1168.6,
+      "text": "Hi I am Elisa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1168.76,
+      "ts_end": 1170.52,
+      "text": "I am your Lufthansa chat assistant.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1170.84,
+      "ts_end": 1173.14,
+      "text": "Here is a selection of topics I can help you with.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1173.71,
+      "ts_end": 1175.43,
+      "text": "You can choose one of the topics.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1175.65,
+      "ts_end": 1176.45,
+      "text": "So then you say.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1176.57,
+      "ts_end": 1177.09,
+      "text": "Hi Elisa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1177.23,
+      "ts_end": 1178.27,
+      "text": "Then Elisa says hello.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1178.43,
+      "ts_end": 1180.33,
+      "text": "Then you can click on any one of these.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1180.45,
+      "ts_end": 1182.27,
+      "text": "You see it is a rule based chat bot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1182.71,
+      "ts_end": 1184.03,
+      "text": "You click some options.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1184.17,
+      "ts_end": 1186.45,
+      "text": "And then Elisa is already programmed to answer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1186.67,
+      "ts_end": 1188.53,
+      "text": "So I say that flight cancelled.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1188.75,
+      "ts_end": 1190.17,
+      "text": "Check alternatives and rebook.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1190.41,
+      "ts_end": 1191.49,
+      "text": "So if I click on this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1191.57,
+      "ts_end": 1193.37,
+      "text": "Elisa is already programmed to answer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1193.91,
+      "ts_end": 1195.43,
+      "text": "This is an example of AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1195.67,
+      "ts_end": 1197.37,
+      "text": "Because it covers intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1198.01,
+      "ts_end": 1200.67,
+      "text": "Lufthansa chat assistant can be thought of to be intelligent.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1201.23,
+      "ts_end": 1203.25,
+      "text": "But this is rule based intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1204.07,
+      "ts_end": 1206.27,
+      "text": "It's not learning based on your responses.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1206.61,
+      "ts_end": 1209.03,
+      "text": "So let's say you respond and your friend responds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1209.39,
+      "ts_end": 1212.03,
+      "text": "Elisa this chat assistant will behave the same way.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1212.39,
+      "ts_end": 1215.81,
+      "text": "It's not learning based on what you are giving it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1215.87,
+      "ts_end": 1218.65,
+      "text": "Or your specific nature as a user.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1218.87,
+      "ts_end": 1221.73,
+      "text": "So that's why this is not an example of machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1222.09,
+      "ts_end": 1223.43,
+      "text": "It's an example of AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1223.67,
+      "ts_end": 1225.53,
+      "text": "But it's not an example of ML.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1226.22,
+      "ts_end": 1230.64,
+      "text": "And that's why AI comes under the broadest or the biggest umbrella.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1230.92,
+      "ts_end": 1232.0,
+      "text": "Within that comes ML.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1232.0,
+      "ts_end": 1233.66,
+      "text": "If you look at ML.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1233.86,
+      "ts_end": 1236.34,
+      "text": "This is basically machines which learn.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1236.58,
+      "ts_end": 1239.42,
+      "text": "They adapt based on how the user is interacting with them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1239.86,
+      "ts_end": 1241.4,
+      "text": "So you might be thinking.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1241.52,
+      "ts_end": 1241.74,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1241.84,
+      "ts_end": 1242.44,
+      "text": "That's fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1242.54,
+      "ts_end": 1244.6,
+      "text": "Then what's the difference between ML and DL?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1244.9,
+      "ts_end": 1246.84,
+      "text": "Why is DL a subset of ML?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1247.26,
+      "ts_end": 1251.24,
+      "text": "The difference is that deep learning usually only involves neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1251.42,
+      "ts_end": 1255.06,
+      "text": "But machine learning involves neural networks plus other fields.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1255.26,
+      "ts_end": 1257.42,
+      "text": "And one such field is decision trees.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1257.9,
+      "ts_end": 1258.48,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1258.52,
+      "ts_end": 1260.38,
+      "text": "Let's say if you were to predict heart disease.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1260.58,
+      "ts_end": 1262.04,
+      "text": "So if you have data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1262.04,
+      "ts_end": 1263.32,
+      "text": "You have data from 303 patients.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1263.54,
+      "ts_end": 1269.98,
+      "text": "And if you are collecting things like age, gender, chest pain, cholesterol level, ECG etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1270.24,
+      "ts_end": 1272.94,
+      "text": "You want to predict whether the person has heart disease or not.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1273.16,
+      "ts_end": 1275.14,
+      "text": "And you build a decision tree like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1276.76,
+      "ts_end": 1280.5,
+      "text": "Now a decision tree like this does not have neural networks at all.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1280.78,
+      "ts_end": 1283.24,
+      "text": "This is completely detached from neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1283.5,
+      "ts_end": 1285.98,
+      "text": "So this is not an example of deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1286.32,
+      "ts_end": 1288.7,
+      "text": "But it is an example of machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1290.03,
+      "ts_end": 1293.73,
+      "text": "A deep learning example would be something which involves a neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1293.93,
+      "ts_end": 1295.19,
+      "text": "So for example here we are.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1295.77,
+      "ts_end": 1297.11,
+      "text": "This is an image detection.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1297.37,
+      "ts_end": 1299.51,
+      "text": "And here is a convolutional neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1299.67,
+      "ts_end": 1300.97,
+      "text": "So we have a coffee cup here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1301.41,
+      "ts_end": 1303.93,
+      "text": "And we are detecting based on these filters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1305.17,
+      "ts_end": 1308.57,
+      "text": "So there are filtering layers in this convolutional neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1308.85,
+      "ts_end": 1312.85,
+      "text": "And at the end of these filtering layers we are detecting what this input is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1312.91,
+      "ts_end": 1313.77,
+      "text": "Whether it is a live boat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1313.85,
+      "ts_end": 1314.61,
+      "text": "Whether it is a pizza.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1315.17,
+      "ts_end": 1318.47,
+      "text": "So with maximum probability we are saying it is an espresso.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1318.99,
+      "ts_end": 1321.55,
+      "text": "So a neural network is being used for this task.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1321.93,
+      "ts_end": 1323.51,
+      "text": "That's an example of deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1324.62,
+      "ts_end": 1328.78,
+      "text": "Another example is let's say if you want to predict handwritten digit classification.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0008"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Instructions",
+          "extracted_text": "1. Customize the model parameters using the sliders.\n2. Use the \"Toggle Monitor\" button to enable/disable the dashboard to see graphs, analysis, or visualization.\n3. Visualize the dataset by clicking the \"Visualize Data\" button.\n4. Train the model by clicking the \"Start Training\" button.\n5. Once trained, test the model by clicking the \"Test\" button or analyze the results by clicking the \"Analyse\" button.\n6. If the accuracy is not satisfactory, try adjusting the parameters and train again.\n7. You can also increase or decrease the number of hidden layer neurons by clicking \"+\" or \"-\" in the model visualization. By default, each hidden layer has 10 neurons.\n\nSuggested parameter combinations:\n\n\u2022 Combination 1: Epochs: 1, Learning Rate: 0.1, Test-Train Split: 0.1, Hidden Layer 1 Neurons: 10, Hidden Layer 2 Neurons: 10\n\u2022 Combination 2: Epochs: 5, Learning Rate: 0.01, Test-Train Split: 0.2, Hidden Layer 1 Neurons: 10, Hidden Layer 2 Neurons: 10\n\u2022 Combination 3: Epochs: 10, Learning Rate: 0.001, Test-Train Split: 0.2, Hidden Layer 1 Neurons: 15, Hidden Layer 2 Neurons: 15\n\nDuring training, the top graph represents the loss, and the second graph represents the training accuracy. The graphs below show the same metrics after each epoch.",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "3dWzNZXA8DY_f0008",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1326.933,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0008.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1329.2,
+      "ts_end": 1332.12,
+      "text": "So if you train a neural network like this.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0009"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Neural network architecture visualization showing a multi-layer perceptron with input layer (784 neurons), two hidden layers (10 neurons each), and output layer (10 MNIST categories), with interconnected nodes and training interface controls.",
+          "diagram_elements": [
+            "Input Layer: 784 Neurons",
+            "Hidden Layer 1: 10 Neurons",
+            "Hidden Layer 2: 10 Neurons",
+            "Output Layer (10 MNIST Categories)",
+            "Status: Data Loaded",
+            "Visualize Data",
+            "Start Training",
+            "Toggle Monitor",
+            "Show Instructions",
+            "Epochs: 5",
+            "Learning Rate: 0.0100",
+            "Test-Train Split: 0.2"
+          ],
+          "confidence": 0.92,
+          "frame_id": "3dWzNZXA8DY_f0009",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1331.466333,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0009.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1332.2,
+      "ts_end": 1333.54,
+      "text": "If you start training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1333.7,
+      "ts_end": 1336.46,
+      "text": "So here you can see the neural network is being trained.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1336.6,
+      "ts_end": 1339.5,
+      "text": "And the problem here is handwritten digit classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1339.9,
+      "ts_end": 1341.68,
+      "text": "So I have given it a bunch of digits.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1342.52,
+      "ts_end": 1344.02,
+      "text": "Which actually look like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1344.2,
+      "ts_end": 1345.02,
+      "text": "MNIST data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1345.79,
+      "ts_end": 1346.89,
+      "text": "It looks like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1346.91,
+      "ts_end": 1349.77,
+      "text": "I have given this neural network a bunch of digits to learn from.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0010"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": null,
+          "extracted_text": "Google Search Results for 'mnist dataset'\n\nSearch filters: All, Images, Videos, Shopping, News, Maps, Books, More, Tools\n\nRelated searches shown:\n- Digit recognition\n- Python\n- Neural network\n- Pytorch\n- Deep learning\n- Keras\n- Variational autoencoder\n\nVisible search results:\n1. MNIST Dataset | Papers With Code\n2. mnist | TensorFlow Data...\n3. MNIST - Machine Learning Datasets\n4. MNIST database - Wikipedia\n5. MNIST dataset introduction (corochannNote)\n6. the MNIST Image Classification Problem... (Towards Data Science)\n7. MNIST dataset... (ResearchGate)\n8. Image Classification - Ludwig",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.75,
+          "frame_id": "3dWzNZXA8DY_f0010",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1348.499667,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0010.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1350.03,
+      "ts_end": 1353.35,
+      "text": "And the task of this neural network is whenever I give it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1353.35,
+      "ts_end": 1354.91,
+      "text": "Or whenever I write a new digit.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1355.05,
+      "ts_end": 1357.69,
+      "text": "It should identify what digit is it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1359.2,
+      "ts_end": 1361.46,
+      "text": "Now if you see this particular example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1361.96,
+      "ts_end": 1366.14,
+      "text": "This is actually an example of neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1366.32,
+      "ts_end": 1368.1,
+      "text": "So here you can see the neural network architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1368.62,
+      "ts_end": 1371.48,
+      "text": "We have the input layer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1371.88,
+      "ts_end": 1373.28,
+      "text": "We have the hidden layer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1373.72,
+      "ts_end": 1374.78,
+      "text": "Two hidden layers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1375.08,
+      "ts_end": 1377.24,
+      "text": "And then we also have the output layer over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1377.75,
+      "ts_end": 1379.85,
+      "text": "This is an example of deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1380.76,
+      "ts_end": 1382.36,
+      "text": "So now if you click on test.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0011"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": "Test Drawing",
+          "extracted_text": "Test Drawing\n\nClear\nUndo\n\nOr Select an MNIST Sample:\n\n0 1 2 3 4 5 6 7 8 9 3 2 2 0 1",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Interactive drawing interface with a black canvas for digit input, clear/undo buttons, and MNIST digit samples displayed as numbered tiles below.",
+          "diagram_elements": [
+            "Black drawing canvas",
+            "Clear button",
+            "Undo button",
+            "MNIST sample digits (0-9 and additional samples)"
+          ],
+          "confidence": 0.75,
+          "frame_id": "3dWzNZXA8DY_f0011",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1381.633,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0011.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1382.52,
+      "ts_end": 1383.84,
+      "text": "And if I select this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1383.84,
+      "ts_end": 1385.02,
+      "text": "Let's say I select this.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0012"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": "Or Select an MNIST Sample:\n\n6 1 4 2 5 3 7 8 9 3 2 0 1\n0 1 0 0 1 1\n\nPredict\nClose\nClear\nUndo",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Interactive MNIST digit classifier interface with a drawing canvas, sample digit selector buttons, and training metrics displayed on the right showing loss and accuracy curves over batches and epochs.",
+          "diagram_elements": [
+            "Drawing canvas (black area)",
+            "Clear button",
+            "Undo button",
+            "MNIST sample digit buttons (0-9)",
+            "Predict button",
+            "Close button",
+            "Training metrics panel",
+            "Loss vs Batch graph",
+            "onEpochEnd callback graph",
+            "Loss vs Epoch curve",
+            "Accuracy vs Epoch curve"
+          ],
+          "confidence": 0.75,
+          "frame_id": "3dWzNZXA8DY_f0012",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1384.366333,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0012.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1385.18,
+      "ts_end": 1386.32,
+      "text": "And click on predict.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1386.58,
+      "ts_end": 1388.9,
+      "text": "You see the neural network is correctly predicting it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1389.06,
+      "ts_end": 1390.62,
+      "text": "So it's understanding the digits.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1390.8,
+      "ts_end": 1392.46,
+      "text": "Let's say I click on this and predict.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1392.6,
+      "ts_end": 1393.78,
+      "text": "It's correctly predicting 7.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1394.2,
+      "ts_end": 1395.98,
+      "text": "This is an example of deep learning.",
+      "frame_ids": [
+        "3dWzNZXA8DY_f0013"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": "Or Select an MNIST Sample:",
+          "extracted_text": "Or Select an MNIST Sample:\n\nPredicted Digit: 7",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Interactive MNIST digit selector showing a grid of handwritten digit samples (0-9) with one digit (7) highlighted by a blue box, and a predicted digit output of 7.",
+          "diagram_elements": [
+            "MNIST sample grid",
+            "Selected digit (7) with blue border",
+            "Predicted Digit: 7",
+            "Predict button",
+            "Close button",
+            "Undo button"
+          ],
+          "confidence": 0.85,
+          "frame_id": "3dWzNZXA8DY_f0013",
+          "video_id": "3dWzNZXA8DY",
+          "timestamp_sec": 1394.599667,
+          "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0013.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1397.37,
+      "ts_end": 1399.91,
+      "text": "That's why deep learning is a subset of machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1400.35,
+      "ts_end": 1404.61,
+      "text": "Machine learning involves these kind of neural network architectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1404.63,
+      "ts_end": 1407.97,
+      "text": "Plus it involves things which are not neural networks like decision trees.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1409.1,
+      "ts_end": 1413.12,
+      "text": "Now within deep learning is LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1413.58,
+      "ts_end": 1414.1,
+      "text": "Why?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1414.1,
+      "ts_end": 1417.12,
+      "text": "Because deep learning as we saw involves images also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1417.6,
+      "ts_end": 1420.06,
+      "text": "But large like this involved images.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1420.3,
+      "ts_end": 1421.76,
+      "text": "Even this project involved images.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1422.24,
+      "ts_end": 1425.08,
+      "text": "But large language models do not involve images.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1425.34,
+      "ts_end": 1426.62,
+      "text": "They only deal with text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1426.88,
+      "ts_end": 1429.7,
+      "text": "And that's why they are a further subset of deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1430.35,
+      "ts_end": 1433.83,
+      "text": "This is the difference between AI, ML, DL and LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1434.19,
+      "ts_end": 1436.73,
+      "text": "So then you might be thinking what is generative AI?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1437.31,
+      "ts_end": 1441.93,
+      "text": "Generative AI you can think of as a mixture of large language models plus deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1442.49,
+      "ts_end": 1443.05,
+      "text": "Why?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1443.05,
+      "ts_end": 1449.07,
+      "text": "Because generative AI also deals with other modalities like image, sound, video etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1449.37,
+      "ts_end": 1451.23,
+      "text": "It deals with all of those modalities.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1452.1,
+      "ts_end": 1457.56,
+      "text": "So it is definitely you can think of it as a mixture of large language models plus deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1457.9,
+      "ts_end": 1460.78,
+      "text": "So if someone asks you what is generative AI?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1461.2,
+      "ts_end": 1464.88,
+      "text": "Basically we are using deep neural networks to create new content.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1465.14,
+      "ts_end": 1469.0,
+      "text": "Such as text, images, various forms of media.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1469.42,
+      "ts_end": 1471.94,
+      "text": "Whereas in LLM you only deal with text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1471.94,
+      "ts_end": 1476.18,
+      "text": "So generative AI can be thought of as a mixture of LLM and deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1477.05,
+      "ts_end": 1479.03,
+      "text": "I know these terms are confusing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1479.29,
+      "ts_end": 1484.45,
+      "text": "But I hope these examples help you understand what are the similarities and differences between these terms.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1484.83,
+      "ts_end": 1488.43,
+      "text": "As a summary you can think of as AI to be the broadest umbrella.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1488.73,
+      "ts_end": 1489.91,
+      "text": "Within that comes ML.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1490.07,
+      "ts_end": 1491.19,
+      "text": "Within that comes DL.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1491.31,
+      "ts_end": 1493.07,
+      "text": "And within that comes LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1494.11,
+      "ts_end": 1496.03,
+      "text": "And AI is artificial intelligence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1496.35,
+      "ts_end": 1497.61,
+      "text": "ML is machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1497.93,
+      "ts_end": 1499.11,
+      "text": "DL is deep learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1499.31,
+      "ts_end": 1501.01,
+      "text": "And LLM is large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1501.27,
+      "ts_end": 1502.85,
+      "text": "And if you mix LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1502.85,
+      "ts_end": 1503.49,
+      "text": "With ML and DL.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1503.69,
+      "ts_end": 1505.09,
+      "text": "Then we have generative AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1505.27,
+      "ts_end": 1507.45,
+      "text": "Because in the field of generative AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1507.59,
+      "ts_end": 1508.85,
+      "text": "We don't just deal with text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1509.11,
+      "ts_end": 1511.59,
+      "text": "But we deal with other modalities of media.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1511.77,
+      "ts_end": 1512.33,
+      "text": "Like image.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1512.67,
+      "ts_end": 1513.51,
+      "text": "Like audio.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1513.67,
+      "ts_end": 1514.25,
+      "text": "Like video.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1514.43,
+      "ts_end": 1514.83,
+      "text": "Etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1517.31,
+      "ts_end": 1521.6,
+      "text": "So LLMs just represent a specific application of deep learning techniques.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1522.33,
+      "ts_end": 1526.14,
+      "text": "Which leverage their ability to process and generate human like text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1526.28,
+      "ts_end": 1527.26,
+      "text": "Which we have already seen.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1527.38,
+      "ts_end": 1528.68,
+      "text": "They basically deal with text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1529.37,
+      "ts_end": 1534.75,
+      "text": "So this is the similarities and differences between AI, ML, DL, LLM and generative AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1534.77,
+      "ts_end": 1538.09,
+      "text": "I hope you have understood this part.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1538.25,
+      "ts_end": 1539.21,
+      "text": "And you like these visuals.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1539.59,
+      "ts_end": 1541.61,
+      "text": "If you have any doubts until this part.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1541.75,
+      "ts_end": 1543.79,
+      "text": "Please write it in the YouTube comments.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1543.93,
+      "ts_end": 1546.39,
+      "text": "And we will answer as quickly as possible.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1546.71,
+      "ts_end": 1549.17,
+      "text": "And now we come to the last part of this lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1549.29,
+      "ts_end": 1550.69,
+      "text": "Which is applications of LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1551.03,
+      "ts_end": 1553.99,
+      "text": "And as I speak the applications go on increasing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1554.27,
+      "ts_end": 1556.93,
+      "text": "But overall they can be divided into five main categories.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1557.81,
+      "ts_end": 1559.41,
+      "text": "LLMs as number one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1559.45,
+      "ts_end": 1561.23,
+      "text": "They can be used to create new content.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1561.51,
+      "ts_end": 1562.31,
+      "text": "Of course.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1562.57,
+      "ts_end": 1564.11,
+      "text": "So if I write here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1564.77,
+      "ts_end": 1565.49,
+      "text": "Right click on it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1565.49,
+      "ts_end": 1577.0,
+      "text": "Write a poem about solar system in the format of a detective story.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1578.43,
+      "ts_end": 1581.53,
+      "text": "Maybe this content does not exist anywhere right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1581.63,
+      "ts_end": 1586.59,
+      "text": "But you can create this content using LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1586.73,
+      "ts_end": 1587.75,
+      "text": "So here you can see.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1587.95,
+      "ts_end": 1591.37,
+      "text": "There is a poem about solar system in a detective story format.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1591.59,
+      "ts_end": 1593.83,
+      "text": "In the quiet sprawl of the Milky Way.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1593.93,
+      "ts_end": 1596.45,
+      "text": "A detective roamed the stars by night and day.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1596.57,
+      "ts_end": 1597.83,
+      "text": "His name was Orion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1597.83,
+      "ts_end": 1600.81,
+      "text": "In cosmic affairs where mysteries burst.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1601.05,
+      "ts_end": 1603.65,
+      "text": "The case on his desk does quite bizarre.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1603.89,
+      "ts_end": 1604.09,
+      "text": "Yeah.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1604.13,
+      "ts_end": 1605.19,
+      "text": "I won't read the full poem.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1605.33,
+      "ts_end": 1606.41,
+      "text": "But here you can see.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1606.47,
+      "ts_end": 1607.89,
+      "text": "You have created new content.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1608.13,
+      "ts_end": 1610.59,
+      "text": "You can even write books with LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1610.69,
+      "ts_end": 1612.57,
+      "text": "Generate media articles with LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1612.65,
+      "ts_end": 1614.39,
+      "text": "And people are already doing these things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1615.78,
+      "ts_end": 1618.68,
+      "text": "Then you can use LLMs as chatbots.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1619.44,
+      "ts_end": 1622.22,
+      "text": "So you can actually interact with them as virtual assistants.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1622.46,
+      "ts_end": 1625.48,
+      "text": "So here you see at the start the example which I showed you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1625.6,
+      "ts_end": 1627.6,
+      "text": "It's like I'm chatting with this LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1627.62,
+      "ts_end": 1627.76,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1628.66,
+      "ts_end": 1630.66,
+      "text": "It asks me what's your favorite form of relaxation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1630.84,
+      "ts_end": 1631.7,
+      "text": "I say reading a book.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1631.8,
+      "ts_end": 1633.48,
+      "text": "I can continue conversations with it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1633.74,
+      "ts_end": 1635.1,
+      "text": "And not just for me.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1635.18,
+      "ts_end": 1635.9,
+      "text": "Big companies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1636.08,
+      "ts_end": 1636.36,
+      "text": "Airlines.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1637.8,
+      "ts_end": 1639.88,
+      "text": "Then hotel reservation desks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1640.02,
+      "ts_end": 1641.18,
+      "text": "They need chatbots.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1641.3,
+      "ts_end": 1641.46,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1641.56,
+      "ts_end": 1643.54,
+      "text": "Let's say you call a customer care representative.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1643.9,
+      "ts_end": 1647.5,
+      "text": "In five years it's highly likely that all of those people are AI.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1647.98,
+      "ts_end": 1649.0,
+      "text": "AI chatbots.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1649.2,
+      "ts_end": 1650.36,
+      "text": "And how are they built?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1650.5,
+      "ts_end": 1652.38,
+      "text": "They are built through the knowledge of LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1652.64,
+      "ts_end": 1655.74,
+      "text": "In fact through this lecture or through this playlist rather.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1655.86,
+      "ts_end": 1657.62,
+      "text": "We will be building our own LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1657.62,
+      "ts_end": 1663.04,
+      "text": "So you will be fully equipped to develop your own chatbot in any field which you like.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1664.11,
+      "ts_end": 1668.59,
+      "text": "So chatbots is one of the huge and major applications right now of large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1669.19,
+      "ts_end": 1669.63,
+      "text": "Banks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1670.41,
+      "ts_end": 1671.29,
+      "text": "Movie restaurant.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1671.57,
+      "ts_end": 1671.95,
+      "text": "Movies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1672.09,
+      "ts_end": 1672.53,
+      "text": "Restaurants.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1672.53,
+      "ts_end": 1673.73,
+      "text": "All of them need chatbots.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1673.77,
+      "ts_end": 1674.67,
+      "text": "When you are booking shows.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1674.89,
+      "ts_end": 1676.65,
+      "text": "When you are dealing with the bank.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1676.75,
+      "ts_end": 1678.27,
+      "text": "You want to know how to open an account.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1678.55,
+      "ts_end": 1683.03,
+      "text": "All of these are going to be automated and are already being automated through LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1683.43,
+      "ts_end": 1684.97,
+      "text": "That's one of the biggest applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1685.27,
+      "ts_end": 1686.11,
+      "text": "And through this playlist.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1686.11,
+      "ts_end": 1689.43,
+      "text": "You will learn the skills to develop your own chatbot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1690.13,
+      "ts_end": 1692.37,
+      "text": "Then the third application is machine translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1692.69,
+      "ts_end": 1696.11,
+      "text": "Which means that we can of course translate the text to any language right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1696.25,
+      "ts_end": 1701.85,
+      "text": "So then I say basically that translate this poem to French.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1706.76,
+      "ts_end": 1710.28,
+      "text": "And here you can see that ChatGPT is working on this translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1710.4,
+      "ts_end": 1712.22,
+      "text": "And immediately it translates it to French.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1712.36,
+      "ts_end": 1714.42,
+      "text": "We don't even need Google translate now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1714.6,
+      "ts_end": 1716.36,
+      "text": "I am sure this translation is accurate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1717.18,
+      "ts_end": 1720.56,
+      "text": "Because it's amazing at this translation task.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1720.66,
+      "ts_end": 1726.66,
+      "text": "So you can very quickly translate the LLMs output into any language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1726.76,
+      "ts_end": 1728.94,
+      "text": "And it does have some support for regional languages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1729.2,
+      "ts_end": 1731.48,
+      "text": "Not a very broad support.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1731.7,
+      "ts_end": 1733.96,
+      "text": "But it does support few regional languages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1734.34,
+      "ts_end": 1740.2,
+      "text": "In fact a lot of research is being done to improve the LLM outputs for regional languages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1740.82,
+      "ts_end": 1742.12,
+      "text": "For regional languages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1742.58,
+      "ts_end": 1744.2,
+      "text": "So that's point number three.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1744.3,
+      "ts_end": 1747.72,
+      "text": "Point number four which we saw already is new text generation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1748.0,
+      "ts_end": 1749.28,
+      "text": "Such as writing poems.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1749.28,
+      "ts_end": 1750.2,
+      "text": "Writing books.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1750.54,
+      "ts_end": 1751.98,
+      "text": "Writing media articles.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1752.2,
+      "ts_end": 1752.84,
+      "text": "News articles.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1753.34,
+      "ts_end": 1758.4,
+      "text": "It can basically create new text for you which did not exist before in literature.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1758.94,
+      "ts_end": 1762.34,
+      "text": "And finally LLMs can also be used for sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1762.76,
+      "ts_end": 1769.42,
+      "text": "You can give a big bunch of paragraph and ask the LLM to identify whether what is the sentiment here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1769.56,
+      "ts_end": 1772.42,
+      "text": "This might be useful for hate speech detection.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1772.56,
+      "ts_end": 1775.38,
+      "text": "Let's say on social media like Twitter, Instagram etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1775.84,
+      "ts_end": 1779.26,
+      "text": "So all of these five applications are the pillars of LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1779.28,
+      "ts_end": 1780.66,
+      "text": "And what they can do.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1780.98,
+      "ts_end": 1784.5,
+      "text": "There are several more applications which I am probably missing right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1784.66,
+      "ts_end": 1786.62,
+      "text": "But these five are the major ones.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1787.2,
+      "ts_end": 1792.7,
+      "text": "To illustrate these applications let me just take you through a portal which we have recently created for school teachers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1793.5,
+      "ts_end": 1798.2,
+      "text": "So here you can see we have created this portal by learning about LLMs ourselves.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1798.54,
+      "ts_end": 1799.98,
+      "text": "So here it's YouTube generator.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1800.32,
+      "ts_end": 1801.14,
+      "text": "MCQ generator.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1801.62,
+      "ts_end": 1802.7,
+      "text": "Text summarizer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1802.84,
+      "ts_end": 1803.64,
+      "text": "Text rewriter.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1803.82,
+      "ts_end": 1804.62,
+      "text": "Worksheet generator.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1805.12,
+      "ts_end": 1807.12,
+      "text": "We can do so many awesome things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1807.2,
+      "ts_end": 1809.06,
+      "text": "Let me go to the lesson plan right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1809.34,
+      "ts_end": 1812.42,
+      "text": "And say that I want to create a lesson plan on the topic of gravity.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1812.72,
+      "ts_end": 1815.74,
+      "text": "And I want to align it with the CBSE curriculum of India.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1815.92,
+      "ts_end": 1817.7,
+      "text": "And let me click on generate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1819.92,
+      "ts_end": 1822.78,
+      "text": "So you will see that the LLM is working on it a bit.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1823.2,
+      "ts_end": 1824.98,
+      "text": "And it does take some time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1825.02,
+      "ts_end": 1827.5,
+      "text": "But now you can see the lesson plan is created for gravity.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1827.86,
+      "ts_end": 1829.04,
+      "text": "Where we have the objective.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1829.22,
+      "ts_end": 1830.04,
+      "text": "We have the assessment.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1830.22,
+      "ts_end": 1830.98,
+      "text": "Key points.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1831.06,
+      "ts_end": 1831.56,
+      "text": "The opening.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1831.72,
+      "ts_end": 1833.14,
+      "text": "The introduction to new material.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1833.28,
+      "ts_end": 1833.92,
+      "text": "Guided practice.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1834.18,
+      "ts_end": 1835.38,
+      "text": "Independent practice etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1836.24,
+      "ts_end": 1838.6,
+      "text": "This would save so much time for the teacher.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1839.08,
+      "ts_end": 1840.02,
+      "text": "And it's amazing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1840.02,
+      "ts_end": 1842.04,
+      "text": "This was not possible 5 years back.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1842.42,
+      "ts_end": 1845.72,
+      "text": "But now with the LLMs we can do all of these applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1846.02,
+      "ts_end": 1851.17,
+      "text": "We can do so many other cool things such as MCQ generator.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1851.51,
+      "ts_end": 1856.51,
+      "text": "Let's say you are a teacher and you want to generate the questions on let's say World War 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1858.68,
+      "ts_end": 1863.31,
+      "text": "And you want one hard, one medium and one easy question.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1863.55,
+      "ts_end": 1864.39,
+      "text": "You click on generate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1864.61,
+      "ts_end": 1866.97,
+      "text": "And you wait for the response of that LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1868.99,
+      "ts_end": 1872.13,
+      "text": "You see immediately within 5 seconds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1872.13,
+      "ts_end": 1874.61,
+      "text": "We have got question and answers for World War 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1874.75,
+      "ts_end": 1875.85,
+      "text": "We have 3 questions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1876.03,
+      "ts_end": 1877.69,
+      "text": "We have their correct answer and the explanation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1878.21,
+      "ts_end": 1882.93,
+      "text": "We built this LLM from or rather we built this LLM application from scratch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1883.29,
+      "ts_end": 1885.19,
+      "text": "And once you go through this playlist.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1885.33,
+      "ts_end": 1887.15,
+      "text": "We will have several lectures towards the end.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1887.27,
+      "ts_end": 1890.23,
+      "text": "Which will show you how you can also build such type of applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1891.52,
+      "ts_end": 1895.78,
+      "text": "But here I want to illustrate the point that if you have knowledge about LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1895.88,
+      "ts_end": 1896.96,
+      "text": "The sky is the limit.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1897.14,
+      "ts_end": 1899.64,
+      "text": "You can build wonderful applications like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1899.78,
+      "ts_end": 1902.06,
+      "text": "And what many students do wrong is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1902.06,
+      "ts_end": 1904.42,
+      "text": "They get so fascinated by these applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1904.56,
+      "ts_end": 1906.06,
+      "text": "That they just download the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1906.3,
+      "ts_end": 1907.36,
+      "text": "They run the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1907.48,
+      "ts_end": 1908.36,
+      "text": "They make some changes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1908.5,
+      "ts_end": 1910.82,
+      "text": "And they write on their resume that they know about LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1911.2,
+      "ts_end": 1912.46,
+      "text": "That's not the right way.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1912.68,
+      "ts_end": 1915.87,
+      "text": "The right way is to understand the foundations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1916.15,
+      "ts_end": 1917.53,
+      "text": "Make your basics clear.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1917.89,
+      "ts_end": 1919.93,
+      "text": "Understand the nuts and bolts of LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1920.21,
+      "ts_end": 1921.89,
+      "text": "Which is the purpose of this playlist.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1922.51,
+      "ts_end": 1925.59,
+      "text": "So this is section 6.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1925.73,
+      "ts_end": 1927.47,
+      "text": "Which is the application of LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1927.85,
+      "ts_end": 1931.85,
+      "text": "And now we have completed the 6 sections which we have planned for today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1933.44,
+      "ts_end": 1936.66,
+      "text": "At the end I want to leave you with just one sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1936.96,
+      "ts_end": 1940.64,
+      "text": "And that is the sky is the limit when it comes to LLM applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1941.34,
+      "ts_end": 1944.64,
+      "text": "Please remember that the applications which I just showed you right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1944.7,
+      "ts_end": 1946.06,
+      "text": "Are just the tip of the iceberg.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1946.46,
+      "ts_end": 1948.82,
+      "text": "You can do so many things right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1948.92,
+      "ts_end": 1950.3,
+      "text": "If you learn about LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1950.56,
+      "ts_end": 1953.64,
+      "text": "That's what's so exciting about the time which we live in currently.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1955.08,
+      "ts_end": 1957.44,
+      "text": "The sky is the limit for research applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1957.68,
+      "ts_end": 1958.94,
+      "text": "For industrial applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1959.38,
+      "ts_end": 1960.96,
+      "text": "But what we think is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1960.96,
+      "ts_end": 1963.4,
+      "text": "Students who will really contribute and make an impact.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1963.62,
+      "ts_end": 1966.76,
+      "text": "Are the ones who know the details of how to write the transformer code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1966.96,
+      "ts_end": 1968.8,
+      "text": "How key query value works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1969.04,
+      "ts_end": 1970.72,
+      "text": "What exactly is positional encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1971.44,
+      "ts_end": 1973.38,
+      "text": "Until you understand these concepts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1974.56,
+      "ts_end": 1975.84,
+      "text": "It becomes difficult.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1976.08,
+      "ts_end": 1977.34,
+      "text": "Your knowledge will be superficial.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1978.0,
+      "ts_end": 1979.94,
+      "text": "And that's the whole purpose of this playlist.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1981.54,
+      "ts_end": 1984.18,
+      "text": "Please comment in the YouTube comment section.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1984.36,
+      "ts_end": 1988.14,
+      "text": "If you liked the style of this content description.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1988.44,
+      "ts_end": 1990.56,
+      "text": "If you liked this whiteboard approach.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1990.72,
+      "ts_end": 1991.78,
+      "text": "I am basically trying to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1992.3,
+      "ts_end": 1993.32,
+      "text": "Write everything here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1993.5,
+      "ts_end": 1995.4,
+      "text": "And give a visual flavor.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1995.56,
+      "ts_end": 1997.62,
+      "text": "And a visual intuition for how things are working.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1998.06,
+      "ts_end": 1999.32,
+      "text": "In subsequent sections.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1999.44,
+      "ts_end": 2001.5,
+      "text": "We will definitely dive a bit deeper into coding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2001.78,
+      "ts_end": 2003.78,
+      "text": "The next lesson as I have mentioned here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2003.82,
+      "ts_end": 2005.18,
+      "text": "Is stages of building LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2005.42,
+      "ts_end": 2008.22,
+      "text": "We will have couple of lectures about these basics.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2008.42,
+      "ts_end": 2009.94,
+      "text": "And then we will be diving into coding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2010.9,
+      "ts_end": 2012.64,
+      "text": "So make sure you are understanding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2012.94,
+      "ts_end": 2014.04,
+      "text": "Make sure you make notes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2014.28,
+      "ts_end": 2015.84,
+      "text": "And ask questions in the comments.",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 14,
+  "frames_with_content": 14
+}

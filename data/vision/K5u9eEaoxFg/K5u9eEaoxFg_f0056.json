@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Apply softmax\nAttention weight\n(1, 2, 3, 3)\n(b, num-heads, num_tokens, ...)\nWe can also implement Dropout",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Convolutional Neural Networks tutorial showing attention mechanism with softmax applied to logits, resulting in attention weights with shape (1, 2, 3, 3) representing batch, number of heads, number of tokens, and token dimension.",
+  "diagram_elements": [
+    "Apply softmax",
+    "Attention weight",
+    "tensor output with numerical values",
+    "Shape annotation (1, 2, 3, 3)",
+    "Parameter labels (b, num-heads, num_tokens)",
+    "Dropout implementation note"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0056",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2409.233,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0056.jpg"
+}

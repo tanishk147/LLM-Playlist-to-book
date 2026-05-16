@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "torch.nn.functional.cross_entropy",
+  "extracted_text": "torch.nn.functional.cross_entropy(input, target, weight=None, size_average=None, ignore_index=-100, reduce=None, reduction='mean', label_smoothing=0.0) [SOURCE]\n\nCompute the cross entropy loss between input logits and target.\n\nSee CrossEntropyLoss for details.\n\nParameters\n\n\u2022 input (Tensor) \u2013 Predicted unnormalized logits; see Shape section below for supported shapes.\n\u2022 target (Tensor) \u2013 Ground truth class indices or class probabilities; see Shape section below for supported shapes.\n\u2022 weight (Tensor, optional) \u2013 a manual rescaling weight given to each class. If given, has to be a Tensor of size C\n\u2022 size_average (bool, optional) \u2013 Deprecated (see reduction). By default, the losses are averaged over each loss element in the batch. Note that for some losses, there multiple elements per sample. If the field size_average is set to False, the losses are instead summed for each minibatch. Ignored when reduce is False. Default: True\n\u2022 ignore_index (int, optional) \u2013 Specifies a target value that is ignored and does not contribute to the input gradient. When size_average is True, the loss is averaged over non-ignored targets. Note that ignore_index is only applicable when the target contains class indices. Default: -100\n\u2022 reduce (bool, optional) \u2013 Deprecated (see reduction). By default, the losses are averaged or",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "7TKCrt--bWI_f0004",
+  "video_id": "7TKCrt--bWI",
+  "timestamp_sec": 2679.366333,
+  "source_image": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0004.jpg"
+}

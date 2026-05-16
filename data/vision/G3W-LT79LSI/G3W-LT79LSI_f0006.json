@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Bessel's correction",
+  "extracted_text": "From Wikipedia, the free encyclopedia\n\nThis article includes a list of general references, but it lacks sufficient corresponding inline citations. Please help to improve this article by introducing more precise citations. (November 2010)\n\nIn statistics, Bessel's correction is the use of n \u2212 1 instead of n in the formula for the sample variance and sample standard deviation, where n is the number of observations in a sample. This method corrects the bias in the estimation of the population variance. It also partially corrects the bias in the estimation of the population standard deviation. However, the correction often increases the mean squared error in these estimations. This technique is named after Friedrich Bessel.\n\nFormulation\n\nIn estimating the population variance from a sample when the population mean is unknown, the uncorrected sample variance is the mean of the squares of deviations of sample values from the sample mean (i.e., using a multiplicative factor 1/n). In this case, the sample variance is a biased estimator of the population variance. Multiplying the uncorrected sample variance by the factor\n\ngives an unbiased estimator of the population variance. In some literature, the above factor is called Bessel's correction.\n\nOne can understand Bessel's correction as the degrees of freedom in the residuals vector (residuals, not errors, because the population mean is unknown):",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "G3W-LT79LSI_f0006",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 1975.133,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0006.jpg"
+}

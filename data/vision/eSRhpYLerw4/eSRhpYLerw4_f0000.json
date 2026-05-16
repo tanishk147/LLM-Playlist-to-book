@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Lecture \u2192 A simple self attention mechanism without trainable weights\n\n(a) In this section, we will implement a simple variant of self-attention, free from any trainable weights.\n\n...one step",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Self-attention mechanism showing how an input vector (token embedding) is transformed into a context vector through attention weights computed from all input vectors.",
+  "diagram_elements": [
+    "Input vector (token embedding) corresponding to the first token",
+    "\"Your\", \"journey\", \"starts\", \"...\", \"step\" tokens",
+    "Attention weight to weigh the importance of input x^(1)",
+    "\u03b1\u2082\u2081, \u03b1\u2082\u2083, \u03b1\u2082\u1d40 attention weights",
+    "Context vector z^(2)",
+    "The context vector z^(2) is computed as a combination of all input vectors weighted with"
+  ],
+  "confidence": 0.85,
+  "frame_id": "eSRhpYLerw4_f0000",
+  "video_id": "eSRhpYLerw4",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/eSRhpYLerw4/eSRhpYLerw4_f0000.jpg"
+}

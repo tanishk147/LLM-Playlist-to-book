@@ -1,0 +1,3273 @@
+{
+  "video_id": "G3W-LT79LSI",
+  "segments": [
+    {
+      "id": "G3W-LT79LSI_000",
+      "title": "Introduction",
+      "ts_start": 0.0,
+      "ts_end": 290.0,
+      "segments": [
+        {
+          "ts_start": 4.79,
+          "ts_end": 10.87,
+          "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "G3W-LT79LSI_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Lecture \u2192 Layer Normalization",
+              "extracted_text": "(1) Training deep neural networks with many layers can be challenging due to\n    vanishing/exploding\n    gradients\n\n(2) This leads to unstable training dynamics",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.92,
+              "frame_id": "G3W-LT79LSI_f0000",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 11.9,
+          "ts_end": 20.1,
+          "text": "In today's lecture, we are going to look at one specific component of the large language model architecture and that is layer normalization.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 20.86,
+          "ts_end": 24.52,
+          "text": "Before that, let me quickly recap what we covered in the last lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 24.64,
+          "ts_end": 30.42,
+          "text": "In the last lecture, we essentially had a bird's eye view of how the LLM architecture looks like.",
+          "frame_ids": [
+            "G3W-LT79LSI_f0001"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Convolutional Neural Networks",
+              "extracted_text": "how everything fit together.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Two example images demonstrating CNN applications: an aerial view of a circular urban development and a close-up of a bird's eye with yellow iris.",
+              "diagram_elements": [
+                "Aerial cityscape image",
+                "Bird eye close-up image"
+              ],
+              "confidence": 0.85,
+              "frame_id": "G3W-LT79LSI_f0001",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 28.233,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0001.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 30.42,
+          "ts_end": 37.33,
+          "text": "So, what we are going to do is that the LLM architecture consists of several components which are arranged together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 38.23,
+          "ts_end": 45.31,
+          "text": "Yes, in the previous lecture, we constructed this GPT backbone, which is like a dummy class which will hold all these components.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 45.67,
+          "ts_end": 53.39,
+          "text": "The first component is the layer normalization, JLU activation, then the feed-forward neural network, and then shortcut connections.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 53.87,
+          "ts_end": 60.69,
+          "text": "These four components make up the transformer block, which is one of the key components of the entire GPT architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 60.71,
+          "ts_end": 64.32,
+          "text": "So, let me show you how this looks like.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 64.64,
+          "ts_end": 71.36,
+          "text": "So, if you zoom into the transformer block, you will see that the transformer block has a number of layers which are stacked together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 71.72,
+          "ts_end": 78.4,
+          "text": "You have a layer normalization, followed by the masked multi-head attention layer, followed by the dropout layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 78.62,
+          "ts_end": 87.54,
+          "text": "You have the shortcut connections, then another layer normalization, a feed-forward neural network, dropout layer, and then another shortcut connections, etc.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 87.88,
+          "ts_end": 91.1,
+          "text": "If you zoom into the feed-forward neural network, you will see that the feed-forward neural network has a number of layers.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 91.12,
+          "ts_end": 96.58,
+          "text": "You see that it consists of linear neural network layers along with the JLU activation function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 98.15,
+          "ts_end": 102.49,
+          "text": "All of these are stacked together in a format which looks something like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 102.69,
+          "ts_end": 107.25,
+          "text": "So, let me take you to the broadest level view, looks something like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 107.45,
+          "ts_end": 112.61,
+          "text": "So, you have the input text which you tokenize, then you pass it into the GPT model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 113.07,
+          "ts_end": 118.09,
+          "text": "In the GPT model, we first do the token embedding, then add the positional embedding vectors,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 118.09,
+          "ts_end": 123.25,
+          "text": "pass these input embeddings to the transformer block within the transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 123.25,
+          "ts_end": 127.17,
+          "text": "block it goes through all the layers which I just showed you and then we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 127.17,
+          "ts_end": 131.63,
+          "text": "the output layers which essentially decode the output from the transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 131.63,
+          "ts_end": 136.71,
+          "text": "block and we predict the next word from the input this is what happens inside",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 136.71,
+          "ts_end": 142.41,
+          "text": "the GPT architecture and we are going to start looking at every single component",
+          "frame_ids": [
+            "G3W-LT79LSI_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "GPT architecture building blocks diagram showing the components used to implement a GPT model, including layer normalization, GELU activation, feed-forward network, shortcut connections, and GPT backbone.",
+              "diagram_elements": [
+                "2) Layer normalization",
+                "3) GELU activation",
+                "4) Feed-forward network",
+                "5) Shortcut connections",
+                "6) Transformer block",
+                "7) Final GPT architecture",
+                "1) GPT backbone"
+              ],
+              "confidence": 0.75,
+              "frame_id": "G3W-LT79LSI_f0002",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 140.133,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 142.41,
+          "ts_end": 146.67,
+          "text": "of this GPT architecture today we are going to look at this component which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 146.67,
+          "ts_end": 152.04,
+          "text": "called as layer normalization so if you look at layer normalization it actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 152.04,
+          "ts_end": 156.5,
+          "text": "comes up at multiple places within the transformer block itself if you see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 156.5,
+          "ts_end": 161.6,
+          "text": "before the multi head attention we have a layer normalization after the multi",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 161.6,
+          "ts_end": 166.38,
+          "text": "head attention also we have a layer normalization so the layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 166.38,
+          "ts_end": 170.8,
+          "text": "comes within the transformer block at multiple places and actually it also",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 170.8,
+          "ts_end": 175.92,
+          "text": "comes outside of the transformer block that's why it's important to define a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 175.92,
+          "ts_end": 177.32,
+          "text": "separate class for the layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 177.32,
+          "ts_end": 182.32,
+          "text": "normalization when we code the GPT architecture. In the last lecture we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 182.32,
+          "ts_end": 189.12,
+          "text": "looked at this dummy GPT model class and the goal here was to put all of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 189.12,
+          "ts_end": 192.52,
+          "text": "different components together so that you get a bird's-eye view without really",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 192.52,
+          "ts_end": 197.52,
+          "text": "coding too many of these components. So what happens in this GPT model class is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 197.52,
+          "ts_end": 203.51,
+          "text": "that there is this forward method which takes in the input and then we convert",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 203.51,
+          "ts_end": 207.69,
+          "text": "the input into token embeddings, we add the positional embeddings to the token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 207.69,
+          "ts_end": 212.07,
+          "text": "embeddings, the resulting embedding vector we add the dropout layer to it, we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 212.07,
+          "ts_end": 217.33,
+          "text": "pass it through the transformer blocks then even after it comes out from the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 217.33,
+          "ts_end": 220.97,
+          "text": "transformer we have a normalization layer. As I showed you within the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 220.97,
+          "ts_end": 224.47,
+          "text": "transformer block itself there is a normalization layer before the attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 224.47,
+          "ts_end": 228.59,
+          "text": "head and after the attention head and after we come out of the transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 228.59,
+          "ts_end": 232.21,
+          "text": "block there is another normalization layer and then there are output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 232.21,
+          "ts_end": 233.11,
+          "text": "processing steps.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 233.51,
+          "ts_end": 238.64,
+          "text": "And the output is returned, right. So to execute this forward method we need to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 238.64,
+          "ts_end": 243.38,
+          "text": "define several things. So when an instance of the dummy GPT model class is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 243.38,
+          "ts_end": 249.04,
+          "text": "created we define these transformer blocks and for that we need to create a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 249.04,
+          "ts_end": 253.08,
+          "text": "separate class called dummy transformer block which will ultimately become just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 253.08,
+          "ts_end": 257.42,
+          "text": "transformer block when we learn about what happens in the transformer and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 257.42,
+          "ts_end": 262.24,
+          "text": "we also create a separate class for layer normalization. Why do we create a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 262.24,
+          "ts_end": 262.82,
+          "text": "separate class?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 262.82,
+          "ts_end": 267.16,
+          "text": "Because layer normalization not just happens in the transformer otherwise we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 267.16,
+          "ts_end": 271.82,
+          "text": "would have just written this procedure here but as you can see even after the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 271.82,
+          "ts_end": 275.2,
+          "text": "input comes from the transformer we pass it through another layer of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 275.2,
+          "ts_end": 279.62,
+          "text": "normalization. So that's why it makes sense to define a separate class of layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 279.62,
+          "ts_end": 284.66,
+          "text": "normalization. In today's lecture we are going to dive deep into this class, how",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 284.66,
+          "ts_end": 289.24,
+          "text": "to create this class, what exactly does layer normalization do and why do we",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_001",
+      "title": "Why do we need layer normalization ?",
+      "ts_start": 290.0,
+      "ts_end": 675.0,
+      "segments": [
+        {
+          "ts_start": 291.32,
+          "ts_end": 292.76,
+          "text": "So let's get started.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 293.3,
+          "ts_end": 299.44,
+          "text": "Diving deep into layer normalization. Ok, so the reason layer normalization comes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 299.44,
+          "ts_end": 304.24,
+          "text": "into the picture is that when we look at the transformer block as you can see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 304.24,
+          "ts_end": 308.7,
+          "text": "number of these layers are stacked on top of each other, right. So there are huge",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 308.7,
+          "ts_end": 313.2,
+          "text": "number of parameters coming from each of these layers and we have to train these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 313.2,
+          "ts_end": 317.48,
+          "text": "parameters. Initially we'll train these, initialize these parameters to random",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 317.48,
+          "ts_end": 322.52,
+          "text": "values but through back propagation we'll train these parameters so that the next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 322.52,
+          "ts_end": 323.68,
+          "text": "world is predicted correctly.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 323.98,
+          "ts_end": 329.11,
+          "text": "So we need to make the training process more efficient and that's where layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 329.11,
+          "ts_end": 333.95,
+          "text": "normalization becomes very important. It turns out that training deep neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 333.95,
+          "ts_end": 338.99,
+          "text": "networks with many layers can be challenging predominantly due to two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 338.99,
+          "ts_end": 343.79,
+          "text": "things. It can either lead to a vanishing gradient problem or it can lead to an",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 343.79,
+          "ts_end": 350.59,
+          "text": "exploding gradient problem and this leads to unstable training dynamics. So",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 350.59,
+          "ts_end": 354.79,
+          "text": "the first advantage of layer normalization is that it improves really",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 355.29,
+          "ts_end": 362.0,
+          "text": "the stability and the efficiency of neural network training. So let me zoom",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 362.0,
+          "ts_end": 366.02,
+          "text": "into this further and explain this. If you consider a deep neural network like",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 366.02,
+          "ts_end": 370.44,
+          "text": "this, you have an input layer and then you have multiple hidden layers which are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 370.44,
+          "ts_end": 375.78,
+          "text": "stacked together after the input layer, right and you have the output layer. So",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 375.78,
+          "ts_end": 380.26,
+          "text": "what happens is that when you do a forward pass, so initially when the weights are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 380.26,
+          "ts_end": 385.94,
+          "text": "initialized randomly you do a forward pass and you get the outputs and then what you do is that based on the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 386.12,
+          "ts_end": 391.06,
+          "text": "gradients you do a backward pass and you try to update these parameters. So",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 391.06,
+          "ts_end": 396.04,
+          "text": "eventually for every of these hidden layers you will have gradients of the loss with respect to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 396.04,
+          "ts_end": 401.78,
+          "text": "the parameters. So when you look at every layer, think of layers as accumulating gradients. Every",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 401.78,
+          "ts_end": 406.98,
+          "text": "layer will have a certain set of gradient values which will get updated after every iteration,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 407.16,
+          "ts_end": 412.75,
+          "text": "right. Now since we are doing the backward pass, let's say if you want to find the gradients of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 412.75,
+          "ts_end": 415.97,
+          "text": "this layer, the gradients of this layer,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 416.15,
+          "ts_end": 420.41,
+          "text": "will depend a lot on the output of this layer because we are doing backward pass.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 420.57,
+          "ts_end": 425.13,
+          "text": "Let me show it with a different color. Yeah, so the output of this layer I'm",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 425.13,
+          "ts_end": 428.85,
+          "text": "showing with the red color and if you want to find the gradients of the first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 428.85,
+          "ts_end": 432.45,
+          "text": "layer, it depends on this red colored outputs since we are doing the backward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 432.45,
+          "ts_end": 437.03,
+          "text": "pass. Now it turns out that if the layer output, if this layer output which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 437.03,
+          "ts_end": 441.17,
+          "text": "I'm showing by red right now, if this is too large or this is too small, that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 441.17,
+          "ts_end": 446.38,
+          "text": "affects the gradients. So if the layer output is too large or too small,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 446.38,
+          "ts_end": 451.44,
+          "text": "then gradient magnitudes can become too large or too small. Now think about what will happen",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 451.44,
+          "ts_end": 455.88,
+          "text": "if gradient magnitudes become too large, let's say. So if we are back propagating and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 455.88,
+          "ts_end": 460.86,
+          "text": "gradient magnitude in this layer becomes too large, what will happen? When you back propagate,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 460.96,
+          "ts_end": 465.62,
+          "text": "essentially you are multiplying different gradients together, right. So if the gradient",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 465.62,
+          "ts_end": 469.98,
+          "text": "here becomes too large, by the time we reach the first layer, the gradient would have exploded",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 469.98,
+          "ts_end": 475.87,
+          "text": "to a very large value. That's called as the gradient explosion. On the other hand, if the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 476.67,
+          "ts_end": 480.25,
+          "text": "gradient of the last layer or one of the intermediate layers is very small, when",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 480.25,
+          "ts_end": 483.77,
+          "text": "you're propagating backwards, till the time you reach the first layer or the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 483.77,
+          "ts_end": 487.57,
+          "text": "second layer, the gradient will become very small. What will happen when the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 487.57,
+          "ts_end": 491.73,
+          "text": "gradient becomes very small? We will not update the parameters because the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 491.73,
+          "ts_end": 496.37,
+          "text": "parameter updates depend on the gradient magnitude. If the gradient is too small,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 496.41,
+          "ts_end": 501.13,
+          "text": "learning will stagnate. If the gradient is too large, that will lead to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 501.13,
+          "ts_end": 505.37,
+          "text": "an unstable learning procedure. So both small gradients and large gradients lead",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 505.37,
+          "ts_end": 506.65,
+          "text": "to unstable training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 506.67,
+          "ts_end": 513.03,
+          "text": "We do not want unstable training dynamics. And one reason for the unstable training dynamics",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 513.03,
+          "ts_end": 518.17,
+          "text": "is that if layer outputs themselves are very large or small, as I mentioned, layer outputs",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 518.17,
+          "ts_end": 523.29,
+          "text": "affect the gradient values. So if we control the magnitude of the layer outputs, we can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 523.29,
+          "ts_end": 528.77,
+          "text": "ensure that the gradient magnitudes themselves do not become too large or too small. Batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 528.77,
+          "ts_end": 535.11,
+          "text": "normalization helps this. Batch normalization helps keep the outputs of the layers to certain",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 535.11,
+          "ts_end": 536.65,
+          "text": "specific values. And training the gradient values will help us to control the gradient",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 536.67,
+          "ts_end": 541.9,
+          "text": "and prevent the magnitude of the output from being too large or too small. And that's what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 541.9,
+          "ts_end": 546.3,
+          "text": "keeps the gradient stable, which leads to stable training dynamics. That's one of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 546.3,
+          "ts_end": 550.46,
+          "text": "first reasons why batch normalization or I should call it layer normalization. There",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 550.46,
+          "ts_end": 556.0,
+          "text": "is a difference, right? So I should actually call this layer normalization. Batch normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 556.0,
+          "ts_end": 560.4,
+          "text": "is something different and we'll come to that later. Today we are only going to look at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 560.4,
+          "ts_end": 566.6,
+          "text": "layer normalization in which the outputs coming from every layer are normalized. The second",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 566.6,
+          "ts_end": 570.54,
+          "text": "advantage of layer normalization is that it prevents this problem which is called as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 570.54,
+          "ts_end": 575.62,
+          "text": "internal covariate shift. So what happens is that as training proceeds, the inputs to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 575.62,
+          "ts_end": 580.28,
+          "text": "every layer can change. Let's say we look at the second layer, right? In first training",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 580.28,
+          "ts_end": 584.24,
+          "text": "iteration, the inputs can have a distribution like this. In the second training iteration,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 584.48,
+          "ts_end": 589.5,
+          "text": "maybe the inputs are skewed. So the input distribution which every layer receives can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 589.5,
+          "ts_end": 594.72,
+          "text": "change according to the iterations. And what that leads to is that it makes training very",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 594.72,
+          "ts_end": 595.14,
+          "text": "difficult.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 596.6,
+          "ts_end": 600.12,
+          "text": "So when the output distribution to every layer is changing, the weights, the updating the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 600.12,
+          "ts_end": 605.62,
+          "text": "weights becomes very hard and that delays the convergence of the parameters and that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 605.62,
+          "ts_end": 611.54,
+          "text": "delays the overall solution reaching an optimal value. We don't want that. Layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 611.54,
+          "ts_end": 618.6,
+          "text": "really helps to prevent this. Layer normalization makes sure that since we are normalizing,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 618.64,
+          "ts_end": 622.42,
+          "text": "which means that as we'll see the variance of the standard deviation is kept to one,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 622.52,
+          "ts_end": 626.58,
+          "text": "we'll make sure that the mean and standard deviation of the output distribution is kept",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 626.6,
+          "ts_end": 632.38,
+          "text": "from every layer is fixed. And this reduces the problem of internal covariate shift, which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 632.38,
+          "ts_end": 637.85,
+          "text": "accelerates convergence. So there are two main reasons why layer normalization is employed.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 638.05,
+          "ts_end": 643.13,
+          "text": "The first reason is that it keeps the training procedure stable by preventing the vanishing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 643.13,
+          "ts_end": 648.97,
+          "text": "gradient or the exploding gradient problem. And the second, the second major reason for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 648.97,
+          "ts_end": 654.95,
+          "text": "using layer normalization is that it prevents or reduces the problem of internal covariate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 654.95,
+          "ts_end": 655.19,
+          "text": "shift.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 655.19,
+          "ts_end": 661.88,
+          "text": "And that accelerates convergence and we get to a result faster. So that's why layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 661.88,
+          "ts_end": 666.78,
+          "text": "is employed, not just in the GPT or the LLM architecture, which we are going to see right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 666.78,
+          "ts_end": 671.92,
+          "text": "now. But in fact, in many deep learning architectures, layer normalization is very frequently used.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_002",
+      "title": "What is layer normalization ?",
+      "ts_start": 675.0,
+      "ts_end": 999.0,
+      "segments": [
+        {
+          "ts_start": 681.47,
+          "ts_end": 685.87,
+          "text": "at a specific layer and we look at the outputs of that specific layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 686.31,
+          "ts_end": 690.87,
+          "text": "And what we'll do is that we'll adjust those outputs so that they have a mean of zero and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 690.87,
+          "ts_end": 695.45,
+          "text": "they have a variance of one. Let me illustrate this through a simple example. Let's say you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 695.45,
+          "ts_end": 699.93,
+          "text": "are looking at a neural network and these four are the outputs from one specific layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 699.93,
+          "ts_end": 708.83,
+          "text": "of the neural network, right? So the four outputs are X1, X2, X3 and X4. And X1 is equal",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 708.83,
+          "ts_end": 716.38,
+          "text": "to 1.1, X2 is 0.8, X3 is 2.3 and X4 is 4.4. In layer normalization, what you do is you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 716.4,
+          "ts_end": 722.15,
+          "text": "find two quantities. First, you find mean of this. So the mean will just be X1 plus",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 722.15,
+          "ts_end": 728.15,
+          "text": "X2 plus X3 plus X4 divided by 4. So in this case, it will be 2.15. And the second thing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 728.15,
+          "ts_end": 732.65,
+          "text": "which you do is you find the variance. So the variance will be 1 by 4 because there",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 732.65,
+          "ts_end": 739.39,
+          "text": "are four quantities here. And then we'll sum up X1 minus the mean whole square plus X2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 739.39,
+          "ts_end": 744.73,
+          "text": "minus the mean whole square plus X3 minus the mean whole square plus X4 minus the mean",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 744.73,
+          "ts_end": 745.25,
+          "text": "whole square.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 746.47,
+          "ts_end": 750.89,
+          "text": "This is the variance value. Now what we do is we perform the normalization procedure",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 751.51,
+          "ts_end": 756.71,
+          "text": "which means that for every variable, we subtract the mean and we divide by the square root",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 756.71,
+          "ts_end": 762.93,
+          "text": "of the variance which is the standard deviation. So X1 will be replaced by X1 minus mu divided",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 762.93,
+          "ts_end": 768.61,
+          "text": "by square root of variance. X2 will be replaced by X2 minus mu divided by square root of variance.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 769.17,
+          "ts_end": 774.69,
+          "text": "X3 will be replaced by X3 minus mu divided by square root of variance. And X4 will be",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 774.69,
+          "ts_end": 776.35,
+          "text": "replaced by X4 minus mu.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 776.35,
+          "ts_end": 783.77,
+          "text": "So when you do this normalization, it leads to these four values. Do you notice something",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 783.77,
+          "ts_end": 789.43,
+          "text": "about these four normalized values? If you add these together in the numerator, you will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 789.43,
+          "ts_end": 796.71,
+          "text": "have X1 plus X2 plus X3 plus X4 minus 4 times mu. So that will be 0 which means that the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 796.71,
+          "ts_end": 799.81,
+          "text": "mean of these normalized values is equal to 0.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 799.95,
+          "ts_end": 804.73,
+          "text": "And if you compute the variance of these normalized values through this formula, you will see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 804.73,
+          "ts_end": 806.49,
+          "text": "that the variance of X1 plus X2 minus X3 plus X4 minus 4 times mu will be 0. So that will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 806.83,
+          "ts_end": 813.62,
+          "text": "these normalized values is actually equal to one that's the most important thing which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 813.62,
+          "ts_end": 819.82,
+          "text": "which is in which you should realize or you you should understand is that after performing the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 819.82,
+          "ts_end": 825.78,
+          "text": "normalization procedure the values which you get these four values their mean is equal to zero and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 825.78,
+          "ts_end": 832.64,
+          "text": "their variance is equal to one that's the whole idea behind normalization the in normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 832.64,
+          "ts_end": 838.04,
+          "text": "we adjust the outputs of every layer of neural network to have mean of zero and variance of one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 838.04,
+          "ts_end": 844.12,
+          "text": "and it turns out that this simple procedure helps us in the stability neural network training and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 844.12,
+          "ts_end": 850.74,
+          "text": "it also helps us reduce the problem of the internal covariate shift so let us actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 850.74,
+          "ts_end": 856.46,
+          "text": "see this in code but before that i want to tell you where the layer normalization is used",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 856.46,
+          "ts_end": 863.58,
+          "text": "and we discussed this at the start of the lecture but the input is converted into an input embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 863.58,
+          "ts_end": 869.3,
+          "text": "then we add the token embeddings and then here right we feed it before going into the multihead",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 869.3,
+          "ts_end": 874.0,
+          "text": "attention we have a layer normalization layer so that the inputs to the multihead attention are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 874.0,
+          "ts_end": 879.52,
+          "text": "normalized even after the multihead attention there is a layer normalization layer before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 879.52,
+          "ts_end": 885.08,
+          "text": "feeding into the neural network module within the transformer block remember this blue block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 885.08,
+          "ts_end": 889.88,
+          "text": "here is the transformer block so the layer normalization layer appears two times here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 889.88,
+          "ts_end": 893.06,
+          "text": "and then it appears once more again outside the transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 894.94,
+          "ts_end": 900.96,
+          "text": "so in GPT and modern transformer architecture layer normalization is typically applied before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 900.96,
+          "ts_end": 906.62,
+          "text": "and after the multihead attention module like what we have seen over here and it also appears",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 906.62,
+          "ts_end": 912.54,
+          "text": "once before the final output layer and we saw this when we coded in the last lecture here if you see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 913.18,
+          "ts_end": 917.54,
+          "text": "within the transformer block layer normalization appears two times before and after the multihead",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 917.54,
+          "ts_end": 923.54,
+          "text": "attention but even before the output it we employ it once so overall it appears three times",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 924.06,
+          "ts_end": 924.36,
+          "text": "that's it.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 924.38,
+          "ts_end": 929.85,
+          "text": "why we need to define a separate class of the layer normalization this one figure which i'm",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 929.85,
+          "ts_end": 934.31,
+          "text": "which i've shown over here actually illustrates the procedure of layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 935.71,
+          "ts_end": 939.41,
+          "text": "let's say we have a neural network layer these are the five inputs",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 939.97,
+          "ts_end": 944.01,
+          "text": "to the neural network right and these are the six outputs of the neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 944.57,
+          "ts_end": 949.23,
+          "text": "without the normalization you will see that their mean is not equal to zero and their variance is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 949.23,
+          "ts_end": 954.61,
+          "text": "not equal to one but after we perform normalization on these layer outputs which means that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 954.89,
+          "ts_end": 960.09,
+          "text": "for from every output here we are going to subtract the mean and divide by the square root",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 960.09,
+          "ts_end": 965.43,
+          "text": "of the variance so we will get these as the resultant values after applying layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 965.99,
+          "ts_end": 970.23,
+          "text": "and if you take a mean of these values you will get that mean is equal to zero and the variance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 970.23,
+          "ts_end": 978.82,
+          "text": "of these values is equal to one this is the simple illustration which describes what happens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 979.28,
+          "ts_end": 984.3,
+          "text": "underneath the hood for layer normalization now what we are going to do is that i am going to take",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 984.3,
+          "ts_end": 984.92,
+          "text": "you through code",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 985.82,
+          "ts_end": 989.72,
+          "text": "going to implement layer normalization first on a neural network which looks like this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 989.72,
+          "ts_end": 994.88,
+          "text": "and then we are going to create a separate class of layer normalization which we can integrate",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_003",
+      "title": "Layer normalization basics in Python",
+      "ts_start": 999.0,
+      "ts_end": 1561.0,
+      "segments": [
+        {
+          "ts_start": 1002.14,
+          "ts_end": 1008.78,
+          "text": "for layer normalization the first thing which we are going to do is start out with a simple example",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1009.48,
+          "ts_end": 1015.2,
+          "text": "to illustrate how layer normalization is implemented in practice and then we will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1015.2,
+          "ts_end": 1020.7,
+          "text": "actually fill out this layer normalization class which we had created in the previous lecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1021.36,
+          "ts_end": 1027.0,
+          "text": "so let's get started what we are doing here is that we are essentially let me take you to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1027.0,
+          "ts_end": 1034.14,
+          "text": "whiteboard to demonstrate what we are doing here we will have a simple neural network layer and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1034.14,
+          "ts_end": 1041.3,
+          "text": "neural network is constructed such that we have two batches of inputs so here is batch number one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1041.82,
+          "ts_end": 1046.26,
+          "text": "and here is batch number two and each batch has five inputs so batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1046.48,
+          "ts_end": 1053.92,
+          "text": "one has x1, x2, x3, x4, x5 and batch number two has x1, x2, x3, x4, x5.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1054.66,
+          "ts_end": 1059.5,
+          "text": "Now here we are looking at one layer of neurons and there are six neurons here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1060.25,
+          "ts_end": 1065.01,
+          "text": "So when these inputs essentially pass through this first layer of neurons we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1065.01,
+          "ts_end": 1070.55,
+          "text": "have the output which is produced and there will be six outputs for batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1070.55,
+          "ts_end": 1076.23,
+          "text": "number one which is y1, y2, y3, y4, y5, y6 and there will be six outputs for batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1076.23,
+          "ts_end": 1083.85,
+          "text": "number two y1, y2, y3, y4, y5, y6. So if you look at the inputs the shape of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1083.85,
+          "ts_end": 1088.59,
+          "text": "inputs will be two rows and five columns because we have two batches and each",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1088.59,
+          "ts_end": 1093.15,
+          "text": "batch will have five inputs right then we have a sequential layer which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1093.15,
+          "ts_end": 1098.65,
+          "text": "essentially takes in five inputs and it has six outputs. This sequential layer is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1098.65,
+          "ts_end": 1104.03,
+          "text": "this the second layer which I have shown you over here this layer of six neurons",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1104.03,
+          "ts_end": 1106.53,
+          "text": "and after every neuron here we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1106.53,
+          "ts_end": 1111.03,
+          "text": "essentially have the RayLow activation function so which has been mentioned",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1111.03,
+          "ts_end": 1114.77,
+          "text": "over here if you don't know what a RayLow activation function is it's fine",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1114.77,
+          "ts_end": 1120.81,
+          "text": "for this lecture we don't need to understand this. The output of the layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1120.81,
+          "ts_end": 1124.99,
+          "text": "is that the layer is then applied on this input batch and we get the output.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1125.67,
+          "ts_end": 1130.07,
+          "text": "Can you try to understand why the shape of the output is like this? So here you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1130.07,
+          "ts_end": 1135.16,
+          "text": "can see that we have two rows and we have six columns. If you look at the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1135.16,
+          "ts_end": 1138.36,
+          "text": "first row this represents the six outputs from the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1139.86,
+          "ts_end": 1144.02,
+          "text": "second batch and if you look at the second row this represents the six",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1144.02,
+          "ts_end": 1151.81,
+          "text": "outputs from the second batch and that's what exactly being shown you y1 y2 y 6",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1151.81,
+          "ts_end": 1158.15,
+          "text": "and batch two has y1 y2 up till y6 so this can be y1 this is y2 this is y3",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1158.15,
+          "ts_end": 1164.21,
+          "text": "this is y6 for batch 1 and this is y1, this is y2 and this is y6 for batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1164.21,
+          "ts_end": 1168.29,
+          "text": "number 2. So this is the layer which we have and now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1168.29,
+          "ts_end": 1174.07,
+          "text": "what we are going to do is that after this layer we are going to apply the batch normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1174.73,
+          "ts_end": 1182.74,
+          "text": "sorry we are going to apply the layer normalization so here i have simply explained",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1182.74,
+          "ts_end": 1188.24,
+          "text": "that we have a neural network which consists of a linear layer followed by the relu activation layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1188.24,
+          "ts_end": 1193.84,
+          "text": "to quickly illustrate what the relu activation function actually looks like take a look at this",
+          "frame_ids": [
+            "G3W-LT79LSI_f0003"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 1193.84,
+          "ts_end": 1200.96,
+          "text": "one this image over here so if x is positive the relu is just y equal to x but if x is equal to",
+          "frame_ids": [
+            "G3W-LT79LSI_f0004"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": [
+                "\\max(0, x)",
+                "R(z) = \\max(0, z)"
+              ],
+              "diagram_summary": "ReLU activation function visualization showing the piecewise linear function that outputs zero for negative inputs and the input value for positive inputs.",
+              "diagram_elements": [
+                "ReLU Activation Function graph",
+                "max(0,x) formula",
+                "X Axis range -10.0 to 10.0",
+                "Y Axis range 0 to 10",
+                "Blue line showing ReLU curve",
+                "Rectified Linear Unit visualization"
+              ],
+              "confidence": 0.85,
+              "frame_id": "G3W-LT79LSI_f0004",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 1194.966333,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0004.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1200.96,
+          "ts_end": 1206.46,
+          "text": "negative the relu is zero so there is a non-linearity here that's the activation function",
+          "frame_ids": [
+            "G3W-LT79LSI_f0005"
+          ],
+          "visuals": [
+            {
+              "category": "code",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": {
+                "language": "python",
+                "content": "torch.manual_seed(123)\nbatch_example = torch.randn(2, 5) #A\nlayer = nn.Sequential(nn.Linear(5, 6), nn.ReLU())\nout = layer(batch_example)\nprint(out)\n\ntensor([[0.2260, 0.3470, 0.0000, 0.2216, 0.0000, 0.0000],\n        [0.2133, 0.2394, 0.0000, 0.5198, 0.3297, 0.0000]],\n       grad_fn=<ReluBackward0>)"
+              },
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "G3W-LT79LSI_f0005",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 1205.999667,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0005.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1208.19,
+          "ts_end": 1212.01,
+          "text": "now what we are going to do as i mentioned is we are going to apply layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1212.51,
+          "ts_end": 1217.07,
+          "text": "so the way it is applied is very similar to the hands-on example which we saw on the whiteboard",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1217.07,
+          "ts_end": 1224.9,
+          "text": "over here this example this same thing will be applying to the first batch and the same thing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1224.9,
+          "ts_end": 1225.58,
+          "text": "will be applying to the second batch and the same thing will be applying to the third batch and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1225.6,
+          "ts_end": 1232.78,
+          "text": "second batch so what we will be doing is that when you look at the first batch we will do y1 minus",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1234.16,
+          "ts_end": 1237.96,
+          "text": "so y1 will be replaced by y1 minus mu divided by",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1238.81,
+          "ts_end": 1244.1,
+          "text": "square root of we write this again divided by square root of variance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1245.59,
+          "ts_end": 1261.73,
+          "text": "y2 will be replaced by y2 minus mu divided by square root of variance and like this similarly",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1261.73,
+          "ts_end": 1277.33,
+          "text": "the last output which is y6 here y6 will also be replaced with y6 minus mu divided by square root of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1278.92,
+          "ts_end": 1284.54,
+          "text": "variance and first we process the first batch and then we process the second batch in a very similar",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1284.54,
+          "ts_end": 1292.41,
+          "text": "manner so now let's go to code to see how this is done so now what we are going to do is that we we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1292.41,
+          "ts_end": 1294.33,
+          "text": "have the output which is this tensor here so we are going to go to the output and we are going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1294.33,
+          "ts_end": 1298.83,
+          "text": "do the output which is this tensor right and then we are doing output dot mean dimension equal to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1298.83,
+          "ts_end": 1303.59,
+          "text": "minus 1 why dimension equal to minus 1 because we have to take the mean along the columns",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1303.59,
+          "ts_end": 1310.25,
+          "text": "so first we look at the first batch outputs and we want to take the mean of this so we do output dot",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1310.25,
+          "ts_end": 1315.15,
+          "text": "mean dimension equal to minus 1 and this keep dimension equal to true that is very important",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1315.15,
+          "ts_end": 1321.79,
+          "text": "because if we don't include keep dimension equal to true the return mean would be a two-dimensional",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1321.79,
+          "ts_end": 1329.79,
+          "text": "vector instead of a two into one dimensional matrix so essentially if you use keep dim equal",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1329.79,
+          "ts_end": 1336.64,
+          "text": "to true the output which you get for the mean is this so the first value here corresponds to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1336.64,
+          "ts_end": 1341.0,
+          "text": "mean of the first batch the second value here corresponds to the mean of the second batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1341.56,
+          "ts_end": 1345.66,
+          "text": "since we used keep dim equal to true the shape of this output is that it's a matrix",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1345.66,
+          "ts_end": 1351.8,
+          "text": "uh or rather uh yeah it's a two into one dimensional matrix over here right now if we did",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1352.14,
+          "ts_end": 1357.46,
+          "text": "use keep them equal to true this would not be a matrix in fact it would just be a two-dimensional",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1357.46,
+          "ts_end": 1363.88,
+          "text": "vector and that's generally not good because uh it's good for the dimensions to be preserved as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1363.88,
+          "ts_end": 1370.09,
+          "text": "we are doing all of these calculations similarly for the variance what we are doing is that we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1370.09,
+          "ts_end": 1374.33,
+          "text": "taking the variance across the column for both the batches and we use keep them equal to true",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1374.88,
+          "ts_end": 1378.43,
+          "text": "and then you print out the mean and then you print out the variance for every batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1378.94,
+          "ts_end": 1382.21,
+          "text": "so for the first batch of data the mean is 0.1324",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1383.07,
+          "ts_end": 1388.97,
+          "text": "the second for the first batch of data the variance is 0.0231 for the second batch of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1388.97,
+          "ts_end": 1397.41,
+          "text": "data the mean is 0.2162170 and for the second batch of data the variance is 0.0398 so remember",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1397.41,
+          "ts_end": 1404.74,
+          "text": "the two uh two commands which we have used here dim equal to minus one because we have to perform",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1404.74,
+          "ts_end": 1409.22,
+          "text": "that operation along the columns and keep them equal to true because we have to retain",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1409.22,
+          "ts_end": 1413.46,
+          "text": "the dimension of the final mean",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1413.78,
+          "ts_end": 1418.42,
+          "text": "and the variance matrix which we have if we did not use keep them equal to true later when we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1418.42,
+          "ts_end": 1423.96,
+          "text": "subtract this mean from every individual element it will lead to some problems so we want to avoid",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1423.96,
+          "ts_end": 1429.14,
+          "text": "that so in this text over here i have just explained why we used keep them equal to true",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1429.14,
+          "ts_end": 1434.5,
+          "text": "and why we use dimension equal to minus one so if you have some confusion along those lines please",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1434.5,
+          "ts_end": 1439.58,
+          "text": "read this text when i share this google or when i share this jupiter notebook with you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1440.64,
+          "ts_end": 1443.66,
+          "text": "great and now what we are going to do is that we are going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1445.2,
+          "ts_end": 1450.94,
+          "text": "subtract the mean so like over here we are going to subtract the mean and divide by the square root",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1450.94,
+          "ts_end": 1457.22,
+          "text": "of variance so we have the output matrix which is there we are going to subtract the mean which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1457.22,
+          "ts_end": 1464.28,
+          "text": "now again you can see the mean is also a tensor which has two rows and one column and we are going",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1464.28,
+          "ts_end": 1468.3,
+          "text": "to subtract the mean from the output and we are going to divide by the square root of variance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1468.3,
+          "ts_end": 1476.16,
+          "text": "this is the main normalization step so this is my output now and the normalized layer outputs are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1476.34,
+          "ts_end": 1481.69,
+          "text": "like this the first row again corresponds to the normalized outputs of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1481.69,
+          "ts_end": 1485.95,
+          "text": "batch 1 the second row corresponds to the normalized outputs of batch number 2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1486.55,
+          "ts_end": 1491.11,
+          "text": "so here I am just printing out the mean and variance of the batch 1 and batch 2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1491.11,
+          "ts_end": 1495.41,
+          "text": "so if you look batch 1 and batch 2 so if you look at the mean you will see that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1495.41,
+          "ts_end": 1499.81,
+          "text": "the mean of the first batch is almost close to 0 this is 10 raised to minus 8",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1499.81,
+          "ts_end": 1505.88,
+          "text": "which is really very close to 0 we can approximate it to 0 for the second batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1505.88,
+          "ts_end": 1509.36,
+          "text": "the mean is again very close to 10 raised to minus 8 again that's almost",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1509.36,
+          "ts_end": 1513.36,
+          "text": "equal to 0 and if you look at the variance for both the batches you will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1513.36,
+          "ts_end": 1516.64,
+          "text": "see that the variance is equal to 1 awesome this is exactly what we wanted",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1516.64,
+          "ts_end": 1520.96,
+          "text": "right which means that the layers have been normalized now so note that the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1520.96,
+          "ts_end": 1525.66,
+          "text": "value 2.9 into 10 raised to minus 8 is the scientific notation for 2.9",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1525.66,
+          "ts_end": 1530.88,
+          "text": "multiplied by 10 raised to minus 8 this value is very close to 0 but not exactly",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1530.88,
+          "ts_end": 1535.14,
+          "text": "0 due to small numerical errors in Python what we have is this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1535.14,
+          "ts_end": 1535.44,
+          "text": "a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1535.88,
+          "ts_end": 1539.96,
+          "text": "we can turn on the turn off the scientific mode so currently the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1539.96,
+          "ts_end": 1546.87,
+          "text": "scientific notation is on that's why we are getting these values which have been",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1546.87,
+          "ts_end": 1550.43,
+          "text": "represented in the scientific notation we can turn off the scientific notation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1550.43,
+          "ts_end": 1554.63,
+          "text": "and then let's print out the mean and the variance so you'll see that the mean",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1554.63,
+          "ts_end": 1559.23,
+          "text": "for both the batches is equal to 0 and the variance for both the batches is",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_004",
+      "title": "Coding the Layer normalization class in Python",
+      "ts_start": 1561.0,
+      "ts_end": 1914.0,
+      "segments": [
+        {
+          "ts_start": 1563.95,
+          "ts_end": 1566.07,
+          "text": "lecture with we want to create a class for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1566.07,
+          "ts_end": 1573.32,
+          "text": "layer normalization what would be the output of this class basically this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1573.32,
+          "ts_end": 1578.78,
+          "text": "class will take in the the output of a layer and it will apply the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1580.1,
+          "ts_end": 1585.46,
+          "text": "normalization to that so let's look at where this layer normalization step is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1585.46,
+          "ts_end": 1590.57,
+          "text": "implemented so the layer normalization step is implemented here the layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1590.57,
+          "ts_end": 1595.33,
+          "text": "normalization step is implemented here so at both of these places when we get",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1596.09,
+          "ts_end": 1600.61,
+          "text": "when the inputs are received to this block and when the input is received to this block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1602.07,
+          "ts_end": 1611.01,
+          "text": "we have certain number of tokens which is let's say let's say we are looking at the context size",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1611.01,
+          "ts_end": 1617.09,
+          "text": "for the number of embedding vectors which we have but the main thing which i want to point out is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1617.09,
+          "ts_end": 1623.9,
+          "text": "that the number of columns which we have is equal to the embedding size and this is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1623.9,
+          "ts_end": 1631.76,
+          "text": "embedding vector dimension which we are using so for gpt2 this embedding size is equal to 768",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1635.66,
+          "ts_end": 1642.19,
+          "text": "so when we look at the so when we look at let's say the first row over here the first row",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1642.19,
+          "ts_end": 1646.37,
+          "text": "corresponds to the embedding for the first token which is an input to this layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1646.95,
+          "ts_end": 1653.11,
+          "text": "right so we will take the mean and we will take the variance along the column dimension which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1653.11,
+          "ts_end": 1657.71,
+          "text": "768 so we'll take the mean of all of this and take the variance and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1657.81,
+          "ts_end": 1661.13,
+          "text": "then do the normalization similarly we'll do this for every single row",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1662.22,
+          "ts_end": 1667.1,
+          "text": "for the input to this layer normalization as well as the input to this layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1667.58,
+          "ts_end": 1673.0,
+          "text": "so if you see the dimension where an instance of this class is created we have to pass in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1673.0,
+          "ts_end": 1678.04,
+          "text": "embedding dimension why do we have to pass in the embedding dimension because we will see that we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1678.04,
+          "ts_end": 1683.92,
+          "text": "are going to implement something like scale and shift these are trainable parameters but the size",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1683.92,
+          "ts_end": 1688.04,
+          "text": "of this scale and shift will be governed by the embedding dimension and that will be applied to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1688.06,
+          "ts_end": 1691.32,
+          "text": "input to the layer normalization so that is the same as the input vector to the layer norm module",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1691.32,
+          "ts_end": 1697.2,
+          "text": "and that will be the same as the output vector so the input to the layer norm module will have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1697.2,
+          "ts_end": 1702.42,
+          "text": "certain number of rows but it will have embedding columns the output of the layer normalization which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1702.42,
+          "ts_end": 1706.94,
+          "text": "is norm x will have the same dimensions as the input because normalization does not change",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1706.94,
+          "ts_end": 1712.06,
+          "text": "dimensions and we are going to scale the output with the scale and shift i'll come to that in a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1712.06,
+          "ts_end": 1718.3,
+          "text": "moment so the main part of this layer normalization class is the forward method which takes in the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1718.74,
+          "ts_end": 1719.0,
+          "text": "which is the number of rows and the number of columns which is the number of rows and that's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1719.0,
+          "ts_end": 1722.9,
+          "text": "what we described so when you think of the input think of the input as having certain number of rows",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1723.46,
+          "ts_end": 1728.56,
+          "text": "but mostly focus on the number of columns which will be the embedding dimensions in each row let's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1728.56,
+          "ts_end": 1733.9,
+          "text": "say we have 768 embedding dimension so in the first step what we do is that along the column we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1733.9,
+          "ts_end": 1740.7,
+          "text": "take the mean exactly similar to what we actually did over here just keep this example in mind",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1742.2,
+          "ts_end": 1744.04,
+          "text": "then what we do is along the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1744.04,
+          "ts_end": 1745.2,
+          "text": "column we take the variance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1745.2,
+          "ts_end": 1750.4,
+          "text": "and then we subtract the mean and then we divide by the square root of variance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1750.4,
+          "ts_end": 1756.52,
+          "text": "note that we have added this small variable epsilon so this is a small constant which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1756.52,
+          "ts_end": 1761.38,
+          "text": "added to the variance to prevent division by zero during normalization so we don't want to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1761.38,
+          "ts_end": 1767.36,
+          "text": "divide by the square root of zero right so we add a small variable here which is called self dot",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1767.36,
+          "ts_end": 1773.66,
+          "text": "epsilon or epsilon so this is the output of the normalized layer normalization but we do one more",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1773.66,
+          "ts_end": 1779.74,
+          "text": "step here which is we multiply by the scale and we multiply by the shift so let me explain",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1779.74,
+          "ts_end": 1785.26,
+          "text": "what this scale and shift are just like we are training we are going to train the embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1785.26,
+          "ts_end": 1790.0,
+          "text": "parameters the positional embedding parameters the neural network parameters in the GPT architecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1790.0,
+          "ts_end": 1797.83,
+          "text": "the scale and shelf the scale and shift our two trainable parameters which have the same",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1797.83,
+          "ts_end": 1803.79,
+          "text": "dimension as the input that the LLM automatically adjust during training if it is determined",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1803.79,
+          "ts_end": 1804.37,
+          "text": "that cinnamon is given a fixed value values going to be less than 0 the magic number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1804.37,
+          "ts_end": 1809.49,
+          "text": "doing so would improve the model's performance on the training task so this allows the model to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1809.49,
+          "ts_end": 1815.59,
+          "text": "learn appropriate scaling and shifting that best suits the data it is processing so you can think",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1815.59,
+          "ts_end": 1821.05,
+          "text": "of it as knobs turnable knobs or fine tuning parameters which we have added just to make sure",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1821.05,
+          "ts_end": 1828.35,
+          "text": "that the layer normalization proceeds smoothly or if you want to tweak the layer normalization a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1828.35,
+          "ts_end": 1832.93,
+          "text": "bit we can always do it with this scale and with this shift these are trainable parameters which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1832.93,
+          "ts_end": 1839.05,
+          "text": "means we don't specify the values of these parameters at the start and remember that the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1839.05,
+          "ts_end": 1846.33,
+          "text": "these scale and shift have the embedding dimension so that we can multiply the the scale and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1846.33,
+          "ts_end": 1853.39,
+          "text": "output of the normalization layer together so remember when you look at each row each row has",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1853.39,
+          "ts_end": 1861.34,
+          "text": "768 dimensions right or the embedding dimensions and this self dot scale is again a vector which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1861.34,
+          "ts_end": 1862.52,
+          "text": "has embedding dimensions",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1863.06,
+          "ts_end": 1867.74,
+          "text": "so you can do element wise multiplication here and then you can do an element wise addition here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1868.82,
+          "ts_end": 1874.62,
+          "text": "and the epsilon parameter is set to a small value such as 10 raised to minus 5 but the main step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1874.62,
+          "ts_end": 1879.46,
+          "text": "which is being performed in this normalization layer is that we take the input and then every row",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1879.46,
+          "ts_end": 1883.84,
+          "text": "of the input we subtract with the mean subtract the mean and divide by the square root of variance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1884.36,
+          "ts_end": 1891.0,
+          "text": "so that the mean of the resultant row is 0 and the standard deviation of the variance is equal to 1",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1893.03,
+          "ts_end": 1894.93,
+          "text": "that's it this is the layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1894.95,
+          "ts_end": 1902.56,
+          "text": "class and when we bring all the elements of the gpt architecture together we'll see that we'll",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1902.56,
+          "ts_end": 1906.42,
+          "text": "replace this dummy class now with the layer normalization class which we just defined",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_005",
+      "title": "Bessel\u2019s correction",
+      "ts_start": 1914.0,
+      "ts_end": 2014.0,
+      "segments": [
+        {
+          "ts_start": 1915.3,
+          "ts_end": 1919.74,
+          "text": "calculation method we have opted for an implementation detail by setting unbiased",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1919.74,
+          "ts_end": 1925.42,
+          "text": "equal to false so here so you might be thinking what happens if unbiased equal to true right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1927.32,
+          "ts_end": 1929.92,
+          "text": "so in our variance calculation method we will apply something which is known as Bessel's correction",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1930.54,
+          "ts_end": 1936.42,
+          "text": "and in Bessel's correction when we do the variance calculation we divide by n minus 1 instead of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1936.42,
+          "ts_end": 1944.25,
+          "text": "dividing by n like what we did right now so if you look at this this implementation which i did",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1944.25,
+          "ts_end": 1948.81,
+          "text": "on the white board to calculate the variance i am dividing by n right which is the number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1950.24,
+          "ts_end": 1957.42,
+          "text": "number of inputs if we do the Bessel's correction we divide by n minus one so this four is replaced by n minus 1",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1957.44,
+          "ts_end": 1962.52,
+          "text": "by 3 this does not matter too much in the case of large language models where the embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1962.52,
+          "ts_end": 1966.94,
+          "text": "dimension n is so large that the difference between n and n minus 1 is practically negligible",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1967.57,
+          "ts_end": 1974.78,
+          "text": "if you are interested to learn about Bessel's correction there are many good articles on this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1974.78,
+          "ts_end": 1980.76,
+          "text": "and you will see that it's the use of n minus 1 instead of n in the formula for sample variance",
+          "frame_ids": [
+            "G3W-LT79LSI_f0006"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Bessel's correction",
+              "extracted_text": "From Wikipedia, the free encyclopedia\n\nThis article includes a list of general references, but it lacks sufficient corresponding inline citations. Please help to improve this article by introducing more precise citations. (November 2010)\n\nIn statistics, Bessel's correction is the use of n \u2212 1 instead of n in the formula for the sample variance and sample standard deviation, where n is the number of observations in a sample. This method corrects the bias in the estimation of the population variance. It also partially corrects the bias in the estimation of the population standard deviation. However, the correction often increases the mean squared error in these estimations. This technique is named after Friedrich Bessel.\n\nFormulation\n\nIn estimating the population variance from a sample when the population mean is unknown, the uncorrected sample variance is the mean of the squares of deviations of sample values from the sample mean (i.e., using a multiplicative factor 1/n). In this case, the sample variance is a biased estimator of the population variance. Multiplying the uncorrected sample variance by the factor\n\ngives an unbiased estimator of the population variance. In some literature, the above factor is called Bessel's correction.\n\nOne can understand Bessel's correction as the degrees of freedom in the residuals vector (residuals, not errors, because the population mean is unknown):",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "G3W-LT79LSI_f0006",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 1975.133,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0006.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1980.76,
+          "ts_end": 1988.86,
+          "text": "and that leads to an unbiased variance but for now it totally works for us if we set the unbiased",
+          "frame_ids": [
+            "G3W-LT79LSI_f0007"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "Two trainable parameters (of the same dimension as the input) that the LLM automatically adjusts during training if it is determined that the model's performance on its training task.\n\nlearn appropriate scaling and shifting that best suit the data it is processing.\n\nVariance\n\nOn method, we have opted for an implementation detail by setting unbiased=False.\n\nWhat this means, in the variance calculation, we divide by the number of inputs n in the variance formula.\n\nApply Bessel's correction, which typically uses n-1 instead of n in the denominator to adjust for bias in sample variance estimation.\n\nA so-called biased estimate of the variance.\n\nFor models (LLMs), where the embedding dimension n is significantly large, the difference between using n and n-1 is practically negligible.\n\nTo ensure compatibility with the GPT-2 model's normalization layers and because it reflects TensorFlow's default behavior, which was used in GPT2 model.\n\nOf in practice and apply it to the batch input:",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.75,
+              "frame_id": "G3W-LT79LSI_f0007",
+              "video_id": "G3W-LT79LSI",
+              "timestamp_sec": 1984.033,
+              "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0007.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1988.86,
+          "ts_end": 1995.15,
+          "text": "equal to false it does not lead to too much of a difference so the reason we choose this approach",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1995.15,
+          "ts_end": 2002.11,
+          "text": "is to ensure compatibility with GPT-2 models normalization layers and it reflects tensor",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2002.11,
+          "ts_end": 2007.55,
+          "text": "flow's default behavior which is to set unbiased equal to false this was actually what was used",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2007.55,
+          "ts_end": 2012.41,
+          "text": "to implement the original GPT-2 model and that's why we are also using unbiased equal to false",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_006",
+      "title": "Testing the Layer normalization class",
+      "ts_start": 2014.0,
+      "ts_end": 2215.0,
+      "segments": [
+        {
+          "ts_start": 2018.11,
+          "ts_end": 2023.85,
+          "text": "layer normalization in practice and apply it to the batch input so we have defined this batch over",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2023.85,
+          "ts_end": 2031.02,
+          "text": "here this batch over here let's try to pass in this batch through the layer normalization layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2031.02,
+          "ts_end": 2036.58,
+          "text": "so i'm defining a layer normalization class i'm creating an instance of it and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2036.58,
+          "ts_end": 2041.3,
+          "text": "as i told you over here we need to pass in the embedding dimension right so i'm saying",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2041.3,
+          "ts_end": 2043.4,
+          "text": "that the embedding dimension is equal to false",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2043.42,
+          "ts_end": 2053.02,
+          "text": "five so i'm taking in batch example so let's see where batch example has been defined yeah so this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2053.02,
+          "ts_end": 2059.8,
+          "text": "is the batch example i'm taking in this example and then what i'm doing is that i am applying the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2059.8,
+          "ts_end": 2066.14,
+          "text": "layer normalization layer to this batch and then it will do all of the steps which i have mentioned",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2066.14,
+          "ts_end": 2071.9,
+          "text": "over here first it will find the mean over all the dimensions and then it will essentially find",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2071.9,
+          "ts_end": 2077.9,
+          "text": "the variance it will subtract the mean and then divide by square root of variance so let me go to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2077.9,
+          "ts_end": 2083.94,
+          "text": "the batch example again and tell you what it's going to do let me print out the batch example",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2083.94,
+          "ts_end": 2095.8,
+          "text": "actually right over here so if you print out print out the batch example you will see that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2095.8,
+          "ts_end": 2102.82,
+          "text": "it's this right so what this layer normalization will do is that it will first take the mean of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2102.82,
+          "ts_end": 2106.58,
+          "text": "this subtract mean from all of these elements and divide all of these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2106.7,
+          "ts_end": 2112.8,
+          "text": "elements by square root of the variance of this first batch then it will do the same for the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2112.8,
+          "ts_end": 2119.6,
+          "text": "second batch and then when you get the mean and the variance of the resulting output so output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2119.6,
+          "ts_end": 2124.34,
+          "text": "underscore ln is my resulting output and if you get the mean and the variance you'll see that the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2124.34,
+          "ts_end": 2129.72,
+          "text": "mean for both the batches is 0 and the standard deviation or the variance for both the batches",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2129.72,
+          "ts_end": 2135.77,
+          "text": "is equal to 1. so as we can clearly see based on the results the layer normalization code works as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2135.77,
+          "ts_end": 2136.17,
+          "text": "expected",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2137.6,
+          "ts_end": 2142.48,
+          "text": "and normalizes the value of each of the two inputs such that they have a mean of 0 and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2142.48,
+          "ts_end": 2148.54,
+          "text": "variance of 1. so i hope you have understood this concept i tried to explain this through",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2148.54,
+          "ts_end": 2154.12,
+          "text": "whiteboard as well as through code and i hope that you have understood the basics as well as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2154.12,
+          "ts_end": 2160.06,
+          "text": "the coding aspect of it now let's see what all we have learnt in this lecture so far so in this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2160.06,
+          "ts_end": 2165.86,
+          "text": "lecture what we have learnt is that we learnt about layer normalization and let's see how this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2165.86,
+          "ts_end": 2168.3,
+          "text": "fits into the context of the entire gpt architecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2168.36,
+          "ts_end": 2172.64,
+          "text": "so to master the gpt architecture we need to learn all of these building blocks",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2173.14,
+          "ts_end": 2178.86,
+          "text": "in the previous lecture we learnt about the gpt backbone in this lecture we looked at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2178.86,
+          "ts_end": 2183.78,
+          "text": "layer normalization in the next lecture we are going to look at this thing called gelu activation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2184.26,
+          "ts_end": 2187.92,
+          "text": "then we look at feed forward network and then we look at shortcut connections",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2188.48,
+          "ts_end": 2192.56,
+          "text": "so in separate lectures we are going to cover all of this and then you will see that all of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2192.56,
+          "ts_end": 2199.7,
+          "text": "this essentially comes together to teach us about the transformer block and only then we'll be fully",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2200.38,
+          "ts_end": 2204.88,
+          "text": "able to understand the gpt architecture i don't think there are any other youtube videos out",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2204.88,
+          "ts_end": 2210.18,
+          "text": "there which cover the gpt architecture from scratch in so much depth but i believe this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2210.18,
+          "ts_end": 2214.88,
+          "text": "much understanding is necessary for you to truly understand how the llm architecture works",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "G3W-LT79LSI_007",
+      "title": "Layer vs Batch normalization",
+      "ts_start": 2215.0,
+      "ts_end": 2337.0,
+      "segments": [
+        {
+          "ts_start": 2220.82,
+          "ts_end": 2226.84,
+          "text": "batch normalization and then i corrected to layer normalization right if you also have this confusion",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2226.84,
+          "ts_end": 2227.78,
+          "text": "remember that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2227.78,
+          "ts_end": 2232.08,
+          "text": "layer and batch normalization are very different from each other in layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2232.08,
+          "ts_end": 2235.52,
+          "text": "normalization we usually normalize along the feature dimension which is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2235.52,
+          "ts_end": 2241.02,
+          "text": "columns and layer normalization does not depend on the batch size at all no",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2241.47,
+          "ts_end": 2245.17,
+          "text": "matter what the batch size is we just take the output of every layer and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2245.17,
+          "ts_end": 2249.73,
+          "text": "normalize it based on the mean and the standard deviation batch normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2249.73,
+          "ts_end": 2253.23,
+          "text": "on the other hand we do the normalization for an entire batch so it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2253.23,
+          "ts_end": 2258.99,
+          "text": "definitely depends on the batch size now the main issue is that the available",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2258.99,
+          "ts_end": 2263.01,
+          "text": "hardware typically dictates the batch size if you if you don't have too",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2263.01,
+          "ts_end": 2268.5,
+          "text": "powerful of a hardware you might need to use a lower batch size so batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2268.5,
+          "ts_end": 2272.48,
+          "text": "normalization is not that flexible because it depends on the batch size we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2272.48,
+          "ts_end": 2276.36,
+          "text": "depends which depends on the available hardware on the other hand layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2276.36,
+          "ts_end": 2281.12,
+          "text": "normalization is pretty flexible it leads to more flexibility and training",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2281.12,
+          "ts_end": 2283.84,
+          "text": "for it leads to more flexibility and stability",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2284.06,
+          "ts_end": 2289.01,
+          "text": "for distributed training so if you have if you are in environments which lack",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2289.01,
+          "ts_end": 2293.55,
+          "text": "resources and hardware capabilities are not there which leads to low batches",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2293.55,
+          "ts_end": 2298.33,
+          "text": "etc or if you don't want to care about batch size you want the normalization to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2298.33,
+          "ts_end": 2302.63,
+          "text": "be independent of the batch size layer normalization is much better in terms of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2302.63,
+          "ts_end": 2307.27,
+          "text": "flexibility so don't make the error or don't make the confusion between layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2307.27,
+          "ts_end": 2312.83,
+          "text": "normalization versus batch normalization this brings us to the end of today's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2312.83,
+          "ts_end": 2314.71,
+          "text": "lecture as I mentioned in the subsequent",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2314.71,
+          "ts_end": 2319.11,
+          "text": "lectures we'll talk about JLU we'll talk about feed forward network and we'll",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2319.11,
+          "ts_end": 2323.33,
+          "text": "also talk about shortcut connections and then later we'll see how all of it comes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2323.33,
+          "ts_end": 2327.91,
+          "text": "together to make the GPT architecture thank you so much everyone and I look",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2327.91,
+          "ts_end": 2329.61,
+          "text": "forward to seeing you in the next lecture",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

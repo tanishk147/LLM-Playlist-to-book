@@ -1,0 +1,23 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Dot product formula",
+  "extracted_text": "Dot Product of Vectors\n\nThe scalar product of two vectors a and b of magnitude |a| and |b| is given as |a||b| cos \u03b8, where \u03b8 represents the angle between the vectors a and b taken in the direction of the vectors.\n\nBYJU'S\nhttps://byjus.com \u203a Maths \u203a Math Article\n\nDot Product Of Two Vectors | Definition, Properties, Formulas ...",
+  "code": null,
+  "math": [
+    "a \\cdot b = \\sum_{i=1}^{n} a_i b_i",
+    "|a||b| \\cos \\theta"
+  ],
+  "diagram_summary": "Google Search results page showing dot product formula with mathematical notation and vector diagrams illustrating the geometric interpretation of dot product.",
+  "diagram_elements": [
+    "Vector diagram showing angle \u03b8 between vectors",
+    "Matrix representation of dot product",
+    "Dot product of vectors illustration",
+    "Formula notation with summation"
+  ],
+  "confidence": 0.75,
+  "frame_id": "eSRhpYLerw4_f0001",
+  "video_id": "eSRhpYLerw4",
+  "timestamp_sec": 1173.133,
+  "source_image": "data/frames/eSRhpYLerw4/eSRhpYLerw4_f0001.jpg"
+}

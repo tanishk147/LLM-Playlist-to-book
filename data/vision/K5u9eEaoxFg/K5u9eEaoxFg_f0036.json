@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Step (7): Find attention scores",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention computation showing queries multiplied by transposed keys to produce attention scores, with two heads processing the same input tensors in parallel.",
+  "diagram_elements": [
+    "Queries",
+    "Keys.Transpose(2, 3)",
+    "Head 1",
+    "Head 2",
+    "Tensor output with numerical values",
+    "Arrow indicating multiplication operation"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0036",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1830.333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0036.jpg"
+}

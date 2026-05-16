@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "vector embeddings (2D example)",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A diagram showing how words and objects are converted into 2D vector embeddings through an embedding layer, with semantic grouping visualized in 2D space where similar items cluster together.",
+  "diagram_elements": [
+    "Input words: king, man, woman, apple, banana, orange, football, golf, tennis",
+    "Embedding layer (diamond shape)",
+    "Vector outputs: [4 5], [3 3.5], [5 3], [2.5 -2], [2.5 -3], [4 -2.5], [-3 4], [-1.5 3], [-2 2]",
+    "2D embedding space with coordinate axes",
+    "Green cluster (fruits): apple, banana, orange",
+    "Blue cluster (people): king, man, woman",
+    "Red cluster (sports): football, golf, tennis"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0008",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 758.766333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0008.jpg"
+}

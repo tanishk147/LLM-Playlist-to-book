@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "1980\n1997\n2017",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Timeline showing three years: 1980, 1997, and 2017, displayed horizontally across the slide.",
+  "diagram_elements": [
+    "1980",
+    "1997",
+    "2017"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0019",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 2012.733,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0019.jpg"
+}

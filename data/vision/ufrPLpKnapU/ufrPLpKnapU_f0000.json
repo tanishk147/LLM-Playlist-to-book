@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Positional Encoding",
+  "extracted_text": "(1) Until now, we looked at token embedding\n\n(2) In the embedding layer, the same token ID gets mapped to the same vector representation, regardless of where the token ID is positioned in the input sequence.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "ufrPLpKnapU_f0000",
+  "video_id": "ufrPLpKnapU",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/ufrPLpKnapU/ufrPLpKnapU_f0000.jpg"
+}

@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": "Step 3: Initialize trainable weight matrices for key, query, value (Wk, Wq, Wv) (6x6)\nStep 4: Calculate Keys, Queries, Value Matrix\n1X3X6 = (Input * Wk) Input * Wq Input * Wv\n(6x6)\nQueries (1X3X6)\nValues (1X3X6)",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention initialization and computation steps showing weight matrix initialization (Step 3) and key-query-value matrix calculation (Step 4) with tensor dimensions and operations.",
+  "diagram_elements": [
+    "Step 3: Initialize trainable weight matrices",
+    "Wk (key weights)",
+    "Wq (query weights)",
+    "Wv (value weights)",
+    "6x6 dimensions",
+    "Step 4: Calculate Keys, Queries, Value Matrix",
+    "Input tensor operations",
+    "1X3X6 output dimensions",
+    "Queries matrix",
+    "Values matrix"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0017",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1189.999667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0017.jpg"
+}

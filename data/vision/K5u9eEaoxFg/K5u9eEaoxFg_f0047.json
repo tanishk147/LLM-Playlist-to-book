@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention visualization showing keys transposed and split across two attention heads, with tensor outputs and shape annotations (1, 2, 3, 3) and parameter labels (b, num_heads, head_dim, num_tokens).",
+  "diagram_elements": [
+    "keys.transpose(2, 3)",
+    "Head 1",
+    "Head 2",
+    "tensor output with numerical values",
+    "shape (1, 2, 3, 3)",
+    "parameters: b, num_heads, head_dim, num_tokens"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0047",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2095.999667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0047.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Fine-tuning GPT models has been implemented in various industries to enhance performance for specific tasks",
+  "extracted_text": "Fine-tuning GPT models has been implemented in various industries to enhance performance for specific tasks. Here are some notable examples across different sectors:\n\n1. Airline Industry\nSK Telecom fine-tuned GPT-4 to improve customer service interactions specifically for telecom-related conversations in Korean. This resulted in significant performance improvements, including a 35% increase in conversation summarization quality and a 33% increase in intent recognition accuracy. This approach could be similarly applied in the airline industry to enhance customer service by handling queries and providing information more accurately in multiple languages (OpenAI).\n\n2. Healthcare\nIn the healthcare industry, fine-tuning GPT models can assist in medical diagnosis, summarizing medical records, and matching patients to clinical trials. By training on domain-specific data, these models can understand medical terminologies and provide more accurate and context-aware responses. For example, a fine-tuned model can help in automating the summarization of patient records, thus aiding healthcare professionals in quickly accessing critical information (Top AI Company)",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "-bsa3fCNGg4_f0004",
+  "video_id": "-bsa3fCNGg4",
+  "timestamp_sec": 340.233,
+  "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0004.jpg"
+}

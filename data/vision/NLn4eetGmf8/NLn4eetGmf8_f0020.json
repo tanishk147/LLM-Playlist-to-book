@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Generative AI History: Recurrent neural networks \u2013 1980 (Memory)",
+  "extracted_text": "RECURRENT NEURAL NETWORKS\n\nRNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Recurrent neural network architecture showing input layer (blue circles), hidden layer (red and yellow circles) with recurrence connections, and output layer (green circle), with labeled components for input, hidden layer, output, and recurrence feedback.",
+  "diagram_elements": [
+    "Input",
+    "Hidden Layer",
+    "Output",
+    "Recurrence"
+  ],
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0020",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 2048.766333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0020.jpg"
+}

@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Tensor shape transformations showing how input vectors with shape (1, 2, 3, 3) are reshaped through multi-head attention operations to output shape (1, 3, 2, 3), with intermediate steps showing head dimension splitting and concatenation.",
+  "diagram_elements": [
+    "(1, 2, 3, 3) - input shape",
+    "vectors:",
+    "(heads, num_tokens, head_dim) \u2192 (b, num_tokens, num_heads, head_dim)",
+    "(1, 2, 3, 3) - intermediate shape",
+    "(b, num_heads, num_tokens, head_dim) - reshaped for multi-head processing",
+    "(1, 3, 2, 3) - output shape",
+    "tensor values with numerical data shown in code blocks"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0079",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2927.799667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0079.jpg"
+}

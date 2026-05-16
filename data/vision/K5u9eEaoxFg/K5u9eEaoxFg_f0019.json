@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "[ 3.4907, -2.1993, 0.2381]],\n[[ 1.1957, 1.3712, 0.6885],\n[-1.5484, 4.2152, 2.1248]],\n\n[[-0.1226, 0.1155, 0.4755],\n[-0.0176, 0.8339, 0.7582]]], dtype=torch.float64)\n\nReshaped Values matrix:\ntensor([[[[-3.6194, 2.0935, 1.3879],\n[ 2.1231, -1.2262, -0.2556]],\n\n[[ 1.1106, -0.4063, -0.5588],\n[ 1.8222, 1.8721, 0.4929]],\n\n[[-1.6594, 0.1052, -0.0468],\n[ 0.8916, -1.4384, -0.5651]]], dtype=torch.float64)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0019",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1343.466333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0019.jpg"
+}

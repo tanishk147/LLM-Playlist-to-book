@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
+  "extracted_text": "Published as a conference paper at ICLR 2015\n\nDzmitry Bahdanau\nJacobs University Bremen, Germany\n\nKyunghyun Cho    Yoshua Bengio*\nUniversit\u00e9 de Montr\u00e9al\n\nAbstract\n\nNeural machine translation is a recently proposed approach to machine translation. Unlike the traditional statistical machine translation, the neural machine translation aims at building a single neural network that can be jointly tuned to maximize the translation performance. The models proposed recently for neural machine translation often belong to a family of encoder\u2013decoders and encode a source sentence into a fixed-length vector from which a decoder generates a translation. In this paper, we conjecture that the use of a fixed-length vector is a bottleneck in improving the performance of this basic encoder\u2013decoder architecture, and propose to extend this by allowing a model to automatically (soft-)search for parts of a source sentence that are relevant to predicting a target word, without having to form these parts as a hard segment explicitly. With this new approach, we achieve a translation performance comparable to the existing state-of-the-art phrase-based system on the task of English-to-French translation. Furthermore, qualitative analysis reveals that the (soft-)alignments found by the model agree",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0014",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 1776.633,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0014.jpg"
+}

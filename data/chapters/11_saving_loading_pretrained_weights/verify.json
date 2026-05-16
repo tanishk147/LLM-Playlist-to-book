@@ -1,0 +1,1616 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Saving, Loading, and Using Pre-Trained GPT-2 Weights",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "At this point in the book, you have built a GPT model from scratch and trained it on a small dataset [c3452].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3452"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 2,
+      "text": "The model works, but it has a problem: it was trained on a single small book for 10 epochs [c3455], and as a result it overfit\u2014memorizing the training text and reproducing it in predictions rather than generalizing [c723].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3455",
+        "c723"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 3,
+      "text": "The solution is to stop training from scratch and instead load the weights that OpenAI has already released publicly for GPT-2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "Before we get there, though, we need to understand the mechanics of saving and loading model state in PyTorch, because those same mechanics underpin everything that follows.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 5,
+      "text": "This chapter covers two related topics.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 6,
+      "text": "First, we look at PyTorch's checkpointing system: how to save and restore model parameters and optimizer state so that training can be interrupted and resumed without losing progress.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 7,
+      "text": "Second, we walk through the full pipeline for downloading OpenAI's GPT-2 weights, parsing the seven files they ship, mapping those weights into our custom `GPTModel` class, and finally running inference to confirm that the loaded model produces coherent text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 8,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 9,
+      "text": "### PyTorch Model Checkpointing",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 10,
+      "text": "#### Why Bother Saving Weights?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 11,
+      "text": "Saving and loading model weights helps save memory and time [c720].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c720"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 12,
+      "text": "This matters even for small experiments, but it becomes critical when dealing with large models like the large language model built in this series [c719].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c719"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 13,
+      "text": "If training is interrupted\u2014by a crash, a timeout on a cloud instance, or simply because you want to pause and resume\u2014you need to be able to restore the exact state of both the model and the optimizer.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 14,
+      "text": "The next step in this series is to load pre-trained weights from OpenAI into the model instead of training from scratch [c726], so building the foundation for weight saving and loading is a prerequisite [c729].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c726",
+        "c729"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 15,
+      "text": "#### The Model State Dictionary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 16,
+      "text": "The two main PyTorch functions for saving and loading model parameters are `torch.save()` and `model.load_state_dict()` [c730].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c730"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 17,
+      "text": "To understand how they work, you first need to understand what they operate on.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 18,
+      "text": "`model.state_dict()` is a dictionary mapping each layer of a PyTorch model to its parameter tensors [c731].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c731"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 19,
+      "text": "Learnable parameters of any `torch.nn.Module` are contained in `model.parameters()` [c733].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c733"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 20,
+      "text": "The state dictionary is essentially a flat snapshot of every weight matrix and bias vector in the model, keyed by the layer name.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 21,
+      "text": "To save a model's parameters, you pass the state dictionary to `torch.save()`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 22,
+      "text": "To restore them, you call `model.load_state_dict()` with the dictionary you previously saved.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 23,
+      "text": "After loading, the model should be put in evaluation mode using `model.eval()` [c737].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c737"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 24,
+      "text": "This is important because some layers (like dropout and batch normalization) behave differently during training versus inference.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 25,
+      "text": "#### The Optimizer State Dictionary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 26,
+      "text": "Saving the model parameters alone is not always sufficient.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 27,
+      "text": "The optimizer also carries state that matters for training continuity.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 28,
+      "text": "The optimizer state dictionary stores both hyperparameters (such as learning rate and weight decay) and historical data used by the optimizer (such as past gradient values and squared gradient values) [c742].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c742"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 29,
+      "text": "More specifically, `optimizer.state_dict()` returns the state of the optimizer as a dictionary containing two entries: `'state'` (a dict holding current optimization state per parameter) and `'param_groups'` (a list containing all parameter groups) [c746].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c746"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 30,
+      "text": "For an optimizer like AdamW, the historical gradient and squared-gradient values are what allow the adaptive learning rate to work correctly when training resumes.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 31,
+      "text": "It is recommended to save the optimizer state in addition to model parameters when checkpointing training [c741].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c741"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 32,
+      "text": "When loading a saved checkpoint, the optimizer state dictionary restores both the optimizer parameters and the history of gradients and squared gradients [c748].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c748"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 33,
+      "text": "Without this, resuming training would effectively reset the optimizer's momentum, which can destabilize training or slow convergence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 34,
+      "text": "#### Saving and Loading a Full Checkpoint",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 35,
+      "text": "The standard pattern is to bundle the model state dictionary and the optimizer state dictionary into a single dictionary and save it as one file.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 36,
+      "text": "The `.pth` file extension is a convention for PyTorch model files, though technically any file extension can be used [c736].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c736"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 37,
+      "text": "To restore from such a checkpoint, you reconstruct the model and optimizer objects, then load their respective state dictionaries from the saved file.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 38,
+      "text": "The following code demonstrates the full restoration sequence:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 39,
+      "text": "# Source: [c747]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 40,
+      "text": "checkpoint = torch.load('model_and_optimizer.pth')",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 41,
+      "text": "Notice that `model.train()` is called at the end here because the intent is to resume training.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 42,
+      "text": "If you were loading for inference only, you would call `model.eval()` instead [c737].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c737"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 43,
+      "text": "Saving and loading model and optimizer states is especially important for training large language models to avoid losing progress and having to restart from scratch [c749].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c749"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 44,
+      "text": "With the checkpointing mechanics established, we can now turn to the more interesting problem: loading weights that someone else has already trained.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 45,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 46,
+      "text": "### Loading OpenAI's GPT-2 Weights",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "#### The Big Picture",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "The lecture series is building a GPT model from scratch using a custom-defined GPT model class [c3452], and the goal of this section is to integrate that custom class with the publicly released GPT-2 OpenAI weights [c3453].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3452",
+        "c3453"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 49,
+      "text": "The GPT-2 weights will be loaded into the GPT model class and used for text generation [c3468].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3468"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 50,
+      "text": "There is one immediate complication: OpenAI originally saved GPT-2 weights using TensorFlow, while the lecture series code uses PyTorch [c3469].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3469"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 51,
+      "text": "This means we cannot simply call `torch.load()` on the downloaded files.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 52,
+      "text": "We need a conversion step.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 53,
+      "text": "TensorFlow must be installed to load the GPT-2 weights, which were originally saved in TensorFlow format [c3470].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3470"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 54,
+      "text": "Previously, a small GPT-2 model was trained for educational purposes using a limited dataset consisting of a single book [c3465].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3465"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 55,
+      "text": "The output was incoherent because the model had not seen enough data.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 56,
+      "text": "The pre-trained GPT-2 weights fix this: with them loaded, the model produces coherent text [c3564], and inference execution is fast because the model does not require training [c3562].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3564",
+        "c3562"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 57,
+      "text": "#### The Seven Downloaded Files",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 58,
+      "text": "The GPT-2 weights consist of seven files with a total size of approximately 500 megabytes [c3475, c3527].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3475",
+        "c3527"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 59,
+      "text": "Downloading them typically takes 5 to 10 minutes with download speeds of 2 to 5 MB per second [c3528].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3528"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 60,
+      "text": "GPT-2 model sizes available include 124M, 355M, 774M, and 1.5B parameters [c3461], and the weights are also available on platforms such as Kaggle [c3460].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3461",
+        "c3460"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 61,
+      "text": "The GPT-2 model download process involves downloading seven files from an API to the local machine [c3500].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3500"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 62,
+      "text": "Let's look at what each file contains, because understanding the file structure is essential for parsing them correctly.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 63,
+      "text": "- **`checkpoint`**: Contains the path where all current parameters and weights of the GPT-2 model are stored [c3481].\n- **`model.ckpt.data-00000-of-00001`**, **`model.ckpt.index`**, **`model.ckpt.meta`**: These three files together store all the weights of the GPT-2 model [c3482].\n- **`encoder.json`**: A vocabulary mapping tokens to their corresponding token IDs [c3483].\n- **`vocab.bpe`**: Contains a list of byte-pair encoded token merges, ordered by merge frequency with the highest probability merges at the top [c3485].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3481",
+        "c3482",
+        "c3483",
+        "c3485"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "Byte-pair encoding is a sub-word tokenization scheme that merges the most frequently occurring pairs of tokens into single tokens [c3486].\n- **`hparams.json`** (also referred to as `params.json` in the download list): Contains all the hyperparameter settings and configuration values for the GPT-2 model [c3488].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3486",
+        "c3488"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 65,
+      "text": "Pre-processing steps are required after downloading GPT-2 weights before they can be integrated with the GPT architecture [c3476].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3476"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 66,
+      "text": "#### The Download Helper Module",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 67,
+      "text": "The `GPT_download3.py` file contains three functions: `download_and_load_gpt2` (the main function), `download_file` (a helper function), and `load_gpt2_params_from_tf_checkpoint` (a helper function) [c3477].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3477"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 68,
+      "text": "The `download_and_load_gpt2` function performs two sequential steps: first downloading the seven files to the local computer, then loading the parameters from the downloaded files into a dictionary called `params` with a specific format [c3478].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3478"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 69,
+      "text": "Here is the implementation:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 70,
+      "text": "# Source: [c3462]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 71,
+      "text": "def download_and_load_gpt2(model_size, models_dir):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 72,
+      "text": "The function validates the requested model size against the four allowed sizes, constructs the download URLs, and iterates through all seven filenames.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 73,
+      "text": "To invoke it:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 74,
+      "text": "# Source: [c3479]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 75,
+      "text": "from gpt_download3 import download_and_load_gpt2",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 76,
+      "text": "This call returns two dictionaries: `settings` and `params`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 77,
+      "text": "We will examine both in detail.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 78,
+      "text": "#### The Settings Dictionary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 79,
+      "text": "The `settings` dictionary contains the same hyperparameters as those in `hparams.json`: vocabulary size, context length, embedding dimension, number of attention heads, and number of transformer blocks [c3503].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3503"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 80,
+      "text": "The hyperparameter values shown are for the smallest GPT-2 model (124 million parameters) [c3496].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3496"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 81,
+      "text": "To understand what these values mean:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 82,
+      "text": "- **Embedding dimension**: The size of the vector space into which each token ID is converted.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 83,
+      "text": "For GPT-2 small, each token is represented as a 768-dimensional vector [c3492].\n- **N_heads**: The number of attention heads present in each transformer block [c3494].\n- **N_layers**: The number of transformer blocks in the model [c3495].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3492",
+        "c3494",
+        "c3495"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 84,
+      "text": "[FIGURE: Table showing GPT-2 small hyperparameters: vocab_size, context_length, emb_dim=768, n_heads=12, n_layers=12]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 85,
+      "text": "#### The Params Dictionary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 86,
+      "text": "The `params` dictionary for GPT-2 has five keys: `WTE` (token embeddings), `WPE` (positional embeddings), `blocks` (transformer block parameters), final normalization scale (`G`), and final normalization shift (`B`) [c3505].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3505"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 87,
+      "text": "Each key corresponds to a distinct part of the model architecture:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 88,
+      "text": "- **`WTE`** (token embeddings): Stores parameters for converting input token IDs into token embeddings [c3506].\n- **`WPE`** (positional embeddings): Stores parameters for adding positional information to token embeddings [c3507].\n- **`blocks`**: Contains all trainable weights and parameters within the transformer blocks, including attention layers, feed-forward networks, output projections, and layer normalization parameters [c3511].\n- **`G` and `B`**: The final layer normalization scale and shift parameters [c3505].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3506",
+        "c3507",
+        "c3511",
+        "c3505"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 89,
+      "text": "Layer normalization in GPT-2 includes trainable scale (`G`) and shift (`B`) parameters applied after mean subtraction and variance normalization [c3517].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3517"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 90,
+      "text": "[FIGURE: Diagram of the params dictionary tree: WTE, WPE, blocks (list of per-layer dicts), G, B]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 91,
+      "text": "One architectural detail worth noting: in GPT-2, the query, key, and value weight matrices in the attention layer are fused into a single large matrix called `C_ATTN` [c3513].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3513"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 92,
+      "text": "This is a common implementation optimization\u2014instead of three separate matrix multiplications, a single larger multiplication is performed and the result is split.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 93,
+      "text": "When we map these weights into our custom model, we need to split `C_ATTN` back into the three separate Q, K, V matrices.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 94,
+      "text": "#### Loading Parameters from the TensorFlow Checkpoint",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 95,
+      "text": "The `tensorflow.train.latest_checkpoint()` function locates the model checkpoint directory and identifies the model checkpoint path named `model.CKPT` [c3502].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3502"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 96,
+      "text": "The `load_gpt2_params_from_tf_checkpoint()` function takes a TensorFlow checkpoint path and a settings dictionary as inputs and returns a `params` dictionary containing the loaded model parameters [c3504].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3504"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 97,
+      "text": "The `load_gpt2_params_from_tf_ckpt` function loads parameter values from a TensorFlow checkpoint and converts them into the `params` dictionary structure with the five keys [c3522].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3522"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 98,
+      "text": "Here is the full implementation:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 99,
+      "text": "# Source: [c3521]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 100,
+      "text": "def load_gpt2_params_from_tf_ckpt(ckpt_path, settings):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "Intuitively, this function walks the TensorFlow variable name hierarchy\u2014which uses `/`-separated path strings like `model/h0/attn/c_attn/w`\u2014and reconstructs a nested Python dictionary that mirrors that hierarchy.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 102,
+      "text": "Variables whose names start with `h` (for \"hidden layer\") are routed into the appropriate index of the `blocks` list.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 103,
+      "text": "All other variables go into the top-level `params` dictionary.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "The function returns two values: the `settings` dictionary (containing vocabulary size, context length, embedding dimension, number of attention heads, and number of transformer blocks) and the `params` dictionary [c3523].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3523"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 105,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 106,
+      "text": "### Mapping GPT-2 Weights into the Custom GPT Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 107,
+      "text": "#### Setting Up the Model Configuration",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 108,
+      "text": "We now have the `params` dictionary populated with GPT-2 weights.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 109,
+      "text": "The next task is to replace the random weight initializations in the GPT model with downloaded GPT-2 parameters from the `params` dictionary [c3541].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3541"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 110,
+      "text": "The GPT model class initializes token embeddings, positional embeddings, transformer blocks, layer normalization, and an output head layer [c3540].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3540"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 111,
+      "text": "We need to assign the downloaded weights to each of these components in turn.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 112,
+      "text": "First, we set up the model configuration.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 113,
+      "text": "The four GPT-2 variants have different architectural dimensions:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 114,
+      "text": "# Source: [c3533]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 115,
+      "text": "model_configs = {",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 116,
+      "text": "This pattern of copying a base configuration and updating it with model-specific values makes it easy to switch between GPT-2 variants without rewriting the model class.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 117,
+      "text": "#### A Shape-Checking Assignment Helper",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 118,
+      "text": "Before assigning any weights, it is useful to have a helper function that verifies shape compatibility.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 119,
+      "text": "A mismatch in tensor shapes is a common source of silent bugs\u2014the assignment might succeed but produce garbage outputs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 120,
+      "text": "# Source: [c3544]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 121,
+      "text": "def assign(left, right):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 122,
+      "text": "The consequence of using this helper throughout the weight-loading process is that any shape mismatch raises an error immediately, rather than propagating silently.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 123,
+      "text": "A tiny mistake in the weight loading process would cause the model to fail [c3572], so this defensive check is valuable.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3572"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 124,
+      "text": "#### Assigning Weights Layer by Layer",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 125,
+      "text": "With the helper in place, we can assign weights to each component of the model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 126,
+      "text": "The process follows the structure of the `params` dictionary.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 127,
+      "text": "**Attention block weights**: Attention block query, key, and value weight matrices are updated by assigning `Q_W`, `K_W`, and `V_W` from downloaded GPT-2 parameters [c3546].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3546"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 128,
+      "text": "Recall that GPT-2 stores these as the fused `C_ATTN` matrix, so the assignment code must split that matrix along the appropriate dimension before assigning to the three separate weight tensors in our custom model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 129,
+      "text": "**Output projection**: The output projection layer weights and biases from GPT-2 are assigned to the attention object's output projection [c3548].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3548"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 130,
+      "text": "**Feed-forward network**: Feed forward neural network weights and biases for both the fully connected layer and projection layer are assigned from downloaded GPT-2 values [c3550].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3550"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 131,
+      "text": "**Final layer normalization**: The final layer normalization scale and shift values are assigned from GPT-2 downloaded parameters [c3552].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3552"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 132,
+      "text": "[FIGURE: Diagram showing the mapping from params dictionary keys (WTE, WPE, blocks[i], G, B) to GPTModel attributes (tok_emb, pos_emb, trf_blocks[i], final_norm)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 133,
+      "text": "#### Weight Tying",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 134,
+      "text": "There is one more architectural detail that requires special handling: weight tying.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 135,
+      "text": "GPT-2 uses weight tying, where token embedding weights are reused for the output head layer instead of defining separate weights [c3553].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3553"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 136,
+      "text": "This means the matrix that maps token IDs to embedding vectors is the same matrix (transposed) that maps the final hidden states back to vocabulary logits.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 137,
+      "text": "Weight tying reduces the total parameters from 164 million to 124 million in the GPT-2 architecture [c3554].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3554"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 138,
+      "text": "Intuitively, this makes sense: the embedding matrix encodes a relationship between tokens and a vector space, and the output projection needs to decode that same relationship in reverse.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 139,
+      "text": "Sharing the weights enforces consistency between the two operations and reduces the parameter count significantly.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 140,
+      "text": "When loading weights, this means we do not assign separate weights to the output head\u2014we simply point it at the same tensor as the token embedding layer.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 141,
+      "text": "#### Downloading and Loading in Practice",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 142,
+      "text": "To put it all together, here is the sequence that downloads the weights and loads them:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 143,
+      "text": "# Source: [c3524]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 144,
+      "text": "from gpt_download3 import download_and_load_gpt2",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 145,
+      "text": "After this call, `settings` contains the hyperparameters and `params` contains the weight tensors.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 146,
+      "text": "The weight assignment functions described above then iterate through the model's layers and call `assign()` to copy each tensor from `params` into the corresponding attribute of the `GPTModel` instance.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 147,
+      "text": "Model weights are loaded correctly when the model produces coherent text [c3571].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3571"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "This is the practical test: if the output is coherent, the mapping was correct; if it is garbage, something went wrong in the assignment.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 149,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 150,
+      "text": "### Text Generation with Pre-Trained Weights",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 151,
+      "text": "#### Running Inference",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 152,
+      "text": "With pre-trained GPT-2 weights loaded, inference execution is fast because the model does not require training [c3562].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3562"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 153,
+      "text": "We can immediately call the `generate` function that was built in earlier chapters.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 154,
+      "text": "The text generation strategies including temperature scaling and top-k sampling can be integrated together to reduce overfitting in text generation [c724].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c724"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 155,
+      "text": "Top-k sampling was introduced as a second decoding strategy to reduce loss and overfitting [c3457].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3457"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 156,
+      "text": "Here is an example generation call:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 157,
+      "text": "# Source: [c3556]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 158,
+      "text": "generate(model, input_token_ids=['every', 'effort', 'moves', 'you'], max_new_tokens=25, temperature=1.5, top_k=50)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 159,
+      "text": "Top-K sampling with K=50 restricts token selection to the 50 most likely candidates during generation [c3558].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3558"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 160,
+      "text": "The temperature of 1.5 controls the sharpness of the probability distribution over those candidates\u2014higher values produce more varied output, lower values produce more conservative output.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 161,
+      "text": "#### Comparing Trained vs. Untrained Output",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 162,
+      "text": "The difference in output quality is stark.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 163,
+      "text": "Without GPT-2 weights, the model generates incoherent output [c3561].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3561"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 164,
+      "text": "With pre-trained GPT-2 weights loaded, output from the pre-trained GPT-2 model is more coherent than output from the untrained model [c3564].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3564"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 165,
+      "text": "This comparison makes intuitive sense.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 166,
+      "text": "The untrained model has random weights, so its output is essentially random token sequences.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 167,
+      "text": "The pre-trained model has weights that encode statistical patterns from a large corpus, so it produces grammatically plausible and semantically coherent continuations.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 168,
+      "text": "#### Fine-Tuning Possibilities",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 169,
+      "text": "Loading pre-trained weights is not the end of the story\u2014it is the beginning of a new one.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 170,
+      "text": "The custom-built GPT model allows exploration of hyperparameter tuning and architectural modifications that are not possible with ChatGPT [c3567].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3567"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 171,
+      "text": "Because we own the model class and have direct access to every weight tensor, we can modify the architecture, freeze specific layers, or fine-tune on a domain-specific dataset.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 172,
+      "text": "For reference, the Adam optimizer is used with a learning rate of 5e-4 and weight decay of 0.1 [c3569] when fine-tuning from the pre-trained weights.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3569"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 173,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 174,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "This chapter covered two complementary skills.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 176,
+      "text": "The first is PyTorch checkpointing: using `model.state_dict()` and `optimizer.state_dict()` to save and restore the full training state, so that long training runs can be interrupted and resumed without losing progress [c720, c749].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c720",
+        "c749"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 177,
+      "text": "The second is loading externally trained weights: downloading OpenAI's seven GPT-2 files, parsing the TensorFlow checkpoint format into a Python dictionary, and mapping each weight tensor into the correct attribute of our custom `GPTModel` class.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 178,
+      "text": "The key technical challenges along the way were:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 179,
+      "text": "1. **Format mismatch**: GPT-2 weights are in TensorFlow format; our model is in PyTorch [c3469].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3469"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 180,
+      "text": "The `load_gpt2_params_from_tf_ckpt` function bridges this gap [c3522].\n2. **Fused attention matrices**: GPT-2 stores Q, K, V as a single `C_ATTN` matrix [c3513], which must be split before assignment.\n3. **Weight tying**: The token embedding and output head share weights [c3553], reducing the parameter count from 164M to 124M [c3554].\n4. **Shape verification**: The `assign()` helper catches mismatches early [c3544], because a tiny mistake in the weight loading process would cause the model to fail [c3572].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3522",
+        "c3513",
+        "c3553",
+        "c3554",
+        "c3544",
+        "c3572"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 181,
+      "text": "The payoff is immediate and tangible: a model that generates coherent text [c3564] without any training, simply by inheriting the knowledge encoded in GPT-2's weights.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3564"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    }
+  ],
+  "summary": {
+    "grounded": 64,
+    "unsupported": 47,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 71
+  }
+}

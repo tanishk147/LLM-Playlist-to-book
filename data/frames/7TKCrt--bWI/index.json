@@ -1,0 +1,65 @@
+[
+  {
+    "frame_id": "7TKCrt--bWI_f0000",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0000.jpg",
+    "phash": "a07f007e057b3a6b",
+    "edge_density": 0.12255646616285404,
+    "sha256": "257a4a28474f4edc1ae4c69ecf34e200a1b49fe8175755e2849533941a3b4c03"
+  },
+  {
+    "frame_id": "7TKCrt--bWI_f0001",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 23.133,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0001.jpg",
+    "phash": "dcafe1e92103a1e5",
+    "edge_density": 0.14594130838099129,
+    "sha256": "b21165985c8ff58c107081635e6556b3987ca7f11527477ce30b9adb48534b53"
+  },
+  {
+    "frame_id": "7TKCrt--bWI_f0002",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 1677.533,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0002.jpg",
+    "phash": "817f007f615f1d29",
+    "edge_density": 0.08934089477805011,
+    "sha256": "34caba674e21b9908f406ac80088391d4c49637a2928894ad548d9125713c618"
+  },
+  {
+    "frame_id": "7TKCrt--bWI_f0003",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 2676.633,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0003.jpg",
+    "phash": "ea81ff80bd8580f5",
+    "edge_density": 0.0923412181712963,
+    "sha256": "3abdad3277823348ca02aaadba3191e50e898fee8c804c87e03d73df8d5ef2c7"
+  },
+  {
+    "frame_id": "7TKCrt--bWI_f0004",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 2679.366333,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0004.jpg",
+    "phash": "a17e005f017f6d35",
+    "edge_density": 0.12385567725354031,
+    "sha256": "faa3cda11f7dfecd0f40176b26a07b394d8274bed78a84554b974f2ed7626cb3"
+  },
+  {
+    "frame_id": "7TKCrt--bWI_f0005",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 3295.033,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0005.jpg",
+    "phash": "c4f88b94fccb803b",
+    "edge_density": 0.15526056559776688,
+    "sha256": "43a70d80f5096211e8efbe8f64658fe03fe9eb22bd282c3808d5636dd813f466"
+  },
+  {
+    "frame_id": "7TKCrt--bWI_f0006",
+    "video_id": "7TKCrt--bWI",
+    "timestamp_sec": 3298.033,
+    "path": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0006.jpg",
+    "phash": "807f007f407f7c1b",
+    "edge_density": 0.1488501455269608,
+    "sha256": "91444aa241e067cdf9d5783892978b3411abc47d0f3b4753bc00ba608657d232"
+  }
+]

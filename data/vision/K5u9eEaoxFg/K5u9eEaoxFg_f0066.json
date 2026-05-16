@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "values = torch.tensor([[[[-3.6194,  2.0935,   1.3879],\n                         [-1.1106, -0.4063,  -0.5588]],\n                        [[ 2.1231, -1.2262,  -0.2556],\n                         [ 1.8222,  1.8721,   0.4929],\n                         [ 0.8916, -1.4384,  -0.5651]]]])\n\nContext vectors:\ntensor([[[[-3.6194,  2.0935,   1.3879],\n          [-1.8728,  1.6494,   0.7163]],\n         [[-0.3553, -0.5607,  -0.1181]],\n         [[ 1.5961, -0.9367,  -0.3400],\n          [ 1.3712,  0.7805,   0.2233],\n          [ 0.6997, -0.4487,  -0.0530]]]])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0066",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2790.866333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0066.jpg"
+}

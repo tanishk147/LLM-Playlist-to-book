@@ -1,0 +1,12 @@
+{
+  "chapter_id": "appendix_datasets_used",
+  "title": "Datasets Used in This Series",
+  "summary": {
+    "grounded": 42,
+    "unsupported": 0,
+    "contradicted": 0,
+    "needs_external_check": 1,
+    "narrative_ok": 17
+  },
+  "stripped_sentence_indices": []
+}

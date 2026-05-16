@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "6 Pretraining for Classification\n7 Finetuning to Follow Instructions\nAppendix A. Introduction to PyTorch\nAppendix B. References and Further Reading\nAppendix C. Exercise Solutions\nAppendix D. Adding Bells and Whistles to the Training Loop\nAppendix E. Parameter-efficient Finetuning with LoRA\n\n\u00a9 Manning Publications Co. To comment go to liveBook\nLicensed to Raj Abhijit Dandekar <raj.dandekar8@gmail.com>",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "Xpr8D6LeAtw_f0021",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 874.733,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0021.jpg"
+}

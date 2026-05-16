@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "This will give us a birds eye view of how everything fits together.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A visual comparison showing an aerial view of a circular urban development and a close-up of a bird's eye (yellow iris) to illustrate the concept of perspective and overview.",
+  "diagram_elements": [
+    "Aerial cityscape photograph",
+    "Bird eye close-up photograph",
+    "Yellow decorative border/frame"
+  ],
+  "confidence": 0.85,
+  "frame_id": "4i23dYoXp-A_f0006",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 2148.766333,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0006.jpg"
+}

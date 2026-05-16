@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Training loop flowchart showing the steps for each batch in a training set: reset loss gradients, calculate loss, perform backward pass, and update model weights.",
+  "diagram_elements": [
+    "2) For each batch in training set",
+    "3) Reset loss gradients from previous epoch",
+    "4) Calculate loss on current batch",
+    "5) Backward pass to calculate loss gradients",
+    "6) Update model weights using loss gradients"
+  ],
+  "confidence": 0.92,
+  "frame_id": "Zxf-34voZss_f0002",
+  "video_id": "Zxf-34voZss",
+  "timestamp_sec": 782.666333,
+  "source_image": "data/frames/Zxf-34voZss/Zxf-34voZss_f0002.jpg"
+}

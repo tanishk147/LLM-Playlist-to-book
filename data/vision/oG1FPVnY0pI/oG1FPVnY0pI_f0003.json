@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "torch.multinomial",
+  "extracted_text": "NOTE\nWhen drawn without replacement, num_samples must be lower than number of non-zero elements in input (or the min number of non-zero elements in each row of input if it is a matrix).\n\nParameters\n\u2022 input (Tensor) \u2013 the input tensor containing probabilities\n\u2022 num_samples (int) \u2013 number of samples to draw\n\u2022 replacement (bool, optional) \u2013 whether to draw with replacement or not\n\nKeyword Arguments\n\u2022 generator (torch.Generator, optional) \u2013 a pseudorandom number generator for sampling\n\u2022 out (Tensor, optional) \u2013 the output tensor.\n\nExample:",
+  "code": {
+    "language": "python",
+    "content": ">>> weights = torch.tensor([0, 10, 3, 0], dtype=torch.float) # create a tensor of weights\n>>> torch.multinomial(weights, 2)\ntensor([1, 2])\n>>> torch.multinomial(weights, 5) # ERROR!\nRuntimeError: cannot sample n_sample > prob_dist.size(-1) samples without replacement\n>>> torch.multinomial(weights, 4, replacement=True)\ntensor([ 2, 1, 1, 1])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "oG1FPVnY0pI_f0003",
+  "video_id": "oG1FPVnY0pI",
+  "timestamp_sec": 335.533,
+  "source_image": "data/frames/oG1FPVnY0pI/oG1FPVnY0pI_f0003.jpg"
+}

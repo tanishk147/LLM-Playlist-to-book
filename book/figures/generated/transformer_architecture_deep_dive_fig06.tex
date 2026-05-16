@@ -1,0 +1,43 @@
+\begin{tikzpicture}[scale=1.2]
+  % Title
+  \node at (2.5, 5.5) {Self-Attention Mechanism};
+  
+  % Input sequence tokens
+  \foreach \i in {1,2,3,4} {
+    \node[draw, rectangle, minimum width=0.6cm, minimum height=0.6cm, fill=lightblue] (token\i) at (\i*0.8, 4.5) {$x_\i$};
+  }
+  
+  % Query, Key, Value projections
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightyellow] (Q) at (0.5, 3.2) {Query (Q)};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightyellow] (K) at (2, 3.2) {Key (K)};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightyellow] (V) at (3.5, 3.2) {Value (V)};
+  
+  % Arrows from tokens to projections
+  \foreach \i in {1,2,3,4} {
+    \draw[->] (token\i) -- (Q);
+    \draw[->] (token\i) -- (K);
+    \draw[->] (token\i) -- (V);
+  }
+  
+  % Attention computation
+  \node[draw, rectangle, minimum width=2cm, minimum height=0.5cm, fill=lightgreen] (matmul) at (2, 1.8) {$QK^T / \sqrt{d_k}$};
+  \node[draw, rectangle, minimum width=1.5cm, minimum height=0.5cm, fill=lightcyan] (softmax) at (2, 0.8) {Softmax};
+  \node[draw, rectangle, minimum width=1.5cm, minimum height=0.5cm, fill=lightyellow] (output) at (2, -0.2) {Output};
+  
+  % Arrows for computation flow
+  \draw[->] (Q) -- (matmul);
+  \draw[->] (K) -- (matmul);
+  \draw[->] (matmul) -- (softmax);
+  \draw[->] (softmax) -- (output);
+  \draw[->] (V) -- (output);
+  
+  % Attention matrix visualization
+  \node at (5.5, 2.5) {Attention Matrix $A \in \mathbb{R}^{N \times N}$};
+  \foreach \i in {1,2,3,4} {
+    \foreach \j in {1,2,3,4} {
+      \pgfmathsetmacro{\shade}{50 + 12.5*\i + 12.5*\j}
+      \node[draw, rectangle, minimum width=0.5cm, minimum height=0.5cm, fill=gray!\shade] at (4.5+\j*0.6, 3.5-\i*0.6) {};
+    }
+  }
+  \node at (5.5, 0.5) {Each token attends to all tokens};
+\end{tikzpicture}

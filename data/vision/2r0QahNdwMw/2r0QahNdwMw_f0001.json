@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "configurations with zero or near-zero training loss), even when data and labels are randomized before training [42]. However, this good behavior is not universal; the trainability of neural nets is highly dependent on network architecture design choices, the choice of optimizer, variable initialization, and a variety of other considerations. Unfortunately, the effect of each of these choices on the structure of the underlying loss surface is unclear. Because of the prohibitive cost of loss function evaluations (which requires looping over all the data points in the training set), studies in this field have remained predominantly theoretical.\n\nFigure 1: The loss surfaces of ResNet-56 with/without skip connections. The proposed filter\n\n(a) without skip connections\n(b) with skip connections",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Two 3D loss surface visualizations comparing ResNet-56 training dynamics: (a) shows a jagged, multi-peaked landscape without skip connections, while (b) shows a smoother, more convex surface with skip connections.",
+  "diagram_elements": [
+    "Loss surface without skip connections (jagged, multi-peaked)",
+    "Loss surface with skip connections (smooth, convex)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "2r0QahNdwMw_f0001",
+  "video_id": "2r0QahNdwMw",
+  "timestamp_sec": 891.566333,
+  "source_image": "data/frames/2r0QahNdwMw/2r0QahNdwMw_f0001.jpg"
+}

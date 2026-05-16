@@ -1,0 +1,12 @@
+{
+  "chapter_id": "appendix_environment_setup",
+  "title": "Environment Setup: PyTorch, TikToken, TensorFlow, and Ollama",
+  "summary": {
+    "grounded": 40,
+    "unsupported": 0,
+    "contradicted": 0,
+    "needs_external_check": 2,
+    "narrative_ok": 12
+  },
+  "stripped_sentence_indices": []
+}

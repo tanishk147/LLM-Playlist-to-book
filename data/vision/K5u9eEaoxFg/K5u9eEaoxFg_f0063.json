@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Transposed Values matrix:\ntensor([[[\u22123.6194, 2.0935, 1.3879],\n[ 1.1106, \u22120.4063, \u22120.5588]],\n[\u22121.6594, 0.1052, \u22120.0468]],\n[[ 2.1231, \u22121.2262, \u22120.2556],\n[ 1.8222, 1.8721, 0.49291],\n[ 0.8916, \u22121.4384, \u22120.5651]]])\n\nStep(7): Find attention scores:\n\nQueries * Keys.Transpose(2,3)",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Illustration of transposed values matrix tensor with numerical data and handwritten annotations showing Step 7 of attention mechanism computation with queries multiplied by transposed keys.",
+  "diagram_elements": [
+    "Transposed Values matrix",
+    "head 1",
+    "head 2",
+    "Step(7): Find attention scores",
+    "Queries * Keys.Transpose(2,3)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0063",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2675.599667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0063.jpg"
+}

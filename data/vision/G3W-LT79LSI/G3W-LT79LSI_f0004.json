@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "\\max(0, x)",
+    "R(z) = \\max(0, z)"
+  ],
+  "diagram_summary": "ReLU activation function visualization showing the piecewise linear function that outputs zero for negative inputs and the input value for positive inputs.",
+  "diagram_elements": [
+    "ReLU Activation Function graph",
+    "max(0,x) formula",
+    "X Axis range -10.0 to 10.0",
+    "Y Axis range 0 to 10",
+    "Blue line showing ReLU curve",
+    "Rectified Linear Unit visualization"
+  ],
+  "confidence": 0.85,
+  "frame_id": "G3W-LT79LSI_f0004",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 1194.966333,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0004.jpg"
+}

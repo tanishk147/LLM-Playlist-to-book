@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "GPT architecture building blocks diagram showing the components used to implement a GPT model, including layer normalization, GELU activation, feed-forward network, shortcut connections, and GPT backbone.",
+  "diagram_elements": [
+    "2) Layer normalization",
+    "3) GELU activation",
+    "4) Feed-forward network",
+    "5) Shortcut connections",
+    "6) Transformer block",
+    "7) Final GPT architecture",
+    "1) GPT backbone"
+  ],
+  "confidence": 0.75,
+  "frame_id": "G3W-LT79LSI_f0002",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 140.133,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0002.jpg"
+}

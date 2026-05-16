@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Step \u24d0: Find attention weights\n\u2193\nMask attention scores to implement",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention computation showing queries matrix, keys transpose operations across two heads, with tensor shape transformations and dimension annotations (b, num_heads, num_tokens, head_dim).",
+  "diagram_elements": [
+    "Queries matrix",
+    "Keys transpose(2, 3)",
+    "Head 2",
+    "Head 2",
+    "Tensor shape (1, 2, 3, 3)",
+    "Tensor shape (b, num_heads, num_tokens, head_dim)",
+    "Tensor shape (1, 2, 3, 3)",
+    "Tensor shape (b, num_heads, num_tokens, head_dim)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0041",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1915.766333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0041.jpg"
+}

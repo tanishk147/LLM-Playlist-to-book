@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Four heatmap matrices (a, b, c, d) showing correlation or similarity patterns with diagonal structures, labeled with French text along axes representing different categories or variables.",
+  "diagram_elements": [
+    "Matrix (a): accord, sur, la, zone, \u00e9conomique, europ\u00e9enne, \u00e9t\u00e9, sign\u00e9, en, ao\u00fbt, 1992, <end>",
+    "Matrix (b): convenient, de, noter, que, l', environnement, marin, est, le, moins, connu, de, l', environnement, <end>",
+    "Matrix (c): La, destruction, de, l', \u00e9quipement, signifie, que, la, Syrie, peut, plus, produire, de, nouvelles, armes, chimiques, <end>",
+    "Matrix (d): Cela, va, changer, mon, avenir, avec, ma, famille, a, dit, l', homme, <end>"
+  ],
+  "confidence": 0.75,
+  "frame_id": "XN7sevVxyUM_f0026",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2511.499667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0026.jpg"
+}

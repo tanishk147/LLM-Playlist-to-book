@@ -1,0 +1,23 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "Reshaped Queries matrix:\ntensor([[[\u22120.4888,   0.2361,  2.8463],\n         [\u22120.2184,   0.4503, \u22121.8915]],\n\n        [[\u22122.3531, \u22120.7912,  1.2578],\n         [ 2.0534, \u22124.3369,  3.2125]],\n\n        [[\u22122.5745,   0.2893,  1.1454],\n         [ 0.9021,  1.5632,  0.6930]]], dtype=torch.float64)\n\nReshaped Keys matrix:\ntensor([[[  0.4143, \u22121.4023, \u22122.7131],\n         [  3.4907, \u22122.1993,   0.2381]],\n\n        [[  1.1957,   1.3712,   0.6885],\n         [\u22121.5484,   4.2152,   2.1248]],\n\n        [[\u22120.1226,   0.1155,   0.4755],\n         [\u22120.0176,   0.8339,   0.7582]]], dtype=torch.float64)\n\nReshaped Values matrix:\ntensor([[[\u22123.6194,   2.0935,   1.3879],\n         [  2.1231, \u22121.2262, \u22120.2556]],"
+  },
+  "math": null,
+  "diagram_summary": "Tensor reshaping visualization showing how Queries, Keys, and Values matrices are reshaped from flat tensors into multi-head attention format with dimensions (batch_size, num_heads, seq_length, head_dim), annotated with arrows and dimension labels.",
+  "diagram_elements": [
+    "Queries matrix with shape (3, 2, 3)",
+    "Keys matrix with shape (3, 2, 3)",
+    "Values matrix with shape (3, 2, 3)",
+    "Dimension annotations showing batch/heads/sequence/feature splits"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0029",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1711.866333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0029.jpg"
+}

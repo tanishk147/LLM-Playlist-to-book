@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Published as a conference paper at ICLR 2021",
+  "extracted_text": "Task | Tested Concepts | Supercategory\nAbstract Algebra | Groups, rings, fields, vector spaces, ... | STEM\nAnatomy | Central nervous system, circulatory system, ... | STEM\nAstronomy | Solar system, galaxies, asteroids, ... | STEM\nBusiness Ethics | Corporate responsibility, stakeholders, regulation, ... | Other\nClinical Knowledge | Spot diagnosis, joints, abdominal examination, ... | Other\nCollege Biology | Cellular structure, molecular biology, ecology, ... | STEM\nCollege Chemistry | Analytical, organic, inorganic, physical, ... | STEM\nCollege Computer Science | Algorithms, systems, graphs, recursion, ... | STEM\nCollege Mathematics | Differential equations, real analysis, combinatorics, ... | STEM\nCollege Medicine | Introductory biochemistry, sociology, reasoning, ... | Other\nCollege Physics | Electromagnetism, thermodynamics, special relativity, ... | STEM\nComputer Security | Cryptography, malware, side channels, fuzzing, ... | STEM\nConceptual Physics | Newton's laws, rotational motion, gravity, sound, ... | STEM\nEconometrics | Volatility, long-run relationships, forecasting, ... | Social Sciences\nElectrical Engineering | Circuits, power systems, electrical drives, ... | STEM\nElementary Mathematics | Word problems, multiplication, remainders, rounding, ... | STEM\nFormal Logic | Propositions, predicate logic, first-order logic, ... | Humanities\nGlobal Facts | Extreme poverty, literacy rates, life expectancy, ... | Other\nHigh School Biology | Natural selection, heredity, cell cycle, Krebs cycle, ... | STEM\nHigh School Chemistry | Chemical reactions, ions, acids and bases, ... | STEM\nHigh School Computer Science | Arrays, conditionals, iteration, inheritance, ... | STEM\nHigh School European History | Renaissance, reformation, industrialization, ... | Humanities\nHigh School Geography | Population, migration, rural land use, urban ... | Social Sciences",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "7m2jV7BOFkA_f0002",
+  "video_id": "7m2jV7BOFkA",
+  "timestamp_sec": 849.233,
+  "source_image": "data/frames/7m2jV7BOFkA/7m2jV7BOFkA_f0002.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "This file does not have a description yet.\n\nFiles displayed:\n- checkpoint (77 B)\n- encoder.json (1.04 MB)\n- hparams.json (91 B)\n- model.ckpt.data-0000... (1.42 GB)\n- model.ckpt.index (10.4 kB)\n- model.ckpt.meta (926.52 kB)\n- vocab.bpe (456.32 kB)",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "__OiQznq4ao_f0009",
+  "video_id": "__OiQznq4ao",
+  "timestamp_sec": 583.066333,
+  "source_image": "data/frames/__OiQznq4ao/__OiQznq4ao_f0009.jpg"
+}

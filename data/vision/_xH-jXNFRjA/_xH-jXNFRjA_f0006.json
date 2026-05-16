@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "W_i^{(l)} = W_i - \\lambda \\frac{\\partial L}{\\partial W}"
+  ],
+  "diagram_summary": "Handwritten diagram showing the process of loading pre-trained weights from GPT-2 and the weight update equation during training with L2 regularization.",
+  "diagram_elements": [
+    "Loading pre-trained weights from GPT-2",
+    "Weight update equation with L2 regularization term"
+  ],
+  "confidence": 0.75,
+  "frame_id": "_xH-jXNFRjA_f0006",
+  "video_id": "_xH-jXNFRjA",
+  "timestamp_sec": 1072.333,
+  "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0006.jpg"
+}

@@ -1,0 +1,30 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture \u2192 Pretraining LLMs: Loss Function",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage pipeline for building and pretraining LLMs: Stage 1 covers data preparation, attention mechanism, and LLM architecture leading to building an LLM; Stage 2 involves pretraining the LLM model with training loop and model evaluation metrics to create a foundation model; Stage 3 loads pretrained weights and performs finetuning on downstream tasks (classifier, personal assistant) using labeled datasets and instruction datasets.",
+  "diagram_elements": [
+    "Stage 1: Data preparation & sampling",
+    "Stage 1: Attention mechanism",
+    "Stage 1: LLM Architecture",
+    "Building an LLM",
+    "Pretraining",
+    "Stage 2: Training loop",
+    "Stage 2: Model evaluation",
+    "Stage 2: Load pretrained weights",
+    "Foundation model",
+    "Stage 3: Finetuning",
+    "Stage 3: Dataset with class labels",
+    "Classifier",
+    "Personal assistant",
+    "Instruction dataset"
+  ],
+  "confidence": 0.92,
+  "frame_id": "7TKCrt--bWI_f0000",
+  "video_id": "7TKCrt--bWI",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0000.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture 5: A closer look at GPT",
+  "extracted_text": "(1) ZERO SHOT vs FEW SHOT LEARNING\n\nZero Shot: Ability to generalize...",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "xbaYCf2FHSY_f0000",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0000.jpg"
+}

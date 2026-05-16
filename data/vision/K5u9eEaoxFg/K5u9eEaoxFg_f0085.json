@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing how combined heads are flattened into token outputs, with tensor data displayed showing numerical values for three tokens and their dimensions.",
+  "diagram_elements": [
+    "Step (II): Combine heads",
+    "Flatten each token output into a single vector",
+    "Token 1",
+    "Token 2",
+    "Token 3",
+    "tensor output with numerical values",
+    "(b, num_tokens, num_heads, head_dim)",
+    "(b, num_tokens, num_heads * head_dim)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0085",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3087.566333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0085.jpg"
+}

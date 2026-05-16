@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Stanford Alpaca: An Instruction-following LLaMA Model",
+  "extracted_text": "This is the repo for the Stanford Alpaca project, which aims to build and share an instruction-following LLaMA model. The repo contains:\n\n\u2022 The 52K data used for fine-tuning the model.\n\u2022 The code for generating the data.\n\u2022 The code for fine-tuning the model.\n\u2022 The code for recovering Alpaca-7B weights from our released weight diff.\n\nWe thank the community for feedback on Stanford-Alpaca and supporting our research. Our live demo is available at the top of the repository.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "7m2jV7BOFkA_f0007",
+  "video_id": "7m2jV7BOFkA",
+  "timestamp_sec": 2843.899667,
+  "source_image": "data/frames/7m2jV7BOFkA/7m2jV7BOFkA_f0007.jpg"
+}

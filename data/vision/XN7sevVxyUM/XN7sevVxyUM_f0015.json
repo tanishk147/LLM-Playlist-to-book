@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Background",
+  "extracted_text": "transduction problems such as language modeling and machine translation [35, 2, 5]. Numerous efforts have since continued to push the boundaries of recurrent language models and encoder-decoder architectures [38, 24, 15].\n\nRecurrent models typically factor computation along the symbol positions of the input and output sequences. Aligning the positions to steps in computation time, they generate a sequence of hidden states h_t, as a function of the previous hidden state h_{t-1} and the input for position t. This inherently sequential nature precludes parallelization within training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching across examples. Recent work has achieved significant improvements in computational efficiency through factorization tricks [21] and conditional computation [32], while also improving model performance in case of the latter. The fundamental constraint of sequential computation, however, remains.\n\nAttention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences [2, 19]. In all but a few cases [27], however, such attention mechanisms are used in conjunction with a recurrent network.\n\nIn this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.\n\n2  Background\n\nThe goal of reducing sequential computation also forms the foundation of the Extended Neural GPU",
+  "code": null,
+  "math": [
+    "h_t",
+    "h_{t-1}"
+  ],
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0015",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2142.066333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0015.jpg"
+}

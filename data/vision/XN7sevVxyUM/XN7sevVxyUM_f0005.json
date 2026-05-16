@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Recurrent Neural Network",
+  "extracted_text": "Time step #1:\nAn RNN takes two input vectors:\n\nProcesses them",
+  "code": null,
+  "math": null,
+  "diagram_summary": "An RNN at time step #1 takes two input vectors (hidden state #0 and input vector #1) and processes them through a neural network unit to produce an output.",
+  "diagram_elements": [
+    "hidden state #0 (orange vector)",
+    "input vector #1 (green vector)",
+    "neural network unit (blue circle)",
+    "output arrow",
+    "hidden state #0 label",
+    "input #1 label"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0005",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 1183.399667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0005.jpg"
+}

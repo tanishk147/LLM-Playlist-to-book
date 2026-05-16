@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "Tensor([[[  0.4688,   0.2501,  2.6405],\n         [-0.2184,   5.4503,  -1.8915]],\n\n        [[-2.3531,  -0.7912,   1.2578],\n         [ 2.0534,  -4.3369,   3.2125]],\n\n        [[-2.5745,   0.2893,   1.1454],\n         [ 0.9021,   1.5632,   0.6930]]], dtype=torch.float64)\n\nReshaped Keys matrix:\nTensor([[[  0.4143,  -1.4023,  -2.7131],\n         [ 3.4907,  -2.1993,   0.2381]],\n\n        [[ 1.1957,   1.3712,   0.6885],\n         [-1.5484,   4.2152,   2.1248]],\n\n        [[-0.1226,   0.1155,   0.4755],\n         [-0.0176,   0.8339,   0.7582]]], dtype=torch.float64)\n\nReshaped Values matrix:\nTensor([[[[-3.6194,   2.0935,   1.3879],"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "K5u9eEaoxFg_f0072",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2881.066333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0072.jpg"
+}

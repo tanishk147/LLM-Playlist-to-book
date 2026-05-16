@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "TOKEN EMBEDDINGS",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Token embeddings diagram showing how input tokens (Jacket, Hat, Shirt) are embedded into a central vector representation, which then projects to output embeddings (Cat, Dog, Puppy).",
+  "diagram_elements": [
+    "Jacket",
+    "Hat",
+    "Shirt",
+    "Central embedding vector (magenta circle)",
+    "Cat",
+    "Dog",
+    "Puppy",
+    "Input arrows (dotted lines)",
+    "Output arrows (solid magenta arrows)"
+  ],
+  "confidence": 0.95,
+  "frame_id": "ghCSGRgVB_o_f0003",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 254.933,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0003.jpg"
+}

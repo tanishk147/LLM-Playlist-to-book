@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Now, all we need to do is apply the softmax function to these masked results, and we are done.",
+  "code": {
+    "language": "python",
+    "content": "mask = torch.triu(torch.ones(context_length, context_length), diagonal=1)\nmasked = attn_scores.masked_fill(mask.bool(), -torch.inf)\nprint(masked)\n\nattn_weights = torch.softmax(masked / keys.shape[-1]**0.5, dim=1)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "h94TQOK7NRA_f0009",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 1741.966333,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0009.jpg"
+}

@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Step (1): Find attention scores.\n\nQueries * Keys.Transpose (2,3)",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention computation workflow showing Step 1 (Find attention scores) with three code blocks demonstrating queries matrix, keys transposed operation, and their multiplication, with annotations indicating Head 1 processing.",
+  "diagram_elements": [
+    "Queries matrix",
+    "Keys.Transpose (2,3)",
+    "Head 1",
+    "queries * keys.transpose()"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0038",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1847.133,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0038.jpg"
+}

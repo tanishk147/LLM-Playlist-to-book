@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "import re\n\ntext = \"Hello, world. This, is a test.\"\nresult = re.split(r'(\\s)', text)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "rsy5Ragmso8_f0004",
+  "video_id": "rsy5Ragmso8",
+  "timestamp_sec": 798.766333,
+  "source_image": "data/frames/rsy5Ragmso8/rsy5Ragmso8_f0004.jpg"
+}

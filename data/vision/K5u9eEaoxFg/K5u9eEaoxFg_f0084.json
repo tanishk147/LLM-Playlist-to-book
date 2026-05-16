@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Step 11 of a Convolutional Neural Networks tutorial showing tensor output with multiple token embeddings being combined and flattened for processing.",
+  "diagram_elements": [
+    "Step 11: Combine heads",
+    "Flatten",
+    "tensor output with numerical values",
+    "Token 1",
+    "Token 2",
+    "Token 3"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0084",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3062.433,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0084.jpg"
+}

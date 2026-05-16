@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Text tokenization and padding pipeline showing three example texts being converted to token IDs and padded to the longest sequence length using padding token 50256.",
+  "diagram_elements": [
+    "Input text message",
+    "Tokenize texts",
+    "Token IDs",
+    "Pad to longest sequence",
+    "Padded token IDs",
+    "Padding token 50256",
+    "No padding in this last example because it is the longest message"
+  ],
+  "confidence": 0.92,
+  "frame_id": "f6zqClXOh7Y_f0004",
+  "video_id": "f6zqClXOh7Y",
+  "timestamp_sec": 711.699667,
+  "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0004.jpg"
+}

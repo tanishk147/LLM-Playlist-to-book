@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Example Setup",
+  "extracted_text": "Batch size `b = 2` (two sequences in the batch).\nNumber of tokens `num_tokens = 2` (each sequence has 2 tokens).\nOutput dimension `d_out = 3` (each token is represented by a 3-dimensional ve\n\nQueries and Keys (Before Transpose)\n\nLet's assume we have the following `queries` and `keys` tensors:\n\nQueries (`queries`):",
+  "code": {
+    "language": "python",
+    "content": "queries = [\n    [[1, 0, 2],  # Sequence 1, Token 1\n     [...]       # Sequence 1, Token 2"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "h94TQOK7NRA_f0011",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 2740.366333,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0011.jpg"
+}

@@ -1,0 +1,2430 @@
+{
+  "video_id": "d_PiwZe8UF4",
+  "segments": [
+    {
+      "id": "d_PiwZe8UF4_000",
+      "title": "Introduction",
+      "ts_start": 0.0,
+      "ts_end": 238.0,
+      "segments": [
+        {
+          "ts_start": 4.82,
+          "ts_end": 11.02,
+          "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "d_PiwZe8UF4_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Lecture \u2192 GELU Activation Function",
+              "extracted_text": "In this section, we implemented layer normalization\n\nWe started this chapter by implementing a GPT placeholder model to see the overall structure of the model\n\narchitecture\n6) Transformer block\n2) Layer normalization\n3) GELU activation\n4) Feed forward network\n5) Shortcut connections\n1) GPT backbone\n\nIn the next section, we will implement components 3 and 4\n\nWe will implement a small neural network sub-module that is a part of the LLM Transformer block.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Architecture diagram showing the Transformer block structure with six main components: GPT backbone, layer normalization, GELU activation, feed forward network, shortcut connections, and the overall Transformer block assembly.",
+              "diagram_elements": [
+                "6) Transformer block",
+                "2) Layer normalization",
+                "3) GELU activation",
+                "4) Feed forward network",
+                "5) Shortcut connections",
+                "1) GPT backbone"
+              ],
+              "confidence": 0.85,
+              "frame_id": "d_PiwZe8UF4_f0000",
+              "video_id": "d_PiwZe8UF4",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/d_PiwZe8UF4/d_PiwZe8UF4_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 11.78,
+          "ts_end": 17.86,
+          "text": "In these set of lectures, we have been learning about the LLM architecture in a lot of detail.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 18.26,
+          "ts_end": 27.18,
+          "text": "If you want to learn about the LLM architecture, it is very important that you understand all of these building blocks from bottom to top.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 27.18,
+          "ts_end": 34.94,
+          "text": "In the previous lecture, we covered about the GPT backbone, which is essentially a dummy code with the bird's eye view,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 35.1,
+          "ts_end": 39.48,
+          "text": "where you see all the different components together without coding any of them.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 39.76,
+          "ts_end": 45.72,
+          "text": "And since the last lecture, we have started looking at each individual component and coding them out in Python.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 46.02,
+          "ts_end": 50.58,
+          "text": "In the previous lecture, we looked at this building block called layer normalization.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 51.0,
+          "ts_end": 56.06,
+          "text": "And today's lecture is going to be completely focused on the second building block,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 56.06,
+          "ts_end": 61.84,
+          "text": "which is the JLU activation function, along with this feed-forward neural network.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 62.33,
+          "ts_end": 66.9,
+          "text": "So today, actually, we are going to cover two of these blocks, which have been shown over here,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 67.04,
+          "ts_end": 71.02,
+          "text": "the JLU activation and the feed-forward neural network.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 71.26,
+          "ts_end": 74.46,
+          "text": "In the next lecture, we'll also be looking at shortcut connections.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 74.68,
+          "ts_end": 79.64,
+          "text": "And then all of these building blocks will come together to form the transformer block,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 79.88,
+          "ts_end": 82.62,
+          "text": "which is the beating heart of the GPT architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 83.12,
+          "ts_end": 86.26,
+          "text": "So let's continue along our journey and make progress.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 86.28,
+          "ts_end": 104.78,
+          "text": "So let's get started with today's lecture to give you an overview of what the transformer block actually looks like.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 104.88,
+          "ts_end": 109.78,
+          "text": "Here is the architecture of the transformer block zooming into this transformer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 110.12,
+          "ts_end": 114.72,
+          "text": "So the transformer block consists of many layers which are stacked together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 115.38,
+          "ts_end": 116.26,
+          "text": "And that's why we are going to talk about the JLU activation function.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 116.26,
+          "ts_end": 118.4,
+          "text": "And that's why we have to learn about each of these layers separately.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 119.02,
+          "ts_end": 121.32,
+          "text": "The first is the layer normalization layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 121.94,
+          "ts_end": 125.7,
+          "text": "The input then is normalized and it's passed to the multi-head attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 126.08,
+          "ts_end": 128.16,
+          "text": "We have a dropout layer after that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 128.32,
+          "ts_end": 131.18,
+          "text": "This plus sign indicates that there is a shortcut connection.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 131.5,
+          "ts_end": 134.08,
+          "text": "Then we have another layer normalization layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 134.32,
+          "ts_end": 137.22,
+          "text": "We learned about layer normalization in the previous lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 137.42,
+          "ts_end": 142.18,
+          "text": "The output of the second layer normalization passes into a feed-forward neural network,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 142.3,
+          "ts_end": 144.9,
+          "text": "which is what we are going to learn about in today's lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 145.08,
+          "ts_end": 146.34,
+          "text": "And when you put a norm in a network, it's not a network.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 146.36,
+          "ts_end": 150.96,
+          "text": "microscope to the speed forward neural network and try to really understand what it consists",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 150.96,
+          "ts_end": 156.8,
+          "text": "of you will see that it consists of linear layers which are common in any neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 157.1,
+          "ts_end": 164.28,
+          "text": "but it consists of this JLU or GELU activation which is you might be hearing about this for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 164.28,
+          "ts_end": 168.38,
+          "text": "the first time even if you have used deep learning frameworks people generally use ReLU,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 168.48,
+          "ts_end": 175.18,
+          "text": "TanH, Sigmoid etc but this JLU activation or GELU activation is new to most of the people",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 175.18,
+          "ts_end": 180.48,
+          "text": "everything else in this speed forward neural network is same as traditional neural networks",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 180.48,
+          "ts_end": 186.94,
+          "text": "but this JLU activation is something which is a bit different so we will be covering",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 186.94,
+          "ts_end": 192.06,
+          "text": "this part also in a lot of detail so I just wanted to show you this so that you have some",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 192.06,
+          "ts_end": 197.14,
+          "text": "context about why we are learning this lecture and after you understand the speed forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 197.14,
+          "ts_end": 201.74,
+          "text": "neural network and GELU after today's lecture you will be able to essentially understand",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 201.74,
+          "ts_end": 205.72,
+          "text": "most of these components over here except for the shortcut connection which we will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 205.72,
+          "ts_end": 206.02,
+          "text": "look at.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 206.04,
+          "ts_end": 214.35,
+          "text": "So let's begin so the goal of this lecture is to implement a small neural network sub",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 214.35,
+          "ts_end": 219.99,
+          "text": "module that is part of the LLM transformer block and when I say neural network sub module",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 219.99,
+          "ts_end": 226.67,
+          "text": "I am especially referring to this speed forward block which has been mentioned here this speed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 226.67,
+          "ts_end": 234.88,
+          "text": "forward block I am referring to this block we want to write a code to integrate this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 234.88,
+          "ts_end": 236.5,
+          "text": "block this speed forward neural network.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_001",
+      "title": "GELU activation mathematics",
+      "ts_start": 238.0,
+      "ts_end": 529.0,
+      "segments": [
+        {
+          "ts_start": 243.41,
+          "ts_end": 249.31,
+          "text": "to call it JLU for the rest of this lecture but the way you call it does not really matter",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 249.31,
+          "ts_end": 255.27,
+          "text": "as long as you understand what the function is what does it represent and why don't we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 255.27,
+          "ts_end": 260.57,
+          "text": "use the common activation functions like RELU so two activation functions which are very",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 260.57,
+          "ts_end": 266.32,
+          "text": "commonly implemented in large language models are the JLU and the SWGLU in today's lecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 266.32,
+          "ts_end": 271.9,
+          "text": "we are going to specifically look at the JLU so before we look at that first let's understand",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 271.9,
+          "ts_end": 276.06,
+          "text": "about the RELU activation function this is how the RELU activation function actually",
+          "frame_ids": [
+            "d_PiwZe8UF4_f0001"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 276.06,
+          "ts_end": 281.78,
+          "text": "looks like for x which is greater than zero the RELU activation function returns the same",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 281.78,
+          "ts_end": 287.0,
+          "text": "value as the input but if x is less than zero the RELU activation function returns zero",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 287.62,
+          "ts_end": 292.2,
+          "text": "so if you plot the RELU activation function as a function of x you will see that the curve",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 292.2,
+          "ts_end": 296.48,
+          "text": "looks something like this it's flat for negative values of x and then it's linear.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 296.48,
+          "ts_end": 301.82,
+          "text": "Already you can start seeing some problems with this right it's not differentiable at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 301.82,
+          "ts_end": 307.38,
+          "text": "x equal to zero there is a sharp jump over here and for all the values of x less than",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 307.38,
+          "ts_end": 313.42,
+          "text": "zero this is equal to zero so if you integrate this in neural networks it often leads to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 313.42,
+          "ts_end": 319.4,
+          "text": "a dead neuron problem which means that if the output from one layer is negative and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 319.4,
+          "ts_end": 324.02,
+          "text": "if RELU activation function is applied to it the output becomes zero and then it stays",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 326.76,
+          "ts_end": 332.2,
+          "text": "the same because we cannot do any learning after that so the neurons which are associated",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 332.2,
+          "ts_end": 337.94,
+          "text": "with that particular output they don't contribute anything to the learning process once the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 337.94,
+          "ts_end": 342.22,
+          "text": "output of the neuron becomes negative and that's called as the dead neuron problem so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 342.22,
+          "ts_end": 346.94,
+          "text": "learning essentially stagnates of course RELU has a huge number of other advantages this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 346.94,
+          "ts_end": 351.86,
+          "text": "non-linearity which is introduced over here makes neural networks expressive it gives",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 351.86,
+          "ts_end": 356.1,
+          "text": "the power to neural networks but the reason we have we are looking at the disadvantages",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 356.76,
+          "ts_end": 362.02,
+          "text": "of RELU is that understanding the disadvantages of RELU will open an opportunity for us to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 362.02,
+          "ts_end": 367.54,
+          "text": "learn about the JLU activation function and why it is used in large language models so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 367.54,
+          "ts_end": 373.18,
+          "text": "first let's start understanding about the mathematical representation of the JLU activation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 373.18,
+          "ts_end": 380.12,
+          "text": "function so mathematically the JLU activation function is the product of x which is essentially",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 380.44,
+          "ts_end": 385.3,
+          "text": "just the identity variable so JLU of x equal to x into this phi of x.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 385.3,
+          "ts_end": 391.04,
+          "text": "And essentially phi of x is the cumulative distribution function of the standard Gaussian",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 391.04,
+          "ts_end": 399.2,
+          "text": "distribution so I just have this opened over here so a standard Gaussian cumulative distribution",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 399.2,
+          "ts_end": 404.28,
+          "text": "function looks like this as a function of x so the JLU is a product of x multiplied",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 404.28,
+          "ts_end": 414.77,
+          "text": "by this and then if you actually try to understand what is happening so let's look at this phi",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 414.77,
+          "ts_end": 416.73,
+          "text": "of x for x greater than zero.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 416.81,
+          "ts_end": 422.57,
+          "text": "So if x is very high you see that it's almost equal to one so which means that for positive",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 422.57,
+          "ts_end": 428.57,
+          "text": "values of x we are slowly tending to one which means that the for very positive values of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 428.57,
+          "ts_end": 434.39,
+          "text": "x the JLU of x will tend to x into one which is x so for very high values of x this will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 434.39,
+          "ts_end": 439.63,
+          "text": "almost tend to the linear function which is quite similar to the positive branch of RELU",
+          "frame_ids": [
+            "d_PiwZe8UF4_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "ReLU Activation Function",
+              "extracted_text": null,
+              "code": null,
+              "math": [
+                "f(u) = max(0, u)"
+              ],
+              "diagram_summary": "ReLU activation function graph showing the piecewise linear relationship where output equals zero for negative inputs and equals the input value for positive inputs.",
+              "diagram_elements": [
+                "X Axis",
+                "Y Axis",
+                "max(0,x) curve",
+                "origin point at (0,0)",
+                "linear increase for positive x"
+              ],
+              "confidence": 0.95,
+              "frame_id": "d_PiwZe8UF4_f0002",
+              "video_id": "d_PiwZe8UF4",
+              "timestamp_sec": 436.399667,
+              "source_image": "data/frames/d_PiwZe8UF4/d_PiwZe8UF4_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 439.63,
+          "ts_end": 444.77,
+          "text": "but what happens to the negative values of this is pretty interesting the negative values",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 444.77,
+          "ts_end": 445.13,
+          "text": "here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 445.13,
+          "ts_end": 450.42,
+          "text": "you can see that they are not equal to zero so x will be multiplied with these negative values",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 450.42,
+          "ts_end": 455.6,
+          "text": "and that's why for negative values of x gelu will not be zero like it is in the relo activation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 455.6,
+          "ts_end": 462.13,
+          "text": "function so now what we can do is that instead of using this complicated cumulative distribution",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 462.13,
+          "ts_end": 469.95,
+          "text": "function what uh people generally do is that they use an approximation for the gelu activation and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 469.95,
+          "ts_end": 475.31,
+          "text": "the approximation which was actually used for training gpt2 looks something like this so here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 475.31,
+          "ts_end": 481.51,
+          "text": "you can see that gelu of x is equal to 0.5 multiplied by x multiplied by 1 plus tan h",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 481.51,
+          "ts_end": 488.97,
+          "text": "square root of 2 by pi into x plus this cubic term no need to worry about this term but just know",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 488.97,
+          "ts_end": 493.73,
+          "text": "that instead of worrying about this phi of x which is the cumulative distribution function",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 494.49,
+          "ts_end": 499.91,
+          "text": "and there is also gaussian involved and it's a bit difficult to compute phi of x",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 499.91,
+          "ts_end": 505.27,
+          "text": "it's better to use numerical approximations right so when gpt2 was trained the gelu",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 505.31,
+          "ts_end": 509.43,
+          "text": "function which they actually used was this approximation which is very close to the actual",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 509.43,
+          "ts_end": 515.85,
+          "text": "gelu function right now if you want to compare this with the relu function here i have shown the plots",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 515.85,
+          "ts_end": 521.91,
+          "text": "of the gelu activation function along with the relo activation function i want you to pause the video",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_002",
+      "title": "Why do we use GELU?",
+      "ts_start": 529.0,
+      "ts_end": 659.0,
+      "segments": [
+        {
+          "ts_start": 529.94,
+          "ts_end": 535.12,
+          "text": "thing which should immediately be clear to all of you is there are a lot of differences for negative",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 537.2,
+          "ts_end": 541.58,
+          "text": "less than zero you can see that the Galois activation function is not really zero. So if",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 541.58,
+          "ts_end": 546.44,
+          "text": "you zoom into this further you will see that for most of the values of x it's not zero it tends to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 546.44,
+          "ts_end": 552.12,
+          "text": "zero but it is not zero whereas the Rayleigh activation function for x less than zero is zero",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 552.12,
+          "ts_end": 557.98,
+          "text": "throughout. Also if you look at the positive values of x you will see that this is kind of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 557.98,
+          "ts_end": 563.98,
+          "text": "not exactly linear here for short values of x but for large values of x it's fully linear",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 564.79,
+          "ts_end": 570.41,
+          "text": "which is exactly what's happening for the Rayleigh activation function. So although this positive",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 570.41,
+          "ts_end": 576.43,
+          "text": "side of the JLU looks like y equal to x it's not exactly y equal to x there are some minor",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 576.43,
+          "ts_end": 582.32,
+          "text": "differences but you can say that for x greater than zero it's almost similar to the Rayleigh",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 582.32,
+          "ts_end": 586.88,
+          "text": "for x greater than zero but for x less than zero there are big differences which start to emerge",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 586.88,
+          "ts_end": 593.31,
+          "text": "which actually make JLU much better than the Rayleigh. So what are the advantages of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 593.31,
+          "ts_end": 594.95,
+          "text": "JLU over the Rayleigh activation function?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 594.97,
+          "ts_end": 599.01,
+          "text": "Well the first advantage which you immediately see from this graph over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 599.01,
+          "ts_end": 604.21,
+          "text": "is you can see that JLU activation is smooth throughout right here there is a discontinuity",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 604.21,
+          "ts_end": 608.11,
+          "text": "in Rayleigh there is a discontinuity at x equal to zero which makes it not differentiable.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 608.55,
+          "ts_end": 613.57,
+          "text": "JLU activation on the other hand is smooth throughout so it's differentiable across all x",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 613.57,
+          "ts_end": 619.13,
+          "text": "that's the first advantage. The second advantage is that it's not zero for negative x so that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 619.13,
+          "ts_end": 624.47,
+          "text": "solves the dead neuron problem. Even if the output of a neuron after is negative",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 624.47,
+          "ts_end": 629.93,
+          "text": "even if it goes through JLU it will not become zero so the neuron won't become dead it will still",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 629.93,
+          "ts_end": 634.59,
+          "text": "keep on contributing to the learning process. That's the second reason. So first reason is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 634.59,
+          "ts_end": 639.89,
+          "text": "differentiability. Second reason is it prevents the dead neuron problem and third reason is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 639.89,
+          "ts_end": 646.76,
+          "text": "it just seems to work better than Rayleigh when we do experiments with LLMs. So as always activation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 646.76,
+          "ts_end": 651.64,
+          "text": "functions are hyper parameters right so we need to test out multiple activation functions to see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 651.64,
+          "ts_end": 654.74,
+          "text": "which one performs better and we have generally seen that JLU is better than Rayleigh. So that's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 654.76,
+          "ts_end": 658.5,
+          "text": "why JLU performs much better in the context of large language models compared to Rayleigh.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_003",
+      "title": "Coding the GELU activation class",
+      "ts_start": 659.0,
+      "ts_end": 834.0,
+      "segments": [
+        {
+          "ts_start": 659.0,
+          "ts_end": 666.54,
+          "text": "So now what I want to do is that first I want to go to code and I want to write a class for the JLU",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 666.54,
+          "ts_end": 672.24,
+          "text": "activation function write a create a class for the JLU which implements the forward pass which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 672.24,
+          "ts_end": 678.13,
+          "text": "that it essentially implements the this function which I showed over here. So if you look at this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 678.13,
+          "ts_end": 684.85,
+          "text": "function whenever JLU receives an input x it it transforms it into this through this function",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 685.33,
+          "ts_end": 690.41,
+          "text": "and then you get this output as shown in this JLU activation function. So what I'm doing here is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 690.41,
+          "ts_end": 696.43,
+          "text": "that I'm creating a class called JLU and what I'm doing here is that I'm defining a forward method",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 696.43,
+          "ts_end": 702.75,
+          "text": "which takes in an input x and it returns this value. It returns 0.5 into x into 1 plus tan h",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 702.75,
+          "ts_end": 710.45,
+          "text": "square root of 2 by pi into x plus 0.044 into x raised to 3. This is exactly what has been",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 711.45,
+          "ts_end": 714.73,
+          "text": "written over here in this black box over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 715.33,
+          "ts_end": 719.71,
+          "text": "The reason we are using this is because the same activation function was used for training GPT-2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 719.71,
+          "ts_end": 724.5,
+          "text": "and remember when we are constructing the LLM architecture here we are mimicking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 724.5,
+          "ts_end": 730.95,
+          "text": "the parameters used in the smallest model of GPT-2. So now we have created a class for the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 730.95,
+          "ts_end": 736.03,
+          "text": "JLU activation. Awesome. So here I've written a simple plot function which just plots the JLU",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 736.03,
+          "ts_end": 741.71,
+          "text": "and the RayLU activation function and it compares them side by side. We already looked at these two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 741.71,
+          "ts_end": 745.27,
+          "text": "plots on the whiteboard and we saw the similarities and differences between them.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 746.13,
+          "ts_end": 751.15,
+          "text": "Here I have just summed up the points because of which the JLU activation function is used in LLMs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 751.31,
+          "ts_end": 757.03,
+          "text": "So as we saw the smoothness of the JLU can lead to better optimization properties during training",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 757.03,
+          "ts_end": 762.79,
+          "text": "as it allows for more nuanced adjustments to the model parameters. So it's fully",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 762.79,
+          "ts_end": 768.17,
+          "text": "differentiable. RayLU has a sharp corner at zero which can sometimes make optimization harder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 768.17,
+          "ts_end": 776.27,
+          "text": "especially in networks that are very deep especially networks that are very deep or have complex architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 778.06,
+          "ts_end": 784.26,
+          "text": "Unlike RayLU which outputs zero for any negative input JLU allows for small nonzero output values.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 784.42,
+          "ts_end": 789.9,
+          "text": "So it prevents the dead neuron problem. So this means that during the training process neurons",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 789.9,
+          "ts_end": 795.46,
+          "text": "that receive negative input can still contribute to the learning process. In RayLU neurons which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 795.46,
+          "ts_end": 800.28,
+          "text": "receive negative input just get an output of zero so they become dead they don't contribute to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 800.28,
+          "ts_end": 807.39,
+          "text": "learning process. This problem is avoided in RayLU in JLU sorry. JLU avoids this dead neuron problem and that's why we have the problem.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 807.41,
+          "ts_end": 813.27,
+          "text": "why it's used in the case of large language models now what we are going to see next is that okay now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 813.27,
+          "ts_end": 818.21,
+          "text": "that we understand about the jlu activation function we are going to actually look at the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 818.21,
+          "ts_end": 824.57,
+          "text": "architecture of this feed forward neural network so you see when you zoom into the neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 824.57,
+          "ts_end": 829.19,
+          "text": "you will see that there is a linear layer here there is a jlu activation here and there is",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_004",
+      "title": "Feed forward neural network architecture",
+      "ts_start": 834.0,
+      "ts_end": 1196.0,
+      "segments": [
+        {
+          "ts_start": 834.13,
+          "ts_end": 841.28,
+          "text": "now i want to tell you a bit about what the linear layer actually looks like so let's go to that part",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 841.28,
+          "ts_end": 846.92,
+          "text": "of the whiteboard and let me show you how the linear layer looks like okay so this is how the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 846.92,
+          "ts_end": 852.14,
+          "text": "feed forward neural network actually looks like don't worry if it looks a bit complicated it's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 852.14,
+          "ts_end": 858.04,
+          "text": "actually quite simple so let's say we receive a token so let's say the feed forward neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 858.04,
+          "ts_end": 864.48,
+          "text": "receives a token and the number of the dimensions of the token is equal to the embedding dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 864.74,
+          "ts_end": 870.9,
+          "text": "and for gpt2 the smallest size that is equal to 768 so let's say this is the embedding dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 870.9,
+          "ts_end": 875.66,
+          "text": "of the token which means that every token is projected into a 7 to 768 dimensional space",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 876.22,
+          "ts_end": 881.6,
+          "text": "so as this token passes through the different layers of the transformer block which we saw over",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 881.6,
+          "ts_end": 887.62,
+          "text": "here the good thing about this transformer block is that the dimensionality of the the token is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 887.62,
+          "ts_end": 893.8,
+          "text": "preserved so even we if we pass from here to here to here to here and finally we go to the input of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 893.8,
+          "ts_end": 895.14,
+          "text": "the feed forward the token is preserved",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 895.16,
+          "ts_end": 901.62,
+          "text": "dimensionality of the token remains 768 throughout this entire procedure and that's one of the big",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 901.62,
+          "ts_end": 906.8,
+          "text": "advantages of the way the transformer block is constructed so keep this embedding dimension in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 906.8,
+          "ts_end": 912.9,
+          "text": "mind as you try to understand the neural network architecture right so here we can see that these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 912.9,
+          "ts_end": 918.84,
+          "text": "are the inputs to the neural network it's a 768 dimensional input vector and this is the first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 918.84,
+          "ts_end": 925.42,
+          "text": "linear layer over here all of these weights which you can see connected to the neurons and then here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 925.86,
+          "ts_end": 931.16,
+          "text": "is the second linear layer so you might be thinking what is the number of neurons which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 931.16,
+          "ts_end": 938.76,
+          "text": "used so the number of neurons which is used over here is four times the number of inputs here so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 938.76,
+          "ts_end": 947.54,
+          "text": "the number of neurons here will be four multiplied by so let me write this so the number of neurons",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 947.54,
+          "ts_end": 955.0,
+          "text": "here will be four multiplied by 768 so this will be um close to three thousand three thousand two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 955.0,
+          "ts_end": 959.66,
+          "text": "200 neurons over here so in the first layer what happens is that the inputs are projected",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 959.66,
+          "ts_end": 964.26,
+          "text": "into a larger dimensional space just so that we make the neural network more expressive",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 964.26,
+          "ts_end": 969.02,
+          "text": "and capture the properties between the inputs and in the second layer the inputs are compressed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 969.02,
+          "ts_end": 973.74,
+          "text": "back to the original embedding size so the output which is received from this neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 973.74,
+          "ts_end": 979.42,
+          "text": "network has the same dimensions as the input it matches the original input dimensions so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 979.42,
+          "ts_end": 985.58,
+          "text": "the output dimensions will also be equal to 768 so the dimensionality of the input is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 985.58,
+          "ts_end": 990.86,
+          "text": "preserved through this neural network as well the expansion so you can think of this neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 990.86,
+          "ts_end": 996.21,
+          "text": "network as an expansion contraction neural network and remember that expansion contraction",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 996.21,
+          "ts_end": 1000.71,
+          "text": "neural networks are very powerful because they preserve the size of the input but at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1000.71,
+          "ts_end": 1008.63,
+          "text": "the same time they allow for a richer exploration space so what happens is that when we expand",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1008.63,
+          "ts_end": 1009.43,
+          "text": "this when we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1009.43,
+          "ts_end": 1014.51,
+          "text": "essentially in the first linear layer we do an expansion right projecting into a dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1014.51,
+          "ts_end": 1020.15,
+          "text": "which is four times larger we can capture more properties between the inputs and that's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1020.15,
+          "ts_end": 1024.87,
+          "text": "what essentially makes transformers so powerful due to layers like these if this layer was",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1024.87,
+          "ts_end": 1029.31,
+          "text": "not there probably we would have missed out the capturing the meaning between some sentences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1029.31,
+          "ts_end": 1034.67,
+          "text": "when we predict the next word so that's why this layer is very important so you can think",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1034.67,
+          "ts_end": 1039.11,
+          "text": "of the neural network essentially as taking one token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1039.43,
+          "ts_end": 1045.67,
+          "text": "and then modifying each dimension of this token place by place because the input is 768 dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1045.67,
+          "ts_end": 1051.25,
+          "text": "the output is also 768 dimension and we are looking at one token at a time so this is very different",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1051.25,
+          "ts_end": 1056.13,
+          "text": "than the attention mechanism right in the attention mechanism we look at one token and we look at the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1056.13,
+          "ts_end": 1061.35,
+          "text": "relationship of that token with other tokens in the neural network that's not in this feed forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1061.35,
+          "ts_end": 1067.83,
+          "text": "neural network we don't consider other tokens at all we just look at one token and then we pass the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1067.83,
+          "ts_end": 1068.11,
+          "text": "input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1070.01,
+          "ts_end": 1077.18,
+          "text": "then each dimension of the input is modified and then we get the output so that's the difference",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1077.18,
+          "ts_end": 1082.0,
+          "text": "between the feed forward neural network and the essentially this multi-head attention module",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1082.58,
+          "ts_end": 1090.98,
+          "text": "which we saw let me yeah so let me zoom in here yeah that's the difference between the feed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1090.98,
+          "ts_end": 1096.96,
+          "text": "forward module this feed forward module it only focuses on the specific token and the multi-head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1096.96,
+          "ts_end": 1101.54,
+          "text": "attention which we saw earlier and because that looks at the relationship of one token with other",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1101.54,
+          "ts_end": 1110.22,
+          "text": "tokens as well awesome now what we can actually do is that let us go to python code and implement",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1110.22,
+          "ts_end": 1116.74,
+          "text": "this feed forward neural network with the expansion and contraction it's again shown over",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1116.74,
+          "ts_end": 1121.32,
+          "text": "here what we are going to consider in python so what we are going to do is that we are going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1121.32,
+          "ts_end": 1129.2,
+          "text": "look at an input which essentially has three tokens and each token has the size of 768",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1130.04,
+          "ts_end": 1133.52,
+          "text": "and that too we are going to look at two such batches so in batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1133.52,
+          "ts_end": 1133.7,
+          "text": "nebulasat we have three versions of this limit and the next really important thing to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1133.7,
+          "ts_end": 1134.94,
+          "text": "In batch number one, we'll have three tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1135.42,
+          "ts_end": 1139.96,
+          "text": "In batch number two, we'll have three tokens and each token will have a size of 768.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1140.18,
+          "ts_end": 1142.64,
+          "text": "Now remember what happens in the first linear layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1142.82,
+          "ts_end": 1144.36,
+          "text": "Just look at one token at once.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1145.34,
+          "ts_end": 1148.86,
+          "text": "The 768 is projected into a 3072 dimensional space.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1149.22,
+          "ts_end": 1152.7,
+          "text": "Then we have the JLU activation function after this linear layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1152.92,
+          "ts_end": 1157.38,
+          "text": "So after this first layer, there is a JLU activation function, which we learned about",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1157.38,
+          "ts_end": 1157.76,
+          "text": "earlier.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1158.51,
+          "ts_end": 1161.01,
+          "text": "Remember the JLU activation preserves the dimension.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1161.01,
+          "ts_end": 1166.01,
+          "text": "So the input to the JLU is 3072 dimension, the output is 3072.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1166.49,
+          "ts_end": 1168.93,
+          "text": "Now the final layer compresses.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1168.93,
+          "ts_end": 1174.23,
+          "text": "So the input dimension to the final layer is 3072 and the output dimension is 768.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1174.37,
+          "ts_end": 1178.65,
+          "text": "So if you see the output tensor dimension, it's exactly the same as the input tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1178.99,
+          "ts_end": 1185.35,
+          "text": "Two batches, three tokens in each batch and 768, the embedding dimension of each token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1186.22,
+          "ts_end": 1190.48,
+          "text": "So I hope you have understood the visual nature of the neural network, which we are about",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1190.48,
+          "ts_end": 1191.06,
+          "text": "to construct.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1191.06,
+          "ts_end": 1194.9,
+          "text": "Because if that is the case, you will really understand what's going on in the code very",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1194.9,
+          "ts_end": 1195.26,
+          "text": "deeply.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_005",
+      "title": "Coding the feedforward neural network class",
+      "ts_start": 1196.0,
+      "ts_end": 1466.0,
+      "segments": [
+        {
+          "ts_start": 1196.01,
+          "ts_end": 1199.31,
+          "text": "So we are going to construct this class, which is called as feed forward.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1199.75,
+          "ts_end": 1204.65,
+          "text": "And when an instance of this class is created, this init constructor is called by default.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1204.91,
+          "ts_end": 1210.55,
+          "text": "And what it does is that it creates this self.layers, which is basically nn.sequential.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1210.69,
+          "ts_end": 1217.72,
+          "text": "So if you are not aware of nn.sequential, you can, it's a PyTorch module basically for",
+          "frame_ids": [
+            "d_PiwZe8UF4_f0003",
+            "d_PiwZe8UF4_f0004"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Sequential",
+              "extracted_text": "CLASS torch.nn.Sequential(*args: Module) [SOURCE]\n\nCLASS torch.nn.Sequential(arg: OrderedDict[str, Module])\n\nA sequential container.\n\nModules will be added to it in the order they are passed in the constructor. Alternatively, an OrderedDict of modules can be passed in. The forward() method of Sequential accepts any input and forwards it to the first module it contains. It then \"chains\" outputs to inputs sequentially for each subsequent module, finally returning the output of the last module.\n\nThe value a Sequential provides over manually calling a sequence of modules is that it allows treating the whole container as a single module, such that performing a transformation on the Sequential applies to each of the modules it stores (which are a registered submodule of the Sequential).\n\nWhat's the difference between a Sequential and a torch.nn.ModuleList? A ModuleList is exactly what it sounds like\u2013a list for storing Modules! On the other hand, the layers in a Sequential are connected in a cascading way.\n\nExample:\n\n# Using Sequential to create a small model. When 'model' is run,\n# input will first be passed to 'Conv2d(1,20,5)'. The output of\n# 'Conv2d(1,20,5)' will be used as the input to the first\n# 'ReLU': the output of 'ReLU' will become the input",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "d_PiwZe8UF4_f0004",
+              "video_id": "d_PiwZe8UF4",
+              "timestamp_sec": 1216.166333,
+              "source_image": "data/frames/d_PiwZe8UF4/d_PiwZe8UF4_f0004.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1217.72,
+          "ts_end": 1220.94,
+          "text": "constructing or chaining a neural network together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1222.23,
+          "ts_end": 1226.93,
+          "text": "So essentially, you can define multiple layers and create a neural network by adding these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1226.93,
+          "ts_end": 1227.85,
+          "text": "different layers together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1228.03,
+          "ts_end": 1229.29,
+          "text": "That's why it's called sequential.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1229.69,
+          "ts_end": 1235.99,
+          "text": "So here what we are doing is that first, if you see we have a GPT configuration and let",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1235.99,
+          "ts_end": 1240.85,
+          "text": "me actually pull that configuration here once more so that you are aware of the configuration",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1240.85,
+          "ts_end": 1241.81,
+          "text": "which we are using.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1241.91,
+          "ts_end": 1242.39,
+          "text": "Yeah.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1242.45,
+          "ts_end": 1246.59,
+          "text": "So this is the GPT configuration which we are using and I'm going to paste it over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1246.59,
+          "ts_end": 1248.27,
+          "text": "so that it's a reference.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1250.12,
+          "ts_end": 1250.6,
+          "text": "Okay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1250.68,
+          "ts_end": 1251.88,
+          "text": "So yeah.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1251.88,
+          "ts_end": 1256.8,
+          "text": "So here I'm going to paste the GPT architect, the GPT configuration which we are using.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1257.14,
+          "ts_end": 1261.66,
+          "text": "Now let's look at how the sequential layer is constructed.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1261.82,
+          "ts_end": 1266.42,
+          "text": "First we have a linear layer, which we saw on the whiteboard and the input dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1266.42,
+          "ts_end": 1270.92,
+          "text": "of this linear layer is the number of embedding dimension, which is 768 for GPT.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1271.1,
+          "ts_end": 1276.58,
+          "text": "And the output of this linear layer dimensions are four into 768 because see the first layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1276.58,
+          "ts_end": 1277.62,
+          "text": "is the projection layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1277.76,
+          "ts_end": 1281.42,
+          "text": "So it takes in an input of the embedding dimension and the outputs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1281.42,
+          "ts_end": 1283.28,
+          "text": "Four into 768.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1283.46,
+          "ts_end": 1287.52,
+          "text": "Then we have a JLU activation function and then we have the second layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1287.7,
+          "ts_end": 1292.9,
+          "text": "The input to the second layer is four into 768 and the output of the second layer is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1292.9,
+          "ts_end": 1293.58,
+          "text": "768.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1294.43,
+          "ts_end": 1300.31,
+          "text": "So the CFG embedding dimension is that we are taking this configuration and we are looking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1300.31,
+          "ts_end": 1302.55,
+          "text": "at the embedding dimension, which is 768.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1303.45,
+          "ts_end": 1308.77,
+          "text": "And if you print this out, if you print GPT config 124 million embedding dimension, you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1308.77,
+          "ts_end": 1310.35,
+          "text": "will see that it's 768, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1310.35,
+          "ts_end": 1313.39,
+          "text": "So this is the feed forward neural network which is constructed.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1313.59,
+          "ts_end": 1314.35,
+          "text": "It has expansion.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1314.59,
+          "ts_end": 1316.35,
+          "text": "So you can think of this as expansion.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1316.59,
+          "ts_end": 1318.47,
+          "text": "Let me write a comment here actually.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1318.73,
+          "ts_end": 1319.77,
+          "text": "This is expansion.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1321.28,
+          "ts_end": 1325.14,
+          "text": "Then this is the activation, the JLU activation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1325.72,
+          "ts_end": 1327.9,
+          "text": "And then finally we have the contraction.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1329.73,
+          "ts_end": 1332.83,
+          "text": "So it's a three step process, expansion, activation, contraction.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1332.97,
+          "ts_end": 1336.15,
+          "text": "And this feed forward neural network is constructed like this, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1336.45,
+          "ts_end": 1339.87,
+          "text": "And then we have the forward method which just returns the output.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1340.17,
+          "ts_end": 1340.35,
+          "text": "Okay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1340.54,
+          "ts_end": 1344.88,
+          "text": "from this layer so it will do the expansion it will do the JLU it will do",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1344.88,
+          "ts_end": 1349.99,
+          "text": "the contraction and it will return the output and remember that the output has",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1349.99,
+          "ts_end": 1355.43,
+          "text": "the same dimensional size as the input right so I have just written some text",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1355.43,
+          "ts_end": 1359.85,
+          "text": "over here as we can see in the preceding code the feed forward module is a small",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1359.85,
+          "ts_end": 1363.95,
+          "text": "neural network consisting of two linear layers and a JLU activation function",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1363.95,
+          "ts_end": 1371.21,
+          "text": "right in the 124 million parameter GPT2 model GPT model it receives the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1371.21,
+          "ts_end": 1375.35,
+          "text": "input batches with tokens that have an embedding size of 768 as we saw earlier",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1375.35,
+          "ts_end": 1380.87,
+          "text": "now we can actually now we have everything in shape now we can actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1381.93,
+          "ts_end": 1385.89,
+          "text": "create an instance of this feed forward class and remember we have to pass in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1385.89,
+          "ts_end": 1389.89,
+          "text": "the configuration which we have earlier constructed so that it can extract the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1389.89,
+          "ts_end": 1393.95,
+          "text": "embedding dimension right so we create an instance of this feed forward class",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1393.95,
+          "ts_end": 1398.13,
+          "text": "and pass in the GPT configuration which we are using one more thing to mention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1398.13,
+          "ts_end": 1401.37,
+          "text": "is that this JLU is basically the JLU",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1401.37,
+          "ts_end": 1405.7,
+          "text": "class which we had defined earlier at the start of this lecture so that's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1405.7,
+          "ts_end": 1410.94,
+          "text": "available to the feed forward feed forward class okay so now I will define",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1410.94,
+          "ts_end": 1415.38,
+          "text": "an input X so as we saw on the whiteboard X will have two batches each",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1415.38,
+          "ts_end": 1418.68,
+          "text": "batch will have three tokens and the embedding dimension of each token is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1418.68,
+          "ts_end": 1425.53,
+          "text": "going to be 768 that's the input now when I I create an instance of the feed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1425.53,
+          "ts_end": 1430.41,
+          "text": "forward class FFN and then pass the input to this instance so what will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1430.41,
+          "ts_end": 1437.28,
+          "text": "happen when the input goes through this instance it will the this init constructor will be called",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1437.28,
+          "ts_end": 1442.74,
+          "text": "so self dot layers will be defined and the neural network will be constructed with this architecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1442.74,
+          "ts_end": 1447.44,
+          "text": "and then the forward method will be called when the forward method will be called first the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1447.44,
+          "ts_end": 1451.88,
+          "text": "expansion will be applied on the input then the activation will be applied and then the contraction",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1451.88,
+          "ts_end": 1457.98,
+          "text": "will be applied and all along the size of the input will be preserved so then the output will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1457.98,
+          "ts_end": 1463.54,
+          "text": "have the same size as the input and you can print out the output shape which is 2 by 3 by 768 again",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_006",
+      "title": "Feedforward neural network advantages",
+      "ts_start": 1466.0,
+      "ts_end": 1592.0,
+      "segments": [
+        {
+          "ts_start": 1469.56,
+          "ts_end": 1475.04,
+          "text": "implemented in this in this lecture plays a crucial role in enhancing the model's ability to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1475.04,
+          "ts_end": 1480.95,
+          "text": "learn from and generalize the data why can it do that because although the input and output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1480.95,
+          "ts_end": 1486.37,
+          "text": "dimensions are same it internally expands the embedding dimension into a higher dimensional space",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1486.96,
+          "ts_end": 1488.31,
+          "text": "through the first linear layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1488.91,
+          "ts_end": 1495.21,
+          "text": "this expansion is followed by a non-linear gelu activation and then a contraction block back to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1495.21,
+          "ts_end": 1500.41,
+          "text": "the original dimension with the second linear transformation so such an expansion contraction",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1500.41,
+          "ts_end": 1506.09,
+          "text": "design allows for the exploration of a richer representation space and thus it enhances the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1506.09,
+          "ts_end": 1511.23,
+          "text": "model's ability to learn from and generalize the data always remember that when you learn about",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1511.23,
+          "ts_end": 1516.27,
+          "text": "these neural network architectures first ask the question why is it even there what if i remove this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1518.0,
+          "ts_end": 1518.94,
+          "text": "you will see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1519.04,
+          "ts_end": 1524.3,
+          "text": "that if you remove it the model's ability to learn from data is hampered significantly and remember",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1524.3,
+          "ts_end": 1529.5,
+          "text": "that in gpt2 we have 12 transformer blocks and each transformer block will have a feed forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1529.5,
+          "ts_end": 1534.34,
+          "text": "neural network like this so we'll have 12 neural network like this so 12 expansion contraction",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1534.34,
+          "ts_end": 1542.47,
+          "text": "blocks now imagine the exploration power which our model has okay the second thing which i really",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1542.47,
+          "ts_end": 1547.49,
+          "text": "want to highlight here which i also highlighted at the start is that there is a uniformity in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1547.49,
+          "ts_end": 1549.91,
+          "text": "input and the output dimensions when we look at the input and the output dimensions when we look at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1549.93,
+          "ts_end": 1554.81,
+          "text": "the gpt2 architecture this simplifies the architecture by enabling the stacking of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1554.81,
+          "ts_end": 1563.85,
+          "text": "multiple layers and this makes the model much more scalable so let me explain this once more",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1564.45,
+          "ts_end": 1569.55,
+          "text": "yeah when we looked at this transformer block at every single layer as i mentioned at every single",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1569.55,
+          "ts_end": 1574.97,
+          "text": "layer normalization multi-head dropout feed forward neural network the dimension is preserved",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1574.97,
+          "ts_end": 1579.41,
+          "text": "throughout so that way we can stack multiple layers together because we don't have to worry",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1580.19,
+          "ts_end": 1584.01,
+          "text": "about additional mismatch that's one of the biggest advantages of this transformer block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1584.01,
+          "ts_end": 1589.33,
+          "text": "it's very flexible that way and we can stack multiple layers on top of each other and that",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "d_PiwZe8UF4_007",
+      "title": "Summary",
+      "ts_start": 1592.0,
+      "ts_end": 1677.0,
+      "segments": [
+        {
+          "ts_start": 1595.94,
+          "ts_end": 1600.26,
+          "text": "where we covered about the gelu activation function and the feed forward neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1600.26,
+          "ts_end": 1606.48,
+          "text": "to which the gelu activation function is linked so now in this entire gpt architecture we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1606.48,
+          "ts_end": 1611.58,
+          "text": "now covered four things we have covered the gpt backbone we have covered layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1611.6,
+          "ts_end": 1616.6,
+          "text": "in the previous lecture and in today's lecture we covered the gelu activation along with the feed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1616.6,
+          "ts_end": 1620.7,
+          "text": "forward neural network in the next lecture we are going to look at shortcut connections",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1620.7,
+          "ts_end": 1627.12,
+          "text": "so shortcut connections are these basically these plus signs if you would have seen if you zoom into",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1627.12,
+          "ts_end": 1633.5,
+          "text": "this transformer block there are these plus signs here right this plus this plus signs with an arrow",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1635.0,
+          "ts_end": 1639.32,
+          "text": "this plus sign here with an arrow these are shortcut connections and you might be wondering",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1639.32,
+          "ts_end": 1642.54,
+          "text": "what they are what they do we learn now all about that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1642.56,
+          "ts_end": 1647.09,
+          "text": "in the next lecture i hope you are understanding everyone from this lectures",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1647.63,
+          "ts_end": 1652.43,
+          "text": "and please try to execute the code which i'm sharing after every single lecture that way the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1652.43,
+          "ts_end": 1657.03,
+          "text": "conceptual understanding and the code understanding will also develop much further",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1657.03,
+          "ts_end": 1661.69,
+          "text": "i am deliberately splitting these lectures into separate so that you understand and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1661.69,
+          "ts_end": 1667.51,
+          "text": "discover about each model of the gpt architecture on your own without confusing you too much",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1667.51,
+          "ts_end": 1671.05,
+          "text": "thank you so much everyone and i look forward to seeing you in the next lecture",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

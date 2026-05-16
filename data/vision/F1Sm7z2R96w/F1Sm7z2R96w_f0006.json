@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "[1.2, 0.9],  # First token predictions for sequence 1\n[0.5, 0.8],  # Second token predictions for sequence 1\n[-1.0, 0.0]  # Third token predictions for sequence 1\n[0.3, 2.1],  # Fourth token predictions for sequence 1\n\n[0.6, 0.8],  # First token predictions for sequence 2\n[0.2, 0.4],  # Second token predictions for sequence 2\n[1.5, 2.0],  # Third token predictions for sequence 2\n[0.1, 0.5]   # Fourth token predictions for sequence 2"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "F1Sm7z2R96w_f0006",
+  "video_id": "F1Sm7z2R96w",
+  "timestamp_sec": 1577.666333,
+  "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0006.jpg"
+}

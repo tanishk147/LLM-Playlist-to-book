@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "Transposed Values matrix:\ntensor([[[[-3.6194,   2.0935,   1.3879],\n          [ 1.1106,  -0.4063,  -0.5588],\n          [-1.6594,   0.1052,  -0.0468]],\n\n         [[ 2.1231,  -1.2262,  -0.2556],\n          [ 1.8222,   1.8721,   0.4929],\n          [ 0.8916,  -1.4384,  -0.5651]]])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0034",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1818.199667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0034.jpg"
+}

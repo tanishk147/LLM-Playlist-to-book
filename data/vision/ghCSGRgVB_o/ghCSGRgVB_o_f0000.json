@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Token Embeddings",
+  "extracted_text": "Output text\nPost processing steps\nGPT",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A flowchart showing three sequential processing steps: Output text, Post processing steps, and GPT, connected vertically.",
+  "diagram_elements": [
+    "Output text",
+    "Post processing steps",
+    "GPT"
+  ],
+  "confidence": 0.85,
+  "frame_id": "ghCSGRgVB_o_f0000",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0000.jpg"
+}

@@ -1,0 +1,55 @@
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Project Data (Heavy files)
+data/_video_cache/
+data/raw/
+
+# Ignore the typeset marker and outputs so the book is built fresh for anyone who clones it
+data/.stage/11_typeset
+book/manuscript.pdf
+book/manuscript.tex
+book/manuscript.md
+reports/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# MacOS
+.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Large archive files
+*.zip
+*.tar.gz

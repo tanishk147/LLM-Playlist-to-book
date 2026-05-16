@@ -1,0 +1,74 @@
+[
+  {
+    "frame_id": "G3W-LT79LSI_f0000",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0000.jpg",
+    "phash": "a05f415f236e3b07",
+    "edge_density": 0.10719464869281047,
+    "sha256": "1d5a5a9c66cad0800b2d74f23b08302def99fe9e82e0acde35a5f11f405b561b"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0001",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 28.233,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0001.jpg",
+    "phash": "bfc4d03f6c3b90c0",
+    "edge_density": 0.1473768978077342,
+    "sha256": "90914d74797a89d4838ffb9ab736277fd51fcb196ffe08a414c4189065c374f9"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0002",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 140.133,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0002.jpg",
+    "phash": "e26b189d9535734a",
+    "edge_density": 0.13130340243736383,
+    "sha256": "a54211564b26247319045e59bb4d1b1b8c899572341608619c9d826d7dc9d34d"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0003",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 1192.699667,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0003.jpg",
+    "phash": "ed9836c699c57612",
+    "edge_density": 0.11631784875408498,
+    "sha256": "119f6c242ec77be88f372754861168783184bade6b67a3a914dd7e74441ae650"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0004",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 1194.966333,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0004.jpg",
+    "phash": "82f62d7dc94fc083",
+    "edge_density": 0.1404008586941721,
+    "sha256": "c5c61fc6518243b224b7e66664890964e8e60d1fe9cecf32b8aaeb0150e9694e"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0005",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 1205.999667,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0005.jpg",
+    "phash": "bfdc407f407c4073",
+    "edge_density": 0.1418675108932462,
+    "sha256": "32b31f25dbfa1250edb377ba7ad16f3d735197572397676998712fd05a2397a4"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0006",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 1975.133,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0006.jpg",
+    "phash": "b85f027f0073525f",
+    "edge_density": 0.13876112728077342,
+    "sha256": "44ca8958e4037578680885238fba3d69c8f198c4873755072b10a54feaee06f2"
+  },
+  {
+    "frame_id": "G3W-LT79LSI_f0007",
+    "video_id": "G3W-LT79LSI",
+    "timestamp_sec": 1984.033,
+    "path": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0007.jpg",
+    "phash": "8a5f407b5075d07d",
+    "edge_density": 0.10754091350081699,
+    "sha256": "c6278f51442a02a0f66154158d9194e14a5ee61636dad220625448542b191cfd"
+  }
+]

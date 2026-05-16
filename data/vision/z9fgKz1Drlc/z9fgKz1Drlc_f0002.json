@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "One epoch is one complete pass over a training set\n\nThe number of batches is determined by the training set size divided by the size of each batch\n\nThese are the usual steps used for training deep neural networks in PyTorch\n\nOptional steps for tracking the training progress\n\nFigure 5.11 A typical training loop for training deep neural networks in PyTorch consists of several steps, iterating over the batches in the training set for several epochs. In each loop, we calculate the loss for each training set item and use it to determine loss gradients, which we use to update the model weights as that the final model weights are optimal.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A flowchart showing the typical training loop for deep neural networks in PyTorch, with nested iterations over epochs and batches, including steps for loss calculation, backward pass, weight updates, and optional tracking.",
+  "diagram_elements": [
+    "1) For each training epoch",
+    "2) For each batch in training set",
+    "3) Reset loss gradients from previous epoch",
+    "4) Calculate loss on current batch",
+    "5) Backward pass to calculate loss gradients",
+    "6) Update model weights using loss gradients",
+    "7) Print training and validation set losses",
+    "8) Generate sample text for visual inspection"
+  ],
+  "confidence": 0.92,
+  "frame_id": "z9fgKz1Drlc_f0002",
+  "video_id": "z9fgKz1Drlc",
+  "timestamp_sec": 160.999667,
+  "source_image": "data/frames/z9fgKz1Drlc/z9fgKz1Drlc_f0002.jpg"
+}

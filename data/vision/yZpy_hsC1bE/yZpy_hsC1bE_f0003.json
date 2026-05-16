@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "File downloaded and saved as sms_spam_collection/SMSSpamCollection.tsv\n\nAfter executing the preceding code, the dataset is saved as a tab-separated text file, SMSSpamCollection.tsv, in the sms_spam_collection folder.\n\nWe can load it into a pandas DataFrame as follows:",
+  "code": {
+    "language": "python",
+    "content": "# Create an unverified SSL context\nssl_context = ssl._create_unverified_context()\n\n# Downloading the file\nwith urllib.request.urlopen(url, context=ssl_context) as response:\n    with open(zip_path, \"wb\") as out_file:\n        out_file.write(response.read())\n\n# Unzipping the file\nwith zipfile.ZipFile(zip_path, \"r\") as zip_ref:\n    zip_ref.extractall(extracted_path)\n\n# Add .csv file extension\noriginal_file_path = Path(extracted_path) / \"SMSSpamCollection\"\nos.rename(original_file_path, data_file_path)\nprint(f\"File downloaded and saved as {data_file_path}\")\n\ndownload_and_unzip_spam_data(url, zip_path, extracted_path, data_file_path)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "yZpy_hsC1bE_f0003",
+  "video_id": "yZpy_hsC1bE",
+  "timestamp_sec": 1126.899667,
+  "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0003.jpg"
+}

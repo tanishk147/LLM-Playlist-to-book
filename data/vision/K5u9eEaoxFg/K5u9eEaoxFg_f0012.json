@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Step 1 of multi-head attention: Calculate Keys, Queries, and Value Matrix using Input tensor multiplied by weight matrices (Wk, Wq, Wv), showing tensor dimensions and output shapes.",
+  "diagram_elements": [
+    "Input tensor",
+    "Wk (Key weight matrix)",
+    "Wq (Query weight matrix)",
+    "Wv (Value weight matrix)",
+    "Keys (1X3X6)",
+    "Queries (1X3X6)",
+    "Values",
+    "d_out",
+    "b (batch)",
+    "num_tokens"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0012",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 992.833,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0012.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Meta-Llama-3-8B-Instruct",
+  "extracted_text": "meta-llama Meta-Llama-3-8B-Instruct\nlike 3.48k\nText Generation Transformers Safetensors PyTorch English llama facebook meta llama-3 conversational text-generation-inference\nInference Endpoints License: llama3\nModel card Files and versions Community 186\nA newer version of this model is available:",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "7m2jV7BOFkA_f0005",
+  "video_id": "7m2jV7BOFkA",
+  "timestamp_sec": 1572.499667,
+  "source_image": "data/frames/7m2jV7BOFkA/7m2jV7BOFkA_f0005.jpg"
+}

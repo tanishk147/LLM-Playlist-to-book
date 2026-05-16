@@ -1,0 +1,28 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "batch = 1",
+    "num\\_tokens = 2",
+    "d\\_in = 6",
+    "(6 \\times 6) \\to d_{in} \\times dout"
+  ],
+  "diagram_summary": "Multi-head attention setup showing initialization steps: batch size, number of tokens, input dimension, and weight matrix dimensions for key, query, and value projections with 2 heads and dimension 6.",
+  "diagram_elements": [
+    "Step (2): Decide d_out, num_heads",
+    "d_out = 6",
+    "num_heads = 2",
+    "head_dim = 3",
+    "Step (3): Initialize trainable weight matrices",
+    "Wk, Wq, Wv (6x6)",
+    "Tensor outputs shown for Wq, Wk, Wv"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0007",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 877.266333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0007.jpg"
+}

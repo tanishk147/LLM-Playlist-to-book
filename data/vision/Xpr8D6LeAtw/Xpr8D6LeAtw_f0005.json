@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Meet Llama 3.1",
+  "extracted_text": "405B\n70B\n8B",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Model size variants of Llama 3.1 displayed as three parameter counts in rounded boxes.",
+  "diagram_elements": [
+    "405B",
+    "70B",
+    "8B"
+  ],
+  "confidence": 0.95,
+  "frame_id": "Xpr8D6LeAtw_f0005",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 488.299667,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0005.jpg"
+}

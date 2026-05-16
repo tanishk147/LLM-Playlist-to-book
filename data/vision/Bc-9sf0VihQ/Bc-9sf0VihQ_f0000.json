@@ -1,0 +1,27 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture \u2192 loading + Saving PyTorch Model Weights",
+  "extracted_text": "Recap until now.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A flowchart showing the progression of LLM development steps from text generation through weight saving and loading, with checkmarks indicating completed steps and annotations describing implementation goals.",
+  "diagram_elements": [
+    "1) Text generation",
+    "2) Text evaluation",
+    "3) Training & validation losses",
+    "4) LLM training function",
+    "5) Text generation strategies",
+    "6) Weight saving & loading",
+    "7) Pretrained weights from OpenAI",
+    "Train the model to generate human-like text",
+    "Implement additional LLM text generation strategies to reduce training data memorization",
+    "Implement functions to save and load the LLM weights to use or continue training the LLM later",
+    "At the end of this chapter, load pretrained weights from OpenAI into our LLM model"
+  ],
+  "confidence": 0.92,
+  "frame_id": "Bc-9sf0VihQ_f0000",
+  "video_id": "Bc-9sf0VihQ",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0000.jpg"
+}

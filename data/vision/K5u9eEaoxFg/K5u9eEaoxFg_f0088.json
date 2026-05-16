@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "As we can see based on the results, the output dimension is directly controlled by the d_out argument:\n\nIn this section, we implemented the MultiHeadAttention class that we will use in the upcoming sections when im",
+  "code": {
+    "language": "python",
+    "content": "batch_size, context_length, d_in = batch.shape\nd_out = 6\nmha = MultiHeadAttention(d_in, d_out, context_length, 0.0, num_heads=2)\ncontext_vecs = mha(batch)\nprint(context_vecs)\nprint(\"context_vecs.shape:\", context_vecs.shape)\n\ntorch.Size([2, 3, 6])\ntensor([[[ 0.1569, -0.0873,  0.0210,  0.0215, -0.3243, -0.2518],\n         [ 0.1117, -0.0547,  0.0406, -0.0213, -0.3251, -0.2993],\n         [ 0.1196, -0.0491,  0.0318, -0.0635, -0.2788, -0.2578]],\n\n        [[ 0.1569, -0.0873,  0.0210,  0.0215, -0.3243, -0.2518],\n         [ 0.1117, -0.0547,  0.0406, -0.0213, -0.3251, -0.2993],\n         [ 0.1196, -0.0491,  0.0318, -0.0635, -0.2788, -0.2578]]],\n       grad_fn=<ViewBackward0>)\ncontext_vecs.shape: torch.Size([2, 3, 6])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "K5u9eEaoxFg_f0088",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3468.766333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0088.jpg"
+}

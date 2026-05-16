@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": true,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "ghCSGRgVB_o_f0017",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 3320.799667,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0017.jpg"
+}

@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "After the execution of the previous code has been completed, let's inspect the contents of settings and params:\n\nSettings: {'n_vocab': 50257, 'n_ctx': 1024, 'n_embd': 768, 'n_head': 12, 'n_layer': 12}\nParameter dictionary keys: dict_keys(['blocks', 'b', 'g', 'wpe', 'wte'])\n\nBoth settings and params are Python dictionaries. The settings dictionary stores the LLM architecture settings similarly to GPT_CONFIG_124M settings.\n\nThe params dictionary contains the actual weight tensors.\n\nthat we only printed the dictionary keys because printing the weight contents would take much screen space",
+  "code": {
+    "language": "python",
+    "content": "print(\"Settings:\", settings)\nprint(\"Parameter dictionary keys:\", params.keys())"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "yXrGeDNuymY_f0017",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1849.466333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0017.jpg"
+}

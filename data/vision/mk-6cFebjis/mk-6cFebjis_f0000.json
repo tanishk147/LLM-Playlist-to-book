@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "LLM Data Preprocessing",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Four-step LLM data preprocessing pipeline showing tokenization methods and embedding processes.",
+  "diagram_elements": [
+    "Tokenization (Word based, Subword based (BPE tokenizer), Character based)",
+    "Token embeddings (Converting token IDs to vectors)",
+    "Positional embeddings (Encoding information about position)",
+    "Input embeddings (Token embeddings + positional embeddings)"
+  ],
+  "confidence": 0.92,
+  "frame_id": "mk-6cFebjis_f0000",
+  "video_id": "mk-6cFebjis",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/mk-6cFebjis/mk-6cFebjis_f0000.jpg"
+}

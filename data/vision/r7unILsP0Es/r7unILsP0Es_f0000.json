@@ -1,0 +1,26 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Finetuning the model (Step 5)",
+  "extracted_text": "We will load GPT-2(355M) model weights\n\n(a) Loss function. Cross entropy loss\n(similar to the one used for pre-training the LLM)\n\n(b) Run training loop on instruction dataset",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Flowchart showing training steps: one epoch passes over training set, batches determined by training set size, reset loss gradients, calculate loss, backward pass, update weights using loss gradients, print training and validation losses, with optional steps for tracking training progress.",
+  "diagram_elements": [
+    "1) For each training epoch",
+    "2) For each batch in training set",
+    "3) Reset loss gradients from previous epoch",
+    "4) Calculate loss on current batch",
+    "5) Backward pass to calculate loss gradients",
+    "6) Update weights using loss gradients",
+    "7) Print training and validation set losses",
+    "8) New: Calculate classification accuracy",
+    "These are the usual steps used for training deep neural networks in PyTorch",
+    "Optional steps for tracking the training progress"
+  ],
+  "confidence": 0.85,
+  "frame_id": "r7unILsP0Es_f0000",
+  "video_id": "r7unILsP0Es",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/r7unILsP0Es/r7unILsP0Es_f0000.jpg"
+}

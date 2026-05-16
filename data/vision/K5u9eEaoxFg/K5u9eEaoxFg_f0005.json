@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "d_{in} = 6",
+    "d_{out} = 12",
+    "head\\_dim = 6"
+  ],
+  "diagram_summary": "Multi-head attention setup showing three steps: (1) compute d_in and d_out parameters, (2) divide d_out into num_heads with head_dim calculation, (3) initialize trainable weight matrices for key, query, and value projections.",
+  "diagram_elements": [
+    "Step(1): d_in=6, num_tokens=?, d_in=(6)",
+    "Step(2): Decide d_out, num_heads with d_out=6, head_dim=6, head_dim=b",
+    "Step(3): Initialize trainable weight matrices for key, query, value (Wk, Wq, Wv) with dimensions (6\u00d76)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0005",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 849.866333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0005.jpg"
+}

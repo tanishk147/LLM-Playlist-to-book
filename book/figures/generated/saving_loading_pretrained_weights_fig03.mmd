@@ -1,0 +1,20 @@
+graph LR
+    A["1) Text generation"] -->|✓| B["2) Text evaluation"]
+    B -->|✓| C["3) Training & validation losses"]
+    C -->|✓| D["4) LLM training function"]
+    D --> E["5) Text generation strategies"]
+    E --> F["6) Weight saving & loading"]
+    F --> G["7) Pretrained weights from OpenAI"]
+    
+    H["Train the model to generate human-like text"] -.-> D
+    I["Implement additional LLM text generation strategies to reduce training data memorization"] -.-> E
+    J["Implement functions to save and load the LLM weights to use or continue training the LLM later"] -.-> F
+    K["At the end of this chapter, load pretrained weights from OpenAI into our LLM model"] -.-> G
+    
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#fff9c4
+    style E fill:#fff9c4
+    style F fill:#fff9c4
+    style G fill:#f3e5f5

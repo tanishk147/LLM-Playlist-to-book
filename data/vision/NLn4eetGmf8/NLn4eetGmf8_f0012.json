@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Transformer architecture showing two stacked blocks (Nx repetitions) with encoder and decoder components, each containing Multi-Head Attention, Add & Norm layers, and Feed Forward networks, culminating in Linear and Softmax output layers.",
+  "diagram_elements": [
+    "Masked Multi-Head Attention",
+    "Add & Norm",
+    "Feed Forward",
+    "Multi-Head Attention",
+    "Linear",
+    "Softmax",
+    "Nx (encoder block)",
+    "Nx (decoder block)"
+  ],
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0012",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 1149.699667,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0012.jpg"
+}

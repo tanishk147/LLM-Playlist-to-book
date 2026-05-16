@@ -1,0 +1,27 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "LSTM cell state updates over time showing Company A value prediction: Initial Long Term Memory (0) and Short Term Memory (0) are updated through Days 1-4 with operations (\u00d7, +) producing intermediate values (-.2, -.1, .5, .25, -.3, -.2, 1), culminating in a prediction for Day 5.",
+  "diagram_elements": [
+    "Company A value chart (Days 1-5)",
+    "High=1 / Low=0 scale",
+    "Initial Long Term Memory: 0",
+    "Initial Short Term Memory: 0",
+    "Day 1: \u00d7, +, value -.2, STM 0",
+    "Day 2: \u00d7, +, value -.1, STM 0.5",
+    "Day 3: \u00d7, +, value -.2, STM 0.25",
+    "Updated Long Term Memory: -.3",
+    "Updated Short Term Memory: -.2",
+    "Day 4: \u00d7, +, STM 1",
+    "Day 5: prediction target (shaded region)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "NLn4eetGmf8_f0022",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 2091.566333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0022.jpg"
+}

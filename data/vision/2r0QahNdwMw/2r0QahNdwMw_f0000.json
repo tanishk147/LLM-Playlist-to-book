@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Shortcut Connections",
+  "extracted_text": "Also known as skip, or residual connections\n\n1) Shortcut connections were first proposed in the field of Computer Vision to solve the problem of vanishing gradient\n\nGradient become progressively smaller as they propagate backward \u2192 making",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A neural network diagram showing layer 2 and hidden layer 3 connected to an output layer, with a visual representation of network architecture and connections.",
+  "diagram_elements": [
+    "Layer 2",
+    "Hidden layer 3",
+    "Output layer",
+    "Network connections"
+  ],
+  "confidence": 0.85,
+  "frame_id": "2r0QahNdwMw_f0000",
+  "video_id": "2r0QahNdwMw",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/2r0QahNdwMw/2r0QahNdwMw_f0000.jpg"
+}

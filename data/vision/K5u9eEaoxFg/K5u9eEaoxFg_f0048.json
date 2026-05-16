@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing tensor transformations across two attention heads with queries, keys, and values being reshaped and processed, with annotations indicating head dimensions and parameter shapes.",
+  "diagram_elements": [
+    "Head 1",
+    "Head 2",
+    "tensor with numerical values (0.4143, 3.4907, -0.1226, etc.)",
+    "queries, keys, transpose(2, 3)",
+    "tensor with values (-8.2252, 2.0863, 1.2960, etc.)",
+    "shape (1, 2, 3, 3)",
+    "shape (b, num_heads, head_dim, num_tokens)",
+    "attention weights",
+    "X (crossed out)",
+    "arrow indicating transformation flow"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0048",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2104.966333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0048.jpg"
+}

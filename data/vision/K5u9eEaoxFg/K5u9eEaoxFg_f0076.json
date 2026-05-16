@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Handwritten diagram showing the structure of multi-head attention with context vector, attention weights, and values components, including parameter shapes and tensor dimensions.",
+  "diagram_elements": [
+    "Context Vector",
+    "Attention Weights",
+    "Values",
+    "Embed Vector",
+    "Dropout",
+    "(b, num_heads, num_tokens, num_tokens)",
+    "(b, num_heads, num_tokens, head_dim)",
+    "Final attention scores",
+    "Tensor output shapes with numerical values"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0076",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2894.966333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0076.jpg"
+}

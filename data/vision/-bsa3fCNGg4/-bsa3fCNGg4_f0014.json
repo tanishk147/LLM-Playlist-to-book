@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "In some cases, organizations need to train a purpose-built model from scratch that understands their business, industry, or domain. Fully custom-trained models imbue new knowledge from a specific domain by modifying key steps of the model training process using novel mid-training and post-training techniques. Organizations that see success with a fully custom-trained model often have large quantities of proprietary data\u2014millions of examples or billions of tokens\u2014that they want to use to teach the model new knowledge or complex, unique behaviors for highly specific use cases.\n\nFor example, Harvey, an AI-native legal tool for attorneys, partnered with OpenAI to create a custom-trained large language model for case law. While foundation models were strong at reasoning, they lacked the extensive knowledge of legal case history and other knowledge required for legal work. After testing out prompt engineering, RAG, and fine-tuning, Harvey worked with our team to add the depth of context needed to the model\u2014the equivalent of 10 billion tokens worth of data. Our team modified every step of the model training process, from domain-specific mid-training to customizing post-training processes and incorporating expert attorney feedback. The resulting model achieved an",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "-bsa3fCNGg4_f0014",
+  "video_id": "-bsa3fCNGg4",
+  "timestamp_sec": 1447.099667,
+  "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0014.jpg"
+}

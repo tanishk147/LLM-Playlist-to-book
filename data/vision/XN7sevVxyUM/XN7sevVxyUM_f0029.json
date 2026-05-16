@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Recurrent neural networks - 1980 (Memory)",
+  "extracted_text": "RECURRENT NEURAL NETWORKS\n\nRNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Recurrent neural network architecture showing input layer connected to hidden layer with recurrent connections, and output layer, with feedback loops indicating memory mechanism.",
+  "diagram_elements": [
+    "Input",
+    "Hidden Layer",
+    "Output",
+    "Recurrent connections"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0029",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2544.433,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0029.jpg"
+}

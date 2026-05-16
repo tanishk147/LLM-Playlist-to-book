@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "3D coordinate system showing multiple colored vectors/arrows emanating from the origin, labeled with text indicating journey steps and directions.",
+  "diagram_elements": [
+    "X axis (0.0 to 1.0)",
+    "Y axis (0.0 to 1.0)",
+    "Z axis (0.0 to 1.0)",
+    "Yellow arrow labeled 'step'",
+    "Red arrow labeled 'Your'",
+    "Cyan arrow labeled 'until'",
+    "Blue arrow labeled 'journey starts'",
+    "Magenta arrow labeled 'one'"
+  ],
+  "confidence": 0.85,
+  "frame_id": "eSRhpYLerw4_f0003",
+  "video_id": "eSRhpYLerw4",
+  "timestamp_sec": 1228.866333,
+  "source_image": "data/frames/eSRhpYLerw4/eSRhpYLerw4_f0003.jpg"
+}

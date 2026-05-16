@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "torch.manual_seed(123)\nbatch_example = torch.randn(2, 5) #A\nlayer = nn.Sequential(nn.Linear(5, 6), nn.ReLU())\nout = layer(batch_example)\nprint(out)\n\ntensor([[0.2260, 0.3470, 0.0000, 0.2216, 0.0000, 0.0000],\n        [0.2133, 0.2394, 0.0000, 0.5198, 0.3297, 0.0000]],\n       grad_fn=<ReluBackward0>)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "G3W-LT79LSI_f0005",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 1205.999667,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0005.jpg"
+}

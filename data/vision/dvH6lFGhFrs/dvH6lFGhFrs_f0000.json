@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Transformer Block",
+  "extracted_text": "Fundamental building block of GPT and other LLM architectures\n\n(1) The transformer block is repeated 12 times -",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "dvH6lFGhFrs_f0000",
+  "video_id": "dvH6lFGhFrs",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/dvH6lFGhFrs/dvH6lFGhFrs_f0000.jpg"
+}

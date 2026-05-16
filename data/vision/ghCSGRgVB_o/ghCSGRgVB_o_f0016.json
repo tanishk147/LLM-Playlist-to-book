@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Linear",
+  "extracted_text": "CLASS torch.nn.Linear(in_features, out_features, bias=True, device=None, dtype=None) [SOURCE]\n\nApplies an affine linear transformation to the incoming data:\n\nThis module supports TensorFloat32.\n\nOn certain ROCm devices, when using float16 inputs this module will use different precision for backward.\n\nParameters\n\u2022 in_features (int) \u2013 size of each input sample\n\u2022 out_features (int) \u2013 size of each output sample\n\u2022 bias (bool) \u2013 if set to False, the layer will not learn an additive bias. Default: True\n\nShape:\n\u2022 Input: where means any number of dimensions including none and\n\u2022 Output: where all but the last dimension are the same shape as the input and\n\nVariables",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "ghCSGRgVB_o_f0016",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 3287.433,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0016.jpg"
+}

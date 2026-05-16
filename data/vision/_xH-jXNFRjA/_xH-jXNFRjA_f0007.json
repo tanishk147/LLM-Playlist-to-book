@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "LLM evaluation framework showing three approaches: MMLU, Human assisted scoring, and using powerful LLMs to evaluate another LLM.",
+  "diagram_elements": [
+    "LLM Evaluation",
+    "MMLU",
+    "Human assisted scoring",
+    "Using powerful LLM to evaluate another"
+  ],
+  "confidence": 0.85,
+  "frame_id": "_xH-jXNFRjA_f0007",
+  "video_id": "_xH-jXNFRjA",
+  "timestamp_sec": 1078.799667,
+  "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0007.jpg"
+}

@@ -1,0 +1,5646 @@
+{
+  "video_id": "rsy5Ragmso8",
+  "duration_sec": 4183.9571875,
+  "segments": [
+    {
+      "ts_start": 4.66,
+      "ts_end": 11.02,
+      "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+      "frame_ids": [
+        "rsy5Ragmso8_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": "Lecture 7: Tokenization",
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "A two-stage diagram showing Stage 1 and Stage 2 of a tokenization process, with Stage 1 containing boxes for Attention mechanism and LLM architecture, and Stage 2 containing boxes for Training loop and Model evaluation.",
+          "diagram_elements": [
+            "Stage 1",
+            "Stage 2",
+            "Attention mechanism",
+            "LLM architecture",
+            "Training loop",
+            "Model evaluation"
+          ],
+          "confidence": 0.85,
+          "frame_id": "rsy5Ragmso8_f0000",
+          "video_id": "rsy5Ragmso8",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/rsy5Ragmso8/rsy5Ragmso8_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 12.33,
+      "ts_end": 17.51,
+      "text": "My name is Dr. Raj Dandekar and I'll be your instructor for this lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 18.88,
+      "ts_end": 24.1,
+      "text": "Today, we are going to cover a very important topic which is called as tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 24.1,
+      "ts_end": 37.44,
+      "text": "Basically, when we build large language models, the data needs to be pre-processed in a certain manner before it is used for pre-training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 38.68,
+      "ts_end": 45.48,
+      "text": "And in this data pre-processing pipeline, the first step is tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 47.03,
+      "ts_end": 55.24,
+      "text": "At its really basic form, tokenization is just the process of breaking down a sentence into individual words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 55.67,
+      "ts_end": 57.73,
+      "text": "But it is a bit more detailed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 58.01,
+      "ts_end": 61.35,
+      "text": "And that the way it is used to actually build large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 61.67,
+      "ts_end": 68.26,
+      "text": "In today's lecture, we are going to understand everything there is to know about tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 68.88,
+      "ts_end": 71.92,
+      "text": "And we will build a tokenizer fully from scratch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 72.34,
+      "ts_end": 77.6,
+      "text": "We'll also build an encoder and decoder from scratch and we'll code it out in Python.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 78.9,
+      "ts_end": 80.98,
+      "text": "So today will be a hands-on session.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 81.34,
+      "ts_end": 85.06,
+      "text": "If you have a laptop in front of you, that's great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 85.14,
+      "ts_end": 88.82,
+      "text": "So that you can follow along in Google Colab or Jupyter.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 88.84,
+      "ts_end": 92.64,
+      "text": "Notebook or VSCode to implement the code along with me.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 93.14,
+      "ts_end": 95.18,
+      "text": "So let's get started with today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 96.12,
+      "ts_end": 102.44,
+      "text": "Building a large language model usually proceeds in three stages, especially if you want to build it from scratch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 103.04,
+      "ts_end": 109.24,
+      "text": "In stage one, we have to understand the nuances or basic mechanism of building an LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 109.64,
+      "ts_end": 115.68,
+      "text": "And that includes data preparation, attention mechanism and understanding the LLM architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 117.24,
+      "ts_end": 119.32,
+      "text": "Stage two involves pre-training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 119.74,
+      "ts_end": 126.56,
+      "text": "And building the foundational model, so that involves the training loop, model evaluation and loading pre-trained weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 126.98,
+      "ts_end": 129.5,
+      "text": "And stage three involves fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 130.34,
+      "ts_end": 138.8,
+      "text": "Training on smaller, very specific data sets to build applications which are actually useful to you, such as a classifier or a personal assistant.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 139.81,
+      "ts_end": 147.11,
+      "text": "In this lecture, we are going to look at the first aspect of stage one, which is data preparation and sampling.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 147.11,
+      "ts_end": 159.31,
+      "text": "So, tokenization comes under the category of data preparation and sampling, and that is what we are going to cover in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 159.49,
+      "ts_end": 164.87,
+      "text": "You can think of this as the first building block for building a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 165.68,
+      "ts_end": 167.9,
+      "text": "So let's get started with today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 169.3,
+      "ts_end": 178.7,
+      "text": "So the main question which we are going to answer today is how exactly do you prepare input text for training a large language model?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 179.83,
+      "ts_end": 182.99,
+      "text": "At the heart of it, LLMs are just neural networks, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 183.11,
+      "ts_end": 184.09,
+      "text": "So you need data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 184.88,
+      "ts_end": 188.86,
+      "text": "The parameters of the LLM are optimized, and then we have some output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 190.21,
+      "ts_end": 195.13,
+      "text": "The question is that this data which comes in as the input, what form should it take?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 195.41,
+      "ts_end": 197.39,
+      "text": "How should we prepare the input text?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 198.15,
+      "ts_end": 202.17,
+      "text": "We have a huge number of documents, right, which the LLM is trained on.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 202.23,
+      "ts_end": 203.99,
+      "text": "We have seen that in previous lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 204.21,
+      "ts_end": 206.97,
+      "text": "The LLM is usually trained on billions of documents.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 207.65,
+      "ts_end": 209.75,
+      "text": "But do we feed the document directly?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 209.97,
+      "ts_end": 210.51,
+      "text": "As the LLM is trained on?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 210.53,
+      "ts_end": 211.21,
+      "text": "As the input text?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 212.0,
+      "ts_end": 215.52,
+      "text": "Do we feed the sentences of the document as the input text?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 215.76,
+      "ts_end": 216.28,
+      "text": "No.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 216.38,
+      "ts_end": 221.06,
+      "text": "It turns out we have to tokenize the document and then feed individual tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 222.56,
+      "ts_end": 228.0,
+      "text": "There is one more step after this, which is called as vector embedding, but we'll have a separate lecture for that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 228.12,
+      "ts_end": 230.42,
+      "text": "Today, we are only going to look at tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 231.61,
+      "ts_end": 236.63,
+      "text": "So the process of tokenization can be broadly broken down into three steps.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 238.13,
+      "ts_end": 241.51,
+      "text": "This is the key takeaway which you should learn from today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 241.51,
+      "ts_end": 248.37,
+      "text": "The first step is that you have to initially split the text into individual word and sub-word tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 248.81,
+      "ts_end": 250.41,
+      "text": "That is step number one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 250.63,
+      "ts_end": 253.05,
+      "text": "Imagine you have a huge amount of text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 253.25,
+      "ts_end": 255.95,
+      "text": "You break it down into individual words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 256.19,
+      "ts_end": 258.33,
+      "text": "That is the first step of tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 259.0,
+      "ts_end": 264.63,
+      "text": "The second step of tokenization is converting these tokens into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 265.93,
+      "ts_end": 271.19,
+      "text": "And the third step is basically encode these token IDs into vector representation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 271.19,
+      "ts_end": 277.55,
+      "text": "We are not going to look at step number three in today's lecture because it comes also under vector embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 277.65,
+      "ts_end": 281.33,
+      "text": "But essentially, we are going to look at step one and step number two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 281.49,
+      "ts_end": 283.93,
+      "text": "So let me repeat step one and step two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 283.99,
+      "ts_end": 289.89,
+      "text": "Step one is basically imagine you have a big document, which is let's say you're training on Harry Potter books.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 290.29,
+      "ts_end": 298.47,
+      "text": "You take these books, you divide it into sentences, and then you split the text into individual word and sub-word tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 298.89,
+      "ts_end": 300.89,
+      "text": "And then you convert these tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 301.19,
+      "ts_end": 302.37,
+      "text": "Into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 303.27,
+      "ts_end": 310.32,
+      "text": "That's the two major steps involved in tokenization, which we are going to look in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 311.61,
+      "ts_end": 319.18,
+      "text": "So I just want to show you a visual for how the input text is given to the large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 319.34,
+      "ts_end": 321.54,
+      "text": "So let's say this is an input text, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 321.6,
+      "ts_end": 323.1,
+      "text": "This is an example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 323.82,
+      "ts_end": 325.94,
+      "text": "Remember the first step of tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 326.16,
+      "ts_end": 328.24,
+      "text": "We break this into individual words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 328.44,
+      "ts_end": 330.22,
+      "text": "So the first word is this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 330.46,
+      "ts_end": 332.0,
+      "text": "The second word is is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 332.12,
+      "ts_end": 333.72,
+      "text": "The third word is an.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 333.94,
+      "ts_end": 335.54,
+      "text": "And the fourth word is example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 335.98,
+      "ts_end": 338.24,
+      "text": "So this is the tokenized text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 338.38,
+      "ts_end": 340.48,
+      "text": "And this is my step number one right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 340.9,
+      "ts_end": 346.44,
+      "text": "Step number two is we need to convert each of these individual tokens into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 346.88,
+      "ts_end": 349.72,
+      "text": "So this is the token ID 1, 4, 0, 1, 3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 349.92,
+      "ts_end": 352.12,
+      "text": "Token ID 2, 2, 0, 1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 352.28,
+      "ts_end": 354.68,
+      "text": "Token ID 3, which is 3, 0, 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 354.76,
+      "ts_end": 357.1,
+      "text": "And token ID 4, which is 1, 1, 3, 4.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 357.68,
+      "ts_end": 360.54,
+      "text": "So every word, or every token rather,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 360.54,
+      "ts_end": 363.04,
+      "text": "has a token ID associated with it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 363.12,
+      "ts_end": 365.82,
+      "text": "I have currently given these numbers randomly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 366.36,
+      "ts_end": 369.78,
+      "text": "But you need to assign a token ID for each word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 369.9,
+      "ts_end": 373.0,
+      "text": "And then the next step after getting these token IDs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 373.0,
+      "ts_end": 377.68,
+      "text": "is to convert these token IDs into something called token embeddings or vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 378.3,
+      "ts_end": 383.06,
+      "text": "And then these vector embeddings are then fed as input data to the GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 384.26,
+      "ts_end": 385.84,
+      "text": "Or the LLM rather.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 387.04,
+      "ts_end": 389.7,
+      "text": "So even before coming to the training stage,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 389.7,
+      "ts_end": 393.08,
+      "text": "we need to do these many steps of preprocessing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 393.12,
+      "ts_end": 397.16,
+      "text": "And today we are essentially going to look at step number one and step number two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 398.23,
+      "ts_end": 402.91,
+      "text": "I hope you have understood the two main steps which we are going to look at in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 403.82,
+      "ts_end": 406.84,
+      "text": "So let us start by looking at step number one initially,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 407.04,
+      "ts_end": 411.68,
+      "text": "which is tokenizing the text or breaking down the text into individual words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 412.2,
+      "ts_end": 416.64,
+      "text": "And you definitely do need to understand the nuances which are involved in this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 416.72,
+      "ts_end": 420.7,
+      "text": "And that's why I'm going to take you through the entire coding process in Python.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 421.28,
+      "ts_end": 423.86,
+      "text": "We could have just used a pre-built tokenizer,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 424.0,
+      "ts_end": 427.28,
+      "text": "but then you won't understand the nuances involved in tokenizing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 427.72,
+      "ts_end": 434.64,
+      "text": "And just to give out a shout out or rather credits to Sebastian Rashka",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 434.64,
+      "ts_end": 437.56,
+      "text": "for hosting this code publicly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 437.76,
+      "ts_end": 440.04,
+      "text": "And I'll be heavily borrowing from this code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 440.78,
+      "ts_end": 442.16,
+      "text": "So let's get started.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 442.36,
+      "ts_end": 445.16,
+      "text": "For the purposes of the demonstration today,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 445.3,
+      "ts_end": 447.4,
+      "text": "we are going to use a specific data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 447.54,
+      "ts_end": 449.58,
+      "text": "We are going to use this book",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 449.58,
+      "ts_end": 450.9,
+      "text": "called The Verdict,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 451.04,
+      "ts_end": 453.38,
+      "text": "which has been written by Edith Wharton.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 453.76,
+      "ts_end": 458.26,
+      "text": "So let's look at a few screenshots or let's look at a few data about this book.",
+      "frame_ids": [
+        "rsy5Ragmso8_f0001"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 458.4,
+      "ts_end": 460.98,
+      "text": "So if you search The Verdict by Edith Wharton,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 461.16,
+      "ts_end": 463.8,
+      "text": "you will get an image of this book,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 463.86,
+      "ts_end": 464.78,
+      "text": "which looks like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 465.88,
+      "ts_end": 467.02,
+      "text": "Year of publishing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 467.98,
+      "ts_end": 470.32,
+      "text": "Let's look at the year when this book was published.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 470.54,
+      "ts_end": 473.28,
+      "text": "So this was, I think, published in 1908.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 473.52,
+      "ts_end": 475.78,
+      "text": "So almost 120-130 years back.",
+      "frame_ids": [
+        "rsy5Ragmso8_f0002"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 476.1,
+      "ts_end": 479.16,
+      "text": "And it's available for free to download.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 479.58,
+      "ts_end": 481.62,
+      "text": "I'll give the link to download this book.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 481.72,
+      "ts_end": 484.34,
+      "text": "It's also available in this repository by Sebastian.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 484.7,
+      "ts_end": 488.8,
+      "text": "You can just click on this download and then download this book.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 489.0,
+      "ts_end": 495.4,
+      "text": "So we are going to look at this book and assume that this is the only training data which we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 495.4,
+      "ts_end": 497.58,
+      "text": "for the purposes of today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 497.82,
+      "ts_end": 503.16,
+      "text": "But whatever I show you today can be really applied to any book or even a huge number of books.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 504.09,
+      "ts_end": 508.65,
+      "text": "I encourage you later after this lecture to try out some different book which is available",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 508.65,
+      "ts_end": 513.63,
+      "text": "for free online, such as the Harry Potter book or whichever one interests you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 513.71,
+      "ts_end": 515.45,
+      "text": "And apply the same code over there.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 517.52,
+      "ts_end": 520.4,
+      "text": "Okay, so this is the data set which we are going to look at.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 520.58,
+      "ts_end": 525.38,
+      "text": "And then what we have to do is basically download and load this data set in Python.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 526.0,
+      "ts_end": 527.9,
+      "text": "So let me show you how to do that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 528.04,
+      "ts_end": 530.74,
+      "text": "So now we are moving into Jupyter coding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 531.56,
+      "ts_end": 535.12,
+      "text": "Please comment out in the comment section if the code is visible to you,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 535.16,
+      "ts_end": 538.32,
+      "text": "if I have zoomed in enough or if I should follow some different style.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 539.63,
+      "ts_end": 540.07,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 540.07,
+      "ts_end": 543.83,
+      "text": "So the first step, as I mentioned, we are going to look at two steps today,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 543.91,
+      "ts_end": 547.45,
+      "text": "creating tokens and then converting these tokens into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 547.97,
+      "ts_end": 550.53,
+      "text": "The first step is creating tokens, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 550.91,
+      "ts_end": 556.81,
+      "text": "So what we are going to do here is that we are going to download the verdict.txt file.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 556.95,
+      "ts_end": 560.09,
+      "text": "We are going to open it in Python and we are going to read it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 560.55,
+      "ts_end": 563.31,
+      "text": "And we are going to print the total number of characters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 563.63,
+      "ts_end": 564.95,
+      "text": "So I'm just showing this.",
+      "frame_ids": [
+        "rsy5Ragmso8_f0003"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 565.57,
+      "ts_end": 567.57,
+      "text": "When you download it, it looks this much.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 567.59,
+      "ts_end": 568.61,
+      "text": "It's not that big.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 570.19,
+      "ts_end": 572.63,
+      "text": "And in fact, it's even available over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 573.92,
+      "ts_end": 576.08,
+      "text": "So I have downloaded this book right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 576.38,
+      "ts_end": 579.86,
+      "text": "And in Python, you can use this open command.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 579.98,
+      "ts_end": 584.22,
+      "text": "So with open the verdict.txt and then R means we are reading this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 585.21,
+      "ts_end": 593.57,
+      "text": "And then raw text is that variable where we are storing whatever content Python has read from this book.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 593.87,
+      "ts_end": 598.81,
+      "text": "So this raw text variable is going to be very important for us because we'll also refer to it later.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 598.81,
+      "ts_end": 601.81,
+      "text": "Basically, raw text is just the entire text which we are reading.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 602.29,
+      "ts_end": 607.09,
+      "text": "And then what we are doing here is that we are counting the total number of characters in this raw text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 607.35,
+      "ts_end": 614.59,
+      "text": "So what I'm doing in this part of the code is that I'm printing out the total number of characters and then length raw text, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 614.97,
+      "ts_end": 620.65,
+      "text": "So here you see the print command towards the end, raw text, colon 99.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 620.87,
+      "ts_end": 621.87,
+      "text": "What does this do?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 622.03,
+      "ts_end": 624.95,
+      "text": "This print command prints the total number of characters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 626.13,
+      "ts_end": 628.55,
+      "text": "So there are two print commands, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 628.55,
+      "ts_end": 632.09,
+      "text": "The first print command essentially prints the total number of characters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 632.31,
+      "ts_end": 639.43,
+      "text": "And the second print command essentially prints the first hundred characters of this file for illustration purposes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 641.78,
+      "ts_end": 644.74,
+      "text": "So let's run both of these print commands right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 644.84,
+      "ts_end": 648.44,
+      "text": "I've already run this before, but let me click on this run icon again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 648.6,
+      "ts_end": 651.48,
+      "text": "So, OK, the result of this first print command is this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 651.54,
+      "ts_end": 656.66,
+      "text": "The total number of characters are 20479, 20479.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 656.84,
+      "ts_end": 659.68,
+      "text": "And the result of the second print command is basically this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 659.7,
+      "ts_end": 664.02,
+      "text": "Basically, we are printing the first hundred characters of this file, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 664.16,
+      "ts_end": 669.74,
+      "text": "So the first hundred characters are I had always thought Jack, Gisborne, etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 670.56,
+      "ts_end": 673.52,
+      "text": "So this is the these are the first hundred characters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 673.7,
+      "ts_end": 679.36,
+      "text": "So this indicates that Python has been able to successfully read the text which we have downloaded.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 679.74,
+      "ts_end": 681.3,
+      "text": "And that's an awesome sign.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 681.42,
+      "ts_end": 683.52,
+      "text": "Great. Now let's move further.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 683.68,
+      "ts_end": 689.32,
+      "text": "Our goal in this lecture is to tokenize all of the characters which are in this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 689.96,
+      "ts_end": 698.36,
+      "text": "Book in this text in the short story into individual worlds that we can later turn into embeddings for LLM training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 698.84,
+      "ts_end": 702.7,
+      "text": "Remember, embeddings is the last step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 702.86,
+      "ts_end": 707.0,
+      "text": "So before you come to training the LLM, there is this thing called embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 707.1,
+      "ts_end": 718.5,
+      "text": "So the goal in this lecture is to do the tokenization and the token IDs for the entire text which we have read for all of these characters for the 20479 characters of this short story.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 718.64,
+      "ts_end": 719.98,
+      "text": "The goal is to convert them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 720.28,
+      "ts_end": 722.18,
+      "text": "Into tokens and token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 723.64,
+      "ts_end": 735.3,
+      "text": "So one note which has been added over here is that note that it's common to process millions of articles and hundreds of thousands of books, which is a huge amount of memory when actually working with LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 735.42,
+      "ts_end": 738.94,
+      "text": "This is very important to note when you actually work with LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 739.04,
+      "ts_end": 743.32,
+      "text": "You don't just download one book as I showed to you right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 743.38,
+      "ts_end": 750.36,
+      "text": "We actually work with millions and thousands of books which are a huge amount of data to be stored on your computer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 750.86,
+      "ts_end": 757.22,
+      "text": "However, for educational purposes, it's sufficient to work with smaller text samples like a single book.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 757.5,
+      "ts_end": 762.52,
+      "text": "And that's why we are using a single book in today's code to demonstrate the idea to you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 763.52,
+      "ts_end": 768.82,
+      "text": "Okay, so the next question is how can we best split this text to obtain a list of tokens?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 769.18,
+      "ts_end": 774.76,
+      "text": "So I encourage you to pause here right now and let's say I give you this problem that you have read this text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 775.08,
+      "ts_end": 778.68,
+      "text": "Now your goal is to split this text into individual tokens, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 778.84,
+      "ts_end": 780.08,
+      "text": "How would you do this?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 780.08,
+      "ts_end": 781.96,
+      "text": "Which Python library would you use?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 785.5,
+      "ts_end": 787.16,
+      "text": "So let me reveal the answer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 787.32,
+      "ts_end": 792.56,
+      "text": "The Python library which we will be using for this is called as regular expression, RE.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 793.7,
+      "ts_end": 797.48,
+      "text": "So this module provides regular expression matching operations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 798.38,
+      "ts_end": 800.58,
+      "text": "And let's see how basically this works.",
+      "frame_ids": [
+        "rsy5Ragmso8_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "import re\n\ntext = \"Hello, world. This, is a test.\"\nresult = re.split(r'(\\s)', text)"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "rsy5Ragmso8_f0004",
+          "video_id": "rsy5Ragmso8",
+          "timestamp_sec": 798.766333,
+          "source_image": "data/frames/rsy5Ragmso8/rsy5Ragmso8_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 800.8,
+      "ts_end": 802.38,
+      "text": "We have to import RE.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 802.56,
+      "ts_end": 813.39,
+      "text": "And then what we can do is that we can use this library to split any given text based on the white spaces in that text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 813.39,
+      "ts_end": 815.39,
+      "text": "Or any other characters in that text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 815.49,
+      "ts_end": 817.11,
+      "text": "And I'll explain what this actually means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 817.83,
+      "ts_end": 828.35,
+      "text": "Okay, so let's say you have a text which looks like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 828.49,
+      "ts_end": 830.79,
+      "text": "Hello world, this is a test, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 831.11,
+      "ts_end": 835.03,
+      "text": "And you want to split this into individual tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 835.77,
+      "ts_end": 842.17,
+      "text": "What I'm going to do here is that from this library, I'm going to use this function RE.split, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 842.49,
+      "ts_end": 844.07,
+      "text": "And then there is this R.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 844.07,
+      "ts_end": 846.91,
+      "text": "And then the symbol is slash S.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 847.31,
+      "ts_end": 853.63,
+      "text": "What this basically does is that this slash S means that we split wherever white spaces are encountered, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 854.38,
+      "ts_end": 857.36,
+      "text": "So let me tell you what is meant by white spaces.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 857.5,
+      "ts_end": 858.7,
+      "text": "So let's look at this world.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 858.84,
+      "ts_end": 859.96,
+      "text": "Let's look at this sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 860.66,
+      "ts_end": 862.92,
+      "text": "You see, there is a white space over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 863.16,
+      "ts_end": 864.84,
+      "text": "There is a white space over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 864.96,
+      "ts_end": 866.66,
+      "text": "There is a white space over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 868.06,
+      "ts_end": 869.2,
+      "text": "Here and here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 869.82,
+      "ts_end": 874.0,
+      "text": "So wherever there is a white space, what this command will do is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 874.0,
+      "ts_end": 876.6,
+      "text": "it will split the text into individual tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 877.16,
+      "ts_end": 880.46,
+      "text": "And where the split will be, wherever the white space is there.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 880.6,
+      "ts_end": 883.06,
+      "text": "So it will scan this sentence from left to right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 883.73,
+      "ts_end": 886.13,
+      "text": "Now here it encounters the white space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 886.27,
+      "ts_end": 887.41,
+      "text": "So it will split here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 887.81,
+      "ts_end": 889.39,
+      "text": "Then again it will move forward.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 889.59,
+      "ts_end": 891.19,
+      "text": "Here it encounters the white space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 891.33,
+      "ts_end": 892.13,
+      "text": "So it will split here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 892.45,
+      "ts_end": 894.01,
+      "text": "So let's go from left to right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 894.27,
+      "ts_end": 898.47,
+      "text": "So until hello and comma, it has not encountered a white space, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 898.53,
+      "ts_end": 900.23,
+      "text": "So hello and comma is one token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 900.83,
+      "ts_end": 902.75,
+      "text": "And then it encounters a white space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 902.75,
+      "ts_end": 903.35,
+      "text": "So it splits.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 903.55,
+      "ts_end": 905.41,
+      "text": "So then it outputs the white space here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 905.77,
+      "ts_end": 909.75,
+      "text": "When you print out the result, then it again goes on scanning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.79,
+      "ts_end": 912.65,
+      "text": "And here until world and full stop, there is no white space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 912.87,
+      "ts_end": 915.03,
+      "text": "So it prints out world and full stop.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 915.27,
+      "ts_end": 918.05,
+      "text": "Then after this point, there is a white space, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 918.47,
+      "ts_end": 919.17,
+      "text": "See this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 919.47,
+      "ts_end": 920.87,
+      "text": "So then it prints this out.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 921.15,
+      "ts_end": 923.63,
+      "text": "Then it again keeps on scanning from left to right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 923.69,
+      "ts_end": 926.03,
+      "text": "So till this and comma, there is no white space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 926.23,
+      "ts_end": 927.91,
+      "text": "So it prints out this and comma.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 928.47,
+      "ts_end": 930.89,
+      "text": "Then it prints out another white space over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 930.97,
+      "ts_end": 932.73,
+      "text": "So it keeps on scanning from left to right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 932.73,
+      "ts_end": 939.04,
+      "text": "to right and then splits wherever white space is encountered right that is the advantage of using",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 939.04,
+      "ts_end": 946.25,
+      "text": "re.split and then this character indicates where you want to split so here i have indicated that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 946.25,
+      "ts_end": 952.07,
+      "text": "you split wherever you see a white space right so the result of this is a list of individual words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 952.07,
+      "ts_end": 956.77,
+      "text": "white spaces and punctuation characters so see white spaces are also the results of this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 956.77,
+      "ts_end": 966.7,
+      "text": "now what we want to do is we want to also split commas and periods so here you see the comma is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 966.7,
+      "ts_end": 972.34,
+      "text": "included as part of the world itself here the full stop is included as part of the world but we want",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 972.34,
+      "ts_end": 978.06,
+      "text": "to have comma and full stop also as separate tokens how do we do that it's pretty simple in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 978.06,
+      "ts_end": 985.02,
+      "text": "the re.split command you also include comma and you also include the full stop along with this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 985.02,
+      "ts_end": 987.5,
+      "text": "slash s command and then when you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 987.5,
+      "ts_end": 992.74,
+      "text": "print the result you will see that along with white spaces so white spaces are of course",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 993.36,
+      "ts_end": 998.66,
+      "text": "printed out because we are splitting on white spaces also but comma is now a separate token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 998.66,
+      "ts_end": 1004.12,
+      "text": "full stop is now a separate token which was not the case before hello and comma were one token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1004.12,
+      "ts_end": 1011.19,
+      "text": "but now you will see hello and comma are separate tokens awesome so now we have split based on comma",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1011.19,
+      "ts_end": 1017.54,
+      "text": "and full stops also correct now the main another remaining issue is that our list",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1017.54,
+      "ts_end": 1023.12,
+      "text": "still includes white space characters right see these the white space characters are still counted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1023.12,
+      "ts_end": 1029.22,
+      "text": "as tokens we can even remove these redundant redundant characters safely so here what we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1029.22,
+      "ts_end": 1036.42,
+      "text": "doing is that uh you first scan the result scan each item in the result so we are looping over",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1036.42,
+      "ts_end": 1041.66,
+      "text": "each item in the result so this is the result right so we are going over each of the individual",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1041.66,
+      "ts_end": 1047.4,
+      "text": "items in this result and if item dot strip is equal to true then only we return that item",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1048.06,
+      "ts_end": 1053.36,
+      "text": "so if it's a white space then item dot strip will actually be false so white spaces will not be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1053.36,
+      "ts_end": 1060.38,
+      "text": "returned whenever there is actually a full world full word like hello or comma or world or this or",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1060.38,
+      "ts_end": 1067.02,
+      "text": "full stop then only item dot strip will return true and those words will be returned in this result",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1067.02,
+      "ts_end": 1074.16,
+      "text": "so using this statement uh loop over item in the result and then find out item dot strip so for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1074.16,
+      "ts_end": 1078.42,
+      "text": "white spaces item dot strip will anyway be false so that will be returned in this result so that will be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1078.44,
+      "ts_end": 1083.5,
+      "text": "not be returned so in this one line of command we can actually get rid of white spaces completely",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1083.5,
+      "ts_end": 1089.04,
+      "text": "from the sentence and now when we print out the result we will have the tokens as hello comma",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1089.04,
+      "ts_end": 1095.72,
+      "text": "world full stop this comma is a test and full stop we won't have white spaces so one more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1095.72,
+      "ts_end": 1101.18,
+      "text": "consideration which i would like to mention over here is that removing white spaces or not this is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1101.18,
+      "ts_end": 1108.18,
+      "text": "an important question to actually discuss because uh when you develop a simple token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1108.44,
+      "ts_end": 1114.04,
+      "text": "analyzer whether we should encode white spaces or as separate characters or just remove them",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1114.04,
+      "ts_end": 1121.78,
+      "text": "depends on our application and its requirements so what are the advantages of removing white spaces",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1121.78,
+      "ts_end": 1126.24,
+      "text": "removing white spaces reduces the memory and computing requirements which is great",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1126.98,
+      "ts_end": 1132.62,
+      "text": "however keeping white spaces can be useful if we train models that are sensitive to the exact",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1132.62,
+      "ts_end": 1138.85,
+      "text": "structure of the text right for example python code is sensitive to indentation and space",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1138.89,
+      "ts_end": 1144.75,
+      "text": "spacing so if python code is used as the data set for training and a large language model it makes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1144.75,
+      "ts_end": 1150.57,
+      "text": "sense to keep the white spaces right because the white spaces have some meaning in in the case of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1150.57,
+      "ts_end": 1159.08,
+      "text": "python code as the training data set in this case we are going to uh until now we are going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1159.08,
+      "ts_end": 1165.14,
+      "text": "remove the white spaces just for simplicity so that we have memory advantages but remember that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1165.14,
+      "ts_end": 1167.8,
+      "text": "it's not obvious to always remove white spaces",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1168.46,
+      "ts_end": 1170.04,
+      "text": "as has been mentioned",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1170.14,
+      "ts_end": 1176.68,
+      "text": "uh uh over here if you have python code as training data white spaces are important because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1176.68,
+      "ts_end": 1182.24,
+      "text": "indentation matters so several things need to be considered when you're building an actual llm",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1182.24,
+      "ts_end": 1186.36,
+      "text": "whether you should remove white spaces or whether you should not remove white spaces",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1188.5,
+      "ts_end": 1194.42,
+      "text": "uh that's great so the tokenization scheme which we devised above works well on simple sample text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1194.42,
+      "ts_end": 1201.7,
+      "text": "so we can modify it a bit further because we also want uh to have question marks quotations",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1201.8,
+      "ts_end": 1207.82,
+      "text": "marks and double dashes as separate characters or separate tokens currently only full stop and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1207.82,
+      "ts_end": 1213.04,
+      "text": "comma are separate tokens right but we also want question marks quotation marks double dashes etc",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1213.04,
+      "ts_end": 1218.92,
+      "text": "separate tokens so let's look at this document again see there are these double dashes then i'm",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1218.92,
+      "ts_end": 1223.68,
+      "text": "sure there are question marks somewhere there are question marks there are exclamation marks in this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1223.68,
+      "ts_end": 1229.54,
+      "text": "document we all want them as separate tokens right and we need to include that in our tokenization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1229.54,
+      "ts_end": 1236.2,
+      "text": "command and the way we do this is pretty simple again we use this re dot split and along with",
+      "frame_ids": [
+        "rsy5Ragmso8_f0005"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "REMOVING WHITESPACES OR NOT",
+          "extracted_text": "When developing a simple tokenizer, whether we should encode whitespaces as separate tokens is one of the design requirements. Removing whitespaces reduces the memory and computing requirements of the tokenizer but makes it less sensitive to the exact structure of the text (for example, Python code, which is sensitive to indentation). We need to balance the efficiency and brevity of the tokenized outputs. Later, we will switch to a tokenization scheme that handles these issues more gracefully.\n\nThe tokenization scheme we devised above works well on the simple sample text. Let us now consider additional special characters, such as question marks, quotation marks, and the double-dashes we have seen earlier. We need to handle these additional special characters:",
+          "code": {
+            "language": "python",
+            "content": "text = \"Hello, world. Is this-- a test?\"\nresult = re.split(r'[,.;:?_!()\\\"\\|\\-\\s]', text)"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "rsy5Ragmso8_f0005",
+          "video_id": "rsy5Ragmso8",
+          "timestamp_sec": 1230.933,
+          "source_image": "data/frames/rsy5Ragmso8/rsy5Ragmso8_f0005.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1236.2,
+      "ts_end": 1241.4,
+      "text": "comma and along with full stop we add all of these other special characters like colon semicolon",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1241.4,
+      "ts_end": 1249.86,
+      "text": "question mark underscore exclamation quotation marks bracket etc and we say that whenever these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1249.86,
+      "ts_end": 1255.22,
+      "text": "characters are encountered also do a split on these characters so that they are considered as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1255.22,
+      "ts_end": 1263.04,
+      "text": "individual tokens right so now when you take the sample text hello comma world is this dash dash",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1263.04,
+      "ts_end": 1268.9,
+      "text": "a text all of these will be sample tokens this dash dash will also be a separate token the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1268.9,
+      "ts_end": 1273.72,
+      "text": "question mark will also be a separate token because we have included that in our split command",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1273.72,
+      "ts_end": 1280.61,
+      "text": "and again we'll strip the white spaces like the same command for item for item in result",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1280.61,
+      "ts_end": 1285.87,
+      "text": "if item dot strip remember this was the command we used to filter out the white spaces",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1285.87,
+      "ts_end": 1293.72,
+      "text": "or to remove the white spaces uh awesome so now these two lines of code are our tokenization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1293.72,
+      "ts_end": 1299.84,
+      "text": "scheme so this is the two lines of code in which we have built the tokenizer in this first line",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1299.84,
+      "ts_end": 1304.32,
+      "text": "of code we take a sentence and we split the sentence wherever there is a white space",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1304.32,
+      "ts_end": 1309.64,
+      "text": "wherever there is a comma full stop colon semicolon question mark underscore exclamation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1309.64,
+      "ts_end": 1315.92,
+      "text": "quotation mark or bracket we split it and then in the second sentence we just remove the white",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1315.92,
+      "ts_end": 1316.24,
+      "text": "space",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1316.32,
+      "ts_end": 1322.6,
+      "text": "and then we print out the result it's as simple as that this is the simple tokenization scheme",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1322.6,
+      "ts_end": 1327.56,
+      "text": "for building large language models a different tokenization scheme is used but we'll come to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1327.56,
+      "ts_end": 1333.18,
+      "text": "that in the next lecture it's called byte pair encoding but for now i just wanted to give you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1333.18,
+      "ts_end": 1339.6,
+      "text": "a sense of what all nuances need to be considered for building a tokenizer like this now you see we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1339.6,
+      "ts_end": 1345.74,
+      "text": "have we have tested these two sentences which are our tokenizer scheme for a sample sentence right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1346.38,
+      "ts_end": 1353.21,
+      "text": "now what we can do is apply the same two statements on the entire raw text so we had the raw",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1353.21,
+      "ts_end": 1360.7,
+      "text": "text right defined before let me go to that uh so see this was the raw text which was basically the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1361.16,
+      "ts_end": 1367.42,
+      "text": "book which we had read now we'll use these two statements to essentially uh convert the entire",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1368.56,
+      "ts_end": 1374.84,
+      "text": "uh raw text into individual tokens so what we'll do is that we will split the entire raw text based",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1374.84,
+      "ts_end": 1377.42,
+      "text": "on these tokens which we had seen before and then we'll have the same two statements the same two",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1377.42,
+      "ts_end": 1384.17,
+      "text": "and then we will store it in a variable which is called as preprocessed so preprocessed is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1384.17,
+      "ts_end": 1390.05,
+      "text": "essentially a list of all the tokens and then in the second statement exactly same to what we saw",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1390.05,
+      "ts_end": 1396.47,
+      "text": "before we'll split or we'll get rid of the white spaces awesome right so now let us print the length",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1396.47,
+      "ts_end": 1403.39,
+      "text": "of the preprocessed so we have four six nine zero tokens in the original book so if you go to this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1403.39,
+      "ts_end": 1408.21,
+      "text": "book the simplest way to think about this is this will be one token height will be one token this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1408.21,
+      "ts_end": 1414.09,
+      "text": "inverted commas will be one token this two double dashes will be one token so this entire thing is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1414.09,
+      "ts_end": 1420.17,
+      "text": "broken down into individual words or tokens which are four six nine zero in number and here we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1420.17,
+      "ts_end": 1427.07,
+      "text": "just printed out the first 30 of these tokens and you see i had always thought they are individual",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1427.07,
+      "ts_end": 1432.99,
+      "text": "tokens and dash dash comma they are also counted as tokens over here because we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1432.99,
+      "ts_end": 1433.25,
+      "text": "a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1433.39,
+      "ts_end": 1439.6,
+      "text": "mentioned that in this split where all do we want the split to happen awesome so we have now got our",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1439.6,
+      "ts_end": 1444.94,
+      "text": "basic tokenizer working and we have applied it to the entire short story which we are considering",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1444.94,
+      "ts_end": 1451.69,
+      "text": "considering as the input data great now we have to come to the second step so we have now finished",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1451.69,
+      "ts_end": 1459.3,
+      "text": "the we have now finished the first step which is tokenizing the entire short story and now we will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1459.3,
+      "ts_end": 1464.18,
+      "text": "come to the next step which is converting tokens into token ids now what is very",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1464.38,
+      "ts_end": 1471.2,
+      "text": "important is that python works with numbers right so even if you look at these individual tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1471.2,
+      "ts_end": 1475.96,
+      "text": "which we have obtained right now these are not numbers they are still words we need to convert",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1475.96,
+      "ts_end": 1481.74,
+      "text": "them into token ids so that they are numerical representations so let's see how to do that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1482.47,
+      "ts_end": 1488.14,
+      "text": "so we have the complete training data set here for illustration i have just taken a sentence and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1488.14,
+      "ts_end": 1494.18,
+      "text": "until now we have converted this sentence into individual tokens now what we will do is that we'll",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1494.18,
+      "ts_end": 1499.68,
+      "text": "take the tokens and convert them into token ids and then there is a very specific way of doing this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1499.68,
+      "ts_end": 1505.02,
+      "text": "first we build something which is called as vocabulary vocabulary is just all the list",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1505.02,
+      "ts_end": 1512.56,
+      "text": "of our tokens but it's sorted in an alphabetical manner so if the if our data set or the tokens are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1512.56,
+      "ts_end": 1519.2,
+      "text": "the quick brown fox jumps over the lazy dog if this is the training data set",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1519.86,
+      "ts_end": 1523.94,
+      "text": "the vocabulary is the list of tokens in alphabetical order so brown",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1524.18,
+      "ts_end": 1530.8,
+      "text": "comes first then dog then fox then jumps then lazy then over then quick and then the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1530.8,
+      "ts_end": 1537.18,
+      "text": "this is my vocabulary for this training data set eventually we'll have billions of data sets",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1537.18,
+      "ts_end": 1542.3,
+      "text": "billions of files so then the vocabulary will be huge but i'm just showing a simple",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1542.3,
+      "ts_end": 1547.24,
+      "text": "representation here for how vocabulary is constructed vocabulary is just a list of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1547.24,
+      "ts_end": 1552.94,
+      "text": "tokens which is sorted in alphabetical manner and then what we do is that each unique token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1553.36,
+      "ts_end": 1554.06,
+      "text": "is mapped",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1554.18,
+      "ts_end": 1560.7,
+      "text": "to a unique integer which is called as the token id so it's as simple as that you map these tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1560.7,
+      "ts_end": 1566.64,
+      "text": "in alphabetical order and then to each token you assign a number so since they are arranged",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1566.64,
+      "ts_end": 1572.48,
+      "text": "in alphabetical order brown will be 0 so you start from 0 since it's python dog will be 1",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1572.48,
+      "ts_end": 1579.64,
+      "text": "fox will be 2 jumps will be 3 lazy will be 4 over will be 5 quick will be 6 and there will be 7.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1580.48,
+      "ts_end": 1584.28,
+      "text": "so the vocabulary always contains unique tokens remember although",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1584.56,
+      "ts_end": 1590.08,
+      "text": "the appears two times in the vocabulary it only comes once so we make a list of these unique",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1590.08,
+      "ts_end": 1596.04,
+      "text": "tokens and we assign token ids to all of these and it's important to arrange the vocabulary in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1596.04,
+      "ts_end": 1601.49,
+      "text": "alphabetical order so that assigning token ids becomes very easy so the process of assigning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1601.49,
+      "ts_end": 1607.19,
+      "text": "token ids is actually very simple each uni just remember that each unique token is mapped",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1607.19,
+      "ts_end": 1614.06,
+      "text": "to a unique integer which is called as the token id right so now let's see how this is implemented",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1614.06,
+      "ts_end": 1614.66,
+      "text": "in python",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1615.67,
+      "ts_end": 1622.03,
+      "text": "uh so in the previous section we tokenized edit worth in short story and assigned it to a python",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1622.03,
+      "ts_end": 1626.57,
+      "text": "variable called pre-processed so remember pre-processed is the final list which contains",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1626.57,
+      "ts_end": 1634.51,
+      "text": "all the tokenized words this these words uh now what we'll do is now we'll create a list of all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1634.51,
+      "ts_end": 1640.17,
+      "text": "unique tokens and sort them alphabetically to determine the vocabulary size exactly what i had",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1640.17,
+      "ts_end": 1646.22,
+      "text": "mentioned over here so what we are doing is that we are taking pre-processed we are converting it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1646.42,
+      "ts_end": 1651.8,
+      "text": "to a set and we are going to sort it into a set so this will sort it in alphabetical order and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1651.8,
+      "ts_end": 1656.88,
+      "text": "we are just going to print the vocabulary size so we can see that the vocabulary size is one one three",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1656.88,
+      "ts_end": 1663.14,
+      "text": "zero right remember the vocabulary only consists of unique words so the vocabulary size is less",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1663.14,
+      "ts_end": 1670.88,
+      "text": "than the number of tokens which are there uh so now what we can do is after determining that the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1670.88,
+      "ts_end": 1677.48,
+      "text": "vocabulary size is one one three zero via the above code we create the vocabulary itself so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1677.7,
+      "ts_end": 1683.12,
+      "text": "when i say you create the vocabulary remember that a vocabulary is not just these tokens but",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1683.12,
+      "ts_end": 1690.38,
+      "text": "every token needs to be assigned to a token id a vocabulary is a is like a dictionary of tokens and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1690.38,
+      "ts_end": 1696.28,
+      "text": "associated token ids so now we have to create that dictionary right and so it's very simple",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1696.28,
+      "ts_end": 1701.06,
+      "text": "you just so all words consists of all the unique words in the vocabulary right in alphabetical",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1701.06,
+      "ts_end": 1707.68,
+      "text": "order what you do is that you just uh you take all these tokens and assign an integer value",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1708.02,
+      "ts_end": 1713.02,
+      "text": "to all these words that's it which means the token which comes first that will be zero the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1713.02,
+      "ts_end": 1718.75,
+      "text": "token which comes second its integer will be one and it will proceed like that uh let me print this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1718.75,
+      "ts_end": 1724.05,
+      "text": "out for you to show you so our tokens are also exclamation marks commas etc right so by default",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1724.05,
+      "ts_end": 1730.47,
+      "text": "they are assigned the first priority so they will be 0 1 2 3 4 5 6 and here you see everything is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1730.47,
+      "ts_end": 1737.67,
+      "text": "arranged in alphabetical order so a will be 11 a h will be 12 among will be 13 and will be 14",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1738.21,
+      "ts_end": 1746.81,
+      "text": "r will be 15 a rrt will be 16 as will be 17 at will be 18 etc now all of these exclamation all of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1746.81,
+      "ts_end": 1755.28,
+      "text": "these i would say words are used because this was written in 1908 this a rrt is not used as an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1755.28,
+      "ts_end": 1761.56,
+      "text": "exclamation typically now but this book was written in 1908 so it shows up right so this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1761.56,
+      "ts_end": 1765.56,
+      "text": "is the vocabulary which we have and we have printed the first 50 items of this vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1765.56,
+      "ts_end": 1768.32,
+      "text": "so it looks like a dictionary pretty much and we have printed the first 50 items of this vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1768.34,
+      "ts_end": 1774.54,
+      "text": "remember that every element in this dictionary which is a token has a token id now associated",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1774.54,
+      "ts_end": 1779.16,
+      "text": "with it that's it vocabulary is as simple as that and the simplified code for this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1779.16,
+      "ts_end": 1786.02,
+      "text": "for every token assign an integer and how do you get the integer and tokens you just enumerate all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1786.02,
+      "ts_end": 1792.04,
+      "text": "words so this enumerate command in python what it does is that it takes all the words and then it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1792.04,
+      "ts_end": 1797.4,
+      "text": "assigns an integer to each word in alphabetical order so that way python is actually awesome and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1798.72,
+      "ts_end": 1804.38,
+      "text": "very complex things in in one line of code actually so this is how you create the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1804.8,
+      "ts_end": 1811.77,
+      "text": "and this is how you assign token ids to every individual token right so as we can see based",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1811.77,
+      "ts_end": 1816.83,
+      "text": "on the output above the dictionary contains individual tokens which are associated with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1816.83,
+      "ts_end": 1822.91,
+      "text": "unique in integer labels exactly why what we saw here the vocabulary which is a dictionary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1822.91,
+      "ts_end": 1828.15,
+      "text": "consists of individual tokens assigned to a unique integer label which are token ids",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1829.71,
+      "ts_end": 1836.27,
+      "text": "now one more thing which i want to tell you is that currently we converted the words or tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1836.27,
+      "ts_end": 1844.97,
+      "text": "into token ids right you can think of this process as encoding now later we will also need a decoder",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1844.97,
+      "ts_end": 1851.25,
+      "text": "which means that from the token id you need to convert the token id back to the world because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1851.25,
+      "ts_end": 1856.77,
+      "text": "when the llm gives the output that will be numerical form now you need to convert it in word",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1856.77,
+      "ts_end": 1862.97,
+      "text": "form so you also need a mapping from the token id to the token the vocabulary is a dictionary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1862.97,
+      "ts_end": 1868.01,
+      "text": "which gives you a mapping from the token to the token id but we need a reverse mapping which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1868.01,
+      "ts_end": 1874.93,
+      "text": "called as a decoder so this is what i have mentioned here later when we want to create",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1874.93,
+      "ts_end": 1882.31,
+      "text": "the output of an llm from numbers back into text we also need a way to turn token ids back into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1882.31,
+      "ts_end": 1888.98,
+      "text": "text and for this we create an inverse version of the vocabulary that maps token ids back to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1888.98,
+      "ts_end": 1896.16,
+      "text": "corresponding text tokens and we'll see how to do that for now what we are going to do is we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1896.16,
+      "ts_end": 1901.6,
+      "text": "understood enough about tokenization that we are going to implement a complete tokenizer class in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1901.6,
+      "ts_end": 1906.86,
+      "text": "python this class will have two methods it will have an encode method and it will have a decode",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1906.86,
+      "ts_end": 1912.44,
+      "text": "method let me show you what it actually means so this tokenizer class which we are going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1912.44,
+      "ts_end": 1913.22,
+      "text": "implement in python is going to be a tokenizer class and it will have a decode method and it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1913.22,
+      "ts_end": 1920.45,
+      "text": "will have two methods the first will be the encode method and the second will be the decode method",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1921.59,
+      "ts_end": 1926.91,
+      "text": "in the encode method what will happen is that sample text will be converted into tokens and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1926.91,
+      "ts_end": 1932.65,
+      "text": "then tokens will be assigned token ids based on the vocabulary exactly what we saw like over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1933.95,
+      "ts_end": 1940.55,
+      "text": "in the decode method exactly reverse things would happen so in the decode method we start with token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1940.55,
+      "ts_end": 1944.45,
+      "text": "ids we convert it into individual tokens and then we get a decode method and then we get a decode method",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1944.45,
+      "ts_end": 1949.28,
+      "text": "and then we get back the sample text so i hope you understand the difference between the encode",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1949.28,
+      "ts_end": 1953.98,
+      "text": "method and the decode method here because this is the exact same difference which will show up in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1953.98,
+      "ts_end": 1959.72,
+      "text": "encoder and decoder block of the transformer architecture or rather this is the this is a good",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1959.72,
+      "ts_end": 1965.52,
+      "text": "way to understand that intuition in the encode in the encode block what we do is we take sample text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1965.52,
+      "ts_end": 1971.34,
+      "text": "we convert it into tokens and then we convert it into token ids that feeds as the training data to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1971.34,
+      "ts_end": 1974.68,
+      "text": "the llm but when the llm gives its output in the function it will be converted into token ids and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1974.68,
+      "ts_end": 1979.68,
+      "text": "in the form of token ids we need to convert it back to tokens and then back to the sample text so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1979.68,
+      "ts_end": 1985.87,
+      "text": "that we know what the output is in terms of sentences so that's why when we implement the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1985.87,
+      "ts_end": 1993.08,
+      "text": "tokenizer class we need an encode method and also the decode method so the encode method will take",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1993.08,
+      "ts_end": 1999.84,
+      "text": "text as an input and give token ids as output the decode method will take ids token ids as input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1999.84,
+      "ts_end": 2005.06,
+      "text": "and will give text as an output now let's see how to actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2006.32,
+      "ts_end": 2013.3,
+      "text": "create this simple tokenizer class in python first so there are if you see three methods the init",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2013.3,
+      "ts_end": 2018.98,
+      "text": "method which is called by default when an instance of this class is created and let us look at the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2018.98,
+      "ts_end": 2024.32,
+      "text": "arguments of the init method it takes vocab so when you create an instance of this tokenizer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2024.32,
+      "ts_end": 2029.84,
+      "text": "class you have to pass in the vocabulary right and remember the vocabulary is nothing but a mapping",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2030.54,
+      "ts_end": 2036.18,
+      "text": "from uh tokens to token ids right so then after this uh instance",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2036.32,
+      "ts_end": 2042.14,
+      "text": "is created str2 int which is string to integer will just be the vocabulary because the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2042.14,
+      "ts_end": 2048.22,
+      "text": "is already a mapping from string to integer or tokens to integer and then the integer to string",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2048.22,
+      "ts_end": 2054.54,
+      "text": "is basically reverse so what you do is that you take the string and integer in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2054.54,
+      "ts_end": 2062.3,
+      "text": "and then for every integer you uh mention which token it is so for s you can think of as the token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2062.3,
+      "ts_end": 2066.16,
+      "text": "and for i you can think of as token id so what we do in this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2066.32,
+      "ts_end": 2074.38,
+      "text": "int to string variable is that uh so we take the token and we take the token id in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2074.38,
+      "ts_end": 2079.42,
+      "text": "and then we just flip it then we say that for this token id this is the particular token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2080.08,
+      "ts_end": 2085.08,
+      "text": "remember this into string will be needed for the decoder method when we have the token ids",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2085.08,
+      "ts_end": 2092.83,
+      "text": "and we want to convert it back to tokens so uh in the encode method the exact same",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2092.83,
+      "ts_end": 2096.95,
+      "text": "pre-processing steps will happen as we had seen before for tokenization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2097.55,
+      "ts_end": 2103.33,
+      "text": "what we'll do if some random text is given to us we will take that text we will split it we will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2103.33,
+      "ts_end": 2108.53,
+      "text": "split it based on the comma based on the full stop based on the colon based on semicolon etc",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2109.23,
+      "ts_end": 2115.91,
+      "text": "into individual tokens and then we'll get rid of the white spaces what we had seen before and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2115.91,
+      "ts_end": 2120.79,
+      "text": "these will be individual tokens right so up till now we are at this part where we have converted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2121.43,
+      "ts_end": 2122.81,
+      "text": "the sample text into individual",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2122.83,
+      "ts_end": 2127.49,
+      "text": "individual tokens and then we will convert these into token ids so that's the last step over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2127.49,
+      "ts_end": 2133.35,
+      "text": "after you get the individual tokens in this list called pre-processed what you have to do is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2133.35,
+      "ts_end": 2139.77,
+      "text": "you have to use this str to int dictionary which is basically just the vocabulary and then you have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2139.77,
+      "ts_end": 2147.72,
+      "text": "to assign a token id for each token so remember the str to int is basically just converting tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2147.72,
+      "ts_end": 2153.94,
+      "text": "to token ids using the vocabulary which is passed into this tokenizer class so you will just take the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2155.06,
+      "ts_end": 2159.5,
+      "text": "tokens you will take the tokens which are in this pre-processed list and you will convert them into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2159.5,
+      "ts_end": 2165.61,
+      "text": "token ids that's the encoder method that's it in the decoder method what you are actually doing is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2165.61,
+      "ts_end": 2172.41,
+      "text": "that you are you are using this reverse dictionary which is integer to string which is basically",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2172.41,
+      "ts_end": 2177.39,
+      "text": "token id to token and then you are converting the token ids into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2177.85,
+      "ts_end": 2182.63,
+      "text": "individual tokens that is the first thing so let's see the decode method you first convert",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2182.63,
+      "ts_end": 2187.81,
+      "text": "the token ids into individual tokens and then what you do is you join these individual tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2187.81,
+      "ts_end": 2194.27,
+      "text": "together so this this join is used so first you convert the token ids into tokens and then you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2194.27,
+      "ts_end": 2200.86,
+      "text": "join the individual tokens together that's it and then here what we are doing is we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2200.86,
+      "ts_end": 2207.81,
+      "text": "to replace spaces before the punctuations so an example here would be let's say if the tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2208.59,
+      "ts_end": 2218.39,
+      "text": "let's say in the decoder if the tokens are the fox chased and question and full stop right now if",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2218.39,
+      "ts_end": 2224.51,
+      "text": "these are the tokens and if we convert it into sample text by using the join method the final",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2224.51,
+      "ts_end": 2231.45,
+      "text": "answer will be the the fox chased and full stop now see the problem here is that there is a space",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2231.45,
+      "ts_end": 2239.07,
+      "text": "between the there is a space here between the full stop and the chased so we need to get rid of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2239.29,
+      "ts_end": 2247.91,
+      "text": "this space so then the final answer would be the fox chased and full stop and this is the same for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2247.91,
+      "ts_end": 2254.76,
+      "text": "question mark Etc so in this second sentence here what we are actually doing is that we are getting",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2254.76,
+      "ts_end": 2261.76,
+      "text": "rid of all the spaces before the punctuation so that it becomes a complete sentence so this is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2261.76,
+      "ts_end": 2268.12,
+      "text": "the decoder method it's actually very simple we are just going to use the encode method to convert",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2269.38,
+      "ts_end": 2270.9,
+      "text": "sample text into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2271.24,
+      "ts_end": 2275.84,
+      "text": "token IDs and we are going to use the decode method to convert token IDs back into sample",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2275.84,
+      "ts_end": 2282.12,
+      "text": "text and for that we needed to write two methods the encode method and the decode method so remember",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2282.12,
+      "ts_end": 2288.54,
+      "text": "this tokenizer class takes the vocabulary already as an input so that so we already have the mapping",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2288.54,
+      "ts_end": 2294.46,
+      "text": "from tokens to token IDs because that is inherently present in the vocabulary we just need to construct",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2294.46,
+      "ts_end": 2299.76,
+      "text": "a reverse mapping from the token IDs back to the tokens and then use that in the decode method that's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2301.79,
+      "ts_end": 2308.75,
+      "text": "it so to convert the text into tokens we use the same re.split and item.strip which we had seen earlier",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2308.75,
+      "ts_end": 2316.13,
+      "text": "in today's lecture so this is essentially the tokenizer class which we have created awesome",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2316.77,
+      "ts_end": 2322.67,
+      "text": "now let's move to the next step so what we can do is that now we can instantiate a tokenizer object",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2322.67,
+      "ts_end": 2329.23,
+      "text": "from this class right and uh token ia passage from the short story which we have downloaded to test",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2329.23,
+      "ts_end": 2332.57,
+      "text": "it out in practice so here you see I am creating an object that has the same concept as the tokenizer which is the choice class for sure.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2332.59,
+      "ts_end": 2338.01,
+      "text": "instance of this class i have passed the vocabulary as an input what is this vocabulary this vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2338.01,
+      "ts_end": 2344.83,
+      "text": "is basically the uh vocabulary of tokens and token ids which we have converted our input text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2345.27,
+      "ts_end": 2350.13,
+      "text": "so this is our input text and we have converted this into tokens and assigned a token id to each",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2350.13,
+      "ts_end": 2356.67,
+      "text": "this is my vocabulary now what i'm doing is i'm actually uh creating an instance of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2357.55,
+      "ts_end": 2361.87,
+      "text": "yeah i'm creating an instance of the simple tokenizer version one class which we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2361.87,
+      "ts_end": 2367.85,
+      "text": "defined over here by passing in this vocabulary as an input right and this is then defined as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2367.85,
+      "ts_end": 2375.67,
+      "text": "tokenizer great and uh so the text which i'm going to pass in now is this it's the last he painted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2375.67,
+      "ts_end": 2381.21,
+      "text": "you know mrs gusburn said with pardonable pride this is the text and now i'm going to test out",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2381.21,
+      "ts_end": 2386.79,
+      "text": "this encode so remember this encode takes in the text as an input so you need a text right to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2386.79,
+      "ts_end": 2391.73,
+      "text": "convert into ids so what the encode method will do always remember this schematic",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2392.86,
+      "ts_end": 2397.56,
+      "text": "always remember this schematic the encode method will convert the text into token ids",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2398.41,
+      "ts_end": 2403.43,
+      "text": "so this is the text and then we apply the method tokenizer dot encode and text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2403.91,
+      "ts_end": 2409.91,
+      "text": "so what when you print the ids you will see these ids of the text which means that our encoder has",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2409.91,
+      "ts_end": 2416.65,
+      "text": "successfully converted this text into token ids that is exactly what we wanted right so the code",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2416.65,
+      "ts_end": 2422.35,
+      "text": "above prints the token ids next let's see if we can turn these token ids back into text so now what we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2422.51,
+      "ts_end": 2429.08,
+      "text": "be doing is we will be using tokenizer.decode and use these ids so tokenizer.Decode and ids",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2429.08,
+      "ts_end": 2434.7,
+      "text": "and pass ids as an input remember tokenizer.Decode takes the ids as an input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2435.77,
+      "ts_end": 2440.67,
+      "text": "so I will pass these ids which we have printed over here and let's see whether it recover this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2440.67,
+      "ts_end": 2445.95,
+      "text": "text so the text which is recovered is it's the last he painted you know mrs gusburn said with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2445.95,
+      "ts_end": 2452.97,
+      "text": "pardonable pride amazing right because it's exactly the same text which we had given uh to the encoder and now it has been set to an encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2452.99,
+      "ts_end": 2458.84,
+      "text": "decoded by the decoder so based on this output above we can see that the decode method successfully",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2458.84,
+      "ts_end": 2465.4,
+      "text": "converted the token ids back into the original text which is exactly what we wanted which means",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2465.4,
+      "ts_end": 2471.94,
+      "text": "the encoder and decoder are working right so so far so good we have implemented a tokenizer which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2471.94,
+      "ts_end": 2477.4,
+      "text": "is capable of tokenizing and de-tokenizing text based on a snippet from the training set",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2477.4,
+      "ts_end": 2482.96,
+      "text": "so this sentence which we gave to the encoder was from the training set so we knew that the words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2482.96,
+      "ts_end": 2488.98,
+      "text": "will be in the vocabulary but what if the sentence which is given is not present in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2488.98,
+      "ts_end": 2497.28,
+      "text": "so we have a vocabulary here which is 1130 the size of the vocabulary is 1130 right what if i",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2497.28,
+      "ts_end": 2502.28,
+      "text": "give a sentence to encode which is not present in the vocabulary so let's try this let's say the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2502.28,
+      "ts_end": 2510.12,
+      "text": "text is hello do you like tea now uh hello is probably not there in this hello is not there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2510.12,
+      "ts_end": 2512.94,
+      "text": "in this short story so let me search hello it's not there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2512.96,
+      "ts_end": 2522.03,
+      "text": "let's see if t is there t is actually t is there but hello is not there so hello will not be there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2522.03,
+      "ts_end": 2528.57,
+      "text": "in the vocabulary right so now later let me see how what's my answer here because now i have asked",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2528.57,
+      "ts_end": 2533.33,
+      "text": "the tokenizer to encode something which is not present in the vocabulary okay so if i run this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2533.33,
+      "ts_end": 2537.73,
+      "text": "you see you get an error here because hello it does not know what to do with this word hello",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2537.73,
+      "ts_end": 2544.11,
+      "text": "because it is not present in the vocabulary so the problem is that the word hello was not used in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2544.15,
+      "ts_end": 2550.23,
+      "text": "verdict short story and hence it is not contained in the vocabulary now this actually highlights the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2550.23,
+      "ts_end": 2555.33,
+      "text": "need to consider large and diverse training data sets to extend the vocabulary when working with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2555.33,
+      "ts_end": 2560.53,
+      "text": "llms we do not want this problem right if our training data set is small and if some user",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2560.53,
+      "ts_end": 2565.73,
+      "text": "gives a new word to chat gpt which it does not even know we don't want our we don't want an error",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2566.37,
+      "ts_end": 2570.49,
+      "text": "that's why huge number of data set is used for training large language models",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2571.45,
+      "ts_end": 2574.21,
+      "text": "in fact uh llms like chat gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2574.47,
+      "ts_end": 2579.41,
+      "text": "a very special thing they use something which is called a special context tokens to deal with words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2579.41,
+      "ts_end": 2584.41,
+      "text": "which might not be present in the vocabulary so that an error message is not shown such as this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2585.0,
+      "ts_end": 2588.95,
+      "text": "and we will come to that in the next section but here i just want to illustrate that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2589.52,
+      "ts_end": 2596.99,
+      "text": "the reason for having a large and diverse training data set is because uh we we want",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2597.62,
+      "ts_end": 2602.19,
+      "text": "many words to be present in our vocabulary it does not make sense to have a smaller and a shorter",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2602.19,
+      "ts_end": 2606.67,
+      "text": "our vocabulary because what if the user gives a new word which is not present in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2606.67,
+      "ts_end": 2611.37,
+      "text": "we don't want that there is a way to deal with this by using something called special context",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2611.37,
+      "ts_end": 2617.71,
+      "text": "tokens so let's look at this in the next section now let us have a look at the last section in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2617.71,
+      "ts_end": 2624.5,
+      "text": "today's lecture which is dealing with special context tokens these content are not usually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2624.5,
+      "ts_end": 2629.04,
+      "text": "covered in other lectures but they are very important especially since we are going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2629.04,
+      "ts_end": 2632.3,
+      "text": "be building llms from scratch we also want to understand how to deal with special context tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2632.32,
+      "ts_end": 2638.1,
+      "text": "and how real life llms work and special context tokens play an important role",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2638.8,
+      "ts_end": 2643.66,
+      "text": "so until now we have implemented a simple tokenizer right and applied it to a passage",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2643.66,
+      "ts_end": 2649.27,
+      "text": "from the training set but the main question we encountered before is that if there is a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2649.27,
+      "ts_end": 2653.95,
+      "text": "word in the text which is not there in the vocabulary how do we encode this world",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2655.26,
+      "ts_end": 2660.52,
+      "text": "so we will be implementing some things which are called as special context tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2661.32,
+      "ts_end": 2662.5,
+      "text": "what we will do is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2663.28,
+      "ts_end": 2670.74,
+      "text": "We will modify the tokenizer to handle unknown words and we will implement a python class",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2670.74,
+      "ts_end": 2673.08,
+      "text": "which is called a simple tokenizer version 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2673.45,
+      "ts_end": 2680.05,
+      "text": "So we have already implemented simple tokenizer version 1 but here it did not have the provision",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2680.05,
+      "ts_end": 2681.57,
+      "text": "to handle the unknown tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2681.91,
+      "ts_end": 2691.24,
+      "text": "So in this version 2 we will also implement the simple tokenizer version 2 to have the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2691.24,
+      "ts_end": 2694.39,
+      "text": "provision to handle the unknown tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2694.63,
+      "ts_end": 2697.55,
+      "text": "In particular we will be learning about two main tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2697.75,
+      "ts_end": 2703.29,
+      "text": "The first is this token which is unknown for an unknown word and the second token is for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2703.29,
+      "ts_end": 2704.07,
+      "text": "end of text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2705.28,
+      "ts_end": 2712.65,
+      "text": "So let me again go back to this whiteboard over here and write a bit about why we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2712.65,
+      "ts_end": 2714.83,
+      "text": "exactly using these tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2716.11,
+      "ts_end": 2721.35,
+      "text": "So let's take a sentence which is the fox chased the dog.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2723.16,
+      "ts_end": 2729.78,
+      "text": "Let's say this is my sentence right now and I have tokenized it into the fox chased the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2729.78,
+      "ts_end": 2731.64,
+      "text": "dog and here is the vocabulary.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2731.86,
+      "ts_end": 2735.88,
+      "text": "So it's arranged in alphabetical order and there are token ids right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2736.12,
+      "ts_end": 2740.48,
+      "text": "Now to this existing vocabulary we are going to add two more tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2740.6,
+      "ts_end": 2746.66,
+      "text": "The first is the unk which is unknown and we'll assign a token id and then we'll also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2746.66,
+      "ts_end": 2750.26,
+      "text": "have end of text and then we'll assign it a token id.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2750.62,
+      "ts_end": 2752.48,
+      "text": "These two are the last two tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2755.44,
+      "ts_end": 2759.42,
+      "text": "So the token ids corresponding to these two will be the largest.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2760.54,
+      "ts_end": 2765.62,
+      "text": "So what will happen is that let's say if some new sentence or some new word is given.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2765.74,
+      "ts_end": 2772.35,
+      "text": "So let's say the fox chased the dog quickly if that is the word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2774.29,
+      "ts_end": 2779.77,
+      "text": "All these other words like the fox chased the dog will be converted into token ids but",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2779.77,
+      "ts_end": 2783.09,
+      "text": "for quickly it will have a token id of 783.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2783.23,
+      "ts_end": 2784.69,
+      "text": "Which is the token id of 783.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2784.71,
+      "ts_end": 2790.69,
+      "text": "And why because quickly was not in the vocabulary or vocabulary only consisted of chased dog",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2790.69,
+      "ts_end": 2791.57,
+      "text": "fox and the.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2791.67,
+      "ts_end": 2798.63,
+      "text": "So quickly is an unknown word and so it will receive a token id which we have reserved",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2798.63,
+      "ts_end": 2799.69,
+      "text": "for unknown words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2800.19,
+      "ts_end": 2803.29,
+      "text": "And then you might be asking what about this end of text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2803.82,
+      "ts_end": 2806.78,
+      "text": "So end of text is something which is a bit different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2807.79,
+      "ts_end": 2814.45,
+      "text": "When we are working with multiple text sources we typically add end of text token between",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2814.45,
+      "ts_end": 2815.03,
+      "text": "the text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2815.21,
+      "ts_end": 2818.29,
+      "text": "So let us look at four text sources here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2818.39,
+      "ts_end": 2822.95,
+      "text": "This is the text source one let's say it comes from one book let's say this is the text source",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2822.95,
+      "ts_end": 2828.87,
+      "text": "two let's say it comes from another news article text source three which comes from an encyclopedia",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2829.47,
+      "ts_end": 2832.39,
+      "text": "and text source four let's say which comes from an interview.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2833.42,
+      "ts_end": 2835.66,
+      "text": "Let's say these are our training sets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2836.36,
+      "ts_end": 2842.8,
+      "text": "Usually all of these are not just collected into one giant document or all of the sentences",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2842.8,
+      "ts_end": 2844.34,
+      "text": "are not just stacked up together.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2844.84,
+      "ts_end": 2851.0,
+      "text": "We usually after after this initial text is fed as an input we have this end of text token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2851.0,
+      "ts_end": 2856.28,
+      "text": "which means that the first text has ended and now the second text has started.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2856.68,
+      "ts_end": 2862.1,
+      "text": "After the second text ends then we again have this end of text token then the third text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2862.1,
+      "ts_end": 2866.94,
+      "text": "starts and after the third text ends then we again have the end of text token and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2866.94,
+      "ts_end": 2868.44,
+      "text": "the fourth text starts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2869.02,
+      "ts_end": 2874.02,
+      "text": "So the end of text token is basically added between the texts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2874.32,
+      "ts_end": 2874.88,
+      "text": "So.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2875.64,
+      "ts_end": 2882.48,
+      "text": "so essentially the end of text tokens act as markers signaling the start or end of a particular",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2882.48,
+      "ts_end": 2890.12,
+      "text": "segment this leads to more effective processing and understanding by the llm it's very important",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2890.12,
+      "ts_end": 2896.02,
+      "text": "to add these end of text tokens because then llm treats the initial so let's say end of text there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2896.02,
+      "ts_end": 2900.82,
+      "text": "is before the end of text which is text source one and after the end of text which is text source two",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2900.82,
+      "ts_end": 2906.04,
+      "text": "if end up if end of text was not there the llm would have mixed all of this together right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2906.72,
+      "ts_end": 2912.22,
+      "text": "but end of text tokens allows the llm to process the data and understand the data in a much better",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2912.22,
+      "ts_end": 2918.42,
+      "text": "manner and in fact when gpt was trained the end of text tokens were used between different text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2918.42,
+      "ts_end": 2924.08,
+      "text": "sources this is very important to note and only students who try to understand tokenization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2924.08,
+      "ts_end": 2930.23,
+      "text": "in detail know about such specifics so these are the two tokens which we will be considering in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2930.23,
+      "ts_end": 2931.25,
+      "text": "this section the first one is\uc73c\ub9acock Byzantium the second one is expand lenses and\u6c11\uc7ac\ufffd DES.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2931.27,
+      "ts_end": 2938.17,
+      "text": "is the unknown token and the second is the end of text token so let's read a bit here we can modify",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2938.17,
+      "ts_end": 2942.99,
+      "text": "the tokenizer to use an unknown token if it encounters a word that is not part of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2942.99,
+      "ts_end": 2949.29,
+      "text": "vocabulary great furthermore we also add a token between unrelated text which is the end of text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2949.29,
+      "ts_end": 2957.41,
+      "text": "token so for example when training gpt like llms on in multiple independent documents it is common",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2957.41,
+      "ts_end": 2964.03,
+      "text": "to insert a token before each document or book that follows a previous text source basically",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2964.03,
+      "ts_end": 2969.39,
+      "text": "this is exactly the end of text token which has been written over here i'll be sharing this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2969.39,
+      "ts_end": 2973.91,
+      "text": "notebook with all of you so no need to worry if you miss certain portion or want to revise certain",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2973.91,
+      "ts_end": 2980.38,
+      "text": "portion again now what we'll be doing as i mentioned over here uh is that we'll be modifying",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2980.38,
+      "ts_end": 2987.1,
+      "text": "the vocabulary we'll be augmenting the vocabulary and how will we modify or augment the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2987.7,
+      "ts_end": 2993.0,
+      "text": "we will include special tokens we will include two special tokens the unknown and the end of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2993.0,
+      "ts_end": 2998.4,
+      "text": "text token and we will add these to the list of all the unique words that we created in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2998.4,
+      "ts_end": 3003.86,
+      "text": "vocabulary in the previous section so let's look at this pre-processed so remember pre-processed",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3003.86,
+      "ts_end": 3011.99,
+      "text": "is the vocabulary uh or uh so pre-processed was our list and then later we converted this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3011.99,
+      "ts_end": 3017.73,
+      "text": "into vocabulary which was stored in vocab right and remember the size of the vocab is one one three zero",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3018.11,
+      "ts_end": 3024.4,
+      "text": "and now we are going to add two more tokens so the size will be 1132 so let us again start with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3024.4,
+      "ts_end": 3030.46,
+      "text": "pre-processed we will sort this and then we'll add two tokens so we'll add the end of text token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3030.46,
+      "ts_end": 3035.38,
+      "text": "and then we'll add the unknown token and that is done by using the python command which is called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3035.38,
+      "ts_end": 3041.64,
+      "text": "extend so what this does is that it just adds two more additional entries to the list the sorted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3041.64,
+      "ts_end": 3046.9,
+      "text": "list in this case and then again we'll write the same command which we did earlier right we first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3048.4,
+      "ts_end": 3054.3,
+      "text": "added the token in the pre process list and then for each token we assign an integer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3054.3,
+      "ts_end": 3060.0,
+      "text": "and this enumerate will make sure that the tokens are anyways arranged in alphabetical order",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3060.52,
+      "ts_end": 3065.0,
+      "text": "and then for each of these token we assign an integer which is the token id that's how we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3065.0,
+      "ts_end": 3070.86,
+      "text": "create the vocabulary now if you print out the length of the vocabulary you will see that the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3070.86,
+      "ts_end": 3077.14,
+      "text": "length of the vocabulary is 1132 and if you remember without adding these two tokens the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3077.14,
+      "ts_end": 3078.92,
+      "text": "length of the vocabulary was 113 and then once we are done with the length of the vocabulary we will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3078.92,
+      "ts_end": 3086.39,
+      "text": "0 so now the length has increased by 2 that is great right that makes sense because two more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3086.39,
+      "ts_end": 3093.68,
+      "text": "tokens have been added so the vocabulary is extended great so based on the output of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3093.68,
+      "ts_end": 3098.78,
+      "text": "print statement above the new vocabulary size is i should mention here actually 1 1 3 2",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3098.78,
+      "ts_end": 3106.35,
+      "text": "so this should be 1 1 3 2 and in the previous section it was 1 1 3 0 and let me run this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3107.25,
+      "ts_end": 3111.47,
+      "text": "yeah so based on the output of the print statement above the new vocabulary size is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3111.47,
+      "ts_end": 3118.54,
+      "text": "1 1 3 2 and the vocabulary size in the previous section was 1 1 3 0 good so what we'll do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3118.54,
+      "ts_end": 3122.84,
+      "text": "as an additional quick check we will also print the last 5 entries of the updated vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3123.52,
+      "ts_end": 3127.94,
+      "text": "so if you print out the last five entries in the updated vocabulary you will see let's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3127.94,
+      "ts_end": 3132.48,
+      "text": "look at the last two entries these are the end of text and the unknown so the end of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3132.48,
+      "ts_end": 3137.42,
+      "text": "text has a token id of 1 1 3 0 and the unknown has a token id of 1 1 3 0 so the end of text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3137.42,
+      "ts_end": 3142.78,
+      "text": "three one awesome so now the vocabulary is updated and now what we'll be doing is that we'll be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3142.78,
+      "ts_end": 3149.69,
+      "text": "extending the simple tokenizer class this is the version two basically many things will remain the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3149.69,
+      "ts_end": 3154.59,
+      "text": "same this initialization will remain the same it will initialize two dictionaries the string to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3154.59,
+      "ts_end": 3160.45,
+      "text": "integer dictionary which is the vocabulary itself which converts the tokens into token ids and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3160.45,
+      "ts_end": 3166.11,
+      "text": "integer to string dictionary which has token ids and then a string mapped to each token id",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3166.11,
+      "ts_end": 3172.41,
+      "text": "this encode now let's look at this encode the first two sentences are very similar to what we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3172.41,
+      "ts_end": 3179.35,
+      "text": "saw before we split on the comma full stop colon semicolon question mark underscore explanation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3179.35,
+      "ts_end": 3186.63,
+      "text": "quotation and bracket and then we remove the white spaces using item dot strip but we add one more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3186.63,
+      "ts_end": 3193.61,
+      "text": "thing what we add is that if the item or if the particular entry is not present in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3195.21,
+      "ts_end": 3196.73,
+      "text": "the token which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3196.73,
+      "ts_end": 3201.81,
+      "text": "assigned to that entry is unknown so let's say you are scanning the text right and if you come",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3201.81,
+      "ts_end": 3207.65,
+      "text": "across a word in the text which is not in the vocabulary so if the item is not present in this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3207.65,
+      "ts_end": 3213.65,
+      "text": "string to integer vocabulary which is the vocabulary which we have passed then it is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3213.65,
+      "ts_end": 3220.0,
+      "text": "it should be the unknown token we replace that with the unknown token and then we convert all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3220.0,
+      "ts_end": 3225.12,
+      "text": "of these tokens to token ids so in this step what will happen is that all the words in the input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3225.12,
+      "ts_end": 3226.62,
+      "text": "text which are not in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3226.86,
+      "ts_end": 3231.88,
+      "text": "will be replaced by the unknown token and then in this step that is the main encoder step where the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3231.88,
+      "ts_end": 3239.52,
+      "text": "tokens are converted into token ids in the decoder part everything will almost stay exactly the same",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3239.52,
+      "ts_end": 3245.98,
+      "text": "nothing changes we first convert the token ids back into tokens and then we join them together",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3245.98,
+      "ts_end": 3252.82,
+      "text": "and before the punctuations there are spaces so we get rid of these spaces and then we return the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3252.82,
+      "ts_end": 3257.29,
+      "text": "decoded text so this is the change in this tokenizer simple tokenizer and then we return the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3257.31,
+      "ts_end": 3262.67,
+      "text": "decoded text to tokenizer version two the only change is adding this so if some word is not known",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3262.67,
+      "ts_end": 3268.21,
+      "text": "you encode it with unknown and then assign the corresponding id to it so if something is unknown",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3268.21,
+      "ts_end": 3275.43,
+      "text": "the id will be 1131 great now let's actually try some things okay let's say the first text source",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3275.43,
+      "ts_end": 3281.27,
+      "text": "which we have is hello do you like tea the second text source which we have is in the sunlit terraces",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3281.27,
+      "ts_end": 3287.45,
+      "text": "of the palace these are two text sources now what we will be doing is we will construct a text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3287.69,
+      "ts_end": 3293.97,
+      "text": "which joins these two and we will add an end of text at the end of the first text source why are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3293.97,
+      "ts_end": 3300.45,
+      "text": "we doing this because we saw that this is usually how it is done in practice in gpt etc if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3300.45,
+      "ts_end": 3304.35,
+      "text": "provide one text source and if you have another text source you don't just join them together",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3304.35,
+      "ts_end": 3310.07,
+      "text": "you split them with this end of text token so this is what we are exactly doing we are now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3310.07,
+      "ts_end": 3317.24,
+      "text": "constructing a text which will feed as an input to the encoder right but we add this end of text so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3317.98,
+      "ts_end": 3323.6,
+      "text": "the text will which will essentially feed to the encoder is hello do you like tea end of text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3323.6,
+      "ts_end": 3330.4,
+      "text": "in the sunlit terraces of the palace this is the text which we are feeding to the encoder and now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3330.4,
+      "ts_end": 3335.78,
+      "text": "we are asking the encoder to encode these into token ids so let's look at this sentence in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3335.78,
+      "ts_end": 3343.0,
+      "text": "detail this word hello is not present in our vocabulary so if if we pass it into this tokenizer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3343.0,
+      "ts_end": 3347.88,
+      "text": "it will hit this this statement where the word is not present in the vocabulary so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3347.98,
+      "ts_end": 3353.76,
+      "text": "it will replace it with the unknown token and this end of text again end of text is actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3353.76,
+      "ts_end": 3358.32,
+      "text": "present in the vocabulary because we have added it right now so the token id corresponding to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3358.32,
+      "ts_end": 3363.9,
+      "text": "end of text will be 1130 and the token id corresponding to hello will be 1131 right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3363.9,
+      "ts_end": 3368.36,
+      "text": "so let's check if this is actually true so i'll now run tokenizer.encode text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3368.36,
+      "ts_end": 3376.26,
+      "text": "and see the token id for hello is 1131 this is exactly what we had expected right because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3378.04,
+      "ts_end": 3382.18,
+      "text": "it is present in the main vocabulary so it's actually an unknown word so its token id should",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3382.18,
+      "ts_end": 3390.22,
+      "text": "be 1131 awesome and then for end of text let's see the token idea this this is the token id for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3390.22,
+      "ts_end": 3396.94,
+      "text": "end of text the token id is 1130 so now there is no error which is coming here earlier when we pass",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3396.94,
+      "ts_end": 3401.3,
+      "text": "this hello do you like tea there was an error which we are getting that hello is not present in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3401.3,
+      "ts_end": 3406.46,
+      "text": "the vocabulary but now this error is not coming because we have taken care of it we have added the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3408.75,
+      "ts_end": 3416.35,
+      "text": "token id and so now the tokenizer encodes the text in a correct manner that's awesome so now what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3416.35,
+      "ts_end": 3424.49,
+      "text": "we'll be doing is that we'll be actually using the decode function now and we'll pass the encoded text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3424.49,
+      "ts_end": 3430.76,
+      "text": "which are the token ids these ids into the tokenizer.decode so let's see what the tokenizer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3430.76,
+      "ts_end": 3437.3,
+      "text": "decode so when these are passed into the decoder the decoder is unknown do you like the end of text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3438.36,
+      "ts_end": 3443.28,
+      "text": "in the sunlit terraces of the unknown so actually there are two unknown text here hello is an unknown",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3443.28,
+      "ts_end": 3450.18,
+      "text": "and palace is also an unknown so the token ids for both of these are 1131 so when you decode these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3450.18,
+      "ts_end": 3457.48,
+      "text": "ids you will get unknown do you like tea so which because hello is not known then end of text and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3457.48,
+      "ts_end": 3462.52,
+      "text": "then in the sunlit terraces of the unknown so here again unknown means the palace which was",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3462.52,
+      "ts_end": 3468.51,
+      "text": "not in the vocabulary so the encoder and decoder are working perfectly and we are able to handle",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3468.81,
+      "ts_end": 3473.81,
+      "text": "the unknown words now uh we are able to handle the unknown words actually quite effectively",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3473.81,
+      "ts_end": 3479.53,
+      "text": "because we replace them with the unknown token and the end of text is also being captured pretty",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3479.53,
+      "ts_end": 3484.67,
+      "text": "effectively so when we actually make the text itself we have to add end of text before we pass",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3484.67,
+      "ts_end": 3491.25,
+      "text": "it to the encoder and subsequently to the decoder so based on comparing the detokenized text with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3491.25,
+      "ts_end": 3497.67,
+      "text": "the original input text we know that the training set which is the verdict book did not actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3497.67,
+      "ts_end": 3498.59,
+      "text": "contain the words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3498.81,
+      "ts_end": 3504.01,
+      "text": "hello and the palace because both of them are replaced by this unknown token here so we will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3504.01,
+      "ts_end": 3514.01,
+      "text": "not get errors this way once we take into account the special context tokens awesome so uh let me",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3514.01,
+      "ts_end": 3520.65,
+      "text": "just add a last note about the special context token so up till now we have discussed tokenization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3520.65,
+      "ts_end": 3527.27,
+      "text": "as an essential step in processing text as input to the llms however along with these special tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3529.71,
+      "ts_end": 3536.17,
+      "text": "let us consider so this is the beginning of a sequence so BOS token so we saw the end of text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3536.17,
+      "ts_end": 3544.05,
+      "text": "right some researchers also consider BOS so this Token Marks the start of a text it signifies to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3544.05,
+      "ts_end": 3551.62,
+      "text": "the llm where a piece of context begins or whereas piece of content begins right then the second token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3551.62,
+      "ts_end": 3558.18,
+      "text": "is eos which is end of sequence right so this token is positioned at the end of a text and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3558.18,
+      "ts_end": 3559.36,
+      "text": "especially useful where a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3560.38,
+      "ts_end": 3566.82,
+      "text": "unrelated text it's similar to end of text then the third token which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3566.82,
+      "ts_end": 3571.44,
+      "text": "important is the padding token so when training LLMs with batch size is larger",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3571.44,
+      "ts_end": 3576.92,
+      "text": "than one the batch might contain texts of varying lengths so to ensure that all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3576.92,
+      "ts_end": 3581.58,
+      "text": "the texts in different batches have the same length the shorter texts are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3581.58,
+      "ts_end": 3586.58,
+      "text": "extended or padded using the pad token up to the length of the longest text in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3586.58,
+      "ts_end": 3590.96,
+      "text": "the batch so imagine the different text is being put in batches to the LLM for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3590.96,
+      "ts_end": 3595.0,
+      "text": "parallel processing we'll look at this in detail so no need to worry about this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3595.0,
+      "ts_end": 3599.92,
+      "text": "right now but just remember that for efficient computing LLM parallelly",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3599.92,
+      "ts_end": 3604.84,
+      "text": "processes the batches so each batch contains text which have different sizes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3604.84,
+      "ts_end": 3611.46,
+      "text": "the shortest texts are augmented with this pad token to match their length",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3611.46,
+      "ts_end": 3615.98,
+      "text": "with the largest text and now we know how to add these special tokens right we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3615.98,
+      "ts_end": 3620.26,
+      "text": "just augment the vocabulary with these tokens and whenever we pass text to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3620.26,
+      "ts_end": 3620.94,
+      "text": "encoder we will be able to add the text to the encoder and we will be able to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3620.94,
+      "ts_end": 3622.98,
+      "text": "add the text to the encoder and we will be able to add the text to the encoder and we may add things like beginning of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3622.98,
+      "ts_end": 3631.09,
+      "text": "sequence end of text the pad token etc so we only saw the unknown and the end of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3631.09,
+      "ts_end": 3634.99,
+      "text": "text special context tokens but there are three other BOS beginning of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3634.99,
+      "ts_end": 3641.45,
+      "text": "sequence and EOS end of sequence and PAD which is padding now here I want you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3641.45,
+      "ts_end": 3647.43,
+      "text": "to note that the tokenizer which is used for GPT models does not need any of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3647.43,
+      "ts_end": 3651.69,
+      "text": "these tokens mentioned above but it only uses the end of text token for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3651.77,
+      "ts_end": 3658.11,
+      "text": "simplicity so GPT-3 GPT-4 when they are trained they don't use bos padding they",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3658.11,
+      "ts_end": 3663.03,
+      "text": "don't even use the unknown token they only use the end of text token for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3663.03,
+      "ts_end": 3668.37,
+      "text": "simplicity and this I also shown over here so the end of text which is used is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3668.37,
+      "ts_end": 3671.13,
+      "text": "exactly how it is used in GPT training as well",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3671.13,
+      "ts_end": 3677.87,
+      "text": "ok and the last sentence is that the tokenizer used for GPT models also does",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3677.87,
+      "ts_end": 3682.09,
+      "text": "not use an unknown token for out of vocabulary words then you might be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3682.09,
+      "ts_end": 3687.77,
+      "text": "thinking how does gpt deal with unknown tokens right so there is something called this the byte",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3687.77,
+      "ts_end": 3693.51,
+      "text": "pair encoding tokenizer which gpt models actually use which breaks down worlds into sub world units",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3693.97,
+      "ts_end": 3699.07,
+      "text": "so currently what we have done is each world is essentially one token right and each punctuation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3699.07,
+      "ts_end": 3706.69,
+      "text": "mark each colon semicolon is one token but what actually gpt does for tokenization it it uses",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3706.69,
+      "ts_end": 3712.83,
+      "text": "something called byte pair encoding or bpe tokenizer and that automatically deals with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3712.83,
+      "ts_end": 3718.63,
+      "text": "unknown tokens because in that tokenizer one word is not essentially one token but even the words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3718.63,
+      "ts_end": 3723.91,
+      "text": "are broken down into sub worlds to generate individual tokens we will come to this in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3723.91,
+      "ts_end": 3730.62,
+      "text": "next lecture but i wanted to show this lecture specifically for showing you how you can do your",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3730.62,
+      "ts_end": 3735.56,
+      "text": "own tokenization from scratch i could have directly showed you byte pair encoding with gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3735.56,
+      "ts_end": 3736.68,
+      "text": "users but then that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3736.82,
+      "ts_end": 3743.24,
+      "text": "you would not have appreciated if you were to tokenize yourself how would you do it from scratch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3743.74,
+      "ts_end": 3748.98,
+      "text": "of course we'll look at the byte pair encoder tokenizer in a lot of detail in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3748.98,
+      "ts_end": 3754.56,
+      "text": "to understand how gpt actually tokenizes but i wanted to give you this intuitive feel so that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3754.56,
+      "ts_end": 3760.19,
+      "text": "you don't think tokenization is a hard process i'll be sharing this code file with all of you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3760.19,
+      "ts_end": 3764.49,
+      "text": "so that you can run this and i actually highly encourage you to run this for a different",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3765.25,
+      "ts_end": 3766.59,
+      "text": "book or a different",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3766.85,
+      "ts_end": 3771.21,
+      "text": "txt file so that you get the hang of it and you become better and better and better at this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3772.92,
+      "ts_end": 3777.56,
+      "text": "just before concluding the lecture i want to go through a quick revision of what all we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3777.56,
+      "ts_end": 3783.1,
+      "text": "learned in today's lecture so in today's lecture we essentially looked at this data preparation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3783.1,
+      "ts_end": 3788.92,
+      "text": "and sampling stage in building large language models from scratch in particular we took a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3788.92,
+      "ts_end": 3796.92,
+      "text": "look at a tokenization and the question is that how do you prepare input text for training llms",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3796.92,
+      "ts_end": 3803.2,
+      "text": "and we saw that this is divided into two steps in step one we split the text into individual words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3803.2,
+      "ts_end": 3809.0,
+      "text": "so you have a essay or a book or a huge number of books you split that text into individual words",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3809.0,
+      "ts_end": 3816.93,
+      "text": "and then you convert these tokens into token ids now when gpt actually uses tokenizers it doesn't",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3816.93,
+      "ts_end": 3822.17,
+      "text": "use individual words as tokens it even does sub words and we'll look at that in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3823.44,
+      "ts_end": 3827.82,
+      "text": "so if you look at how llms are actually trained you take the input text and you use the tokenizer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3827.84,
+      "ts_end": 3833.28,
+      "text": "you tokenize it into words you convert these words into token ids and then the later step",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3833.28,
+      "ts_end": 3838.2,
+      "text": "is we have to convert these token ids also into vector representations which we will come to later",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3838.2,
+      "ts_end": 3843.34,
+      "text": "but in today's lecture we mostly looked at step one which is tokenizing and step two which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3843.34,
+      "ts_end": 3849.25,
+      "text": "converting tokens into token ids right so initially what we did is we downloaded and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3849.25,
+      "ts_end": 3855.91,
+      "text": "loaded the data set in python we tokenized the entire data set using python's regular expression",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3857.91,
+      "ts_end": 3863.67,
+      "text": "re dot split we first use it used it at white spaces and then we added colon semicolons",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3863.67,
+      "ts_end": 3870.0,
+      "text": "question marks dash dash character etc because we wanted to split all of those",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3870.66,
+      "ts_end": 3875.56,
+      "text": "punctuations and even if you search the dash dash in this text you will see dash dash appear",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3875.56,
+      "ts_end": 3882.79,
+      "text": "so many times so even we wanted to split that into individual tokens awesome so this is what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3882.79,
+      "ts_end": 3887.99,
+      "text": "we did and then what we did is we maintained the vocabulary we converted these tokens into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3888.39,
+      "ts_end": 3893.55,
+      "text": "token ids so we saw that what a vocabulary is that is it's simply a dictionary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3893.55,
+      "ts_end": 3901.53,
+      "text": "and it's a mapping from the tokens into the token ids so the tokens are arranged alphabetically and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3901.53,
+      "ts_end": 3909.7,
+      "text": "then each token is mapped to a token id as you can see over here so each unique token is mapped",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3909.7,
+      "ts_end": 3915.5,
+      "text": "to a unique integer called token id and why are these token ids necessary because you will see",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3915.5,
+      "ts_end": 3919.28,
+      "text": "that these token ids are then converted into token embeddings which are fed as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3919.64,
+      "ts_end": 3927.36,
+      "text": "to the gpt um great now then after that we implemented a tokenizer class in python so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3927.36,
+      "ts_end": 3932.18,
+      "text": "that whenever we create a vocabulary we can create an instance of this tokenizer class",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3932.86,
+      "ts_end": 3938.2,
+      "text": "but we did not just define the encode method in this class we defined one more method which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3938.2,
+      "ts_end": 3943.98,
+      "text": "the decode method so what the encode method did is that whenever sample text is provided it converted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3943.98,
+      "ts_end": 3950.1,
+      "text": "it into tokens and then converted these tokens into token ids great but the decode method did",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3950.1,
+      "ts_end": 3957.78,
+      "text": "exactly opposite it took the token ids as an input it converted the token ids into tokenized text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3957.78,
+      "ts_end": 3963.88,
+      "text": "and then it recovered the sample text from the tokenized text why is the decoder important",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3963.88,
+      "ts_end": 3970.56,
+      "text": "because the gpt output is also in token ids so we need to convert it back to the sample text to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3970.56,
+      "ts_end": 3973.22,
+      "text": "to make sense of what the output is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3974.36,
+      "ts_end": 3979.38,
+      "text": "so the tokenizer class which we defined had two methods the encode method and the decode method",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3980.24,
+      "ts_end": 3986.32,
+      "text": "finally we saw a problem that if some word is passed to the encoder which is not present in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3986.32,
+      "ts_end": 3991.54,
+      "text": "the vocabulary then the encoder throws up an error to avoid this we need to add special",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3991.54,
+      "ts_end": 3999.06,
+      "text": "context or special text tokens to the vocabulary and one such special text token is unknown so if",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3999.06,
+      "ts_end": 4004.28,
+      "text": "some word is encountered which is not known we add the unknown token uh the second special",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4004.36,
+      "ts_end": 4010.8,
+      "text": "context text token which is also used in gpt is the end of text so whenever there are multiple",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4010.8,
+      "ts_end": 4016.34,
+      "text": "text sources when we feed the text to the encoder we can separate them with the end of text tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4016.94,
+      "ts_end": 4021.8,
+      "text": "we later saw that many researchers used other other special tokens also like beginning of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4021.8,
+      "ts_end": 4028.77,
+      "text": "sequence end of sequence padding etc actually when gpt was trained it only used the end of text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4028.77,
+      "ts_end": 4035.09,
+      "text": "token to distinguish between the different text sources awesome so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4035.87,
+      "ts_end": 4041.03,
+      "text": "then we then we saw that with these special tokens even if you are given a new sentence",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4041.03,
+      "ts_end": 4046.67,
+      "text": "whose words are not known uh such as the quickly here which was not known it is just replaced",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4047.29,
+      "ts_end": 4055.37,
+      "text": "by the token id for the unknown token no error is shown up uh now we saw that uh gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4055.37,
+      "ts_end": 4060.01,
+      "text": "did not actually use the unknown token so let me take you to the end of this book",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4061.4,
+      "ts_end": 4067.48,
+      "text": "so end of this notebook so gpt models did not use the unknown token then you might be thinking then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4067.48,
+      "ts_end": 4072.76,
+      "text": "how did gpt models deal with words which are not known they deal with words which are not known by",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4072.76,
+      "ts_end": 4078.98,
+      "text": "using something called byte pair encoding in byte pairing code in byte pair encoding every word is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4078.98,
+      "ts_end": 4084.48,
+      "text": "not a token words themselves are broken down into subwords and then these subwords are the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4084.48,
+      "ts_end": 4092.44,
+      "text": "token so let's say you have a word which is uh which is chased right in the vocabulary which we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4092.44,
+      "ts_end": 4097.66,
+      "text": "have developed this chased itself is one token but in byte pair encoding it might be possible that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4099.04,
+      "ts_end": 4107.04,
+      "text": "broken down into three sub tokens ch as this is just for example but these this is what i mean",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4107.04,
+      "ts_end": 4113.74,
+      "text": "by sub word tokens uh so sub word tokens means breaking down one word itself into sub words and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4113.74,
+      "ts_end": 4121.58,
+      "text": "then using these sub words as the tokens uh so gpt models use a byte pair encoding tokenizer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4121.58,
+      "ts_end": 4126.76,
+      "text": "which breaks down words into sub word units and we are going to cover that in a lot of detail in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4126.76,
+      "ts_end": 4134.01,
+      "text": "the next lecture so uh thank you so much everyone for sticking with me for this lecture and it's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4134.01,
+      "ts_end": 4139.83,
+      "text": "been a long lecture i think it's more than one hour but i think it is worth it i have not seen",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4139.83,
+      "ts_end": 4145.43,
+      "text": "this much of a detailed treatment on tokenization in any of the lectures many of the lectures are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4145.43,
+      "ts_end": 4149.59,
+      "text": "toy lectures which means they just give you the basics but then don't show you things like end",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4149.59,
+      "ts_end": 4155.47,
+      "text": "of text dealing with unknown words padding then byte pair encoding or some things which are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4155.47,
+      "ts_end": 4156.63,
+      "text": "actually used in llms",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4156.63,
+      "ts_end": 4156.87,
+      "text": "you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4157.33,
+      "ts_end": 4163.13,
+      "text": "and that is what i wanted to cover so my lecture style will be a mix of whiteboard writing on",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4163.13,
+      "ts_end": 4169.59,
+      "text": "whiteboard and also showing you code here in jupiter notebook i'll be sharing this code file",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4169.59,
+      "ts_end": 4174.07,
+      "text": "with everyone so you can run this code and i highly encourage you to run this code on your own",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 4175.02,
+      "ts_end": 4178.42,
+      "text": "thank you so much everyone and i look forward to seeing you in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 6,
+  "frames_with_content": 3
+}

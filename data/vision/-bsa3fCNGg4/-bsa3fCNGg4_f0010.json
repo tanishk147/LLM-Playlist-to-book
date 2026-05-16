@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Custom-Trained Model",
+  "extracted_text": "various parameter efficient fine-tuning (PEFT) methods at a larger scale. It's particularly helpful for organizations that need support setting up efficient training data pipelines, evaluation systems, and bespoke parameters and methods to maximize model performance for their use case or task.\n\nFor example, SK Telecom, a telecommunications operator serving over 30 million subscribers in South Korea, wanted to customize a model to be an expert in the telecommunications domain with an initial focus on customer service. They worked with OpenAI to fine-tune GPT-4 to improve its performance in telecom-related conversations in the Korean language. Over the course of multiple weeks, SKT and OpenAI drove meaningful performance improvement in telecom customer service tasks\u2014a 35% increase in conversation summarization quality, a 33% increase in intent recognition accuracy, and an increase in satisfaction scores from 3.6 to 4.5 (out of 5) when comparing the fine-tuned model to GPT-4.\n\nIn some cases, organizations need to train a purpose-built model from scratch that understands their business, industry, or domain. Fully custom-trained models imbue new knowledge from a specific domain by modifying key steps of the model training process",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "-bsa3fCNGg4_f0010",
+  "video_id": "-bsa3fCNGg4",
+  "timestamp_sec": 991.366333,
+  "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0010.jpg"
+}

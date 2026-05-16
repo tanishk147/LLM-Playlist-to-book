@@ -1,0 +1,29 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture 6: Stages of building LLM",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A flowchart showing the stages of building a Large Language Model (LLM), progressing from Stage 1 (Attention mechanism and LLM architecture, building on pretraining) through Stage 2 (Training loop, Model evaluation, Load pretrained weights) to Stage 3 (Finetuning and Classification), with foundational model as the central component.",
+  "diagram_elements": [
+    "Stage 1",
+    "Attention mechanism",
+    "LLM architecture",
+    "Building on pretraining",
+    "Stage 2",
+    "Training loop",
+    "Model evaluation",
+    "Load pretrained weights",
+    "Foundational model",
+    "Stage 3",
+    "Finetuning",
+    "Classification",
+    "Person"
+  ],
+  "confidence": 0.85,
+  "frame_id": "z9fgKz1Drlc_f0000",
+  "video_id": "z9fgKz1Drlc",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/z9fgKz1Drlc/z9fgKz1Drlc_f0000.jpg"
+}

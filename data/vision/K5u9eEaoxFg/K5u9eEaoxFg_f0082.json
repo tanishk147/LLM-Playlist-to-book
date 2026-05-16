@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Visualization of flattening token outputs into rows, showing how each token's output is flattened and labeled as Token 1, Token 2, and Token 3, with dimensions (b, num_tokens, d_out).",
+  "diagram_elements": [
+    "Attention heads (multiple)",
+    "Flatten each token output into each row",
+    "Token 1",
+    "Token 2",
+    "Token 3",
+    "tensor output with numerical values",
+    "(b, num_tokens, d_out)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0082",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3054.933,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0082.jpg"
+}

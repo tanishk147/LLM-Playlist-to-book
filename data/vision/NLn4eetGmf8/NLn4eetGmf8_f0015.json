@@ -1,0 +1,26 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Transformers in computer vision",
+  "extracted_text": "Self-attention (Vaswani et al.)",
+  "code": null,
+  "math": [
+    "A(K, Q) = \\text{Softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)",
+    "A \\in \\mathbb{R}^{N \\times N}"
+  ],
+  "diagram_summary": "Diagram showing transformer architecture for computer vision with self-attention mechanism, including patch embedding, stage 1 processing, and attention computation with queries, keys, and values.",
+  "diagram_elements": [
+    "Patch embedding (H\u00d7W\u00d73)",
+    "Stage 1",
+    "Self-attention block",
+    "Q (Query)",
+    "K^T/\u221ad_k (Key)",
+    "Softmax",
+    "Sample images (animal and colorful pattern)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "NLn4eetGmf8_f0015",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 1908.099667,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0015.jpg"
+}

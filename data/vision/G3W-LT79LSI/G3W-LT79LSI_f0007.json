@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Two trainable parameters (of the same dimension as the input) that the LLM automatically adjusts during training if it is determined that the model's performance on its training task.\n\nlearn appropriate scaling and shifting that best suit the data it is processing.\n\nVariance\n\nOn method, we have opted for an implementation detail by setting unbiased=False.\n\nWhat this means, in the variance calculation, we divide by the number of inputs n in the variance formula.\n\nApply Bessel's correction, which typically uses n-1 instead of n in the denominator to adjust for bias in sample variance estimation.\n\nA so-called biased estimate of the variance.\n\nFor models (LLMs), where the embedding dimension n is significantly large, the difference between using n and n-1 is practically negligible.\n\nTo ensure compatibility with the GPT-2 model's normalization layers and because it reflects TensorFlow's default behavior, which was used in GPT2 model.\n\nOf in practice and apply it to the batch input:",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "G3W-LT79LSI_f0007",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 1984.033,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0007.jpg"
+}

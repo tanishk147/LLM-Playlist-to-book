@@ -1,0 +1,3763 @@
+{
+  "video_id": "ufrPLpKnapU",
+  "duration_sec": 2931.93725,
+  "segments": [
+    {
+      "ts_start": 5.26,
+      "ts_end": 11.98,
+      "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 12.68,
+      "ts_end": 19.5,
+      "text": "Today, we are going to be looking at a very important topic and that is called as Positional Encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 21.37,
+      "ts_end": 24.65,
+      "text": "So, I have divided today's lecture into 2-3 modules.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 25.09,
+      "ts_end": 28.07,
+      "text": "Initially, we will look at what all we have covered so far.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 28.35,
+      "ts_end": 32.67,
+      "text": "Then, we will try to understand why is Positional Encoding really needed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 32.67,
+      "ts_end": 45.75,
+      "text": "And then finally, we will do a hands-on coding exercise in Python where we will actually add a Positional Encoding layer along with the Token Embedding layer which we have already created so far.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 46.7,
+      "ts_end": 47.96,
+      "text": "So, let's get started.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 48.16,
+      "ts_end": 60.18,
+      "text": "If you have not seen the previous lecture on Token Encoding or Token Embedding, I would highly encourage you to see that lecture because Positional Encoding builds on top of Token Encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 60.18,
+      "ts_end": 63.92,
+      "text": "If you are coming to this lecture series for the first time, welcome.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 64.2,
+      "ts_end": 69.18,
+      "text": "I have designed the lectures so that they are good to watch even as standalone lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 69.5,
+      "ts_end": 75.12,
+      "text": "But of course, if you go through the previous lectures, your understanding of the current one will be much better.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 75.62,
+      "ts_end": 76.9,
+      "text": "So, let's get started.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 77.28,
+      "ts_end": 82.0,
+      "text": "Until now, we have looked at something which is called as Token Embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 82.3,
+      "ts_end": 84.34,
+      "text": "And what is meant by Token Embedding?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 85.26,
+      "ts_end": 90.44,
+      "text": "So, Token Embedding is the step number 3 in the LLM training process.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 90.7,
+      "ts_end": 93.46,
+      "text": "So, first we start with an input text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 93.64,
+      "ts_end": 96.12,
+      "text": "Then we convert that text into tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 96.44,
+      "ts_end": 103.5,
+      "text": "So, for example, if the text is this is an example, the tokens can be this is an example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 103.88,
+      "ts_end": 108.84,
+      "text": "This, what I am showing right now, is an example of a world-based tokenizer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 109.24,
+      "ts_end": 116.68,
+      "text": "But there are other tokenizers such as sub-world-based tokenizer or byte-pair encoding tokenizer which actually GPT uses.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 117.27,
+      "ts_end": 120.66,
+      "text": "So, remember that one world is generally not equal to one token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 120.7,
+      "ts_end": 123.9,
+      "text": "You can even have sub-worlds or characters as tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 124.22,
+      "ts_end": 130.56,
+      "text": "For the case of simplicity, I am just showing here the tokenized text to be individual worlds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 130.84,
+      "ts_end": 132.26,
+      "text": "So, that's step number 1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 132.44,
+      "ts_end": 141.0,
+      "text": "Step number 2 is maintaining the vocabulary of the tokens, sorting them in ascending order and assigning a token ID to each token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 141.38,
+      "ts_end": 142.74,
+      "text": "That's step number 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 143.02,
+      "ts_end": 150.3,
+      "text": "But even then, we are not ready to give the token IDs as input for the GPT or for the LLM training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 150.46,
+      "ts_end": 150.84,
+      "text": "So, that's step number 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 150.86,
+      "ts_end": 156.76,
+      "text": "There is a very crucial step number 3 which we looked at in the previous lecture and that's called token embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 157.38,
+      "ts_end": 166.75,
+      "text": "Basically, the token IDs which we obtained are converted into vectors so that the semantic meaning between the different worlds is retained.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 167.09,
+      "ts_end": 174.61,
+      "text": "If you directly use the token IDs as inputs to the LLM, we do not retain the meaning between worlds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 174.75,
+      "ts_end": 177.81,
+      "text": "So, for example, dog and puppy are related to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 177.91,
+      "ts_end": 180.19,
+      "text": "Cat and kitten are related to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 180.19,
+      "ts_end": 189.29,
+      "text": "If we don't convert token IDs into token embeddings, this semantic relationship or this meaning between the worlds is lost.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 190.42,
+      "ts_end": 193.02,
+      "text": "That's why it's very important to have step number 3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 193.22,
+      "ts_end": 201.88,
+      "text": "So, if you have a vocabulary which GPT uses, let's say of around 50,000 worlds, GPT-2 was trained on a vocabulary of 50,000 worlds,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 202.02,
+      "ts_end": 210.06,
+      "text": "which means of 50,000 tokens, which means we have 50,000 token IDs and then there is a vector corresponding to each token ID.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 211.0,
+      "ts_end": 214.4,
+      "text": "That is called as token embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 214.54,
+      "ts_end": 218.4,
+      "text": "Every token is converted into a vector in a higher dimensional space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 219.12,
+      "ts_end": 226.0,
+      "text": "So, now you must be thinking, okay, so now I have these vectors which capture the semantic relationship between worlds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 226.1,
+      "ts_end": 229.68,
+      "text": "And now I can feed these vectors as inputs to the large language model, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 230.68,
+      "ts_end": 231.16,
+      "text": "Almost.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 231.3,
+      "ts_end": 232.32,
+      "text": "We are almost there.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 232.42,
+      "ts_end": 236.9,
+      "text": "I promise there is just one last step remaining in the data pre-processing part.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 237.91,
+      "ts_end": 241.35,
+      "text": "And then in the next lecture onwards, we'll come to training the LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 241.63,
+      "ts_end": 243.09,
+      "text": "We'll see the attention mechanism, etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 243.65,
+      "ts_end": 246.71,
+      "text": "And the last step is called as positional embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 247.34,
+      "ts_end": 248.58,
+      "text": "So, why is this needed?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 248.8,
+      "ts_end": 252.48,
+      "text": "So, let's say we have a sentence, the cat sat on the mat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 252.76,
+      "ts_end": 255.6,
+      "text": "And then another sentence, on the mat, the cat sat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 256.32,
+      "ts_end": 261.82,
+      "text": "So, if you look at both of these sentences, the cat world appears in both of these sentences, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 262.3,
+      "ts_end": 267.0,
+      "text": "And in both of these sentences, cat is a token that will be assigned a token ID.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 269.17,
+      "ts_end": 271.55,
+      "text": "And that will be converted into a vector.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 272.46,
+      "ts_end": 276.24,
+      "text": "So, the vector for cat will be the same in both of these sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 276.74,
+      "ts_end": 280.14,
+      "text": "Although the position of the cat in these two sentences is different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 280.72,
+      "ts_end": 287.56,
+      "text": "So, until now, if we just use the vector embedding, we do not have any information about the position of the particular world.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 289.68,
+      "ts_end": 294.04,
+      "text": "So, in the embedding layer, in the token embedding layer, whatever we have seen up till now,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 294.14,
+      "ts_end": 298.92,
+      "text": "the same token ID gets mapped to the same vector representation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 299.78,
+      "ts_end": 303.82,
+      "text": "So, the token ID for cat will get mapped to the same vector.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 304.56,
+      "ts_end": 308.6,
+      "text": "Regardless of where the token ID is positioned in the input sequence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 309.38,
+      "ts_end": 314.04,
+      "text": "So, for example, cat, the position of the cat is different in these two sentences, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 314.36,
+      "ts_end": 322.04,
+      "text": "But if we don't do anything about the position, if we don't encode the position, and if we just use the embedding layer we learned previously,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 322.72,
+      "ts_end": 328.44,
+      "text": "both of these tokens, cat, in both of the sentences will have the exact same vector representation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 329.79,
+      "ts_end": 334.63,
+      "text": "So, in the embedding layer, which we have seen so far, the position is not incorporated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 334.63,
+      "ts_end": 338.04,
+      "text": "There is a figure, which demonstrates this pretty nicely.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 338.54,
+      "ts_end": 345.88,
+      "text": "So, let's say this is the embedding layer weight matrix, which is basically, we have all of these tokens in our vocabulary.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 346.14,
+      "ts_end": 348.16,
+      "text": "Those are converted into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 348.44,
+      "ts_end": 352.12,
+      "text": "And for every token ID, there is a vector in a higher dimensional space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 352.52,
+      "ts_end": 357.02,
+      "text": "So, each row corresponds to one such vector for the token ID.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 357.36,
+      "ts_end": 364.48,
+      "text": "Now, if you want to embed these token IDs, which means if you want to convert these token IDs into vector representation,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 365.1,
+      "ts_end": 370.92,
+      "text": "you will see that the token 5 comes here, and the token 5 comes here also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 371.26,
+      "ts_end": 375.42,
+      "text": "And these two tokens clearly appear at different positions in the sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 376.52,
+      "ts_end": 380.62,
+      "text": "But if you look at the embedded vectors for these two tokens, they're exactly the same.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 380.72,
+      "ts_end": 387.96,
+      "text": "If you look at the first row here, that's the embedded vector for the token ID 5, the first token ID 5.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 388.26,
+      "ts_end": 392.58,
+      "text": "And for the second token ID 5, you'll see that the embedded vector is the third row.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 392.88,
+      "ts_end": 394.96,
+      "text": "So, if you look at the first row and the third row,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 394.96,
+      "ts_end": 400.42,
+      "text": "third row they are actually exactly the same so the main point here is that the same token id",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 400.42,
+      "ts_end": 407.32,
+      "text": "result in the same embedding vectors which says that we are essentially not exploiting the maximum",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 407.32,
+      "ts_end": 412.98,
+      "text": "information present in sentences in sentences there are there is meaning between different",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 412.98,
+      "ts_end": 418.5,
+      "text": "words which we already captured through vector embeddings but the position also matters a lot",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 418.5,
+      "ts_end": 424.32,
+      "text": "right cat appears at different positions here and that completely that may change the meaning of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 424.32,
+      "ts_end": 431.44,
+      "text": "sentence entirely so it's very important to also encode the information related to tokens and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 431.44,
+      "ts_end": 440.15,
+      "text": "position at which the token appears in the given sentence so it is very helpful to inject additional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 440.15,
+      "ts_end": 445.95,
+      "text": "position information to the large language model along with capturing the semantic meaning it is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 445.95,
+      "ts_end": 452.05,
+      "text": "extremely important to inject this additional information about the position to the lln so now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 452.05,
+      "ts_end": 455.09,
+      "text": "let us talk a bit about how do we encode this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 455.09,
+      "ts_end": 460.89,
+      "text": "information about the position so let's say if i give a world and i convert it into token id and i",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 460.89,
+      "ts_end": 466.33,
+      "text": "convert it into a vector how do i also give information about the position of the world",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 466.33,
+      "ts_end": 473.31,
+      "text": "let's look at that so there are essentially two types of positional embeddings the first type of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 473.31,
+      "ts_end": 479.21,
+      "text": "positional embedding is absolute and this is the more commonly used positional embedding and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 479.21,
+      "ts_end": 484.84,
+      "text": "second type of positional embedding is relative positional embedding so as you must have guessed",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 486.02,
+      "ts_end": 490.36,
+      "text": "these two positional embeddings are different let's look at absolute positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 490.36,
+      "ts_end": 496.62,
+      "text": "initially in absolute positional embedding for each in for each position in the input sequence",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 497.12,
+      "ts_end": 504.26,
+      "text": "a unique embedding is added to the tokens embedding to convey its exact location",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 505.02,
+      "ts_end": 509.58,
+      "text": "let me repeat that in absolute in absolute positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 510.15,
+      "ts_end": 515.63,
+      "text": "for each position in the input sequence a unique embedding is added to the tokens embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 516.27,
+      "ts_end": 520.67,
+      "text": "So, for example, if you look at these two sentences, cat sat on the mat, cat sat on the mat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 520.87,
+      "ts_end": 523.75,
+      "text": "The token embedding for cat in both is the same, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 524.05,
+      "ts_end": 530.75,
+      "text": "But as I said, for each position, there will be a different positional encoding which will be added to the token encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 531.29,
+      "ts_end": 535.32,
+      "text": "So, let's say if the token encoding is X for sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 535.44,
+      "ts_end": 542.24,
+      "text": "So, let me say, so let's say this is sentence number one and let's say this is sentence number two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 542.24,
+      "ts_end": 550.29,
+      "text": "So, let's say the token encoding for cat is X in sentence one and for sentence two also it's X because it's the same word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 550.41,
+      "ts_end": 557.09,
+      "text": "But now the positional encoding is different because in the first sentence, the cat appears in position number two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 557.37,
+      "ts_end": 561.47,
+      "text": "So, there will be some different positional encoding for this position.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 561.83,
+      "ts_end": 566.67,
+      "text": "And for the second sentence, the cat appears in position number five.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 566.79,
+      "ts_end": 568.59,
+      "text": "So, there will be some different positional encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 568.87,
+      "ts_end": 573.05,
+      "text": "So, the final embedding will be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 573.29,
+      "ts_end": 576.65,
+      "text": "The addition of the token embedding plus the positional embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 576.69,
+      "ts_end": 582.49,
+      "text": "So, for sentence one, the final vector embedding for cat will be X plus Y for sentence two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 582.55,
+      "ts_end": 585.21,
+      "text": "The final vector embedding for cat will be X plus Z.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 585.53,
+      "ts_end": 586.85,
+      "text": "So, they are different now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 586.91,
+      "ts_end": 588.57,
+      "text": "See, they are not the same.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 588.67,
+      "ts_end": 592.13,
+      "text": "So, cat won't be embedded in the same manner in both the sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 592.73,
+      "ts_end": 596.07,
+      "text": "And so, some information about its position will be incorporated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 596.67,
+      "ts_end": 599.85,
+      "text": "That is exactly what happens in absolute positional embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 599.95,
+      "ts_end": 602.15,
+      "text": "And there is a nice figure to showcase this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 602.49,
+      "ts_end": 603.27,
+      "text": "So, let's say.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 603.29,
+      "ts_end": 607.36,
+      "text": "We have four tokens in the input sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 607.72,
+      "ts_end": 609.86,
+      "text": "So, let's say the first token is the.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 611.2,
+      "ts_end": 612.88,
+      "text": "The second is cat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 614.77,
+      "ts_end": 616.09,
+      "text": "The third is sat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 617.6,
+      "ts_end": 618.86,
+      "text": "And the fourth is mat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 619.92,
+      "ts_end": 623.4,
+      "text": "So, what I've shown over here is that these are the token embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 623.5,
+      "ts_end": 626.94,
+      "text": "So, for the word the, this is a three dimensional token embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 627.0,
+      "ts_end": 630.06,
+      "text": "For cat, it's the same three dimensional token embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 630.12,
+      "ts_end": 631.3,
+      "text": "For sat, it's the same.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 631.36,
+      "ts_end": 632.5,
+      "text": "And for mat, it's the same.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 633.0,
+      "ts_end": 635.9,
+      "text": "Ideally, the vector embeddings for every word will be different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 635.98,
+      "ts_end": 638.68,
+      "text": "But I'm just showing this for the sake of simplicity.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 639.12,
+      "ts_end": 643.36,
+      "text": "Remember, the vector embeddings for each word are ideally, are actually different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 643.62,
+      "ts_end": 647.24,
+      "text": "But I just want to show a visual demonstration here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 647.42,
+      "ts_end": 649.14,
+      "text": "So, these are the vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 649.26,
+      "ts_end": 653.96,
+      "text": "Now, what we will do is that for each vector embedding, we'll add a positional embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 654.12,
+      "ts_end": 657.54,
+      "text": "And these positional embeddings are different based on the position.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 657.86,
+      "ts_end": 661.0,
+      "text": "So, for example, the comes in position number one, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 661.16,
+      "ts_end": 665.24,
+      "text": "So, the positional embeddings are 1.1, 1.2, and 1.3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 665.46,
+      "ts_end": 665.94,
+      "text": "Cat.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 665.94,
+      "ts_end": 667.36,
+      "text": "Cat comes in the second position.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 667.52,
+      "ts_end": 670.68,
+      "text": "So, the positional embeddings are 2.1, 2.2, 2.3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 670.88,
+      "ts_end": 672.76,
+      "text": "Sat comes in the third position.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 673.04,
+      "ts_end": 676.54,
+      "text": "So, the positional embeddings are 3.1, 3.2, 3.3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 676.58,
+      "ts_end": 678.38,
+      "text": "Mat comes in the fourth position.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 678.62,
+      "ts_end": 682.34,
+      "text": "So, the positional embeddings are 4.1, 4.2, and 4.3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 682.74,
+      "ts_end": 685.96,
+      "text": "Again, these numbers I'm just showing for representative purpose.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 686.8,
+      "ts_end": 689.8,
+      "text": "Now, if you add the token embedding to the positional embedding,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 689.84,
+      "ts_end": 693.5,
+      "text": "you'll see that although the token embeddings are the same for these words,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 693.64,
+      "ts_end": 695.92,
+      "text": "the final embeddings, which are also conversion,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 695.94,
+      "ts_end": 699.68,
+      "text": "called as the input embeddings which will be fed as input to the llm they are different",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 699.68,
+      "ts_end": 704.32,
+      "text": "because the positional embeddings which are added to each token embedding is different",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 704.32,
+      "ts_end": 711.44,
+      "text": "so for the word the the final input embedding is 2.1 2.2 2.3 for the word cat the final input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 711.44,
+      "ts_end": 719.84,
+      "text": "embedding is 3.1 3.2 3.3 and similarly for mat the final input embedding is 5.1 5.2 and 5.3",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 719.84,
+      "ts_end": 726.92,
+      "text": "this is the intuitive idea behind absolute positional embeddings we have token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 726.92,
+      "ts_end": 732.5,
+      "text": "and then we add positional embeddings for different positions so finally we get an input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 732.5,
+      "ts_end": 739.84,
+      "text": "embedding which encodes positional information that's it one more key thing to remember here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 739.84,
+      "ts_end": 744.48,
+      "text": "is that the positional vectors have the same dimension as the original token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 744.48,
+      "ts_end": 750.32,
+      "text": "can you think why this is the case why should the positional embeddings have the same dimension as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 750.32,
+      "ts_end": 751.26,
+      "text": "the token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 751.26,
+      "ts_end": 758.34,
+      "text": "pause for a moment to think about this okay so the reason the positional embeddings should",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 758.34,
+      "ts_end": 762.56,
+      "text": "have the same dimension as the original token embeddings is because we want to add them",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 762.56,
+      "ts_end": 766.8,
+      "text": "together right and this addition would be difficult if the dimension of the positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 766.8,
+      "ts_end": 771.06,
+      "text": "embedding is different so for example here if this positional embedding was a four dimension",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 771.06,
+      "ts_end": 775.56,
+      "text": "thing adding this four dimensional vector to a three dimensional vector would not be possible",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 775.56,
+      "ts_end": 780.72,
+      "text": "so the in absolute positional embedding the positional vectors have the same dimension",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 780.72,
+      "ts_end": 781.58,
+      "text": "as the original",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 781.58,
+      "ts_end": 782.04,
+      "text": "right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 782.06,
+      "ts_end": 787.42,
+      "text": "that's the importance am stairs OK its got the same dimension as the original token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 787.42,
+      "ts_end": 791.8,
+      "text": "and there are the dominant and dominant positional embeddings they both processed by a Moroccan",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 791.8,
+      "ts_end": 796.72,
+      "text": "method in the middle in order to create positional embeddings this is an interesting way of CLF",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 796.72,
+      "ts_end": 807.48,
+      "text": "so in this way beging as one single positional espa so it's it's not just a one dimensional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 807.48,
+      "ts_end": 812.94,
+      "text": "embedding the right positional features also packed into the true positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 812.94,
+      "ts_end": 817.96,
+      "text": "so that's a bit different than the absolute embedding right for each position in absolute",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 817.96,
+      "ts_end": 823.98,
+      "text": "embedding there is a separate positional embedding but in relative positional embedding what we care",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 823.98,
+      "ts_end": 832.08,
+      "text": "about is how far apart different worlds are rather than their exact position now you must be thinking",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 832.08,
+      "ts_end": 838.48,
+      "text": "where exactly is relative positional encoding important so relative positional encoding is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 838.48,
+      "ts_end": 843.58,
+      "text": "actually very important because the model in this case can generalize better to sequence of varying",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 843.58,
+      "ts_end": 850.22,
+      "text": "lengths even if it has not seen such lengths during training so for example in in absolute",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 850.22,
+      "ts_end": 855.8,
+      "text": "positional encoding if you train with a sequence length of five and if in the test you have a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 855.8,
+      "ts_end": 860.3,
+      "text": "sequence length of six it's very difficult for the absolute positional encoding to know what to do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 860.3,
+      "ts_end": 866.26,
+      "text": "because it has trained for five positions and five positional embeddings but in this case of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 866.26,
+      "ts_end": 868.34,
+      "text": "relative positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 868.48,
+      "ts_end": 874.22,
+      "text": "the model can generalize better to sequence of varying lengths because even if it gets some",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 874.22,
+      "ts_end": 880.74,
+      "text": "random length during the testing phase the absolute position does not matter anyways all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 880.74,
+      "ts_end": 885.99,
+      "text": "that matters is the relative position between different worlds can you try to think of an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 885.99,
+      "ts_end": 889.85,
+      "text": "example where relative positioning might be more important than absolute positioning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 889.85,
+      "ts_end": 901.46,
+      "text": "okay so it turns out that relative positionings are actually better if the sequences are very long",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 901.46,
+      "ts_end": 903.82,
+      "text": "and if longer paragraphs or longer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 903.82,
+      "ts_end": 904.02,
+      "text": "you can generalize better to sequence of varying lengths because even if it gets some random length",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 904.02,
+      "ts_end": 908.56,
+      "text": "the input sequences need to be analyzed because then we need to know the relationship between how",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 908.56,
+      "ts_end": 914.88,
+      "text": "different worlds are connected rather than the exact specific position i'll come to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 915.6,
+      "ts_end": 923.84,
+      "text": "advantages and disadvantages of both of these in a moment okay so in the next in the next section",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 923.84,
+      "ts_end": 930.58,
+      "text": "which is section number five i want to discuss about just these two types of encodings and which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 930.58,
+      "ts_end": 933.5,
+      "text": "one to use in practice which one does gpt uses etc",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 933.5,
+      "ts_end": 934.62,
+      "text": "so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 934.62,
+      "ts_end": 938.94,
+      "text": "both of these type of positional embeddings which are absolute embedding and relate relative",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 938.94,
+      "ts_end": 947.42,
+      "text": "positional embedding are very good because they enable the llms let me switch color they enable",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 947.42,
+      "ts_end": 952.34,
+      "text": "the large language models to understand the order and relationship between the tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 953.1,
+      "ts_end": 959.14,
+      "text": "and this actually ensures more accurate and context aware predictions so whichever positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 959.14,
+      "ts_end": 964.84,
+      "text": "encoding you use it is actually much better than not using any positional encoding because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 964.84,
+      "ts_end": 970.7,
+      "text": "it makes the llm more aware of the order and relationship between tokens and that actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 970.7,
+      "ts_end": 977.03,
+      "text": "leads to better predictions now let's come to point number six so the choice between",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 977.03,
+      "ts_end": 983.79,
+      "text": "the two types of positional embedding really depends on the specific application and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 983.79,
+      "ts_end": 990.09,
+      "text": "nature of the data being processed so for example generally absolute positional encoding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 990.09,
+      "ts_end": 995.51,
+      "text": "is preferred when the fixed order of tokens is crucial such as for sequence generation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 995.51,
+      "ts_end": 1002.67,
+      "text": "so gpt was trained using an absolute positional encoding and the original transformer paper",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1002.67,
+      "ts_end": 1008.33,
+      "text": "was also trained using absolute positional encoding relative positional encoding on the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1008.33,
+      "ts_end": 1013.63,
+      "text": "other end is suitable for tasks like language modeling or long sequences where the same",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1013.63,
+      "ts_end": 1019.48,
+      "text": "phrase can appear in different parts of the sequence so generally relative positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1019.48,
+      "ts_end": 1024.46,
+      "text": "encoding is useful if you are analyzing long sequences and where the same phrase can repeat",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1024.46,
+      "ts_end": 1025.44,
+      "text": "over and over again",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1026.63,
+      "ts_end": 1032.07,
+      "text": "for all practical purposes i would say absolute positional encoding is the one which is used more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1032.07,
+      "ts_end": 1041.97,
+      "text": "commonly in fact as i mentioned open as gpt models so gpt3 gpt4 etc use absolute positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1041.97,
+      "ts_end": 1048.2,
+      "text": "embeddings that are optimized during the training process so one thing to remember here is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1048.2,
+      "ts_end": 1053.84,
+      "text": "similar to the embedding vectors we do not know what values of the positional embedding to be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1053.84,
+      "ts_end": 1056.7,
+      "text": "used so for example here i randomly showed the positional embedding values and what values do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1056.72,
+      "ts_end": 1063.32,
+      "text": "these values 1.1 1.1 1.3 right ideally as i mentioned in the previous lecture the vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1063.32,
+      "ts_end": 1068.88,
+      "text": "embeddings need to be optimized right we need to know the weights for each vector which what's the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1068.88,
+      "ts_end": 1076.23,
+      "text": "value for each vector similarly when gpt was developed even the values of the positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1076.97,
+      "ts_end": 1083.67,
+      "text": "embedding vectors need to be optimized and these positional embedding vectors vector values are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1083.67,
+      "ts_end": 1088.35,
+      "text": "actually optimized during the training process this optimization is actually a part of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1088.35,
+      "ts_end": 1093.97,
+      "text": "training process itself so when you look at the model training for gpt we also have to optimize",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1093.97,
+      "ts_end": 1099.17,
+      "text": "for the token embeddings and we also have to optimize for the positional embeddings we do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1099.17,
+      "ts_end": 1106.18,
+      "text": "not know about these values before remember i mentioned that along with gpt the original",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1106.18,
+      "ts_end": 1111.38,
+      "text": "transformer paper which is called as attention is all you need so let me show you this paper",
+      "frame_ids": [
+        "ufrPLpKnapU_f0001"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "3.5 Positional Encoding",
+          "extracted_text": "Since our model contains no recurrence and no convolution, in order for the model to make use of the order of the sequence, we must inject some information about the relative or absolute position of the tokens in the sequence. To this end, we add \"positional encodings\" to the input embeddings at the bottoms of the encoder and decoder stacks. The positional encodings have the same dimension d_model as the embeddings, so that the two can be summed. There are many choices of positional encodings, learned and fixed [9].\n\nIn this work, we use sine and cosine functions of different frequencies:\n\nwhere pos is the position and i is the dimension. That is, each dimension of the positional encoding corresponds to a sinusoid. The wavelengths form a geometric progression from 2\u03c0 to 10000 \u00b7 2\u03c0. We chose this function because we hypothesized it would allow the model to easily learn to attend by relative positions, since for any fixed offset k, PE_pos+k can be represented as a linear function of PE_pos.\n\nWe also experimented with using learned positional embeddings [9] instead, and found that the two versions produced nearly identical results (see Table 2 row (E)). We chose the sinusoidal version",
+          "code": null,
+          "math": [
+            "PE_{(pos,2i)} = sin(pos/10000^{2i/d_{model}})",
+            "PE_{(pos,2i+1)} = cos(pos/10000^{2i/d_{model}})"
+          ],
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "ufrPLpKnapU_f0001",
+          "video_id": "ufrPLpKnapU",
+          "timestamp_sec": 1107.066333,
+          "source_image": "data/frames/ufrPLpKnapU/ufrPLpKnapU_f0001.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1111.38,
+      "ts_end": 1114.74,
+      "text": "yeah this paper so they also used an absolute positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1114.76,
+      "ts_end": 1120.18,
+      "text": "positional encoding and in this case they actually propose some formula for how to encode the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1120.18,
+      "ts_end": 1127.22,
+      "text": "different positions so they use sinusoidal and cosine formula over here so you can read a bit",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1127.22,
+      "ts_end": 1132.64,
+      "text": "about what they have written here since our model contains no recurrence in order for the model to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1132.64,
+      "ts_end": 1137.48,
+      "text": "make use of the order of the sequence we must inject some information about the relative or",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1137.48,
+      "ts_end": 1142.82,
+      "text": "absolute position of the tokens so they have added absolute positional embedding and they have used",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1142.82,
+      "ts_end": 1144.74,
+      "text": "some formula for how to encode the different positions so they have added absolute positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1146.0,
+      "ts_end": 1147.58,
+      "text": "embedding and they have used some formula for how to encode the different positions so they have used",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1147.58,
+      "ts_end": 1153.99,
+      "text": "the positional embedding for each token on the contrary when gpt was trained no such formula was",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1153.99,
+      "ts_end": 1161.17,
+      "text": "used and the positional embedding vector values were actually optimized during the training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1161.17,
+      "ts_end": 1167.96,
+      "text": "process itself i hope everyone is with me until this point because now we are going to jump into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1167.96,
+      "ts_end": 1174.36,
+      "text": "a hands-on demonstration of looking at a very real life",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1175.3,
+      "ts_end": 1181.52,
+      "text": "example such as GPT-2 looking at the vocabulary transforming that vocabulary into token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1181.52,
+      "ts_end": 1186.44,
+      "text": "adding positional embeddings to those token embeddings and then generating the input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1186.44,
+      "ts_end": 1192.16,
+      "text": "embeddings which are the final input to the LLM training. So you might be noticing that I am using",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1192.16,
+      "ts_end": 1197.88,
+      "text": "the words encoding and embedding interchangeably. So sometimes positional encodings are also called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1197.88,
+      "ts_end": 1203.18,
+      "text": "positional embeddings. So these words are used interchangeably. All you need to remember is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1203.18,
+      "ts_end": 1207.62,
+      "text": "when someone says encoding or embedding it's usually a vector in a higher dimensional space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1209.19,
+      "ts_end": 1214.75,
+      "text": "Okay so now let's come to the next part. In the next part what we are going to do is we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1214.75,
+      "ts_end": 1219.95,
+      "text": "to implement positional embeddings in a hands-on manner. So I am going to take you to the Jupyter",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1219.95,
+      "ts_end": 1226.74,
+      "text": "notebook now very similar to how we have been doing in the previous lectures. Okay so previously",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1227.34,
+      "ts_end": 1232.16,
+      "text": "especially in the last lecture we focused on very small embedding sizes in this chapter for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1232.16,
+      "ts_end": 1233.1,
+      "text": "illustration purposes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1233.48,
+      "ts_end": 1234.0,
+      "text": "Now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1234.0,
+      "ts_end": 1234.66,
+      "text": "we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1234.66,
+      "ts_end": 1240.2,
+      "text": "are going to consider much more realistic and useful embedding sizes and encode the input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1240.2,
+      "ts_end": 1246.52,
+      "text": "tokens into a 256 dimensional vector space. So remember I mentioned that in token embedding you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1246.52,
+      "ts_end": 1251.68,
+      "text": "have every word and that word is projected into a higher dimensional vector space. Usually that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1251.68,
+      "ts_end": 1258.22,
+      "text": "dimension is very high. So GPT-3 I think was trained on a vector space of around 256 or even",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1258.22,
+      "ts_end": 1263.78,
+      "text": "more dimensions. So we are going to consider a vector space of that size right now for demonstration.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1265.32,
+      "ts_end": 1271.44,
+      "text": "As it is written here, this is smaller than what the original gpt 3 model used. So in GPT-3",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1271.44,
+      "ts_end": 1278.02,
+      "text": "the embedding size is actually 1, 2, 2, 8, 8 dimensions. So it's nowhere close to 256 but",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1278.02,
+      "ts_end": 1286.17,
+      "text": "it's fine. Let me actually ask chat GPT what is the vector embedding size for GPT-2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1286.29,
+      "ts_end": 1294.47,
+      "text": "For GPT-2 for one of their smallest models, I think it is around 256. So let me ask chat GPT what is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1294.47,
+      "ts_end": 1294.83,
+      "text": "\ub9d0",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1296.04,
+      "ts_end": 1304.74,
+      "text": "vector embedding size for gpt2 so if i ask this to chat gpt you will see that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1305.97,
+      "ts_end": 1311.73,
+      "text": "for the for all their models it actually starts from 768 so the value of 256 we are using is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1311.73,
+      "ts_end": 1317.21,
+      "text": "three times smaller but it's fine it's at least the same order of magnitude so okay we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1317.21,
+      "ts_end": 1323.35,
+      "text": "to encode the input tokens into 256 dimensional vector representation and then we are going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1323.35,
+      "ts_end": 1329.19,
+      "text": "assume that the token ids were created by the byte pair encoder tokenizer which has a vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1329.19,
+      "ts_end": 1345.81,
+      "text": "size of 50257 let's check this what's the vocabulary size of gpt2 pre-training so let's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1345.81,
+      "ts_end": 1351.83,
+      "text": "see the vocabulary size is 5025257 using the byte pair encoder this is exactly what we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1351.83,
+      "ts_end": 1356.75,
+      "text": "going to use right now in today's hands-on example so as i mentioned before to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1356.75,
+      "ts_end": 1363.31,
+      "text": "actually create the embedding layer or this is also called as the token embedding matrix",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1363.91,
+      "ts_end": 1369.11,
+      "text": "you need two you need two quantities or two variables the first you need the vector dimension",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1369.67,
+      "ts_end": 1374.47,
+      "text": "so basically every token id in the vocabulary will be converted to a vector of these many",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1374.47,
+      "ts_end": 1386.54,
+      "text": "dimensions and right now we are going to use uh 256 over here uh 256 and the second thing which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1386.54,
+      "ts_end": 1390.0,
+      "text": "we need is the vocabulary size and the vocabulary size in our case is 256 and the second thing which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1390.02,
+      "ts_end": 1394.44,
+      "text": "we need is the vocabulary size in our case is as i've already mentioned here it's 50257 this means",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1394.44,
+      "ts_end": 1400.78,
+      "text": "that there are 50257 token ids and each of these token ids will be transformed into a 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1400.78,
+      "ts_end": 1407.6,
+      "text": "dimensional vector awesome so now what we are going to do is that we have defined the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1407.6,
+      "ts_end": 1413.3,
+      "text": "size to be 50257 we have defined the output dimension which is the vector size as 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1413.86,
+      "ts_end": 1418.76,
+      "text": "and then we are going to create a token embedding layer using torch.nn.embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1420.92,
+      "ts_end": 1425.74,
+      "text": "actually creates this kind of an embedding layer provide provided we have those two inputs",
+      "frame_ids": [
+        "ufrPLpKnapU_f0002"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 1426.4,
+      "ts_end": 1432.62,
+      "text": "which is the vocabulary size and second is the vector length which we want so i'll put the link",
+      "frame_ids": [
+        "ufrPLpKnapU_f0003"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Embedding",
+          "extracted_text": "CLASS torch.nn.Embedding(num_embeddings, embedding_dim, padding_idx=None, max_norm=None, norm_type=2.0, scale_grad_by_freq=False, sparse=False, _weight=None, _freeze=False, device=None, dtype=None) [SOURCE]\n\nA simple lookup table that stores embeddings of a fixed dictionary and size.\n\nThis module is often used to store word embeddings and retrieve them using indices. The input to the module is a list of indices, and the output is the corresponding word embeddings.\n\nParameters\n\n\u2022 num_embeddings (int) - size of the dictionary of embeddings\n\u2022 embedding_dim (int) - the size of each embedding vector\n\u2022 padding_idx (int, optional) - If specified, the entries at padding_idx do not contribute to the gradient, therefore, the embedding vector at padding_idx is not updated during training, i.e. it remains as a fixed \"pad\". For a newly constructed Embedding, the embedding vector at padding_idx will default to all zeroes, but can be updated to another value to be used as the padding vector.\n\u2022 max_norm (float, optional) - If given, each embedding vector with norm larger than max_norm is renormalized to have norm max_norm.\n\u2022 norm_type (float, optional) - The p of the p-norm to compute for the max_norm option. Default 2.\n\u2022 scale_grad_by_freq (bool, optional) - If given, this will scale gradients by the inverse of frequency",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "ufrPLpKnapU_f0003",
+          "video_id": "ufrPLpKnapU",
+          "timestamp_sec": 1428.733,
+          "source_image": "data/frames/ufrPLpKnapU/ufrPLpKnapU_f0003.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1432.62,
+      "ts_end": 1438.96,
+      "text": "of this in the chat or in the information section of the youtube video as well so when you run this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1438.96,
+      "ts_end": 1443.4,
+      "text": "you will see that the token embedding layer has been created and it takes two inputs the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1443.4,
+      "ts_end": 1450.4,
+      "text": "size and the output dimension awesome so now once the token embedding layer is created we need to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1450.94,
+      "ts_end": 1457.48,
+      "text": "uh remember the token embedding layer is is essentially a lookup matrix where if you give it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1459.58,
+      "ts_end": 1464.5,
+      "text": "the ids so if you have a token embedding layer and if you provide the token embedding layer with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1464.5,
+      "ts_end": 1469.8,
+      "text": "input ids which you want to look look for it will give you the corresponding embedding vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1469.8,
+      "ts_end": 1475.94,
+      "text": "so for example uh this is the token embedding matrix right if you and this is a lookup table",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1475.94,
+      "ts_end": 1481.18,
+      "text": "why is it a lookup table because if you pass in the input id it looks up that particular row",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1481.3,
+      "ts_end": 1487.86,
+      "text": "and it gives you the vector associated with that so now we need to create the input ids so that we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1487.86,
+      "ts_end": 1494.78,
+      "text": "can generate the vector embeddings or the token embeddings for those inputs and to create the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1494.78,
+      "ts_end": 1500.5,
+      "text": "input ids we are going to use something called as data loader so we looked at data loader in the in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1500.5,
+      "ts_end": 1505.76,
+      "text": "one of the previous lectures so what we are going to do here is that we are going to have a batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1505.76,
+      "ts_end": 1511.04,
+      "text": "and that batch size will be equal to eight and we are going to use a context size of four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1511.3,
+      "ts_end": 1516.76,
+      "text": "which means that the maximum input length is four which means four tokens at a time can be passed as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1516.76,
+      "ts_end": 1524.58,
+      "text": "inputs that's also called as the context size so uh let me actually show this to you in pictorial",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1524.58,
+      "ts_end": 1530.38,
+      "text": "format so that it's easier for you to visualize okay so this is the input which we are going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1530.38,
+      "ts_end": 1536.26,
+      "text": "create uh we are going to divide the data into batches and the batch size will be equal to eight",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1536.76,
+      "ts_end": 1541.32,
+      "text": "so the parameters will be updated after processing every eight batches",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1541.78,
+      "ts_end": 1546.64,
+      "text": "now we are not looking at parameter updation at all i just want you to be aware of the dimensions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1547.28,
+      "ts_end": 1552.72,
+      "text": "so the input which we will be looking at one time is a batch of eight so there are eight rows over",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1552.72,
+      "ts_end": 1559.52,
+      "text": "here and each row corresponds to one input sequence so if you look at the first row these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1559.52,
+      "ts_end": 1564.3,
+      "text": "will be four tokens if you look at the second row these will be four tokens so the first row",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1564.3,
+      "ts_end": 1570.12,
+      "text": "when i say four tokens these are four token ids so remember the goal is to look at these four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1570.12,
+      "ts_end": 1576.38,
+      "text": "token ids and to predict the next world so you can think of each row as an input to the llm",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1576.88,
+      "ts_end": 1584.34,
+      "text": "and each row consists of four token ids now our goal is to transform each of these token ids into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1584.34,
+      "ts_end": 1592.24,
+      "text": "a 256 dimensional vector right so if you look at the first row the first row has",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1592.24,
+      "ts_end": 1600.86,
+      "text": "four token ids and we want to transform each into 256 dimensional vector so before coming to that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1600.86,
+      "ts_end": 1601.26,
+      "text": "let me",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1601.36,
+      "ts_end": 1607.08,
+      "text": "show you how the inputs are initialized and how from the data loader so you so i have already",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1607.08,
+      "ts_end": 1611.74,
+      "text": "defined a data loader in this jupyter notebook and you will have access to that when i share the code",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1611.74,
+      "ts_end": 1616.9,
+      "text": "file with you if you have not seen the data loader lecture i highly encourage you to go to that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1616.9,
+      "ts_end": 1620.54,
+      "text": "but if not it's fine i'll try to give you an intuition of what's happening here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1620.54,
+      "ts_end": 1624.04,
+      "text": "essentially what we are doing here is that we are looking at the raw text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1624.56,
+      "ts_end": 1631.84,
+      "text": "and this raw text is actually the verdict so this is a book called the verdict and",
+      "frame_ids": [
+        "ufrPLpKnapU_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": null,
+          "extracted_text": "Navigation Menu\nrasbt / LLMs-from-scratch\nrasbt /\nLLMs-from-scratch\nType / to search\nSearch code, repositories, users, issues, pull requests...\nCode\nIssues\nPull requests\nDiscussions\nActions\nSecurity\nInsights\nOpen in github.dev Open in a new github.dev tab Open in codespace\nBreadcrumbs\nLLMs-from-scratch / ch02 / 01_main-chapter-code\n/ the-verdict.txt",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "ufrPLpKnapU_f0004",
+          "video_id": "ufrPLpKnapU",
+          "timestamp_sec": 1630.266333,
+          "source_image": "data/frames/ufrPLpKnapU/ufrPLpKnapU_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1632.32,
+      "ts_end": 1637.64,
+      "text": "let me actually refresh this so that it appears in a better format yeah so this is actually a book",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1637.64,
+      "ts_end": 1643.0,
+      "text": "called the verdict and this is the main text which we are using as sample text for uh for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1643.0,
+      "ts_end": 1649.62,
+      "text": "these set of lectures so what's happening is that we are taking this raw text and uh we are chunking",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1649.62,
+      "ts_end": 1657.74,
+      "text": "it into batches so each each batch is of size eight and for each batch we are looking at a max",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1657.74,
+      "ts_end": 1662.12,
+      "text": "length of four so only four input tokens will be used to predict the next world",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1662.42,
+      "ts_end": 1669.28,
+      "text": "so think of this matrix which i showed you over here so we are going to create a data loader which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1669.28,
+      "ts_end": 1673.98,
+      "text": "takes in the raw text which is a batch size of eight which has a max length which are the number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1673.98,
+      "ts_end": 1680.06,
+      "text": "of essentially columns which is the context length which is equal to four and then a stride of four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1680.06,
+      "ts_end": 1685.94,
+      "text": "and shuffle equal to false so stride basically means that let's say if you look at this text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1685.94,
+      "ts_end": 1693.03,
+      "text": "right and if you want to uh create inputs so the first input will be i had always thought",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1693.19,
+      "ts_end": 1699.47,
+      "text": "because the context size is four now since stride is equal to four the next input will be jack gisborne",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1699.47,
+      "ts_end": 1705.87,
+      "text": "rather if the stride was equal to one the next input would be had always thought jack but now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1705.87,
+      "ts_end": 1710.95,
+      "text": "the stride is equal to four so after one input we'll skip one two three four times and then give",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1710.95,
+      "ts_end": 1716.86,
+      "text": "the next input so what we are essentially doing is creating inputs so the batch size is eight right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1716.86,
+      "ts_end": 1722.56,
+      "text": "so the first batch will have this as the first row of input this as the second row of input this as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1723.32,
+      "ts_end": 1729.8,
+      "text": "input and so on up till eight eight batches and each of these tokens uh are converted into token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1729.8,
+      "ts_end": 1737.23,
+      "text": "ids and then what we want to do is map each of those token ids into vectors that's what we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1737.23,
+      "ts_end": 1744.89,
+      "text": "doing exactly through this data loader data loader just helps us to manage the task of inputting the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1744.89,
+      "ts_end": 1751.05,
+      "text": "data batching the data creating different batches parallel processing much easier so it's highly",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1751.05,
+      "ts_end": 1753.49,
+      "text": "recommended to use data loader by a GitHub ship to manage different batches parallelly need much easier so it's highly recommended to use data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1753.49,
+      "ts_end": 1759.71,
+      "text": "actually just show you the data loader so it's this link data sets and data loaders in python",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1760.83,
+      "ts_end": 1767.18,
+      "text": "it's actually highly useful when dealing with large language models okay so once we define a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1767.18,
+      "ts_end": 1771.72,
+      "text": "data loader like this we just iterate through the data loader and we can get inputs and targets",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1771.72,
+      "ts_end": 1778.54,
+      "text": "so if you print out the token ids so this is the input of a batch and if you see this exactly",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1778.54,
+      "ts_end": 1783.72,
+      "text": "similar to what we had written on the whiteboard so if you look at one batch it will have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1785.69,
+      "ts_end": 1793.19,
+      "text": "eight input sequences and each input sequence has four token ids or four tokens and using these we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1793.19,
+      "ts_end": 1798.75,
+      "text": "want to predict the next world for each input sequence so this is the batch of inputs which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1798.75,
+      "ts_end": 1804.57,
+      "text": "we have received and now what we actually want to do is for each of these input token ids we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1804.57,
+      "ts_end": 1807.71,
+      "text": "want to convert each of these into a 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1807.71,
+      "ts_end": 1808.53,
+      "text": "uh",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1808.79,
+      "ts_end": 1816.62,
+      "text": "dimensional vector representation but first let's look at this token id tensor and it's a 8 by 4",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1816.62,
+      "ts_end": 1822.34,
+      "text": "tensor because it has eight rows and four columns uh the data batch consists of eight text samples",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1822.34,
+      "ts_end": 1828.56,
+      "text": "with four tokens each awesome now what we are going to do is that we are going to convert each",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1828.56,
+      "ts_end": 1838.02,
+      "text": "of these token ids into a 256 dimensional vector using this embedding layer so as i told you what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1838.02,
+      "ts_end": 1839.58,
+      "text": "this embedding layer is is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1839.82,
+      "ts_end": 1843.96,
+      "text": "it's actually a lookup table right so if you look at this embedding layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1844.53,
+      "ts_end": 1849.6,
+      "text": "and if you give the token id it will generate the or it will fetch the corresponding vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1849.6,
+      "ts_end": 1853.26,
+      "text": "representation for you that's exactly what we are going to do over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1853.89,
+      "ts_end": 1857.44,
+      "text": "so uh these are the inputs right now let's say i'm looking at one batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1857.96,
+      "ts_end": 1863.76,
+      "text": "which has eight rows and which has four columns and i have given the input ids as randomly",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1863.76,
+      "ts_end": 1870.31,
+      "text": "assigned over here right now but let's say these are the input ids so for the first a first batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1870.31,
+      "ts_end": 1881.04,
+      "text": "the input ids are 10 8 20 and 21 now what is done is that these input ids are then mapped to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1881.8,
+      "ts_end": 1886.7,
+      "text": "embedding vector matrix so we we know the corresponding row so if you look at the first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1886.7,
+      "ts_end": 1893.72,
+      "text": "row it's 10 8 10 and 20 these are the input ids right so then here you look for that input id of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1893.72,
+      "ts_end": 1898.52,
+      "text": "10 and then if you find then you find the corresponding vector for it then you look",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1898.52,
+      "ts_end": 1904.3,
+      "text": "for the input id of 8 and then you find the corresponding vector for it then you look at",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1904.3,
+      "ts_end": 1910.48,
+      "text": "the input id of 20 and then you find the corresponding vector for it and then you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1910.48,
+      "ts_end": 1916.96,
+      "text": "look at the input id of 21 and then you find the corresponding vector for it so basically",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1917.46,
+      "ts_end": 1924.78,
+      "text": "for each token in this input input batch one embedding vector of size 256 is generated for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1924.78,
+      "ts_end": 1929.6,
+      "text": "each token in the input so i've just constructed another visualization for you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1929.8,
+      "ts_end": 1938.0,
+      "text": "all to see it further so if this is the input batch for each token id here it's converted into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1938.0,
+      "ts_end": 1945.69,
+      "text": "a 256 dimensional vector so if the size of this original input batch was 8 by 4 when we generate",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1945.69,
+      "ts_end": 1953.59,
+      "text": "the embedding vectors for each of this the we will get a tensor which is 8 by 4 by 256 so it's a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1953.59,
+      "ts_end": 1959.79,
+      "text": "three-dimensional tensor now why 256 because for each of these 8 by 4 32 values for each of these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1959.79,
+      "ts_end": 1967.46,
+      "text": "32 values we have a 256 dimensional tensor so for each of these you can think of like a vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1967.46,
+      "ts_end": 1973.62,
+      "text": "which has basically 256 dimensions so there is a vector here vector here vector here vector here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1973.62,
+      "ts_end": 1979.16,
+      "text": "etc i cannot show the three-dimensional structure right now but it's basically 8 by 4 by 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1981.81,
+      "ts_end": 1987.83,
+      "text": "uh okay so that's what we are going to do next so we have this inputs right which is the batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1987.83,
+      "ts_end": 1990.41,
+      "text": "of inputs generated from the data loader",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1990.41,
+      "ts_end": 1994.67,
+      "text": "we are just going to pass it as an argument to the lookup table to the embedding layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1994.67,
+      "ts_end": 2001.43,
+      "text": "and then we are going to get this tensor which is 8x4x256 which is exactly the tensor shape",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2001.43,
+      "ts_end": 2008.75,
+      "text": "which i was showing to you over here that's the 8x4x256 tensor after we pass the input ids to this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2009.79,
+      "ts_end": 2014.57,
+      "text": "lookup table of the embedding layer basically what this lookup table does is that it generates the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2014.57,
+      "ts_end": 2021.67,
+      "text": "256 dimensional vector for each of this token ids up till now what we have done is that we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2021.67,
+      "ts_end": 2027.95,
+      "text": "broken down the input text into batches so let's say we so this is the first first batch this this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2027.95,
+      "ts_end": 2034.99,
+      "text": "is the first this is the first input of the first batch remember each batch has eight inputs so this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2034.99,
+      "ts_end": 2040.95,
+      "text": "is the first input we converted into token ids and then each of the token id is have a has a 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2040.95,
+      "ts_end": 2044.43,
+      "text": "256 vector length embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2045.12,
+      "ts_end": 2050.34,
+      "text": "that's what we have done until now it's as simple as that i hope everyone is following until now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2050.34,
+      "ts_end": 2057.7,
+      "text": "i'm trying to explain this vectorial and tensorial notation as in detail as possible but of course",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2057.7,
+      "ts_end": 2062.64,
+      "text": "sometimes it gets a bit difficult so if you have any questions you can ask it in the comment",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2062.64,
+      "ts_end": 2070.9,
+      "text": "section so here i have written that as we can tell based on the 8x4x256 dimensional tensor output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2070.9,
+      "ts_end": 2074.84,
+      "text": "each token id is now embedded as a 256 dimensional vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2074.84,
+      "ts_end": 2075.24,
+      "text": "also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2075.26,
+      "ts_end": 2079.86,
+      "text": "awesome and now we have what we have to do is that we have to add a positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2081.16,
+      "ts_end": 2087.5,
+      "text": "positional embedding vector to each of these vectors similar to the token embedding we also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2087.5,
+      "ts_end": 2093.72,
+      "text": "have to create another embedding layer for the positional encoding so remember that at each time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2093.72,
+      "ts_end": 2100.16,
+      "text": "only four vectors need to be processed right because if you look at the context size that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2100.16,
+      "ts_end": 2106.04,
+      "text": "is equal to four at one time in the input only four tokens are going to be given so at one time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2106.04,
+      "ts_end": 2111.78,
+      "text": "only the input the maximum input size is four which means the llm is going to predict the next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2111.78,
+      "ts_end": 2117.72,
+      "text": "word based on a maximum of four tokens so actually we need to encode only four positions in this case",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2118.32,
+      "ts_end": 2125.0,
+      "text": "so the embedding layer size will have one two three four rows and the number of columns will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2125.0,
+      "ts_end": 2130.1,
+      "text": "be the vector dimension which is 256 that is fine because for every position we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2130.1,
+      "ts_end": 2134.88,
+      "text": "are going to have a 256 dimensional vector remember we have to add this vector to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2135.42,
+      "ts_end": 2140.96,
+      "text": "token embedding vector so the size should be same the size here was 256 right every",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2141.7,
+      "ts_end": 2147.96,
+      "text": "token which was embedded had a size 256 so here also for every position we need a 256 dimensional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2147.96,
+      "ts_end": 2153.18,
+      "text": "vector but there are only four positions right it can either be the first token the second token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2153.18,
+      "ts_end": 2158.62,
+      "text": "third token or fourth token so the number of rows when we create the embedding layer for positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2158.62,
+      "ts_end": 2160.0,
+      "text": "encoding is going to be four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2160.1,
+      "ts_end": 2165.85,
+      "text": "which is the context length so now let us write that in the code so remember when we created",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2165.85,
+      "ts_end": 2171.91,
+      "text": "the token embedding the number of rows was the vocabulary size but here the number of rows is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2171.91,
+      "ts_end": 2178.8,
+      "text": "going to be equal to the context length so now we are creating a embedding layer for the positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2178.8,
+      "ts_end": 2183.64,
+      "text": "embedding number of rows is equal to the context length and the number of columns is output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2183.64,
+      "ts_end": 2190.36,
+      "text": "dimension which is 256 because each vector needs to have a size of 256. great so we have created the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2190.68,
+      "ts_end": 2197.22,
+      "text": "positional embedding layer right now and now i am going to visually try to explain how we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2197.22,
+      "ts_end": 2201.2,
+      "text": "to add or how we are going to essentially create the positional embedding vectors",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2201.96,
+      "ts_end": 2207.86,
+      "text": "so let's look at our input matrix again here the batch size is eight so we have eight rows and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2207.86,
+      "ts_end": 2212.94,
+      "text": "context length is four which that's why we have four columns so if you look at each input sequence",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2212.94,
+      "ts_end": 2218.12,
+      "text": "let's look at the first row if you look at the first row it has four token ids let's say those",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2220.74,
+      "ts_end": 2228.12,
+      "text": "and 21 each of these token id is now a 256 uh vector length vector because we have done the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2228.12,
+      "ts_end": 2232.78,
+      "text": "embedding we have done the token embedding so each token id is a 256 dimensional vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2233.77,
+      "ts_end": 2237.53,
+      "text": "so this is the first batch of input you can see that there are four positions here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2237.53,
+      "ts_end": 2243.71,
+      "text": "maybe these words are the cat sat on now what we need to do is that we need to add one",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2244.39,
+      "ts_end": 2251.07,
+      "text": "one uh positional encoding vector for each of these to this uh to the token embedding for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2251.13,
+      "ts_end": 2257.43,
+      "text": "the 10 for the token id 10 we have to add a positional uh embedding vector to a token id",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2257.43,
+      "ts_end": 2263.05,
+      "text": "of 8 we have to add another vector to a token id of 20 we need to add a positional vector to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2263.05,
+      "ts_end": 2270.56,
+      "text": "a token id of 21 we need to add another positional embedding vector so uh we need to add one position",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2270.56,
+      "ts_end": 2276.86,
+      "text": "vector to each of these four token embeddings and remember that the same positional embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2276.86,
+      "ts_end": 2281.4,
+      "text": "are applied uh because there are only four positions right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2282.5,
+      "ts_end": 2295.14,
+      "text": "So the positional embedding, we just need to do it once and then for every token, for every input sequence, the same four positional embeddings can be applied.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2295.34,
+      "ts_end": 2308.97,
+      "text": "So, for example, this is the batch one. Right. If you look at this batch, which is row number three, let's say there are some input IDs like one, two, five and six.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2308.97,
+      "ts_end": 2322.05,
+      "text": "Let's say these are the token IDs. Now, whatever positional embedding we added to the first input, the same positional embedding can be added to this input because the positions are the same.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2322.11,
+      "ts_end": 2337.3,
+      "text": "Either it's position one, two, three or four. We just need to encode the different positions. Right. So that's why the positional encoding size or the positional embedding size has to be four by 256.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2337.72,
+      "ts_end": 2339.4,
+      "text": "We only need four positional.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2339.42,
+      "ts_end": 2351.52,
+      "text": "Four positional embedding vectors and then each vector will, of course, have size 256. So then the positional embedding vector matrix, which we have, will be a four by 256 matrix.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2351.98,
+      "ts_end": 2359.18,
+      "text": "Why do we only need four? Why not have a separate positional embedding for each of the inputs here?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2359.78,
+      "ts_end": 2366.94,
+      "text": "Because for each of these inputs, we only want to encode whether the token ID is in the first position, second, third or fourth.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2367.3,
+      "ts_end": 2369.2,
+      "text": "So we only need the positional.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2370.38,
+      "ts_end": 2378.96,
+      "text": "We only need four positional embedding vectors, one for the first position, one for the second, one for the third, one for the fourth.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2379.08,
+      "ts_end": 2384.32,
+      "text": "And then we can add the same four to basically all the input sequences in a given batch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2384.94,
+      "ts_end": 2386.26,
+      "text": "That's what we are going to do.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2386.5,
+      "ts_end": 2393.68,
+      "text": "So in the next step, which is the step number 13, we are going to generate the four positional embedding vectors from the positional embedding matrix.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2394.46,
+      "ts_end": 2398.46,
+      "text": "So as I told you, all embedding matrix are essentially lookup tables.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2398.68,
+      "ts_end": 2399.62,
+      "text": "So to generate those lookup tables, we need to set up some lookup tables for each one of the inputs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2399.64,
+      "ts_end": 2406.18,
+      "text": "the embedding vectors we just need to pass these positions 0 1 2 and 3 and then it will generate",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2406.18,
+      "ts_end": 2412.04,
+      "text": "the corresponding vectors according to that so how to pass the positions you just use",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2412.04,
+      "ts_end": 2417.38,
+      "text": "torch.arrange max length what torch.arrange max length will do is that it will create",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2417.38,
+      "ts_end": 2424.92,
+      "text": "0 1 and 1 2 and 3 so max length is equal to 4 so torch.arrange will create a sequence of number 0",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2424.92,
+      "ts_end": 2432.06,
+      "text": "1 up to max input length minus 1 so this will be 0 1 2 3 so essentially it will create uh the token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2432.06,
+      "ts_end": 2437.76,
+      "text": "id 0 1 2 and 3 and then we can just look up the positional embedding table and generate these four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2437.76,
+      "ts_end": 2444.08,
+      "text": "positional embedding vectors so then what we do is that as i said we just look up the positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2444.08,
+      "ts_end": 2450.93,
+      "text": "embedding layer matrix uh which is a lookup table and just pass in these four arguments 0 1 2 3",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2450.93,
+      "ts_end": 2454.43,
+      "text": "so then it generates four vectors each of size 256.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2454.99,
+      "ts_end": 2455.47,
+      "text": "these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2455.59,
+      "ts_end": 2459.75,
+      "text": "are the four positional embedding vectors which we need one is for position number one",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2459.75,
+      "ts_end": 2464.71,
+      "text": "second is for position number two third is for position number three and fourth is for position",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2464.71,
+      "ts_end": 2471.54,
+      "text": "number four so as we can see the positional embedding tensor consists of four 256 dimensional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2471.54,
+      "ts_end": 2479.75,
+      "text": "vectors we can now add this directly to the token embedding so let's see how that is done let's look",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2479.75,
+      "ts_end": 2486.45,
+      "text": "at one batch for now and then let's see how to add the token embeddings with the position embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2486.65,
+      "ts_end": 2490.56,
+      "text": "so we have generated these four positional embedding vectors from",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2490.56,
+      "ts_end": 2493.98,
+      "text": "the positional embedding matrix great so we have completed step number 13",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2494.52,
+      "ts_end": 2499.34,
+      "text": "and so finally we come to step number 14 this is the last step where we have to add the position",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2499.34,
+      "ts_end": 2505.24,
+      "text": "embeddings to the token embeddings so if you look at the token embedding matrix it's 8 by 4 by 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2506.08,
+      "ts_end": 2511.94,
+      "text": "as we had already seen before so for each token id there is a 256 dimensional vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2512.52,
+      "ts_end": 2516.98,
+      "text": "and how many token ids are there there are eight batches and each batch has four token ids",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2517.0,
+      "ts_end": 2523.68,
+      "text": "so 8 by 4 that's why the size is 8 by 4 by 256 and then the positional embedding we just have 4",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2523.68,
+      "ts_end": 2531.71,
+      "text": "256 256 256 256 so this is just 4 by 256 so for the first position we have a 256 dimension vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2532.27,
+      "ts_end": 2537.15,
+      "text": "for the second position we have a 256 dimension vector for the third position we have a 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2537.15,
+      "ts_end": 2543.69,
+      "text": "dimension vector and for the fourth position we have a 256 dimension vector so now we are adding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2543.69,
+      "ts_end": 2549.57,
+      "text": "the token embeddings with the positional embeddings so you must be thinking this is 8 by 4 by 256 this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2549.57,
+      "ts_end": 2557.09,
+      "text": "is 4 by 256 how does python really add them so when you add such matrices matrices what happens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2557.09,
+      "ts_end": 2563.93,
+      "text": "is a broadcasting operation so what python does is that it converts this 4 by 256 to 8 by 4 by 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2564.53,
+      "ts_end": 2570.58,
+      "text": "by duplicating these same values eight times so then what is essentially happening is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2570.58,
+      "ts_end": 2576.5,
+      "text": "to the first row these four values are added to this to the second row these same four values",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2576.5,
+      "ts_end": 2582.34,
+      "text": "are added to the third row this same four values are added similarly to the eighth row this same",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2582.34,
+      "ts_end": 2587.9,
+      "text": "four values are added so finally the input embeddings which are the result of the token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2587.9,
+      "ts_end": 2594.18,
+      "text": "embeddings plus the positional embeddings have the size of 8 by 4 by 256 and these are the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2594.18,
+      "ts_end": 2600.88,
+      "text": "input embeddings which then will be the final training input to the llms so we did so many",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2600.9,
+      "ts_end": 2605.88,
+      "text": "things to reach this stage right but i hope you have understood this part i just wanted to show",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2605.88,
+      "ts_end": 2611.82,
+      "text": "you for gpt2 we had a vocabulary size of around 50 000 and i showed you a vector length of 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2612.52,
+      "ts_end": 2619.68,
+      "text": "so first i showed you how to create the 8 by 4 by 256 token embedding matrix in the first place",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2619.68,
+      "ts_end": 2626.1,
+      "text": "so our initial task was for you to understand uh how is this token embedding itself created",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2626.1,
+      "ts_end": 2630.1,
+      "text": "so every token id in a batch is converted into a vector of size 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2630.9,
+      "ts_end": 2638.58,
+      "text": "and then for each position we add a positional positional embedding so first we need to see how",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2638.58,
+      "ts_end": 2643.5,
+      "text": "many positions are there and for that the parameter which becomes important is the context length",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2644.32,
+      "ts_end": 2648.86,
+      "text": "because that is the maximum length of the input to be fed at any time to the llm so only",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2648.86,
+      "ts_end": 2655.34,
+      "text": "those many positions are important so the context length is four so we then create so we only need",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2655.34,
+      "ts_end": 2660.8,
+      "text": "four positional embedding vectors one for position one second for position two third",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2660.9,
+      "ts_end": 2665.2,
+      "text": "for position three and fourth for the position number four and then we add it to the token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2665.2,
+      "ts_end": 2671.65,
+      "text": "embedding matrix how do we add it python does a prop broadcasting so even if the token embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2671.65,
+      "ts_end": 2676.63,
+      "text": "matrix is eight by four by 256 and even if the positional embedding is just four by 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2677.33,
+      "ts_end": 2684.15,
+      "text": "it just copies these uh these four values eight times uh so essentially what happens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2684.15,
+      "ts_end": 2689.71,
+      "text": "is that to each row of the token embedding the same positional embedding four vectors are added",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2690.93,
+      "ts_end": 2695.85,
+      "text": "we get the input embeddings eight by four by 256. i hope you have understood these dimensions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2696.59,
+      "ts_end": 2702.95,
+      "text": "so eight because in each batch we have eight input sequences and in each input sequence we have four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2702.95,
+      "ts_end": 2709.41,
+      "text": "tokens that's why four and y 256 because each token id or each token is essentially a 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2709.41,
+      "ts_end": 2716.5,
+      "text": "length vector i hope everyone has understood this lecture on positional and positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2716.5,
+      "ts_end": 2721.72,
+      "text": "now let me go back to the start where we looked at what all we have covered and what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2721.82,
+      "ts_end": 2730.77,
+      "text": "needs to be the input to the llm so look at this diagram so in today's lecture we actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2731.56,
+      "ts_end": 2736.77,
+      "text": "looked at one more step which is i would say maybe step 3.5 in that case and that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2736.77,
+      "ts_end": 2742.43,
+      "text": "is adding positional embeddings to the token embeddings and that finally leads to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2743.69,
+      "ts_end": 2748.85,
+      "text": "input embedding so these input embeddings which we obtained so actually let me add",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2748.85,
+      "ts_end": 2752.57,
+      "text": "right here positional embedding so what we actually added to the token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2753.81,
+      "ts_end": 2766.38,
+      "text": "uh positional embeddings so so what we added here was yeah positional embeddings and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2766.38,
+      "ts_end": 2772.74,
+      "text": "this resulted into input embeddings so token embeddings plus positional embeddings is input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2772.74,
+      "ts_end": 2777.94,
+      "text": "embeddings and then these are the ones which are actually used as input to the gpt so essentially",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2777.94,
+      "ts_end": 2782.56,
+      "text": "what we did in token embedding and positional embedding is we try to exploit as many things",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2783.02,
+      "ts_end": 2787.22,
+      "text": "in textual language as possible the first thing which we exploited is semantic meaning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2787.22,
+      "ts_end": 2792.68,
+      "text": "when we did token embeddings when we did positional embeddings we exploited the fact that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2792.68,
+      "ts_end": 2798.53,
+      "text": "the different positions also mean something until now we have not seen how exactly to obtain the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2798.53,
+      "ts_end": 2802.83,
+      "text": "values in the positional embedding see even in today's lecture we just randomly initialized",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2802.83,
+      "ts_end": 2808.79,
+      "text": "the embedding matrix right like if you see in the code this positional embedding layer is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2808.79,
+      "ts_end": 2814.15,
+      "text": "randomly initialized so what what torch.nn.embedding does is that it initializes a matrix",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2814.15,
+      "ts_end": 2817.43,
+      "text": "with number of rows as context length number of rows as context length and number of rows as context",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2817.43,
+      "ts_end": 2822.33,
+      "text": "length and number of columns as output dimension and it puts random values in this so then how do we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2822.33,
+      "ts_end": 2827.97,
+      "text": "know the actual values so that is actually part of the llm training process and it's exactly similar",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2827.97,
+      "ts_end": 2834.85,
+      "text": "for the uh token embeddings as well so we need to optimize the values in the token embedding layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2835.33,
+      "ts_end": 2840.53,
+      "text": "and we need to optimize the value in the positional embedding layer however for us to reach the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2840.53,
+      "ts_end": 2846.33,
+      "text": "optimization stage stage first it's very important for you to understand what exactly is positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2846.33,
+      "ts_end": 2848.11,
+      "text": "embedding what exactly is the positional embedding layer and what exactly is the positional embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2848.13,
+      "ts_end": 2855.0,
+      "text": "token embedding and that was the whole purpose of today's lecture uh this brings us to the end of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2855.0,
+      "ts_end": 2859.94,
+      "text": "today's lecture thank you so much everyone i hope you understood a lot i hope you understood the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2859.94,
+      "ts_end": 2868.47,
+      "text": "difference between absolute um absolute and positional embedding yeah absolute and relative",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2868.47,
+      "ts_end": 2874.79,
+      "text": "sorry absolute and relative positional embedding i hope you understood uh why positional embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2874.79,
+      "ts_end": 2879.59,
+      "text": "are added and most importantly i hope you understood the dimensions ultimately i feel",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2879.83,
+      "ts_end": 2884.37,
+      "text": "it all comes down to dimensions people who understand the dimensions really don't feel",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2884.37,
+      "ts_end": 2890.59,
+      "text": "scared or intimidated by the subject so if someone understands where this 8 by 4 by 256 is actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2890.59,
+      "ts_end": 2896.17,
+      "text": "coming from right this 8 by 4 by 256 then i feel they will have a much stronger grasp on the subject",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2896.17,
+      "ts_end": 2902.89,
+      "text": "so that's why today i spent a lot of time on explaining these dimensions um thank you so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2902.89,
+      "ts_end": 2906.61,
+      "text": "much everyone and if you have any doubts or questions please put it in the comment section",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2906.61,
+      "ts_end": 2909.65,
+      "text": "the lectures are getting a bit more involved and detailed now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2909.65,
+      "ts_end": 2910.39,
+      "text": "so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2910.53,
+      "ts_end": 2913.97,
+      "text": "i'll be happy to interact in the comment section and solve any doubts or questions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2913.97,
+      "ts_end": 2918.57,
+      "text": "also let me know if you're liking this teaching style which is a mix of the whiteboard lectures",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2919.31,
+      "ts_end": 2923.69,
+      "text": "plus the hands-on coding i'll of course be sharing the code file with all of you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2923.69,
+      "ts_end": 2926.27,
+      "text": "thanks everyone and i'll see you in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 5,
+  "frames_with_content": 4
+}

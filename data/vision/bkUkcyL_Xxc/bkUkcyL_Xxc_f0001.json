@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "instruction tuning with loss over instructions\n\narXiv\nhttps://arxiv.org \u203a ca\n\n[2405.14394] Instruction Tuning With Loss Over Instructions\n\nby Z Shi \u00b7 2024 \u00b7 Cited by 4 \u2014 We propose a simple yet effective method, Instruction Modelling (IM), which trains LMs by applying a loss function to the instruction and prompt part.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "bkUkcyL_Xxc_f0001",
+  "video_id": "bkUkcyL_Xxc",
+  "timestamp_sec": 2969.633,
+  "source_image": "data/frames/bkUkcyL_Xxc/bkUkcyL_Xxc_f0001.jpg"
+}

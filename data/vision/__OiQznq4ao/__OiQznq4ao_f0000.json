@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Step 4: Loading a pretrained LLM",
+  "extracted_text": "In the previous sections, we prepared the dataset and data loaders\n\nStage 1: Preparing the dataset\n1) Dataset download and formatting\n2) Batching the dataset\n3) Creating data loaders\n\nNow, we are loading the LLM for finetuning\n\nStage 2: Finetuning the LLM\n4) Loading a pretrained LLM\n5) Instruction finetuning LLM\n6) Inspecting the modeling loss",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Two-stage workflow diagram showing Stage 1 (Preparing the dataset) with three sequential steps for dataset preparation, and Stage 2 (Finetuning the LLM) with three sequential steps for loading and finetuning a pretrained language model.",
+  "diagram_elements": [
+    "Stage 1: Preparing the dataset",
+    "1) Dataset download and formatting",
+    "2) Batching the dataset",
+    "3) Creating data loaders",
+    "Stage 2: Finetuning the LLM",
+    "4) Loading a pretrained LLM",
+    "5) Instruction finetuning LLM",
+    "6) Inspecting the modeling loss"
+  ],
+  "confidence": 0.92,
+  "frame_id": "__OiQznq4ao_f0000",
+  "video_id": "__OiQznq4ao",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/__OiQznq4ao/__OiQznq4ao_f0000.jpg"
+}

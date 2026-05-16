@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "total compute used during training. Based on the analysis in Scaling Law we train much larger models on many fewer tokens than is typical. As a larger than RoBERTa-Large (355M params), both models took roughly training. Methodology for these calculations can be found in Appendix D.\n\nDataset | Quantity (tokens) | Weight in training mix | Epochs elapsed training for\n---|---|---|---\nCommon Crawl (filtered) | 410 billion | 60% | 0.\nWebText2 | 19 billion | 22% | 2\nBooks1 | 12 billion | 8% | 1\nBooks2 | 55 billion | 8% | 0.\nWikipedia | 3 billion | 3% | 3",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "xbaYCf2FHSY_f0040",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 1902.399667,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0040.jpg"
+}

@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "REMOVING WHITESPACES OR NOT",
+  "extracted_text": "When developing a simple tokenizer, whether we should encode whitespaces as separate tokens is one of the design requirements. Removing whitespaces reduces the memory and computing requirements of the tokenizer but makes it less sensitive to the exact structure of the text (for example, Python code, which is sensitive to indentation). We need to balance the efficiency and brevity of the tokenized outputs. Later, we will switch to a tokenization scheme that handles these issues more gracefully.\n\nThe tokenization scheme we devised above works well on the simple sample text. Let us now consider additional special characters, such as question marks, quotation marks, and the double-dashes we have seen earlier. We need to handle these additional special characters:",
+  "code": {
+    "language": "python",
+    "content": "text = \"Hello, world. Is this-- a test?\"\nresult = re.split(r'[,.;:?_!()\\\"\\|\\-\\s]', text)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "rsy5Ragmso8_f0005",
+  "video_id": "rsy5Ragmso8",
+  "timestamp_sec": 1230.933,
+  "source_image": "data/frames/rsy5Ragmso8/rsy5Ragmso8_f0005.jpg"
+}

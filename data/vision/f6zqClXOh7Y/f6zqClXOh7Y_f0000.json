@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Step 2: Creating dataloaders",
+  "extracted_text": "Text messages are of varying length\n\nTo batch these messages, we have 2 options:\n\n(1) Truncate all messages to length of shortest m\n\n(2) Pad all messages to length of longest messa",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "f6zqClXOh7Y_f0000",
+  "video_id": "f6zqClXOh7Y",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0000.jpg"
+}

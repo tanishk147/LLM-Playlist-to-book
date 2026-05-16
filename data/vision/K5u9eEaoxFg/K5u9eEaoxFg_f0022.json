@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Step 6 demonstrates grouping matrices by number of heads, showing a tensor reshape operation from (b, num_tokens, num_heads, head_dim) to (b, num_heads, num_tokens, head_dim), with example dimensions (1, 3, 2, 3) \u2192 (1, 2, 3, 3).",
+  "diagram_elements": [
+    "Step 6: Group matrices by number of heads",
+    "(b, num_tokens, num_heads, head_dim)",
+    "(b, num_heads, num_tokens, head_dim)",
+    "(1, 3, 2, 3)",
+    "(1, 2, 3, 3)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0022",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1493.466333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0022.jpg"
+}

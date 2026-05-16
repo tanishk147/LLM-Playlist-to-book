@@ -1,0 +1,21 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Looking under the hood",
+  "extracted_text": "Under the hood, the model is composed of an encoder and a decoder.\n\nThe encoder processes each item in the input sequence, it compiles the information it captures into a vector (called the context). After processing the entire input sequence, the encoder sends the context over to the decoder, which begins producing the output sequence item by item.\n\nThe same applies in the case of machine translation.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence to sequence model architecture showing input sequence flowing through an encoder (green) which produces a context vector, passed to a decoder (purple) which produces an output sequence.",
+  "diagram_elements": [
+    "Input sequence (three circles)",
+    "ENCODER (green box)",
+    "Context vector (arrow between encoder and decoder)",
+    "DECODER (purple box)",
+    "Output sequence (empty box)"
+  ],
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0001",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 917.966333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0001.jpg"
+}

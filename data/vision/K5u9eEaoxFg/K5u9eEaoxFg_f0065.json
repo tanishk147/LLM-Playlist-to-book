@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "\\text{Divide by } \\sqrt{\\text{head-dim}}",
+    "\\sqrt{d_{out}/\\text{num\\_heads}} = \\sqrt{64/2} = \\sqrt{32}"
+  ],
+  "diagram_summary": "Multi-head attention computation showing tensor output divided by head dimension, followed by softmax normalization.",
+  "diagram_elements": [
+    "tensor output with numerical values",
+    "division by sqrt(head-dim)",
+    "apply softmax"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0065",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2681.599667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0065.jpg"
+}

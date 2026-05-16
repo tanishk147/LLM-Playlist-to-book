@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "import os\nimport requests  # Make sure requests is installed\nimport json\nimport numpy as np\nimport tensorflow as tf\nfrom tqdm import tqdm\n\ndef download_and_load_gpt2(model_size, models_dir):\n    # Validate model size\n    allowed_sizes = (\"124M\", \"355M\", \"774M\", \"1558M\")\n    if model_size not in allowed_sizes:\n        raise ValueError(f\"Model size not in {allowed_sizes}\")\n\n    # Define paths\n    model_dir = os.path.join(models_dir, model_size)\n    base_url = \"https://openaipublic.blob.core.windows.net/gpt-2/models\"\n    filenames = [\n        \"checkpoint\", \"encoder.json\", \"hparams.json\",\n        \"model.ckpt.data-00000-of-00001\", \"model.ckpt.index\",\n        \"model.ckpt.meta\", \"vocab.bpe\"\n    ]\n\n    # Download files\n    os.makedirs(model_dir, exist_ok=True)\n    for filename in filenames:\n        file_url = os.path.join(base_url, model_size,"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "yXrGeDNuymY_f0006",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 476.799667,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0006.jpg"
+}

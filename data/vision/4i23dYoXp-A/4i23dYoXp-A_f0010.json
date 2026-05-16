@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A conceptual diagram showing the architecture of a GPT model with multiple transformer blocks, layer normalization, feed-forward networks, and shortcut connections, alongside images of an aerial city view and an animal eye to illustrate the 'birds eye view' concept.",
+  "diagram_elements": [
+    "Dummy GPT model",
+    "Transformer block",
+    "Layer normalization",
+    "GELU activation",
+    "Feed forward network",
+    "Shortcut connections",
+    "GPT architecture",
+    "Aerial city view image",
+    "Animal eye image",
+    "Mental model in which we will code the GPT architecture"
+  ],
+  "confidence": 0.75,
+  "frame_id": "4i23dYoXp-A_f0010",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 2899.199667,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0010.jpg"
+}

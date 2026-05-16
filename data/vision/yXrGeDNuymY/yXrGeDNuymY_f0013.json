@@ -1,0 +1,15 @@
+{
+  "category": "terminal",
+  "skip": false,
+  "title": null,
+  "extracted_text": "warnings.warn(\nmodel.ckpt.data-00000-of-00001: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 498M/498M [09:33<00:00, 868kiB/s]\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/con\nerified HTTPS request is being made to host 'openai public.blob.core.windows.net'. Adding ce\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nmodel.ckpt.index: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 5.21k/5.21k [00:00<00:00, 6.57MiB/s]\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/con\nerified HTTPS request is being made to host 'openai public.blob.core.windows.net'. Adding ce\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nmodel.ckpt.meta: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 471k/471k [00:02<00:00, 223kiB/s]\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/con\nerified HTTPS request is being made to host 'openai public.blob.core.windows.net'. Adding ce\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nvocab.bpe: 100%|\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588| 456k/456k [00:02<00:00, 226kiB/s]\n\nAfter the execution of the previous code has been completed, let's inspect the contents of settings and parar\n\nprint(\"Settings:\", settings\nprint(\"Parameter dictionary",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "yXrGeDNuymY_f0013",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1717.366333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0013.jpg"
+}

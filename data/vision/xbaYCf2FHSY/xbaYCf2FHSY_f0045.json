@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Table 2.1: Sizes, architectures, and learning hyper-parameters",
+  "extracted_text": "Table 2.1: Sizes, architectures, and learning hyper-parameters (batch size in tokens and learning rate schedule for each model we trained. All models were trained for a total of 300 billion tokens.\n\nModel Name | n_params | n_layers | d_model | n_heads | d_head | Batch Size\nGPT-3 Small | 125M | 12 | 768 | 12 | 64 | 0.5M\nGPT-3 Medium | 350M | 24 | 1024 | 16 | 64 | 0.5M\nGPT-3 Large | 760M | 24 | 1536 | 16 | 96 | 0.5M\nGPT-3 XL | 1.3B | 24 | 2048 | 24 | 128 | 1M\nGPT-3 2.7B | 2.7B | 32 | 2560 | 32 | 80 | 1M\nGPT-3 6.7B | 6.7B | 32 | 4096 | 32 | 128 | 2M\nGPT-3 13B | 13.0B | 40 | 5140 | 40 | 128 | 2M\nGPT-3 175B or \"GPT-3\" | 175.0B | 96 | 12288 | 96 | 128 | 3.2M",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "xbaYCf2FHSY_f0045",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 2647.299667,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0045.jpg"
+}

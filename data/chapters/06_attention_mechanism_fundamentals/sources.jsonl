@@ -1,0 +1,168 @@
+## Claims (cite these by ID inline as [cNNN])
+- c1331 [definition | UjdRN80c6p8 @ 22-31s]
+  Self-attention mechanism is also called scaled dot-product attention.
+- c1332 [definition | UjdRN80c6p8 @ 148-168s]
+  Attention weights are a normalized version of attention scores.
+- c1333 [definition | UjdRN80c6p8 @ 208-243s]
+  Context vectors are computed as a weighted sum over the input vectors.
+- c1344 [definition | UjdRN80c6p8 @ 329-333s]
+  Self-attention mechanism is also called scaled dot product attention.
+- c1350 [definition | UjdRN80c6p8 @ 520-536s]
+  Self-attention mechanism is implemented using three trainable weight matrices: Query (WQ), Key (WK), and Value (WV).
+- c1367 [code | UjdRN80c6p8 @ 1067-1082s]
+  torch.nn.Parameter is a Tensor subclass used to mark tensors as module parameters, which are automatically added to the module's parameter list and appear in the parameters() iterator.
+- c1368 [code | UjdRN80c6p8 @ 1084-1115s]
+  Query, Key, and Value weight matrices are initialized as torch.nn.Parameter objects with random values and shape (D_in, D_out).
+- c1373 [code | UjdRN80c6p8 @ 1381-1396s]
+  keys = inputs @ W_k
+  values = inputs @ W_v
+  queries = inputs @ W_q
+- c1395 [definition | UjdRN80c6p8 @ 2189-2208s]
+  Attention weights are normalized attention scores where each row sums to one, making them interpretable as probability distributions over tokens.
+- c1403 [definition | UjdRN80c6p8 @ 2411-2416s]
+  Attention weights are computed by scaling attention scores by the square root of the key embedding dimension, then applying softmax.
+- c1406 [code | UjdRN80c6p8 @ 2459-2521s]
+  d_k = keys.shape[-1]  # Extract key embedding dimension from last axis
+  attention_scores_scaled = attention_scores / (d_k ** 0.5)  # Scale by sqrt(d_k)
+  attention_weights = softmax(attention_scores_scaled, dim=-1)  # Apply softmax over columns
+- c1443 [code | UjdRN80c6p8 @ 3836-3852s]
+  keys = x @ W_key
+  queries = x @ W_query
+  values = x @ W_value
+- c1445 [code | UjdRN80c6p8 @ 3887-3942s]
+  attention_scores = attention_scores / (keys.shape[-1] ** 0.5)
+  attention_weights = softmax(attention_scores, dim=-1)
+- c1448 [code | UjdRN80c6p8 @ 3952-3965s]
+  context_vector = attention_weights @ values
+- c1465 [definition | UjdRN80c6p8 @ 4451-4468s]
+  An attention weight between two tokens (e.g., between 'journey' and 'your') indicates how much the model should attend to the second token when processing the first token as the query.
+- c1469 [definition | UjdRN80c6p8 @ 4539-4560s]
+  Query in attention mechanism is analogous to a search query in a database and represents the current token the model is focusing on.
+- c1470 [definition | UjdRN80c6p8 @ 4570-4581s]
+  Key in attention mechanism represents items in the input sequence and is used to match with the query.
+- c1471 [definition | UjdRN80c6p8 @ 4593-4602s]
+  Value in attention mechanism represents the actual content or representation of the input items themselves.
+- c2155 [definition | eSRhpYLerw4 @ 5-11s]
+  Self-attention is a mechanism that transforms an input vector (token embedding) into a context vector through attention weights computed from all input vectors.
+- c2158 [definition | eSRhpYLerw4 @ 40-47s]
+  A simplified self-attention mechanism without trainable weights is a variant of self-attention that does not include learnable parameters.
+- c2176 [definition | eSRhpYLerw4 @ 404-423s]
+  In the notation used, x_i denotes the vector representation of the i-th token, where x_1 is the first token, x_2 is the second token, and so on.
+- c2178 [definition | eSRhpYLerw4 @ 485-505s]
+  Attention weights determine how much attention to give to each input token when computing the context vector for any embedding vector.
+- c2179 [definition | eSRhpYLerw4 @ 498-515s]
+  The context vector, denoted by z, is derived from attention weights and input vectors.
+- c2181 [definition | eSRhpYLerw4 @ 653-672s]
+  Vector embeddings capture semantic meaning, such that semantically related words like 'journey' and 'starts' are positioned closer to each other in vector space.
+- c2183 [definition | eSRhpYLerw4 @ 801-830s]
+  A query is the element or token being examined; in this example, the word 'journey' (x2) is the query.
+- c2184 [definition | eSRhpYLerw4 @ 837-858s]
+  A context vector (z2) for a query contains information about both the query token itself and all other input elements in the sequence.
+- c2187 [definition | eSRhpYLerw4 @ 891-927s]
+  Attention scores are intermediate values that quantify how much importance or attention should be paid to each input word relative to a query word.
+- c2193 [definition | eSRhpYLerw4 @ 1166-1174s]
+  The dot product of two vectors a and b is calculated as a · b = Σ(a_i * b_i), which equals |a||b| cos θ, where θ is the angle between the vectors.
+- c2207 [definition | eSRhpYLerw4 @ 1590-1661s]
+  Normalization is the process of transforming attention scores so that they sum to one, enabling interpretable statements about attention allocation as percentages.
+- c2216 [definition | eSRhpYLerw4 @ 2065-2096s]
+  Softmax normalization takes the exponent of every element and divides by the summation of all exponents: softmax(x_i) = e^x_i / Σ(e^x_j).
+- c2224 [definition | eSRhpYLerw4 @ 2270-2277s]
+  Naive Softmax attention weights are computed by taking the exponent of each attention score and dividing by the summation of the exponents.
+- c2229 [code | eSRhpYLerw4 @ 2405-2410s]
+  torch.nn.Softmax(dim=None) applies the Softmax function to rescale n-dimensional input Tensor elements to the range [0,1] and sum to 1.
+- c2236 [definition | eSRhpYLerw4 @ 2632-2639s]
+  A context vector is an enriched embedding vector that combines contributions from all input embedding vectors weighted by their corresponding attention weights.
+- c2246 [equation | eSRhpYLerw4 @ 2930-2955s]
+  Context vector Z_i = sum over all tokens j of (attention_weight_j * embedding_vector_j)
+- c2250 [definition | eSRhpYLerw4 @ 3131-3150s]
+  An attention weight matrix is a matrix where each row represents the attention weights for one particular query word, and each column represents the attention weight between that query and a key word.
+- c2265 [definition | eSRhpYLerw4 @ 3681-3692s]
+  The dim parameter in torch.softmax specifies the dimension of the input tensor along which the normalization will be computed.
+- c1342 [fact | UjdRN80c6p8 @ 286-289s]
+  In the simplified attention mechanism, attention scores were calculated using dot product.
+- c1410 [design_decision | UjdRN80c6p8 @ 2687-2708s]
+  In attention mechanisms, the dot product between query and key vectors is scaled by dividing by the square root of the key dimension.
+- c1400 [fact | UjdRN80c6p8 @ 2315-2327s]
+  The scaling by square root of dimension is one of the reasons the mechanism is called scaled dot-product attention.
+- c2199 [fact | eSRhpYLerw4 @ 1300-1311s]
+  In self-attention mechanisms, the dot product determines the extent to which elements of a sequence attend to one another.
+- c1343 [fact | UjdRN80c6p8 @ 290-292s]
+  In the simplified attention mechanism, attention weights were obtained through normalization.
+- c2192 [fact | eSRhpYLerw4 @ 1024-1093s]
+  The dot product is the mathematical operation that measures alignment between two vectors and can be used to compute attention scores.
+- c2197 [design_decision | eSRhpYLerw4 @ 1244-1283s]
+  Attention scores are calculated using the dot product between a query vector and each input vector.
+- c2157 [fact | eSRhpYLerw4 @ 26-39s]
+  This lecture covers the mathematical foundations of attention and implements a simplified version of the attention mechanism from scratch in Python.
+- c1459 [architecture | UjdRN80c6p8 @ 4375-4381s]
+  Self-attention requires three trainable weight matrices: WQ (query weight matrix), WK (key weight matrix), and WV (value weight matrix).
+- c2274 [fact | eSRhpYLerw4 @ 4097-4123s]
+  When computing the matrix product of attention weights and inputs, each element in the output row is the dot product of the corresponding attention weight row with each column of the input matrix.
+- c1414 [fact | UjdRN80c6p8 @ 2764-2793s]
+  The dot product of two random vectors increases the variance; without scaling, the variance of the dot product scales proportionally with the dimension of the query and key vectors.
+- c2200 [fact | eSRhpYLerw4 @ 1320-1339s]
+  Higher dot product values correspond to higher similarity and higher attention scores between two elements.
+- c1416 [fact | UjdRN80c6p8 @ 2922-2962s]
+  Dividing the dot product by the square root of dimension keeps the variance of the attention scores close to 1, regardless of the dimension of the query and key vectors.
+- c1385 [fact | UjdRN80c6p8 @ 1743-1806s]
+  For a query matrix of shape 6 by 2, computing attention scores for the second query (journey) involves taking the dot product of that query row with all key rows to produce 6 attention scores.
+- c1446 [fact | UjdRN80c6p8 @ 3911-3931s]
+  Dividing attention scores by the square root of the key embedding dimension ensures that values in the attention score matrix remain small and that the variance of the dot product between keys and queries stays close to one.
+- c2278 [problem | eSRhpYLerw4 @ 4472-4524s]
+  Using only dot product to compute attention weights means attention is based solely on semantic similarity, which fails to capture contextual importance when semantically unrelated words are important in context.
+- c1409 [fact | UjdRN80c6p8 @ 2549-2558s]
+  The attention weights matrix for all queries is a 6x6 matrix computed by applying the scaling and softmax operation to the full 6x6 attention scores matrix.
+- c1348 [fact | UjdRN80c6p8 @ 483-489s]
+  Trainable weight matrices in self-attention are optimized when the large language model is trained.
+- c2237 [fact | eSRhpYLerw4 @ 2737-2755s]
+  The context vector for a query token is computed by multiplying each input embedding vector by its corresponding attention weight and then summing all the scaled vectors.
+- c1474 [design_decision | UjdRN80c6p8 @ 4652-4661s]
+  Causal attention modifies the self-attention mechanism to prevent the model from accessing future information in the sequence.
+- c2208 [fact | eSRhpYLerw4 @ 1667-1674s]
+  The primary goal of normalization in attention is to obtain attention weights that sum up to one.
+- c1382 [fact | UjdRN80c6p8 @ 1652-1676s]
+  When two vectors are aligned (small angle between them), their dot product is maximum, indicating high attention.
+- c1439 [design_decision | UjdRN80c6p8 @ 3757-3780s]
+  Self-attention is organized as a Python class (SelfAttentionVersion1) derived from nn.Module to enable reusable instantiation and integration into larger LLM implementations.
+- c1376 [architecture | UjdRN80c6p8 @ 1440-1446s]
+  The first step of the attention mechanism is converting input embeddings into key, query, and value vectors through linear transformations.
+- c2175 [fact | eSRhpYLerw4 @ 365-381s]
+  Both simplified attention mechanisms and complex multi-head attention used in modern large language models have the same goal: converting embedding vectors into context vectors.
+- c2186 [fact | eSRhpYLerw4 @ 858-877s]
+  In this lecture, trainable weights are not used in the attention mechanism; trainable weights are added later in actual LLM implementations to improve context understanding and learning.
+- c2161 [fact | eSRhpYLerw4 @ 100-107s]
+  The second lecture will cover self-attention with trainable weights as implemented in modern LLMs including GPT.
+- c1415 [fact | UjdRN80c6p8 @ 2843-2871s]
+  For a d-dimensional query and key vector sampled from a normal distribution, the variance of their dot product before scaling is approximately equal to d.
+- c2163 [fact | eSRhpYLerw4 @ 115-127s]
+  Each lecture presents mathematical foundations on a whiteboard and then codes out the attention mechanism from scratch in Python.
+- c1397 [fact | UjdRN80c6p8 @ 2155-2181s]
+  Normalization of attention scores serves two purposes: making attention interpretable and helping backpropagation by keeping scales consistent between 0 and 1.
+- c1413 [fact | UjdRN80c6p8 @ 2668-2732s]
+  Scaling attention scores by the square root of dimension prevents the softmax distribution from becoming too sharp, which would make the model overly confident in a single key and destabilize learning.
+- c1345 [fact | UjdRN80c6p8 @ 321-328s]
+  Self-attention mechanism is used in the original transformer architecture, GPT models, and most other popular large language models.
+- c2279 [design_decision | eSRhpYLerw4 @ 4595-4643s]
+  Trainable weights in attention allow the model to learn attention patterns beyond semantic similarity, enabling it to assign high attention to contextually important words even when they are not semantically related to the query.
+- c2198 [fact | eSRhpYLerw4 @ 1285-1299s]
+  The dot product quantifies how much two vectors are aligned; higher dot product means higher alignment.
+- c1335 [fact | UjdRN80c6p8 @ 157-164s]
+  Attention scores and attention weights encode information about how much the query vector and the input embedding vector are related to each other.
+- c1404 [fact | UjdRN80c6p8 @ 2420-2426s]
+  The scaling factor for attention scores is the square root of the embedding dimension of the keys.
+- c2282 [fact | eSRhpYLerw4 @ 4643-4661s]
+  Trainable weights allow the attention mechanism to capture long-range dependencies by learning contextual patterns beyond semantic embedding space.
+- c1452 [design_decision | UjdRN80c6p8 @ 4188-4248s]
+  Use nn.linear layers instead of nn.parameter to initialize query, key, and value weight matrices in self-attention, with bias set to false.
+- c1457 [fact | UjdRN80c6p8 @ 4261-4273s]
+  Using nn.linear for self-attention implementation is more common practice when dealing with LLMs.
+- c1420 [fact | UjdRN80c6p8 @ 3105-3111s]
+  Attention scores are divided by the square root of the key dimension.
+- c1435 [fact | UjdRN80c6p8 @ 3607-3624s]
+  The context vector for a specific token can be computed by taking that token's row from the attention weights matrix (1×6) and multiplying it by the values matrix (6×2) to produce a 1×2 vector.
+- c1336 [fact | UjdRN80c6p8 @ 164-168s]
+  Attention weights sum up to one because they are normalized.
+- c2275 [fact | eSRhpYLerw4 @ 4216-4253s]
+  The matrix multiplication operation scales each input vector by its corresponding attention weight and sums them, which is equivalent to the manual context vector calculation process.
+- c1429 [fact | UjdRN80c6p8 @ 3306-3339s]
+  To compute the context vector for 'journey', each value vector is scaled by its corresponding attention weight: the 'your' vector is multiplied by 0.15, the 'journey' vector by 0.22, the 'begins' vector by 0.2199, the 'width' vector by 0.13, the 'one' vector by 0.09, and the 'step' vector by 0.18.

@@ -1,0 +1,19 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Upper Triangular Matrix and Lower Triangular Matrix",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Comparison of upper triangular matrix (U) with zeros below the diagonal and lower triangular matrix (L) with zeros above the diagonal, both 4\u00d74 examples.",
+  "diagram_elements": [
+    "Upper Triangular Matrix U: a\u2081\u2081 a\u2081\u2082 a\u2081\u2083 a\u2081\u2084; 0 a\u2082\u2082 a\u2082\u2083 a\u2082\u2084; 0 0 a\u2083\u2083 a\u2083\u2084; 0 0 0 a\u2084\u2084",
+    "Lower Triangular Matrix L: a\u2081\u2081 0 0 0; a\u2082\u2081 a\u2082\u2082 0 0; a\u2083\u2081 a\u2083\u2082 a\u2083\u2083 0; a\u2084\u2081 a\u2084\u2082 a\u2084\u2083 a\u2084\u2084",
+    "Green highlighting showing zero regions"
+  ],
+  "confidence": 0.95,
+  "frame_id": "h94TQOK7NRA_f0007",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 1232.799667,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0007.jpg"
+}

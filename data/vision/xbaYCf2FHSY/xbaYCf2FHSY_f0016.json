@@ -1,0 +1,21 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "at inference time to rapidly adapt to or recognize the desired task (illustrated in Figure 1.1). Recent work [RWC+19] attempts to do this via what we call \"in-context learning\", using the text itself as a form of task specification: the model is conditioned on a natural language instruction and/or a few demonstrations of the task and is then expected to complete further instances of the task simply by predicting what comes next.\n\nWhile it has shown some initial promise, this approach still achieves results far inferior to fine-tuning - for example [RWC+19] achieves only 4% on Natural Questions, and even its 55 F1 COCO result is now more than 35 points behind the state of the art. Meta-learning clearly requires substantial improvement in order to be viable as a practical method of solving language tasks.\n\nAnother recent trend in language modeling may offer a path forward. In recent years, the size of transformer language models has increased substantially, from 100 million parameters [DCLT11], to 300 million parameters [RDF+18], to 1.5 billion parameters [RWC+19], and finally 17 billion parameters [Tur20]. This increase has brought improvements in text synthesis and/or downstream NLP tasks, and there is evidence suggesting that top loss, which correlates well with many downstream tasks, follows a power law with scale [KMH+20]. Since in-context learning involves absorbing many skills and tasks within the parameters of the model, it is plausible that in-context learning abilities might also grow with scale.\n\nIn the context of language models this has sometimes been called \"zero-shot transfer\", but this term is potentially ambiguous: the model is \"zero-shot\" in the sense that no gradient updates are performed, but it often involves providing inference-time demonstrations to the model, so is not truly learning from zero examples. To avoid this confusion, we use the term \"meta-learning\" to capture the inner-loop / outer-loop structure of the general method, and the term \"in context-learning\" to refer to the inner loop of meta-learning where the model is conditioned on the task specification at inference time. These terms are intended to remain agnostic on the question of whether the model learns new tasks from scratch at inference time or simply recognizes patterns seen during training - this is an important issue which we discuss later in the paper, but \"meta-learning\" is intended to encompass both possibilities, and simply describes the inner-outer loop structure.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Line chart showing aggregate performance across benchmarks with three learning paradigms: Few Shot, One Shot, and Zero Shot, with accuracy on y-axis (ranging from 20-100) and performance generally increasing across benchmarks.",
+  "diagram_elements": [
+    "Few Shot",
+    "One Shot",
+    "Zero Shot",
+    "Accuracy",
+    "Aggregate Performance Across Benchmarks"
+  ],
+  "confidence": 0.85,
+  "frame_id": "xbaYCf2FHSY_f0016",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 554.833,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0016.jpg"
+}

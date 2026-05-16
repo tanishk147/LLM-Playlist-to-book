@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "1.42 gigabytes.\n\nThis is roughly three times larger than the storage space needed for the small model:",
+  "code": {
+    "language": "python",
+    "content": "from gpt_download3 import download_and_load_gpt2\n\nBASE_CONFIG = {\n    \"vocab_size\": 50257,           # Vocabulary size\n    \"context_length\": 1024,        # Context length\n    \"drop_rate\": 0.0,              # Dropout rate\n    \"qkv_bias\": True               # Query-key-value bias\n}\n\nmodel_configs = {\n    \"gpt2-small (124M)\": {\"emb_dim\": 768, \"n_layers\": 12, \"n_heads\": 12},\n    \"gpt2-medium (355M)\": {\"emb_dim\": 1024, \"n_layers\": 24, \"n_heads\": 16},\n    \"gpt2-large (774M)\": {\"emb_dim\": 1280, \"n_layers\": 36, \"n_heads\": 20},\n    \"gpt2-xl (1558M)\": {\"emb_dim\": 1600, \"n_layers\": 48, \"n_heads\": 25},\n}\n\nCHOOSE_MODEL = \"gpt2-medium (355M)\""
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "__OiQznq4ao_f0010",
+  "video_id": "__OiQznq4ao",
+  "timestamp_sec": 604.199667,
+  "source_image": "data/frames/__OiQznq4ao/__OiQznq4ao_f0010.jpg"
+}

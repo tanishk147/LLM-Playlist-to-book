@@ -1,0 +1,36 @@
+\begin{tikzpicture}[node distance=0.8cm, scale=0.9]
+  % Title
+  \node[font=\bfseries] at (0, 5.5) {Sentence Split into Overlapping Input-Target Pairs with Masking};
+  
+  % Original sentence
+  \node[anchor=west, font=\small] at (0, 4.8) {Original sentence:};
+  \node[anchor=west] at (0, 4.3) {The quick brown fox jumps over the lazy dog};
+  
+  % Pair 1
+  \node[anchor=west, font=\small, color=blue] at (0, 3.3) {Pair 1 (Input → Target):};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (0.6, 2.6) {The};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (1.9, 2.6) {quick};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (3.2, 2.6) {brown};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (4.5, 2.6) {fox};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (5.8, 2.6) {jumps};
+  \node[anchor=west, font=\tiny] at (0.3, 2.1) {Input};
+  \node[anchor=west, font=\tiny, color=red] at (3.0, 2.1) {Masked};
+  \node[anchor=west, font=\tiny] at (0.3, 1.8) {Target: brown};
+  
+  % Pair 2
+  \node[anchor=west, font=\small, color=blue] at (0, 1.0) {Pair 2 (Input → Target):};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (0.6, 0.3) {The};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (1.9, 0.3) {quick};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (3.2, 0.3) {brown};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (4.5, 0.3) {fox};
+  \node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (5.8, 0.3) {jumps};
+  \node[anchor=west, font=\tiny] at (0.3, -0.2) {Input};
+  \node[anchor=west, font=\tiny, color=red] at (5.6, -0.2) {Masked};
+  \node[anchor=west, font=\tiny] at (0.3, -0.5) {Target: fox};
+  
+  % Legend
+  \node[draw, rectangle, minimum width=0.8cm, minimum height=0.3cm, fill=white] at (0.4, -1.3) {};
+  \node[anchor=west, font=\tiny] at (0.7, -1.25) {Input token};
+  \node[draw, rectangle, minimum width=0.8cm, minimum height=0.3cm, fill=lightgray] at (2.5, -1.3) {};
+  \node[anchor=west, font=\tiny] at (2.8, -1.25) {Masked token};
+\end{tikzpicture}

@@ -1,0 +1,24 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "The key point is that a classification-finetuned model is restricted to predicting classes it has encountered during its training\u2014for instance, if a model is trained to determine whether something is \"spam\" or \"not spam,\" as illustrated in figure 6.3, but it can't say anything else about the input text.\n\nFigure 6.3 Illustration of a text classification scenario using an LLM. A model finetuned for spam classification does not require further instruction alongside the input. In contrast to an instruction-finetuned model, it can only respond with \"spam\" and \"not spam.\"\n\nIn contrast to the classification-finetuned model depicted in figure 6.3, an instruction-finetuned model typically has the capability to undertake a broader range of tasks. We can",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Text classification scenario showing two examples: a spam message and a casual dinner inquiry, both processed by LLMs that can only output binary responses (\"Spam\"/\"Not spam\").",
+  "diagram_elements": [
+    "Model input without instructions",
+    "\"You are a winner you have been specially selected to receive $1000 cash or a $2000 award.\"",
+    "LLM",
+    "Spam",
+    "\"Hey, just wanted to check if we're still on for dinner tonight? Let me know!\"",
+    "LLM",
+    "Not spam",
+    "Model can only output two types of responses: \"Spam\" and \"Not spam\""
+  ],
+  "confidence": 0.92,
+  "frame_id": "z9fgKz1Drlc_f0008",
+  "video_id": "z9fgKz1Drlc",
+  "timestamp_sec": 584.766333,
+  "source_image": "data/frames/z9fgKz1Drlc/z9fgKz1Drlc_f0008.jpg"
+}

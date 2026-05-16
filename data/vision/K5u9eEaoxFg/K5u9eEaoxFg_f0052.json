@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing how queries, keys, and values are transposed and processed across multiple heads, with tensor dimensions and reshaping operations annotated.",
+  "diagram_elements": [
+    "Head 1",
+    "Head 2",
+    "Keys.transpose(2, 3)",
+    "queries * keys.transpose(2, 3): shape",
+    "Cat (concatenate)",
+    "Attention weights",
+    "(1, 2, 3, 3) shape",
+    "(b, num_heads, head_dim, num_tokens)",
+    "head_dim",
+    "attention weights"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0052",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2227.133,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0052.jpg"
+}

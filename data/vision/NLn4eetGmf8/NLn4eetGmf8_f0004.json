@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Tokenize the data",
+  "extracted_text": "Fine Tuning is fun for all!\n\n[34389, 13932, 278, 318, 1257, 329, 477, 0]\n\nFine Tuning is fun for all!\n\nThere are multiple popular tokenizers:\n\u2022 Use the tokenizer associated with your model!",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Diagram showing the encoding and decoding process of tokenization, where the text 'Fine Tuning is fun for all!' is converted to token IDs [34389, 13932, 278, 318, 1257, 329, 477, 0] and then decoded back to text.",
+  "diagram_elements": [
+    "Encoding",
+    "Decoding",
+    "Token IDs: [34389, 13932, 278, 318, 1257, 329, 477, 0]"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0004",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 469.866333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0004.jpg"
+}

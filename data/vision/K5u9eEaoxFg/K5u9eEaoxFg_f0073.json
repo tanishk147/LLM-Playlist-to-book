@@ -1,0 +1,25 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "1.6594,  0.1052, -0.0468],\n0.8916, -1.4384, -0.5651]]], dtype=torch.float64)"
+  },
+  "math": null,
+  "diagram_summary": "Handwritten annotations showing tensor reshaping with num_heads parameter, demonstrating how a tensor is reshaped from (batch_size, head_dim) to (batch_size, num_heads, num_tokens, head_dim).",
+  "diagram_elements": [
+    "head_dim",
+    "num_heads",
+    "num_tokens",
+    "head_dim",
+    "reshape operation",
+    "output dimensions (1, 2, 3, 3)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0073",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2884.266333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0073.jpg"
+}

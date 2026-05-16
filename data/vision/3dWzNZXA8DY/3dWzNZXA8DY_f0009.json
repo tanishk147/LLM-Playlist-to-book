@@ -1,0 +1,28 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Neural network architecture visualization showing a multi-layer perceptron with input layer (784 neurons), two hidden layers (10 neurons each), and output layer (10 MNIST categories), with interconnected nodes and training interface controls.",
+  "diagram_elements": [
+    "Input Layer: 784 Neurons",
+    "Hidden Layer 1: 10 Neurons",
+    "Hidden Layer 2: 10 Neurons",
+    "Output Layer (10 MNIST Categories)",
+    "Status: Data Loaded",
+    "Visualize Data",
+    "Start Training",
+    "Toggle Monitor",
+    "Show Instructions",
+    "Epochs: 5",
+    "Learning Rate: 0.0100",
+    "Test-Train Split: 0.2"
+  ],
+  "confidence": 0.92,
+  "frame_id": "3dWzNZXA8DY_f0009",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 1331.466333,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0009.jpg"
+}

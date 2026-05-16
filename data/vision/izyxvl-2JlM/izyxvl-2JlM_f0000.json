@@ -1,0 +1,26 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Model initialization with pretrained weights",
+  "extracted_text": "In this section, we will prepare the model for classification finetuning.\n\nIn this section, we initialize the pretrained model from the previous chapter that we will finetune\n\nStage 1:\nDataset preparation\n\nStage 2:\nModel setup\n\nStage 3:\nModel finetuning and usage\n\nIn the previous section, we prepared the SPAM prediction dataset for classification finetuning.\n\n1) Download the dataset\n2) Preprocess dataset\n4) Initialize model\n5) Load pretrained weights\n6) Model setup\n8) Finetune model\n9) Evaluate finetuned model",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage workflow diagram showing dataset preparation, model setup, and model finetuning stages with sequential steps including downloading dataset, preprocessing, initializing model, loading pretrained weights, finetuning, and evaluation.",
+  "diagram_elements": [
+    "Stage 1: Dataset preparation",
+    "Stage 2: Model setup",
+    "Stage 3: Model finetuning and usage",
+    "1) Download the dataset",
+    "2) Preprocess dataset",
+    "4) Initialize model",
+    "5) Load pretrained weights",
+    "6) Model setup",
+    "8) Finetune model",
+    "9) Evaluate finetuned model"
+  ],
+  "confidence": 0.85,
+  "frame_id": "izyxvl-2JlM_f0000",
+  "video_id": "izyxvl-2JlM",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0000.jpg"
+}

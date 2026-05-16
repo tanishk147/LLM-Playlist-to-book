@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Layer Normalization",
+  "extracted_text": "(1) Training deep neural networks with many layers can be challenging due to\n    vanishing/exploding\n    gradients\n\n(2) This leads to unstable training dynamics",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "G3W-LT79LSI_f0000",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0000.jpg"
+}

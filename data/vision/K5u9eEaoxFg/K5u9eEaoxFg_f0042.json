@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing how queries and keys are transposed and processed across multiple heads, with tensor shapes and dimension transformations annotated.",
+  "diagram_elements": [
+    "Head 1",
+    "Head 2",
+    "keys.transpose(2, 3)",
+    "queries \u00d7 keys.transpose(2, 3)",
+    "tensor shape (2, 3)",
+    "tensor shape (1, 2960)",
+    "tensor shape (b, num_heads, head_dim, num_tokens)",
+    "tensor shape (b, num_heads, num_tokens, num_tokens)",
+    "Find attention weights",
+    "Mask attention scores to implement"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0042",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1941.499667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0042.jpg"
+}

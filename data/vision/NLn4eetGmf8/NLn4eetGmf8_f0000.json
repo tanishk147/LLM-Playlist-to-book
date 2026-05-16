@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture4: Basic Intro to Transformers",
+  "extracted_text": "\u2460 Most modern LLMs rely on the transformer architecture \u2192 deep neural network architecture introduced in 2017 paper\n\nAttention is ALL \u2192 you Need",
+  "code": null,
+  "math": null,
+  "diagram_summary": "The 'Attention Is All You Need' paper title page showing author names and abstract text.",
+  "diagram_elements": [
+    "Attention Is All You Need (paper title)",
+    "Author names and affiliations",
+    "Abstract section"
+  ],
+  "confidence": 0.85,
+  "frame_id": "NLn4eetGmf8_f0000",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0000.jpg"
+}

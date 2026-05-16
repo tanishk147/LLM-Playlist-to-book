@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A tensor decomposition diagram showing how a multi-dimensional tensor is split into three tokens with annotations for batch dimension, number of tokens, number of heads, and head dimension parameters.",
+  "diagram_elements": [
+    "tensor([[-3.6194, 2.0935, 1.3879], [1.5961, -0.0367, -0.34001]], ...)",
+    "Token 1",
+    "Token 2",
+    "Token 3",
+    "(b, num_tokens, num_heads, head_dim)",
+    "(1, 3, 2, 3)",
+    "b, num_tokens",
+    "num_heads, head_dim",
+    "FINAL RES"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0087",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3170.533,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0087.jpg"
+}

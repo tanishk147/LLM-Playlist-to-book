@@ -1,0 +1,7427 @@
+{
+  "video_id": "NLn4eetGmf8",
+  "duration_sec": 2439.0240625,
+  "segments": [
+    {
+      "ts_start": 4.49,
+      "ts_end": 11.81,
+      "text": "Hello everyone, welcome to the lecture 4 in this Building Large Language Models from Scratch series.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Lecture4: Basic Intro to Transformers",
+          "extracted_text": "\u2460 Most modern LLMs rely on the transformer architecture \u2192 deep neural network architecture introduced in 2017 paper\n\nAttention is ALL \u2192 you Need",
+          "code": null,
+          "math": null,
+          "diagram_summary": "The 'Attention Is All You Need' paper title page showing author names and abstract text.",
+          "diagram_elements": [
+            "Attention Is All You Need (paper title)",
+            "Author names and affiliations",
+            "Abstract section"
+          ],
+          "confidence": 0.85,
+          "frame_id": "NLn4eetGmf8_f0000",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 12.4,
+      "ts_end": 23.84,
+      "text": "In the previous lecture, we took a look at the differences between the two stages of building an LLM and the two stages were pre-training and fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 23.84,
+      "ts_end": 38.41,
+      "text": "So, pre-training involves training on a large diverse data set and fine-tuning is basically refinement by training on a narrower data set specific to a particular task or a particular domain.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 39.37,
+      "ts_end": 48.35,
+      "text": "If you have not seen the previous lecture, I highly encourage you to go through the previous lecture so that there will be a good flow between these different lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 48.61,
+      "ts_end": 54.47,
+      "text": "If you are watching today's lecture for the first time, no problem at all, welcome to this series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 55.09,
+      "ts_end": 59.85,
+      "text": "And I have designed this lecture so that it is independently accessible and understandable.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 60.44,
+      "ts_end": 61.8,
+      "text": "So, let's get started.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 61.9,
+      "ts_end": 70.61,
+      "text": "Today, I am very excited because today's topic is regarding introduction or rather a basic introduction to transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 70.77,
+      "ts_end": 82.09,
+      "text": "In today's topic, we are not going to go into the mathematical details or even the coding details of transformers, but we are just going to introduce the flavor of this concept.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 82.56,
+      "ts_end": 84.26,
+      "text": "What does it really mean?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 84.26,
+      "ts_end": 86.92,
+      "text": "What it did for large language models?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 87.16,
+      "ts_end": 90.84,
+      "text": "What is the history of transformers in the context of GPT?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 92.12,
+      "ts_end": 97.02,
+      "text": "Is there any similarity or differences between LLMs and transformers?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 97.28,
+      "ts_end": 102.24,
+      "text": "When people say LLMs and transformers, they usually use these terms interchangeably.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 102.86,
+      "ts_end": 106.02,
+      "text": "When should we use these terminologies interchangeably?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 106.1,
+      "ts_end": 108.78,
+      "text": "Are there any similarities or differences between them?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 108.86,
+      "ts_end": 111.48,
+      "text": "We are going to learn about all of these aspects.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 111.76,
+      "ts_end": 114.12,
+      "text": "We are also going to look at the schematic.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 115.0,
+      "ts_end": 124.04,
+      "text": "Of how transformers generally work, and in doing so, we will understand the basics of a few terminologies like embedding, tokenization, etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 124.7,
+      "ts_end": 126.8,
+      "text": "So, let's get started with today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 128.14,
+      "ts_end": 138.24,
+      "text": "So, the secret sauce behind large language models and the secret sauce behind why LLMs are so popular is this world called as transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 139.69,
+      "ts_end": 146.45,
+      "text": "Most of the modern large language models rely on this architecture, which is called as transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 147.76,
+      "ts_end": 149.84,
+      "text": "So, what is a transformer architecture?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 150.42,
+      "ts_end": 151.04,
+      "text": "So, what is a transformer architecture?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 151.04,
+      "ts_end": 157.84,
+      "text": "Essentially, it's a deep neural network architecture, which was introduced in a paper, which was released in 2017.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 159.61,
+      "ts_end": 166.89,
+      "text": "This paper is called as Attention is all you need, and if you go and search about this paper on Google Scholar right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 167.01,
+      "ts_end": 168.85,
+      "text": "So, let me do that just quickly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 169.11,
+      "ts_end": 176.19,
+      "text": "So, if I go here to Google Scholar and type Attention is all you need, let us check the number of citations, which it has.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 176.31,
+      "ts_end": 177.47,
+      "text": "It has more than a hundred citations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 177.49,
+      "ts_end": 180.25,
+      "text": "It has more than a hundred thousand citations in just six to seven years.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 180.67,
+      "ts_end": 182.03,
+      "text": "That's incredible, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 182.29,
+      "ts_end": 187.53,
+      "text": "It's because this paper led to so many breakthroughs, which happened later.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 187.75,
+      "ts_end": 196.29,
+      "text": "The GPT architecture, which is the foundational stone or foundational building block of ChatGPT originated from this paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 196.49,
+      "ts_end": 204.37,
+      "text": "The GPT architecture is not exactly the same as the transformer architecture proposed in this paper, but it is heavily based on that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 204.37,
+      "ts_end": 210.85,
+      "text": "So, it's very important for us to understand what this paper really did and what are transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 211.82,
+      "ts_end": 214.42,
+      "text": "So, I've opened this paper here so that you can see.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 214.48,
+      "ts_end": 216.26,
+      "text": "It's titled Attention is all you need.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 216.58,
+      "ts_end": 219.1,
+      "text": "So, you might be thinking, what is attention?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 219.36,
+      "ts_end": 225.24,
+      "text": "And it is actually a technical term, which is related to how attention is used in our daily life also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 225.78,
+      "ts_end": 231.64,
+      "text": "We'll also be touching upon this briefly today and we'll be understanding intuition behind attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 232.78,
+      "ts_end": 235.28,
+      "text": "So, if you look at this paper, it's a 15 page paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 235.3,
+      "ts_end": 239.32,
+      "text": "And this is the transformer architecture, which I'm talking about.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 239.7,
+      "ts_end": 241.7,
+      "text": "Essentially, it's a neural network architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 242.34,
+      "ts_end": 246.56,
+      "text": "And there are so many things to unpack and explain here, which we won't be doing today.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 246.66,
+      "ts_end": 252.34,
+      "text": "We'll be doing it in subsequent lectures because every aspect of this architecture will need a separate lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 252.48,
+      "ts_end": 253.24,
+      "text": "It's that detailed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 253.52,
+      "ts_end": 255.72,
+      "text": "Today, we are just going to look at an overview.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 257.1,
+      "ts_end": 258.78,
+      "text": "So, it's a 15 page paper.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0002"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "3.2.2 Multi-Head Attention",
+          "extracted_text": "Instead of performing a single attention function with d_model-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values h times with different, learned linear projections to d_k, d_v and d_v dimensions, respectively. On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding d_v-dimensional output values. These are concatenated and once again projected, resulting in the final values, as depicted in Figure 2.\n\nMulti-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.",
+          "code": null,
+          "math": [
+            "MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O",
+            "head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)",
+            "W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}, W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}, W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}"
+          ],
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.92,
+          "frame_id": "NLn4eetGmf8_f0002",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 257.533,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0002.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 258.9,
+      "ts_end": 264.62,
+      "text": "And to go through this paper and to really understand this paper, it will at least need 10 to 15 lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 265.0,
+      "ts_end": 266.02,
+      "text": "And this lecture is about that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 266.04,
+      "ts_end": 267.54,
+      "text": "This lecture can serve as an introduction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 267.8,
+      "ts_end": 271.1,
+      "text": "So, it's very important for you all to understand this lecture clearly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 271.68,
+      "ts_end": 279.38,
+      "text": "First thing, which I want to explain is that when this paper was proposed, it was actually proposed for translation tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 279.64,
+      "ts_end": 283.22,
+      "text": "Which means converting one language into another language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 283.44,
+      "ts_end": 289.8,
+      "text": "Text completion, which is the predominant role of GPT, was not even in consideration here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 290.18,
+      "ts_end": 295.5,
+      "text": "They were mostly looking at English to French and English to German translations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 296.48,
+      "ts_end": 301.7,
+      "text": "So, they proposed a mechanism which did huge amount of advancements on these tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 301.92,
+      "ts_end": 306.4,
+      "text": "The transformer mechanism they proposed led to big advancement in these tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 306.72,
+      "ts_end": 315.07,
+      "text": "Later, it was discovered that using an architecture derived from this transformer architecture, we can do so many other things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 316.36,
+      "ts_end": 318.12,
+      "text": "So, that's the first thing to note.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 319.19,
+      "ts_end": 325.89,
+      "text": "And that is that original transformer which was developed, it was developed for machine translation tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 325.89,
+      "ts_end": 331.47,
+      "text": "Especially, it was developed to translate English texts into German and French.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 332.47,
+      "ts_end": 333.09,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 333.19,
+      "ts_end": 340.07,
+      "text": "Now, we are going to look at a schematic of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 340.47,
+      "ts_end": 344.27,
+      "text": "So, this schematic is fairly detailed like you can see.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0003"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Abstract",
+          "extracted_text": "The dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the best models from the literature. We show that the Transformer generalizes well to other tasks by applying it successfully to English constituency parsing both with large and limited training data.",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "NLn4eetGmf8_f0003",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 340.633,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0003.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 344.39,
+      "ts_end": 350.05,
+      "text": "And we have actually done a toned down version of this schematic.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 350.07,
+      "ts_end": 355.19,
+      "text": "And I have borrowed this schematic from the book Building LLMs from Scratch by Sebastian.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 355.51,
+      "ts_end": 356.99,
+      "text": "One of the best books in the world.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 357.01,
+      "ts_end": 358.03,
+      "text": "It is based on large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 358.49,
+      "ts_end": 362.73,
+      "text": "So, let us look at this schematic first of all by zooming out.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 362.93,
+      "ts_end": 365.21,
+      "text": "So, this is a simplified transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 365.93,
+      "ts_end": 368.91,
+      "text": "First, I want to show you that there are 8 steps over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 369.01,
+      "ts_end": 369.97,
+      "text": "You can see these orange.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 370.11,
+      "ts_end": 375.61,
+      "text": "Step number 1, step number 2, step number 3, step number 4, 5, 6, 7 and 8.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 375.91,
+      "ts_end": 382.31,
+      "text": "So, if you understand these 8 steps as an intuition, you would have understood the intuition of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 382.85,
+      "ts_end": 385.85,
+      "text": "So, let's start going through it from step by step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 385.85,
+      "ts_end": 392.57,
+      "text": "And as we saw, one of the main purposes of the original transformer architecture was to convert English to German.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 392.91,
+      "ts_end": 395.31,
+      "text": "So, this is the example which we have taken here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 395.67,
+      "ts_end": 399.73,
+      "text": "Let's look at step number 1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 400.31,
+      "ts_end": 402.79,
+      "text": "So, this is the input text which is to be translated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 403.09,
+      "ts_end": 407.37,
+      "text": "And as we can all see, this input text is right now in the English language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 408.09,
+      "ts_end": 408.61,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 409.79,
+      "ts_end": 415.89,
+      "text": "And the transformer is designed so that at the end of 8 steps, it will convert it into German.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 415.93,
+      "ts_end": 416.15,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 416.17,
+      "ts_end": 418.91,
+      "text": "But there are a number of things which happened before that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 419.09,
+      "ts_end": 420.67,
+      "text": "Let's go to step number 2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 420.81,
+      "ts_end": 425.55,
+      "text": "In step number 2, the input text is basically taken and pre-processed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 426.16,
+      "ts_end": 432.14,
+      "text": "What pre-processing means is that there is a process which is called as tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 433.73,
+      "ts_end": 434.29,
+      "text": "Tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 436.52,
+      "ts_end": 441.36,
+      "text": "And what tokenization basically means is that we have huge sentences, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 441.42,
+      "ts_end": 448.42,
+      "text": "Which might be, let's say we have input data from billions of data sets as we saw in the previous lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 448.6,
+      "ts_end": 451.7,
+      "text": "Such transformers are usually trained on huge amounts of data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 451.98,
+      "ts_end": 456.84,
+      "text": "And let's say the input data is in the form of documents and documents have sentences, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 457.04,
+      "ts_end": 460.94,
+      "text": "So, the entire sentence cannot be fed into the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 461.06,
+      "ts_end": 465.26,
+      "text": "The sentence needs to be broken down into simpler words or tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 465.72,
+      "ts_end": 468.88,
+      "text": "This process is called as the process of tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 469.44,
+      "ts_end": 471.56,
+      "text": "So, I have a simple schematic here.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Tokenize the data",
+          "extracted_text": "Fine Tuning is fun for all!\n\n[34389, 13932, 278, 318, 1257, 329, 477, 0]\n\nFine Tuning is fun for all!\n\nThere are multiple popular tokenizers:\n\u2022 Use the tokenizer associated with your model!",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Diagram showing the encoding and decoding process of tokenization, where the text 'Fine Tuning is fun for all!' is converted to token IDs [34389, 13932, 278, 318, 1257, 329, 477, 0] and then decoded back to text.",
+          "diagram_elements": [
+            "Encoding",
+            "Decoding",
+            "Token IDs: [34389, 13932, 278, 318, 1257, 329, 477, 0]"
+          ],
+          "confidence": 0.95,
+          "frame_id": "NLn4eetGmf8_f0004",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 469.866333,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 472.49,
+      "ts_end": 477.27,
+      "text": "So, for now, for simplicity, you can imagine that one word is one token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 477.27,
+      "ts_end": 479.15,
+      "text": "This is not usually the case.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 479.51,
+      "ts_end": 482.13,
+      "text": "One word is generally not equal to one token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 482.23,
+      "ts_end": 488.57,
+      "text": "But for understanding this class, you can think of tokenizing as breaking down the sentence into individual words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 488.93,
+      "ts_end": 490.63,
+      "text": "So, let's say this is the sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 490.85,
+      "ts_end": 492.51,
+      "text": "Fine tuning is fun for all.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 494.02,
+      "ts_end": 503.1,
+      "text": "Tokenizing basically means breaking this down into individual words like fine, tu, tun, ing is fun for all.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 503.2,
+      "ts_end": 507.24,
+      "text": "And then assigning an id, a unique number to each of these words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 507.84,
+      "ts_end": 517.56,
+      "text": "So, basically, we have taken the huge amount of data, broken it down into tokens or individual words and assigned an id or a number to each token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 517.94,
+      "ts_end": 520.22,
+      "text": "This is called as the process of tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 520.58,
+      "ts_end": 533.01,
+      "text": "And so, let's say if you have English data from Reddit posts or from Wikipedia, you break it down into words and you collect individual sub-words from each sentence in the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 533.77,
+      "ts_end": 536.87,
+      "text": "This is what usually happens in the pre-processing step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 537.25,
+      "ts_end": 538.27,
+      "text": "Then the next step is the pre-processing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 538.29,
+      "ts_end": 542.11,
+      "text": "The next step after the pre-processing, step number three, is encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 542.29,
+      "ts_end": 546.43,
+      "text": "This is one of the most important building blocks of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 546.99,
+      "ts_end": 554.95,
+      "text": "And what this encoder does is that the input text which is pre-processed, let's say the tokens, are passed to the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 555.21,
+      "ts_end": 559.59,
+      "text": "And what actually happens in the encoder is something called as vector embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 568.59,
+      "ts_end": 574.95,
+      "text": "So, what the encoder actually does is it implements a process which is called as vector embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 575.92,
+      "ts_end": 576.94,
+      "text": "So, up till now, we have seen this process.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 576.96,
+      "ts_end": 580.68,
+      "text": "Up till now, we have seen that every sentence is broken down into individual words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 581.2,
+      "ts_end": 586.64,
+      "text": "And those words are converted into numerical ids.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 587.1,
+      "ts_end": 593.4,
+      "text": "But the main problem is that we need to encode the semantic meaning between the words also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 593.78,
+      "ts_end": 597.12,
+      "text": "So, let's say for example if you take the word dog and puppy.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0005"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": "Tokenize the data",
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Tokenization process showing text 'Fine Tuning is fun for all!' being converted into token IDs [34389, 13932, 278, 318, 1257, 329, 477, 0] and then decoded back to the original text.",
+          "diagram_elements": [
+            "Original text: 'Fine Tuning is fun for all!'",
+            "Token IDs: [34389, 13932, 278, 318, 1257, 329, 477, 0]",
+            "Encoding arrows (downward)",
+            "Decoding arrows (downward)",
+            "Decoded text: 'Fine Tuning is fun for all!'",
+            "Enco (label, partially visible)",
+            "Decc (label, partially visible)"
+          ],
+          "confidence": 0.92,
+          "frame_id": "NLn4eetGmf8_f0005",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 594.766333,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0005.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 597.54,
+      "ts_end": 604.0,
+      "text": "With this method which I have shown you right now with tokenization, random ids will be assigned to dog and puppy.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 604.0,
+      "ts_end": 610.68,
+      "text": "But we need to encode the information somewhere that dog and puppy are actually related to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 611.22,
+      "ts_end": 614.46,
+      "text": "So, can we somehow represent the input data?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 614.64,
+      "ts_end": 621.18,
+      "text": "Can we somehow represent the tokens in a way which captures the semantic meaning between the words?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 621.64,
+      "ts_end": 624.68,
+      "text": "And that process is called as vector embedding.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0006"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": "vector embeddings (2D example)",
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "A 2D vector embedding example showing how categorical items (king, man, woman, apple, banana, orange, football, golf, tennis) are converted into numerical vectors and plotted as points in 2D space, with similar items clustering together.",
+          "diagram_elements": [
+            "Input categories: king, man, woman, apple, banana, orange, football, golf, tennis",
+            "Embedding vectors with numerical values",
+            "2D coordinate space with x and y axes",
+            "Green cluster (top-left): fruits and people",
+            "Blue cluster (top-right): related items",
+            "Red cluster (bottom-right): sports items"
+          ],
+          "confidence": 0.92,
+          "frame_id": "NLn4eetGmf8_f0006",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 624.166333,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0006.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 625.38,
+      "ts_end": 631.82,
+      "text": "What is done usually in vector embedding is that words are taken and they are converted into vectorized representations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 631.82,
+      "ts_end": 635.9,
+      "text": "So, this figure actually illustrates it very simply.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 636.14,
+      "ts_end": 637.92,
+      "text": "Let's say these are the words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 638.02,
+      "ts_end": 642.92,
+      "text": "King, man, woman, apple, banana, orange, football, golf and tennis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 643.4,
+      "ts_end": 645.76,
+      "text": "What is done in vector embedding is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 646.32,
+      "ts_end": 649.22,
+      "text": "So, this is a two-dimensional vector embedding I am showing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 649.4,
+      "ts_end": 654.14,
+      "text": "In a two-dimensional vector embedding, each of these words are converted into vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 654.62,
+      "ts_end": 657.88,
+      "text": "And the way these vectors are formed is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 658.02,
+      "ts_end": 659.68,
+      "text": "So, king, man and woman.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 659.8,
+      "ts_end": 661.8,
+      "text": "They are terms which are related to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 661.82,
+      "ts_end": 664.72,
+      "text": "Apple, banana and orange are related.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 664.94,
+      "ts_end": 665.82,
+      "text": "All of them are fruits.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 666.4,
+      "ts_end": 668.32,
+      "text": "Football, golf and tennis are related.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 668.56,
+      "ts_end": 669.58,
+      "text": "All of them are sports.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 670.26,
+      "ts_end": 673.4,
+      "text": "So, when you convert these words into individual vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 673.68,
+      "ts_end": 675.06,
+      "text": "If you see on the right hand side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 675.26,
+      "ts_end": 676.9,
+      "text": "Look at king, man and woman.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 677.48,
+      "ts_end": 679.06,
+      "text": "They are more closer together.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 679.7,
+      "ts_end": 680.66,
+      "text": "As vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 681.46,
+      "ts_end": 683.84,
+      "text": "If you look at the green circle here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 683.92,
+      "ts_end": 685.56,
+      "text": "Which is football, golf and tennis.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0007"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": "vector embeddings (2D example)",
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "A 2D vector embedding example showing how input data (represented by a diamond shape) is transformed into numerical vectors, which are then plotted as points in a 2D coordinate space, with three clusters of points shown in different colored circles (green, blue, and red).",
+          "diagram_elements": [
+            "Input shape (diamond)",
+            "Vector matrix with blue values [4 5], [3 3.5], [5 3]",
+            "Vector matrix with red values [2.5 -2], [2.5 -3], [4 -2.5]",
+            "Vector matrix with green values [-3 4], [-1.5 3], [-2 2]",
+            "2D coordinate system with x and y axes",
+            "Green cluster (upper left quadrant)",
+            "Blue cluster (upper right quadrant)",
+            "Red cluster (lower right quadrant)"
+          ],
+          "confidence": 0.85,
+          "frame_id": "NLn4eetGmf8_f0007",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 684.766333,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0007.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 685.74,
+      "ts_end": 686.86,
+      "text": "They are more closer together.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 687.26,
+      "ts_end": 689.1,
+      "text": "If you look at the red circle here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 689.2,
+      "ts_end": 690.72,
+      "text": "Which is apple, banana and orange.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 691.82,
+      "ts_end": 692.8,
+      "text": "They are more closer together.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 693.34,
+      "ts_end": 697.32,
+      "text": "So, converting these words into such kind of vector format.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 698.32,
+      "ts_end": 700.32,
+      "text": "Is called as vector embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 700.5,
+      "ts_end": 702.24,
+      "text": "And this is a difficult task.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 702.38,
+      "ts_end": 704.24,
+      "text": "We cannot randomly put vectors right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 704.58,
+      "ts_end": 705.82,
+      "text": "Because there have.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 706.04,
+      "ts_end": 709.08,
+      "text": "So, apple and banana have to be closer to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 709.2,
+      "ts_end": 711.28,
+      "text": "All fruits need to be closer to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 711.38,
+      "ts_end": 713.5,
+      "text": "Than let's say banana and king.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 714.32,
+      "ts_end": 717.14,
+      "text": "So, there is usually a detailed procedure for this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 717.22,
+      "ts_end": 719.76,
+      "text": "And neural networks are trained even for this step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 719.92,
+      "ts_end": 722.22,
+      "text": "That is called as vector embedding step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 723.24,
+      "ts_end": 725.8,
+      "text": "So, that is the main purpose of the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 725.9,
+      "ts_end": 727.72,
+      "text": "The main purpose of the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 727.76,
+      "ts_end": 730.0,
+      "text": "Is actually to take in the input text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 730.2,
+      "ts_end": 731.6,
+      "text": "From the pre-processing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 731.62,
+      "ts_end": 732.46,
+      "text": "May be the tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 732.76,
+      "ts_end": 734.66,
+      "text": "And to convert those tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 734.84,
+      "ts_end": 736.82,
+      "text": "Into vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 736.96,
+      "ts_end": 738.96,
+      "text": "So, if you see in step number 4.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 739.18,
+      "ts_end": 741.52,
+      "text": "We have generated vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 742.17,
+      "ts_end": 745.71,
+      "text": "So, in the left hand side of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 746.25,
+      "ts_end": 749.41,
+      "text": "The final goal is to generate vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 749.49,
+      "ts_end": 750.27,
+      "text": "Which means that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 750.49,
+      "ts_end": 752.49,
+      "text": "Let's say if we have millions of data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 752.59,
+      "ts_end": 752.81,
+      "text": "Which means that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 752.83,
+      "ts_end": 753.67,
+      "text": "In English language.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 753.77,
+      "ts_end": 755.01,
+      "text": "We convert them into tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 755.17,
+      "ts_end": 756.31,
+      "text": "We convert them into vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 756.71,
+      "ts_end": 759.39,
+      "text": "And that is done in a giant dimension space.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0008"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": "vector embeddings (2D example)",
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "A diagram showing how words and objects are converted into 2D vector embeddings through an embedding layer, with semantic grouping visualized in 2D space where similar items cluster together.",
+          "diagram_elements": [
+            "Input words: king, man, woman, apple, banana, orange, football, golf, tennis",
+            "Embedding layer (diamond shape)",
+            "Vector outputs: [4 5], [3 3.5], [5 3], [2.5 -2], [2.5 -3], [4 -2.5], [-3 4], [-1.5 3], [-2 2]",
+            "2D embedding space with coordinate axes",
+            "Green cluster (fruits): apple, banana, orange",
+            "Blue cluster (people): king, man, woman",
+            "Red cluster (sports): football, golf, tennis"
+          ],
+          "confidence": 0.95,
+          "frame_id": "NLn4eetGmf8_f0008",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 758.766333,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0008.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 759.61,
+      "ts_end": 761.01,
+      "text": "Not just in two dimension space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 761.35,
+      "ts_end": 763.65,
+      "text": "It is done in may be 500,000.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 763.73,
+      "ts_end": 765.53,
+      "text": "Huge number of dimension space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 765.93,
+      "ts_end": 767.43,
+      "text": "Which we cannot even imagine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 767.77,
+      "ts_end": 769.85,
+      "text": "But the way it is done is such that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 770.19,
+      "ts_end": 772.51,
+      "text": "Semantic meaning is captured between the words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 773.03,
+      "ts_end": 774.75,
+      "text": "That is how the embedding vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 774.85,
+      "ts_end": 775.69,
+      "text": "Should be returned.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 776.9,
+      "ts_end": 779.44,
+      "text": "Here is another example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 780.64,
+      "ts_end": 782.1,
+      "text": "Which visually shows you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 782.12,
+      "ts_end": 783.22,
+      "text": "How the embedding is done.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 783.44,
+      "ts_end": 785.06,
+      "text": "Let's say if you have text right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 785.08,
+      "ts_end": 785.68,
+      "text": "From documents.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 785.78,
+      "ts_end": 787.74,
+      "text": "That text is converted into IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 787.98,
+      "ts_end": 790.46,
+      "text": "And those tokenized IDs are converted.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 790.48,
+      "ts_end": 791.98,
+      "text": "Into vector format like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 792.18,
+      "ts_end": 794.6,
+      "text": "This is a three dimensional vectorized representation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 794.96,
+      "ts_end": 796.08,
+      "text": "So, we can visualize this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 796.7,
+      "ts_end": 799.22,
+      "text": "And another nice visualization is this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 799.3,
+      "ts_end": 800.34,
+      "text": "Where we take in the.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 800.7,
+      "ts_end": 803.65,
+      "text": "Where we take in the data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 804.29,
+      "ts_end": 805.77,
+      "text": "Put it into the embedding model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 806.03,
+      "ts_end": 807.89,
+      "text": "And then vectorized embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 808.09,
+      "ts_end": 809.49,
+      "text": "Are the result of this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 809.97,
+      "ts_end": 811.59,
+      "text": "So, that is the first step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 811.65,
+      "ts_end": 812.89,
+      "text": "Of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 813.85,
+      "ts_end": 815.89,
+      "text": "We view it as left side and right side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 816.11,
+      "ts_end": 817.27,
+      "text": "In the left side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 817.35,
+      "ts_end": 818.35,
+      "text": "In these four steps.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 818.53,
+      "ts_end": 820.69,
+      "text": "We take the input sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 820.99,
+      "ts_end": 823.19,
+      "text": "And the final goal is to convert them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 823.25,
+      "ts_end": 824.75,
+      "text": "Into these vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 824.89,
+      "ts_end": 827.09,
+      "text": "So that semantic meaning is captured.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 827.25,
+      "ts_end": 828.43,
+      "text": "Between the words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 829.72,
+      "ts_end": 831.98,
+      "text": "Now what do we do with these embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 832.1,
+      "ts_end": 833.56,
+      "text": "We feed these embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 833.56,
+      "ts_end": 834.8,
+      "text": "To the right hand side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 835.38,
+      "ts_end": 836.96,
+      "text": "So, look at this arrow here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 837.14,
+      "ts_end": 838.86,
+      "text": "These embeddings are fed to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 838.88,
+      "ts_end": 840.32,
+      "text": "What is called as the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 840.66,
+      "ts_end": 842.84,
+      "text": "So, let's come to the right hand side of things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 844.04,
+      "ts_end": 844.38,
+      "text": "Number five.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 844.5,
+      "ts_end": 846.2,
+      "text": "This is the.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 848.37,
+      "ts_end": 849.53,
+      "text": "German translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 849.63,
+      "ts_end": 850.91,
+      "text": "Which our model will be doing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 851.27,
+      "ts_end": 853.43,
+      "text": "And remember the model completes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 853.51,
+      "ts_end": 854.77,
+      "text": "One word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 856.03,
+      "ts_end": 858.13,
+      "text": "So, this is an example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 858.13,
+      "ts_end": 859.11,
+      "text": "Is the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 859.43,
+      "ts_end": 861.23,
+      "text": "And up till now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 861.31,
+      "ts_end": 863.49,
+      "text": "Let's say the model has translated this to be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 863.49,
+      "ts_end": 864.49,
+      "text": "Das ist ein.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 865.1,
+      "ts_end": 867.3,
+      "text": "So, this is not complete translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 867.44,
+      "ts_end": 869.02,
+      "text": "Because the translation of example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 869.32,
+      "ts_end": 870.7,
+      "text": "Is not yet included.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 870.7,
+      "ts_end": 872.66,
+      "text": "So, this can be called as.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 872.74,
+      "ts_end": 873.9,
+      "text": "The partial output text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 874.4,
+      "ts_end": 876.56,
+      "text": "Remember this is available to the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 876.8,
+      "ts_end": 878.6,
+      "text": "Because the model only generates.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 878.74,
+      "ts_end": 880.46,
+      "text": "One output word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 880.68,
+      "ts_end": 882.2,
+      "text": "So, by the time we reach.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 882.3,
+      "ts_end": 883.72,
+      "text": "The fourth output word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 883.82,
+      "ts_end": 885.3,
+      "text": "Which is the translation of example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 885.86,
+      "ts_end": 888.46,
+      "text": "We would have the translated words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 888.52,
+      "ts_end": 890.14,
+      "text": "For this is and an.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 890.48,
+      "ts_end": 892.42,
+      "text": "So, this is available to the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 892.82,
+      "ts_end": 894.48,
+      "text": "This is one of the key features.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 894.52,
+      "ts_end": 896.68,
+      "text": "Of transformer and even the GPT architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 896.98,
+      "ts_end": 898.82,
+      "text": "One output word is produced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 898.94,
+      "ts_end": 899.72,
+      "text": "At one time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 901.21,
+      "ts_end": 903.37,
+      "text": "So, the model has partial output text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 903.45,
+      "ts_end": 904.61,
+      "text": "Which is das ist ein.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 905.27,
+      "ts_end": 907.51,
+      "text": "These words are available to the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 907.77,
+      "ts_end": 909.23,
+      "text": "And even.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.47,
+      "ts_end": 911.09,
+      "text": "This kind of text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 911.19,
+      "ts_end": 912.99,
+      "text": "Which is available is converted into.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 913.15,
+      "ts_end": 914.17,
+      "text": "The tokenization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 914.43,
+      "ts_end": 916.31,
+      "text": "The tokenized ids which we saw.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 916.49,
+      "ts_end": 918.07,
+      "text": "This is the pre-processing step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 918.33,
+      "ts_end": 920.17,
+      "text": "And then this is fed to the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 921.2,
+      "ts_end": 923.22,
+      "text": "The job of the decoder is basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 923.24,
+      "ts_end": 924.7,
+      "text": "To do the final translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 925.1,
+      "ts_end": 927.32,
+      "text": "Now remember along with this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 927.72,
+      "ts_end": 928.92,
+      "text": "Partial input text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 929.1,
+      "ts_end": 930.7,
+      "text": "The decoder also receives.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 931.72,
+      "ts_end": 931.9,
+      "text": "The vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 931.98,
+      "ts_end": 934.94,
+      "text": "So, the decoder has received the vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 934.96,
+      "ts_end": 936.52,
+      "text": "From the left hand side of things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 936.94,
+      "ts_end": 939.52,
+      "text": "And now the task of the decoder is basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 940.44,
+      "ts_end": 942.52,
+      "text": "It has received the vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 942.64,
+      "ts_end": 943.8,
+      "text": "It has received.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 944.28,
+      "ts_end": 945.52,
+      "text": "The partial text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 945.68,
+      "ts_end": 946.84,
+      "text": "And it has to predict.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 947.14,
+      "ts_end": 949.32,
+      "text": "What the next word is going to be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 949.4,
+      "ts_end": 950.78,
+      "text": "Based on this information.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 951.86,
+      "ts_end": 954.38,
+      "text": "And then we go to the output layer slowly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 954.8,
+      "ts_end": 956.26,
+      "text": "We go to the output layer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 956.56,
+      "ts_end": 957.28,
+      "text": "And then.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 957.66,
+      "ts_end": 958.94,
+      "text": "Finally you will see that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 959.56,
+      "ts_end": 960.08,
+      "text": "The.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 962.14,
+      "ts_end": 963.52,
+      "text": "Final translation for example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 963.52,
+      "ts_end": 964.92,
+      "text": "Is completed over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 965.12,
+      "ts_end": 966.48,
+      "text": "And this is called as by spine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 967.0,
+      "ts_end": 968.78,
+      "text": "I don't know how to pronounce it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 968.88,
+      "ts_end": 971.7,
+      "text": "My German is not that good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 971.78,
+      "ts_end": 973.7,
+      "text": "And I have not even learned German in the first place.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 973.88,
+      "ts_end": 975.46,
+      "text": "But here you can see.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 975.52,
+      "ts_end": 977.78,
+      "text": "This is the German translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 977.82,
+      "ts_end": 978.5,
+      "text": "For example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 979.14,
+      "ts_end": 981.7,
+      "text": "Which the decoder has produced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 982.06,
+      "ts_end": 984.04,
+      "text": "So, step number 7 is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 984.56,
+      "ts_end": 985.64,
+      "text": "For the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 985.72,
+      "ts_end": 987.8,
+      "text": "Is to generate the translated text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 987.9,
+      "ts_end": 988.96,
+      "text": "One word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 989.3,
+      "ts_end": 990.74,
+      "text": "And then step number 8.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 992.14,
+      "ts_end": 992.9,
+      "text": "Is to get the final output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 994.36,
+      "ts_end": 997.02,
+      "text": "And this is how the decoder actually translates.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 997.08,
+      "ts_end": 999.46,
+      "text": "The input into the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 999.58,
+      "ts_end": 1000.78,
+      "text": "One word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1000.88,
+      "ts_end": 1001.82,
+      "text": "That is very important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1002.36,
+      "ts_end": 1003.64,
+      "text": "Now you might be thinking.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1003.72,
+      "ts_end": 1006.5,
+      "text": "How does the decoder translate it into the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1006.76,
+      "ts_end": 1008.6,
+      "text": "Remember it's like a neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1008.88,
+      "ts_end": 1010.64,
+      "text": "And we are training the neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1010.76,
+      "ts_end": 1012.6,
+      "text": "So initially it will make mistakes of course.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1012.84,
+      "ts_end": 1014.3,
+      "text": "But there will be a loss function.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1014.54,
+      "ts_end": 1016.88,
+      "text": "And then we will eventually train the transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1017.08,
+      "ts_end": 1018.8,
+      "text": "To be better and better and better.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1019.3,
+      "ts_end": 1021.72,
+      "text": "So think of this as a neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1021.94,
+      "ts_end": 1023.0,
+      "text": "So let me show you the.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1023.94,
+      "ts_end": 1024.46,
+      "text": "Actual.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1025.1,
+      "ts_end": 1026.4,
+      "text": "Schematic of the transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1026.6,
+      "ts_end": 1027.94,
+      "text": "What we have seen right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1028.0,
+      "ts_end": 1029.08,
+      "text": "Is a simplified architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1029.6,
+      "ts_end": 1032.28,
+      "text": "But if you see the actual schematic of the transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1032.46,
+      "ts_end": 1034.2,
+      "text": "You will see that there are feed forward layers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1035.02,
+      "ts_end": 1036.4,
+      "text": "Which means there are weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1036.46,
+      "ts_end": 1038.4,
+      "text": "And parameters which need to be optimized.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1038.78,
+      "ts_end": 1039.86,
+      "text": "So that the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1040.28,
+      "ts_end": 1042.02,
+      "text": "Predicts the German word correctly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1043.33,
+      "ts_end": 1045.79,
+      "text": "It's very similar to training a neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1045.97,
+      "ts_end": 1046.15,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1046.45,
+      "ts_end": 1049.37,
+      "text": "So these are actually the 8 steps.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1049.97,
+      "ts_end": 1050.83,
+      "text": "Which are.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1051.27,
+      "ts_end": 1052.47,
+      "text": "Very much important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1053.83,
+      "ts_end": 1054.33,
+      "text": "To train the transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1054.71,
+      "ts_end": 1057.01,
+      "text": "So let me actually go through these 8 steps.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1057.13,
+      "ts_end": 1059.29,
+      "text": "In the simplified transformer architecture again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1059.53,
+      "ts_end": 1062.31,
+      "text": "The first step is to have the input text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1062.41,
+      "ts_end": 1063.31,
+      "text": "Which is to be translated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1063.57,
+      "ts_end": 1064.61,
+      "text": "This is an example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1064.99,
+      "ts_end": 1066.73,
+      "text": "The second step is to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1067.23,
+      "ts_end": 1069.47,
+      "text": "Pre-process all the sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1069.61,
+      "ts_end": 1071.41,
+      "text": "By breaking them down into tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1071.69,
+      "ts_end": 1073.69,
+      "text": "And then assigning a token id.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1073.87,
+      "ts_end": 1074.63,
+      "text": "To each token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1075.11,
+      "ts_end": 1076.95,
+      "text": "The third step is basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1077.05,
+      "ts_end": 1079.35,
+      "text": "To pass these token ids into the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1079.55,
+      "ts_end": 1081.53,
+      "text": "And then convert these token ids.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1081.63,
+      "ts_end": 1083.33,
+      "text": "Into an embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1083.83,
+      "ts_end": 1085.45,
+      "text": "This means that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1085.47,
+      "ts_end": 1088.35,
+      "text": "Words are projected into high dimensional vector space.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1088.73,
+      "ts_end": 1090.67,
+      "text": "And the way these words are projected.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1090.99,
+      "ts_end": 1091.89,
+      "text": "Is such that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1091.99,
+      "ts_end": 1093.19,
+      "text": "The semantic relationship.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1093.65,
+      "ts_end": 1095.71,
+      "text": "Or the semantic meaning between the words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1095.83,
+      "ts_end": 1096.97,
+      "text": "Is captured very clearly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1097.69,
+      "ts_end": 1100.63,
+      "text": "Now this vector embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1100.69,
+      "ts_end": 1102.81,
+      "text": "Is fed as an input to the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1102.97,
+      "ts_end": 1104.09,
+      "text": "But along with this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1104.17,
+      "ts_end": 1105.57,
+      "text": "The decoder also receives.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1105.79,
+      "ts_end": 1107.43,
+      "text": "The partial output text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1107.93,
+      "ts_end": 1109.61,
+      "text": "Remember the decoder is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1109.99,
+      "ts_end": 1112.47,
+      "text": "Decoding the English to German.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1112.59,
+      "ts_end": 1113.81,
+      "text": "One word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1113.93,
+      "ts_end": 1115.55,
+      "text": "So for decoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1115.57,
+      "ts_end": 1116.43,
+      "text": "This is an example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1116.61,
+      "ts_end": 1118.49,
+      "text": "It already has the decoded answer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1118.59,
+      "ts_end": 1119.79,
+      "text": "For this is an.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1119.99,
+      "ts_end": 1122.97,
+      "text": "And now it wants to translate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1123.09,
+      "ts_end": 1124.55,
+      "text": "English to German for example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1124.83,
+      "ts_end": 1127.13,
+      "text": "So it receives this partial output text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1127.25,
+      "ts_end": 1128.65,
+      "text": "It receives the vector embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1128.69,
+      "ts_end": 1130.23,
+      "text": "And then it is trained.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1130.31,
+      "ts_end": 1132.23,
+      "text": "To predict the next output word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1132.27,
+      "ts_end": 1132.97,
+      "text": "Which is by spike.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1133.54,
+      "ts_end": 1135.58,
+      "text": "Which is the German for example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1136.06,
+      "ts_end": 1137.14,
+      "text": "And this is how.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1138.12,
+      "ts_end": 1140.26,
+      "text": "English is translated into German.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1140.26,
+      "ts_end": 1141.36,
+      "text": "In a transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1141.88,
+      "ts_end": 1144.3,
+      "text": "So this is a very very simplified.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1144.72,
+      "ts_end": 1146.56,
+      "text": "Explanation of how a transformer works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1146.8,
+      "ts_end": 1148.04,
+      "text": "We have not even covered.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1148.18,
+      "ts_end": 1148.94,
+      "text": "Attention here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1149.08,
+      "ts_end": 1151.38,
+      "text": "You might be thinking why is this paper titled.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0012"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Transformer architecture showing two stacked blocks (Nx repetitions) with encoder and decoder components, each containing Multi-Head Attention, Add & Norm layers, and Feed Forward networks, culminating in Linear and Softmax output layers.",
+          "diagram_elements": [
+            "Masked Multi-Head Attention",
+            "Add & Norm",
+            "Feed Forward",
+            "Multi-Head Attention",
+            "Linear",
+            "Softmax",
+            "Nx (encoder block)",
+            "Nx (decoder block)"
+          ],
+          "confidence": 0.92,
+          "frame_id": "NLn4eetGmf8_f0012",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 1149.699667,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0012.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1151.6,
+      "ts_end": 1152.7,
+      "text": "Attention is all you need.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1152.88,
+      "ts_end": 1155.06,
+      "text": "And there is a very specific reason for it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1155.22,
+      "ts_end": 1157.58,
+      "text": "I just want you to not get intimidated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1157.74,
+      "ts_end": 1159.18,
+      "text": "Or afraid by the transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1159.4,
+      "ts_end": 1162.18,
+      "text": "And that's why I am showing you this simplified form right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1162.5,
+      "ts_end": 1164.26,
+      "text": "At the simplest form.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1164.38,
+      "ts_end": 1165.96,
+      "text": "You can think of a transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1166.08,
+      "ts_end": 1167.5,
+      "text": "As a neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1167.5,
+      "ts_end": 1169.02,
+      "text": "And you are optimizing parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1169.28,
+      "ts_end": 1170.18,
+      "text": "In a neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1170.46,
+      "ts_end": 1171.82,
+      "text": "It's as simple as that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1172.06,
+      "ts_end": 1173.78,
+      "text": "What many students do is that.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0013"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Attention Is All You Need",
+          "extracted_text": "Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in this paper solely for use in journalistic or scholarly works.\n\nAshish Vaswani*\nGoogle Brain\navaswani@google.com\n\nNoam Shazeer*\nGoogle Brain\nnoam@google.com\n\nNiki Parmar*\nGoogle Research\nnikip@google.com\n\nJakob Uszkoreit*\nGoogle Research\nusz@google.com\n\nLlion Jones*\nGoogle Research\n\nAidan N. Gomez\u2020\nUniversity of Toronto\n\n\u0141ukasz Kaiser*\nGoogle Brain",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "NLn4eetGmf8_f0013",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 1173.399667,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0013.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1173.84,
+      "ts_end": 1176.14,
+      "text": "They try to understand this architecture directly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1176.98,
+      "ts_end": 1178.78,
+      "text": "And then that leads to many issues.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1178.9,
+      "ts_end": 1180.76,
+      "text": "Because it's actually fairly complicated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1181.06,
+      "ts_end": 1182.98,
+      "text": "And then they develop a fear for this subject.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1184.1,
+      "ts_end": 1185.6,
+      "text": "I wanted to avoid that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1185.72,
+      "ts_end": 1188.14,
+      "text": "So I started with this simplified transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1189.48,
+      "ts_end": 1189.96,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1190.04,
+      "ts_end": 1192.06,
+      "text": "I hope you have understood until this point.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1192.16,
+      "ts_end": 1194.04,
+      "text": "I encourage you all to maybe pause here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1194.18,
+      "ts_end": 1195.74,
+      "text": "And think about what you have learnt.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1197.28,
+      "ts_end": 1198.78,
+      "text": "Now let's go to the next.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1199.68,
+      "ts_end": 1200.32,
+      "text": "Part of the lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1201.44,
+      "ts_end": 1202.74,
+      "text": "The transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1203.4,
+      "ts_end": 1205.98,
+      "text": "Predominantly consists of two main blocks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1206.28,
+      "ts_end": 1208.38,
+      "text": "The first is the encoder block.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1208.74,
+      "ts_end": 1210.86,
+      "text": "And the second is the decoder block.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1211.04,
+      "ts_end": 1212.66,
+      "text": "And we saw both of these here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1212.76,
+      "ts_end": 1214.34,
+      "text": "You see the encoder was over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1214.58,
+      "ts_end": 1216.58,
+      "text": "And the decoder was over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1217.4,
+      "ts_end": 1217.96,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1218.04,
+      "ts_end": 1219.7,
+      "text": "The main purpose of the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1219.82,
+      "ts_end": 1221.58,
+      "text": "Is to convert the input text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1221.7,
+      "ts_end": 1222.74,
+      "text": "Into embedding vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1222.88,
+      "ts_end": 1225.56,
+      "text": "And the main purpose of the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1225.72,
+      "ts_end": 1227.66,
+      "text": "Is to generate the output text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1227.94,
+      "ts_end": 1229.5,
+      "text": "From the embedding vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1230.0,
+      "ts_end": 1231.4,
+      "text": "And from the partial output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1231.46,
+      "ts_end": 1232.54,
+      "text": "Which it has received.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1233.62,
+      "ts_end": 1235.26,
+      "text": "So encoder and decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1235.34,
+      "ts_end": 1237.86,
+      "text": "Are the two key blocks of a transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1238.62,
+      "ts_end": 1239.14,
+      "text": "Remember.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1239.26,
+      "ts_end": 1241.42,
+      "text": "The GPT architecture is actually different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1241.56,
+      "ts_end": 1242.3,
+      "text": "Than the transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1242.58,
+      "ts_end": 1243.62,
+      "text": "Because that came later.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1243.88,
+      "ts_end": 1245.54,
+      "text": "And it does not have the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1247.7,
+      "ts_end": 1249.32,
+      "text": "It only has the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1249.58,
+      "ts_end": 1251.06,
+      "text": "But we will come to that later.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1251.24,
+      "ts_end": 1251.84,
+      "text": "Right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1251.92,
+      "ts_end": 1254.96,
+      "text": "Remember that transformers have both encoder and decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1255.48,
+      "ts_end": 1256.0,
+      "text": "Now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1256.0,
+      "ts_end": 1259.83,
+      "text": "One key part of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1260.09,
+      "ts_end": 1261.79,
+      "text": "Is this thing called as.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1261.89,
+      "ts_end": 1263.37,
+      "text": "Self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1264.25,
+      "ts_end": 1265.93,
+      "text": "So lets actually google.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1266.27,
+      "ts_end": 1268.15,
+      "text": "Or lets actually control F.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1268.17,
+      "ts_end": 1268.87,
+      "text": "Attention here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1268.97,
+      "ts_end": 1270.39,
+      "text": "And see how many times it shows up.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1270.49,
+      "ts_end": 1271.35,
+      "text": "97 times.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1272.05,
+      "ts_end": 1274.83,
+      "text": "And lets see how they have defined attention actually.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1277.63,
+      "ts_end": 1278.27,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1278.57,
+      "ts_end": 1281.35,
+      "text": "Attention mechanisms have become an integral part.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1281.45,
+      "ts_end": 1282.35,
+      "text": "Of sequence modeling.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1282.95,
+      "ts_end": 1284.73,
+      "text": "Allowing modeling of dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1285.05,
+      "ts_end": 1286.79,
+      "text": "Without regard to the distance.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1287.95,
+      "ts_end": 1289.17,
+      "text": "Between input or output sequences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1289.57,
+      "ts_end": 1290.53,
+      "text": "Remember this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1290.73,
+      "ts_end": 1293.47,
+      "text": "So the attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1293.67,
+      "ts_end": 1295.51,
+      "text": "Allows you to model the dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1295.57,
+      "ts_end": 1296.81,
+      "text": "Between different worlds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1296.97,
+      "ts_end": 1299.47,
+      "text": "Without regards to how close apart.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1299.65,
+      "ts_end": 1301.21,
+      "text": "Or how far apart the worlds are.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1301.78,
+      "ts_end": 1303.56,
+      "text": "That is one key thing to remember.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1306.64,
+      "ts_end": 1307.48,
+      "text": "And then.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1307.54,
+      "ts_end": 1308.18,
+      "text": "Self attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1308.62,
+      "ts_end": 1310.32,
+      "text": "Is an attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1310.42,
+      "ts_end": 1311.86,
+      "text": "Relating different positions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1312.36,
+      "ts_end": 1313.68,
+      "text": "Of a single sequence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1313.92,
+      "ts_end": 1316.82,
+      "text": "In order to compute a representation of the sequence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1317.2,
+      "ts_end": 1319.0,
+      "text": "This is a bit difficult to understand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1319.68,
+      "ts_end": 1320.5,
+      "text": "So let me actually.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1321.16,
+      "ts_end": 1323.84,
+      "text": "Explain to you the way I understood it on the whiteboard.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1324.53,
+      "ts_end": 1325.55,
+      "text": "What basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1325.71,
+      "ts_end": 1327.77,
+      "text": "Self attention mechanism does is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1327.87,
+      "ts_end": 1329.15,
+      "text": "Or attention is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1329.23,
+      "ts_end": 1330.97,
+      "text": "It allows the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1331.35,
+      "ts_end": 1334.05,
+      "text": "To weigh the importance of different worlds.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1334.11,
+      "ts_end": 1336.07,
+      "text": "And tokens relative to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1336.35,
+      "ts_end": 1337.99,
+      "text": "So lets say you have two sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1338.17,
+      "ts_end": 1338.41,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1338.53,
+      "ts_end": 1341.39,
+      "text": "And lets say the first sentence is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1341.65,
+      "ts_end": 1343.33,
+      "text": "Harry Potter is on station.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1343.47,
+      "ts_end": 1344.79,
+      "text": "Or platform number something.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1345.11,
+      "ts_end": 1347.23,
+      "text": "And then Harry Potter wants to board the train.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1347.43,
+      "ts_end": 1348.89,
+      "text": "And then third sentence fourth sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1349.87,
+      "ts_end": 1351.21,
+      "text": "You are on the fourth sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1351.45,
+      "ts_end": 1354.03,
+      "text": "To predict the next word in the fourth sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1354.11,
+      "ts_end": 1356.07,
+      "text": "The context is very important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1356.25,
+      "ts_end": 1356.43,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1356.51,
+      "ts_end": 1360.51,
+      "text": "So you need to know what the text was in the sentence number one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1360.57,
+      "ts_end": 1361.67,
+      "text": "Sentence number two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1361.73,
+      "ts_end": 1363.43,
+      "text": "And sentence number three as well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1364.07,
+      "ts_end": 1365.73,
+      "text": "Only then you will be able to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1365.77,
+      "ts_end": 1367.39,
+      "text": "Really understand the fourth sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1367.51,
+      "ts_end": 1369.59,
+      "text": "And predict the next word in the fourth sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1370.81,
+      "ts_end": 1372.55,
+      "text": "This is the meaning of.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1372.63,
+      "ts_end": 1373.69,
+      "text": "Long range dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1374.43,
+      "ts_end": 1375.45,
+      "text": "Which means that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1375.61,
+      "ts_end": 1378.37,
+      "text": "If I am predicting the next word in the fourth sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1378.53,
+      "ts_end": 1379.29,
+      "text": "I need to know.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1380.35,
+      "ts_end": 1381.85,
+      "text": "The importance of previous words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1381.99,
+      "ts_end": 1383.77,
+      "text": "I need to know how much attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1384.05,
+      "ts_end": 1386.05,
+      "text": "Should I give to the previous words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1386.11,
+      "ts_end": 1387.87,
+      "text": "Which word which has come previously.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1387.87,
+      "ts_end": 1389.05,
+      "text": "Should receive more attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1389.59,
+      "ts_end": 1391.73,
+      "text": "Maybe Harry should receive more attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1391.95,
+      "ts_end": 1394.17,
+      "text": "Maybe platform or train should receive more attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1395.36,
+      "ts_end": 1396.82,
+      "text": "The self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1397.12,
+      "ts_end": 1398.34,
+      "text": "Allows you to capture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1398.42,
+      "ts_end": 1399.6,
+      "text": "Long range dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1400.16,
+      "ts_end": 1402.64,
+      "text": "So that the model can look even far behind.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1402.92,
+      "ts_end": 1404.46,
+      "text": "And even to sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1404.54,
+      "ts_end": 1405.9,
+      "text": "Closer to the current one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1405.96,
+      "ts_end": 1407.38,
+      "text": "To identify the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1408.88,
+      "ts_end": 1409.44,
+      "text": "So.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1411.24,
+      "ts_end": 1411.56,
+      "text": "The self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1411.72,
+      "ts_end": 1413.74,
+      "text": "Allows the model to weigh the importance.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1413.8,
+      "ts_end": 1415.32,
+      "text": "Of different words or tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1415.48,
+      "ts_end": 1416.62,
+      "text": "Relative to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1416.8,
+      "ts_end": 1418.06,
+      "text": "That is very important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1418.34,
+      "ts_end": 1421.32,
+      "text": "So basically if you are to predict the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1421.4,
+      "ts_end": 1422.62,
+      "text": "The self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1423.12,
+      "ts_end": 1424.6,
+      "text": "Maintains this attention score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1425.0,
+      "ts_end": 1426.54,
+      "text": "Which basically tells you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1426.82,
+      "ts_end": 1428.9,
+      "text": "Which word should be given more attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1429.06,
+      "ts_end": 1430.42,
+      "text": "When you predict the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1430.74,
+      "ts_end": 1432.92,
+      "text": "And this is a key part of the intuition.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1433.04,
+      "ts_end": 1435.12,
+      "text": "For all of you to think about.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1435.9,
+      "ts_end": 1437.28,
+      "text": "So let us actually.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1438.28,
+      "ts_end": 1439.18,
+      "text": "Look at.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1441.5,
+      "ts_end": 1443.28,
+      "text": "The part where attention comes in.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1443.34,
+      "ts_end": 1444.32,
+      "text": "See multi head attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1444.54,
+      "ts_end": 1447.38,
+      "text": "There are these blocks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1447.54,
+      "ts_end": 1448.94,
+      "text": "Which are called as attention blocks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1449.46,
+      "ts_end": 1450.92,
+      "text": "So these attention blocks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1451.04,
+      "ts_end": 1453.16,
+      "text": "Make sure you capture long range dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1453.24,
+      "ts_end": 1454.08,
+      "text": "In the sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1454.9,
+      "ts_end": 1456.78,
+      "text": "That is why this paper is actually called.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1456.86,
+      "ts_end": 1457.98,
+      "text": "Attention is all you need.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1458.1,
+      "ts_end": 1459.66,
+      "text": "Because of the self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1460.7,
+      "ts_end": 1462.98,
+      "text": "And the intuition behind attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1463.14,
+      "ts_end": 1464.8,
+      "text": "Which these folks introduced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1465.2,
+      "ts_end": 1465.86,
+      "text": "So as I mentioned.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1466.22,
+      "ts_end": 1468.16,
+      "text": "They calculated an attention score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1468.42,
+      "ts_end": 1470.2,
+      "text": "Which basically is a matrix.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1471.5,
+      "ts_end": 1472.32,
+      "text": "That is why these words should be given.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1472.4,
+      "ts_end": 1473.94,
+      "text": "More importance in relative.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1474.32,
+      "ts_end": 1476.24,
+      "text": "Or in relation to other words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1477.7,
+      "ts_end": 1478.52,
+      "text": "For now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1478.58,
+      "ts_end": 1480.46,
+      "text": "Just understand this intuition.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1480.82,
+      "ts_end": 1483.16,
+      "text": "So that later when we come to the mathematics.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1483.24,
+      "ts_end": 1484.2,
+      "text": "And coding of it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1484.32,
+      "ts_end": 1486.74,
+      "text": "I just want you to be comfortable with this notion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1487.06,
+      "ts_end": 1488.48,
+      "text": "And I want you to appreciate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1488.6,
+      "ts_end": 1489.78,
+      "text": "How beautiful this is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1489.9,
+      "ts_end": 1492.84,
+      "text": "Because you as a human.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1492.98,
+      "ts_end": 1494.8,
+      "text": "We keep context into our mind.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1494.82,
+      "ts_end": 1495.48,
+      "text": "Pretty naturally.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1495.58,
+      "ts_end": 1496.72,
+      "text": "When we are reading a story.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1496.82,
+      "ts_end": 1498.92,
+      "text": "We remember what was written on the previous page.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1502.36,
+      "ts_end": 1502.52,
+      "text": "And we have a very difficult.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1503.06,
+      "ts_end": 1506.28,
+      "text": "Self attention mechanism actually allows the model to do that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1506.46,
+      "ts_end": 1508.14,
+      "text": "It allows the model to capture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1508.18,
+      "ts_end": 1509.28,
+      "text": "Long range dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1509.74,
+      "ts_end": 1512.6,
+      "text": "So that it makes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1512.72,
+      "ts_end": 1514.0,
+      "text": "The next word prediction accurately.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1514.34,
+      "ts_end": 1515.32,
+      "text": "In chat GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1515.38,
+      "ts_end": 1516.16,
+      "text": "When you write an input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1517.76,
+      "ts_end": 1520.04,
+      "text": "GPT actually gives attention to every sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1520.18,
+      "ts_end": 1523.06,
+      "text": "And then it predicts what the next word could be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1523.24,
+      "ts_end": 1524.34,
+      "text": "It doesn't just look at the.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1525.6,
+      "ts_end": 1527.2,
+      "text": "Sentence before the current one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1527.32,
+      "ts_end": 1528.44,
+      "text": "It looks at all sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1528.56,
+      "ts_end": 1530.88,
+      "text": "Because maybe previous words are more important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1530.88,
+      "ts_end": 1532.79,
+      "text": "This is possible.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1532.83,
+      "ts_end": 1534.19,
+      "text": "Through the self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1535.51,
+      "ts_end": 1537.33,
+      "text": "So that is the second key concept.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1537.41,
+      "ts_end": 1538.57,
+      "text": "Which I wanted to introduce.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1539.61,
+      "ts_end": 1541.83,
+      "text": "And in the last part of the lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1541.99,
+      "ts_end": 1543.99,
+      "text": "We are going to look at the later variations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1544.03,
+      "ts_end": 1545.29,
+      "text": "Of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1545.77,
+      "ts_end": 1547.45,
+      "text": "So the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1547.55,
+      "ts_end": 1549.73,
+      "text": "Or this paper rather came out in 2017.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1550.51,
+      "ts_end": 1551.75,
+      "text": "The GPT models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1551.89,
+      "ts_end": 1553.33,
+      "text": "Came out after that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1553.57,
+      "ts_end": 1555.29,
+      "text": "And there is another set of models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1555.37,
+      "ts_end": 1556.17,
+      "text": "Called as BERT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1556.31,
+      "ts_end": 1558.83,
+      "text": "Which also came out as later variations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1558.89,
+      "ts_end": 1560.13,
+      "text": "Of the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1562.09,
+      "ts_end": 1562.79,
+      "text": "So there are two later variations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1563.13,
+      "ts_end": 1563.85,
+      "text": "Which I want to discuss.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1564.25,
+      "ts_end": 1565.93,
+      "text": "The first is called as BERT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1566.17,
+      "ts_end": 1571.61,
+      "text": "It is called as bi-directional encoder representations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1571.81,
+      "ts_end": 1573.17,
+      "text": "From transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1573.81,
+      "ts_end": 1575.43,
+      "text": "No need to understand the meaning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1575.63,
+      "ts_end": 1576.93,
+      "text": "But that is just what BERT means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1577.43,
+      "ts_end": 1578.89,
+      "text": "Maybe you would have heard this terminology.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1579.15,
+      "ts_end": 1581.33,
+      "text": "But did not know the full form.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1581.47,
+      "ts_end": 1582.37,
+      "text": "The full form is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1582.43,
+      "ts_end": 1584.37,
+      "text": "Bi-directional encoder representations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1584.57,
+      "ts_end": 1585.87,
+      "text": "From transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1586.21,
+      "ts_end": 1588.01,
+      "text": "And the second is GPT models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1588.37,
+      "ts_end": 1590.63,
+      "text": "Of course all of us have heard of chat GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1590.85,
+      "ts_end": 1592.23,
+      "text": "But the full form of GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1592.25,
+      "ts_end": 1593.47,
+      "text": "Is generative.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1593.83,
+      "ts_end": 1595.77,
+      "text": "Pre-trained transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1597.84,
+      "ts_end": 1599.02,
+      "text": "Pre-trained because.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1599.2,
+      "ts_end": 1601.22,
+      "text": "It is a pre-trained or a foundational model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1601.44,
+      "ts_end": 1603.02,
+      "text": "Which we saw in the previous lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1603.24,
+      "ts_end": 1605.86,
+      "text": "So now you should start understanding these terminologies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1606.48,
+      "ts_end": 1607.84,
+      "text": "Now you must be thinking.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1607.98,
+      "ts_end": 1609.58,
+      "text": "What is the difference between BERT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1609.86,
+      "ts_end": 1611.0,
+      "text": "And GPT models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1611.36,
+      "ts_end": 1612.96,
+      "text": "There is a big difference basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1613.34,
+      "ts_end": 1615.34,
+      "text": "The way BERT operates is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1615.48,
+      "ts_end": 1617.74,
+      "text": "It predicts hidden words in a given sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1618.12,
+      "ts_end": 1619.38,
+      "text": "So let us say you have a sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1619.66,
+      "ts_end": 1621.44,
+      "text": "It will mask some words randomly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1621.78,
+      "ts_end": 1623.0,
+      "text": "And it will try to predict.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1623.6,
+      "ts_end": 1624.82,
+      "text": "Those masked or hidden words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1625.16,
+      "ts_end": 1626.46,
+      "text": "That is what BERT does.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1626.8,
+      "ts_end": 1629.22,
+      "text": "What does GPT do as we have all seen.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1629.36,
+      "ts_end": 1630.68,
+      "text": "It generates a new word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1630.96,
+      "ts_end": 1632.72,
+      "text": "So there is a pretty big difference.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1632.86,
+      "ts_end": 1635.14,
+      "text": "Between how BERT works and how GPT works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1635.48,
+      "ts_end": 1636.5,
+      "text": "Let us see a schematic.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1636.8,
+      "ts_end": 1638.24,
+      "text": "So this is how BERT actually works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1638.7,
+      "ts_end": 1639.88,
+      "text": "Let us say we have a sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1639.98,
+      "ts_end": 1642.82,
+      "text": "This is an dash or question mark.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1642.9,
+      "ts_end": 1645.28,
+      "text": "Of how LLM dash perform.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1645.74,
+      "ts_end": 1647.28,
+      "text": "So let us say as input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1647.4,
+      "ts_end": 1649.06,
+      "text": "We have this text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1649.22,
+      "ts_end": 1649.86,
+      "text": "Which is incomplete.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1650.86,
+      "ts_end": 1652.56,
+      "text": "So BERT receives inputs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1653.76,
+      "ts_end": 1655.42,
+      "text": "Randomly masked during training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1655.72,
+      "ts_end": 1657.06,
+      "text": "And masked means that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1657.1,
+      "ts_end": 1658.52,
+      "text": "Let us say we do not know these words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1658.92,
+      "ts_end": 1660.88,
+      "text": "And then this is the input text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1661.02,
+      "ts_end": 1663.5,
+      "text": "We do the same pre-processing steps as we saw about.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1663.64,
+      "ts_end": 1666.32,
+      "text": "Converting them into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1666.6,
+      "ts_end": 1668.42,
+      "text": "Then we pass it to the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1668.48,
+      "ts_end": 1669.28,
+      "text": "Do the embedding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1669.36,
+      "ts_end": 1670.82,
+      "text": "Same thing like what we saw before.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1671.24,
+      "ts_end": 1673.68,
+      "text": "And then the main output is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1673.7,
+      "ts_end": 1674.94,
+      "text": "We fill the missing words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1675.22,
+      "ts_end": 1677.32,
+      "text": "So BERT model realizes that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1677.36,
+      "ts_end": 1679.52,
+      "text": "The missing words are example and can.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1679.88,
+      "ts_end": 1682.12,
+      "text": "So then the final sentence is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1682.12,
+      "ts_end": 1683.58,
+      "text": "This is an example of.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1683.66,
+      "ts_end": 1684.96,
+      "text": "How LLM can perform.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1685.62,
+      "ts_end": 1686.94,
+      "text": "This is how BERT works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1687.88,
+      "ts_end": 1689.52,
+      "text": "How GPT actually works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1689.56,
+      "ts_end": 1690.84,
+      "text": "Is something completely different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1691.2,
+      "ts_end": 1693.44,
+      "text": "So let us say the input which GPT receives.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1693.68,
+      "ts_end": 1696.24,
+      "text": "Is this is an example of how LLM can dash.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1697.65,
+      "ts_end": 1698.87,
+      "text": "So we just have to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1699.11,
+      "ts_end": 1700.35,
+      "text": "Predict the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1700.41,
+      "ts_end": 1701.67,
+      "text": "We receive incomplete text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1701.77,
+      "ts_end": 1703.19,
+      "text": "And we have to predict the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1703.85,
+      "ts_end": 1706.13,
+      "text": "So then the way GPT works.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1706.25,
+      "ts_end": 1707.89,
+      "text": "Is that it does the pre-processing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1707.89,
+      "ts_end": 1710.27,
+      "text": "Like we saw converts words to token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1710.87,
+      "ts_end": 1712.47,
+      "text": "Then there is a decoder model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1713.11,
+      "ts_end": 1714.15,
+      "text": "Not an encoder model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1714.55,
+      "ts_end": 1717.55,
+      "text": "So the decoder then predicts the last word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1717.67,
+      "ts_end": 1719.45,
+      "text": "Or the word which you do not know.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1719.99,
+      "ts_end": 1720.51,
+      "text": "Perform.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1720.89,
+      "ts_end": 1722.17,
+      "text": "So then the output is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1722.25,
+      "ts_end": 1724.49,
+      "text": "This is an example of how LLM can perform.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1725.19,
+      "ts_end": 1727.07,
+      "text": "So GPT models learn to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1727.13,
+      "ts_end": 1728.47,
+      "text": "Generate one word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1729.09,
+      "ts_end": 1731.11,
+      "text": "Now this leads to big differences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1731.13,
+      "ts_end": 1733.15,
+      "text": "Because if you see the GPT model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1733.25,
+      "ts_end": 1734.41,
+      "text": "Is left to right right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1734.71,
+      "ts_end": 1736.73,
+      "text": "All the left information is there.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1736.83,
+      "ts_end": 1738.97,
+      "text": "We are only predicting the right most information.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1739.35,
+      "ts_end": 1740.15,
+      "text": "What is not known.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1740.47,
+      "ts_end": 1741.51,
+      "text": "Whereas in BERT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1743.27,
+      "ts_end": 1743.45,
+      "text": "It is asked.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1743.63,
+      "ts_end": 1745.47,
+      "text": "So the model has to pay attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1745.51,
+      "ts_end": 1747.87,
+      "text": "To different parts of the sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1748.13,
+      "ts_end": 1750.43,
+      "text": "And that's why BERT actually does very well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1750.49,
+      "ts_end": 1751.51,
+      "text": "In sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1752.01,
+      "ts_end": 1753.37,
+      "text": "So here I have.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1754.49,
+      "ts_end": 1756.41,
+      "text": "I have a text which actually compares.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1757.59,
+      "ts_end": 1758.63,
+      "text": "Or answers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1758.69,
+      "ts_end": 1760.09,
+      "text": "Why is BERT so good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1760.17,
+      "ts_end": 1763.05,
+      "text": "When we do sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1763.43,
+      "ts_end": 1764.37,
+      "text": "So the reason.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1764.55,
+      "ts_end": 1766.31,
+      "text": "BERT is called bidirectional.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1766.53,
+      "ts_end": 1767.85,
+      "text": "So you will see that the name is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1768.11,
+      "ts_end": 1770.57,
+      "text": "Bidirectional encoder representation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1770.99,
+      "ts_end": 1771.17,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1773.95,
+      "ts_end": 1774.43,
+      "text": "So the BERT model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1774.43,
+      "ts_end": 1775.23,
+      "text": "Whereas in GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1775.27,
+      "ts_end": 1777.33,
+      "text": "We just look at the sentence from left to right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1777.73,
+      "ts_end": 1780.21,
+      "text": "But BERT looks at the sentence from both directions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1780.31,
+      "ts_end": 1782.25,
+      "text": "Because even the first word might be missing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1782.61,
+      "ts_end": 1784.57,
+      "text": "So it has to look from the left side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1784.69,
+      "ts_end": 1785.81,
+      "text": "As well as the right side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1786.84,
+      "ts_end": 1789.84,
+      "text": "And by looking at the entire sentence from both directions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1790.12,
+      "ts_end": 1791.7,
+      "text": "BERT can capture the nuances.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1791.76,
+      "ts_end": 1793.48,
+      "text": "And relationships between words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1793.7,
+      "ts_end": 1795.58,
+      "text": "That are important for understanding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1795.98,
+      "ts_end": 1797.0,
+      "text": "Meaning and context.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1797.0,
+      "ts_end": 1798.92,
+      "text": "For instance.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1799.12,
+      "ts_end": 1801.18,
+      "text": "BERT model can differentiate between.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1801.22,
+      "ts_end": 1803.2,
+      "text": "Bank as a financial institution.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1803.64,
+      "ts_end": 1805.24,
+      "text": "And bank as a river bank.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1805.5,
+      "ts_end": 1807.28,
+      "text": "By looking at the surrounding words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1808.79,
+      "ts_end": 1809.93,
+      "text": "So that is why.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1810.57,
+      "ts_end": 1812.07,
+      "text": "BERT can actually understand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1812.17,
+      "ts_end": 1813.89,
+      "text": "The nuances and relationships.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1814.07,
+      "ts_end": 1815.81,
+      "text": "Between different words in a sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1816.11,
+      "ts_end": 1818.45,
+      "text": "Since it looks at the sentence from both sides.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1818.87,
+      "ts_end": 1820.59,
+      "text": "That's why BERT is very commonly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1820.59,
+      "ts_end": 1821.95,
+      "text": "Used in sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1822.49,
+      "ts_end": 1824.23,
+      "text": "Even GPT can be used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1824.31,
+      "ts_end": 1825.31,
+      "text": "In sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1825.31,
+      "ts_end": 1827.17,
+      "text": "But the speciality of BERT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1827.23,
+      "ts_end": 1828.17,
+      "text": "Is sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1830.44,
+      "ts_end": 1831.92,
+      "text": "So that's the difference.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1832.04,
+      "ts_end": 1833.3,
+      "text": "Between BERT and GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1833.5,
+      "ts_end": 1835.88,
+      "text": "No one talks too much about BERT these days.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1835.98,
+      "ts_end": 1837.5,
+      "text": "All the hype is about GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1837.56,
+      "ts_end": 1838.46,
+      "text": "Chat GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1838.52,
+      "ts_end": 1840.44,
+      "text": "Because it produces one word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1840.84,
+      "ts_end": 1843.14,
+      "text": "It can complete missing text also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1843.52,
+      "ts_end": 1845.36,
+      "text": "It can also do sentiment analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1846.6,
+      "ts_end": 1848.16,
+      "text": "But I just want to explain.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1848.44,
+      "ts_end": 1850.72,
+      "text": "I just wanted to explain these differences to you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1850.78,
+      "ts_end": 1852.24,
+      "text": "So that you are aware of.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1852.34,
+      "ts_end": 1853.48,
+      "text": "What BERT means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1853.58,
+      "ts_end": 1854.44,
+      "text": "What GPT means.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1856.62,
+      "ts_end": 1858.58,
+      "text": "Have the word transformers in them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1858.86,
+      "ts_end": 1860.2,
+      "text": "Because they have originated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1860.24,
+      "ts_end": 1861.74,
+      "text": "From the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1863.12,
+      "ts_end": 1864.74,
+      "text": "Which we just consider.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1865.14,
+      "ts_end": 1866.2,
+      "text": "But as you saw.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1866.26,
+      "ts_end": 1868.38,
+      "text": "The GPT model does not have an encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1868.52,
+      "ts_end": 1869.62,
+      "text": "They only have a decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1870.26,
+      "ts_end": 1871.34,
+      "text": "That's one key thing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1871.4,
+      "ts_end": 1872.84,
+      "text": "Which I wanted to demonstrate here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1873.94,
+      "ts_end": 1876.46,
+      "text": "Whereas the BERT model only has the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1876.72,
+      "ts_end": 1878.28,
+      "text": "So remember these differences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1878.32,
+      "ts_end": 1879.82,
+      "text": "Between BERT and GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1881.08,
+      "ts_end": 1882.96,
+      "text": "And now one thing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1883.0,
+      "ts_end": 1884.06,
+      "text": "Which I would like to cover.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1884.2,
+      "ts_end": 1885.4,
+      "text": "Before we end the lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1886.98,
+      "ts_end": 1888.66,
+      "text": "Is the difference between transformer and LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1889.25,
+      "ts_end": 1891.05,
+      "text": "So are they the same thing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1891.19,
+      "ts_end": 1892.45,
+      "text": "When we say LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1892.49,
+      "ts_end": 1894.13,
+      "text": "Can we also say transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1895.54,
+      "ts_end": 1897.7,
+      "text": "So the key thing to note is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1897.96,
+      "ts_end": 1900.5,
+      "text": "Not all transformers are LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1901.58,
+      "ts_end": 1902.08,
+      "text": "Transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1902.08,
+      "ts_end": 1904.06,
+      "text": "Can also be used for other tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1904.18,
+      "ts_end": 1905.36,
+      "text": "Like computer vision.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1905.78,
+      "ts_end": 1908.2,
+      "text": "So one thing which I would like to show you here.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0015"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Transformers in computer vision",
+          "extracted_text": "Self-attention (Vaswani et al.)",
+          "code": null,
+          "math": [
+            "A(K, Q) = \\text{Softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)",
+            "A \\in \\mathbb{R}^{N \\times N}"
+          ],
+          "diagram_summary": "Diagram showing transformer architecture for computer vision with self-attention mechanism, including patch embedding, stage 1 processing, and attention computation with queries, keys, and values.",
+          "diagram_elements": [
+            "Patch embedding (H\u00d7W\u00d73)",
+            "Stage 1",
+            "Self-attention block",
+            "Q (Query)",
+            "K^T/\u221ad_k (Key)",
+            "Softmax",
+            "Sample images (animal and colorful pattern)"
+          ],
+          "confidence": 0.85,
+          "frame_id": "NLn4eetGmf8_f0015",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 1908.099667,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0015.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1908.28,
+      "ts_end": 1908.9,
+      "text": "Is this thing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1909.98,
+      "ts_end": 1913.3,
+      "text": "So transformers are not only used for language tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1913.62,
+      "ts_end": 1915.12,
+      "text": "They are also used for vision tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1915.26,
+      "ts_end": 1916.24,
+      "text": "Such as image recognition.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1916.54,
+      "ts_end": 1918.08,
+      "text": "Image classification etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1918.64,
+      "ts_end": 1921.14,
+      "text": "Here is a website which I have pulled out.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0016"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Vision Transformers (ViT) in Image Recognition \u2013 2024 Guide",
+          "extracted_text": "DEEP LEARNING\n\nAuthor: Gaudenz Boesch\nDate: November 25, 2023\n\nBuild, deploy, operate computer vision at scale\n\nVision Transformers (ViT) has recently emerged as a competitive alternative to Convolutional Neural Networks (CNNs) that are currently state-of-the-art (SOTA) in different computer vision tasks. ViT models outperform the current SOTA CNNs by almost x4 in terms of computational efficiency and accuracy.",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Grid of 36 sample images showing various computer vision tasks and visualizations, including object detection, segmentation, and feature maps.",
+          "diagram_elements": [
+            "Brain/medical imaging",
+            "Feature visualizations (purple/green heatmaps)",
+            "Object detection boxes",
+            "Segmentation masks",
+            "Natural objects (fruits, animals, household items)",
+            "Architectural/structural images"
+          ],
+          "confidence": 0.92,
+          "frame_id": "NLn4eetGmf8_f0016",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 1918.699667,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0016.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1921.28,
+      "ts_end": 1923.1,
+      "text": "These are called as vision transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1923.1,
+      "ts_end": 1923.54,
+      "text": "VIT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1924.06,
+      "ts_end": 1926.32,
+      "text": "And they can be used for various applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1926.54,
+      "ts_end": 1928.08,
+      "text": "So here see the vision transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1928.1,
+      "ts_end": 1930.48,
+      "text": "Is being used to detect a pothole on the road.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1931.04,
+      "ts_end": 1932.82,
+      "text": "Then there are a number of.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1933.14,
+      "ts_end": 1934.96,
+      "text": "Other important applications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1935.06,
+      "ts_end": 1936.6,
+      "text": "Such as it can be used to classify.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1936.74,
+      "ts_end": 1938.8,
+      "text": "Between tumors as malignant and benign.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1938.82,
+      "ts_end": 1939.86,
+      "text": "Just from the images.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1940.36,
+      "ts_end": 1942.12,
+      "text": "And a number of people have discussed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1942.2,
+      "ts_end": 1943.36,
+      "text": "The similarities and differences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1943.6,
+      "ts_end": 1945.94,
+      "text": "Between convolutional neural network and VIT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1946.57,
+      "ts_end": 1948.05,
+      "text": "So VIT achieves.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1948.67,
+      "ts_end": 1950.15,
+      "text": "Remarkable results compared to CNN.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1950.33,
+      "ts_end": 1952.15,
+      "text": "While obtaining substantially fewer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1953.35,
+      "ts_end": 1954.29,
+      "text": "Computational resources.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1954.33,
+      "ts_end": 1955.19,
+      "text": "For pre-training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1956.48,
+      "ts_end": 1958.46,
+      "text": "In comparison to CNN.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1959.18,
+      "ts_end": 1961.54,
+      "text": "Vision transformers show a generally weaker bias.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1961.98,
+      "ts_end": 1962.96,
+      "text": "So basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1963.22,
+      "ts_end": 1966.02,
+      "text": "You think of only convolutional neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1966.2,
+      "ts_end": 1967.62,
+      "text": "When you think of image classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1967.76,
+      "ts_end": 1968.1,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1968.34,
+      "ts_end": 1970.98,
+      "text": "But vision transformers are a new method.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1971.36,
+      "ts_end": 1973.78,
+      "text": "Which is also gaining a lot of popularity.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1974.2,
+      "ts_end": 1975.36,
+      "text": "And they can be used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1975.46,
+      "ts_end": 1976.98,
+      "text": "For image classification tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1978.69,
+      "ts_end": 1979.57,
+      "text": "So remember.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1980.37,
+      "ts_end": 1981.33,
+      "text": "Don't think of transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1981.96,
+      "ts_end": 1983.5,
+      "text": "Don't think of transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1983.5,
+      "ts_end": 1985.72,
+      "text": "Only in the context of large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1985.8,
+      "ts_end": 1986.78,
+      "text": "Or text generation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1987.64,
+      "ts_end": 1989.22,
+      "text": "Transformers can also be used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1989.32,
+      "ts_end": 1990.36,
+      "text": "For computer vision.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1990.9,
+      "ts_end": 1991.32,
+      "text": "So remember.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1991.48,
+      "ts_end": 1993.54,
+      "text": "Not all transformers are LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1993.98,
+      "ts_end": 1995.44,
+      "text": "So what about LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1995.5,
+      "ts_end": 1997.34,
+      "text": "Are all LLMs transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1997.62,
+      "ts_end": 1999.28,
+      "text": "So that is also not true.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1999.38,
+      "ts_end": 2001.62,
+      "text": "Not all LLMs are also transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2002.26,
+      "ts_end": 2004.46,
+      "text": "LLMs can be based on recurrent.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2004.46,
+      "ts_end": 2006.76,
+      "text": "Or convolutional architectures as well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2006.76,
+      "ts_end": 2009.22,
+      "text": "This is one very important point to remember.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2009.48,
+      "ts_end": 2011.02,
+      "text": "I had made a presentation.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0018"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Timeline showing the evolution of neural network architectures from 1980 to 2017, progressing from Recurrent Neural Networks to Long Short-Term Memory Networks to Transformers, with increasing complexity represented by cylindrical shapes labeled Bam!, Double Bam!!, and Triple Bam!!!",
+          "diagram_elements": [
+            "Recurrent Neural Networks (1980)",
+            "Long Short-Term Memory Networks (1997)",
+            "Transformers (2017)",
+            "Bam!",
+            "Double Bam!!",
+            "Triple Bam!!!",
+            "Dotted arrows showing progression"
+          ],
+          "confidence": 0.95,
+          "frame_id": "NLn4eetGmf8_f0018",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 2009.599667,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0018.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 2011.7,
+      "ts_end": 2012.76,
+      "text": "Some time back.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0019"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": null,
+          "extracted_text": "1980\n1997\n2017",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Timeline showing three years: 1980, 1997, and 2017, displayed horizontally across the slide.",
+          "diagram_elements": [
+            "1980",
+            "1997",
+            "2017"
+          ],
+          "confidence": 0.95,
+          "frame_id": "NLn4eetGmf8_f0019",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 2012.733,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0019.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 2012.96,
+      "ts_end": 2014.84,
+      "text": "And this image has been taken from.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2015.26,
+      "ts_end": 2016.3,
+      "text": "Stats Quest channel.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2016.58,
+      "ts_end": 2018.32,
+      "text": "So before even.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2018.82,
+      "ts_end": 2020.18,
+      "text": "Transformers came into the picture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2020.24,
+      "ts_end": 2021.34,
+      "text": "Here you can see 1980.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2021.9,
+      "ts_end": 2023.64,
+      "text": "Recurrent neural networks were introduced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2023.88,
+      "ts_end": 2024.94,
+      "text": "In 1997.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2025.28,
+      "ts_end": 2027.62,
+      "text": "Long short term memory networks were introduced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2028.04,
+      "ts_end": 2030.68,
+      "text": "Both of them could do sequence modeling tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2030.96,
+      "ts_end": 2033.44,
+      "text": "And both of them could do text completion tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2034.08,
+      "ts_end": 2035.78,
+      "text": "So they also can be called.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2035.84,
+      "ts_end": 2036.66,
+      "text": "As language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2036.76,
+      "ts_end": 2038.7,
+      "text": "So remember that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2039.25,
+      "ts_end": 2040.87,
+      "text": "All LLMs are not.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2041.87,
+      "ts_end": 2042.43,
+      "text": "Transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2044.04,
+      "ts_end": 2045.46,
+      "text": "LLMs can also be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2045.62,
+      "ts_end": 2046.76,
+      "text": "Recurrent neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2046.92,
+      "ts_end": 2048.48,
+      "text": "Or long short term memory networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2048.92,
+      "ts_end": 2050.46,
+      "text": "To give you a quick introduction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2050.84,
+      "ts_end": 2052.68,
+      "text": "What RNNs actually do is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2052.82,
+      "ts_end": 2055.3,
+      "text": "RNNs maintain this kind of a feedback loop.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2056.2,
+      "ts_end": 2057.42,
+      "text": "So that is why.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2057.48,
+      "ts_end": 2059.46,
+      "text": "We can incorporate memory into account.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2061.42,
+      "ts_end": 2062.72,
+      "text": "LSTM on the other hand.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0021"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Generative AI History: Long Short Term Memory \u2013 1997",
+          "extracted_text": "LONG SHORT-TERM MEMORY NEURAL NETWORKS\n\nLSTMs are a specialized type of RNN designed to address the vanishing gradient problem, which occurs when training RNNs on long sequences.",
+          "code": null,
+          "math": null,
+          "diagram_summary": "LSTM Recurrent Unit diagram showing the internal architecture with gates (input, forget, output) represented by colored nodes (red and blue circles) connected by lines, illustrating the flow of information through the cell.",
+          "diagram_elements": [
+            "LSTM Recurrent Unit",
+            "Cell state",
+            "Input gate",
+            "Forget gate",
+            "Output gate",
+            "Tanh activation",
+            "Sigmoid activation"
+          ],
+          "confidence": 0.85,
+          "frame_id": "NLn4eetGmf8_f0021",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 2061.933,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0021.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 2063.0,
+      "ts_end": 2063.56,
+      "text": "Incorporates.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2063.66,
+      "ts_end": 2064.78,
+      "text": "Two separate paths.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2065.08,
+      "ts_end": 2067.18,
+      "text": "One path about short term memories.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2067.72,
+      "ts_end": 2069.14,
+      "text": "And one path about long term memories.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2069.52,
+      "ts_end": 2070.56,
+      "text": "That's why they are called.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2070.66,
+      "ts_end": 2074.52,
+      "text": "Long short term memory networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2074.78,
+      "ts_end": 2076.52,
+      "text": "So one path is for long term memories.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2076.66,
+      "ts_end": 2078.54,
+      "text": "And one path is for short term memories.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2079.36,
+      "ts_end": 2080.2,
+      "text": "So basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2080.24,
+      "ts_end": 2081.76,
+      "text": "We have one green line.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2082.0,
+      "ts_end": 2083.18,
+      "text": "Let's say which is shown here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2083.3,
+      "ts_end": 2084.8,
+      "text": "That represents long term memory.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2085.32,
+      "ts_end": 2087.56,
+      "text": "One line which shows the short term memory.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2087.8,
+      "ts_end": 2089.76,
+      "text": "And then basically using both.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2089.82,
+      "ts_end": 2091.76,
+      "text": "We can make predictions of what comes next.",
+      "frame_ids": [
+        "NLn4eetGmf8_f0022"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "LSTM cell state updates over time showing Company A value prediction: Initial Long Term Memory (0) and Short Term Memory (0) are updated through Days 1-4 with operations (\u00d7, +) producing intermediate values (-.2, -.1, .5, .25, -.3, -.2, 1), culminating in a prediction for Day 5.",
+          "diagram_elements": [
+            "Company A value chart (Days 1-5)",
+            "High=1 / Low=0 scale",
+            "Initial Long Term Memory: 0",
+            "Initial Short Term Memory: 0",
+            "Day 1: \u00d7, +, value -.2, STM 0",
+            "Day 2: \u00d7, +, value -.1, STM 0.5",
+            "Day 3: \u00d7, +, value -.2, STM 0.25",
+            "Updated Long Term Memory: -.3",
+            "Updated Short Term Memory: -.2",
+            "Day 4: \u00d7, +, STM 1",
+            "Day 5: prediction target (shaded region)"
+          ],
+          "confidence": 0.85,
+          "frame_id": "NLn4eetGmf8_f0022",
+          "video_id": "NLn4eetGmf8",
+          "timestamp_sec": 2091.566333,
+          "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0022.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 2092.16,
+      "ts_end": 2094.26,
+      "text": "So even recurrent neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2094.56,
+      "ts_end": 2097.02,
+      "text": "And long short term memory networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2097.02,
+      "ts_end": 2099.2,
+      "text": "And even some convolutional.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2099.6,
+      "ts_end": 2101.16,
+      "text": "Architectures can also be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2101.2,
+      "ts_end": 2102.26,
+      "text": "Large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2102.88,
+      "ts_end": 2104.04,
+      "text": "So as we end.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2104.14,
+      "ts_end": 2105.62,
+      "text": "I just want you to remember that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2105.68,
+      "ts_end": 2107.58,
+      "text": "Not all transformers are LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2107.68,
+      "ts_end": 2109.36,
+      "text": "This is very important to keep in mind.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2109.54,
+      "ts_end": 2112.14,
+      "text": "And not all LLMs are transformers also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2113.28,
+      "ts_end": 2114.86,
+      "text": "So don't use the terms.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2115.22,
+      "ts_end": 2117.22,
+      "text": "Transformers and LLMs interchangeably.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2117.4,
+      "ts_end": 2119.28,
+      "text": "They are actually very different things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2119.48,
+      "ts_end": 2120.8,
+      "text": "But not many students.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2120.94,
+      "ts_end": 2122.64,
+      "text": "Or not many people really understand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2122.72,
+      "ts_end": 2125.08,
+      "text": "The similarities or the differences between them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2125.26,
+      "ts_end": 2127.32,
+      "text": "One purpose of these set of lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2127.56,
+      "ts_end": 2129.8,
+      "text": "Is for you to understand everything from basics.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2130.0,
+      "ts_end": 2131.36,
+      "text": "The way it is supposed to be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2131.68,
+      "ts_end": 2133.66,
+      "text": "That way you will also be much more confident.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2133.72,
+      "ts_end": 2135.32,
+      "text": "When you transition your career.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2135.56,
+      "ts_end": 2137.9,
+      "text": "Or you are sitting for an LLM interview.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2138.06,
+      "ts_end": 2139.12,
+      "text": "And if you don't know the difference.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2139.22,
+      "ts_end": 2140.7,
+      "text": "Between transformers or LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2140.92,
+      "ts_end": 2142.94,
+      "text": "These lectures can clarify those.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2143.36,
+      "ts_end": 2144.74,
+      "text": "Similarities and differences for you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2145.08,
+      "ts_end": 2147.56,
+      "text": "I am going to go into a lot of detail in lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2147.76,
+      "ts_end": 2149.08,
+      "text": "Like what we did right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2149.18,
+      "ts_end": 2150.12,
+      "text": "And not assume anything.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2150.58,
+      "ts_end": 2152.8,
+      "text": "So I have written number of things on the whiteboard.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2152.86,
+      "ts_end": 2153.82,
+      "text": "So that you can understand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2155.08,
+      "ts_end": 2157.16,
+      "text": "Let's do a quick recap of what all we learnt.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2158.14,
+      "ts_end": 2160.44,
+      "text": "First we saw that most modern LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2160.52,
+      "ts_end": 2162.14,
+      "text": "Rely on the transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2162.6,
+      "ts_end": 2163.86,
+      "text": "Which was proposed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2164.02,
+      "ts_end": 2165.54,
+      "text": "In the 2017 paper.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2165.76,
+      "ts_end": 2168.4,
+      "text": "It is basically a deep neural network architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2168.8,
+      "ts_end": 2170.3,
+      "text": "The paper which proposed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2170.38,
+      "ts_end": 2171.34,
+      "text": "The transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2171.7,
+      "ts_end": 2173.74,
+      "text": "Is called as attention is all you need.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2174.1,
+      "ts_end": 2175.8,
+      "text": "And the original transformer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2176.0,
+      "ts_end": 2177.8,
+      "text": "Was developed for machine translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2178.14,
+      "ts_end": 2180.04,
+      "text": "For translating English tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2180.3,
+      "ts_end": 2181.82,
+      "text": "Or English texts into German.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2181.92,
+      "ts_end": 2182.4,
+      "text": "And French.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2182.8,
+      "ts_end": 2185.38,
+      "text": "We saw simplified transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2185.64,
+      "ts_end": 2186.62,
+      "text": "Which had 8 steps.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2188.14,
+      "ts_end": 2188.5,
+      "text": "For example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2188.52,
+      "ts_end": 2191.06,
+      "text": "Pre-process it by converting words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2191.2,
+      "ts_end": 2193.72,
+      "text": "Or sentences into words and token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2194.02,
+      "ts_end": 2195.98,
+      "text": "Then we pass it into the encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2196.06,
+      "ts_end": 2198.56,
+      "text": "Which converts these tokens into vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2198.76,
+      "ts_end": 2200.22,
+      "text": "The vector embeddings are.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2200.64,
+      "ts_end": 2201.94,
+      "text": "Fed to the decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2202.12,
+      "ts_end": 2204.02,
+      "text": "Along with the vector embeddings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2204.08,
+      "ts_end": 2206.52,
+      "text": "The decoder also receives partial output text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2206.78,
+      "ts_end": 2207.94,
+      "text": "And it generates.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2208.08,
+      "ts_end": 2210.06,
+      "text": "The translated sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2210.28,
+      "ts_end": 2211.46,
+      "text": "One word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2212.02,
+      "ts_end": 2214.28,
+      "text": "This is the simplified transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2214.92,
+      "ts_end": 2215.92,
+      "text": "And we saw that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2215.98,
+      "ts_end": 2217.04,
+      "text": "The transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2218.3,
+      "ts_end": 2218.44,
+      "text": "Has an encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2218.58,
+      "ts_end": 2219.62,
+      "text": "And a decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2220.94,
+      "ts_end": 2222.26,
+      "text": "However later we saw.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2222.4,
+      "ts_end": 2224.52,
+      "text": "That GPT models do not have an encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2224.68,
+      "ts_end": 2225.72,
+      "text": "They only have a decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2226.95,
+      "ts_end": 2228.89,
+      "text": "In the middle we had a small discussion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2228.97,
+      "ts_end": 2230.05,
+      "text": "On self attention mechanism.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2230.93,
+      "ts_end": 2232.41,
+      "text": "Which is really the heart.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2232.47,
+      "ts_end": 2234.33,
+      "text": "Of why transformers work so well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2234.45,
+      "ts_end": 2236.23,
+      "text": "And why the paper which I showed you earlier.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2236.39,
+      "ts_end": 2237.77,
+      "text": "Is called attention is all you need.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2238.13,
+      "ts_end": 2240.03,
+      "text": "Self attention allows the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2240.19,
+      "ts_end": 2242.33,
+      "text": "To weigh the importance of different words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2242.45,
+      "ts_end": 2243.55,
+      "text": "Relative to each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2243.55,
+      "ts_end": 2245.43,
+      "text": "And it enables the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2245.45,
+      "ts_end": 2247.05,
+      "text": "To capture long range dependencies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2247.47,
+      "ts_end": 2249.37,
+      "text": "So when we are predicting the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2249.73,
+      "ts_end": 2250.81,
+      "text": "From a given sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2251.05,
+      "ts_end": 2253.53,
+      "text": "We can look at all the context in the past.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2253.91,
+      "ts_end": 2255.57,
+      "text": "And weigh the importance.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2255.67,
+      "ts_end": 2257.11,
+      "text": "Of which word matters more.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2257.27,
+      "ts_end": 2258.57,
+      "text": "For predicting the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2259.67,
+      "ts_end": 2261.51,
+      "text": "You can think of also self attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2261.59,
+      "ts_end": 2263.55,
+      "text": "As parallel attention to different parts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2263.67,
+      "ts_end": 2265.63,
+      "text": "Of a paragraph or different sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2266.98,
+      "ts_end": 2268.46,
+      "text": "We will look into this later.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2268.66,
+      "ts_end": 2270.48,
+      "text": "It is going to be one of the key aspects.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2273.14,
+      "ts_end": 2274.22,
+      "text": "It is going to be.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2274.24,
+      "ts_end": 2275.16,
+      "text": "One of the key aspects.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2275.56,
+      "ts_end": 2276.7,
+      "text": "Of our course as we move forward.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2277.8,
+      "ts_end": 2279.76,
+      "text": "Then we saw the later variations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2279.76,
+      "ts_end": 2281.54,
+      "text": "Of transformer architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2282.04,
+      "ts_end": 2284.24,
+      "text": "In particular we looked at two variations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2284.44,
+      "ts_end": 2285.26,
+      "text": "First is BERT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2285.34,
+      "ts_end": 2287.5,
+      "text": "Which is bi-directional encoder representations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2288.02,
+      "ts_end": 2290.02,
+      "text": "And then we saw GPT.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2290.34,
+      "ts_end": 2292.16,
+      "text": "So there is a difference between these.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2292.58,
+      "ts_end": 2295.92,
+      "text": "BERT predicts hidden words in a sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2296.04,
+      "ts_end": 2297.32,
+      "text": "Or it predicts missing words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2297.46,
+      "ts_end": 2299.08,
+      "text": "Which are also called masked words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2299.6,
+      "ts_end": 2301.64,
+      "text": "So basically what this does is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2301.76,
+      "ts_end": 2304.16,
+      "text": "BERT pays attention to a sentence from left side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2304.3,
+      "ts_end": 2305.5,
+      "text": "As well as from the right side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2306.14,
+      "ts_end": 2306.96,
+      "text": "So that a new word can be masked.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2307.4,
+      "ts_end": 2310.0,
+      "text": "That is why it is called bi-directional encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2310.12,
+      "ts_end": 2312.1,
+      "text": "And it does not have the decoder architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2312.4,
+      "ts_end": 2313.82,
+      "text": "It just has the encoder architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2314.58,
+      "ts_end": 2317.28,
+      "text": "Since BERT looks at a sentence from both the words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2317.4,
+      "ts_end": 2318.38,
+      "text": "Both the directions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2318.64,
+      "ts_end": 2320.98,
+      "text": "It can capture the meanings of different words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2321.06,
+      "ts_end": 2322.86,
+      "text": "And how they relate to each other very well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2323.3,
+      "ts_end": 2325.3,
+      "text": "And that is why BERT models are used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2325.38,
+      "ts_end": 2327.0,
+      "text": "For sentiment analysis a lot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2328.41,
+      "ts_end": 2329.71,
+      "text": "GPT on the other hand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2329.89,
+      "ts_end": 2332.24,
+      "text": "Just gets the data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2332.54,
+      "ts_end": 2334.38,
+      "text": "And then it predicts the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2334.78,
+      "ts_end": 2336.92,
+      "text": "So it is a left to right analysis.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2336.92,
+      "ts_end": 2339.66,
+      "text": "Basically it has data from the left hand side.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2339.88,
+      "ts_end": 2341.66,
+      "text": "And then it has to predict what comes on the right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2341.78,
+      "ts_end": 2342.74,
+      "text": "Or what is the next word.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2343.55,
+      "ts_end": 2345.65,
+      "text": "So GPT receives incomplete text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2345.77,
+      "ts_end": 2347.77,
+      "text": "And learns to generate one word at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2348.98,
+      "ts_end": 2350.86,
+      "text": "And main thing to remember is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2350.92,
+      "ts_end": 2352.48,
+      "text": "GPT does not have an encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2352.66,
+      "ts_end": 2353.92,
+      "text": "It only has decoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2355.43,
+      "ts_end": 2355.87,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2355.95,
+      "ts_end": 2357.53,
+      "text": "And then in the last part of the lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2357.61,
+      "ts_end": 2360.55,
+      "text": "We saw the difference between transformers versus LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2360.79,
+      "ts_end": 2361.45,
+      "text": "So remember.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2361.59,
+      "ts_end": 2363.45,
+      "text": "Not all transformers are LLMs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2363.93,
+      "ts_end": 2366.53,
+      "text": "Transformers can also be used for computer vision tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2366.81,
+      "ts_end": 2368.07,
+      "text": "Like image classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2368.17,
+      "ts_end": 2369.59,
+      "text": "Image segmentation etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2370.29,
+      "ts_end": 2372.97,
+      "text": "Similarly not all LLMs are transformers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2373.77,
+      "ts_end": 2374.99,
+      "text": "Before transformers came.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2375.05,
+      "ts_end": 2376.13,
+      "text": "Recurrent neural networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2376.43,
+      "ts_end": 2378.39,
+      "text": "And long short term memory networks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2378.59,
+      "ts_end": 2380.35,
+      "text": "And even convolutional architectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2380.43,
+      "ts_end": 2382.31,
+      "text": "Were used for text completion.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2382.87,
+      "ts_end": 2383.87,
+      "text": "So that is why.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2384.09,
+      "ts_end": 2385.99,
+      "text": "LLMs can be based on recurrent.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2385.99,
+      "ts_end": 2387.95,
+      "text": "Or convolutional architectures as well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2388.19,
+      "ts_end": 2389.71,
+      "text": "So do not use these terms.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2389.99,
+      "ts_end": 2391.79,
+      "text": "Transformers and LLMs interchangeably.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2391.91,
+      "ts_end": 2393.09,
+      "text": "Though many people do it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2393.51,
+      "ts_end": 2396.25,
+      "text": "Understand the similarities and differences between the two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2397.12,
+      "ts_end": 2398.5,
+      "text": "That brings us to the end.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2398.5,
+      "ts_end": 2399.16,
+      "text": "Of this lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2399.28,
+      "ts_end": 2401.86,
+      "text": "We covered five points.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2401.98,
+      "ts_end": 2402.96,
+      "text": "In today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2403.18,
+      "ts_end": 2405.74,
+      "text": "And I encourage you to be proactive.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2405.9,
+      "ts_end": 2406.92,
+      "text": "In the comment section.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2407.16,
+      "ts_end": 2407.9,
+      "text": "Ask questions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2408.0,
+      "ts_end": 2408.5,
+      "text": "Ask doubts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2409.44,
+      "ts_end": 2411.82,
+      "text": "Also make notes about these architectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2411.82,
+      "ts_end": 2413.14,
+      "text": "As you are learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2413.38,
+      "ts_end": 2414.98,
+      "text": "That is really one of the best ways.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2415.02,
+      "ts_end": 2416.22,
+      "text": "To learn about this material.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2416.96,
+      "ts_end": 2418.02,
+      "text": "As always.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2418.08,
+      "ts_end": 2420.08,
+      "text": "I try to show everything on a whiteboard.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2420.26,
+      "ts_end": 2422.74,
+      "text": "Plus try to explain as clearly as possible.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2422.9,
+      "ts_end": 2424.16,
+      "text": "So that nothing is left out.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2424.16,
+      "ts_end": 2426.04,
+      "text": "And I show a lot of examples.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2426.14,
+      "ts_end": 2427.2,
+      "text": "Also in this process.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2427.92,
+      "ts_end": 2428.86,
+      "text": "Thanks a lot everyone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2429.06,
+      "ts_end": 2430.58,
+      "text": "I hope you are enjoying in this series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2430.72,
+      "ts_end": 2433.0,
+      "text": "I look forward to seeing you in the next lecture.",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 23,
+  "frames_with_content": 22
+}

@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Temperature Scaling",
+  "extracted_text": "Until now, the generated token is selected corresponding to the largest probability score among all",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "oG1FPVnY0pI_f0000",
+  "video_id": "oG1FPVnY0pI",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/oG1FPVnY0pI/oG1FPVnY0pI_f0000.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Vizuara",
+  "extracted_text": "Magic Tools\nOutput History\n\nYoutube Generator\nGenerate guiding questions aligned to a YouTube video.\n\nText Question\nGenerate text-dependent questions for students based on any text that you input.\n\nWorksheet Generator\nGenerate a worksheet based on any topic or text.\n\nMCQ Generator\nCreate a multiple choice assessment based on any topic, standard(s), or criteria\n\nText summarizer\nTake any text and summarize it in whatever length you choose.\n\nText Rewriter\nTake any text and rewrite it with custom criteria however you'd like!\n\nProof Read\nTake any text and have it proofread, correcting grammar, spelling, punctuation and adding clarity.\n\nLesson Plan\nGenerate a lesson plan for a topic or objective you're teaching.\n\nReport Card\nGenerate report card comments with a student's strengths and areas for growth.\n\nEssay Grader\nGrade Essay\n\nPPT Generator\nGenerate PPT\n\nMAGIC",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "Xpr8D6LeAtw_f0010",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 535.866333,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0010.jpg"
+}

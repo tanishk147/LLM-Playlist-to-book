@@ -1,0 +1,30 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Langchain : Chains, agents, and retrieval strategies that make up an application's cognitive architecture.\n\nLangGraph : A library for building robust and stateful multi-actor applications with LLMs by modeling steps as edges and nodes in a graph. Integrates smoothly with LangChain, but can be used without it.\n\nProductionization:\n\nLangSmith: A developer platform that lets you debug, test, evaluate, and monitor chains built on any LLM framework and seamlessly integrates with LangChain.\n\nDeployment:\n\nLangGraph Cloud: Turn your LangGraph applications into production-ready APIs and Assistants.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Architecture diagram showing LangChain ecosystem with three layers: Deployment (LangGraph Cloud - commercial), Components (Integrations - OSS, LangChain - OSS, LangGraph - OSS), and Development (LangSmith with features: Debugging, Playground, Prompt Management, Annotation, Testing, Monitoring - commercial).",
+  "diagram_elements": [
+    "LangGraph Cloud",
+    "COMMERCIAL",
+    "Integrations",
+    "OSS",
+    "LangChain",
+    "LangGraph",
+    "LangSmith",
+    "Debugging",
+    "Playground",
+    "Prompt Management",
+    "Annotation",
+    "Testing",
+    "Monitoring",
+    "COMMERCIAL"
+  ],
+  "confidence": 0.95,
+  "frame_id": "Xpr8D6LeAtw_f0018",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 779.066333,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0018.jpg"
+}

@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "vector embeddings (2D example)",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A 2D vector embedding example showing how categorical items (king, man, woman, apple, banana, orange, football, golf, tennis) are converted into numerical vectors and plotted as points in 2D space, with similar items clustering together.",
+  "diagram_elements": [
+    "Input categories: king, man, woman, apple, banana, orange, football, golf, tennis",
+    "Embedding vectors with numerical values",
+    "2D coordinate space with x and y axes",
+    "Green cluster (top-left): fruits and people",
+    "Blue cluster (top-right): related items",
+    "Red cluster (bottom-right): sports items"
+  ],
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0006",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 624.166333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0006.jpg"
+}

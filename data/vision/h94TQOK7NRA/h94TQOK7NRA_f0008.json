@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "torch.tril \u2014 PyTorch 2.4 documentation\ntorch.tril ... Returns the lower triangular part of the matrix (2-D tensor) or batch of matrices input , the other elements of the result tensor out are set to 0.\n\nPeople also ask\nWhat does Torch Tril do?\nWhat is torch in Python?\nWhat is the use of torch stack?\nWhat is the difference between PyTorch and torch?\n\ntorch.tril_indices\nReturns the indices of the lower triangular part of a row -by- col matrix in a 2-by-N Tensor, where the first row contains row coordinates of all indices and ...",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "h94TQOK7NRA_f0008",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 1239.499667,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0008.jpg"
+}

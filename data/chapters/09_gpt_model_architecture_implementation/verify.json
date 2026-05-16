@@ -1,0 +1,2152 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Assembling the Full GPT Model Architecture",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "At this point in the book, you have built every individual piece of the GPT puzzle: token embeddings, positional embeddings, multi-head attention, feed-forward networks, layer normalization, shortcut connections, and full transformer blocks.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 2,
+      "text": "The goal of this chapter is to snap those pieces together into a single, coherent `GPTModel` class, understand exactly what happens during a forward pass, count the parameters, and finally turn the model's raw numerical output into actual text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 3,
+      "text": "This is the chapter where everything clicks.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "By the end you will have a working 124-million-parameter GPT-2-scale model running on a laptop, producing text from scratch.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 5,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 6,
+      "text": "### The Big Picture: What the GPT Pipeline Looks Like",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 7,
+      "text": "Before writing a single line of code, it helps to have a clear mental map of the full pipeline.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 8,
+      "text": "The journey from raw text to a next-token prediction follows a fixed sequence of transformations [c811]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c811"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 9,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 10,
+      "text": "An input sentence is tokenized into **token IDs**.\n2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 11,
+      "text": "Token IDs are projected into **token embeddings** (768-dimensional vectors for GPT-2 scale) [c818].\n3. **Positional embeddings** are added to the token embeddings to produce **input embeddings** [c930].\n4.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c818",
+        "c930"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 12,
+      "text": "A **dropout** layer is applied to the input embeddings [c932].\n5.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c932"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 13,
+      "text": "The sequence passes through **12 stacked transformer blocks** [c1000].\n6.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1000"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 14,
+      "text": "A final **layer normalization** is applied [c943].\n7.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c943"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 15,
+      "text": "An **output head** (a linear layer) converts the normalized embeddings into **logits** over the vocabulary [c965].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c965"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 16,
+      "text": "[FIGURE: Linear pipeline diagram showing: Input Sentence \u2192 Token IDs \u2192 Token Embeddings (768-dim) \u2192 + Positional Embeddings \u2192 Dropout \u2192 Transformer Block \u00d712 \u2192 Layer Norm \u2192 Output Head \u2192 Logits (vocab_size)]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 17,
+      "text": "The output is a tensor of shape `(batch_size, sequence_length, vocabulary_size)` [c994].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c994"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 18,
+      "text": "Each position in the sequence gets its own probability distribution over the entire vocabulary, and the model's job is to make the distribution at position $t$ peak at the token that actually follows position $t$ in the training data [c917].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c917"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 19,
+      "text": "Intuitively, every stage in this pipeline has a clear responsibility: embeddings give the model a rich numerical representation of each token and its position; transformer blocks refine those representations by letting tokens attend to one another; and the output head translates the final representations into vocabulary-scale scores.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 20,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 21,
+      "text": "### The Configuration Dictionary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 22,
+      "text": "Rather than hard-coding hyperparameters throughout the model class, GPT implementations typically collect all configuration values into a single dictionary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 23,
+      "text": "Here is the configuration for the 124-million-parameter GPT-2 model:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 24,
+      "text": "# Source: [c438]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 25,
+      "text": "GPT_CONFIG_124M = {",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 26,
+      "text": "Each entry deserves a brief note:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 27,
+      "text": "- **`vocab_size: 50257`** \u2014 the number of unique tokens the model knows about.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 28,
+      "text": "Every logit vector will have exactly this many entries.\n- **`context_length: 1024`** \u2014 the maximum number of tokens the model can process at once.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 29,
+      "text": "This determines the size of the positional embedding table.\n- **`emb_dim: 768`** \u2014 the width of every embedding vector throughout the model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 30,
+      "text": "Each token ID is projected into a 768-dimensional space [c379].\n- **`n_heads: 12`** \u2014 the number of parallel attention heads inside each transformer block [c1816].\n- **`n_layers: 12`** \u2014 the number of transformer blocks stacked sequentially [c888].\n- **`drop_rate: 0.1`** \u2014 the fraction of embedding elements zeroed out by dropout during training [c932].\n- **`qkv_bias: False`** \u2014 whether to add a bias term to the query, key, and value projection matrices.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c379",
+        "c1816",
+        "c888",
+        "c932"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 31,
+      "text": "The original GPT-2 omits these biases.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 32,
+      "text": "This dictionary is passed into the model constructor and every sub-module, keeping the code clean and making it trivial to experiment with different scales.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 33,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 34,
+      "text": "### A Dummy Model First: Understanding the Skeleton",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 35,
+      "text": "Before presenting the full implementation, it is instructive to look at a *dummy* version of the GPT model \u2014 one where the transformer blocks and layer normalization are replaced with placeholder classes.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 36,
+      "text": "This lets you see the overall structure without getting lost in the details of any one sub-module.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 37,
+      "text": "# Source: [c911]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 38,
+      "text": "class DummyGPTModel(nn.Module):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 39,
+      "text": "Even with dummy sub-modules, this skeleton reveals the complete data flow.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 40,
+      "text": "Notice that the `forward` method takes a batch of integer token IDs, not text strings [c990].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c990"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 41,
+      "text": "The model is entirely numerical from start to finish.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 42,
+      "text": "The dummy model is useful for verifying tensor shapes before committing to the full implementation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 43,
+      "text": "Once you confirm that the shapes are correct at every stage, you can swap in the real sub-modules one by one.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 44,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 45,
+      "text": "### Building the Real GPT Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 46,
+      "text": "Now let us walk through each component of the real model in detail.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "#### Token Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "Token embeddings are projections of token IDs into higher-dimensional vector spaces [c1787].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1787"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 49,
+      "text": "In PyTorch, this is a simple lookup table:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 50,
+      "text": "# Source: [c425]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 51,
+      "text": "self.pos_emb = nn.Embedding(context_length, embedding_dimension)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 52,
+      "text": "(The same `nn.Embedding` API is used for both token and positional embeddings; only the table dimensions differ.) Each token ID is mapped to a unique 768-dimensional vector.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 53,
+      "text": "These vectors are learned during training \u2014 the model adjusts them so that tokens with similar meanings end up with similar vectors.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 54,
+      "text": "Token IDs are converted to token embeddings before being passed through the rest of the model [c411].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c411"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 55,
+      "text": "The embedding layer is the first place where discrete symbols become continuous vectors that neural network operations can act on [c1813].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1813"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 56,
+      "text": "#### Positional Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 57,
+      "text": "A transformer's attention mechanism is, by itself, permutation-invariant: it treats a bag of tokens, not a sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 58,
+      "text": "Positional embeddings fix this by injecting information about *where* each token sits in the sequence [c926].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c926"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 59,
+      "text": "The positional embedding layer is another `nn.Embedding` table, this time of shape `(context_length, emb_dim)` \u2014 one vector per possible position.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 60,
+      "text": "To index into it, we need a tensor of position indices:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 61,
+      "text": "# Source: [c426]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 62,
+      "text": "pos = torch.arange(sequence_length) creates a tensor [0, 1, 2, ..., sequence_length-1] to index into the positional embedding matrix.",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 63,
+      "text": "The input embedding \u2014 the actual value fed into the first transformer block \u2014 is the sum of the token embedding and the positional embedding [c930]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c930"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "$$\\text{Input Embedding} = \\text{Token Embedding} + \\text{Positional Embedding}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 65,
+      "text": "This addition is element-wise and produces a single 768-dimensional vector per token that encodes both *what* the token is and *where* it appears [c1790, c1814].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1790",
+        "c1814"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 66,
+      "text": "[FIGURE: Diagram showing token ID \u2192 token embedding table \u2192 768-dim vector, and position index \u2192 positional embedding table \u2192 768-dim vector, both summed to produce the input embedding]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 67,
+      "text": "#### Dropout on Input Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 68,
+      "text": "Immediately after forming the input embeddings, a dropout layer is applied [c932].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c932"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 69,
+      "text": "Dropout randomly sets some elements of every input embedding to zero during training [c932].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c932"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 70,
+      "text": "This acts as a regularizer, preventing the model from over-relying on any single embedding dimension and improving generalization.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 71,
+      "text": "At inference time, dropout is disabled (PyTorch handles this automatically when you call `model.eval()`), so every element is used.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 72,
+      "text": "#### Stacked Transformer Blocks",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 73,
+      "text": "The transformer block is the key component of the entire GPT model [c920].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c920"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 74,
+      "text": "The full GPT-2-scale model chains 12 of these blocks together [c1000, c1818].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1000",
+        "c1818"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 75,
+      "text": "Each transformer block contains [c1815]:\n- A **layer normalization** layer\n- A **masked multi-head attention** module\n- A **dropout** layer\n- **Shortcut (residual) connections**\n- A second **layer normalization** layer\n- A **feed-forward neural network**\n- Another **dropout** layer",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 76,
+      "text": "Let us briefly revisit what each of these does in context.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 77,
+      "text": "**Layer normalization** normalizes the embedding values for each token so that the mean is zero and the variance is one [c963].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c963"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 78,
+      "text": "This stabilizes training by preventing the activations from growing or shrinking uncontrollably as they pass through many layers [c943].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c943"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 79,
+      "text": "**Masked multi-head attention** converts embedding vectors into context vectors [c945].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c945"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 80,
+      "text": "A context vector is an embedding that captures both the semantic meaning of a token and how much attention should be given to all other tokens in the sequence [c947].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c947"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 81,
+      "text": "The \"masked\" part ensures that when predicting token $t$, the model cannot see tokens at positions $t+1, t+2, \\ldots$ \u2014 it can only attend to the past.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 82,
+      "text": "This is what makes the model autoregressive.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 83,
+      "text": "The attention mechanism is the driving engine that gives LLMs their power [c1794]; it is where key, query, and value projections operate [c1816].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1794",
+        "c1816"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 84,
+      "text": "**Shortcut connections** add the output of a sub-layer back to its input [c950].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c950"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 85,
+      "text": "This provides an alternative gradient flow path and prevents the vanishing gradient problem that would otherwise make training 12-layer networks extremely difficult [c950].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c950"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 86,
+      "text": "In PyTorch, the 12 transformer blocks are chained using `nn.Sequential`:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 87,
+      "text": "self.trf_blocks = nn.Sequential(",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 88,
+      "text": "`nn.Sequential` passes the output of each block directly as the input to the next, which is exactly the behavior we want [c992].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c992"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 89,
+      "text": "#### Final Layer Normalization",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 90,
+      "text": "After the last transformer block, one more layer normalization is applied before the output head [c992].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c992"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 91,
+      "text": "This final normalization ensures that the values entering the output head are well-scaled, regardless of how many transformer blocks were stacked.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 92,
+      "text": "Layer normalization sets the mean to zero and variance to one for each token independently [c943].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c943"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 93,
+      "text": "#### The Output Head",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 94,
+      "text": "The output head is a neural network at the final stage of the GPT model that transforms token embeddings into logits for vocabulary prediction [c965].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c965"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 95,
+      "text": "In practice, it is a single linear (fully connected) layer with no bias:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 96,
+      "text": "self.out_head = nn.Linear(cfg[\"emb_dim\"], cfg[\"vocab_size\"], bias=False)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 97,
+      "text": "This layer maps each 768-dimensional token representation to a 50257-dimensional vector \u2014 one score per vocabulary token.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 98,
+      "text": "These scores are the **logits** [c968].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c968"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 99,
+      "text": "The output head is the only stage in the GPT model where the input dimensions change: the tensor goes from shape `(batch_size, num_tokens, 768)` to `(batch_size, num_tokens, 50257)` [c973].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c973"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 100,
+      "text": "Every other stage preserves the embedding dimension.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 101,
+      "text": "Logits are the final output matrices from a transformer model that contain probability scores for each token in the vocabulary at each position in the sequence [c432].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c432"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 102,
+      "text": "The word \"logits\" is used because these are *unnormalized* scores \u2014 they become proper probabilities only after a softmax is applied [c1817].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1817"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 103,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "### The Complete Forward Pass",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 105,
+      "text": "Putting it all together, the forward pass of the GPT model follows this sequence [c1020]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1020"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 106,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 107,
+      "text": "Accept a batch of input token IDs with shape `(batch_size, sequence_length)` [c990].\n2.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c990"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 108,
+      "text": "Look up token embeddings: shape becomes `(batch_size, sequence_length, 768)`.\n3.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 109,
+      "text": "Compute positional embeddings and add them to the token embeddings.\n4.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 110,
+      "text": "Apply dropout to the combined input embeddings.\n5.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 111,
+      "text": "Pass the sequence through all 12 transformer blocks via `nn.Sequential`.\n6.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 112,
+      "text": "Apply final layer normalization.\n7.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 113,
+      "text": "Pass through the output head to produce logits of shape `(batch_size, sequence_length, 50257)`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 114,
+      "text": "The full model forward pass applies dropout to input embeddings, chains 12 transformer blocks using `nn.Sequential`, applies layer normalization, and outputs logits [c992].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c992"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 115,
+      "text": "The output is a tensor of shape `(batch_size, sequence_length, vocabulary_size)` [c994].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c994"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 116,
+      "text": "The core of this logic can be expressed in approximately 8 lines of code [c1019], which is a remarkable fact given the complexity of what is happening inside each transformer block.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1019"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 117,
+      "text": "[FIGURE: Annotated tensor shape diagram showing how shape changes at each stage: (B, T) \u2192 (B, T, 768) \u2192 (B, T, 768) [\u00d712 blocks] \u2192 (B, T, 768) \u2192 (B, T, 50257)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 118,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 119,
+      "text": "### Creating a Model Instance",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 120,
+      "text": "Once the `GPTModel` class is defined, creating an instance is straightforward \u2014 you pass in the configuration dictionary [c996]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c996"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 121,
+      "text": "model = GPTModel(GPT_CONFIG_124M)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 122,
+      "text": "At this point, the model has been initialized with random weights [c895].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c895"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 123,
+      "text": "It can already perform a forward pass and produce logits; those logits just won't correspond to meaningful text yet because the weights haven't been trained.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 124,
+      "text": "Nevertheless, the architecture is fully functional, and you can run inference through the 124-million-parameter GPT architecture on a laptop [c897].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c897"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 125,
+      "text": "The GPT model architecture outputs numerical tensors [c1015].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1015"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 126,
+      "text": "The model outputs logits that can be decoded to predict the next token [c916].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c916"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 127,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 128,
+      "text": "### Understanding the Output: Logits and Their Shape",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 129,
+      "text": "Let us be precise about what the model returns.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "Given an input batch of shape `(batch_size, sequence_length)`, the model returns logits of shape `(batch_size, sequence_length, 50257)` [c994].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c994"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 131,
+      "text": "The logits matrix is the output produced by passing token embeddings through the output head neural network [c968].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c968"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 132,
+      "text": "Each of the `sequence_length` positions gets its own 50257-dimensional logit vector.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 133,
+      "text": "The value at position `[b, t, v]` is the model's unnormalized score for \"token `v` should come after the first `t` tokens in example `b`.\"",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 134,
+      "text": "To convert logits into a next-token prediction, you need to:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 135,
+      "text": "1. **Extract the logits for the last position** \u2014 since you want to predict the token *after* the current sequence, only the last row of the sequence dimension matters [c845].\n2. **Apply softmax** to convert logits into probabilities.\n3. **Select the most probable token** (or sample from the distribution).",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c845"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 136,
+      "text": "We will implement this step by step in the text generation section below.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 137,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 138,
+      "text": "### Weight Tying: 163M vs. 124M Parameters",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 139,
+      "text": "Before counting parameters, there is an important design decision to understand: **weight tying**.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "Weight tying is a technique where the original GPT-2 architecture reuses the weights from the token embedding layer in its output layer [c1006].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1006"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 141,
+      "text": "The intuition is that both layers deal with the same vocabulary: the token embedding layer maps token IDs to vectors, and the output head maps vectors back to token IDs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 142,
+      "text": "It makes sense that these two mappings might share the same underlying matrix.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 143,
+      "text": "The token embedding layer and output layer in the implemented model both have shape `(50257, 768)` [c1007].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1007"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 144,
+      "text": "That is $50257 \\times 768 = 38{,}597{,}376$ parameters \u2014 a substantial chunk of the total.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 145,
+      "text": "Weight tying reduces the memory footprint from 163 million to 124 million parameters and reduces computational complexity [c1009].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1009"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 146,
+      "text": "When output layer parameters are removed from the total (because they are shared with the token embedding layer), the parameter count becomes exactly 124 million, matching the original GPT-2 model size [c1008].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1008"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 147,
+      "text": "However, using separate token embedding and output layers results in better training and model performance compared to weight tying [c1010].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1010"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "The implementation in this book therefore keeps them separate, which is why the raw parameter count is 163 million rather than 124 million.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 149,
+      "text": "When people say \"GPT-2 124M,\" they are referring to the weight-tied count.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 150,
+      "text": "[FIGURE: Side-by-side comparison: weight-tied model (124M params, shared embedding/output matrix) vs. untied model (163M params, separate matrices)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 151,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 152,
+      "text": "### Counting Parameters",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 153,
+      "text": "To count the total number of parameters in the model, you can iterate over `model.parameters()` and sum the element counts:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 154,
+      "text": "# Source: [c1004]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 155,
+      "text": "p.numel() - method to count the total number of parameters in model's parameter tensors",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 156,
+      "text": "In practice, this looks like:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 157,
+      "text": "total_params = sum(p.numel() for p in model.parameters())",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 158,
+      "text": "The trainable parameters in an LLM include [c1822]:\n- Token embeddings\n- Positional embeddings\n- Layer normalization scale and shift parameters\n- Query, key, and value weight matrices in multi-head attention\n- Feed-forward network weights\n- Final output layer weights",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 159,
+      "text": "Each of these contributes to the total.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 160,
+      "text": "The dominant terms are the attention weight matrices (which appear in every one of the 12 transformer blocks) and the embedding/output matrices.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 161,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 162,
+      "text": "### From Logits to Text: Autoregressive Generation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 163,
+      "text": "A large language model generates tokens given a sequence of input tokens [c805].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c805"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 164,
+      "text": "The process is *autoregressive*: the model generates one token at a time, appends it to the input, and then generates the next token conditioned on the extended sequence.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 165,
+      "text": "The goal of this section is to convert the output tensor from the GPT model into predictions of the next word [c817].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c817"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 166,
+      "text": "#### The `generate_text_simple` Function",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 167,
+      "text": "The `generate_text_simple` function takes a model (an instance of the GPT model class), input token indices (`idx`), a maximum number of new tokens to generate, and a context size as arguments [c856].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c856"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 168,
+      "text": "Here is the complete generation loop, broken down step by step.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 169,
+      "text": "**Step 1: Crop the context window.**",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 170,
+      "text": "If the accumulated sequence is longer than the model's context window, we must crop it.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 171,
+      "text": "The model was trained on sequences of at most `context_length` tokens, so feeding it more would be undefined behavior.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 172,
+      "text": "# Source: [c859]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 173,
+      "text": "idx_cond = idx[:, -context_size:]",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 174,
+      "text": "This slices the last `context_size` tokens from the current sequence, discarding anything older.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "**Step 2: Run the forward pass without gradient tracking.**",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 176,
+      "text": "During inference, we do not need to compute gradients.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 177,
+      "text": "Wrapping the forward pass in `torch.no_grad()` saves memory and speeds up computation:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 178,
+      "text": "# Source: [c872]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 179,
+      "text": "with torch.no_grad():",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 180,
+      "text": "**Step 3: Extract logits for the last position.**",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 181,
+      "text": "The model returns logits for every position in the sequence, but we only care about the prediction for the *next* token \u2014 the one that comes after the last token in our input.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 182,
+      "text": "We extract the logits at the final sequence position:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 183,
+      "text": "# Source: [c863]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 184,
+      "text": "logits = logits[:, -1, :]",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 185,
+      "text": "This reduces the shape from `(batch_size, sequence_length, vocab_size)` to `(batch_size, vocab_size)`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 186,
+      "text": "**Step 4: Convert logits to probabilities.**",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 187,
+      "text": "Apply softmax along the vocabulary dimension to turn raw scores into a proper probability distribution:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 188,
+      "text": "# Source: [c865]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 189,
+      "text": "probas = torch.softmax(logits, dim=-1)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 190,
+      "text": "**Step 5: Select the most probable token.**",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 191,
+      "text": "In the simplest generation strategy (greedy decoding), we always pick the token with the highest probability:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 192,
+      "text": "# Source: [c867]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 193,
+      "text": "idx_next = torch.argmax(probas, dim=-1, keepdim=True)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 194,
+      "text": "`keepdim=True` preserves the sequence dimension so the result has shape `(batch_size, 1)`, which is compatible with the concatenation in the next step.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 195,
+      "text": "**Step 6: Append the new token and repeat.**",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 196,
+      "text": "The newly generated token is appended to the running sequence:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 197,
+      "text": "# Source: [c869]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 198,
+      "text": "idx = torch.cat((idx, idx_next), dim=1)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 199,
+      "text": "The loop then returns to Step 1 with the extended sequence.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 200,
+      "text": "This continues until `max_new_tokens` tokens have been generated.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 201,
+      "text": "[FIGURE: Autoregressive generation loop diagram: input tokens \u2192 model \u2192 logits \u2192 softmax \u2192 argmax \u2192 new token \u2192 append to input \u2192 repeat]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 202,
+      "text": "#### Putting It All Together",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 203,
+      "text": "Here is the complete generation function assembled from the steps above:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 204,
+      "text": "def generate_text_simple(model, idx, max_new_tokens, context_size):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 205,
+      "text": "#### A Concrete Example",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 206,
+      "text": "Starting with the input `'hello i am'` and setting `max_new_tokens=6`, the GPT model generates the complete output `'hello i am a model ready to help'` [c854].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c854"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 207,
+      "text": "This is with randomly initialized weights \u2014 the output is not yet meaningful English, but the mechanics work correctly.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 208,
+      "text": "After training on real data, the same function produces coherent text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 209,
+      "text": "Note that in GPT training, sampling techniques will modify the softmax output so the model does not always select the most likely token, introducing variability and creativity in generated text [c878].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c878"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 210,
+      "text": "Greedy decoding (always picking the argmax) tends to produce repetitive, boring output.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 211,
+      "text": "Temperature scaling, top-k sampling, and nucleus sampling are common alternatives, but they all operate on the same logit output \u2014 only the selection strategy changes.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 212,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 213,
+      "text": "### The Loss Function",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 214,
+      "text": "To train the model, we need a way to measure how wrong its predictions are.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 215,
+      "text": "The loss function used in LLM training is cross-entropy loss between the predicted next token and the actual next token [c1821].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1821"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 216,
+      "text": "Cross-entropy loss penalizes the model when it assigns low probability to the correct token.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 217,
+      "text": "If the model is very confident and correct, the loss is near zero.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 218,
+      "text": "If the model is confident but wrong, the loss is large.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 219,
+      "text": "Minimizing this loss over a large corpus of text is what drives the model to learn useful representations.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 220,
+      "text": "The attention mechanism \u2014 which is the driving engine that gives LLMs their power [c1794] \u2014 is trained end-to-end through this loss signal.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1794"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 221,
+      "text": "Gradients flow back through the output head, through the layer normalization, through all 12 transformer blocks, and all the way back to the embedding layers.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 222,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 223,
+      "text": "### What Comes After Pre-Training",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 224,
+      "text": "Once the GPT model has been pre-trained on a large text corpus, it can be adapted for specific tasks through fine-tuning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 225,
+      "text": "There are two main flavors [c1827, c1828]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1827",
+        "c1828"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 226,
+      "text": "- **Classification fine-tuning**: the model is trained to classify inputs into categories, such as determining whether an email is spam or not spam [c1827].\n- **Instruction fine-tuning**: the model is trained on a dataset of instructions, inputs, and outputs to perform well on instruction-following tasks [c1828].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1827",
+        "c1828"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 227,
+      "text": "Fine-tuned models are evaluated using benchmarks like MMLU (Measuring Massive Multitask Language Understanding), which uses 57 tests to evaluate LLM performance across diverse domains [c1831].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1831"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 228,
+      "text": "Other evaluation methods include human evaluation, where humans compare and rate the outputs of different LLMs [c1832], and LLM-based evaluation, where a powerful large language model is used to evaluate the outputs of another LLM [c1833].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1832",
+        "c1833"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 229,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 230,
+      "text": "### What We Built From Scratch",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 231,
+      "text": "It is worth pausing to appreciate the scope of what has been implemented.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 232,
+      "text": "The GPT architecture was built completely from scratch without using external libraries like LangChain [c900].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c900"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 233,
+      "text": "All sub-modules of the GPT architecture were implemented and coded from scratch [c901].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c901"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 234,
+      "text": "The lecture series covered layer normalization, GELU activation, feed-forward networks, shortcut connections, and transformer blocks [c904].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c904"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 235,
+      "text": "Each of these components was introduced, explained, and coded before being assembled into the final model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 236,
+      "text": "The complete architecture consists of [c1812]:\n- Input tokens converted to embeddings\n- Positional embeddings added to token embeddings\n- The combined embeddings passed through transformer blocks\n- A final layer normalization\n- A final neural network (the output head) that produces logits for next-token prediction",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1812"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 237,
+      "text": "The transformer block itself contains a normalization layer, multi-head attention, dropout, shortcut connections, another normalization layer, a feed-forward neural network, and another dropout layer [c1815].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 238,
+      "text": "Multi-head attention is a key architectural component that enables coherent and meaningful outputs in modern GPT models like GPT-4 [c824].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c824"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 239,
+      "text": "[FIGURE: Full architecture diagram: token IDs \u2192 token embedding \u2192 + positional embedding \u2192 dropout \u2192 [LayerNorm \u2192 MultiHeadAttention \u2192 Dropout \u2192 Residual] \u00d7 12 \u2192 LayerNorm \u2192 Linear(768\u219250257) \u2192 Logits]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 240,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 241,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 242,
+      "text": "In this chapter, you assembled the complete GPT model from its constituent parts.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 243,
+      "text": "The key takeaways are:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 244,
+      "text": "- The GPT forward pass is a linear pipeline: embeddings \u2192 dropout \u2192 12 transformer blocks \u2192 layer norm \u2192 output head \u2192 logits [c811, c992].\n- The output shape is always `(batch_size, sequence_length, vocab_size)` [c994], where `vocab_size = 50257` for GPT-2.\n- The output head is the only stage where the embedding dimension changes [c973].\n- Weight tying reduces the parameter count from 163M to 124M by sharing the token embedding and output matrices [c1009], though keeping them separate can improve performance [c1010].\n- Autoregressive text generation works by repeatedly feeding the model the current sequence, extracting the last-position logits, applying softmax, selecting a token, and appending it [c856].\n- The loss function is cross-entropy between predicted and actual next tokens [c1821].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c811",
+        "c992",
+        "c994",
+        "c973",
+        "c1009",
+        "c1010",
+        "c856",
+        "c1821"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 245,
+      "text": "The model outputs logits which will be converted into tokens and text outputs in subsequent work [c1021].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1021"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 246,
+      "text": "With the architecture fully assembled and the generation loop in place, the next step is training \u2014 adjusting those 124 million parameters so that the model's predictions actually match real language.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    }
+  ],
+  "summary": {
+    "grounded": 74,
+    "unsupported": 91,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 82
+  }
+}

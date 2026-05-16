@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Softmax",
+  "extracted_text": "CLASS torch.nn.Softmax(dim=None) [SOURCE]\n\nApplies the Softmax function to an n-dimensional input Tensor.\n\nRescales them so that the elements of the n-dimensional output Tensor lie in the range [0,1] and sum to 1.\n\nSoftmax is defined as:\n\nWhen the input Tensor is a sparse tensor then the unspecified values are treated as -inf.\n\nShape:\n\u2022 Input: where * means, any number of additional dimensions\n\u2022 Output: , same shape as the input\n\nReturns\na Tensor of the same dimension and shape as the input with values in the range [0, 1]\n\nParameters",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "eSRhpYLerw4_f0004",
+  "video_id": "eSRhpYLerw4",
+  "timestamp_sec": 2439.233,
+  "source_image": "data/frames/eSRhpYLerw4/eSRhpYLerw4_f0004.jpg"
+}

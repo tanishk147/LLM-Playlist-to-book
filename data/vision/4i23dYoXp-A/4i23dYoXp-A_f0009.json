@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "how everything fit together",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Visual composition showing an aerial cityscape photograph on the left and a close-up animal eye (appears to be a cat or similar creature with yellow iris) on the right, connected by a yellow curved line, illustrating how different visual elements combine.",
+  "diagram_elements": [
+    "Aerial cityscape photograph",
+    "Animal eye close-up",
+    "Yellow connecting curve",
+    "Star decoration"
+  ],
+  "confidence": 0.85,
+  "frame_id": "4i23dYoXp-A_f0009",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 2894.266333,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0009.jpg"
+}

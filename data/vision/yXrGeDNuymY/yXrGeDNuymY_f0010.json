@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Hand-drawn diagram showing transformer architecture components including blocks, positional embeddings, attention layers, and feedforward neural network weights with annotations explaining similarities between different components (h1, h2, etc.).",
+  "diagram_elements": [
+    "Blocks",
+    "Type",
+    "Positional Embeddings",
+    "Attention layers in transformer blocks",
+    "Transformer [h0] attn / c_attn",
+    "Q, K, V",
+    "Feedforward neural network weights in transformer block",
+    "Transformer [h0] mlp / c_fc",
+    "Transformer [h0] mlp / c_proj",
+    "h1, h2 \u2192 h12 similarities"
+  ],
+  "confidence": 0.65,
+  "frame_id": "yXrGeDNuymY_f0010",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1629.733,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0010.jpg"
+}

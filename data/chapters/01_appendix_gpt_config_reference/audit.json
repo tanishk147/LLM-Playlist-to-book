@@ -1,0 +1,22 @@
+{
+  "chapter_id": "appendix_gpt_config_reference",
+  "title": "GPT Model Configuration Reference and Hyperparameter Glossary",
+  "summary": {
+    "grounded": 56,
+    "unsupported": 6,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 13
+  },
+  "stripped_sentence_indices": [
+    4,
+    7,
+    9,
+    21,
+    22,
+    31,
+    34,
+    36,
+    47
+  ]
+}

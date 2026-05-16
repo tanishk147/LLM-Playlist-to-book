@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "# Get the predictions\nwith torch.no_grad():\n    logits = model(idx_cond) ### batch, n_tokens, vocab_size\n\n# Focus only on the last time step\n# (batch, n_tokens, vocab_size) becomes (batch, vocab_size)\nlogits = logits[:, -1, :]\n\n# Apply softmax to get probabilities\nprobas = torch.softmax(logits, dim=-1) # (batch, vocab_size)\n\n# Get the idx of the vocab entry with the highest probability value\nidx_next = torch.argmax(probas, dim=-1, keepdim=True) # (batch, 1)\n\n# Append sampled index to the running sequence\nidx = torch.cat((idx, idx_next), dim=1) # (batch, n_tokens+1)\n\nreturn idx"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "F1Sm7z2R96w_f0010",
+  "video_id": "F1Sm7z2R96w",
+  "timestamp_sec": 1675.499667,
+  "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0010.jpg"
+}

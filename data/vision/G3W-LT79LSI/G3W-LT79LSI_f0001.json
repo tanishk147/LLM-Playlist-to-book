@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": "how everything fit together.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Two example images demonstrating CNN applications: an aerial view of a circular urban development and a close-up of a bird's eye with yellow iris.",
+  "diagram_elements": [
+    "Aerial cityscape image",
+    "Bird eye close-up image"
+  ],
+  "confidence": 0.85,
+  "frame_id": "G3W-LT79LSI_f0001",
+  "video_id": "G3W-LT79LSI",
+  "timestamp_sec": 28.233,
+  "source_image": "data/frames/G3W-LT79LSI/G3W-LT79LSI_f0001.jpg"
+}

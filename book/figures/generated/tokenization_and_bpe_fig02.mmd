@@ -1,0 +1,16 @@
+graph LR
+    A["(1) Tokenization"] --> B["Word based"]
+    A --> C["Subword based<br/>BPE tokenizer"]
+    A --> D["Character based"]
+    B --> E["(2) Token embeddings"]
+    C --> E
+    D --> E
+    E --> F["Converting token IDs<br/>to vectors"]
+    F --> G["(3) Positional embeddings"]
+    G --> H["Encoding information<br/>about position"]
+    H --> I["(4) Input embeddings"]
+    I --> J["Token embeddings +<br/>Positional embeddings"]
+    style A fill:#e1f5ff
+    style E fill:#e1f5ff
+    style G fill:#e1f5ff
+    style I fill:#e1f5ff

@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention architecture showing Step 2 (deciding L_out and num_heads with head_dim=6/2) and Step 3 (initializing trainable weight matrices for key, query, value with dimensions 6x6).",
+  "diagram_elements": [
+    "Step (2): Decide L_out, num_heads",
+    "L_out (circled, value 6)",
+    "num_heads (circled, value 2)",
+    "head_dim = 6 / 2",
+    "Step (3): Initialize trainable weight matrices",
+    "for key, query, value (Wk, Wq, Wv)",
+    "6 x 6 dimensions"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0004",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 844.999667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0004.jpg"
+}

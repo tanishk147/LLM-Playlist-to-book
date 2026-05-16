@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "First, we initialize a new GPTModel instance.\n\nNote that the original GPT model initialized the linear layers for the query, key, and value matrices in the multi-head attention m required or recommended; however, to be able to load the weights correctly, we have to enable these too by setting qkv_bias to\n\nWe are also using the 1024 token context length that was used by the original GPT-2 model(s)",
+  "code": {
+    "language": "python",
+    "content": "# Define model configurations in a dictionary for compactness\nmodel_configs = {\n    \"gpt2-small (124M)\": {\"emb_dim\": 768, \"n_layers\": 12, \"n_heads\": 12},\n    \"gpt2-medium (355M)\": {\"emb_dim\": 1024, \"n_layers\": 24, \"n_heads\": 16},\n    \"gpt2-large (774M)\": {\"emb_dim\": 1280, \"n_layers\": 36, \"n_heads\": 20},\n    \"gpt2-xl (1558M)\": {\"emb_dim\": 1600, \"n_layers\": 48, \"n_heads\": 25},\n}\n\n# Copy the base configuration and update with specific model settings\nmodel_name = \"gpt2-small (124M)\"  # Example model name\nNEW_CONFIG = GPT_CONFIG_124M.copy()\nNEW_CONFIG.update(model_configs[model_name])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "yXrGeDNuymY_f0021",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1986.933,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0021.jpg"
+}

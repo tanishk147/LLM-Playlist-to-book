@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Sequential",
+  "extracted_text": "CLASS torch.nn.Sequential(*args: Module) [SOURCE]\n\nCLASS torch.nn.Sequential(arg: OrderedDict[str, Module])\n\nA sequential container.\n\nModules will be added to it in the order they are passed in the constructor. Alternatively, an OrderedDict of modules can be passed in. The forward() method of Sequential accepts any input and forwards it to the first module it contains. It then \"chains\" outputs to inputs sequentially for each subsequent module, finally returning the output of the last module.\n\nThe value a Sequential provides over manually calling a sequence of modules is that it allows treating the whole container as a single module, such that performing a transformation on the Sequential applies to each of the modules it stores (which are a registered submodule of the Sequential).\n\nWhat's the difference between a Sequential and a torch.nn.ModuleList? A ModuleList is exactly what it sounds like\u2013a list for storing Modules! On the other hand, the layers in a Sequential are connected in a cascading way.\n\nExample:\n\n# Using Sequential to create a small model. When 'model' is run,\n# input will first be passed to 'Conv2d(1,20,5)'. The output of\n# 'Conv2d(1,20,5)' will be used as the input to the first\n# 'ReLU': the output of 'ReLU' will become the input",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "d_PiwZe8UF4_f0004",
+  "video_id": "d_PiwZe8UF4",
+  "timestamp_sec": 1216.166333,
+  "source_image": "data/frames/d_PiwZe8UF4/d_PiwZe8UF4_f0004.jpg"
+}

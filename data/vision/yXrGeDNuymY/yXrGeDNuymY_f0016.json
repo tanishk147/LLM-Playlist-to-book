@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "download the gpt_download.py Python module directly from this chapter's online repository\n\ncan now import the download_and_load_gpt2 function from the gpt_download.py file as follows, which will load ght parameters (params) into our Python session:",
+  "code": {
+    "language": "python",
+    "content": "gpt_download3 import download_and_load_gpt2\n\nings, params = download_and_load_gpt2(model_size=\"124M\", models_dir=\"gpt2\")"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "yXrGeDNuymY_f0016",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1760.566333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0016.jpg"
+}

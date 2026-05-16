@@ -1,0 +1,21 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "You are a winner you have been specially selected to receive $1000 cash or a $2000 award\n\nHey, just wanted to check if we're still on for dinner tonight? Let me know!\n\nConvert the active sentence to passive: 'The chef cooks every day.'\n\nResponse: 'The meal is cooked every day by the chef.'",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Neural network architecture diagram showing hidden units, layers, and connections with annotations about replacing linear output layer with a layer that maps from hidden units to only 1 unit where 2 units regression the two classes.",
+  "diagram_elements": [
+    "Hidden units",
+    "Linear output layer",
+    "Regression layer",
+    "Input layer",
+    "Output"
+  ],
+  "confidence": 0.65,
+  "frame_id": "_xH-jXNFRjA_f0002",
+  "video_id": "_xH-jXNFRjA",
+  "timestamp_sec": 564.033,
+  "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0002.jpg"
+}

@@ -1,0 +1,2136 @@
+{
+  "video_id": "oG1FPVnY0pI",
+  "duration_sec": 1591.936875,
+  "segments": [
+    {
+      "ts_start": 4.88,
+      "ts_end": 11.68,
+      "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+      "frame_ids": [
+        "oG1FPVnY0pI_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Lecture \u2192 Temperature Scaling",
+          "extracted_text": "Until now, the generated token is selected corresponding to the largest probability score among all",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "oG1FPVnY0pI_f0000",
+          "video_id": "oG1FPVnY0pI",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/oG1FPVnY0pI/oG1FPVnY0pI_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 12.26,
+      "ts_end": 19.48,
+      "text": "Today, we are going to learn about a very important concept and that concept is called Temperature Scaling.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 20.54,
+      "ts_end": 26.28,
+      "text": "We will understand what Temperature Scaling is and why it is used in Large Language Models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 27.12,
+      "ts_end": 30.64,
+      "text": "First, let me recap what all we have done in the previous lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 30.64,
+      "ts_end": 35.36,
+      "text": "In the previous lecture, we actually trained a Large Language Model completely from scratch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 36.38,
+      "ts_end": 45.02,
+      "text": "So, here is the training process which we had defined and we ran the Large Language Model for 10 epochs and we saw the next words which were predicted.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 45.36,
+      "ts_end": 55.4,
+      "text": "So, every effort moves was the input token which we had or the input sentence which we had given to the Large Language Model and then we recorded the output tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 55.64,
+      "ts_end": 58.56,
+      "text": "And then here you can see I printed out the output tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 58.56,
+      "ts_end": 62.86,
+      "text": "You know was one of the axioms he laid down across dash, dash, dash.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 63.14,
+      "ts_end": 70.0,
+      "text": "So, there were 50 output tokens and as you can see the output tokens don't really make too much of sense right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 70.36,
+      "ts_end": 73.24,
+      "text": "And that's what we are aiming to do in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 73.42,
+      "ts_end": 81.56,
+      "text": "Our whole goal in today's lecture is how to make sure that the randomness in the output tokens is reduced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 82.74,
+      "ts_end": 87.86,
+      "text": "How to make sure that the output tokens eventually start making sense.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 88.08,
+      "ts_end": 88.96,
+      "text": "We will learn.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 89.1,
+      "ts_end": 96.04,
+      "text": "Techniques to do this in today's lecture and one such technique is called as the technique of temperature scaling.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 97.78,
+      "ts_end": 100.66,
+      "text": "This is the technique which we are going to learn about today.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 100.96,
+      "ts_end": 103.2,
+      "text": "So, let's get started with today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 104.41,
+      "ts_end": 104.93,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 105.01,
+      "ts_end": 115.11,
+      "text": "So, until now what we have seen is that the generated token is selected corresponding to the largest probability score among all the tokens in the vocabulary.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 115.47,
+      "ts_end": 117.55,
+      "text": "What do I mean with mean by this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 117.67,
+      "ts_end": 120.27,
+      "text": "So, this is the process which we are following until now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 120.77,
+      "ts_end": 133.89,
+      "text": "Every effort moves, that's my input which is fed to the GPT architecture and then I get a logits tensor which is ultimately passed through the softmax and then I get a tensor of probabilities like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 134.11,
+      "ts_end": 146.51,
+      "text": "What we are doing until now to predict the next token is we are looking at that index or that token ID which has the maximum probability and then we decode that token ID which gives us the next token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 147.51,
+      "ts_end": 150.67,
+      "text": "So, for example, when every is the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 151.25,
+      "ts_end": 157.13,
+      "text": "The token ID corresponding to this second index where probability is 0.6 which is the highest.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 157.73,
+      "ts_end": 162.47,
+      "text": "That's the output and that token ID is 1 and so the next token is effort.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 162.99,
+      "ts_end": 165.43,
+      "text": "Similarly, when every effort moves is the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 165.49,
+      "ts_end": 166.55,
+      "text": "We look at this third row.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 166.65,
+      "ts_end": 170.23,
+      "text": "We try to find that entry which has the highest value.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 170.59,
+      "ts_end": 172.35,
+      "text": "That entry is 0.34.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 172.47,
+      "ts_end": 179.99,
+      "text": "The index number is 5 or the token ID is 5 and then we see that for token ID 5 the token which corresponds to that is U.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 180.31,
+      "ts_end": 181.23,
+      "text": "So, when every is the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 181.25,
+      "ts_end": 182.45,
+      "text": "Every effort moves is the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 182.59,
+      "ts_end": 183.59,
+      "text": "U should be the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 184.25,
+      "ts_end": 184.81,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 184.99,
+      "ts_end": 193.89,
+      "text": "So, until now what we have seen is that the generated token is selected corresponding to the largest probability score among all the tokens in the vocabulary.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 194.39,
+      "ts_end": 201.13,
+      "text": "What this leads to is that this leads to a lot of randomness and diversity in the generated text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 201.73,
+      "ts_end": 208.85,
+      "text": "So, since all of these are probability scores, why are we choosing the next token in a deterministic manner like this?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 209.05,
+      "ts_end": 210.51,
+      "text": "What if we use.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 212.46,
+      "ts_end": 215.32,
+      "text": "What if we choose the next token in a probabilistic manner?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 215.52,
+      "ts_end": 219.4,
+      "text": "What if we sample the next token from a probability distribution?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 220.14,
+      "ts_end": 224.02,
+      "text": "This is exactly what is explored in the concept of temperature scaling.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 225.18,
+      "ts_end": 232.48,
+      "text": "There are actually two techniques which really help to control the randomness and the two techniques are used together with each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 232.74,
+      "ts_end": 236.74,
+      "text": "First is temperature scaling and the second is top case sampling.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 236.96,
+      "ts_end": 240.54,
+      "text": "This top case sampling technique we are going to look at in the next lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 240.68,
+      "ts_end": 242.7,
+      "text": "Today, we are going to focus on temperature.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 242.98,
+      "ts_end": 257.7,
+      "text": "So, the main idea behind temperature scaling is that first what we do is that instead of taking the maximum probability and just looking at the index which corresponds to the maximum probability.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 258.04,
+      "ts_end": 261.84,
+      "text": "We replace this arg max with a probability distribution.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 262.36,
+      "ts_end": 270.44,
+      "text": "So, for example, here instead of just choosing this token with a maximum probability, we will look at these probability scores.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 270.72,
+      "ts_end": 272.74,
+      "text": "And then based on this, we will sample.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 272.98,
+      "ts_end": 274.58,
+      "text": "So, the next token is then sampled according to the probability score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 274.58,
+      "ts_end": 279.74,
+      "text": "And that probability distribution turns out to be the multinomial probability distribution.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 280.54,
+      "ts_end": 285.8,
+      "text": "So, the next token is then sampled according to the probability score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 286.38,
+      "ts_end": 292.26,
+      "text": "We don't just blindly or we don't just choose the token ID with the highest probability value.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 292.52,
+      "ts_end": 296.5,
+      "text": "We sample the next token according to the probability score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 296.72,
+      "ts_end": 299.34,
+      "text": "This distinction in terminology is very important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 299.52,
+      "ts_end": 301.04,
+      "text": "We are sampling the next token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 301.5,
+      "ts_end": 302.98,
+      "text": "So, it's not clear to us.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 302.98,
+      "ts_end": 306.8,
+      "text": "What the next token is going to be because we are sampling it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 306.9,
+      "ts_end": 308.52,
+      "text": "So, what does sampling mean?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 308.64,
+      "ts_end": 312.16,
+      "text": "To give you an example, let's look at the Gaussian distribution, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 312.42,
+      "ts_end": 321.54,
+      "text": "And if I ask you to sample values from a Gaussian distribution, I cannot tell you right now what the value will be because I'm sampling it from this distribution.",
+      "frame_ids": [
+        "oG1FPVnY0pI_f0001",
+        "oG1FPVnY0pI_f0002"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 321.92,
+      "ts_end": 327.28,
+      "text": "What I can tell you is that most of my samples will probably be close to the mean point like here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 327.56,
+      "ts_end": 331.18,
+      "text": "Very few will probably be at the tail end of the Gaussian distribution.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 331.78,
+      "ts_end": 332.96,
+      "text": "This is what sampling is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 332.98,
+      "ts_end": 339.32,
+      "text": "Sampling from a distribution means, in this case, we are sampling from this distribution, which is multinomial distribution.",
+      "frame_ids": [
+        "oG1FPVnY0pI_f0003"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "torch.multinomial",
+          "extracted_text": "NOTE\nWhen drawn without replacement, num_samples must be lower than number of non-zero elements in input (or the min number of non-zero elements in each row of input if it is a matrix).\n\nParameters\n\u2022 input (Tensor) \u2013 the input tensor containing probabilities\n\u2022 num_samples (int) \u2013 number of samples to draw\n\u2022 replacement (bool, optional) \u2013 whether to draw with replacement or not\n\nKeyword Arguments\n\u2022 generator (torch.Generator, optional) \u2013 a pseudorandom number generator for sampling\n\u2022 out (Tensor, optional) \u2013 the output tensor.\n\nExample:",
+          "code": {
+            "language": "python",
+            "content": ">>> weights = torch.tensor([0, 10, 3, 0], dtype=torch.float) # create a tensor of weights\n>>> torch.multinomial(weights, 2)\ntensor([1, 2])\n>>> torch.multinomial(weights, 5) # ERROR!\nRuntimeError: cannot sample n_sample > prob_dist.size(-1) samples without replacement\n>>> torch.multinomial(weights, 4, replacement=True)\ntensor([ 2, 1, 1, 1])"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "oG1FPVnY0pI_f0003",
+          "video_id": "oG1FPVnY0pI",
+          "timestamp_sec": 335.533,
+          "source_image": "data/frames/oG1FPVnY0pI/oG1FPVnY0pI_f0003.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 339.66,
+      "ts_end": 351.06,
+      "text": "And if you go to Wikipedia, you will see that the multinomial distribution essentially is for a number of different mutually exclusive outcomes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 351.4,
+      "ts_end": 359.36,
+      "text": "So, when we have k possible mutually exclusive outcomes with corresponding probabilities, think of this as the next token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 359.52,
+      "ts_end": 363.08,
+      "text": "Here also we have the outcomes equal to the numbers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 363.08,
+      "ts_end": 368.04,
+      "text": "vocabulary size right k possible outcomes because anything can be the next token and all of them",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 368.04,
+      "ts_end": 374.72,
+      "text": "have a probability associated with them right and let's say we conduct thousand or n independent",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 374.72,
+      "ts_end": 381.06,
+      "text": "trials to predict the next token then we will have a probability distribution that is essentially",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 381.06,
+      "ts_end": 386.66,
+      "text": "called as the multinomial probability distribution and i'm going to explain that to you in just a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 386.66,
+      "ts_end": 392.12,
+      "text": "moment so that it's going to be clear to you right now just know that we are going to sample the next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 392.12,
+      "ts_end": 397.64,
+      "text": "token from this distribution which is called as multinomial distribution before coming to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 397.64,
+      "ts_end": 403.66,
+      "text": "temperature let's actually go to code to understand until this point what we are going to do okay",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 403.66,
+      "ts_end": 410.59,
+      "text": "so the whole topic of today's lecture is decoding strategies to control randomness let us first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 410.59,
+      "ts_end": 415.93,
+      "text": "briefly revisit the generate text simple function which we have been using up till now and then we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 415.93,
+      "ts_end": 421.96,
+      "text": "will cover techniques such as temperature scaling and top k sampling and here first what i'm doing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 421.96,
+      "ts_end": 423.64,
+      "text": "is i'm switching the model to the cpc and then i'm going to show you how to do that so let's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 423.64,
+      "ts_end": 429.0,
+      "text": "go to the cpu and i'm running it in the evaluation mode so here you can see that this is the gpt model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 429.0,
+      "ts_end": 434.52,
+      "text": "which we are going to use we have the embedding layers then the transformer block then after",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 434.52,
+      "ts_end": 442.06,
+      "text": "coming out of the transformer block we have let's see when i come out of the transformer block here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 442.06,
+      "ts_end": 449.14,
+      "text": "i have another normalization layer and then i have output header this is my architecture awesome now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 449.14,
+      "ts_end": 454.64,
+      "text": "i just want to show you currently we have this generate text simple it takes in the input token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 455.08,
+      "ts_end": 459.72,
+      "text": "or the input sentence which we have it passes it through the architecture which i just showed you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 459.72,
+      "ts_end": 466.6,
+      "text": "and then it predicts the next 25 tokens using the maximum probability so we are not currently doing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 466.6,
+      "ts_end": 472.28,
+      "text": "the sampling as i mentioned and so here you can see when every effort moves you is the input this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 472.28,
+      "ts_end": 479.5,
+      "text": "this is the output these are the 25 tokens and the randomness here is pretty high right so previously",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 479.86,
+      "ts_end": 484.64,
+      "text": "inside the generate text simple function we always sample the token with the highest probability",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 485.08,
+      "ts_end": 492.42,
+      "text": "as the next token using torch.argmax right this is called as greedy decoding now to generate text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 492.42,
+      "ts_end": 497.72,
+      "text": "with more variety what we are going to do is that we are going to replace the argmax with a function",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 497.72,
+      "ts_end": 502.96,
+      "text": "that samples from a probability distribution that's the main thing which we are going to do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 502.96,
+      "ts_end": 508.44,
+      "text": "and to illustrate this probabilistic sampling with a concrete example let us actually first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 508.44,
+      "ts_end": 513.72,
+      "text": "take a very small vocabulary size and let us demonstrate here what's going on so let's say",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 513.72,
+      "ts_end": 519.74,
+      "text": "my vocabulary size only consists of the tokens which are closer every effort forward inches",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 519.74,
+      "ts_end": 527.64,
+      "text": "moves visa towards and you so these are the eight these are the nine tokens in my vocabulary and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 527.64,
+      "ts_end": 533.44,
+      "text": "each has a token id from zero to eight i also maintain an inverse vocabulary dictionary which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 533.44,
+      "ts_end": 541.14,
+      "text": "gives me the token id and then it decodes it back to the token awesome now let's say the input to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 541.14,
+      "ts_end": 543.76,
+      "text": "this input to my large language model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 543.76,
+      "ts_end": 550.41,
+      "text": "and remember the model is this let's say the input to this model is every effort moves you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 551.34,
+      "ts_end": 555.92,
+      "text": "what this input will do when passed through the model is that we'll get the output logits tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 556.56,
+      "ts_end": 563.94,
+      "text": "and the output logits tensor will have the number of columns which is equal to the vocabulary size",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 563.94,
+      "ts_end": 571.4,
+      "text": "so the number of columns here in the output logits tensor will be nine right now what we do here is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 574.46,
+      "ts_end": 576.86,
+      "text": "So that this is converted into probabilities right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 577.24,
+      "ts_end": 581.82,
+      "text": "And so when you pass this into a softmax you can print out the probabilities and you will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 581.82,
+      "ts_end": 583.5,
+      "text": "see that the probabilities look like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 583.88,
+      "ts_end": 586.08,
+      "text": "Now all of these add up to 1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 586.24,
+      "ts_end": 591.32,
+      "text": "So earlier what we used to do is that we just looked at these probabilities and we said",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 591.32,
+      "ts_end": 595.96,
+      "text": "that the next token id is going to be that token id with the maximum probability.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 596.44,
+      "ts_end": 602.72,
+      "text": "So let's see and that maximum probability is 0.5721 and this is column number 0, 1,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 602.72,
+      "ts_end": 604.54,
+      "text": "2 and 3, this column number 3.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 604.68,
+      "ts_end": 607.66,
+      "text": "So the next token id is equal to 3 which we have printed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 607.96,
+      "ts_end": 612.6,
+      "text": "And then using the inverse vocabulary we will print the next token and that is forward.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 612.96,
+      "ts_end": 617.96,
+      "text": "So then the next token will be every effort moves you and then forward will be my predicted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 617.96,
+      "ts_end": 618.34,
+      "text": "token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 619.44,
+      "ts_end": 623.66,
+      "text": "Here is where we are going to make the change to implement a probabilistic sampling process.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 624.14,
+      "ts_end": 628.78,
+      "text": "We can now replace the argmax with the multinomial function in PyTorch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 628.9,
+      "ts_end": 633.18,
+      "text": "So here you can see we are replacing the argmax with a multinomial function here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 633.18,
+      "ts_end": 641.18,
+      "text": "And this multinomial function is applied to this probas which is the probabilities which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 642.02,
+      "ts_end": 644.26,
+      "text": "is the tensor of probabilities.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 644.52,
+      "ts_end": 649.62,
+      "text": "This is where the multinomial function is applied and then what we can do is that we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 649.62,
+      "ts_end": 654.76,
+      "text": "can get the next token id based on what we sample from this probability distribution",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 655.38,
+      "ts_end": 658.36,
+      "text": "and then we predict the token corresponding to the next token id.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 658.92,
+      "ts_end": 661.62,
+      "text": "Here you can see that this is just equal to forward right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 661.7,
+      "ts_end": 662.8,
+      "text": "So what really happened?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 662.8,
+      "ts_end": 664.54,
+      "text": "It is the same as the previous one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 664.8,
+      "ts_end": 665.76,
+      "text": "There is no change.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 665.96,
+      "ts_end": 668.52,
+      "text": "So you might be thinking why did we do this multinomial.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 669.82,
+      "ts_end": 674.96,
+      "text": "So what happens is that the multinomial function samples the next token proportional to its",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 674.96,
+      "ts_end": 675.84,
+      "text": "probability score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 676.34,
+      "ts_end": 677.9,
+      "text": "This is the important thing here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 678.28,
+      "ts_end": 681.94,
+      "text": "So let's say currently we did only one trial here right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 682.0,
+      "ts_end": 686.44,
+      "text": "In that one trial what the multinomial function did is that it looked at all these probabilities",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 686.44,
+      "ts_end": 688.38,
+      "text": "and then it will sample from this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 688.56,
+      "ts_end": 693.08,
+      "text": "So there is a high chance that it will choose forward and that's why it chose forward.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 693.44,
+      "ts_end": 697.08,
+      "text": "We will really see the difference when we do more number of trials.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 697.36,
+      "ts_end": 702.24,
+      "text": "So see in this definition there is n independent trials which need to be performed right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 702.36,
+      "ts_end": 704.32,
+      "text": "That is what we are going to do right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 705.19,
+      "ts_end": 710.17,
+      "text": "So the multinomial function samples the next token proportional to its probability score.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 710.39,
+      "ts_end": 714.23,
+      "text": "In other words forward is still like still the most likely token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 714.65,
+      "ts_end": 717.35,
+      "text": "So we are not changing the most likely token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 717.45,
+      "ts_end": 719.29,
+      "text": "It still remains the most likely token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 719.41,
+      "ts_end": 721.77,
+      "text": "But we will also select other tokens sometimes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 722.99,
+      "ts_end": 723.91,
+      "text": "See that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 724.37,
+      "ts_end": 728.99,
+      "text": "the most likely token and will be selected by the multinomial most of the time but not all the time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 729.6,
+      "ts_end": 733.95,
+      "text": "so to illustrate this we will repeat this process this sampling thousand times",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 734.77,
+      "ts_end": 741.03,
+      "text": "so to sim the multinomial function is very intuitive so when you do thousand trials in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 741.03,
+      "ts_end": 748.61,
+      "text": "each trial it will try to choose that token which has the highest probability so now it's a bit of a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 748.61,
+      "ts_end": 752.57,
+      "text": "random process right it's not deterministic sometimes the multinomial function might even",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 752.57,
+      "ts_end": 759.77,
+      "text": "choose pizza although it will be very very rare sometimes it might choose but most of the times",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 759.77,
+      "ts_end": 767.2,
+      "text": "it will choose forward only so let's try to do this now so what we are doing is that we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 767.2,
+      "ts_end": 771.98,
+      "text": "running the same procedure now we are applying the multinomial function to this probas tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 772.62,
+      "ts_end": 782.42,
+      "text": "and then we are going to take the sample which is we are going to take the token id which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 782.42,
+      "ts_end": 784.18,
+      "text": "sampled in that particular iteration",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 784.3,
+      "ts_end": 789.02,
+      "text": "and then we are going to print out that what we are also doing is that in these thousand iterations",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 789.65,
+      "ts_end": 795.14,
+      "text": "i am going to print out how many times each token is chosen so that's this frequency we print print",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 795.14,
+      "ts_end": 800.58,
+      "text": "out how many times every single token is chosen when you are doing this thousand iterations so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 800.58,
+      "ts_end": 806.02,
+      "text": "here are the results so when you do this number of iterations these many times you will see that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 806.53,
+      "ts_end": 813.26,
+      "text": "uh you will see that the word forward is sampled most number of times it's sampled 582 times out of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 813.26,
+      "ts_end": 813.72,
+      "text": "the thousand",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 814.3,
+      "ts_end": 821.1,
+      "text": "but other tokens such as closer inches and towards so closer inches and toward they are also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 821.66,
+      "ts_end": 827.52,
+      "text": "sampled some of the time so in fact closer is sampled 73 times inches is sampled two times and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 827.52,
+      "ts_end": 834.0,
+      "text": "towards is sampled 343 times this means that since we replace the argmax function with the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 834.0,
+      "ts_end": 838.94,
+      "text": "multinomial function the llm would sometimes generate text such as every effort moves you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 838.94,
+      "ts_end": 844.22,
+      "text": "toward every effort moves you inches and every effort moves you closer instead of every time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 844.46,
+      "ts_end": 850.36,
+      "text": "generating every effort moves you forward so now integration of this multinomial",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 851.08,
+      "ts_end": 855.18,
+      "text": "function has made sure that we are not sampling the same token each time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 855.74,
+      "ts_end": 862.46,
+      "text": "sometime we are also giving more uh we are giving more chance for other tokens to be the next token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 862.46,
+      "ts_end": 867.38,
+      "text": "and that's what improves the creativity of the large language model it leads to more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 868.5,
+      "ts_end": 875.36,
+      "text": "exploration it leads to more creativity and sometimes it can also lead to better outputs in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 875.52,
+      "ts_end": 878.58,
+      "text": "a more complex way so instead of just sampling a deterministic prediction every single time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 878.58,
+      "ts_end": 884.46,
+      "text": "so you might be thinking that okay this looks fine but why is this method called as temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 884.46,
+      "ts_end": 888.52,
+      "text": "scaling where does temperature come into the picture and why is it called temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 888.52,
+      "ts_end": 895.18,
+      "text": "so basically you see this logit tensor over here right before we apply the soft max there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 895.18,
+      "ts_end": 902.12,
+      "text": "is a logits tensor what what what is meant by temperature is that temperature is basically just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 902.12,
+      "ts_end": 904.14,
+      "text": "a fancy term for dividing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 904.14,
+      "ts_end": 909.82,
+      "text": "dividing the logits tensor by a number which is greater than zero so the only thing which is done",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.82,
+      "ts_end": 914.62,
+      "text": "when we introduce temperature is that we have this thing called scale logits and all the logit",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 914.62,
+      "ts_end": 918.38,
+      "text": "values which we have are divided by another number which is called as the temperature value",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 919.27,
+      "ts_end": 924.21,
+      "text": "so what this does is that so see when you divide it by the temperature value you get this scale",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 924.21,
+      "ts_end": 930.23,
+      "text": "logic then you apply softmax and then you get the tensor of probabilities every the rest of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 930.23,
+      "ts_end": 935.49,
+      "text": "process stays the same but what this introduction of this temperature does is that it changes the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 935.49,
+      "ts_end": 941.55,
+      "text": "distribution a bit it changes the distribution of probabilities so for example let's see what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 941.55,
+      "ts_end": 947.65,
+      "text": "this dividing by this temperature does through code so we can further control the distribution",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 947.65,
+      "ts_end": 952.83,
+      "text": "and selection process via a concept called temperature scaling where temperature scaling",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 952.83,
+      "ts_end": 957.05,
+      "text": "is just a fancy description for dividing the logits by a number greater than zero",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 957.59,
+      "ts_end": 960.83,
+      "text": "now we will see two things we will see temperatures greater than",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 960.83,
+      "ts_end": 964.15,
+      "text": "one what happens when temperature is greater than one and we'll see what happens when",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 964.15,
+      "ts_end": 970.25,
+      "text": "temperature is smaller than one okay so here what i'm doing is that i'm scaling the logits with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 970.25,
+      "ts_end": 975.91,
+      "text": "dividing by temperature and then i'll apply the softmax exactly like what we had done over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 976.47,
+      "ts_end": 984.68,
+      "text": "and then uh even before applying the multinomial distribution uh then we'll get the scale probab",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 984.68,
+      "ts_end": 989.82,
+      "text": "we'll get the scale probabilities as applying softmax with temperature first i just want to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 989.82,
+      "ts_end": 991.16,
+      "text": "show you without your sense of the concept of the system and then you can see that the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 991.16,
+      "ts_end": 995.98,
+      "text": "on going to the multinomial function what happens when you scale the logits with temperature and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 995.98,
+      "ts_end": 1001.8,
+      "text": "what happens as the result when you apply softmax so look at this plot first i want you to see the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1001.8,
+      "ts_end": 1006.62,
+      "text": "plot with temperature equal to 1 which are the blue so when you see the blue you will see that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1006.62,
+      "ts_end": 1012.14,
+      "text": "the probability for forward is around 0.5 probability for closer is around 0.1 and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1012.14,
+      "ts_end": 1016.38,
+      "text": "probability for towards is around 0.3 this is exactly what we saw in this case right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1016.38,
+      "ts_end": 1027.2,
+      "text": "so probability for forward is 0.5 probability for towards so probability for towards is 0.35",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1027.2,
+      "ts_end": 1036.41,
+      "text": "and probability for there is one more probability for closer so probability for closer is 0.06 right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1036.41,
+      "ts_end": 1042.79,
+      "text": "so the blue the blue line there is when we are not changing anything when temperature is equal to 1",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1042.79,
+      "ts_end": 1045.67,
+      "text": "now let's see what happens when temperature is small",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1045.67,
+      "ts_end": 1046.73,
+      "text": "so when you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1046.73,
+      "ts_end": 1053.21,
+      "text": "actually when you take these value when you take these logits and you divide each of them by 0.1",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1053.21,
+      "ts_end": 1059.15,
+      "text": "and then you take the softmax then you will get probabilities which look something like this in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1059.15,
+      "ts_end": 1063.91,
+      "text": "the orange you will see there is a sharper probability for forward now and almost all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1063.91,
+      "ts_end": 1069.11,
+      "text": "the other probabilities have been shifted to 0 and we can test this out a bit in the code right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1069.11,
+      "ts_end": 1076.85,
+      "text": "now so what i'm going to do is that i'm going to say that next logits next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1079.18,
+      "ts_end": 1085.82,
+      "text": "token logits is equal to next token logits or let's say next token logits 2 is equal to next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1085.82,
+      "ts_end": 1094.65,
+      "text": "token logits divided by 0.1 right okay so now i have a next token logits 2 where every logit is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1094.65,
+      "ts_end": 1100.76,
+      "text": "divided by 0.1 and here what i will do is that i will print out i'll print out the probabilities",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1100.76,
+      "ts_end": 1107.48,
+      "text": "which correspond to the uh when you apply the softmax so now i'll just do this and print out",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1107.48,
+      "ts_end": 1108.04,
+      "text": "the probabilities",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1110.73,
+      "ts_end": 1115.89,
+      "text": "here you see what happened when we divided by 0.1 and then you applied the softmax almost all the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1115.89,
+      "ts_end": 1121.27,
+      "text": "probabilities all other probabilities are brought down to 0 but there is a sharper probability very",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1121.27,
+      "ts_end": 1125.99,
+      "text": "high probability now for forward this is in contrast to these probabilities right where even",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1125.99,
+      "ts_end": 1132.45,
+      "text": "here this value had a significant amount which was toward uh i think that was toward yeah this value",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1132.45,
+      "ts_end": 1137.51,
+      "text": "also had a significant amount that was for closer but now all these values are turned to 0 the only",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1137.51,
+      "ts_end": 1140.49,
+      "text": "value which matters the most is uh forward",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1140.73,
+      "ts_end": 1146.49,
+      "text": "so that's the first conclusion when temperature value is very low then there is a peak in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1146.49,
+      "ts_end": 1152.09,
+      "text": "probability distribution which means that it becomes sharper for specific values now let me",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1152.09,
+      "ts_end": 1159.82,
+      "text": "try this that let me divide by 5 or as shown in the graph uh yeah temperature equal to 5 and here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1159.82,
+      "ts_end": 1166.47,
+      "text": "you will see the probability becomes a bit flatter which means that there is kind of high values for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1166.47,
+      "ts_end": 1171.67,
+      "text": "all the tokens so let's see what is happening here when the when i divide by 5 and here you will see",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1171.69,
+      "ts_end": 1177.45,
+      "text": "the probability is 5 so next token logits 3 i'm dividing the next token logits by 5 and then what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1177.45,
+      "ts_end": 1185.91,
+      "text": "i'll do is that i'll print out the probabilities for next token logits 3 and let me print it out",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1185.91,
+      "ts_end": 1190.65,
+      "text": "in a separate cell actually so that it might be cleaner so i have a separate cell where i will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1190.65,
+      "ts_end": 1200.98,
+      "text": "print out where i'll print out the probabilities for this tensor where i've divided the logits by",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1200.98,
+      "ts_end": 1204.86,
+      "text": "5 and then i run it so now you see this is my probability",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1205.24,
+      "ts_end": 1209.82,
+      "text": "sensor and you can see that it has just become a bit flattened and a bit more uniform now for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1209.82,
+      "ts_end": 1215.18,
+      "text": "every token we have certain values of course the value for forward is still the highest but there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1215.18,
+      "ts_end": 1220.82,
+      "text": "are other values such as toward which has now become very close to forward even the probability",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1220.82,
+      "ts_end": 1226.98,
+      "text": "value for closer has become very similar to forward now so if the temperature value is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1226.98,
+      "ts_end": 1232.14,
+      "text": "very high it means that the probability distribution kind of flattens out a bit",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1232.14,
+      "ts_end": 1234.81,
+      "text": "and then every token kind of has",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1235.31,
+      "ts_end": 1240.05,
+      "text": "uniform probability as being the next token can you think about what this would mean for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1240.05,
+      "ts_end": 1246.88,
+      "text": "generating the next world or generating the next token this means that there is a lot of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1246.88,
+      "ts_end": 1252.24,
+      "text": "variability now in our output token which is also sometimes called creativity but in some cases the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1252.24,
+      "ts_end": 1256.98,
+      "text": "creativity can be too high because now you will see that there is certain output for pizza also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1256.98,
+      "ts_end": 1262.64,
+      "text": "which means that every effort moves you pizza our llm is also predicting this as an output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1262.64,
+      "ts_end": 1265.9,
+      "text": "so ideally we don't want the temperature value too high",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1266.84,
+      "ts_end": 1272.56,
+      "text": "we don't want the temperature value too low also if the temperature value is too low then there is only one token which is predicted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1272.56,
+      "ts_end": 1278.72,
+      "text": "we need to place emphasis on other tokens also which might be making sense so as we saw applying",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1278.72,
+      "ts_end": 1284.84,
+      "text": "very small temperatures such as 0.1 will result in sharper distributions such that later when we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1284.84,
+      "ts_end": 1291.64,
+      "text": "apply the multinomial function it will select the most likely token which is forward now please keep",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1291.64,
+      "ts_end": 1296.7,
+      "text": "in mind that after this we are going to apply multinomial so multinomial sampling is going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1296.84,
+      "ts_end": 1301.8,
+      "text": "happen after the softmax so if the probability distribution looks something like in the orange",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1301.8,
+      "ts_end": 1308.0,
+      "text": "the multinomial will always sample this because the probability remember multinomial samples",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1308.0,
+      "ts_end": 1313.38,
+      "text": "according to the probabilities right so if the probability is 0.991 it will always sample this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1313.38,
+      "ts_end": 1320.69,
+      "text": "so that's why when the temperature values are small such as 0.1 it results in sharper distributions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1320.69,
+      "ts_end": 1326.99,
+      "text": "and the multinomial function then selects the most likely token here forward almost 100 percent",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1327.45,
+      "ts_end": 1332.79,
+      "text": "time and then we approach the behavior of the argmax function so when the temperature values are low",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1332.79,
+      "ts_end": 1338.31,
+      "text": "it's almost like going back to the earlier approach where we selected the token id with the highest",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1338.31,
+      "ts_end": 1344.05,
+      "text": "probability score now if you look at the higher temperature if temperature value is equal to 5",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1344.05,
+      "ts_end": 1348.35,
+      "text": "this actually results in a more uniform distribution where other tokens are also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1348.35,
+      "ts_end": 1353.92,
+      "text": "selected more often such as what is shown in the green color here this can add more variety to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1353.92,
+      "ts_end": 1357.14,
+      "text": "generated texts but also it leads to nonsensical text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1357.88,
+      "ts_end": 1364.54,
+      "text": "for example uh pizza is now four percent probability so we will get every effort moves you pizza about",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1364.54,
+      "ts_end": 1369.4,
+      "text": "four percent of the time if you use temperature equal to five that's not good so the ideally there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1369.4,
+      "ts_end": 1375.09,
+      "text": "needs to be a good balance in the temperature which we use there is a very nice graph which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1375.09,
+      "ts_end": 1380.11,
+      "text": "actually shows why this has the name temperature so here you see if the temperature becomes high",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1380.11,
+      "ts_end": 1384.67,
+      "text": "as is shown on the right side we saw that the distribution becomes more uniform right every",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1384.67,
+      "ts_end": 1387.45,
+      "text": "token has some probability whereas for low temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1388.19,
+      "ts_end": 1391.93,
+      "text": "something on the right something on the left here where we have sharper distributions only one token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1391.93,
+      "ts_end": 1399.23,
+      "text": "makes sense so low temperature can be corresponding to low entropy whereas when you do increase the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1399.23,
+      "ts_end": 1403.57,
+      "text": "temperature things generally be become a more unstable things become more chaotic become more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1403.57,
+      "ts_end": 1409.15,
+      "text": "creative that's why every token has certain probability here of being the next token so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1409.15,
+      "ts_end": 1414.74,
+      "text": "that's why it's called as temperature because increasing the temperature makes makes uh make",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1418.28,
+      "ts_end": 1425.77,
+      "text": "makes it a bit uh unstable I would say or rather I would call it a bit more creative a bit more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1425.77,
+      "ts_end": 1432.09,
+      "text": "randomized it's almost like the entropy has increased so that's why conceptually it's called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1432.09,
+      "ts_end": 1437.57,
+      "text": "as temperature because increase in temperature leads to a more flattened diffused distribution",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1437.57,
+      "ts_end": 1444.13,
+      "text": "whereas lowering the temperature means lower entropy so only one token value would make more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1444.13,
+      "ts_end": 1448.55,
+      "text": "sense now here is a graphic which actually shows what happens as you increase the temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1448.57,
+      "ts_end": 1453.93,
+      "text": "temperature to very very high values if temperature becomes very high almost every next token will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1453.93,
+      "ts_end": 1458.45,
+      "text": "have equal probability if the temperature becomes very low we have sharper distributions as we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1458.45,
+      "ts_end": 1464.72,
+      "text": "seen before awesome so this brings us to the end of the lecture where we covered about temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1464.72,
+      "ts_end": 1471.5,
+      "text": "scaling and how temperature scaling can be actually used to predict the next token in a probabilistic",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1471.5,
+      "ts_end": 1476.72,
+      "text": "sense so instead of just choosing the next token according to the maximum value we will use a multi",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1476.72,
+      "ts_end": 1479.2,
+      "text": "multinomial probability distribution to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1479.5,
+      "ts_end": 1485.18,
+      "text": "sample the next token that's the keyword so first you take the logit so the procedure is like this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1485.18,
+      "ts_end": 1491.46,
+      "text": "first you take the logits then you scale it so you scale the logits with the temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1493.14,
+      "ts_end": 1500.42,
+      "text": "and then what you do is then you apply the softmax and then you get a tensor of probabilities and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1500.42,
+      "ts_end": 1508.23,
+      "text": "then you sample using the multinomial distribution this is the sequential workflow for application of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1508.23,
+      "ts_end": 1511.97,
+      "text": "temperature and we later saw that the reason it's called temperature is because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1512.35,
+      "ts_end": 1516.93,
+      "text": "as the temperature becomes high it's like the entropy increases every next token has some",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1516.93,
+      "ts_end": 1522.63,
+      "text": "probability of being the next token whereas if the temperature is very low the entropy is very low",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1522.63,
+      "ts_end": 1527.99,
+      "text": "it's like everything is concentrated to one single token and we have a sharper probability distribution",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1529.31,
+      "ts_end": 1533.59,
+      "text": "so small token means that the llm output does not have any creativity it will always",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1533.59,
+      "ts_end": 1537.41,
+      "text": "give the same thing as an output but large token means that it's a flattened distribution",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1537.41,
+      "ts_end": 1542.63,
+      "text": "more variety but also it has scope for more nonsense so you need to be careful",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1542.89,
+      "ts_end": 1549.1,
+      "text": "choosing the temperature value in the next lecture we will study another technique for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1550.65,
+      "ts_end": 1557.29,
+      "text": "reducing the randomization while decoding the tokens or reducing the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1560.03,
+      "ts_end": 1563.11,
+      "text": "reducing the randomization when predicting the next token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1564.37,
+      "ts_end": 1571.24,
+      "text": "and that strategy is called as top k sampling so usually top k sampling is used along with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1571.24,
+      "ts_end": 1576.58,
+      "text": "temperature scaling and so we'll also see how top k sampling integrates with what we learned today",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1576.58,
+      "ts_end": 1582.1,
+      "text": "which is temperature scaling thanks a lot everyone this was a short lecture but i hope you understood",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1582.1,
+      "ts_end": 1586.24,
+      "text": "the concept of temperature scaling thanks a lot and i'll see you in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 4,
+  "frames_with_content": 2
+}

@@ -1,0 +1,26 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "10 Most Common Loss Functions in Machine Learning",
+  "extracted_text": "by Avi Ghouls\n\nLoss Function Name | Description | Function\n\nRegression Losses\n\nMean Bias Error\nCaptures average bias in prediction. But is rarely used for training.\n\nMean Absolute Error\nMeasures absolute average bias in prediction. Also called L1 Loss.\n\nMean Squared Error\nAverage squared difference between actual and predicted. Also called L2 Loss.\n\nRoot Mean Squared Error\nSquare root of MSE. Loss and dependent variable have same units.\n\nHuber Loss\nA combination of MSE and MAE. It is parametric loss function.\n\nLog Cosh Loss\nSimilar to Huber Loss & non-parametric. But computationally expensive.\n\nClassification Losses (Binary + Multi-class)\n\nBinary Cross Entropy (BCE)\nLoss function for binary classification tasks.\n\nHinge Loss\nPenalizes wrong and right (but less confident) predictions. Commonly used in SVMs.\n\nCross Entropy Loss\nExtension of BCE loss to multi-class classification.\n\nKL Divergence\nMinimizes the divergence between predicted and true probability distribution",
+  "code": null,
+  "math": [
+    "\\mathcal{L}_{MBE} = \\frac{1}{N} \\sum_{i=1}^{N} (y_i - f(x_i))",
+    "\\mathcal{L}_{MAE} = \\frac{1}{N} \\sum_{i=1}^{N} |y_i - f(x_i)|",
+    "\\mathcal{L}_{MSE} = \\frac{1}{N} \\sum_{i=1}^{N} (y_i - f(x_i))^2",
+    "\\mathcal{L}_{RMSE} = \\sqrt{\\frac{1}{N} \\sum_{i=1}^{N} (y_i - f(x_i))^2}",
+    "\\mathcal{L}_{Huber} = \\begin{cases} \\frac{(y_i - f(x_i))^2}{2} & \\text{if } |y_i - f(x_i)| \\leq \\delta \\\\ \\delta|y_i - f(x_i)| - \\frac{\\delta}{2} & \\text{otherwise} \\end{cases}",
+    "\\mathcal{L}_{LogCosh} = \\frac{1}{N} \\sum_{i=1}^{N} \\log(\\cosh(f(x_i) - y_i))",
+    "\\mathcal{L}_{BCE} = -\\frac{1}{N} \\sum_{i=1}^{N} [y_i \\log(p_i) + (1-y_i) \\log(1-p_i)]",
+    "\\mathcal{L}_{Hinge} = max(0, 1 - (f(x) \\cdot y))",
+    "\\mathcal{L}_{CE} = -\\frac{1}{N} \\sum_{i=1}^{N} \\sum_{c=1}^{M} y_{i,c} \\log(f(x_i)_c)",
+    "\\mathcal{L}_{KL} = -\\sum_{i=1}^{N} y_i \\cdot \\log\\left(\\frac{y_i}{f(x_i)}\\right)"
+  ],
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "7TKCrt--bWI_f0001",
+  "video_id": "7TKCrt--bWI",
+  "timestamp_sec": 23.133,
+  "source_image": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0001.jpg"
+}

@@ -1,0 +1,22 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture 2: Intro to LLMs",
+  "extracted_text": "\u2460 What is a Large Language Model (LLM)\n\nNeural networks designed to understand, generate and respond to human like text.\n\nDeep Neural Networks trained on massive amounts of text data.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A neural network architecture diagram showing input data flowing through multiple layers (Layer 1 to Layer N) with interconnected neurons, producing output.",
+  "diagram_elements": [
+    "Input Data",
+    "Neuron",
+    "Layer 1",
+    "Layer N",
+    "Output Layer",
+    "Output"
+  ],
+  "confidence": 0.92,
+  "frame_id": "3dWzNZXA8DY_f0000",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0000.jpg"
+}

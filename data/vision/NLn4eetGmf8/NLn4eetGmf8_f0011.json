@@ -1,0 +1,27 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Transformer architecture diagram showing encoder-decoder structure with stacked layers of Multi-Head Attention, Feed Forward, Add & Norm blocks, Positional Encoding, and Input/Output Embeddings.",
+  "diagram_elements": [
+    "Input Embedding",
+    "Positional Encoding",
+    "Multi-Head Attention",
+    "Add & Norm",
+    "Feed Forward",
+    "Masked Multi-Head Attention",
+    "Output Embedding",
+    "Linear",
+    "Softmax",
+    "Nx (encoder stack)",
+    "Nx (decoder stack)"
+  ],
+  "confidence": 0.95,
+  "frame_id": "NLn4eetGmf8_f0011",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 1023.133,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0011.jpg"
+}

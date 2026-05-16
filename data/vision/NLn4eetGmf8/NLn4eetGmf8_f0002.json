@@ -1,0 +1,19 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "3.2.2 Multi-Head Attention",
+  "extracted_text": "Instead of performing a single attention function with d_model-dimensional keys, values and queries, we found it beneficial to linearly project the queries, keys and values h times with different, learned linear projections to d_k, d_v and d_v dimensions, respectively. On each of these projected versions of queries, keys and values we then perform the attention function in parallel, yielding d_v-dimensional output values. These are concatenated and once again projected, resulting in the final values, as depicted in Figure 2.\n\nMulti-head attention allows the model to jointly attend to information from different representation subspaces at different positions. With a single attention head, averaging inhibits this.",
+  "code": null,
+  "math": [
+    "MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O",
+    "head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)",
+    "W_i^Q \\in \\mathbb{R}^{d_{model} \\times d_k}, W_i^K \\in \\mathbb{R}^{d_{model} \\times d_k}, W_i^V \\in \\mathbb{R}^{d_{model} \\times d_v}"
+  ],
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0002",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 257.533,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0002.jpg"
+}

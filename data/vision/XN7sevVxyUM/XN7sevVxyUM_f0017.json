@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence-to-sequence neural machine translation model with an encoding stage containing three stacked Encoder RNN blocks (green) that process input, and a decoding stage with a single Decoder RNN block (purple) that generates output.",
+  "diagram_elements": [
+    "Encoding Stage",
+    "Encoder RNN",
+    "Encoder RNN",
+    "Encoder RNN",
+    "Decoding Stage",
+    "Decoder RNN",
+    "Arrow from Encoding to Decoding"
+  ],
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0017",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2281.166333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0017.jpg"
+}

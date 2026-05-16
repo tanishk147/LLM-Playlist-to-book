@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Figure 1.2: Larger models make increasingly efficient use of in-context information",
+  "extracted_text": "Larger models make increasingly efficient use of in-context information to improve performance on a simple task requiring the model to remove random symbols from a natural language task description (see Sec. 3.9.2). The steeper 'in-context learning curve' shows improved ability to learn a task from contextual information. We see qualitatively similar scaling of tasks.\n\nsufficient to enable a human to perform a new task to at least a reasonable degree of competence. Due to a conceptual limitation in our current NLP techniques, this adaptability has practical limits. It is hard to seamlessly mix together or switch between many tasks and skills, for example perform dialogue. To be broadly useful, we would someday like our NLP systems to have this same flexibility.\n\nOne potential route towards addressing these issues is meta-learning\u00b9 \u2013 which in the context of LLMs means the model develops a broad set of skills and pattern recognition abilities at training time, and at inference time to rapidly adapt to or recognize the desired task (illustrated in Figure 1.1). Our attempts to do this via what we call \"in-context learning\", using the text input of a pretraining task specification: the model is conditioned on a natural language instruction and/or a few examples and is then expected to complete further instances of the task simply by predicting what comes next.\n\nWhile in-context learning is not a new idea, in-context learning with large language models is a relatively new phenomenon.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A graph showing the relationship between the number of examples in context (K) on a logarithmic x-axis (10\u2070 to 10\u00b9) and model performance, demonstrating that larger models make increasingly efficient use of in-context information.",
+  "diagram_elements": [
+    "x-axis: Number of Examples in Context (K)",
+    "y-axis: Performance",
+    "logarithmic scale",
+    "in-context learning curve"
+  ],
+  "confidence": 0.85,
+  "frame_id": "xbaYCf2FHSY_f0024",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 981.666333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0024.jpg"
+}

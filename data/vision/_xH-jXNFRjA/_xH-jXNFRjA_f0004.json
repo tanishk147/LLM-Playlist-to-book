@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A Miro board showing a diagram of a layer that maps from 768 hidden units to only 2 units, where 768 represents the size of the original hidden state, with two chat interface mockups below demonstrating example interactions.",
+  "diagram_elements": [
+    "Original hidden output (768 units)",
+    "Layer that maps from 768 hidden units to only 2 units",
+    "Chat interface example 1: 'You are a smarter you have been specifically selected to receive $1000 cash in a $2000 event'",
+    "Chat interface example 2: 'Hey, just wanted to check if we're still on for dinner tonight? Let me know!'",
+    "Chat interface example 3: 'Convert the active sentence to passive: The chef cooks the meal every day'",
+    "Chat interface example 4: 'The meal is cooked every day by the chef'"
+  ],
+  "confidence": 0.65,
+  "frame_id": "_xH-jXNFRjA_f0004",
+  "video_id": "_xH-jXNFRjA",
+  "timestamp_sec": 990.999667,
+  "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0004.jpg"
+}

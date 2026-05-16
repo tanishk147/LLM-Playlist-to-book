@@ -1,0 +1,542 @@
+[
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[node distance=1.5cm]\n  % Input\n  \\node[rectangle, draw, fill=lightgray, minimum width=2cm, minimum height=0.8cm] (input) {Input Text};\n  \n  % Layers\n  \\node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=input] (layer1) {Layer 1\\\\Neurons};\n  \\node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=layer1] (layer2) {Layer 2\\\\Neurons};\n  \\node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=layer2] (layern) {Layer N\\\\Neurons};\n  \n  % Output\n  \\node[rectangle, draw, fill=lightgray, minimum width=2cm, minimum height=0.8cm, below of=layern] (output) {Output Text};\n  \n  % Arrows with parameter labels\n  \\draw[->, thick] (input) -- (layer1) node[midway, right, font=\\small] {parameters};\n  \\draw[->, thick] (layer1) -- (layer2) node[midway, right, font=\\small] {parameters};\n  \\draw[->, thick] (layer2) -- (layern) node[midway, right, font=\\small] {parameters};\n  \\draw[->, thick] (layern) -- (output) node[midway, right, font=\\small] {parameters};\n\\end{tikzpicture}",
+    "caption": "Neural network architecture showing input text flowing through stacked layers with parameters on connections, producing output text.",
+    "rationale": "TikZ is needed for precise positioning of stacked boxes with labeled connection arrows; Mermaid cannot cleanly represent the vertical layer stack with side-labeled parameters.",
+    "artifact_path": "book/figures/generated/llm_foundations_overview_fig01.tex",
+    "chapter_id": "llm_foundations_overview",
+    "index": 1,
+    "description": "A simple diagram showing input text flowing into stacked neural network layers and producing output text, with \"parameters\" labeled on the connections between neurons"
+  },
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[scale=1.2]\n  % Outermost circle: AI\n  \\draw[thick, blue] (0,0) circle (4cm);\n  \\node[blue, font=\\Large\\bfseries] at (0, 3.7) {AI};\n  \n  % Second circle: ML\n  \\draw[thick, green] (0,0) circle (3.2cm);\n  \\node[green, font=\\Large\\bfseries] at (0, 2.9) {ML};\n  \n  % Third circle: DL\n  \\draw[thick, orange] (0,0) circle (2.4cm);\n  \\node[orange, font=\\Large\\bfseries] at (0, 2.1) {DL};\n  \n  % Innermost circle: LLMs\n  \\draw[thick, red] (0,0) circle (1.2cm);\n  \\node[red, font=\\Large\\bfseries] at (0, 0) {LLMs};\n  \n  % Generative AI ellipse overlapping DL and LLMs\n  \\draw[thick, dashed, purple] (0.8, -0.5) ellipse (1.8cm and 1.2cm);\n  \\node[purple, font=\\Large\\bfseries] at (1.2, -1.8) {Generative AI};\nend{tikzpicture}",
+    "caption": "Hierarchical relationship of AI subfields: AI encompasses ML, which encompasses DL, which contains LLMs at the center. Generative AI overlaps the DL and LLM regions.",
+    "rationale": "Concentric circles with overlapping regions are best expressed in TikZ for precise geometric control and proper rendering of the nested hierarchy and overlap.",
+    "artifact_path": "book/figures/generated/llm_foundations_overview_fig02.tex",
+    "chapter_id": "llm_foundations_overview",
+    "index": 2,
+    "description": "Concentric circles showing AI as the outermost ring, then ML, then DL, then LLMs at the center, with Generative AI overlapping DL and LLMs"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Stage 1: Pre-Training\"] -->|Training on large,<br/>diverse dataset| B[\"Foundation Model\"]\n    B --> C[\"Stage 2: Fine-Tuning\"]\n    C -->|Training on task-specific<br/>data| D[\"Task-Specific Model\"]",
+    "caption": "Two-stage pipeline for building Large Language Models: pre-training produces a foundation model, which is then fine-tuned to create a task-specific model.",
+    "rationale": "Simple horizontal pipeline with two stages and labeled outputs; cleanly expressible as a Mermaid flowchart without loss of information.",
+    "artifact_path": "book/figures/generated/llm_foundations_overview_fig03.mmd",
+    "chapter_id": "llm_foundations_overview",
+    "index": 3,
+    "description": "A horizontal pipeline diagram with two boxes labeled \"Stage 1: Pre-Training\" and \"Stage 2: Fine-Tuning\" connected by an arrow, with \"Foundation Model\" as the output of Stage 1 and \"Task-Specific Model\" as the output of Stage 2"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Input Embeddings +<br/>Positional Encoding\"] --> B[\"Multi-Head<br/>Attention\"]\n    B --> C{\"Add &<br/>Norm\"}\n    C --> D[\"Feed-Forward<br/>Network\"]\n    D --> E{\"Add &<br/>Norm\"}\n    E --> F[\"Output<br/>Representations\"]\n    B -.\"Residual Connection\".-> C\n    D -.\"Residual Connection\".-> E\n    style A fill:#e1f5ff\n    style B fill:#fff3e0\n    style D fill:#fff3e0\n    style F fill:#e8f5e9",
+    "caption": "Transformer block architecture showing input embeddings with positional encoding flowing through multi-head attention and feed-forward layers, with residual connections and layer normalization at each stage.",
+    "rationale": "This is a standard architectural block diagram that can be cleanly represented as a Mermaid flowchart with proper labeling of all components and residual connection paths.",
+    "artifact_path": "book/figures/generated/llm_foundations_overview_fig04.mmd",
+    "chapter_id": "llm_foundations_overview",
+    "index": 4,
+    "description": "A simplified transformer block diagram showing input embeddings with positional encoding feeding into multi-head attention, then a feed-forward layer, with residual connections, producing output representations"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Three prompting paradigms: zero-shot (task description only), one-shot (task description plus one example), and few-shot (task description plus multiple examples) for guiding LLM behavior.",
+    "rationale": "The figure directive describes three side-by-side prompt boxes, but the provided diagram extractions and source frames do not contain this specific visual. The frames shown are about LLM pretraining/finetuning stages and custom-trained models, not prompting paradigms. Without the actual source image of the three prompt boxes, a clean regeneration cannot be confidently attempted; embedding the original is the safest approach.",
+    "artifact_path": "book/figures/embedded/llm_foundations_overview_fig05.jpg",
+    "chapter_id": "llm_foundations_overview",
+    "index": 5,
+    "description": "Three side-by-side prompt boxes illustrating zero-shot (task description only), one-shot (task description + one example), and few-shot (task description + multiple examples) prompting"
+  },
+  {
+    "mode": "mermaid",
+    "code": "timeline\n    title LLM Development Timeline (2017\u20132024)\n    2017 : Transformer Paper\n    2018 : GPT-1\n    2019 : GPT-2\n    2020 : GPT-3 (Few-shot Learning)\n    2023 : GPT-4 (Closed-source)\n    2024 : Llama 3 405B (Open-weight)",
+    "caption": "Key milestones in large language model development from the Transformer paper (2017) through GPT-4 and open-weight models like Llama 3 (2024).",
+    "rationale": "Timeline diagrams are well-suited to Mermaid's timeline syntax, which cleanly represents sequential milestones with years and labels without requiring complex visual positioning.",
+    "artifact_path": "book/figures/generated/llm_foundations_overview_fig06.mmd",
+    "chapter_id": "llm_foundations_overview",
+    "index": 6,
+    "description": "A timeline from 2017 to 2024 showing key milestones: Transformer paper (2017), GPT-1, GPT-2, GPT-3 (2020, few-shot learning), GPT-4 (closed-source), Llama 3 405B (open-weight, 2024)"
+  },
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[node distance=1.5cm, auto, thick]\n  % Define styles\n  \\tikzstyle{block} = [rectangle, draw, fill=white, text width=2cm, text centered, rounded corners=0.1cm]\n  \\tikzstyle{attention} = [rectangle, draw, fill=orange!30, text width=2cm, text centered, rounded corners=0.1cm]\n  \\tikzstyle{norm} = [rectangle, draw, fill=yellow!30, text width=2cm, text centered, rounded corners=0.1cm]\n  \\tikzstyle{ffwd} = [rectangle, draw, fill=cyan!30, text width=2cm, text centered, rounded corners=0.1cm]\n  \\tikzstyle{output} = [rectangle, draw, fill=white, text width=2cm, text centered, rounded corners=0.1cm]\n  \n  % Encoder stack (left side)\n  \\node[attention] (enc_attn) at (0, 4) {Multi-Head\\\\Attention};\n  \\node[norm] (enc_norm1) at (0, 2.5) {Add \\& Norm};\n  \\node[ffwd] (enc_ffwd) at (0, 1) {Feed\\\\Forward};\n  \\node[norm] (enc_norm2) at (0, -0.5) {Add \\& Norm};\n  \n  % Encoder bracket\n  \\draw[thick] (-1.3, 4.8) -- (-1.3, -1.3) -- (-0.9, -1.3);\n  \\draw[thick] (-1.3, 4.8) -- (-0.9, 4.8);\n  \\node at (-1.8, 1.5) {$N\\times$};\n  \n  % Decoder stack (right side)\n  \\node[attention] (dec_masked) at (4, 5) {Masked\\\\Multi-Head\\\\Attention};\n  \\node[norm] (dec_norm1) at (4, 3.5) {Add \\& Norm};\n  \\node[attention] (dec_attn) at (4, 2) {Multi-Head\\\\Attention};\n  \\node[norm] (dec_norm2) at (4, 0.5) {Add \\& Norm};\n  \\node[ffwd] (dec_ffwd) at (4, -1) {Feed\\\\Forward};\n  \\node[norm] (dec_norm3) at (4, -2.5) {Add \\& Norm};\n  \n  % Decoder bracket\n  \\draw[thick] (5.3, 5.8) -- (5.3, -3.3) -- (4.9, -3.3);\n  \\draw[thick] (5.3, 5.8) -- (4.9, 5.8);\n  \\node at (5.8, 1.2) {$N\\times$};\n  \n  % Output layers\n  \\node[output] (linear) at (4, -4.2) {Linear};\n  \\node[output] (softmax) at (4, -5.2) {Softmax};\n  \n  % Encoder connections\n  \\draw[->] (enc_attn) -- (enc_norm1);\n  \\draw[->] (enc_norm1) -- (enc_ffwd);\n  \\draw[->] (enc_ffwd) -- (enc_norm2);\n  \n  % Decoder connections\n  \\draw[->] (dec_masked) -- (dec_norm1);\n  \\draw[->] (dec_norm1) -- (dec_attn);\n  \\draw[->] (dec_attn) -- (dec_norm2);\n  \\draw[->] (dec_norm2) -- (dec_ffwd);\n  \\draw[->] (dec_ffwd) -- (dec_norm3);\n  \\draw[->] (dec_norm3) -- (linear);\n  \\draw[->] (linear) -- (softmax);\n  \n  % Cross connections from encoder to decoder\n  \\draw[->] (enc_norm2) -- (2, 0.5) -- (dec_attn);\n  \n  % Feedback loops (simplified)\n  \\draw[->] (enc_norm1.east) -- (1.2, 2.5) -- (1.2, 4) -- (enc_attn.west);\n  \\draw[->] (dec_norm2.east) -- (5.2, 0.5) -- (5.2, 2) -- (dec_attn.west);\n  \\draw[->] (dec_norm3.east) -- (5.2, -2.5) -- (5.2, -1) -- (dec_ffwd.west);\n\\end{tikzpicture}",
+    "caption": "Transformer architecture with stacked encoder and decoder blocks. Each block contains Multi-Head Attention, Add & Norm, and Feed Forward layers, culminating in Linear and Softmax output layers.",
+    "rationale": "The diagram has precise structural requirements (stacked blocks with specific layer ordering, feedback loops, cross-connections) that are better expressed in TikZ than Mermaid for accurate positioning and visual hierarchy.",
+    "artifact_path": "book/figures/generated/transformer_architecture_deep_dive_fig01.tex",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 1,
+    "description": "High-level transformer diagram showing input text flowing into an encoder block that produces embedding vectors, which feed into a decoder block alongside partial output text, producing final output text word by word"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Transformer architecture with stacked encoder and decoder blocks (Nx repetitions), each containing Multi-Head Attention, Add & Norm layers, and Feed Forward networks, culminating in Linear and Softmax output layers.",
+    "rationale": "The diagram extraction describes a Transformer architecture, but the FIGURE directive requests an RNN unrolled diagram (x1, x2, x3 \u2192 h1, h2, h3). There is a mismatch between the directive and the extracted diagrams. The source frames show Transformer architectures and vision tasks, not RNN unrolling. Embedding the original frame preserves accuracy rather than regenerating a potentially incorrect diagram.",
+    "artifact_path": "book/figures/embedded/transformer_architecture_deep_dive_fig02.jpg",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 2,
+    "description": "RNN unrolled diagram showing input tokens x1, x2, x3 feeding into hidden states h1, h2, h3 sequentially, with each hidden state depending on the previous one"
+  },
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[node distance=1.5cm, auto, thick]\n  % Encoder block\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=orange!30] (enc_attn) {Multi-Head\\\\Attention};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=yellow!30, above of=enc_attn] (enc_norm1) {Add \\& Norm};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=cyan!30, below of=enc_attn] (enc_ff) {Feed\\\\Forward};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=yellow!30, below of=enc_ff] (enc_norm2) {Add \\& Norm};\n  \n  % Encoder label\n  \\node[right of=enc_norm1, xshift=1.5cm] {Encoder\\\\$N\\times$};\n  \n  % Context vector\n  \\node[draw, circle, minimum size=1cm, below of=enc_norm2, yshift=-1cm] (context) {Context\\\\Vector};\n  \n  % Decoder block\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=orange!30, below of=context, yshift=-1.5cm] (dec_masked) {Masked Multi-Head\\\\Attention};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=yellow!30, above of=dec_masked] (dec_norm1) {Add \\& Norm};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=orange!30, below of=dec_masked] (dec_attn) {Multi-Head\\\\Attention};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=yellow!30, below of=dec_attn] (dec_norm2) {Add \\& Norm};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=cyan!30, below of=dec_norm2] (dec_ff) {Feed\\\\Forward};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, fill=yellow!30, below of=dec_ff] (dec_norm3) {Add \\& Norm};\n  \n  % Decoder label\n  \\node[right of=dec_norm1, xshift=1.5cm] {Decoder\\\\$N\\times$};\n  \n  % Output layers\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, below of=dec_norm3, yshift=-0.5cm] (linear) {Linear};\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.8cm, below of=linear] (softmax) {Softmax};\n  \n  % Arrows\n  \\draw[->] (enc_norm1) -- (enc_attn);\n  \\draw[->] (enc_attn) -- (enc_ff);\n  \\draw[->] (enc_ff) -- (enc_norm2);\n  \\draw[->] (enc_norm2) -- (context);\n  \\draw[->] (context) -- (dec_norm1);\n  \\draw[->] (dec_norm1) -- (dec_masked);\n  \\draw[->] (dec_masked) -- (dec_attn);\n  \\draw[->] (dec_attn) -- (dec_norm2);\n  \\draw[->] (dec_norm2) -- (dec_ff);\n  \\draw[->] (dec_ff) -- (dec_norm3);\n  \\draw[->] (dec_norm3) -- (linear);\n  \\draw[->] (linear) -- (softmax);\n\\end{tikzpicture}",
+    "caption": "Transformer encoder-decoder architecture with stacked multi-head attention, feed-forward, and normalization layers (repeated N times in each stack), culminating in linear and softmax output layers.",
+    "rationale": "The diagram shows a complex stacked architecture with multiple layers and feedback loops that requires precise positioning; TikZ provides better control over the layout and visual hierarchy than Mermaid.",
+    "artifact_path": "book/figures/generated/transformer_architecture_deep_dive_fig03.tex",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 3,
+    "description": "RNN encoder-decoder diagram showing encoder processing input tokens into a single context vector, which is passed to the decoder that generates output tokens one at a time"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Transformer architecture with encoder and decoder stacks, each containing Masked Multi-Head Attention, Add & Norm layers, and Feed Forward networks, repeated Nx times and culminating in Linear and Softmax output layers.",
+    "rationale": "The figure directive requests an LSTM cell diagram, but the extracted diagrams and source frames show Transformer architecture instead\u2014a mismatch indicating the wrong frames were provided. Embedding preserves the original visual structure rather than attempting to regenerate a diagram that doesn't match the stated intent.",
+    "artifact_path": "book/figures/embedded/transformer_architecture_deep_dive_fig04.jpg",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 4,
+    "description": "LSTM cell diagram showing two separate pathways\u2014a cell state (long-term memory) and a hidden state (short-term memory)\u2014with input, forget, and output gates"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Transformer architecture showing encoder and decoder stacks with multi-head attention, feed-forward networks, and layer normalization components repeated N times.",
+    "rationale": "The diagram extraction describes a Transformer architecture (encoder-decoder with Nx blocks), but the FIGURE directive requests a Bahdanau attention diagram (encoder hidden states h1...hN with attention weights alpha1...alphaN). The extracted diagrams do not match the requested figure content. The source frames show Transformer architecture and Vision Transformer components, not Bahdanau attention. Embedding the original frame is safest to avoid misrepresenting the intended diagram.",
+    "artifact_path": "book/figures/embedded/transformer_architecture_deep_dive_fig05.jpg",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 5,
+    "description": "Bahdanau attention diagram showing all encoder hidden states h1...hN being passed to the decoder, with attention weights alpha1...alphaN computed at each decoding step to form a weighted context vector"
+  },
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[scale=1.2]\n  % Title\n  \\node at (2.5, 5.5) {Self-Attention Mechanism};\n  \n  % Input sequence tokens\n  \\foreach \\i in {1,2,3,4} {\n    \\node[draw, rectangle, minimum width=0.6cm, minimum height=0.6cm, fill=lightblue] (token\\i) at (\\i*0.8, 4.5) {$x_\\i$};\n  }\n  \n  % Query, Key, Value projections\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightyellow] (Q) at (0.5, 3.2) {Query (Q)};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightyellow] (K) at (2, 3.2) {Key (K)};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightyellow] (V) at (3.5, 3.2) {Value (V)};\n  \n  % Arrows from tokens to projections\n  \\foreach \\i in {1,2,3,4} {\n    \\draw[->] (token\\i) -- (Q);\n    \\draw[->] (token\\i) -- (K);\n    \\draw[->] (token\\i) -- (V);\n  }\n  \n  % Attention computation\n  \\node[draw, rectangle, minimum width=2cm, minimum height=0.5cm, fill=lightgreen] (matmul) at (2, 1.8) {$QK^T / \\sqrt{d_k}$};\n  \\node[draw, rectangle, minimum width=1.5cm, minimum height=0.5cm, fill=lightcyan] (softmax) at (2, 0.8) {Softmax};\n  \\node[draw, rectangle, minimum width=1.5cm, minimum height=0.5cm, fill=lightyellow] (output) at (2, -0.2) {Output};\n  \n  % Arrows for computation flow\n  \\draw[->] (Q) -- (matmul);\n  \\draw[->] (K) -- (matmul);\n  \\draw[->] (matmul) -- (softmax);\n  \\draw[->] (softmax) -- (output);\n  \\draw[->] (V) -- (output);\n  \n  % Attention matrix visualization\n  \\node at (5.5, 2.5) {Attention Matrix $A \\in \\mathbb{R}^{N \\times N}$};\n  \\foreach \\i in {1,2,3,4} {\n    \\foreach \\j in {1,2,3,4} {\n      \\pgfmathsetmacro{\\shade}{50 + 12.5*\\i + 12.5*\\j}\n      \\node[draw, rectangle, minimum width=0.5cm, minimum height=0.5cm, fill=gray!\\shade] at (4.5+\\j*0.6, 3.5-\\i*0.6) {};\n    }\n  }\n  \\node at (5.5, 0.5) {Each token attends to all tokens};\n\\end{tikzpicture}",
+    "caption": "Self-attention mechanism showing how each token in a sequence computes attention weights over all other tokens via Query-Key-Value projections, resulting in an N\u00d7N attention matrix.",
+    "rationale": "The figure directive describes a self-attention diagram with token-to-token attention and a weight matrix, which requires precise positioning and mathematical notation best expressed in TikZ rather than Mermaid.",
+    "artifact_path": "book/figures/generated/transformer_architecture_deep_dive_fig06.tex",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 6,
+    "description": "Self-attention diagram showing a single input sequence where each token attends to every other token in the same sequence, with attention weights shown as a matrix"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Transformer architecture showing encoder and decoder stacks with Masked Multi-Head Attention, Add & Norm layers, and Feed Forward networks repeated Nx times, culminating in Linear and Softmax output layers.",
+    "rationale": "The figure directive describes a BERT bidirectional attention diagram with masked tokens and attention arrows, but the extracted diagrams show a full Transformer encoder-decoder architecture. The source frame contains complex nested block structures with precise visual hierarchy and styling that would be difficult to faithfully reproduce in Mermaid without losing clarity. Embedding preserves the original design intent.",
+    "artifact_path": "book/figures/embedded/transformer_architecture_deep_dive_fig07.jpg",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 7,
+    "description": "BERT bidirectional attention diagram showing a masked token in the center of a sentence with attention arrows flowing both left and right from all other tokens toward the masked position"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Transformer architecture showing encoder (left, Nx blocks) and decoder (right, Nx blocks) with Multi-Head Attention, Masked Multi-Head Attention, Add & Norm layers, and Feed Forward networks, culminating in Linear and Softmax output layers.",
+    "rationale": "The diagram contains a complex nested block structure with precise visual hierarchy (encoder vs. decoder stacks, residual connections shown as curved brackets) that would lose clarity if redrawn in Mermaid; embedding preserves the original architectural clarity.",
+    "artifact_path": "book/figures/embedded/transformer_architecture_deep_dive_fig08.jpg",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 8,
+    "description": "GPT left-to-right generation diagram showing a sequence of tokens where each new token is predicted based only on the tokens to its left, with a causal mask blocking rightward attention"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"RNNs\"] -->|Sequential processing| B[\"LSTMs<br/>(1997)\"]\n    B -->|Gating mechanism| C[\"Bahdanau Attention<br/>(2014)\"]\n    C -->|Query-Key-Value| D[\"Transformer<br/>(2017)\"]\n    D -->|Self-attention| E[\"BERT & GPT\"]\n    \n    style A fill:#e1f5ff\n    style B fill:#b3e5fc\n    style C fill:#81d4fa\n    style D fill:#4fc3f7\n    style E fill:#29b6f6",
+    "caption": "Historical progression of neural sequence models from RNNs through Transformers, highlighting key architectural innovations in attention mechanisms.",
+    "rationale": "The figure is a simple timeline/progression diagram showing sequential evolution of models with brief annotations. Mermaid's left-to-right graph layout cleanly represents this linear progression without loss of information.",
+    "artifact_path": "book/figures/generated/transformer_architecture_deep_dive_fig09.mmd",
+    "chapter_id": "transformer_architecture_deep_dive",
+    "index": 9,
+    "description": "Timeline diagram showing progression from RNNs \u2192 LSTMs \u2192 Bahdanau Attention (2014) \u2192 Transformer (2017) \u2192 BERT and GPT, with brief annotations at each step"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Raw Text\"] --> B[\"Tokenizer\"]\n    B --> C[\"Token IDs\"]\n    C --> D[\"Vector Embeddings\"]\n    \n    style A fill:#e1f5ff\n    style B fill:#fff3e0\n    style C fill:#f3e5f5\n    style D fill:#e8f5e9",
+    "caption": "LLM data preprocessing pipeline: raw text is tokenized into token IDs, which are then converted to vector embeddings for model input.",
+    "rationale": "The figure directive describes a simple linear pipeline with four stages and arrows between them. This is a straightforward flowchart that Mermaid can cleanly represent without loss of information.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig01.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 1,
+    "description": "High-level pipeline showing raw text \u2192 tokenizer \u2192 token IDs \u2192 vector embeddings, with arrows between each stage"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"(1) Tokenization\"] --> B[\"Word based\"]\n    A --> C[\"Subword based<br/>BPE tokenizer\"]\n    A --> D[\"Character based\"]\n    B --> E[\"(2) Token embeddings\"]\n    C --> E\n    D --> E\n    E --> F[\"Converting token IDs<br/>to vectors\"]\n    F --> G[\"(3) Positional embeddings\"]\n    G --> H[\"Encoding information<br/>about position\"]\n    H --> I[\"(4) Input embeddings\"]\n    I --> J[\"Token embeddings +<br/>Positional embeddings\"]\n    style A fill:#e1f5ff\n    style E fill:#e1f5ff\n    style G fill:#e1f5ff\n    style I fill:#e1f5ff",
+    "caption": "Four-stage LLM data preprocessing pipeline showing tokenization methods (word-based, subword-based BPE, character-based) flowing through token embeddings, positional embeddings, and final input embeddings.",
+    "rationale": "The diagram is a clear sequential pipeline with branching at the tokenization stage; Mermaid flowchart can cleanly represent this structure with all four labeled stages and their relationships.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig02.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 2,
+    "description": "Three-stage pipeline: (1) \"Hello world\" \u2192 [\"Hello\", \"world\""
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Tokenization\"] --> B[\"Word based\"]\n    A --> C[\"Subword based<br/>(BPE tokenizer)\"]\n    A --> D[\"Character based\"]\n    \n    B --> E[\"Vocabulary Size\"]\n    C --> E\n    D --> E\n    \n    B --> F[\"OOV Handling\"]\n    C --> F\n    D --> F\n    \n    B --> G[\"Sequence Length\"]\n    C --> G\n    D --> G\n    \n    style A fill:#e1f5ff\n    style B fill:#fff9c4\n    style C fill:#c8e6c9\n    style D fill:#f8bbd0\n    style E fill:#ede7f6\n    style F fill:#ede7f6\n    style G fill:#ede7f6",
+    "caption": "Comparison of three tokenization approaches (word-based, subword-based BPE, and character-based) across vocabulary size, out-of-vocabulary handling, and sequence length trade-offs.",
+    "rationale": "The figure directive describes a comparison table of tokenization types. The extracted diagram elements show three tokenization methods (word-based, subword-based BPE, character-based) and three comparison dimensions (vocabulary size, OOV handling, sequence length). This is cleanly expressible as a Mermaid flowchart showing the relationships between tokenization types and their trade-off dimensions.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig03.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 3,
+    "description": "Comparison table of three tokenization types showing vocabulary size, OOV handling, and sequence length trade-offs"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Text\"] --> B[\"Regex Split\"]\n    B --> C[\"Token List\"]\n    C --> D[\"Vocab Lookup\"]\n    D --> E[\"ID List\"]\n    E --> F[\"Reverse Lookup\"]\n    F --> G[\"Token List\"]\n    G --> H[\"Join\"]\n    H --> I[\"Text\"]\n    \n    style A fill:#e1f5ff\n    style E fill:#fff3e0\n    style I fill:#e1f5ff\n    \n    subgraph encode[\"Encode Path\"]\n        A\n        B\n        C\n        D\n        E\n    end\n    \n    subgraph decode[\"Decode Path\"]\n        F\n        G\n        H\n        I\n    end",
+    "caption": "Tokenization encode and decode pipeline: the encode path converts text to token IDs via regex splitting and vocabulary lookup, while the decode path reverses the process to reconstruct text.",
+    "rationale": "The figure describes a simple linear pipeline with two symmetric paths (encode and decode), which is ideal for Mermaid flowchart representation. All elements are clearly labeled and the flow is straightforward.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig04.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 4,
+    "description": "Diagram showing encode path: text \u2192 regex split \u2192 token list \u2192 vocab lookup \u2192 ID list; and decode path: ID list \u2192 reverse lookup \u2192 token list \u2192 join \u2192 text"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph TD\n    A[\"(1) Tokenization\"] --> B[\"Word based\"]\n    A --> C[\"Subword based<br/>BPE tokenizer\"]\n    A --> D[\"Character based\"]\n    E[\"(2) Token embeddings\"] --> F[\"Converting token IDs<br/>to vectors\"]\n    G[\"(3) Positional embeddings\"] --> H[\"Encoding information<br/>about position\"]\n    I[\"(4) Input embeddings\"] --> J[\"Token embeddings +<br/>Positional embeddings\"]\n    \n    style A fill:#e1f5ff\n    style E fill:#e1f5ff\n    style G fill:#e1f5ff\n    style I fill:#e1f5ff",
+    "caption": "LLM Data Preprocessing: A four-step pipeline showing tokenization methods (word-based, subword-based with BPE, character-based), token embeddings, positional embeddings, and their combination into input embeddings.",
+    "rationale": "The diagram is a straightforward hierarchical process flow with four main steps and their sub-components. Mermaid can cleanly represent this structure with labeled boxes and connections.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig05.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 5,
+    "description": "Diagram showing two documents separated by <|endoftext|> token, and a batch of sequences padded to equal length with <|pad|> tokens"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Step-by-step BPE merge example showing three rounds of merging the most frequent pair from a character-token corpus, with merge table tracking frequency changes.",
+    "rationale": "The figure directive requests a BPE merge example with a corpus progression and merge table, but the extracted diagrams do not contain the actual BPE merge sequence data (initial tokens, merge rounds, frequency counts, or merge table). Without the specific token sequences and numerical data, regenerating this accurately in Mermaid or TikZ risks misrepresenting the pedagogical content. The original frame should be embedded to preserve fidelity.",
+    "artifact_path": "book/figures/embedded/tokenization_and_bpe_fig06.jpg",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 6,
+    "description": "Step-by-step BPE merge example: starting corpus with character tokens, showing three rounds of merging the most frequent pair, with merge table on the right"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph TD\n    A[\"(1) Tokenization\"] --> B[\"Word based\"]\n    A --> C[\"Subword based<br/>BPE tokenizer\"]\n    A --> D[\"Character based\"]\n    E[\"(2) Token embeddings\"] --> F[\"Converting token IDs<br/>to vectors\"]\n    G[\"(3) Positional embeddings\"] --> H[\"Encoding information<br/>about position\"]\n    I[\"(4) Input embeddings\"] --> J[\"Token embeddings +<br/>Positional embeddings\"]\n    style A fill:#e1f5ff\n    style E fill:#f3e5f5\n    style G fill:#e8f5e9\n    style I fill:#fff3e0",
+    "caption": "LLM Data Preprocessing: Four-step pipeline showing tokenization methods (word-based, subword-based BPE, character-based), token embeddings, positional embeddings, and final input embeddings.",
+    "rationale": "The diagram is a straightforward hierarchical process flow with four main steps and their sub-components; Mermaid can cleanly represent this structure without loss of fidelity.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig07.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 7,
+    "description": "Diagram showing tiktoken encoding of an unfamiliar word, decomposing it into subword tokens with their IDs"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Raw Text File\"] --> B[\"Tokenization\"]\n    B --> B1[\"Word based\"]\n    B --> B2[\"Subword based<br/>(BPE tokenizer)\"]\n    B --> B3[\"Character based\"]\n    B1 --> C[\"Token IDs\"]\n    B2 --> C\n    B3 --> C\n    C --> D[\"Token Embeddings<br/>(Converting token IDs to vectors)\"]\n    E[\"Positional Embeddings<br/>(Encoding position information)\"] --> F\n    D --> F[\"Input Embeddings<br/>(Token + Positional)\"]\n    F --> G[\"Ready for Embedding Layer\"]\n    \n    style A fill:#e1f5ff\n    style B fill:#fff3e0\n    style C fill:#f3e5f5\n    style D fill:#e8f5e9\n    style E fill:#e8f5e9\n    style F fill:#fce4ec\n    style G fill:#c8e6c9",
+    "caption": "LLM data preprocessing pipeline: from raw text through tokenization (word-based, subword-based BPE, or character-based), token embeddings, positional embeddings, and finally combined input embeddings ready for the embedding layer.",
+    "rationale": "The figure describes a clear sequential pipeline with multiple branching paths (tokenization methods) that converge and continue through embedding stages. This is well-suited to a Mermaid flowchart representation.",
+    "artifact_path": "book/figures/generated/tokenization_and_bpe_fig08.mmd",
+    "chapter_id": "tokenization_and_bpe",
+    "index": 8,
+    "description": "End-to-end flowchart from raw text file through tokenization, vocabulary lookup, and encoding to a final sequence of integer token IDs ready for embedding"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph TD\n    A[\"Raw Text\"] --> B[\"Tokenizer\"]\n    B --> C[\"Token IDs\"]\n    C --> D[\"Embedding Layer\"]\n    D --> E[\"Token Embedding Vectors\"]",
+    "caption": "Three-stage pipeline for converting raw text to token embedding vectors through tokenization and embedding layers.",
+    "rationale": "The figure describes a simple sequential pipeline with five stages connected linearly, which is cleanly expressible as a Mermaid flowchart. The directive specifies the exact stages, and no complex visual styling or positioning is required.",
+    "artifact_path": "book/figures/generated/embeddings_and_positional_encoding_fig01.mmd",
+    "chapter_id": "embeddings_and_positional_encoding",
+    "index": 1,
+    "description": "Three-stage pipeline: raw text \u2192 tokenizer \u2192 token IDs \u2192 embedding layer \u2192 token embedding vectors"
+  },
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[scale=1.2]\n  % Matrix representation\n  \\node[draw, rectangle, minimum width=2cm, minimum height=4cm] (matrix) at (0,0) {};\n  \\node at (0, 2.3) {\\small vocab\\_size};\n  \\node at (1.3, 0) {\\small embedding\\_dim};\n  \n  % Row labels (token IDs)\n  \\node[anchor=east] at (-0.5, 1.5) {\\small token 0};\n  \\node[anchor=east] at (-0.5, 0.5) {\\small token 1};\n  \\node[anchor=east] at (-0.5, -0.5) {\\small token 2};\n  \\node[anchor=east] at (-0.5, -1.5) {\\small ...};\n  \n  % Arrows from token IDs to matrix rows\n  \\draw[->, thick] (-0.3, 1.5) -- (-0.1, 1.5);\n  \\draw[->, thick] (-0.3, 0.5) -- (-0.1, 0.5);\n  \\draw[->, thick] (-0.3, -0.5) -- (-0.1, -0.5);\n  \n  % Highlight one row\n  \\draw[red, dashed, thick] (-1, 1.3) rectangle (1, 1.7);\n  \\node[red, anchor=west] at (1.2, 1.5) {\\small embedding vector};\n\\end{tikzpicture}",
+    "caption": "Embedding weight matrix with vocab_size rows and embedding_dim columns. Token IDs index into rows to retrieve their corresponding embedding vectors.",
+    "rationale": "The figure requires precise positioning of a matrix with labeled rows and arrows pointing from token IDs to specific rows\u2014TikZ provides better control than Mermaid for this mathematical diagram structure.",
+    "artifact_path": "book/figures/generated/embeddings_and_positional_encoding_fig02.tex",
+    "chapter_id": "embeddings_and_positional_encoding",
+    "index": 2,
+    "description": "Embedding weight matrix with vocab_size rows and embedding_dim columns; arrows from token IDs to their corresponding rows"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Sliding window over a token sequence showing how input (X) and target (Y) pairs are constructed by shifting the window by one position at each step.",
+    "rationale": "The figure directive describes a sliding window visualization over tokens, but the provided diagram extractions and source frames do not contain this sliding window diagram\u2014they show unrelated content (flowchart and word embeddings). Without the actual source image of the sliding window, embedding the original frame is the safest approach to avoid misrepresentation.",
+    "artifact_path": "book/figures/embedded/embeddings_and_positional_encoding_fig03.jpg",
+    "chapter_id": "embeddings_and_positional_encoding",
+    "index": 3,
+    "description": "Sliding window over a token sequence showing how X and Y are constructed by shifting by one position"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Positional embedding lookup table with context_length rows and embedding_dim columns, showing positions 0, 1, 2, 3 mapped to their respective embedding vectors.",
+    "rationale": "The figure directive describes a lookup table structure (rows \u00d7 columns matrix), but no source image showing this table was provided in the extractions. The extracted frames show unrelated content (flowchart and word-to-number mappings). Without a visual reference of the actual positional embedding table, regenerating it as Mermaid or TikZ risks misrepresenting the exact layout, dimensions, and vector values. Embedding the original is safer.",
+    "artifact_path": "book/figures/embedded/embeddings_and_positional_encoding_fig04.jpg",
+    "chapter_id": "embeddings_and_positional_encoding",
+    "index": 4,
+    "description": "Positional embedding lookup table with context_length rows and embedding_dim columns; positions 0,1,2,3 mapped to their respective vectors"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Broadcasting a (4,256) positional embedding tensor to (8,4,256) and adding it element-wise to a (8,4,256) token embedding tensor.",
+    "rationale": "The FIGURE directive describes a tensor broadcasting operation, but no corresponding diagram extraction was provided with visual elements showing the tensor shapes, broadcasting arrows, or addition operation. The extracted frames show unrelated content (flowchart and word embeddings). Without a source image or clear diagram structure to regenerate, embedding is the safest approach to avoid misrepresenting the tensor operation.",
+    "artifact_path": "book/figures/embedded/embeddings_and_positional_encoding_fig05.jpg",
+    "chapter_id": "embeddings_and_positional_encoding",
+    "index": 5,
+    "description": "Broadcasting diagram: (4,256) positional embedding tensor expanded to (8,4,256) and added element-wise to (8,4,256) token embedding tensor"
+  },
+  {
+    "mode": "tikz",
+    "code": "\\begin{tikzpicture}[node distance=0.8cm, scale=0.9]\n  % Title\n  \\node[font=\\bfseries] at (0, 5.5) {Sentence Split into Overlapping Input-Target Pairs with Masking};\n  \n  % Original sentence\n  \\node[anchor=west, font=\\small] at (0, 4.8) {Original sentence:};\n  \\node[anchor=west] at (0, 4.3) {The quick brown fox jumps over the lazy dog};\n  \n  % Pair 1\n  \\node[anchor=west, font=\\small, color=blue] at (0, 3.3) {Pair 1 (Input \u2192 Target):};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (0.6, 2.6) {The};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (1.9, 2.6) {quick};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (3.2, 2.6) {brown};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (4.5, 2.6) {fox};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (5.8, 2.6) {jumps};\n  \\node[anchor=west, font=\\tiny] at (0.3, 2.1) {Input};\n  \\node[anchor=west, font=\\tiny, color=red] at (3.0, 2.1) {Masked};\n  \\node[anchor=west, font=\\tiny] at (0.3, 1.8) {Target: brown};\n  \n  % Pair 2\n  \\node[anchor=west, font=\\small, color=blue] at (0, 1.0) {Pair 2 (Input \u2192 Target):};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (0.6, 0.3) {The};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (1.9, 0.3) {quick};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (3.2, 0.3) {brown};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm] at (4.5, 0.3) {fox};\n  \\node[draw, rectangle, minimum width=1.2cm, minimum height=0.5cm, fill=lightgray] at (5.8, 0.3) {jumps};\n  \\node[anchor=west, font=\\tiny] at (0.3, -0.2) {Input};\n  \\node[anchor=west, font=\\tiny, color=red] at (5.6, -0.2) {Masked};\n  \\node[anchor=west, font=\\tiny] at (0.3, -0.5) {Target: fox};\n  \n  % Legend\n  \\node[draw, rectangle, minimum width=0.8cm, minimum height=0.3cm, fill=white] at (0.4, -1.3) {};\n  \\node[anchor=west, font=\\tiny] at (0.7, -1.25) {Input token};\n  \\node[draw, rectangle, minimum width=0.8cm, minimum height=0.3cm, fill=lightgray] at (2.5, -1.3) {};\n  \\node[anchor=west, font=\\tiny] at (2.8, -1.25) {Masked token};\n\\end{tikzpicture}",
+    "caption": "Overlapping input-target pairs extracted from a sentence, where tokens beyond the current target position are masked during training.",
+    "rationale": "TikZ is needed for precise positioning of token boxes, masking visualization with fill colors, and clear alignment of multiple pairs with annotations.",
+    "artifact_path": "book/figures/generated/input_target_pairs_and_dataloaders_fig01.tex",
+    "chapter_id": "input_target_pairs_and_dataloaders",
+    "index": 1,
+    "description": "Diagram showing a sentence being split into overlapping input-target pairs, with masking applied to tokens beyond the current target"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Context size 4 with four prediction tasks per input-target pair, illustrating the shift-by-one relationship between consecutive predictions.",
+    "rationale": "This is a data table with specific numerical values and a precise layout showing the shift-by-one relationship; regenerating as Mermaid would lose the tabular structure and exact alignment that is essential for understanding the concept.",
+    "artifact_path": null,
+    "chapter_id": "input_target_pairs_and_dataloaders",
+    "index": 2,
+    "description": "Table showing context size 4 with four prediction tasks per input-target pair, illustrating the shift-by-one relationship"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph TB\n    subgraph stride1[\"Stride = 1 (Heavy Overlap)\"]\n        direction LR\n        w1[\"Window 1\"]\n        w2[\"Window 2\"]\n        w3[\"Window 3\"]\n        tokens1[\"Token Sequence: t\u2081 t\u2082 t\u2083 t\u2084 t\u2085 t\u2086 t\u2087 t\u2088\"]\n        tokens1 --> w1\n        tokens1 --> w2\n        tokens1 --> w3\n        w1 -.->|overlap| w2\n        w2 -.->|overlap| w3\n    end\n    \n    subgraph stride_ctx[\"Stride = context_size (No Overlap)\"]\n        direction LR\n        w4[\"Window 1\"]\n        w5[\"Window 2\"]\n        w6[\"Window 3\"]\n        tokens2[\"Token Sequence: t\u2081 t\u2082 t\u2083 t\u2084 t\u2085 t\u2086 t\u2087 t\u2088\"]\n        tokens2 --> w4\n        tokens2 --> w5\n        tokens2 --> w6\n        w4 -.->|no overlap| w5\n        w5 -.->|no overlap| w6\n    end",
+    "caption": "Comparison of sliding window strategies: stride=1 creates heavy overlap between consecutive windows, while stride=context_size creates non-overlapping windows over the token sequence.",
+    "rationale": "This is a conceptual comparison diagram showing two windowing strategies; Mermaid can effectively represent the two cases with labeled windows and their overlap relationships.",
+    "artifact_path": "book/figures/generated/input_target_pairs_and_dataloaders_fig03.mmd",
+    "chapter_id": "input_target_pairs_and_dataloaders",
+    "index": 3,
+    "description": "Sliding window diagram showing stride=1 (heavy overlap) vs stride=context_size (no overlap) over a token sequence"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"GPTDatasetV1\"] -->|pulls batches| B[\"DataLoader\"]\n    B -->|batch| C[\"Input Tensor X\"]\n    B -->|batch| D[\"Target Tensor Y<br/>(X shifted by 1)\"]\n    style A fill:#e1f5ff\n    style B fill:#fff3e0\n    style C fill:#f3e5f5\n    style D fill:#f3e5f5",
+    "caption": "DataLoader pulls batches from GPTDatasetV1, producing input tensor X and target tensor Y (which is X shifted by one position).",
+    "rationale": "Simple data flow diagram with three main components and directional relationships; cleanly expressible as a Mermaid flowchart.",
+    "artifact_path": "book/figures/generated/input_target_pairs_and_dataloaders_fig04.mmd",
+    "chapter_id": "input_target_pairs_and_dataloaders",
+    "index": 4,
+    "description": "Diagram showing DataLoader pulling batches from GPTDatasetV1, with input tensor X and target tensor Y side by side, Y being X shifted by one"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Raw Text\"] --> B[\"Tokenizer\"]\n    B --> C[\"Token IDs\"]\n    C --> D[\"Sliding Window\"]\n    D --> E[\"GPTDatasetV1\"]\n    E --> F[\"DataLoader\"]\n    F --> G[\"Batched X, Y Tensors\"]\n    G --> H[\"Embedding Layer\"]\n    \n    style A fill:#e1f5ff\n    style B fill:#fff3e0\n    style C fill:#f3e5f5\n    style D fill:#e8f5e9\n    style E fill:#fce4ec\n    style F fill:#fff9c4\n    style G fill:#f1f8e9\n    style H fill:#ede7f6",
+    "caption": "End-to-end data pipeline for GPT model training, from raw text input through tokenization, windowing, dataset construction, batching, and embedding.",
+    "rationale": "Linear pipeline with clearly labeled sequential stages; Mermaid left-to-right graph is ideal for representing this data flow.",
+    "artifact_path": "book/figures/generated/input_target_pairs_and_dataloaders_fig05.mmd",
+    "chapter_id": "input_target_pairs_and_dataloaders",
+    "index": 5,
+    "description": "End-to-end pipeline diagram: raw text \u2192 tokenizer \u2192 token IDs \u2192 sliding window \u2192 GPTDatasetV1 \u2192 DataLoader \u2192 batched (X, Y) tensors \u2192 embedding layer"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Self-attention mechanism with trainable weight matrices W_Q, W_K, and W_V projecting input embeddings into query, key, and value vectors.",
+    "rationale": "The figure directive describes a specific neural network architecture diagram (input embeddings \u2192 three parallel weight matrix projections \u2192 output vectors) that requires precise visual representation of tensor shapes and transformation flows. The source frames provided show lecture slides and documentation pages rather than the actual diagram being referenced, making it impossible to accurately regenerate the specific architecture diagram without risking misrepresentation of the exact layout, labeling, and visual structure.",
+    "artifact_path": "book/figures/embedded/attention_mechanism_fundamentals_fig01.jpg",
+    "chapter_id": "attention_mechanism_fundamentals",
+    "index": 1,
+    "description": "Diagram showing input embeddings x1\u2026x6 being projected through three separate weight matrices W_Q, W_K, W_V to produce query vectors q1\u2026q6, key vectors k1\u2026k6, and value vectors v1\u2026v6"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Input: Q, K, V<br/>(from W_Q, W_K, W_V projections)\"] --> B[\"Compute Scores<br/>Q \u00b7 K^T\"]\n    B --> C[\"Scale<br/>\u00f7 \u221ad_k\"]\n    C --> D[\"Softmax<br/>(Attention Weights)\"]\n    D --> E[\"Weighted Sum<br/>over Values\"]\n    E --> F[\"Context Vectors<br/>(Output)\"]\n    \n    style A fill:#e1f5ff\n    style F fill:#c8e6c9\n    style D fill:#fff9c4",
+    "caption": "Scaled dot-product attention mechanism: inputs are projected via learnable weight matrices, then attention weights are computed through dot product, scaling, and softmax normalization, finally producing context vectors as weighted sums over values.",
+    "rationale": "The figure describes a sequential pipeline of operations in scaled dot-product attention. Mermaid flowchart cleanly represents this left-to-right data flow with labeled transformation steps.",
+    "artifact_path": "book/figures/generated/attention_mechanism_fundamentals_fig02.mmd",
+    "chapter_id": "attention_mechanism_fundamentals",
+    "index": 2,
+    "description": "End-to-end diagram of scaled dot-product attention: inputs \u2192 W_Q/W_K/W_V projections \u2192 dot product \u2192 divide by sqrt(d_k) \u2192 softmax \u2192 weighted sum over values \u2192 context vectors"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "A 4\u00d74 attention score matrix with the upper triangle (above the diagonal) shaded in grey to indicate masked positions in causal attention.",
+    "rationale": "The figure directive describes a specific attention mask matrix visualization that requires precise visual representation of the triangular masking pattern. While this could theoretically be drawn in TikZ, the directive does not provide the actual matrix values or a source image showing the exact layout, making a clean regeneration risky. Embedding the original frame preserves the exact visual representation intended.",
+    "artifact_path": "book/figures/embedded/causal_and_multihead_attention_fig01.jpg",
+    "chapter_id": "causal_and_multihead_attention",
+    "index": 1,
+    "description": "A 4\u00d74 attention score matrix with the upper triangle (above the diagonal) shaded in grey to indicate masked positions, and the lower triangle plus diagonal left open"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Input Tensor<br/>(b, T, d_in)\"] --> B[\"Linear Projection<br/>Query (Wq)\"]\n    A --> C[\"Linear Projection<br/>Key (Wk)\"]\n    A --> D[\"Linear Projection<br/>Value (Wv)\"]\n    B --> E[\"Reshape & Transpose<br/>(b, num_heads, T, head_dim)\"]\n    C --> E\n    D --> E\n    E --> F[\"Scaled Dot-Product<br/>Attention per Head\"]\n    F --> G[\"Transpose & Reshape<br/>(b, T, d_out)\"]\n    G --> H[\"Output Projection\"]\n    H --> I[\"Output Tensor<br/>(b, T, d_out)\"]\n    \n    style A fill:#e1f5ff\n    style I fill:#e1f5ff\n    style F fill:#fff9c4",
+    "caption": "Multi-head attention architecture: input tensor flows through three parallel linear projections (query, key, value), reshaped and transposed for per-head scaled dot-product attention, then recombined and projected to output.",
+    "rationale": "The figure describes a clear sequential data flow with parallel branches and reshaping operations, which Mermaid can represent cleanly as a left-to-right flowchart without loss of essential information.",
+    "artifact_path": "book/figures/generated/causal_and_multihead_attention_fig02.mmd",
+    "chapter_id": "causal_and_multihead_attention",
+    "index": 2,
+    "description": "Data flow diagram showing input tensor (b, T, d_in) \u2192 three linear projections \u2192 reshape and transpose to (b, num_heads, T, head_dim) \u2192 scaled dot-product attention per head \u2192 transpose and reshape back to (b, T, d_out) \u2192 output projection"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Side-by-side comparison of ReLU and GELU activation functions over the range x \u2208 [-3, 3], showing their characteristic shapes and differences in smoothness.",
+    "rationale": "The figure directive requests a mathematical plot of activation functions, but the provided diagram extractions and source frames do not contain this specific plot\u2014they show neural network architecture diagrams and 3D loss surfaces instead. Without the actual activation function plot image, regenerating it as Mermaid or TikZ would require inventing the exact curve shapes and data, which violates the rule against inventing diagram elements. Embedding the original frame is the safest approach.",
+    "artifact_path": "book/figures/embedded/transformer_block_components_fig01.jpg",
+    "chapter_id": "transformer_block_components",
+    "index": 1,
+    "description": "Side-by-side plot of ReLU and GELU activation functions over the range x \u2208 [-3, 3"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "LLM text generation process showing autoregressive token generation across iterations, with input context growing as newly generated tokens are appended.",
+    "rationale": "The source frames contain handwritten annotations, Miro board UI elements, and complex visual layouts that cannot be cleanly regenerated as Mermaid or TikZ without losing fidelity. The diagram elements are embedded within a collaborative whiteboard interface with multiple overlapping annotations and visual styling that is best preserved by embedding the original image.",
+    "artifact_path": "book/figures/embedded/gpt_model_architecture_implementation_fig01.jpg",
+    "chapter_id": "gpt_model_architecture_implementation",
+    "index": 1,
+    "description": "Diagram showing token ID \u2192 token embedding table \u2192 768-dim vector, and position index \u2192 positional embedding table \u2192 768-dim vector, both summed to produce the input embedding"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Tensor shape transformations through an LLM: input tokens (B, T) are embedded to (B, T, 768), processed through 12 transformer blocks while maintaining shape, and logits are extracted from the final token position for next-token prediction.",
+    "rationale": "The figure directive describes a tensor shape diagram, but the extracted diagrams show Miro board screenshots with handwritten annotations, code snippets, and complex visual layouts that cannot be cleanly regenerated as Mermaid or TikZ without losing fidelity. The original frames should be embedded as-is.",
+    "artifact_path": "book/figures/embedded/gpt_model_architecture_implementation_fig02.jpg",
+    "chapter_id": "gpt_model_architecture_implementation",
+    "index": 2,
+    "description": "Annotated tensor shape diagram showing how shape changes at each stage: (B, T) \u2192 (B, T, 768) \u2192 (B, T, 768) [\u00d712 blocks"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "LLM text generation process: iterative token generation where input context grows with each iteration (1st iteration: 'Hello' \u2192 'I'; 2nd iteration: 'Hello I am' \u2192 'a'), and logits extraction for the 4th token position using logits[:, -1, :].",
+    "rationale": "The source frames contain hand-drawn annotations, Miro board interface elements, and code snippets overlaid on a live editing environment. The visual layout, handwriting, and precise positioning of arrows and highlights are essential to the pedagogical intent and cannot be cleanly regenerated as Mermaid or TikZ without losing fidelity.",
+    "artifact_path": "book/figures/embedded/gpt_model_architecture_implementation_fig03.jpg",
+    "chapter_id": "gpt_model_architecture_implementation",
+    "index": 3,
+    "description": "Side-by-side comparison: weight-tied model (124M params, shared embedding/output matrix) vs. untied model (163M params, separate matrices)"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"Input tokens<br/>(Hello | I am)\"] --> B[\"Model\"]\n    B --> C[\"Logits\"]\n    C --> D[\"Softmax\"]\n    D --> E[\"Argmax\"]\n    E --> F[\"New token\"]\n    F --> G[\"Append to input\"]\n    G --> A\n    \n    style A fill:#e1f5ff\n    style B fill:#fff3e0\n    style C fill:#f3e5f5\n    style D fill:#e8f5e9\n    style E fill:#fce4ec\n    style F fill:#fff9c4\n    style G fill:#e0f2f1",
+    "caption": "Autoregressive generation loop: the model iteratively generates tokens by processing input, computing logits, applying softmax and argmax, then appending the new token back to the input for the next iteration.",
+    "rationale": "The figure describes a clear sequential process loop with distinct stages (input \u2192 model \u2192 logits \u2192 softmax \u2192 argmax \u2192 new token \u2192 append \u2192 repeat). This is a perfect use case for a Mermaid flowchart with a feedback loop.",
+    "artifact_path": "book/figures/generated/gpt_model_architecture_implementation_fig04.mmd",
+    "chapter_id": "gpt_model_architecture_implementation",
+    "index": 4,
+    "description": "Autoregressive generation loop diagram: input tokens \u2192 model \u2192 logits \u2192 softmax \u2192 argmax \u2192 new token \u2192 append to input \u2192 repeat"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Top-K sampling technique: restrict sampled tokens to the top K most likely tokens by zeroing all other probabilities and renormalizing.",
+    "rationale": "The diagram extraction references a handwritten explanation of top-K sampling, but the provided source frames show loss functions and PyTorch documentation\u2014neither contains the actual top-K filtering bar chart described in the FIGURE directive. Without the correct source image showing the probability bars and highlighting, regeneration risks misrepresenting the visual.",
+    "artifact_path": "book/figures/embedded/pretraining_loss_and_training_loop_fig01.jpg",
+    "chapter_id": "pretraining_loss_and_training_loop",
+    "index": 1,
+    "description": "Diagram showing top-k filtering: a bar chart of token probabilities, with the top-3 bars highlighted and all others set to zero, followed by renormalization"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "GPT-2 small model hyperparameters and the lecture roadmap for implementing weight saving/loading and loading pretrained OpenAI weights.",
+    "rationale": "The figure directive mentions a table of hyperparameters, but the extracted diagrams show flowcharts and documentation screenshots. The source frames contain hand-drawn annotations, mixed content (flowchart + text), and reference material that cannot be cleanly separated or regenerated without risking misrepresentation. Embedding preserves the original context and visual hierarchy.",
+    "artifact_path": "book/figures/embedded/saving_loading_pretrained_weights_fig01.jpg",
+    "chapter_id": "saving_loading_pretrained_weights",
+    "index": 1,
+    "description": "Table showing GPT-2 small hyperparameters: vocab_size, context_length, emb_dim=768, n_heads=12, n_layers=12"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "PyTorch model state_dict structure showing the hierarchical organization of model parameters (WTE, WPE, transformer blocks, layer norm weights and biases).",
+    "rationale": "The figure directive requests a params dictionary tree diagram, but the provided extractions do not contain a visual representation of this tree structure. The source frames show lecture slides about saving/loading models and optimizer state_dict documentation, neither of which depicts the specific WTE/WPE/blocks/G/B parameter hierarchy. Without the actual diagram to reference, regeneration risks misrepresenting the structure; embedding the original frame is safer.",
+    "artifact_path": "book/figures/embedded/saving_loading_pretrained_weights_fig02.jpg",
+    "chapter_id": "saving_loading_pretrained_weights",
+    "index": 2,
+    "description": "Diagram of the params dictionary tree: WTE, WPE, blocks (list of per-layer dicts), G, B"
+  },
+  {
+    "mode": "mermaid",
+    "code": "graph LR\n    A[\"1) Text generation\"] -->|\u2713| B[\"2) Text evaluation\"]\n    B -->|\u2713| C[\"3) Training & validation losses\"]\n    C -->|\u2713| D[\"4) LLM training function\"]\n    D --> E[\"5) Text generation strategies\"]\n    E --> F[\"6) Weight saving & loading\"]\n    F --> G[\"7) Pretrained weights from OpenAI\"]\n    \n    H[\"Train the model to generate human-like text\"] -.-> D\n    I[\"Implement additional LLM text generation strategies to reduce training data memorization\"] -.-> E\n    J[\"Implement functions to save and load the LLM weights to use or continue training the LLM later\"] -.-> F\n    K[\"At the end of this chapter, load pretrained weights from OpenAI into our LLM model\"] -.-> G\n    \n    style A fill:#e1f5ff\n    style B fill:#e1f5ff\n    style C fill:#e1f5ff\n    style D fill:#fff9c4\n    style E fill:#fff9c4\n    style F fill:#fff9c4\n    style G fill:#f3e5f5",
+    "caption": "LLM development pipeline showing completed steps (1-4) and upcoming implementation goals (5-7), culminating in loading pretrained OpenAI weights.",
+    "rationale": "The diagram is a linear flowchart with checkmarks and annotations that can be cleanly represented in Mermaid with styling to distinguish completed vs. upcoming steps.",
+    "artifact_path": "book/figures/generated/saving_loading_pretrained_weights_fig03.mmd",
+    "chapter_id": "saving_loading_pretrained_weights",
+    "index": 3,
+    "description": "Diagram showing the mapping from params dictionary keys (WTE, WPE, blocks[i"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Three text messages of varying lengths are tokenized and right-padded with end-of-text tokens to match the longest sequence length.",
+    "rationale": "The figure directive describes a specific tokenization and padding visualization that requires showing actual token sequences with visual alignment and padding indicators. This is best preserved as an embedded image to ensure accurate representation of the token-level details and padding structure.",
+    "artifact_path": "book/figures/embedded/classification_finetuning_fig01.jpg",
+    "chapter_id": "classification_finetuning",
+    "index": 1,
+    "description": "Diagram showing three text messages of different lengths being tokenized and then right-padded with the end-of-text token to the length of the longest sequence"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Side-by-side comparison of GPT-2 output head (768\u219250257 vocabulary) versus a new classification head (768\u21922 classes), with the transformer stack remaining unchanged.",
+    "rationale": "The figure directive describes a specific architectural comparison that is not present in any of the provided diagram extractions. The extracted frames show unrelated content (torch.save documentation and instruction finetuning pipeline). Without the actual source image showing the GPT-2 head comparison, regenerating this diagram risks misrepresenting the exact architectural details, layer dimensions, and visual layout. Embedding the original frame is the safest approach.",
+    "artifact_path": "book/figures/embedded/classification_finetuning_fig02.jpg",
+    "chapter_id": "classification_finetuning",
+    "index": 2,
+    "description": "Side-by-side diagram of the original GPT-2 output head (768\u219250257) versus the new classification head (768\u21922), with the rest of the transformer stack unchanged"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Timeline diagram showing one training epoch divided into batches, with loss printed every 50 batches and accuracy printed at the end of each epoch.",
+    "rationale": "The figure directive describes a timeline/training loop visualization that is not present in the provided diagram extractions or source frames. The extractions show unrelated content (torch.save documentation, instruction finetuning pipeline, and dataloader creation). Without the actual source image or clear structural description, regenerating this as Mermaid or TikZ risks misrepresenting the intended timeline layout and batch/loss/accuracy reporting schedule. Embedding the original frame is the safest approach.",
+    "artifact_path": "book/figures/embedded/classification_finetuning_fig03.jpg",
+    "chapter_id": "classification_finetuning",
+    "index": 3,
+    "description": "Timeline diagram showing one training epoch divided into batches, with loss printed every 50 batches and accuracy printed at the end of each epoch"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Three sequences of varying lengths padded with token ID 50256 to form a uniform rectangular batch matrix for model processing.",
+    "rationale": "The figure directive describes a specific data padding visualization that is not present in any of the provided diagram extractions or source frames. The extracted diagrams show instruction finetuning pipelines and GitHub repository content, not token padding matrices. Without the actual source image showing the three sequences and padding visualization, a clean regeneration cannot be confidently attempted.",
+    "artifact_path": "book/figures/embedded/instruction_finetuning_fig01.jpg",
+    "chapter_id": "instruction_finetuning",
+    "index": 1,
+    "description": "Diagram showing three sequences of different lengths being padded with token ID 50256 to form a uniform rectangular batch matrix"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Input and target token sequences for instruction finetuning, showing the one-position rightward shift with end-of-text token appended.",
+    "rationale": "The FIGURE directive describes a side-by-side token sequence illustration, but the provided diagram extractions and source frames do not contain this specific visualization. The frames show a three-stage LLM pipeline and a GitHub repository page, neither of which matches the token sequence diagram described. Without the actual source image showing the token sequences, embedding the original frame is the safest approach to avoid misrepresentation.",
+    "artifact_path": "book/figures/embedded/instruction_finetuning_fig02.jpg",
+    "chapter_id": "instruction_finetuning",
+    "index": 2,
+    "description": "Side-by-side illustration of input token sequence and target token sequence, showing the one-position rightward shift with an end-of-text token appended at the end of the target"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Token count comparison of The Verdict (~5,145 tokens) against a typical large pre-training corpus, illustrating the relative scale of the dataset.",
+    "rationale": "The figure directive references a bar chart comparing token counts, but the provided diagram extractions and source frames do not contain this specific visualization. The frames shown are from Stanford Alpaca and Common Crawl overview pages, neither of which displays the token count bar chart described. Without access to the actual bar chart image, embedding the original frame is the safest approach to avoid misrepresenting the data.",
+    "artifact_path": "book/figures/embedded/appendix_datasets_used_fig01.jpg",
+    "chapter_id": "appendix_datasets_used",
+    "index": 1,
+    "description": "Bar chart comparing the token count of The Verdict (~5,145 tokens) against a typical large pre-training corpus, to give a sense of scale"
+  },
+  {
+    "mode": "mermaid",
+    "code": "pie title SMS Spam Collection Data Split (1,494 total examples)\n    \"Train (70%)\" : 1045\n    \"Validation (10%)\" : 149\n    \"Test (20%)\" : 300",
+    "caption": "Distribution of the balanced SMS Spam Collection dataset across train, validation, and test splits.",
+    "rationale": "A pie chart showing three categorical proportions (70/10/20 split) is straightforward to render in Mermaid and requires no visual complexity beyond labels and percentages.",
+    "artifact_path": "book/figures/generated/appendix_datasets_used_fig02.mmd",
+    "chapter_id": "appendix_datasets_used",
+    "index": 2,
+    "description": "Pie chart showing the 70/10/20 train/validation/test split of the balanced SMS Spam Collection (1,494 total examples)"
+  },
+  {
+    "mode": "embed",
+    "code": null,
+    "caption": "Comparison of the 1,100-pair instruction dataset used in this book against the Stanford Alpaca 52,000-pair dataset.",
+    "rationale": "The figure directive describes a side-by-side bar chart, but none of the provided diagram extractions contain actual bar chart data, diagram elements, or visual structure details. The source frames shown are GitHub/website screenshots with text content, not the bar chart itself. Without the actual chart data (exact values, labels, and visual structure), regenerating it as Mermaid or TikZ risks misrepresenting the comparison. Embedding the original frame is the safest approach.",
+    "artifact_path": "book/figures/embedded/appendix_datasets_used_fig03.jpg",
+    "chapter_id": "appendix_datasets_used",
+    "index": 3,
+    "description": "Side-by-side bar chart comparing the 1,100-pair instruction dataset used in this book against the Stanford Alpaca 52,000-pair dataset"
+  }
+]

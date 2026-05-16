@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "vector embeddings (2D example)",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A 2D vector embedding example showing how input data (represented by a diamond shape) is transformed into numerical vectors, which are then plotted as points in a 2D coordinate space, with three clusters of points shown in different colored circles (green, blue, and red).",
+  "diagram_elements": [
+    "Input shape (diamond)",
+    "Vector matrix with blue values [4 5], [3 3.5], [5 3]",
+    "Vector matrix with red values [2.5 -2], [2.5 -3], [4 -2.5]",
+    "Vector matrix with green values [-3 4], [-1.5 3], [-2 2]",
+    "2D coordinate system with x and y axes",
+    "Green cluster (upper left quadrant)",
+    "Blue cluster (upper right quadrant)",
+    "Red cluster (lower right quadrant)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "NLn4eetGmf8_f0007",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 684.766333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0007.jpg"
+}

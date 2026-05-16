@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "We download the gpt_download.py Python module directly from this chapter's online repository\n\nWe can now import the download_and_load_gpt2 function from the gpt_download.py file as follows to load the weight parameters (params) into our Python session:",
+  "code": {
+    "language": "python",
+    "content": "[1]: from gpt_download3 import download_and_load_gpt2\n\n[2]: settings, params = download_and_load_gpt2(model_size=\"124M\", models_dir=\"gpt2\")"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "yXrGeDNuymY_f0014",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1733.199667,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0014.jpg"
+}

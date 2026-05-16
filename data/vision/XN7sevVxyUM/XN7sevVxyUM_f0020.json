@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Encoder-decoder attention mechanism showing encoding stage with hidden states (h1 h2 h3) flowing into attention decoding stage with h_init input, attention computation (cyan circle), and <END> token output.",
+  "diagram_elements": [
+    "Encoding Stage",
+    "h1 h2 h3",
+    "Attention Decoding Stage",
+    "h_init",
+    "Attention mechanism (cyan circle)",
+    "<END> token"
+  ],
+  "confidence": 0.85,
+  "frame_id": "XN7sevVxyUM_f0020",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2316.399667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0020.jpg"
+}

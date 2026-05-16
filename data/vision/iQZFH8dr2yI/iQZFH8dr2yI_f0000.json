@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "the token count or the number of iterations\n\nLecture \u2192 Create Input-Target Pairs\n\nThe last step before we create vector embeddings is to create input-target pairs:\n\n* What do these input-target pairs look lik~",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "iQZFH8dr2yI_f0000",
+  "video_id": "iQZFH8dr2yI",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/iQZFH8dr2yI/iQZFH8dr2yI_f0000.jpg"
+}

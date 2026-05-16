@@ -1,0 +1,65 @@
+[
+  {
+    "frame_id": "f6zqClXOh7Y_f0000",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0000.jpg",
+    "phash": "807f007f007f1e7e",
+    "edge_density": 0.11066804108796297,
+    "sha256": "f4be9d6d8defd7645f9677534b70b892ceec80456e60efaddb911c354601007b"
+  },
+  {
+    "frame_id": "f6zqClXOh7Y_f0001",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 247.599667,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0001.jpg",
+    "phash": "ff80ff809a92807e",
+    "edge_density": 0.04356585733251634,
+    "sha256": "f9b416e400eb8b4b24948d57a2a95175a031850a36649d7c3ab2fefd37174cdd"
+  },
+  {
+    "frame_id": "f6zqClXOh7Y_f0002",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 250.699667,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0002.jpg",
+    "phash": "805f007f125f3b1f",
+    "edge_density": 0.12707663143382353,
+    "sha256": "4628642bb54309716eb2d4b6cfe87d9e50b5f139f03dcd7864fba6997c00c6fe"
+  },
+  {
+    "frame_id": "f6zqClXOh7Y_f0003",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 628.966333,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0003.jpg",
+    "phash": "9c23dda3dda289a2",
+    "edge_density": 0.13408522263071895,
+    "sha256": "8d48d8336317659a58fb6840b6f4cca3e5c8a37c7270fa36e56553d8347260dc"
+  },
+  {
+    "frame_id": "f6zqClXOh7Y_f0004",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 711.699667,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0004.jpg",
+    "phash": "c17f707b0b1fa850",
+    "edge_density": 0.1671250553172658,
+    "sha256": "0f5e01aa601556babb432075ec595891b483d51333f396869263b20f48b83842"
+  },
+  {
+    "frame_id": "f6zqClXOh7Y_f0005",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 1601.333,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0005.jpg",
+    "phash": "dda0dda0dca28877",
+    "edge_density": 0.05086699176198257,
+    "sha256": "3ad8ea9cd97e2923ab180b987a37476ced8a19fd049834cc5479647a0fdcd656"
+  },
+  {
+    "frame_id": "f6zqClXOh7Y_f0006",
+    "video_id": "f6zqClXOh7Y",
+    "timestamp_sec": 1604.466333,
+    "path": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0006.jpg",
+    "phash": "905f4a1f0a7f6878",
+    "edge_density": 0.12862125970179739,
+    "sha256": "f8c4e78e1122642b733de1fabe7d3e475252c05b784c197f4c342ccd067397ad"
+  }
+]

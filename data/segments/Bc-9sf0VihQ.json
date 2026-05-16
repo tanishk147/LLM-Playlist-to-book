@@ -1,0 +1,1103 @@
+{
+  "video_id": "Bc-9sf0VihQ",
+  "segments": [
+    {
+      "id": "Bc-9sf0VihQ_000",
+      "title": "Recap",
+      "ts_start": 0.0,
+      "ts_end": 168.0,
+      "segments": [
+        {
+          "ts_start": 4.67,
+          "ts_end": 11.37,
+          "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "Bc-9sf0VihQ_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Lecture \u2192 loading + Saving PyTorch Model Weights",
+              "extracted_text": "Recap until now.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "A flowchart showing the progression of LLM development steps from text generation through weight saving and loading, with checkmarks indicating completed steps and annotations describing implementation goals.",
+              "diagram_elements": [
+                "1) Text generation",
+                "2) Text evaluation",
+                "3) Training & validation losses",
+                "4) LLM training function",
+                "5) Text generation strategies",
+                "6) Weight saving & loading",
+                "7) Pretrained weights from OpenAI",
+                "Train the model to generate human-like text",
+                "Implement additional LLM text generation strategies to reduce training data memorization",
+                "Implement functions to save and load the LLM weights to use or continue training the LLM later",
+                "At the end of this chapter, load pretrained weights from OpenAI into our LLM model"
+              ],
+              "confidence": 0.92,
+              "frame_id": "Bc-9sf0VihQ_f0000",
+              "video_id": "Bc-9sf0VihQ",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 12.53,
+          "ts_end": 20.57,
+          "text": "Today, it's going to be a short lecture in which we are going to be learning about loading and saving PyTorch model weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 20.97,
+          "ts_end": 28.05,
+          "text": "This is going to be very important especially when dealing with huge models such as the large language model which we have built so far.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 28.23,
+          "ts_end": 32.09,
+          "text": "This will help us to save memory, it will help us to save time.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 32.09,
+          "ts_end": 38.59,
+          "text": "So, I have dedicated this special lecture to teach you how to do this loading and saving in Python.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 39.5,
+          "ts_end": 43.42,
+          "text": "Before getting started, let's quickly recap whatever we have done until now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 44.23,
+          "ts_end": 52.39,
+          "text": "So, initially in this series on pre-training large language models, we looked at evaluating the loss function for an LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 52.47,
+          "ts_end": 62.51,
+          "text": "We saw how the cross-entropy loss comes into the picture here and we can define the loss between the target text which we want.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 62.89,
+          "ts_end": 64.49,
+          "text": "And the LLM predicted output.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 65.74,
+          "ts_end": 67.96,
+          "text": "We also ran the pre-training loop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 68.36,
+          "ts_end": 80.21,
+          "text": "So, this was an awesome lecture in which we actually ran an LLM for 10 epochs and then we generated new text from the input text which was given to the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 80.43,
+          "ts_end": 83.79,
+          "text": "Here we saw that there was an issue of overfitting.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 84.13,
+          "ts_end": 91.99,
+          "text": "So, the large language model was just memorizing the text on which it was trained on and in the prediction it was just using that memorized text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 92.33,
+          "ts_end": 93.67,
+          "text": "To avoid overfitting, we have to do a couple of things.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 93.69,
+          "ts_end": 106.25,
+          "text": "To avoid overfitting, we looked at text generation strategies, we looked at temperature scaling and we looked at top case sampling and we saw how those both can be integrated together to generate text which is not overfitting.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 106.61,
+          "ts_end": 116.19,
+          "text": "Although the text does not overfit or although the LLM does not overfit, the text which is generated is still not making too much meaningful sense.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 116.51,
+          "ts_end": 120.13,
+          "text": "And that's because the data set on which we are training is not huge.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 121.03,
+          "ts_end": 123.91,
+          "text": "So, eventually in the next lecture, we are going to...",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 124.01,
+          "ts_end": 129.63,
+          "text": "We are going to load pre-trained weights from OpenAI into the model instead of training our own model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 130.09,
+          "ts_end": 136.81,
+          "text": "So, OpenAI has spent millions of dollars pre-training weights and they have made it open source for GPT-2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 137.03,
+          "ts_end": 146.79,
+          "text": "So, in the next lecture, we are going to actually use the pre-trained weights from OpenAI and we are going to integrate that into the GPT architecture which we have built so far.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 147.73,
+          "ts_end": 153.71,
+          "text": "But in today's lecture, I want to build the foundation for weight saving and loading.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 154.55,
+          "ts_end": 159.23,
+          "text": "Because this will be very useful for pre-training, when we use the pre-trained weights for OpenAI.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "Bc-9sf0VihQ_001",
+      "title": "Saving and loading model parameters",
+      "ts_start": 168.0,
+      "ts_end": 420.0,
+      "segments": [
+        {
+          "ts_start": 168.89,
+          "ts_end": 169.95,
+          "text": "Let's get started.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 170.45,
+          "ts_end": 173.79,
+          "text": "So, there are two main functions which are very important.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 173.97,
+          "ts_end": 179.09,
+          "text": "First is Torque.Save and second is basically Model.LoadStateDictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 179.23,
+          "ts_end": 182.05,
+          "text": "I'll explain to you what each of this actually means.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 182.33,
+          "ts_end": 184.45,
+          "text": "Let's say we have a GPT model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 184.55,
+          "ts_end": 188.93,
+          "text": "And we want to save the parameters of the model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 189.83,
+          "ts_end": 191.01,
+          "text": "What does this mean?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 191.11,
+          "ts_end": 194.61,
+          "text": "So, essentially, we have defined this GPT model class, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 195.13,
+          "ts_end": 196.97,
+          "text": "We have defined this in code before.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 197.07,
+          "ts_end": 200.75,
+          "text": "And when this class is defined, this kind of GPT model is constructed.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 201.07,
+          "ts_end": 203.25,
+          "text": "There are huge number of parameters here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 203.29,
+          "ts_end": 206.03,
+          "text": "In fact, the parameters are more than 100 million parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 206.95,
+          "ts_end": 213.21,
+          "text": "So, instead of running a new instance of this model each time, I would like to save these 100 million parameters somewhere.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 213.75,
+          "ts_end": 215.11,
+          "text": "And the PyTorch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 215.13,
+          "ts_end": 219.57,
+          "text": "Command to save these parameters is Torque.Save and Model.State.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 219.71,
+          "ts_end": 222.35,
+          "text": "So, Torque.Save and then you pass in two arguments.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 222.63,
+          "ts_end": 225.31,
+          "text": "The first is the Model.StateDictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 225.57,
+          "ts_end": 229.61,
+          "text": "And the second is the file name where you want to store the model parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 230.29,
+          "ts_end": 234.81,
+          "text": "So, Model.StateDictionary is a dictionary mapping each layer to its parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 235.01,
+          "ts_end": 237.67,
+          "text": "And it's by default available to any PyTorch model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 238.39,
+          "ts_end": 241.07,
+          "text": "And this is the file name, which is Model.Pth.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 241.9,
+          "ts_end": 243.92,
+          "text": "Here I have opened the StateDictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 243.96,
+          "ts_end": 245.04,
+          "text": "And here you can see that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 245.26,
+          "ts_end": 251.98,
+          "text": "In PyTorch, the learnable parameters of any Torch.nn.Module are contained in Model.Parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 252.08,
+          "ts_end": 257.5,
+          "text": "And the StateDictionary is simply a Python dictionary object that maps each layer to its parameter tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 258.24,
+          "ts_end": 261.06,
+          "text": "So, now you can think of different layers here, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 261.93,
+          "ts_end": 270.19,
+          "text": "What this StateDictionary will do is that it will just take each layer and construct a dictionary mapping it to its parameters of the layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 270.79,
+          "ts_end": 274.77,
+          "text": "And then using Torch.Save, we can save all of these parameter dictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 274.77,
+          "ts_end": 276.85,
+          "text": "In the file called Model.Pth.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 278.19,
+          "ts_end": 281.33,
+          "text": "The second command is Model.LoadStateDictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 281.43,
+          "ts_end": 287.87,
+          "text": "Now let's say that you save the parameters and you send it to someone else, who is your collaborator on this project.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 288.11,
+          "ts_end": 294.69,
+          "text": "What they can do on their end is that they can use this file Model.Pth and they can use Torch.Load.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 294.99,
+          "ts_end": 297.53,
+          "text": "And they can do Model.LoadStateDictionary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 297.67,
+          "ts_end": 303.53,
+          "text": "So what it will do is that, when they are starting this model from scratch, their model will be loaded with these parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 303.81,
+          "ts_end": 305.39,
+          "text": "Which are contained in the Model.Pth.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 305.39,
+          "ts_end": 314.08,
+          "text": "dot pth file so i've even um showed that here torch dot nn dot module dot load state dictionary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 314.58,
+          "ts_end": 320.36,
+          "text": "so it loads the models parameter dictionary using state dict which we have already defined before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 320.36,
+          "ts_end": 326.3,
+          "text": "so state dict is basically this awesome so these are the two commands and let's see them in action",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 326.3,
+          "ts_end": 332.63,
+          "text": "in code right now okay so uh we have constructed an instance of this gpt model class and i showed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 332.63,
+          "ts_end": 338.63,
+          "text": "this gpt model class to you over here this is the class which we have defined in the code before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 339.27,
+          "ts_end": 343.75,
+          "text": "um so i've created an instance of this class right now and it's 124 million",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 344.35,
+          "ts_end": 349.97,
+          "text": "the configuration is 124 million parameters and then see i'm using the torch.save command here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 350.49,
+          "ts_end": 355.09,
+          "text": "and this is the model state dictionary and i'm saving this parameter dictionary in a file called",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 355.09,
+          "ts_end": 361.39,
+          "text": "model.pth so as i've written here the dot pth extension is a convention for py torch files",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 362.15,
+          "ts_end": 362.61,
+          "text": "we could",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 362.69,
+          "ts_end": 368.09,
+          "text": "technically use any file extension that does not matter and then what we can do is that let's say",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 368.09,
+          "ts_end": 375.25,
+          "text": "i am a collaborator working with someone else and i send this model.pth to that person they can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 375.92,
+          "ts_end": 380.8,
+          "text": "create an instance of the gpt model class and they can already load this model with the parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 381.44,
+          "ts_end": 387.69,
+          "text": "which are present in model.pth for that they can do something like torch.load and they can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 387.69,
+          "ts_end": 392.61,
+          "text": "do model.load state dictionary and then they can put the model in evaluation mode and they can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 392.61,
+          "ts_end": 397.65,
+          "text": "see that all of the parameters have been loaded in the model the parameters which were present in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 397.65,
+          "ts_end": 403.61,
+          "text": "the model.pth that really saves a lot of time for this new person who has received this even for you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 404.07,
+          "ts_end": 411.11,
+          "text": "if you suddenly log out of python or google collab or jupyter notebook instead of pre-training the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 411.11,
+          "ts_end": 415.67,
+          "text": "model again if you are frequently saving the parameters it will really save you a lot of",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "Bc-9sf0VihQ_002",
+      "title": "Saving and loading the optimizer parameters and history",
+      "ts_start": 420.0,
+      "ts_end": 745.0,
+      "segments": [
+        {
+          "ts_start": 422.86,
+          "ts_end": 426.04,
+          "text": "the code up till a certain point and i want to train it tomorrow again",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 428.41,
+          "ts_end": 432.95,
+          "text": "loading the model parameters is one thing but what about the optimizer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 433.49,
+          "ts_end": 439.69,
+          "text": "because in cases of optimizers like adam the optimizer also maintains a history of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 440.49,
+          "ts_end": 446.09,
+          "text": "gradient and it also maintains a history of the squared gradient values right shouldn't i be saving",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 446.09,
+          "ts_end": 452.58,
+          "text": "these values also because that's needed by the optimizer if i just save the model parameters the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 453.38,
+          "ts_end": 457.98,
+          "text": "optimizer essentially loses the gradient values and the squared gradient values which it has",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 457.98,
+          "ts_end": 463.68,
+          "text": "calculated until the training process right so usually it's also recommended to save",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 464.78,
+          "ts_end": 469.32,
+          "text": "the optimizer state and similar to the parameters which we have saved",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 469.32,
+          "ts_end": 473.58,
+          "text": "the optimizers can also be saved using something like optimizer state dictionary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 474.02,
+          "ts_end": 478.04,
+          "text": "and i'm going to show that to you just in a minute what this dictionary stores is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 478.04,
+          "ts_end": 483.28,
+          "text": "it stores the hyper parameters but it also optimizes the hyper parameters but it also",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 483.28,
+          "ts_end": 488.52,
+          "text": "stores the historical data used by that hyper used by that optimizer such as the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 488.52,
+          "ts_end": 492.3,
+          "text": "past gradient values the square of the gradient values which are needed for the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 492.3,
+          "ts_end": 497.5,
+          "text": "Adam optimizer so let's see how we can go ahead and save the optimizer state so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 497.5,
+          "ts_end": 501.24,
+          "text": "I have written here that adaptive optimizers such as Adam W which we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 501.24,
+          "ts_end": 506.1,
+          "text": "used to train the LLM store additional parameters for each model weight this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 506.1,
+          "ts_end": 510.28,
+          "text": "optimizer uses historical data to adjust learning rates for each model such as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 510.28,
+          "ts_end": 513.96,
+          "text": "the gradient history of the gradients history of the square of the gradients",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 513.96,
+          "ts_end": 519.75,
+          "text": "now without storing these history the optimizer resets and that's not very",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 519.75,
+          "ts_end": 523.71,
+          "text": "good because then we have essentially not utilized the training which has",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 523.71,
+          "ts_end": 528.99,
+          "text": "happened so far and then the model may not converge properly right so using",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 528.99,
+          "ts_end": 532.89,
+          "text": "torres dot save actually we can save both the model and the optimizer state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 532.89,
+          "ts_end": 538.36,
+          "text": "dictionary also so here is the optimizer which we have defined earlier and now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 538.36,
+          "ts_end": 540.4,
+          "text": "here you see earlier we had",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 540.4,
+          "ts_end": 544.82,
+          "text": "used torres dot save and only saved the model parameters right now we can use",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 544.82,
+          "ts_end": 549.56,
+          "text": "torres dot save and save the model state dictionary and we can also save the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 549.56,
+          "ts_end": 555.12,
+          "text": "optimizer state dictionary using optimizer dot state so you can see",
+          "frame_ids": [
+            "Bc-9sf0VihQ_f0001"
+          ],
+          "visuals": [
+            {
+              "category": "other",
+              "skip": false,
+              "title": null,
+              "extracted_text": "optimizer.state_dict()\n\nPyTorch\nhttps://pytorch.org \u203a docs \u203a stable \u203a generated \u203a torch.o...\ntorch.optim.Optimizer.state_dict\nReturns the state of the optimizer as a dict. It contains two entries: NOTE: The parameter IDs may look like indices but they are just IDs associating state ...\n\nPyTorch Forums\nhttps://discuss.pytorch.org \u203a what-does-optimizer-state-...\nWhat does `optimizer.state_dict()` store?\n8 Feb 2022 \u2014 An optimizer's state dictionary contains two types of information - parameters that are being optimized and any hyperparameters in use. For ...\n\nStack Overflow\nhttps://stackoverflow.com \u203a questions \u203a what-are-saved-...\nWhat are saved in optimizer's state_dict? what \"state\", ...\nThe optimizer's state_dict contains information about the optimizer's state (parameters to be optimized), as well as the hyperparameters used.\n1 answer \u00b7 Top answer: In contrast to model's state_dict, which saves learnable parameters, th...\n\nPyTorch: What's the purpose of saving the optimizer state?\nWhat is the purpose of optimizer's state_dict in PyTorch Big ...\nState_dict error for testing a model that is trained by loading ...\nPyTorch / device problem(cpu, gpu) when load state_dict for ...",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "Bc-9sf0VihQ_f0001",
+              "video_id": "Bc-9sf0VihQ",
+              "timestamp_sec": 554.433,
+              "source_image": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0001.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 555.12,
+          "ts_end": 560.67,
+          "text": "this in PyTorch this is optimizer dot state dictionary and it returns the",
+          "frame_ids": [
+            "Bc-9sf0VihQ_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "torch.optim.Optimizer.state_dict",
+              "extracted_text": "Optimizer.state_dict()[source]\n\nReturns the state of the optimizer as a dict.\n\nIt contains two entries:\n\n\u2022 state: a Dict holding current optimization state. Its content differs between optimizer classes, but some common characteristics hold. For example, state is saved per parameter, and the parameter itself is NOT saved. state is a Dictionary mapping parameter ids to a Dict with state corresponding to each parameter.\n\n\u2022 param_groups: a List containing all parameter groups where each parameter group is a Dict. Each parameter group contains metadata specific to the optimizer, such as learning rate and weight decay, as well as a List of parameter IDs of the parameters in the group.\n\nNOTE: The parameter IDs may look like indices but they are just IDs associating state with param_group. When loading from a state_dict, the optimizer will zip the param_group params (int IDs) and the optimizer param_groups (actual nn.Parameter s) in order to match state WITHOUT additional verification.\n\nA returned state dict might look something like:",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "Bc-9sf0VihQ_f0002",
+              "video_id": "Bc-9sf0VihQ",
+              "timestamp_sec": 557.099667,
+              "source_image": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 560.67,
+          "ts_end": 567.25,
+          "text": "state of the optimizer it also really maintains a history of the gradients the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 567.25,
+          "ts_end": 570.39,
+          "text": "gradient square and the parameters such as learning rate weight decay",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 570.59,
+          "ts_end": 576.48,
+          "text": "etc so the Adam optimizer is initialized with these parameters so when you save",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 576.48,
+          "ts_end": 579.9,
+          "text": "the optimizer state dictionary it of course saves these parameters but it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 579.9,
+          "ts_end": 584.28,
+          "text": "also saves the history and you save these two dictionaries in this file",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 584.28,
+          "ts_end": 588.34,
+          "text": "which is called as model and optimizer dot PTH so when you give this code to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 588.34,
+          "ts_end": 593.44,
+          "text": "someone else you can now pass them the model as well as the optimizer state so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 593.44,
+          "ts_end": 596.52,
+          "text": "that they can directly use the model as well as the current state of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 596.52,
+          "ts_end": 600.0,
+          "text": "optimizer to keep on running the model on their end even for you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 600.62,
+          "ts_end": 604.04,
+          "text": "let's say if you close the session of training today and then you want to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 604.04,
+          "ts_end": 607.86,
+          "text": "resume the training you have to save the parameters as well as the optimizers in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 607.86,
+          "ts_end": 613.05,
+          "text": "this file model and optimizer dot PTH now what we can actually do is that we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 613.05,
+          "ts_end": 616.99,
+          "text": "can test this so this file is saved so you can do torres dot load this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 616.99,
+          "ts_end": 620.83,
+          "text": "particular file and then load the contents in an object called checkpoint",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 621.37,
+          "ts_end": 625.93,
+          "text": "what we can now do is that we can create an instance of the model GPT model class",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 625.93,
+          "ts_end": 630.95,
+          "text": "and first we can load the model parameters and then load the parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 630.97,
+          "ts_end": 636.01,
+          "text": "so we use this checkpoint and then we see this dictionary model dot state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 636.01,
+          "ts_end": 641.37,
+          "text": "dictionary and load the model parameters here right then what we do is that we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 641.37,
+          "ts_end": 647.35,
+          "text": "define the optimizer and then we also a load the optimizer dictionary so we look",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 647.35,
+          "ts_end": 651.51,
+          "text": "at the checkpoint object and we load the optimizer state dictionary which will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 651.51,
+          "ts_end": 655.03,
+          "text": "load the optimizer parameters as well as the history of the gradient and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 655.03,
+          "ts_end": 659.71,
+          "text": "squared of square gradients and then you put the model in train mode so this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 659.71,
+          "ts_end": 660.01,
+          "text": "model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 660.01,
+          "ts_end": 664.65,
+          "text": "model.train will not do the training but we just put the model in train mode right now to do the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 664.65,
+          "ts_end": 669.27,
+          "text": "training we'll need to do the forward pass the backward pass gradient descent etc which we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 669.27,
+          "ts_end": 676.09,
+          "text": "done earlier but i showed you this saving of the model and saving of the optimizer states just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 676.09,
+          "ts_end": 681.01,
+          "text": "because it's very useful practice especially for dealing with large language models otherwise it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 681.01,
+          "ts_end": 685.13,
+          "text": "can be really frustrating to start everything from scratch again to lose the model parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 685.13,
+          "ts_end": 690.03,
+          "text": "to lose the optimizer states and i've seen many researchers make this mistake of not knowing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 690.03,
+          "ts_end": 695.45,
+          "text": "exactly how to load the model parameters the optimizer parameters and the optimizer state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 695.45,
+          "ts_end": 699.81,
+          "text": "once you learn how to do it it's actually pretty simple i'll also be sharing these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 701.05,
+          "ts_end": 706.99,
+          "text": "pyTorch links with you in the video description i hope you have understood this lecture in which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 706.99,
+          "ts_end": 714.1,
+          "text": "we covered about essentially loading and saving model weights in pyTorch now we have all the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 714.1,
+          "ts_end": 715.24,
+          "text": "ammunition necessary to load the model and save the model weights in pyTorch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 715.26,
+          "ts_end": 718.24,
+          "text": "now we have all the ammunition necessary to attack the next lecture which is loading pre-trained",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 718.24,
+          "ts_end": 722.78,
+          "text": "weights from openai this will be an awesome lecture in which we will use the weights which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 722.78,
+          "ts_end": 728.92,
+          "text": "are given by openai for gpt2 and then we'll use our own gpt architecture which we have built in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 728.92,
+          "ts_end": 734.22,
+          "text": "this series so far and we'll do the next world prediction task thank you so much everyone i hope",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 734.22,
+          "ts_end": 738.9,
+          "text": "you learned from this lecture stay tuned and i look forward to seeing you in the next lecture",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

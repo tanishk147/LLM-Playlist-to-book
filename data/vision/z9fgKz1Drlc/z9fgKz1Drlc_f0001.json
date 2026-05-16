@@ -1,0 +1,26 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Tokenization process flow diagram showing how text in a document (sentence or paragraph) is broken down into individual tokens, which are then recombined into words or sentences.",
+  "diagram_elements": [
+    "Text in Document : Sentence or Paragraph",
+    "Tokenization",
+    "Token",
+    "Token",
+    "Token",
+    "Token",
+    "Token",
+    "Token",
+    "Token",
+    "Word or Sentence"
+  ],
+  "confidence": 0.95,
+  "frame_id": "z9fgKz1Drlc_f0001",
+  "video_id": "z9fgKz1Drlc",
+  "timestamp_sec": 158.899667,
+  "source_image": "data/frames/z9fgKz1Drlc/z9fgKz1Drlc_f0001.jpg"
+}

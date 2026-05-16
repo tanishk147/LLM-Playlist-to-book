@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "vector embeddings (2D example)",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A 2D vector embedding example showing how categorical words (king, man, woman, apple, banana, orange, football, golf, tennis) are transformed through an embedding layer into 2D vector coordinates, then plotted on a 2D coordinate system where semantically similar items cluster together.",
+  "diagram_elements": [
+    "Input words: king, man, woman (blue), apple, banana, orange (red), football, golf, tennis (green)",
+    "Embedding layer (diamond shape)",
+    "Vector coordinates matrix with 10 rows of 2D vectors",
+    "2D coordinate plot with three clusters: green cluster (sports), blue cluster (royalty/people), red cluster (fruits)"
+  ],
+  "confidence": 0.92,
+  "frame_id": "z9fgKz1Drlc_f0003",
+  "video_id": "z9fgKz1Drlc",
+  "timestamp_sec": 293.299667,
+  "source_image": "data/frames/z9fgKz1Drlc/z9fgKz1Drlc_f0003.jpg"
+}

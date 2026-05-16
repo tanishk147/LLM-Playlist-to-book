@@ -1,0 +1,3445 @@
+{
+  "video_id": "F1Sm7z2R96w",
+  "duration_sec": 2458.1573125,
+  "segments": [
+    {
+      "ts_start": 4.59,
+      "ts_end": 10.91,
+      "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Lecture \u2192 Generating text from output tensors",
+          "extracted_text": "Review of how an LLM generates text:\n\n1st iteration:\nThe input context for the model: Hello |\nThe next generated token: I\nThe token generated in the previous round is appended to the input for the next iteration: am\n\n2nd iteration:\nThe input context grows in each iteration: Hello | I am a model:",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Diagram showing how an LLM generates text iteratively: the input context grows with each iteration as newly generated tokens are appended, demonstrating the autoregressive generation process.",
+          "diagram_elements": [
+            "The input context for the model",
+            "The next generated token",
+            "The token generated in the previous round is appended to the input for the next iteration",
+            "The input context grows in each iteration",
+            "1st iteration",
+            "2nd iteration",
+            "Hello",
+            "I",
+            "am",
+            "a",
+            "model"
+          ],
+          "confidence": 0.85,
+          "frame_id": "F1Sm7z2R96w_f0000",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 11.54,
+      "ts_end": 17.4,
+      "text": "Today is the last lecture in the GPT architecture module which we have been covering.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 17.66,
+      "ts_end": 27.78,
+      "text": "And in today's lecture, what we are going to do is that we are going to generate text from the output tensor which we have reached at in the last lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 27.78,
+      "ts_end": 37.62,
+      "text": "So, first let me give you a review of how an LLM generates text because this figure right here is what will guide us throughout this entire lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 37.78,
+      "ts_end": 46.0,
+      "text": "And then I'll quickly take you through the recap of what all we have completed so far and what's the main objective of today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 46.34,
+      "ts_end": 48.26,
+      "text": "So, let's get started everyone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 49.24,
+      "ts_end": 52.7,
+      "text": "What a large language model does is essentially the following.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 53.41,
+      "ts_end": 58.31,
+      "text": "It generates tokens given a certain sequence of inputs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 58.33,
+      "ts_end": 61.11,
+      "text": "It generates the output token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 62.43,
+      "ts_end": 67.33,
+      "text": "And to generate the output token, the model is given a context size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 67.59,
+      "ts_end": 72.53,
+      "text": "That's the maximum number of tokens which the model looks at before predicting the next token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 74.04,
+      "ts_end": 84.66,
+      "text": "So, let's say when we are looking at the first iteration, this is the input tokens, hello, I am, and the model has to predict the next token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 86.07,
+      "ts_end": 89.69,
+      "text": "And then the next token is actually appended.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 89.69,
+      "ts_end": 91.65,
+      "text": "To the input tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 91.73,
+      "ts_end": 96.07,
+      "text": "So, in the second iterations, now the inputs are hello, I am a.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 96.95,
+      "ts_end": 104.33,
+      "text": "So, the token which has been generated in the previous round is appended to the input for the next iteration.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 104.68,
+      "ts_end": 108.26,
+      "text": "And in the next iteration, the input tokens are hello, I am a.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 108.46,
+      "ts_end": 110.52,
+      "text": "And then the output is model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 112.41,
+      "ts_end": 112.93,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 112.99,
+      "ts_end": 118.51,
+      "text": "Then in the third iteration, we have hello, I am a model, which are the input tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 118.65,
+      "ts_end": 120.83,
+      "text": "And then the output tokens are.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 120.97,
+      "ts_end": 121.29,
+      "text": "Ready.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 122.86,
+      "ts_end": 130.08,
+      "text": "Similarly, we continue doing iterations until there is a specific number of max maximum number of new tokens which can be generated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 130.68,
+      "ts_end": 135.2,
+      "text": "So, let's say we have reached the sixth iteration and hello, I am ready to help.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 135.32,
+      "ts_end": 140.76,
+      "text": "So, the new tokens which have been generated are model, ready, to, and help, and dot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 140.86,
+      "ts_end": 141.78,
+      "text": "So, five new tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 142.02,
+      "ts_end": 149.34,
+      "text": "So, if the maximum number of new tokens is five, then the output from the model is hello, I am a model ready to help.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 150.71,
+      "ts_end": 151.75,
+      "text": "This is the main.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 152.63,
+      "ts_end": 156.87,
+      "text": "Mechanism through which the next token is generated from a given list of tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 157.35,
+      "ts_end": 160.81,
+      "text": "What's very important in this process is also the context size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 161.19,
+      "ts_end": 168.59,
+      "text": "That's the maximum number of previous tokens the LLM is going to look at before predicting the next token in GPT-2 architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 168.93,
+      "ts_end": 171.59,
+      "text": "The context size was one thousand and twenty-four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 172.19,
+      "ts_end": 173.71,
+      "text": "So, just keep this in mind.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 173.75,
+      "ts_end": 181.85,
+      "text": "Keep this iterative procedure in mind where the output from the earlier iteration is appended to the next iteration and the next world is predicted.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 182.03,
+      "ts_end": 182.45,
+      "text": "And this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 182.73,
+      "ts_end": 188.19,
+      "text": "on happening until we have reached the maximum number of new tokens this is the exact mechanism",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 188.19,
+      "ts_end": 193.84,
+      "text": "which we are going to implement in today's lecture first let's recap what all we have learned so far",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 193.84,
+      "ts_end": 199.58,
+      "text": "in this series we started out with getting an input such as every effort moves you that's the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 199.58,
+      "ts_end": 205.78,
+      "text": "input sentence we converted it into token ids we converted it into input embeddings sorry we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 205.78,
+      "ts_end": 210.32,
+      "text": "converted it into token embeddings we added positional embeddings to this token embeddings",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 210.32,
+      "ts_end": 215.58,
+      "text": "which led to input embeddings then we added a dropout layer the output from this dropout layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 215.58,
+      "ts_end": 220.28,
+      "text": "was passed into the transformer block the transformer block which is shown in blue color",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 220.28,
+      "ts_end": 225.36,
+      "text": "is where all the magic really happens and the core engine of the transformer block is multihead",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 225.36,
+      "ts_end": 230.82,
+      "text": "attention before the multihead attention there is a normalization layer after the multihead attention",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 230.82,
+      "ts_end": 235.52,
+      "text": "we have a dropout and a shortcut connection then after the shortcut connection we have another",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 235.52,
+      "ts_end": 240.3,
+      "text": "layer of normalization we have a feed forward neural network we have another dropout",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 240.32,
+      "ts_end": 245.4,
+      "text": "layer then we have one more shortcut connection over here and then we get the output from the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 245.4,
+      "ts_end": 252.75,
+      "text": "transformer after the output is obtained from the transformer we have one more layer normalization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 252.75,
+      "ts_end": 257.97,
+      "text": "layer and then we have a final neural network which is also called as the output head which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 257.97,
+      "ts_end": 263.35,
+      "text": "gives us this output tensor all of this has been covered in the previous two lectures where we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 263.35,
+      "ts_end": 268.23,
+      "text": "coded out the entire transformer block and in the last lecture we coded out the entire gpt model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 268.75,
+      "ts_end": 271.05,
+      "text": "so if you have not seen the previous lectures i have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 271.15,
+      "ts_end": 273.61,
+      "text": "already covered the entire gpt model so i highly recommend you to do that so that you can follow",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 273.61,
+      "ts_end": 281.04,
+      "text": "along in this lecture as well so let us see the exact flow which we have implemented so far and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 281.04,
+      "ts_end": 286.3,
+      "text": "what we need to do next so the output or the main goal of the today's lecture is that look at this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 286.3,
+      "ts_end": 291.71,
+      "text": "output tensor which we have obtained this output tensor looks pretty big right so your question",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 291.71,
+      "ts_end": 296.67,
+      "text": "would be how do i go from this output tensor to prediction of the next world which i have shown",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 296.67,
+      "ts_end": 299.49,
+      "text": "in this visual representation in today's lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 302.05,
+      "ts_end": 307.32,
+      "text": "so what we are going to do is we are going to go to code to predict the next world so at the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 307.32,
+      "ts_end": 311.7,
+      "text": "end of today's lecture we will actually take an input and get words as the next predictions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 312.88,
+      "ts_end": 317.9,
+      "text": "okay so here is the entire pipeline which we saw remember the format in which we have received the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 317.9,
+      "ts_end": 323.88,
+      "text": "input batches uh here there were two batches and each batch has certain number of tokens so in this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 323.88,
+      "ts_end": 329.4,
+      "text": "case each batch had four tokens we focused on the first batch which has four tokens and that's every",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 329.4,
+      "ts_end": 331.99,
+      "text": "effort moves you we converted the first batch which has four tokens and that's every effort moves you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 332.01,
+      "ts_end": 338.43,
+      "text": "we converted every token id there are four token ids here six six one zero nine three six two six",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 338.43,
+      "ts_end": 344.33,
+      "text": "six one zero zero and three four five we converted every token id into a token embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 344.33,
+      "ts_end": 350.83,
+      "text": "so the embedding size was 768 over here and then what we did was we added positional",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 350.83,
+      "ts_end": 355.13,
+      "text": "embedding to these token embeddings since the context size is four over here we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 355.13,
+      "ts_end": 360.81,
+      "text": "four positions and there is a 768 dimensional embedding for the positional uh embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 360.81,
+      "ts_end": 366.88,
+      "text": "so we add the token embedding to the positional embedding and that gives us the input embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 366.88,
+      "ts_end": 372.74,
+      "text": "for every token for every effort moves and you so we have these four input embeddings for these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 372.74,
+      "ts_end": 378.86,
+      "text": "four tokens then what we do is we pass these input embeddings through a dropout layer which randomly",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 378.86,
+      "ts_end": 383.92,
+      "text": "turns off certain elements to zero this output which i am highlighting in the yellow color right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 383.92,
+      "ts_end": 389.22,
+      "text": "now that is passed as an input to the transformer this is where all the magic happens in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 389.22,
+      "ts_end": 391.24,
+      "text": "transformer we first start with a normalized input and then we pass the input embeddings to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 391.26,
+      "ts_end": 396.82,
+      "text": "transition layer which makes sure that the mean and variance across so mean is zero across every",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 396.82,
+      "ts_end": 402.26,
+      "text": "row and the variance is one across every single row then we apply the multi-head attention which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 402.26,
+      "ts_end": 407.4,
+      "text": "converts these embedding vectors into context vectors which carry richer meaning they also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 407.4,
+      "ts_end": 413.38,
+      "text": "carry meaning about how the particular token attends to all the other tokens or how one token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 413.86,
+      "ts_end": 419.73,
+      "text": "relates to all the other tokens in the sentence this mask multi-head attention is the key revolution",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 421.29,
+      "ts_end": 427.95,
+      "text": "and that's why modern gpt architecture such as the gpt4 which we all have been using performs so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 427.95,
+      "ts_end": 433.89,
+      "text": "brilliantly if multi-head attention was not there the llm outputs would not be so coherent and so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 433.89,
+      "ts_end": 441.31,
+      "text": "meaningful after this we have a dropout layer then we have a shortcut connection followed by a layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 441.31,
+      "ts_end": 448.88,
+      "text": "normalization followed by a feed forward neural network followed by another dropout layer followed",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 448.88,
+      "ts_end": 452.2,
+      "text": "by a shortcut connection and then we get the transformer block",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 452.22,
+      "ts_end": 458.44,
+      "text": "output remember here the dimensions up till this stage are exactly preserved so we still have four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 458.44,
+      "ts_end": 464.52,
+      "text": "tokens here and every token is still an embedding size of 768 but now the embeddings are much more",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 464.52,
+      "ts_end": 469.7,
+      "text": "richer because they also contain context about how one token relates to other tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 470.44,
+      "ts_end": 474.56,
+      "text": "then we have after coming out of the transformer we have a layer normalization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 476.1,
+      "ts_end": 482.81,
+      "text": "and then we have the final output layer which is this final neural network now after this stage",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 483.21,
+      "ts_end": 488.13,
+      "text": "is where today's lecture begins so first i want you to look at the output which we have received",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 488.78,
+      "ts_end": 494.32,
+      "text": "when we come out of the entire gpt model so the number of rows are still the same we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 494.32,
+      "ts_end": 501.02,
+      "text": "four rows every effort is the second row moves is the third row and u is the fourth row but the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 501.02,
+      "ts_end": 506.62,
+      "text": "number of columns are now five zero two five seven which is the vocabulary size and uh why",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 507.08,
+      "ts_end": 512.92,
+      "text": "do we have those many number of columns the reason is because every effort moves you these are four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 513.56,
+      "ts_end": 518.38,
+      "text": "right which is also the context size when the context size is equal to four there are actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 518.38,
+      "ts_end": 524.04,
+      "text": "four input output prediction tasks which are happening there is not just one input output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 524.04,
+      "ts_end": 528.28,
+      "text": "prediction task so you might be thinking how come there are four input output prediction tasks",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 528.78,
+      "ts_end": 534.36,
+      "text": "well the first prediction task is when every is an input you have to predict what's the output and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 534.36,
+      "ts_end": 540.14,
+      "text": "that should be effort right so you look at these output logits so these are called logits you look",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 540.14,
+      "ts_end": 543.08,
+      "text": "at the five zero two five seven output logits for every",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 543.56,
+      "ts_end": 548.94,
+      "text": "and then you find that index which has the highest value so let's say this index has the highest value",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 548.94,
+      "ts_end": 557.47,
+      "text": "right remember these index also correspond to probabilities so this index will give us which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 557.47,
+      "ts_end": 565.25,
+      "text": "word in the entire vocabulary should come after every and then hopefully this token id here or",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 565.25,
+      "ts_end": 569.89,
+      "text": "this index corresponds to effort so then if when every is the input effort is the output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 570.65,
+      "ts_end": 573.83,
+      "text": "similarly when every effort is the input we look at the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 574.57,
+      "ts_end": 580.37,
+      "text": "row for effort and we try to look at that index which has the maximum value let's say this is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 580.37,
+      "ts_end": 585.43,
+      "text": "index this is that token id then we go to our vocabulary and look for the word which corresponds",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 585.43,
+      "ts_end": 591.81,
+      "text": "to this token id and that will be moves after all the weights and parameters have been optimized",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 592.37,
+      "ts_end": 597.69,
+      "text": "when every effort moves is the input then we look at again the row corresponding to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 597.69,
+      "ts_end": 602.81,
+      "text": "moves and we try to look at that token id or that index which gives us the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 604.01,
+      "ts_end": 607.09,
+      "text": "maximum value and then we look at the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 607.09,
+      "ts_end": 610.79,
+      "text": "and we try to find out what that id corresponds to and that will be u",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 610.79,
+      "ts_end": 616.31,
+      "text": "only after these three prediction tasks are done then we come to the fourth prediction task",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 616.31,
+      "ts_end": 621.45,
+      "text": "which is the main prediction task when the input is every effort moves you you have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 621.45,
+      "ts_end": 625.38,
+      "text": "to predict the output right so you look at the fourth row which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 625.38,
+      "ts_end": 627.74,
+      "text": "the final row and you try to find that id",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 627.74,
+      "ts_end": 632.9,
+      "text": "which gives you the maximum value and then you find the word corresponding to that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 632.9,
+      "ts_end": 638.04,
+      "text": "and that word will hopefully be forward so then the next word which will be predicted by this lm",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 638.04,
+      "ts_end": 644.61,
+      "text": "is every effort knows you forward and remember the size of the output over here since we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 644.61,
+      "ts_end": 649.79,
+      "text": "only one batch over here the number of rows in the output are equal to 4 and the number of columns",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 649.79,
+      "ts_end": 656.26,
+      "text": "are equal to the vocabulary size which is 50257 when the number of batches are equal to 2 the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 656.26,
+      "ts_end": 663.08,
+      "text": "output tensor size will be 2 into 4 into 50257 what we have to do is that from this tensor we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 663.08,
+      "ts_end": 668.96,
+      "text": "have to extract that word which comes after every effort moves you so let's see how the first step",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 668.96,
+      "ts_end": 675.2,
+      "text": "is to take a look at this output tensor and make sense of it that we have four tokens and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 675.2,
+      "ts_end": 681.14,
+      "text": "number of columns is equal to vocabulary size awesome as i told you every row corresponds to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 681.14,
+      "ts_end": 685.98,
+      "text": "something specific so the first row corresponds to what token should come after every the second",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 685.98,
+      "ts_end": 686.24,
+      "text": "row corresponds to what next row corresponds to everything the second row corresponds to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 686.26,
+      "ts_end": 691.16,
+      "text": "corresponds to what token should come after every effort the third row corresponds to what token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 691.16,
+      "ts_end": 696.14,
+      "text": "should come after every effort moves you and only the fourth row corresponds to what token should",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 696.14,
+      "ts_end": 702.36,
+      "text": "come after every effort moves you so we are going to extract the last vector from this tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 702.36,
+      "ts_end": 707.0,
+      "text": "that's step number two so we will look at the vector which is corresponding to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 708.32,
+      "ts_end": 714.18,
+      "text": "you which i am marking right now and we will extract this vector after this vector is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 714.18,
+      "ts_end": 719.46,
+      "text": "extracted this is called as the logits vector we look at the logits which are present and you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 719.46,
+      "ts_end": 723.86,
+      "text": "will see that these logits don't add up to one which means that the logits currently don't",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 723.86,
+      "ts_end": 728.9,
+      "text": "represent the probabilities then what we do from step number two to step number three is that we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 728.9,
+      "ts_end": 734.66,
+      "text": "are going to apply softmax so we are going to apply softmax function here so that we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 734.66,
+      "ts_end": 740.5,
+      "text": "to convert these logits into a set of probabilities so now when you look at the last vector for u",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 740.5,
+      "ts_end": 742.9,
+      "text": "you will see that all of the values add up to one",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 742.9,
+      "ts_end": 744.16,
+      "text": "so this gives us the following",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 744.16,
+      "ts_end": 748.62,
+      "text": "probabilities that the probability of the next token being the first element in the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 748.62,
+      "ts_end": 756.64,
+      "text": "is let's say 0.1 percent the probability of the second token being the uh the probability of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 756.64,
+      "ts_end": 763.54,
+      "text": "next word being the second token is let's say 0.2 etc so you can do this for all the tokens and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 763.54,
+      "ts_end": 769.42,
+      "text": "you in the next step which is step number four you identify the index position or token id of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 769.42,
+      "ts_end": 775.12,
+      "text": "largest value so you find the index which corresponds to the largest probability so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 775.12,
+      "ts_end": 781.17,
+      "text": "here clearly it looks like 0.2 uh is the probability which seems to be the largest and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 781.17,
+      "ts_end": 786.49,
+      "text": "then i find the index for this particular element and it turns out that in this case let's say the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 786.49,
+      "ts_end": 792.29,
+      "text": "token id is equal to 57 which means that the highest probability for the next word after",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 792.29,
+      "ts_end": 798.67,
+      "text": "every effort moves you is the word or the token with the token id equal to 57 and then all we do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 798.67,
+      "ts_end": 799.43,
+      "text": "is that we go to the next word of token id and then we look at the token id of the next word",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 799.45,
+      "ts_end": 804.79,
+      "text": "to vocab we go to our vocabulary and we decode the word which corresponds to the token id of 57",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 804.79,
+      "ts_end": 809.91,
+      "text": "and we hope that it's equal to forward up till now we have not trained the llm architecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 810.65,
+      "ts_end": 814.73,
+      "text": "so the next word will not be what we expect because the training has not been done at all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 814.73,
+      "ts_end": 819.49,
+      "text": "it will be a random word but after all the training is done which will be the subject of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 819.49,
+      "ts_end": 825.17,
+      "text": "our next module the next one should be what we actually expect so this is the exact procedure",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 825.17,
+      "ts_end": 831.22,
+      "text": "which we are going to follow and remember there is one last step after this token id is obtained",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 831.22,
+      "ts_end": 836.96,
+      "text": "we'll have to append this token id to the previous inputs for the next round why this step number five",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 836.96,
+      "ts_end": 841.06,
+      "text": "exists is i hope you remember this diagram which we saw at the start of this lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 841.06,
+      "ts_end": 846.24,
+      "text": "the step number five exists because after you predict the next token after you predict the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 846.24,
+      "ts_end": 851.78,
+      "text": "next generation token the task does not stop here we have to append this token to the input in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 851.78,
+      "ts_end": 855.6,
+      "text": "second iteration and then we have to repeat this process until we reach the next generation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 855.62,
+      "ts_end": 858.86,
+      "text": "the last iteration which corresponds to the maximum number of new tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 859.46,
+      "ts_end": 865.44,
+      "text": "okay so i hope you have understood the process i have just written a section where i explain",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 865.44,
+      "ts_end": 870.9,
+      "text": "this process again so that you can revise and reinforce your concepts so in the previous",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 870.9,
+      "ts_end": 877.76,
+      "text": "section we have seen that the gpt model outputs the tensors with this shape batch size number of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 877.76,
+      "ts_end": 885.46,
+      "text": "tokens and the vocabulary size remember this is exactly what we saw over here the shape is equal",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 885.46,
+      "ts_end": 885.82,
+      "text": "to the batch size number of tokens and the vocabulary size number of tokens and the vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 885.82,
+      "ts_end": 890.92,
+      "text": "batch size multiplied by number of tokens multiplied by the vocabulary size okay so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 892.8,
+      "ts_end": 899.24,
+      "text": "this is the output tensor and now the question is that how do we go from this output tensor to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 899.24,
+      "ts_end": 904.58,
+      "text": "the generated text and as i explained to you in the visual map there will be different steps so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 904.58,
+      "ts_end": 909.6,
+      "text": "first what we'll do is that we'll get this output tensor and then what we'll do is that we'll extract",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.6,
+      "ts_end": 916.29,
+      "text": "the last row from this output tensor after extracting the last row these are the logits we'll",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 916.29,
+      "ts_end": 920.85,
+      "text": "convert it into a set of probabilities by applying the softmax and we'll extract that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 920.85,
+      "ts_end": 926.13,
+      "text": "token id with the highest probability and then we'll find the word which or find the token which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 926.13,
+      "ts_end": 932.65,
+      "text": "corresponds to that token id and then we'll append that token to the previous inputs and then we'll",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 932.65,
+      "ts_end": 939.95,
+      "text": "do the next round of iterations this is exactly what we'll be doing so basically we'll take the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 939.95,
+      "ts_end": 945.05,
+      "text": "index of the highest value we'll get the token id we'll decode it back to text that produces the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 945.05,
+      "ts_end": 949.33,
+      "text": "next token and we'll append to the previous input so i've written the same thing here so that you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 949.33,
+      "ts_end": 955.47,
+      "text": "can you know reinforce and uh master your understanding of these concepts so this step",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 955.47,
+      "ts_end": 960.89,
+      "text": "by step process enables the model to generate text sequentially building coherent phrases",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 960.89,
+      "ts_end": 967.93,
+      "text": "from the initial input context so as i showed to you over here we are going to over here we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 967.93,
+      "ts_end": 972.93,
+      "text": "going to repeat this process over multiple iterations right and that's also what i've",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 972.93,
+      "ts_end": 979.29,
+      "text": "written over here yeah in practice what we do is that we repeat this process over multiple",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 979.29,
+      "ts_end": 985.35,
+      "text": "iterations until we reach a user specified number of generated tokens so we have to specify how many",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 985.35,
+      "ts_end": 990.35,
+      "text": "new tokens you need and only when we reach that reach that many number of new tokens we stop",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 990.99,
+      "ts_end": 996.03,
+      "text": "so the figure below illustrates the process of generating one token id at a time so let's zoom",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 996.03,
+      "ts_end": 1001.07,
+      "text": "into this figure further so let's say the initial input tokens which are provided as the input to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1001.07,
+      "ts_end": 1003.23,
+      "text": "the llm are hello i am with the initial input token and the initial input token which are provided as the input to the llm are hello i am with the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1003.23,
+      "ts_end": 1008.67,
+      "text": "these token ids what the llm will do in iteration number one is that it will predict the next token id",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1008.67,
+      "ts_end": 1014.51,
+      "text": "using the procedure we saw before and let's say the token id is 257 which corresponds to the token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1014.51,
+      "ts_end": 1019.89,
+      "text": "er this token is then appended in the second iteration so now we are we have come to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1019.89,
+      "ts_end": 1025.55,
+      "text": "second iteration the inputs are hello i am er and then we make the output which is the next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1026.16,
+      "ts_end": 1032.81,
+      "text": "uh given given these inputs what is the next token which comes out and then the token world which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1032.81,
+      "ts_end": 1033.21,
+      "text": "okay the token on this screen is appended from the initial compiler which is now the second token integration is going to take part in the\u975e\u5e38 macro element",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1033.21,
+      "ts_end": 1038.11,
+      "text": "the actual token is model and then this token is now appended to the input of the previous iteration",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1038.59,
+      "ts_end": 1043.13,
+      "text": "now we are at iteration number three similarly we get an output at iteration number three",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1043.13,
+      "ts_end": 1049.48,
+      "text": "and this process proceeds till the end why do we do only six tokens because there is a provision",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1049.48,
+      "ts_end": 1055.88,
+      "text": "for max new tokens and that has been set to six that's why we only do six iterations remember the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1055.88,
+      "ts_end": 1061.78,
+      "text": "number of iterations which we do will be determined by the maximum number of new tokens which have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1061.78,
+      "ts_end": 1069.74,
+      "text": "been specified so then even the input is hello i am since the maximum number of new tokens is six",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1070.26,
+      "ts_end": 1078.64,
+      "text": "the output will be hello i am a model ready to help dot this this is the output which the gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1078.64,
+      "ts_end": 1083.88,
+      "text": "has generated that's why generative ai we have generated something like this completely from",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1083.88,
+      "ts_end": 1090.84,
+      "text": "scratch now that was not present as an input or a training data this is generated as a new text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1092.54,
+      "ts_end": 1097.84,
+      "text": "and this is the process underneath all of it so now when you use gpt today or tomorrow or anytime",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1098.58,
+      "ts_end": 1102.52,
+      "text": "hopefully this lecture series has kind of shined a torch to this black box",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1102.52,
+      "ts_end": 1107.32,
+      "text": "for all the other students who don't know how this next word next world prediction task works",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1107.32,
+      "ts_end": 1112.86,
+      "text": "gpt operates like a black box but not for all of you who have been watching this video series",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1112.86,
+      "ts_end": 1119.08,
+      "text": "because i'm trying to deconstruct how the next word is actually predicted given the input tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1120.38,
+      "ts_end": 1121.9,
+      "text": "awesome so uh",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1123.44,
+      "ts_end": 1128.5,
+      "text": "in iteration number one the model is provided with tokens corresponding to hello i am",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1129.0,
+      "ts_end": 1135.4,
+      "text": "and then it predicts the next token with id 257 great and then that is again appended to the input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1135.8,
+      "ts_end": 1141.12,
+      "text": "and this process is repeated till the model produce produces the complete sentence hello",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1141.12,
+      "ts_end": 1146.76,
+      "text": "i am a model ready to help after six iterations why only six iterations because the maximum",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1146.76,
+      "ts_end": 1152.94,
+      "text": "number of new tokens was set to six okay so i hope everyone has followed with me until this part",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1153.54,
+      "ts_end": 1160.6,
+      "text": "and i want you to recap these steps the step number one is to look at the output tensor step",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1160.6,
+      "ts_end": 1165.6,
+      "text": "number two is to extract the last vector step number three is to convert logits into probabilities",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1166.24,
+      "ts_end": 1171.5,
+      "text": "step number four is to identify the index position of the largest value and step number five is to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1171.5,
+      "ts_end": 1176.32,
+      "text": "append token id to the previous inputs and we are going to keep on doing this until maximum number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1176.32,
+      "ts_end": 1181.96,
+      "text": "of new tokens has been reached this is the exact same thing which we are going to implement in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1181.96,
+      "ts_end": 1189.26,
+      "text": "code right now so the next part of this lecture is diving into code so let's jump into code right now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1191.24,
+      "ts_end": 1195.94,
+      "text": "okay so here what we are going to do is we are going to generate text from output tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1196.58,
+      "ts_end": 1200.08,
+      "text": "and we are going to implement the same process what we have seen in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1200.08,
+      "ts_end": 1209.43,
+      "text": "on the whiteboard okay great so the first thing what we need is that we need the inputs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1210.46,
+      "ts_end": 1216.88,
+      "text": "we need the inputs to be provided and the inputs are usually provided in the format which looks like this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1218.27,
+      "ts_end": 1223.37,
+      "text": "yeah this is the input batch so in the input what we'll be doing is that let's say this is a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1223.37,
+      "ts_end": 1229.65,
+      "text": "batch with two inputs the first batch has four tokens and the second batch has four tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1229.65,
+      "ts_end": 1235.99,
+      "text": "so the inputs will be provided like this and that's called as the idx so the shape of idx is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1235.99,
+      "ts_end": 1239.83,
+      "text": "batch which are the number of batches which we have and then the input is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1239.85,
+      "ts_end": 1246.83,
+      "text": "uh and that's the number of rows and the number of columns is equal to n tokens so so that you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1246.83,
+      "ts_end": 1251.67,
+      "text": "visualize what the inputs will look like i'll just copy paste the inputs which i showed to you before",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1252.23,
+      "ts_end": 1256.35,
+      "text": "so i'll just copy paste this over here so that this is a visual reference for you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1257.16,
+      "ts_end": 1265.88,
+      "text": "so this is the this is the input this is the format of the input batch which is passed into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1265.88,
+      "ts_end": 1271.1,
+      "text": "this generate text simple so we are defining a function which is generate text simple",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1271.74,
+      "ts_end": 1279.12,
+      "text": "and what it will do is that it will take a model and what is model model has been defined before",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1279.12,
+      "ts_end": 1287.94,
+      "text": "model is actually let me go back yeah model is an instance of the gpt model class so see this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1287.94,
+      "ts_end": 1292.6,
+      "text": "is the gpt model class which we had coded in the last lecture which takes the inputs and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1292.6,
+      "ts_end": 1299.84,
+      "text": "outputs the logits tensor um so that's the second input to the function which we are going to define",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1299.84,
+      "ts_end": 1301.32,
+      "text": "today and that function is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1302.12,
+      "ts_end": 1306.96,
+      "text": "generate text simple so model sorry model is the first input so we have to pass in an instance of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1306.96,
+      "ts_end": 1312.14,
+      "text": "the gpt model class we have to pass in the inputs and remember i told you about the maximum number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1312.14,
+      "ts_end": 1317.08,
+      "text": "of new tokens so we have to pass in that as an argument and we also have to pass in the context",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1317.08,
+      "ts_end": 1322.8,
+      "text": "size because the context size specifies how many words we have to look at before predicting the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1322.8,
+      "ts_end": 1328.82,
+      "text": "next world great now let's start the coding the first thing what we have to do is that we have to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1328.82,
+      "ts_end": 1334.3,
+      "text": "make sure that the number of tokens which the llm is looking at at any given point is determined by",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1334.3,
+      "ts_end": 1340.32,
+      "text": "the context size so let me show you what that actually means here i'm just taking a random",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1340.32,
+      "ts_end": 1346.4,
+      "text": "example to demonstrate this to you so take a look at this example over here let's say these are the",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0001"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "idx = [[10, 23, 45, 67, 89, 123, 56, 78],  # First sequence\n      [9, 8, 7, 6, 5, 4, 3, 2]]           # Second sequence"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "F1Sm7z2R96w_f0001",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1343.566333,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0001.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1346.4,
+      "ts_end": 1353.1,
+      "text": "inputs let's say these are the this is the input tensor which is given to the llm and here you will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1353.1,
+      "ts_end": 1358.48,
+      "text": "see that this input tensor actually has two rows which means there are two batches but i want you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1358.48,
+      "ts_end": 1358.8,
+      "text": "to look at the input tensor which is given to the llm and here you will see that this input tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1358.8,
+      "ts_end": 1360.48,
+      "text": "has two rows which means there are two batches but i want you to look at so two rows because there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1360.48,
+      "ts_end": 1366.0,
+      "text": "are two batches but look at the number of tokens so number of tokens here are actually equal to eight",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1366.0,
+      "ts_end": 1372.85,
+      "text": "so there are eight tokens here now what if the context size is equal to five so if the context",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1372.85,
+      "ts_end": 1377.29,
+      "text": "size is equal to five we cannot look at eight tokens before predicting the next world we only",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1377.29,
+      "ts_end": 1383.59,
+      "text": "can look at five tokens so this command which is it takes in the input and then it only looks at the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1383.59,
+      "ts_end": 1388.61,
+      "text": "number of elements specific to the context size so in the code we are going to write",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1388.61,
+      "ts_end": 1392.33,
+      "text": "this command right now so what this command will do is that it will look at the input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1392.33,
+      "ts_end": 1397.19,
+      "text": "if the input token size which is the number of columns is equal to the context size then it's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1397.19,
+      "ts_end": 1402.31,
+      "text": "fine but if it's not it will take the last elements which are equal to the context size",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1402.73,
+      "ts_end": 1407.89,
+      "text": "so now the context size is equal to 5 so it will look at the last 5 tokens as an input from the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1407.89,
+      "ts_end": 1413.05,
+      "text": "first batch and it will look at the last 5 tokens as an input from the second batch this is what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1413.05,
+      "ts_end": 1418.95,
+      "text": "this idx colon minus context size colon is going to do it will restrict the input so that we only",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1418.95,
+      "ts_end": 1424.51,
+      "text": "look at the number of tokens equal to context size so that's the first uh command which we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1424.51,
+      "ts_end": 1431.13,
+      "text": "written that's idx underscore cond which is condition idx underscore condition great now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1431.13,
+      "ts_end": 1436.85,
+      "text": "what we are going to do is that we are going to pass this input to the model so the model is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1436.85,
+      "ts_end": 1442.27,
+      "text": "gpt class this is where all the main functions are happening what this model will do is that it will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1442.27,
+      "ts_end": 1443.03,
+      "text": "take the input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1443.59,
+      "ts_end": 1448.31,
+      "text": "and then it will pass the input through token embeddings positional embeddings dropout layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1448.87,
+      "ts_end": 1453.81,
+      "text": "transformer blocks another normalization layer and the final output layer and it will return this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1453.81,
+      "ts_end": 1459.35,
+      "text": "logit tensor and remember that this logit tensor which is which is received what are the dimensions",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1459.35,
+      "ts_end": 1467.01,
+      "text": "for it the dimensions are batch comma number of tokens comma the vocabulary size this is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1467.01,
+      "ts_end": 1472.05,
+      "text": "dimensions of this logit tensor and then what we have to now do is that we have to extract the last",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1472.05,
+      "ts_end": 1473.29,
+      "text": "row from this logic tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1473.69,
+      "ts_end": 1480.22,
+      "text": "remember what we did on the whiteboard when we looked at the logit tensor which was this tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1480.22,
+      "ts_end": 1484.94,
+      "text": "that is in step one in step number two what we have to do is that we have to extract the last",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1484.94,
+      "ts_end": 1489.92,
+      "text": "vector from this logit tensor so now what we are going to do in the second step is that let's say",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0002"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "logits = [[[2.1, 0.5, -0.3, 1.2, 0.9],  # First token predictions for sequence 1\n           [1.1, 2.2, -0.1, 0.5, 0.8],  # Second token predictions for sequence 1\n           [0.3, 1.5, 2.8, -1.0, 0.0],  # Third token predictions for sequence 1\n           [1.0, 1.8, 0.6, -0.5, 2.1]], # Fourth token predictions for sequence 1\n          [[1.2, 0.9, 1.0, -1.1, 0.8],  # First token predictions for sequence 2\n           [0.5, -0.2, 2.3, 1.1, 0.4],  # Second token predictions for sequence 2\n           [0.6, 1.4, -0.9, 0.7, 2.0],  # Third token predictions for sequence 2\n           [1.3, 2.0, 1.5, -0.6, 0.5]]] # Fourth token predictions for sequence 2"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "F1Sm7z2R96w_f0002",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1488.566333,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0002.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1489.92,
+      "ts_end": 1494.64,
+      "text": "if the logit tensor looks something like this so if i have two batches this is my first batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1495.26,
+      "ts_end": 1503.81,
+      "text": "and this is my second batch and then in each batch i have four tokens and then here i'm taking a vector",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1504.67,
+      "ts_end": 1505.41,
+      "text": "into the first batch here i'm taking a vector interest and with this vector interest i am",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1505.41,
+      "ts_end": 1505.43,
+      "text": "taking a\ufffd\ufffd\uc11c i am taking the vector to any this vector index and i am taking a container and taking",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1505.43,
+      "ts_end": 1506.6,
+      "text": "a mensenial condition here and i just look for a \u0422\u0430\u043a so in this logit for Indigenous",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1506.6,
+      "ts_end": 1508.42,
+      "text": "we are going to have a vector called gelmi\u015f and then what we have to do is that from each of these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1508.42,
+      "ts_end": 1513.16,
+      "text": "batches we have to take the last we have to take the last row so from the first batch we have to take",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0003"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "logits = [[[2.1, 0.5, -0.3, 1.2, 0.9],  # First token predictions for sequence 1\n           [1.1, 2.2, -0.1, 0.5, 0.8],  # Second token predictions for sequence 1\n           [0.3, 1.5, 2.0, -1.0, 0.0],  # Third token predictions for sequence 1\n           [1.0, 1.8, 0.6, -0.5, 2.1]], # Fourth token predictions for sequence 1\n\n          [[1.2, 0.9, 1.0, -1.1, 0.8],  # First token predictions for sequence 2\n           [0.5, -0.2, 2.3, 1.1, 0.4],  # Second token predictions for sequence 2\n           [0.6, 1.4, -0.9, 0.7, 2.0],  # Third token predictions for sequence 2\n           [1.3, 2.0, 1.5, -0.6, 0.5]]] # Fourth token predictions for sequence 2"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "F1Sm7z2R96w_f0003",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1509.933,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0003.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1513.16,
+      "ts_end": 1518.88,
+      "text": "the last row from the second batch we have to take the last row and the way this will happen is through",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1518.88,
+      "ts_end": 1524.78,
+      "text": "this command logits colon minus one and colon so what this first colon is that which means you do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1524.78,
+      "ts_end": 1532.06,
+      "text": "nothing to the batch argument but this second is minus one which means that you look at the first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1532.06,
+      "ts_end": 1536.58,
+      "text": "batch and then you look at the last you take the last row you look at the second batch and you just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1536.58,
+      "ts_end": 1541.0,
+      "text": "take the last row this is what we are going to do so now we are going to apply this function which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1541.0,
+      "ts_end": 1547.05,
+      "text": "will just take the last row out of every batch in the logits tensor so logits colon minus one colon",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1547.05,
+      "ts_end": 1554.95,
+      "text": "is going to result in this where we just take the we just take this row from the first batch",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Diagram showing predictions for sequences with logits output for the 4th token, with arrows and annotations highlighting specific logit values.",
+          "diagram_elements": [
+            "Predictions for sequence 1",
+            "Predictions for sequence 2",
+            "logits[:, -1, :] output",
+            "Logits for the 4th token",
+            "Numerical logit values (1.2, 1.5, -0.6, etc.)"
+          ],
+          "confidence": 0.65,
+          "frame_id": "F1Sm7z2R96w_f0004",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1549.033,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1554.95,
+      "ts_end": 1561.03,
+      "text": "and we take the last row from the second batch and we just stack them together so this is the",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0005"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "logits[:, -1, :] = [[-1.0, 1.8, 0.6, -0.5, 2.1], [-1.2, 2.0, 1.5, -0.8, 0.5]]  # Logits for the 4th token\n                                                                                    # Logits for the 4th token"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.75,
+          "frame_id": "F1Sm7z2R96w_f0005",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1555.866333,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0005.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1561.03,
+      "ts_end": 1565.43,
+      "text": "second command here where we only focused on the last time step or the last row",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1566.27,
+      "ts_end": 1571.95,
+      "text": "okay and now when we execute this command the dimensions become the batch which are the number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1571.95,
+      "ts_end": 1577.73,
+      "text": "of rows and the vocabulary size so one thing which i would like to clarify here is that here",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0006"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "[1.2, 0.9],  # First token predictions for sequence 1\n[0.5, 0.8],  # Second token predictions for sequence 1\n[-1.0, 0.0]  # Third token predictions for sequence 1\n[0.3, 2.1],  # Fourth token predictions for sequence 1\n\n[0.6, 0.8],  # First token predictions for sequence 2\n[0.2, 0.4],  # Second token predictions for sequence 2\n[1.5, 2.0],  # Third token predictions for sequence 2\n[0.1, 0.5]   # Fourth token predictions for sequence 2"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "F1Sm7z2R96w_f0006",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1577.666333,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0006.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1579.38,
+      "ts_end": 1583.82,
+      "text": "i mentioned this 5 as the embedding dimension right but this is actually the vocabulary size",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1583.82,
+      "ts_end": 1591.64,
+      "text": "the number of columns here are equal to the vocabulary size and what this what this function",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1591.64,
+      "ts_end": 1594.94,
+      "text": "this is equal to the vocabulary size and what this function does is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1594.94,
+      "ts_end": 1601.2,
+      "text": "it just takes the last row so when we get this final output the number of rows are still equal",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0007"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "its =[[2.1, 0.5, -0.3, 1.2, 0.9], # First token predictions for sequence 1\n     [1.1, 2.2, -0.1, 0.5, 0.8], # Second token predictions for sequence 1\n     [0.3, 1.5, 2.0, -1.0, 0.0]  # Third token predictions for sequence 1\n     [1.0, 1.8, 0.6, -0.5, 2.1]], # Fourth token predictions for sequence 1\n\n    [[1.2, 0.9, 1.0, -1.1, 0.8], # First token predictions for sequence 2\n     [0.5, -0.2, 2.3, 1.1, 0.4], # Second token predictions for sequence 2\n     [0.6, 1.4, -0.9, 0.7, 2.0], # Third token predictions for sequence 2\n     [1.3, 2.0, 1.5, -0.6, 0.5]]] # Fourth token predictions for sequence 2"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "F1Sm7z2R96w_f0007",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1595.799667,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0007.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1601.2,
+      "ts_end": 1605.8,
+      "text": "to the number of batches and the number of columns are equal to the vocabulary size we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1605.8,
+      "ts_end": 1608.72,
+      "text": "get rid of the second dimension which was equal to the number of tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1610.25,
+      "ts_end": 1616.88,
+      "text": "so now we have this these two we have the rows which correspond to the last",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1616.88,
+      "ts_end": 1622.22,
+      "text": "row in every batch and the next step is applying softmax and converting these",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0008"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "[0.5, -0.3, 1.2, 0.9], # First token predictions for sequence 1\n2.2, -0.1, 0.5, 0.8], # Second token predictions for sequence 1\n-2.0, -1.0, 0.0], # Third token predictions for sequence 1\n8, 0.6, -0.5, 2.1]], # Fourth token predictions for sequence 1\n\n9, 1.0, -1.1, 0.8], # First token predictions for sequence 2\n2, 2.3, 1.1, 0.4], # Second token predictions for sequence 2\n4, -0.9, 0.7, 2.0], # Third token predictions for sequence 2\n0, 1.5, -0.6, 0.5]] # Fourth token predictions for sequence 2"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.75,
+          "frame_id": "F1Sm7z2R96w_f0008",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1618.133,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0008.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1622.22,
+      "ts_end": 1626.3,
+      "text": "logits into a set of probabilities this is exactly what we are going to do we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1626.3,
+      "ts_end": 1632.2,
+      "text": "are going to apply softmax and dimension equal to minus 1 which will ensure that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1632.2,
+      "ts_end": 1635.7,
+      "text": "for every row which we have extracted softmax will be applied along the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1635.7,
+      "ts_end": 1640.18,
+      "text": "columns of those rows so when we look at each of the tokens so let's say you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1640.18,
+      "ts_end": 1645.86,
+      "text": "when we look at this batch so when you look at each batch when you sum up the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1645.86,
+      "ts_end": 1650.69,
+      "text": "probabilities for each batch they will sum up to 1 so remember the now that the",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0009"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "logits[:, -1, :] = [[1.0, 1.8, 0.6, -0.5, 2.1],  # Logits for the 4th token\n                     [1.3, 2.0, 1.5, -0.6, 0.5]]  # Logits for the 4th token"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "F1Sm7z2R96w_f0009",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1650.566333,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0009.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1650.69,
+      "ts_end": 1655.51,
+      "text": "size here is just batch size number of rows and number of columns equal to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1655.51,
+      "ts_end": 1661.09,
+      "text": "vocabulary size so now all of these will be transformed into values such as these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1662.05,
+      "ts_end": 1665.47,
+      "text": "and if you add up these values so for the first batch you will just add up",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1665.47,
+      "ts_end": 1669.07,
+      "text": "these values and that will sum up to 1 for the second batch you will add up",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1669.07,
+      "ts_end": 1670.55,
+      "text": "these values and that will sum up to 1",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1670.55,
+      "ts_end": 1674.75,
+      "text": "remember the goal is to predict the new token for every batch we have inputted",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1674.75,
+      "ts_end": 1679.91,
+      "text": "so this is the next step and then the final step is we are going to look at",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0010"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "# Get the predictions\nwith torch.no_grad():\n    logits = model(idx_cond) ### batch, n_tokens, vocab_size\n\n# Focus only on the last time step\n# (batch, n_tokens, vocab_size) becomes (batch, vocab_size)\nlogits = logits[:, -1, :]\n\n# Apply softmax to get probabilities\nprobas = torch.softmax(logits, dim=-1) # (batch, vocab_size)\n\n# Get the idx of the vocab entry with the highest probability value\nidx_next = torch.argmax(probas, dim=-1, keepdim=True) # (batch, 1)\n\n# Append sampled index to the running sequence\nidx = torch.cat((idx, idx_next), dim=1) # (batch, n_tokens+1)\n\nreturn idx"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "F1Sm7z2R96w_f0010",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1675.499667,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0010.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1679.91,
+      "ts_end": 1685.44,
+      "text": "that index with the highest probability value and this is exactly the step which",
+      "frame_ids": [
+        "F1Sm7z2R96w_f0011"
+      ],
+      "visuals": [
+        {
+          "category": "diagram",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": null,
+          "math": null,
+          "diagram_summary": "Visualization of softmax attention weights for two sequences, showing logits converted to probability distributions with yellow curved connectors highlighting the attention values.",
+          "diagram_elements": [
+            "For Sequence 1 (logits: [1.0, 1.8, 0.6, -0.5, 2.1])",
+            "[0.140, 0.312, 0.094, 0.031, 0.422]",
+            "For Sequence 2 (logits: [1.3, 2.0, 1.5, -0.6, 0.5])",
+            "[0.207, 0.417, 0.253, 0.031, 0.093]"
+          ],
+          "confidence": 0.95,
+          "frame_id": "F1Sm7z2R96w_f0011",
+          "video_id": "F1Sm7z2R96w",
+          "timestamp_sec": 1683.033,
+          "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0011.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1685.44,
+      "ts_end": 1690.72,
+      "text": "we had mentioned here also yeah so after converting the logits into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1690.72,
+      "ts_end": 1695.24,
+      "text": "probabilities we look at that index which has the highest value so this is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1695.24,
+      "ts_end": 1698.34,
+      "text": "exactly what we are doing in this step we look at that index with the highest",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1698.34,
+      "ts_end": 1702.22,
+      "text": "value that token ID and then in the last step we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1702.4,
+      "ts_end": 1710.02,
+      "text": "append that token id idx next to the initial token ids which were stored in idx so in this last step",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1710.02,
+      "ts_end": 1716.09,
+      "text": "we do the appending part which has been mentioned over here so look at step number five over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1716.09,
+      "ts_end": 1720.59,
+      "text": "we have to append the token id generated to the previous inputs for the next round",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1721.51,
+      "ts_end": 1728.35,
+      "text": "and this is what is shown in this torch.cat which is concatenation and idx next is the input is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1728.35,
+      "ts_end": 1733.53,
+      "text": "id which corresponds to the highest probability and that is appended to the current current",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1734.95,
+      "ts_end": 1740.82,
+      "text": "indices and we you see we are in a for loop here so the number of times we are going to do this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1740.82,
+      "ts_end": 1746.3,
+      "text": "appending operation is by the time we reach the maximum number of new tokens these are the number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1746.3,
+      "ts_end": 1752.95,
+      "text": "of iterations remember on the whiteboard what we saw on the whiteboard we had clearly seen that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1752.95,
+      "ts_end": 1758.13,
+      "text": "the number of iterations over here the number of iterations which are six iterations over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1758.13,
+      "ts_end": 1764.36,
+      "text": "are equal to the number of maximum maximum number of new tokens so that's what's been",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1764.36,
+      "ts_end": 1768.34,
+      "text": "written in the code we are doing the number of iterations equal to the maximum number of new",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1768.34,
+      "ts_end": 1774.92,
+      "text": "tokens and then we are going to keep on adding these new tokens to the input tokens and that's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1774.92,
+      "ts_end": 1780.28,
+      "text": "it this is how we are going to predict the new tokens corresponding to the next words and that's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1780.28,
+      "ts_end": 1785.9,
+      "text": "exactly what's happening in the gpt model this is how you go from all of the complicated gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1785.9,
+      "ts_end": 1792.17,
+      "text": "model architecture to predicting the next word i have just written some text over here in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1792.17,
+      "ts_end": 1796.91,
+      "text": "preceding code the generate text simple function we use a softmax to convert the logits into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1796.91,
+      "ts_end": 1803.63,
+      "text": "probability distribution from which we identify the position with the highest value uh now you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1803.63,
+      "ts_end": 1808.15,
+      "text": "might think that since we are only looking at the index with the highest value and softmax is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1808.15,
+      "ts_end": 1814.27,
+      "text": "monotonic why do we need the softmax why can't we just find the index from the logits that index",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1814.27,
+      "ts_end": 1815.33,
+      "text": "which gives the highest value",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1816.03,
+      "ts_end": 1820.99,
+      "text": "softmax is monotonic so that index is going to remain same whether we apply softmax or not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1822.2,
+      "ts_end": 1827.62,
+      "text": "so in practice the softmax step is redundant which means it's not really needed to find the position",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1827.62,
+      "ts_end": 1832.9,
+      "text": "with the highest highest score because the position with the highest score in the softmax",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1832.9,
+      "ts_end": 1840.04,
+      "text": "output is the same position in the logits tensor so in other words we could apply the torg.argmax",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1840.04,
+      "ts_end": 1846.06,
+      "text": "here we have applied it to the softmax torg.argmax we have applied to softmax generated output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1846.2,
+      "ts_end": 1851.08,
+      "text": "right we could have applied this to the logits tensor directly and get identical results so here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1851.08,
+      "ts_end": 1857.36,
+      "text": "i could have just replaced this with logits and the results would have been the same so then your",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1857.36,
+      "ts_end": 1865.11,
+      "text": "question would be then why are we using the softmax in the first place uh what the importance of softmax",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1865.11,
+      "ts_end": 1871.91,
+      "text": "is that we wanted to show you the full process of transforming logits to probabilities which can give",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1871.91,
+      "ts_end": 1877.49,
+      "text": "additional intuition the probabilities give us some intuition of how much percentage contribution does each token make.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1877.51,
+      "ts_end": 1885.3,
+      "text": "have in the next world prediction task and this will also help us because in the next module where we'll",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1885.3,
+      "ts_end": 1890.76,
+      "text": "do the gpt training we will introduce additional sampling techniques where we will modify the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1890.76,
+      "ts_end": 1894.56,
+      "text": "softmax output such that the model does not always select the most likely token",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1895.24,
+      "ts_end": 1900.36,
+      "text": "and will introduce some variability and creativity in the generated text this is the important part",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1901.05,
+      "ts_end": 1908.32,
+      "text": "the model does not always take the output with the maximum probability to make sure",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1908.32,
+      "ts_end": 1913.24,
+      "text": "that the generated text has some variability some creativity we will explore some other options",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1913.24,
+      "ts_end": 1918.32,
+      "text": "where the softmax selects some other tokens and for that definitely we need to apply the softmax",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1918.32,
+      "ts_end": 1923.1,
+      "text": "because we need the outputs to be in some format of probabilities so although softmax was not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1923.1,
+      "ts_end": 1927.38,
+      "text": "needed in the current code it will be useful later when we look at things such as temperature",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1928.08,
+      "ts_end": 1933.6,
+      "text": "variability in selecting the outputs etc don't worry about these terminologies right now i'll",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1933.6,
+      "ts_end": 1938.6,
+      "text": "cover that in detail when we come to the next module now what we can do is that we have written",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1938.6,
+      "ts_end": 1944.9,
+      "text": "this whole function right why don't we test it on some sample text so let me take the model input as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1944.9,
+      "ts_end": 1950.76,
+      "text": "hello i am um these are this is my model input and the reason i'm taking this input is that this is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1950.76,
+      "ts_end": 1956.07,
+      "text": "the same input which i have used on the miro whiteboard over here so i take this model input and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1957.3,
+      "ts_end": 1960.98,
+      "text": "then what i'll first do is that i'll first encode it into token ids",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1961.6,
+      "ts_end": 1964.38,
+      "text": "so i first use my encoder to encode this model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1964.46,
+      "ts_end": 1969.72,
+      "text": "input and convert it into a tensor so remember the shape of the input should be batch size here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1969.72,
+      "ts_end": 1974.76,
+      "text": "i have only one batch and the number of tokens so it should be a tensor and it should be a tensor of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1974.76,
+      "ts_end": 1979.78,
+      "text": "token ids so i have my encoder which has been defined through tick token so if you have been",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1979.78,
+      "ts_end": 1985.08,
+      "text": "following these lectures you will know that we have been generating our encodings through tick",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1985.08,
+      "ts_end": 1990.92,
+      "text": "token which is the tokenizer used for open ai models it's a byte pair encoder so we are using",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1990.92,
+      "ts_end": 1994.44,
+      "text": "that to encode this sentence and now i have generated my input sentence",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1994.46,
+      "ts_end": 1998.2,
+      "text": "so let me take a look at the sample now what we'll do is that before passing in the model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1998.2,
+      "ts_end": 2003.0,
+      "text": "we'll first put the model in evaluation mode this bypasses some layers such as normalization layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2003.0,
+      "ts_end": 2007.8,
+      "text": "dropout layer because we are not training the model here we are just evaluating so it just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2007.8,
+      "ts_end": 2013.1,
+      "text": "makes the model a bit more efficient and then we will just call this generate text sample function",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2014.1,
+      "ts_end": 2019.92,
+      "text": "we'll call this generate text sample function and we'll put model equal to model we have already",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2019.92,
+      "ts_end": 2024.04,
+      "text": "defined the model before and let me again take this over here so that you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2024.88,
+      "ts_end": 2029.64,
+      "text": "you have full grasp and the gpt model configuration which we are using has been defined over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2029.64,
+      "ts_end": 2037.4,
+      "text": "this is the configuration we are using a vocabulary size of 50257 context length of 1024 768 embedding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2037.4,
+      "ts_end": 2045.2,
+      "text": "dimension 12 attention heads 12 transformer blocks and dropout rate of 0.1 so this is the model which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2045.2,
+      "ts_end": 2050.54,
+      "text": "has been defined um because that's needed to be passed into our function so i'm just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2051.02,
+      "ts_end": 2055.3,
+      "text": "writing it over here for your reference i'll code it out i'll comment it out i will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2055.42,
+      "ts_end": 2061.38,
+      "text": "share the code so that you can run it on your own laptop okay so then we'll run this generate text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2061.38,
+      "ts_end": 2066.46,
+      "text": "simple function we'll pass in the model we'll pass in the inputs this these are my inputs right now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2066.46,
+      "ts_end": 2071.56,
+      "text": "remember the inputs is the second argument over here then we have to pass max new tokens and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2071.56,
+      "ts_end": 2077.42,
+      "text": "context size so let me pass in that so my max new tokens is 6 and the context size which i'm passing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2077.42,
+      "ts_end": 2084.62,
+      "text": "is gpt configuration context length which is 1024 and then i'll just print out the output so i have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2085.44,
+      "ts_end": 2090.88,
+      "text": "my new tokens right and the input was these tokens one five four nine six eleven three one four and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2090.88,
+      "ts_end": 2096.64,
+      "text": "seven one six so now these are the inputs and if you look at the output tensor you'll see that six",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2096.64,
+      "ts_end": 2102.82,
+      "text": "new tokens have been appended over here two seven zero one eight two four zero eight six four seven",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2102.82,
+      "ts_end": 2107.6,
+      "text": "four eight eight four three three zero nine six one four two three four eight seven two six seven",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2107.6,
+      "ts_end": 2113.84,
+      "text": "these are the six new tokens which have been appended uh through because of our generate text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2115.9,
+      "ts_end": 2121.93,
+      "text": "which our gpt model has predicted and here you can see that the output length is 10 why 10 because 4",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2121.93,
+      "ts_end": 2127.55,
+      "text": "were the number of input tokens and max new tokens were 6 so 6 additional words or tokens have been",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2127.55,
+      "ts_end": 2133.35,
+      "text": "generated now we can use the decode method and based on our vocabulary and the byte pair encoder",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2133.35,
+      "ts_end": 2139.89,
+      "text": "which we have used we can convert these new tokens back into text so it seems that the next text is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2139.89,
+      "ts_end": 2145.87,
+      "text": "now some random text and the next text is not as great as what i have written on the white",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2145.97,
+      "ts_end": 2152.96,
+      "text": "board over here on the whiteboard the next text was hello i am model ready to help but here the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2152.96,
+      "ts_end": 2158.52,
+      "text": "next text is something completely random right now why is this completely random the reason this text",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2158.52,
+      "ts_end": 2163.74,
+      "text": "is completely random is that because we have not trained the model yet the model has 124 million",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2163.74,
+      "ts_end": 2168.1,
+      "text": "parameters and all of those parameters are completely random right now those are not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2168.1,
+      "ts_end": 2173.02,
+      "text": "trained now it's just a matter of training the whole gpt architecture has been set up completely",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2173.02,
+      "ts_end": 2176.02,
+      "text": "we have implemented the full gpt architecture and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2176.16,
+      "ts_end": 2181.04,
+      "text": "initialized the gpt model instance but with random weights we need to train these 124 million",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2181.04,
+      "ts_end": 2188.1,
+      "text": "parameters and for that we have the whole next module dedicated which are next maybe six seven",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2188.1,
+      "ts_end": 2193.44,
+      "text": "number of lectures or even more but for now if you have reached this stage just be happy and proud",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2193.44,
+      "ts_end": 2200.28,
+      "text": "that you have run a 124 million gpt to architecture model completely on your laptop you have taken an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2200.28,
+      "ts_end": 2206.14,
+      "text": "input and you have predicted the outputs and this is the first step towards understanding how gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2206.16,
+      "ts_end": 2211.44,
+      "text": "really works when you go to chat gpt and when you type hello i am let me let's actually do that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2212.18,
+      "ts_end": 2223.09,
+      "text": "so i'm going to chat gpt right now and let me type hello i am and let me say complete this sentence",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2223.9,
+      "ts_end": 2227.62,
+      "text": "i'm providing no context here and does not make two months too much sense",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2227.62,
+      "ts_end": 2232.52,
+      "text": "but here you can see that based on the past interactions which i've had with chat gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2232.52,
+      "ts_end": 2237.7,
+      "text": "it it results in some output which is at least quite coherent it's much better than",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2238.3,
+      "ts_end": 2242.82,
+      "text": "the output which we have received over here right but that's fine we have not implemented the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2242.82,
+      "ts_end": 2247.48,
+      "text": "training but we have essentially implemented all the nuts the bolts and the building blocks",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2247.9,
+      "ts_end": 2254.06,
+      "text": "for building out this entire gpt architecture on our own completely from scratch we have not used",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2254.06,
+      "ts_end": 2259.18,
+      "text": "any library from langchain or anything we have defined this gpt architecture fully from scratch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2259.18,
+      "ts_end": 2263.44,
+      "text": "we have learned about all the sub modules involved in the gpt architecture we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2263.44,
+      "ts_end": 2267.78,
+      "text": "coded all these sub modules and ultimately now we have reached the stage we are given an input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2268.3,
+      "ts_end": 2274.08,
+      "text": "we can predict an output so let us go back to the schematic which we started this lecture with and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2274.08,
+      "ts_end": 2278.72,
+      "text": "let's see whether we have implemented everything which we we actually wanted to implement",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2279.3,
+      "ts_end": 2284.92,
+      "text": "uh yeah this is that schematic i was talking about so we have i think had six to seven lectures in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2284.92,
+      "ts_end": 2289.68,
+      "text": "this gpt architecture module and in these lectures we have implemented every single",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2289.68,
+      "ts_end": 2294.1,
+      "text": "thing which has been mentioned in this schematic all the things we have been mentioned all the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2294.1,
+      "ts_end": 2298.64,
+      "text": "things have been covered so when you are given an input which is a text such as every effort moves",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2299.34,
+      "ts_end": 2304.82,
+      "text": "now we are we are ready to predict the next words we have reached this stage where we had an input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2304.82,
+      "ts_end": 2310.08,
+      "text": "and we have implemented the whole gpt architecture to produce the output it's just that the training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2310.08,
+      "ts_end": 2316.26,
+      "text": "has not been done yet but it's fine we'll come sequentially to that part in fact we have learned",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2316.26,
+      "ts_end": 2323.24,
+      "text": "this whole thing in this module we first started with the gpt backbone where the code was not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2323.24,
+      "ts_end": 2328.92,
+      "text": "implemented but we had a dummy gpt class then we implemented layer normalization jlu activation feed",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2329.26,
+      "ts_end": 2334.76,
+      "text": "network shortcut connection we coded out the entire transformer block after that and in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2334.76,
+      "ts_end": 2339.44,
+      "text": "today's lecture we coded out the entire gpt architecture and we also got the final the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2339.44,
+      "ts_end": 2344.94,
+      "text": "next words given a set of input tokens so these were a comprehensive set of lectures but if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2344.94,
+      "ts_end": 2356.82,
+      "text": "reach the end you should be proud of yourself and i just want to write that you um you did it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2357.71,
+      "ts_end": 2361.39,
+      "text": "that is what i i want to write just to keep you motivated",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2362.21,
+      "ts_end": 2367.09,
+      "text": "uh to keep on following the next lectures which are coming because if you reach this stage you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2367.09,
+      "ts_end": 2372.53,
+      "text": "have already reached much farther than 95 percent of students so it's amazing many other students",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2372.53,
+      "ts_end": 2378.51,
+      "text": "might just be using gpt but you are one of the few students who have now coded out a gpt to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2378.51,
+      "ts_end": 2383.73,
+      "text": "architecture on your own on your local machine which is predicting the next world which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2383.73,
+      "ts_end": 2388.65,
+      "text": "predicting the next token and i find that incredibly satisfying and motivating in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2388.65,
+      "ts_end": 2391.97,
+      "text": "next set of lectures what we are going to do is that we are going to do the training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2392.53,
+      "ts_end": 2399.73,
+      "text": "for the 124 million parameters in the gpt2 model and then the output which is generated will start",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2399.73,
+      "ts_end": 2405.23,
+      "text": "getting much better and it will be better and better and better so the whole goal of the next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2405.23,
+      "ts_end": 2410.09,
+      "text": "set of lectures is to make this set of outputs better but now since the architecture is in place",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2411.65,
+      "ts_end": 2418.74,
+      "text": "doing the next part will be a bit easier because we can directly work from the architecture which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2418.74,
+      "ts_end": 2422.18,
+      "text": "we have built thank you so much everyone i hope you are enjoying these lectures",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2422.24,
+      "ts_end": 2426.34,
+      "text": "i say this at the end of every lecture but i deliberately try to keep a mix of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2426.96,
+      "ts_end": 2433.88,
+      "text": "uh very detailed whiteboard notes such as this plus the coding because i feel that students to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2433.88,
+      "ts_end": 2438.98,
+      "text": "really master large language models you need an understanding of theory intuition as well as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2438.98,
+      "ts_end": 2444.06,
+      "text": "detailed code i'll be sharing the entire code file with you and i encourage you to play with this code",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2444.06,
+      "ts_end": 2450.46,
+      "text": "ask doubts on youtube and we'll try to clarify as much as possible thanks a lot everyone i look",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2450.46,
+      "ts_end": 2452.02,
+      "text": "forward to seeing you in the next video",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2452.5,
+      "ts_end": 2452.52,
+      "text": "you",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 12,
+  "frames_with_content": 12
+}

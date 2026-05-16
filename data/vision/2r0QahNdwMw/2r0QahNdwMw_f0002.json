@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Training neural networks requires minimizing a high-dimensional non-convex loss function \u2013 a task that is hard in theory, but sometimes easy in practice. Despite the NP-hardness of training general neural loss functions [2], simple gradient methods often find global minimizers (parameter configurations with zero or near-zero training loss), even when data and labels are randomized before training [42]. However, this good behavior is not universal; the trainability of neural nets is highly dependent on network architecture design choices, the choice of optimizer, variable initialization, and a variety of other considerations. Unfortunately, the effect of each of these choices on the structure of the underlying loss surface is unclear. Because of the prohibitive cost of loss function evaluations (which requires looping over all the data points in the training set), studies in this field have remained predominantly theoretical.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Two 3D visualizations of neural network loss surfaces showing high-dimensional non-convex optimization landscapes with peaks, valleys, and saddle points.",
+  "diagram_elements": [
+    "Left loss surface: jagged terrain with multiple peaks and valleys",
+    "Right loss surface: smoother terrain with central depression"
+  ],
+  "confidence": 0.92,
+  "frame_id": "2r0QahNdwMw_f0002",
+  "video_id": "2r0QahNdwMw",
+  "timestamp_sec": 895.566333,
+  "source_image": "data/frames/2r0QahNdwMw/2r0QahNdwMw_f0002.jpg"
+}

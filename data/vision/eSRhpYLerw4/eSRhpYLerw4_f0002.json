@@ -1,0 +1,24 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Dot Product of Vectors",
+  "extracted_text": "The dot product of two vectors a and b of magnitude |a| and |b| is\na \u00b7 b = |a||b| cos \u03b8, where \u03b8 represents the angle between the vectors\nand determines the direction of the vectors.",
+  "code": null,
+  "math": [
+    "a \\cdot b = |a||b| \\cos \\theta"
+  ],
+  "diagram_summary": "Three vector diagrams showing the dot product formula: left diagram shows vectors a and b with angle \u03b8; middle diagram shows vectors a and b with angle \u03b8 and projection; right diagram shows angle \u03b8 between vectors.",
+  "diagram_elements": [
+    "vector a",
+    "vector b",
+    "angle \u03b8",
+    "projection of a onto b",
+    "magnitude |a|",
+    "magnitude |b|"
+  ],
+  "confidence": 0.85,
+  "frame_id": "eSRhpYLerw4_f0002",
+  "video_id": "eSRhpYLerw4",
+  "timestamp_sec": 1175.399667,
+  "source_image": "data/frames/eSRhpYLerw4/eSRhpYLerw4_f0002.jpg"
+}

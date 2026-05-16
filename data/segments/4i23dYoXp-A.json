@@ -1,0 +1,3943 @@
+{
+  "video_id": "4i23dYoXp-A",
+  "segments": [
+    {
+      "id": "4i23dYoXp-A_000",
+      "title": "Goal of this lecture",
+      "ts_start": 0.0,
+      "ts_end": 217.0,
+      "segments": [
+        {
+          "ts_start": 4.66,
+          "ts_end": 11.08,
+          "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "4i23dYoXp-A_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Lecture \u2192 LLM Architecture Overview",
+              "extracted_text": "After learning about the attention mechanism, let us understand the LLM architecture",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Three-stage LLM development pipeline: Stage 1 shows building an LLM from data preparation and sampling through attention mechanisms; Stage 2 shows foundation model development with training loop, model evaluation, and preprocessing; Stage 3 shows applications including classifier and personal assistant with instruction dataset and finetuning.",
+              "diagram_elements": [
+                "Stage 1",
+                "Data preparation & sampling",
+                "Tokenization",
+                "Attention mechanisms",
+                "Building an LLM",
+                "Stage 2",
+                "Training loop",
+                "Model evaluation",
+                "Preprocessing",
+                "Foundation model",
+                "Load pretrained weights",
+                "Finetuning",
+                "Stage 3",
+                "Classifier",
+                "Personal assistant",
+                "Instruction dataset"
+              ],
+              "confidence": 0.85,
+              "frame_id": "4i23dYoXp-A_f0000",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 12.0,
+          "ts_end": 19.42,
+          "text": "First, let me take you through what all we have learned so far in this lecture series through this diagram.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 19.82,
+          "ts_end": 28.1,
+          "text": "So, in this lecture series, we are going to build a large language model completely from scratch and we are going to do that in three stages.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 28.1,
+          "ts_end": 34.33,
+          "text": "In the stage 1, we will lay the foundations for building an LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 34.55,
+          "ts_end": 37.65,
+          "text": "In the stage 2, we will pre-train the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 37.75,
+          "ts_end": 40.87,
+          "text": "And in stage 3, we are going to fine-tune the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 41.85,
+          "ts_end": 46.43,
+          "text": "We are still at stage 1 and until now we have covered two aspects of stage 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 46.65,
+          "ts_end": 55.51,
+          "text": "We have looked at the data preparation and sampling, which included tokenization, vector embeddings, and positional embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 55.51,
+          "ts_end": 60.05,
+          "text": "And very recently, we have looked at the attention mechanism in a lot of detail.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 60.41,
+          "ts_end": 73.59,
+          "text": "In particular, those of you who have followed the attention mechanism, we had a very detailed 4-5 lectures which started from simplified self-attention, self-attention, causal attention, and multi-head attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 74.57,
+          "ts_end": 85.25,
+          "text": "If you have not been through these lectures, I highly encourage you to go through them because attention really serves as the fundamental building block to understand everything which follows.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 85.89,
+          "ts_end": 97.57,
+          "text": "If you have watched all the previous lectures and if you have run the code which I have been providing, it's amazing and I would like to congratulate you that you have reached this part.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 98.17,
+          "ts_end": 103.25,
+          "text": "Understanding attention is one of the most difficult aspects of understanding large language models.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 103.63,
+          "ts_end": 108.23,
+          "text": "And if you have reached up till here, the rest of this will be easier for you.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 108.53,
+          "ts_end": 109.83,
+          "text": "So let's get started.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 110.17,
+          "ts_end": 115.81,
+          "text": "In these subsequent lecture videos which are to follow, we are going to learn about this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 115.89,
+          "ts_end": 118.99,
+          "text": "Part number three, which is the large language model architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 119.49,
+          "ts_end": 122.81,
+          "text": "As I always do, I'm going to break this into multiple videos.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 123.03,
+          "ts_end": 125.23,
+          "text": "I will not cover everything in one video.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 126.43,
+          "ts_end": 130.83,
+          "text": "We will cover every single video in a lot of detail and completely from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 132.02,
+          "ts_end": 136.72,
+          "text": "Today, right now, it's the first video in the large language model architecture module.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 137.26,
+          "ts_end": 138.62,
+          "text": "So let's get started.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 138.96,
+          "ts_end": 145.18,
+          "text": "I think this will be a very interesting module for all of you, especially to those of you who have followed until now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 145.24,
+          "ts_end": 146.42,
+          "text": "We have learned about the architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 146.44,
+          "ts_end": 147.18,
+          "text": "We have learned about the attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 147.46,
+          "ts_end": 149.36,
+          "text": "We learned about input embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 149.44,
+          "ts_end": 151.02,
+          "text": "We learned about position embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 151.12,
+          "ts_end": 157.04,
+          "text": "But all of you must be thinking, how does all of this really come together to give me something like a GPT?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 157.44,
+          "ts_end": 158.96,
+          "text": "Where does the training happen?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 159.18,
+          "ts_end": 160.98,
+          "text": "Where does back propagation happen?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 161.2,
+          "ts_end": 162.78,
+          "text": "Where are the neural networks here?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 163.02,
+          "ts_end": 168.68,
+          "text": "If you remember at the start, I told you that large language models are just deep neural networks.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 168.94,
+          "ts_end": 172.56,
+          "text": "Where are neural networks and what exactly is the transformer?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 173.06,
+          "ts_end": 175.04,
+          "text": "We learned about the attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 175.04,
+          "ts_end": 182.25,
+          "text": "And you must have heard about this, that attention mechanism is at the heart of transformers.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 182.33,
+          "ts_end": 184.13,
+          "text": "But what really is transformers?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 184.67,
+          "ts_end": 189.19,
+          "text": "When do we do the training and where do we generate the next world as the output?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 190.0,
+          "ts_end": 196.46,
+          "text": "All of that will become pretty clear to you as we slowly start unraveling this box of the LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 197.14,
+          "ts_end": 200.46,
+          "text": "I really had a lot of fun learning about this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 200.54,
+          "ts_end": 202.32,
+          "text": "And let's get started.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 202.7,
+          "ts_end": 204.78,
+          "text": "As I told you, LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 204.78,
+          "ts_end": 206.88,
+          "text": "I'm planning to cover in four to five videos.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 207.02,
+          "ts_end": 208.26,
+          "text": "And today is the first video.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 210.07,
+          "ts_end": 216.37,
+          "text": "So after learning about the attention mechanism in the previous lectures, let us learn about the LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_001",
+      "title": "Overview of the LLM architecture",
+      "ts_start": 217.0,
+      "ts_end": 694.0,
+      "segments": [
+        {
+          "ts_start": 224.44,
+          "ts_end": 229.44,
+          "text": "This is the bird's eye view, and we are going to cover every single aspect of this in detail.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 229.52,
+          "ts_end": 236.14,
+          "text": "But right now, I want to show you what all you have learned and how does that fit in the context of what's true?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 236.14,
+          "ts_end": 236.7,
+          "text": "And what's to come next?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 237.78,
+          "ts_end": 240.4,
+          "text": "This always helps in the learning process.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 240.6,
+          "ts_end": 243.9,
+          "text": "Imagine if you are getting walking through a forest, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 244.06,
+          "ts_end": 260.88,
+          "text": "And if you want to get to the other side, it's always good to know to track your path, to have some kind of feedback like, OK, this is what you have covered right now and this is what's next to come so that you can relate what you're learning next with the learnings from the past.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 261.04,
+          "ts_end": 264.44,
+          "text": "And that helps you reach the end of the forest in our case.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 265.99,
+          "ts_end": 267.31,
+          "text": "Learning about how the.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 267.45,
+          "ts_end": 274.33,
+          "text": "Previous knowledge fits into what we are going to learn about next will really help you learn about LLMs in a much better manner.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 274.89,
+          "ts_end": 281.63,
+          "text": "So initially we started with tokenizing, then we looked at vector embedding and positional embedding.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 281.94,
+          "ts_end": 292.7,
+          "text": "The final embedding vectors which we had for every token were then converted into context vectors through masked multi-head attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 293.65,
+          "ts_end": 297.87,
+          "text": "So the main aim of attention or rather the multi-head attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 297.93,
+          "ts_end": 298.23,
+          "text": "attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 298.23,
+          "ts_end": 302.59,
+          "text": "Was to take the input embedding vectors and convert them into context vectors.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 303.09,
+          "ts_end": 316.99,
+          "text": "Context vectors are a much richer form of representation than embedding vectors because they not only contain semantic meaning of the token, but they also contain information about how the token relates to all the other tokens in the sentence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 319.73,
+          "ts_end": 326.19,
+          "text": "Now, masked multi-head attention forms a very important part of something which is called as the transformer block.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 327.18,
+          "ts_end": 328.5,
+          "text": "Transformer block is the.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 328.5,
+          "ts_end": 332.2,
+          "text": "Most important part of the large language model architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 332.56,
+          "ts_end": 337.26,
+          "text": "And it's a block which actually consists of many different aspects which are linked together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 337.62,
+          "ts_end": 344.1,
+          "text": "So let us zoom into this transformer block a bit, unravel it, open this block and see what it contains.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 344.63,
+          "ts_end": 350.98,
+          "text": "If you zoom into the transformer block, you'll see that it contains a number of things and mask multi-head attention forms a part of this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 351.14,
+          "ts_end": 354.2,
+          "text": "So whatever you have learned in the multi-head attention comes over here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 354.75,
+          "ts_end": 358.08,
+          "text": "So imagine you have a sentence such as, every.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 358.08,
+          "ts_end": 364.3,
+          "text": "effort moves you and you want to predict the next word right the first step is to convert each of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 364.3,
+          "ts_end": 370.36,
+          "text": "these into input embeddings or vector embeddings so these are these and let's say we also add a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 370.36,
+          "ts_end": 375.6,
+          "text": "positional embedding right these embedding vectors are then passed on to the transformer block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 375.6,
+          "ts_end": 381.32,
+          "text": "the first part of the transformer block is a layer normal normalization the second is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 381.32,
+          "ts_end": 386.2,
+          "text": "masked multi-head attention which converts the input embedding tokens into context vectors",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 386.2,
+          "ts_end": 392.94,
+          "text": "these are then passed into a dropout layer you can notice this plus signs so these arrows which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 392.94,
+          "ts_end": 398.84,
+          "text": "run from here to this plus sign they are called a shortcut connections the output of the shortcut",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 398.84,
+          "ts_end": 404.44,
+          "text": "connection goes to another layer normalization then we have a feed forward neural network here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 404.44,
+          "ts_end": 410.54,
+          "text": "then another dropout layer is connected and there is one more shortcut connection here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 410.54,
+          "ts_end": 415.8,
+          "text": "and if you zoom into the feed forward neural network further you will see that it has something",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 415.8,
+          "ts_end": 416.24,
+          "text": "which is called a shortcut connection and if you zoom into the feed forward neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 416.24,
+          "ts_end": 422.19,
+          "text": "it is called as the JLU activation if you look at all these terminologies and you you think what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 422.19,
+          "ts_end": 427.63,
+          "text": "does it mean what is layer normalization what is dropout what is the JLU activation why do we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 427.63,
+          "ts_end": 433.57,
+          "text": "a feed forward neural network here and why are all these things stacked together like this that's all",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 433.57,
+          "ts_end": 438.17,
+          "text": "what we are going to cover in this video and the four to five videos which are going to follow",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 438.17,
+          "ts_end": 443.43,
+          "text": "forward but remember this entire architecture has a large number of trainable parameters and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 443.43,
+          "ts_end": 446.91,
+          "text": "trainable weights when the LLM is pre-trained",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 446.91,
+          "ts_end": 453.02,
+          "text": "these weights and these parameters are optimized and ultimately we get the output the outputs are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 453.02,
+          "ts_end": 458.24,
+          "text": "such that they have the same form and dimensions as the inputs and the outputs are then processed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 458.24,
+          "ts_end": 464.52,
+          "text": "further which gives the final text so once we get the output from the transformer block it goes to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 464.52,
+          "ts_end": 470.32,
+          "text": "these output layers and then the which decodes the output from the transformer block and we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 470.32,
+          "ts_end": 476.2,
+          "text": "get the next word so every effort moves you was the input if you remember and the next word is forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 477.17,
+          "ts_end": 482.69,
+          "text": "I just wanted to give you this bird's eye view of what exactly is going on and what we are building",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 482.69,
+          "ts_end": 488.71,
+          "text": "what you have learned so far and how it fits into what we are planning to learn next in these set of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 488.71,
+          "ts_end": 492.95,
+          "text": "lectures which we are which are going to follow we are going to zoom into this transformer block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 492.95,
+          "ts_end": 498.35,
+          "text": "and we are going to understand every single thing which has been mentioned here we will learn about",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 498.35,
+          "ts_end": 502.89,
+          "text": "first of all we learn about how to stack these different layers together which will be in today's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 502.89,
+          "ts_end": 506.71,
+          "text": "lecture then we will dive into each individual layer and learn about them",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 507.17,
+          "ts_end": 512.83,
+          "text": "we'll have a separate lecture on layer normalization a separate lecture on the shortcut connections a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 512.83,
+          "ts_end": 517.57,
+          "text": "separate lecture on feed forward neural network with JLU activation we'll stack all of these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 517.57,
+          "ts_end": 522.23,
+          "text": "together and then finally we'll have a separate lecture on how this output from the transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 522.23,
+          "ts_end": 528.79,
+          "text": "is decoded to produce the next world okay so I hope you have understood why we learned about",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 528.79,
+          "ts_end": 533.81,
+          "text": "the mask multihead attention because if we had not learned about this see this forms such a critical",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 533.81,
+          "ts_end": 537.01,
+          "text": "part of this transformer block right to learn about this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 537.39,
+          "ts_end": 542.67,
+          "text": "this small block is it took us five lectures spanning over seven hours but that's the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 542.67,
+          "ts_end": 548.32,
+          "text": "importance of the attention mechanism if this block is removed if this mass multihead block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 548.32,
+          "ts_end": 554.34,
+          "text": "is removed it's like the large language models would lose all their power and then we are back",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 554.34,
+          "ts_end": 560.82,
+          "text": "to the age of recurrent neural networks and long short-term memory networks okay so let's see what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 560.82,
+          "ts_end": 566.08,
+          "text": "we have learned so far we have learned about input tokenization we have learned about embedding token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 568.16,
+          "ts_end": 574.82,
+          "text": "we have learned about mask multihead attention okay so uh let me first give you a brief overview of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 574.82,
+          "ts_end": 580.48,
+          "text": "the mask multihead attention in which you have if in case you have forgotten so we have the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 580.48,
+          "ts_end": 586.56,
+          "text": "embedding vectors which are stacked together like this we have a bunch of keys queries and the value",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 586.56,
+          "ts_end": 592.08,
+          "text": "matrices which are multiplied with the inputs to give the queries the keys and the values",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 593.03,
+          "ts_end": 598.13,
+          "text": "the queries are multiplied with the keys transpose to give us attention scores which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 598.51,
+          "ts_end": 603.4,
+          "text": "are then converted into attention weights attention weights are then multiplied with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 603.4,
+          "ts_end": 608.3,
+          "text": "the values matrix to give us the context vector and since we have multiple attention heads the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 608.3,
+          "ts_end": 613.7,
+          "text": "context vectors are stacked together to give us a combined context vector this is what is happening",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 613.7,
+          "ts_end": 619.26,
+          "text": "in the multihead attention block now this whole process of what all we have learned so far can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 619.26,
+          "ts_end": 624.64,
+          "text": "be visualized like this also if you have the input text which is every effort moves you it's first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 624.64,
+          "ts_end": 629.0,
+          "text": "tokenized and GPT uses a byte pair tokenizer which we learned about before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 629.22,
+          "ts_end": 635.92,
+          "text": "every single token is converted into a token ID every single token ID is converted into a vector",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 635.92,
+          "ts_end": 640.96,
+          "text": "embedding which is a vectorized representation these vector embeddings are passed into the GPT",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 640.96,
+          "ts_end": 645.66,
+          "text": "model which consists of the transformer block which I showed you before then there is an output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 645.66,
+          "ts_end": 653.06,
+          "text": "that output is further decoded and that gives us the output text for GPT-2 the token embeddings",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 653.06,
+          "ts_end": 659.36,
+          "text": "which were used had a embedding vector size of 768 dimensions which means each token ID was converted",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 659.92,
+          "ts_end": 665.66,
+          "text": "into a vector of 768 dimension and the output is generated such that the dimensions are matched so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 665.66,
+          "ts_end": 672.52,
+          "text": "the output is a 768 dimensional vector for each 768 dimensional input token embedding and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 672.52,
+          "ts_end": 678.46,
+          "text": "we do some post processing with the output so that we generate the next world which is forward so every",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 678.46,
+          "ts_end": 685.95,
+          "text": "effort moves you forward great so what we are yet to learn is the transformer block and we'll start",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 685.95,
+          "ts_end": 691.23,
+          "text": "learning about this in today in today's lecture we'll dive slowly deeper and deeper into every",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_002",
+      "title": "GPT-2 model architecture overview",
+      "ts_start": 694.0,
+      "ts_end": 1227.0,
+      "segments": [
+        {
+          "ts_start": 697.59,
+          "ts_end": 704.19,
+          "text": "a toy problem we will not use a toy model we are directly going to use GPT-2 so we will use the same",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 704.19,
+          "ts_end": 710.76,
+          "text": "architecture which was used to build the GPT-2 model so if you look at this paper this was the",
+          "frame_ids": [
+            "4i23dYoXp-A_f0001"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 710.76,
+          "ts_end": 718.93,
+          "text": "paper which introduced GPT-2 and if you look at the models which they had they had they had a small",
+          "frame_ids": [
+            "4i23dYoXp-A_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "ks of McCann et al. (2018) without the need for explicit\nservision of which symbols are the outputs to be pre-\nted. Since the supervised objective is the the same as the\nsupervised objective but only evaluated on a subset of the\nquence, the global minimum of the unsupervised objective\nalso the global minimum of the supervised objective. In\ns slightly toy setting, the concerns with density estimation\na principled training objective discussed in (Sutskever\net al., 2015) are side stepped. The problem instead becomes\nether we are able to, in practice, optimize the unsuper-\ned objective to convergence. Preliminary experiments\nirmed that sufficiently large language models are able to\nform multitask learning in this toy-ish setup but learning\nnuch slower than in explicitly supervised approaches.\n\nile it is a large step from the well-posed setup described\nve to the messiness of \"language in the wild\", Weston\n116) argues, in the context of dialog, for the need to\nelop systems capable of learning from natural language\nectly and demonstrated a proof of concept \u2013 learning a\n task without a reward signal by using forward prediction\n teacher's outputs. While dialog is an attractive approach,\nworry it is overly restrictive. The internet contains a vast\nount of information that is passively available without\nneed for interactive communication. Our speculation is\nt a language model with sufficient capacity will begin to\nlearn to infer and perform the tasks demonstrated in\nural language sequences in order to better predict them,\nardless of their method of procurement. If a language\nodel is able to do this it will be, in effect, performing\n\nIn the hiding of Joliette, wrote in French: \"Mentez mentez,\nil en restera toujours quelque chose,\" which translates as,\n\"Lie lie and something will always remain.\"\n\n\"I hate the word 'perfume,'\" Burr says. \"It's somewhat better\nin French: 'parfum.'\"\n\nIf listened carefully at 29:55, a conversation can be heard\nbetween two guys in French: \"Comment on fait pour aller\nde l'autre c\u00f4t\u00e9? -Quel autre c\u00f4t\u00e9?\", which means \"- How\ndo you get to the other side? - What side?\".\n\nIf this sounds like a bit of a stretch, consider this ques-\ntion in French: Is-tu aller au cin\u00e9ma?, or Did you go to\nthe movies?, which literally translates as Have-you to go to\nmovies/theater?\n\n\"Brevet Sans Garantie Du Gouvernement\", translated to\nEnglish: \"Patented without government warranty\".\n\nTable 1. Examples of naturally occurring demonstrations of En-\nglish to French and French to English translation found throughout\nthe WebText training set.\n\nCommon Crawl. Trinh & Le (2018)'s best results were\nachieved using a small subsample of Common Crawl which\nincluded only documents most similar to their target dataset,\nthe Winograd Schema Challenge. While this is a pragmatic\napproach to improve performance on a specific task, we\nwant to avoid making assumptions about the tasks to be\nperformed ahead of time.",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.75,
+              "frame_id": "4i23dYoXp-A_f0002",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 716.233,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 718.93,
+          "ts_end": 722.99,
+          "text": "model and they had a large model which has one five four two million parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 723.15,
+          "ts_end": 729.57,
+          "text": "if you look at the small model it had 117 million parameters this was revised later to be 124",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 729.57,
+          "ts_end": 734.79,
+          "text": "million parameters which is what we are going to use for these set of lectures and for the rest of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 734.79,
+          "ts_end": 739.51,
+          "text": "this video series as well so we are going to construct an LLM with 124 million parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 739.51,
+          "ts_end": 746.69,
+          "text": "which has 12 layers what are these layers which means we'll have 12 transformer blocks and D model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 746.69,
+          "ts_end": 752.19,
+          "text": "which is the vector embedding size is 768 these are the parameters which we are going to use in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 753.15,
+          "ts_end": 762.68,
+          "text": "and also in the rest of the lectures so why are we using GPT-2 and not GPT-3 or GPT-4 one reason is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 762.68,
+          "ts_end": 769.3,
+          "text": "that GPT-2 is smaller so it's better to run it locally on our local machine and second reason",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 769.3,
+          "ts_end": 776.14,
+          "text": "is that OpenAI has made only GPT-2 weights public OpenAI has really not made the weights of GPT-3",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 776.14,
+          "ts_end": 782.84,
+          "text": "and GPT-4 public yet so that's the thing with open source right OpenAI is closed source right now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 783.92,
+          "ts_end": 788.28,
+          "text": "as Llama models are open source so all weights have been released so that's why we are sticking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 788.28,
+          "ts_end": 793.34,
+          "text": "with GPT-2 because its weights have been made public we will load these weights later in one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 793.34,
+          "ts_end": 798.98,
+          "text": "of the subsequent videos so here is the configuration which we are going to use and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 798.98,
+          "ts_end": 803.68,
+          "text": "to all those who are watching the video you can pause here and try to understand whether",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 803.68,
+          "ts_end": 808.2,
+          "text": "you understand every single terminology here we have covered all of these in the previous",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 808.2,
+          "ts_end": 814.14,
+          "text": "lectures so I'm going to pause here and ask you to also pause on your end and try to think about",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 814.34,
+          "ts_end": 819.44,
+          "text": "these terminologies I'll anyway explain each of these terminologies but I want you to just give",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 819.44,
+          "ts_end": 825.88,
+          "text": "it a shot and try to understand okay so let's go step by step the first is the vocabulary size",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 826.62,
+          "ts_end": 830.8,
+          "text": "this means that every we start with a vocabulary so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 832.04,
+          "ts_end": 838.66,
+          "text": "um the GPT-2 uses a byte pair encoder right so it's a subword tokenizer so the vocabulary is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 838.66,
+          "ts_end": 844.3,
+          "text": "how many subwords are basically there uh this will be used for tokenization so if the vocabulary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 845.14,
+          "ts_end": 851.68,
+          "text": "word level tokenization so if the sentence is every step moves you forward then the vocabulary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 851.68,
+          "ts_end": 856.96,
+          "text": "will have every step moves you forward so that way the tokenization will happen but if you use",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 856.96,
+          "ts_end": 864.26,
+          "text": "a byte pair encoder which gpt2 uses it's a subword tokenizer so the vocabulary size is 50 257",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 864.26,
+          "ts_end": 870.44,
+          "text": "and it may contain of characters it may contain sub words it may contain full words also but this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 870.44,
+          "ts_end": 879.11,
+          "text": "is the vocabulary size which we deal with when we consider gpt2 this will be very useful for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 879.11,
+          "ts_end": 884.69,
+          "text": "tokenization so when we do tokenization what happens is we have a vocabulary and there are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 884.69,
+          "ts_end": 891.18,
+          "text": "tokens in the vocabulary and there is a token id with respect to every single token and wherever",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 891.18,
+          "ts_end": 896.5,
+          "text": "whenever a new text is given to us using that vocabulary that text is converted into tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 896.5,
+          "ts_end": 900.76,
+          "text": "and then those tokens are converted into token ids if some text",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 901.36,
+          "ts_end": 906.66,
+          "text": "does not belong to the vocabulary that's called as the out of vocabulary problem the byte pair",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 906.66,
+          "ts_end": 912.29,
+          "text": "encoder does not face this issue because it's a subword tokenizer we have covered about vocabulary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 912.29,
+          "ts_end": 917.85,
+          "text": "size in our lecture on embedding so if you are unclear about this please refer to that the second",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 917.85,
+          "ts_end": 923.29,
+          "text": "is the context length the context length basically refers to how many maximum words are used to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 923.29,
+          "ts_end": 929.74,
+          "text": "predict the next world so if there is context length is 1024 which was actually used in gpt2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 929.74,
+          "ts_end": 931.76,
+          "text": "we are going to look at 10241",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 931.78,
+          "ts_end": 936.74,
+          "text": "words and we are going to predict the next word maximum there will be no case when we are looking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 936.74,
+          "ts_end": 941.5,
+          "text": "at 2000 words let's say and predicting the next world when i say word i am actually meaning token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 941.5,
+          "ts_end": 948.84,
+          "text": "here which is not exactly correct because gpt2 uses the byte pair encoder tokenizer which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 948.84,
+          "ts_end": 955.08,
+          "text": "subword tokenization scheme but for the sake of this lecture if i use word and token interchangeably",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 955.08,
+          "ts_end": 961.59,
+          "text": "it's because it's good for intuition the second thing is the embedding dimension now every token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 961.97,
+          "ts_end": 967.69,
+          "text": "in this vocabulary which we have will be projected into a vector space such as this so for example the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 967.69,
+          "ts_end": 973.15,
+          "text": "tokens are your journey starts with one step here is a three-dimensional vector representation of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 973.15,
+          "ts_end": 981.25,
+          "text": "every single token right and the embedding should be such that the meaning is captured so for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 981.25,
+          "ts_end": 985.91,
+          "text": "example if journey and starts are more similar in meaning they would be closer together in this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 985.91,
+          "ts_end": 992.27,
+          "text": "embedding space so this is a three-dimensional embedding space in gpt2 we are using a 768",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 992.39,
+          "ts_end": 997.43,
+          "text": "dimensional embedding space it's very difficult to show this over here but you can imagine a 768",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 997.43,
+          "ts_end": 1003.17,
+          "text": "dimensional embedding space in which the words are projected now if you are thinking how do we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1003.17,
+          "ts_end": 1008.19,
+          "text": "learn about these projections how do we know which vector journey corresponds to now that's also",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1008.19,
+          "ts_end": 1014.27,
+          "text": "trained in gpt2 when we look at the transformer block you will see that the embedding itself is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1014.27,
+          "ts_end": 1020.77,
+          "text": "not fixed we are going to train the embedding layer so that every word is embedded correctly",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1021.3,
+          "ts_end": 1021.99,
+          "text": "so that semantic",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1022.39,
+          "ts_end": 1027.66,
+          "text": "meaning is captured the next thing is the number of heads and these are the number of attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1027.66,
+          "ts_end": 1033.08,
+          "text": "heads which are equal to 12. so if you look at this diagram over here i told you that multiple",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1033.68,
+          "ts_end": 1039.06,
+          "text": "queries keys and values matrix matrices are created right so the more the number of attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1039.06,
+          "ts_end": 1044.28,
+          "text": "heads the more the number of these matrices are created so if we have 12 attention heads it means",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1044.28,
+          "ts_end": 1050.62,
+          "text": "there will be 12 such queries keys and value matrices so here the number of heads is 12 number",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1050.62,
+          "ts_end": 1052.72,
+          "text": "of layers is the number of transformer blocks",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1053.08,
+          "ts_end": 1058.22,
+          "text": "remember this is different than the number of attention heads number of layers is how many such",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1058.22,
+          "ts_end": 1064.82,
+          "text": "layers are we going to have so this is one one transformer block layer and it includes multi head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1064.82,
+          "ts_end": 1070.66,
+          "text": "attention so within this one layer there will be 12 attention heads but in terms of these transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1070.66,
+          "ts_end": 1076.78,
+          "text": "blocks itself there can be 12 blocks so it's not necessary that the number of layers and number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1076.78,
+          "ts_end": 1081.39,
+          "text": "heads are similar here we are using 12 transformer blocks",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1083.35,
+          "ts_end": 1088.83,
+          "text": "which we will see later how they are stacked up together okay so number of layers is 12 then drop",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1088.83,
+          "ts_end": 1097.43,
+          "text": "rate is basically the dropout rate and uh query key value bias is or qkv bias is the bias term",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1097.43,
+          "ts_end": 1102.29,
+          "text": "when we initialize the query key and the value matrix by default this is always set to false",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1103.95,
+          "ts_end": 1108.95,
+          "text": "okay so the number of transformer blocks one more thing which i want to mention here is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1108.95,
+          "ts_end": 1114.45,
+          "text": "we are looking at the gpt2 small model which used 12 transform which uses 12 transformers",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1114.47,
+          "ts_end": 1120.41,
+          "text": "blocks right but as we saw over here they had four models of gpt2 so if you go from left to",
+          "frame_ids": [
+            "4i23dYoXp-A_f0003"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Language Models are Unsupervised Multitask Learners",
+              "extracted_text": "Table 2. Architecture hyperparameters for the 4 model sizes.\n\nfew modifications. Layer normalization (Ba et al., 20",
+              "code": null,
+              "math": [
+                "d_{model}"
+              ],
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "4i23dYoXp-A_f0003",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 1115.033,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0003.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1120.41,
+          "ts_end": 1126.33,
+          "text": "right here you will see small the medium has 24 transformer blocks the large has 36 transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1126.33,
+          "ts_end": 1132.69,
+          "text": "blocks and the largest which is extra large that has 48 transformer blocks and you will see that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1132.69,
+          "ts_end": 1139.01,
+          "text": "the dimensionality also increases from left to right we are using 768 dimension gpt2 small but",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1139.01,
+          "ts_end": 1143.31,
+          "text": "if you go from left to right you will see that one zero two four one two eight zero and finally the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1144.47,
+          "ts_end": 1151.55,
+          "text": "large has a dimensionality of 1600 okay so i hope you have understood this this configuration",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1152.21,
+          "ts_end": 1157.67,
+          "text": "and what we are now going to do is that now i'm going to take you to code and i'm going to build",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1157.67,
+          "ts_end": 1163.81,
+          "text": "a gpt placeholder architecture what does this mean this basically means that whatever i showed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1163.81,
+          "ts_end": 1170.19,
+          "text": "you over here right this thing this thing whatever i showed you i know that you have not yet",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1170.19,
+          "ts_end": 1175.83,
+          "text": "understood the layer normalization the shortcut connection even the transformer block what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1175.91,
+          "ts_end": 1181.57,
+          "text": "it exactly has what this feed forward neural network is what the jlo activation is right now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1181.57,
+          "ts_end": 1185.59,
+          "text": "what i want to do is i just want to create a skeleton for our code where these different",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1185.59,
+          "ts_end": 1189.51,
+          "text": "blocks will come in together we'll code them later in subsequent parts and we'll have a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1189.51,
+          "ts_end": 1195.83,
+          "text": "separate lecture for each of them but right now we'll build a gpt placeholder architecture which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1195.83,
+          "ts_end": 1201.26,
+          "text": "will also called as the dummy gpt model this will actually give a bird's eye view of how",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1201.26,
+          "ts_end": 1205.96,
+          "text": "everything fits together so here i have shown a bird's eye and this is a bird's eye view",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1206.52,
+          "ts_end": 1211.08,
+          "text": "so the reason this bird's eye view is again very important is that you will see what we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1211.08,
+          "ts_end": 1215.02,
+          "text": "planning to do in the subsequent lectures and that's why the skeleton is very important",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1215.02,
+          "ts_end": 1220.12,
+          "text": "especially for a complicated topic like the llm architecture where multiple things have to fit",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1220.12,
+          "ts_end": 1225.2,
+          "text": "in together first let's zoom out and see what all has to fit in together and then in subsequent",
+          "frame_ids": [
+            "4i23dYoXp-A_f0004"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "At the end of this chapter, we use multiple transformer blocks to implement the GPT model that we will train in the upcoming chapter\n\n7) Final GPT architecture\n\nWe combine the building blocks 1-5,",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Visual comparison showing an aerial cityscape photograph on the left connected via a yellow curved line to a close-up photograph of a bird's eye on the right, illustrating visual feature extraction.",
+              "diagram_elements": [
+                "Aerial cityscape image",
+                "Bird eye close-up image",
+                "Yellow connecting curve",
+                "7) Final GPT architecture box"
+              ],
+              "confidence": 0.75,
+              "frame_id": "4i23dYoXp-A_f0004",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 1224.533,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0004.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_003",
+      "title": "Begin coding the GPT-2 architecture",
+      "ts_start": 1227.0,
+      "ts_end": 1278.0,
+      "segments": [
+        {
+          "ts_start": 1230.07,
+          "ts_end": 1235.89,
+          "text": "the gpt configuration 124 million parameters which we are going to use so let's jump right into it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1237.55,
+          "ts_end": 1242.83,
+          "text": "okay so now what we are going to do is we are going to implement a gpt model from scratch to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1242.83,
+          "ts_end": 1248.47,
+          "text": "generate text and i'll show you exactly how the code is executed but at every single step of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1248.47,
+          "ts_end": 1253.77,
+          "text": "code i'll again take you to the whiteboard so that you can visualize what every parameter means it's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1253.77,
+          "ts_end": 1259.47,
+          "text": "very important for you to read a sentence of the code and to visualize how it how how it looks like",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1259.47,
+          "ts_end": 1264.57,
+          "text": "only then you will really understand the code so this is the gpt configuration which we covered on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1264.57,
+          "ts_end": 1267.07,
+          "text": "the whiteboard i hope you have understood the meaning of every parameter in the code so let's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1267.09,
+          "ts_end": 1271.61,
+          "text": "take a look at every single terminology here if not just look up the meaning once more or go",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1271.61,
+          "ts_end": 1275.67,
+          "text": "through our previous lectures but it's very important that you don't just skim through it",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_004",
+      "title": "Dummy GPT model class",
+      "ts_start": 1278.0,
+      "ts_end": 1401.0,
+      "segments": [
+        {
+          "ts_start": 1281.92,
+          "ts_end": 1287.7,
+          "text": "so this is a dummy gpt model class we'll use a placeholder for the transformer block we'll use",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1287.7,
+          "ts_end": 1294.59,
+          "text": "a placeholder for the layer normalization okay so first let me give you a broad overview of what all",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1294.59,
+          "ts_end": 1295.31,
+          "text": "do we have here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1295.31,
+          "ts_end": 1297.97,
+          "text": "so we have a dummy gpt model over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1297.99,
+          "ts_end": 1303.51,
+          "text": "and it has the forward pass what this forward or rather i should call it the forward method",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1303.51,
+          "ts_end": 1308.55,
+          "text": "what this forward method does is that it takes an input and at the end of this forward method",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1308.55,
+          "ts_end": 1314.73,
+          "text": "we are going to uh print out the output this is what we are aiming to do so if you look at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1314.73,
+          "ts_end": 1321.87,
+          "text": "the figure which let me show this figure to you here this is the main thing right so what that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1321.87,
+          "ts_end": 1328.05,
+          "text": "forward method does is that it takes an input which basically can just be these words and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1328.05,
+          "ts_end": 1334.53,
+          "text": "the aim of this is to the aim of the forward pass is to give you the next word in this case the next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1334.53,
+          "ts_end": 1339.69,
+          "text": "word is forward so that's the output so all of what we want to implement somewhere lies in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1339.69,
+          "ts_end": 1347.07,
+          "text": "middle right um so there are two main blocks which will be very important to us so there is first the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1347.07,
+          "ts_end": 1351.95,
+          "text": "transformer block we are going to create a class for the transformer block not in this lecture but",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1351.95,
+          "ts_end": 1357.23,
+          "text": "in later lectures and we are going to create a class for the layer normalization let me show you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1358.05,
+          "ts_end": 1364.05,
+          "text": "into the picture so if you look at the transformer block over here the transformer block consists of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1364.05,
+          "ts_end": 1369.79,
+          "text": "all of these things right and layer normalization is a very important part of it layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1369.79,
+          "ts_end": 1374.79,
+          "text": "will also be implemented before the transformer and after the transformer but it is also present",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1374.79,
+          "ts_end": 1380.03,
+          "text": "within the transformer itself so we will have a transformer block will in which we will put all",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1380.03,
+          "ts_end": 1384.07,
+          "text": "of these things what i am showing here and we will have a separate layer normalization block",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1384.61,
+          "ts_end": 1387.87,
+          "text": "the reason we are having a separate layer normalization block is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1388.05,
+          "ts_end": 1392.17,
+          "text": "it comes in the transformer block that's fine but it also comes at other places",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1392.17,
+          "ts_end": 1398.24,
+          "text": "so it's better to define a separate class of it so this is the class which will define later not now",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_005",
+      "title": "Passing the input",
+      "ts_start": 1401.0,
+      "ts_end": 1491.0,
+      "segments": [
+        {
+          "ts_start": 1404.21,
+          "ts_end": 1408.45,
+          "text": "method is actually doing okay so the forward method first takes in an input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1409.86,
+          "ts_end": 1417.31,
+          "text": "and let me show you what that input actually looks like um okay so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1421.02,
+          "ts_end": 1426.56,
+          "text": "let me write some visualizations over here so that you understand what's going on yeah okay so the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1426.56,
+          "ts_end": 1431.52,
+          "text": "forward method is going to take an input right and the input let's say is this same thing let",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1431.52,
+          "ts_end": 1439.36,
+          "text": "me write it over here what's that input the input is every effort moves you let's say this is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1439.36,
+          "ts_end": 1445.64,
+          "text": "input which is which is passed to the forward method let me write over here right and i'm going",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1445.64,
+          "ts_end": 1449.02,
+          "text": "to write this with a different color so let's say the input is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1454.7,
+          "ts_end": 1469.5,
+          "text": "every effort moves you okay great so this is my input right now the way this will be fed to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1469.5,
+          "ts_end": 1477.56,
+          "text": "forward method is that uh let me actually show you that so we are going to feed this input to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1477.56,
+          "ts_end": 1483.3,
+          "text": "the forward method doing something like this so let's say every effort moves you is the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1483.3,
+          "ts_end": 1488.58,
+          "text": "right we are first going to use the tick token tokenizer which is the byte pair encoder and we",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_006",
+      "title": "Vector embeddings",
+      "ts_start": 1491.0,
+      "ts_end": 1864.0,
+      "segments": [
+        {
+          "ts_start": 1492.06,
+          "ts_end": 1495.86,
+          "text": "so remember the workflow which we saw over here every token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1496.3,
+          "ts_end": 1502.96,
+          "text": "here see every token is essentially converted into token ids and then everything later after",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1502.96,
+          "ts_end": 1509.2,
+          "text": "this point happens within the gpt model class but in this stage we have to do it outside",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1509.2,
+          "ts_end": 1515.8,
+          "text": "and then pass the token ids to the gpt model class so now we have this every effort moves",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1515.8,
+          "ts_end": 1520.96,
+          "text": "you right this will be converted into a token id this will be converted into a token id this will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1521.42,
+          "ts_end": 1525.96,
+          "text": "be converted into a token id and this will be converted into a token id right the first step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1525.96,
+          "ts_end": 1534.41,
+          "text": "is that every token id will be converted into a token embedding uh and so what that means is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1534.41,
+          "ts_end": 1544.15,
+          "text": "every token id so let's say this is id1 let's say this is id1 this is id2 this is id3 and this is id4",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1544.15,
+          "ts_end": 1552.13,
+          "text": "right each of these token ids will need to be converted into a 768 a 768 vector",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1553.78,
+          "ts_end": 1557.98,
+          "text": "a 768 vector embedding essentially that is going to be the input embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1557.98,
+          "ts_end": 1563.3,
+          "text": "and the way we are going to do that is that we are going to first create a token embedding layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1564.99,
+          "ts_end": 1571.77,
+          "text": "and for that we will use the nn dot embedding in pytorch what this layer actually does is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1571.77,
+          "ts_end": 1578.49,
+          "text": "it creates this matrix which is called as the token embedding matrix it has rows which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1578.49,
+          "ts_end": 1583.31,
+          "text": "equal to the model vocabulary size and every row basically corresponds to one token id",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1584.21,
+          "ts_end": 1590.71,
+          "text": "and every row the length of every row is essentially 768 so now if you want to find the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1590.71,
+          "ts_end": 1596.83,
+          "text": "vector embedding for id number one let's say id number one is 44 you just look at the 44th row",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1596.83,
+          "ts_end": 1603.05,
+          "text": "over here and you get the 768 dimensional vector if you want to look at the let's say for effort",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1603.05,
+          "ts_end": 1610.13,
+          "text": "the id is 64. you look at id number 64 for effort you get the 768 dimensional vector similarly u",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1610.13,
+          "ts_end": 1617.89,
+          "text": "let's say the id for u is 85 or or rather 40 000 you go downward and you get you go to the 40 000",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1617.89,
+          "ts_end": 1626.36,
+          "text": "row and you get the 768 vector 768 dimensional input embedding vector now that's why this token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1626.36,
+          "ts_end": 1630.78,
+          "text": "embedding matrix is also called as the lookup matrix you just pass in the token ids and it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1630.78,
+          "ts_end": 1636.85,
+          "text": "gives you the vector embeddings remember that all of the parameters here here everywhere in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1636.85,
+          "ts_end": 1640.91,
+          "text": "this token embedding matrix they will be initialized randomly for now and we will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1640.91,
+          "ts_end": 1645.81,
+          "text": "train these parameters so when we initialize this token embedding layer it initializes the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1645.81,
+          "ts_end": 1651.27,
+          "text": "parameters from a gaussian distribution and then they are initialized randomly later when we do",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1651.27,
+          "ts_end": 1656.89,
+          "text": "back propagation we will train these for now when when you look at all these embedding matrices just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1656.89,
+          "ts_end": 1662.37,
+          "text": "just know that their values are random for now okay so the first step is to convert all of these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1662.37,
+          "ts_end": 1669.62,
+          "text": "tokens into token embeddings which are 768 embedding vectors and you will see that that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1669.62,
+          "ts_end": 1670.58,
+          "text": "has been done over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1671.42,
+          "ts_end": 1675.34,
+          "text": "so when you go to the forward method first what you do is you look at the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1675.34,
+          "ts_end": 1682.32,
+          "text": "shape right the input shape is basically batch size which are the number of rows and the sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1682.32,
+          "ts_end": 1688.39,
+          "text": "length which is essentially uh the length of the number of tokens which we are considering",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1688.39,
+          "ts_end": 1697.12,
+          "text": "so for example let us look at this this is for example one such batch right so i have in this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1697.12,
+          "ts_end": 1702.14,
+          "text": "batch two the batch length the batch size is two so there are two rows in this tensor and the number",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1702.8,
+          "ts_end": 1702.88,
+          "text": "length where this is a dot is w and the sequence length is a one by one i will say one is the number",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1702.88,
+          "ts_end": 1706.08,
+          "text": "of creation\u53ef\u611b and O months are the number of tokens which i'm going to use or now let's just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1706.08,
+          "ts_end": 1712.54,
+          "text": "look at one batch so i'm i'm feeding in four tokens and which are my input inputs and then i want to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1712.54,
+          "ts_end": 1716.74,
+          "text": "get the next word so every effort moves you forward which will be the next word right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1717.59,
+          "ts_end": 1722.35,
+          "text": "so that's why the shape is batch size and sequence length the batch size is in the example which i",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1722.35,
+          "ts_end": 1726.47,
+          "text": "showed you there are two batches so two rows and sequence length is the number of tokens basically",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1726.47,
+          "ts_end": 1727.19,
+          "text": "great",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1727.19,
+          "ts_end": 1730.77,
+          "text": "so the first thing what we are going to do is that we are going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1731.67,
+          "ts_end": 1739.15,
+          "text": "create the token embeddings out of the input index which is the inputs which we have given",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1739.15,
+          "ts_end": 1744.21,
+          "text": "now take a look at these inputs and just look at the first batch the first batch is a list",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1744.21,
+          "ts_end": 1750.05,
+          "text": "of token ids which you which have been mentioned over here what we'll do with these token ids is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1750.05,
+          "ts_end": 1755.99,
+          "text": "we will then query or look up the token embedding matrix and then retrieve those input embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1755.99,
+          "ts_end": 1761.93,
+          "text": "vectors so for this token id there will be a 768 dimensional vector for this token id there will be",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1761.93,
+          "ts_end": 1767.43,
+          "text": "a 768 dimensional vector etc so you might be thinking where is that embedding matrix so that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1767.43,
+          "ts_end": 1772.97,
+          "text": "has been created in the init constructor which is invoked by default so see first we have a token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1772.97,
+          "ts_end": 1779.05,
+          "text": "embedding matrix which has been created the number of rows of this matrix are equal to the vocabulary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1779.05,
+          "ts_end": 1785.22,
+          "text": "size exactly what we have written over here the number of rows of this token embedding matrix is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1785.22,
+          "ts_end": 1786.48,
+          "text": "equal to the vocabulary size",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1786.76,
+          "ts_end": 1790.44,
+          "text": "and the number of columns of this token embedding matrix is the embedding dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1790.92,
+          "ts_end": 1797.7,
+          "text": "why because every token or every token id has a 768 dimensional vector associated with it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1797.7,
+          "ts_end": 1802.58,
+          "text": "so the number of columns which are there is equal to the 768",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1803.1,
+          "ts_end": 1810.28,
+          "text": "so for every token id essentially there will be 768 columns so this is the embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1810.28,
+          "ts_end": 1814.76,
+          "text": "token embedding weight matrix which has been created using this py torch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1815.48,
+          "ts_end": 1816.16,
+          "text": "embedding class",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1816.76,
+          "ts_end": 1821.26,
+          "text": "and what we are doing here essentially in the forward method is that we are looking at the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1821.8,
+          "ts_end": 1825.56,
+          "text": "input token ids which have been mentioned in our batch and we are going to look up",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1826.12,
+          "ts_end": 1831.72,
+          "text": "that token embedding matrix and we will get the token embeddings for the inputs so we will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1831.72,
+          "ts_end": 1838.1,
+          "text": "essentially have four four 768 dimensional vectors for the first batch and we will have four 768",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1838.1,
+          "ts_end": 1844.26,
+          "text": "dimensional vectors for the second batch great the next step which we are going to do after getting",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1844.26,
+          "ts_end": 1847.32,
+          "text": "the token ids is we have to get the positional embedding so we will get the positional embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1847.34,
+          "ts_end": 1853.78,
+          "text": "right so remember up till now we have we have a 768 dimensional vector for id 1",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1853.78,
+          "ts_end": 1858.7,
+          "text": "a 768 dimensional vector for id 2 a 768 dimensional vector for id 3",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1858.7,
+          "ts_end": 1862.18,
+          "text": "and a 768 dimensional vector for id number 4",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_007",
+      "title": "Positional embeddings",
+      "ts_start": 1864.0,
+      "ts_end": 2169.0,
+      "segments": [
+        {
+          "ts_start": 1867.76,
+          "ts_end": 1874.16,
+          "text": "a positional embedding to each of these four vectors okay so for that first we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1874.16,
+          "ts_end": 1877.28,
+          "text": "need a positional embedding weight matrix very similar to the token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1877.28,
+          "ts_end": 1880.84,
+          "text": "embedding weight matrix so remember the positional embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1880.84,
+          "ts_end": 1882.9,
+          "text": "really depends on the context size because",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1883.84,
+          "ts_end": 1888.96,
+          "text": "at for we'll take let's say context size is 1024",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1888.96,
+          "ts_end": 1893.46,
+          "text": "at max we'll use 1024 tokens to predict the next world right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1893.46,
+          "ts_end": 1897.94,
+          "text": "so we just need to know the let's say the position is 1",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1897.94,
+          "ts_end": 1903.16,
+          "text": "so let's say the position is 1 we need a positional embedding vector for this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1903.16,
+          "ts_end": 1906.24,
+          "text": "position if the position is 3 or 2 we need a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1906.24,
+          "ts_end": 1907.32,
+          "text": "positional embedding vector for this position",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1907.34,
+          "ts_end": 1912.32,
+          "text": "similarly if the position is 1024 we need a positional embedding vector for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1912.32,
+          "ts_end": 1914.42,
+          "text": "this we don't need a positional embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1914.42,
+          "ts_end": 1918.46,
+          "text": "vector for 1025 why because we are not we are not looking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1918.46,
+          "ts_end": 1922.44,
+          "text": "at the context window of 1025 we are only",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1922.44,
+          "ts_end": 1926.7,
+          "text": "going to look at maximum 1024 tokens at once and predict the next world",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1927.89,
+          "ts_end": 1931.79,
+          "text": "so that's why the number of rows in the positional embedding matrix is the equal",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1931.79,
+          "ts_end": 1934.99,
+          "text": "to the context size but if you see the number of columns they",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1934.99,
+          "ts_end": 1937.95,
+          "text": "are still equal to the embedding size and that is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1938.05,
+          "ts_end": 1940.49,
+          "text": "more important because we are going to add the positional embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1940.49,
+          "ts_end": 1944.5,
+          "text": "vectors to the token embedding to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1944.5,
+          "ts_end": 1948.46,
+          "text": "token embedding vectors so here there are four token embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1948.46,
+          "ts_end": 1953.38,
+          "text": "vectors of 768 dimensions each right to each of these we'll have four",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1954.32,
+          "ts_end": 1960.08,
+          "text": "positional embedding vectors so now every effort moves you let's say so it's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1960.08,
+          "ts_end": 1961.96,
+          "text": "position number 1 position number 2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1961.96,
+          "ts_end": 1968.18,
+          "text": "position number 3 and position number 4 right so we will get the positional embedding vector corresponding to first 2,3,5 and 10th \u00e9l\u00e9ments",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1968.18,
+          "ts_end": 1968.44,
+          "text": "number 4 right so we will get the positional engaged vector corresponding to 1st tong and 10th \uc6b0\ub9ac\uac00 que\u0633\u0626",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1968.46,
+          "ts_end": 1975.06,
+          "text": "position second position third position and fourth position and we'll add them to each of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1975.06,
+          "ts_end": 1981.26,
+          "text": "these token embedding vectors the context size is 1024 but for now i'm just showing you a simple",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1981.26,
+          "ts_end": 1988.0,
+          "text": "version of four context size but the main point i'm trying to illustrate here is that once we get",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1988.0,
+          "ts_end": 1992.78,
+          "text": "the token embedding vectors for these four tokens we'll add them with the positional embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1992.78,
+          "ts_end": 1999.82,
+          "text": "vectors okay so here you can see that first a positional embedding matrix is also initialized",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1999.82,
+          "ts_end": 2004.78,
+          "text": "when this init constructor is called and the number of rows here are equal to the context",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2004.78,
+          "ts_end": 2010.66,
+          "text": "length which is exactly what i showed you over here the number of rows are equal to the context",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2010.66,
+          "ts_end": 2014.88,
+          "text": "length or the context size and the number of columns are equal to the embedding dimension",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2014.88,
+          "ts_end": 2021.48,
+          "text": "so this is again a nn.embedding which is very similar to the embedding class or exactly the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2021.48,
+          "ts_end": 2023.18,
+          "text": "same embedding class which we use for token embedding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2023.2,
+          "ts_end": 2029.9,
+          "text": "again these will be initialized randomly for now we'll train them later now what we'll be doing is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2029.9,
+          "ts_end": 2039.45,
+          "text": "that based on the positions in the in the tokens we are going to query or we are going to look up",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2039.45,
+          "ts_end": 2044.63,
+          "text": "the positional embedding matrix so torch.arrange sequence length what this will go this is going",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2044.63,
+          "ts_end": 2051.23,
+          "text": "to do is that it will look at the token length so in this case the token length let's say right now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2051.23,
+          "ts_end": 2053.67,
+          "text": "the token length is equal to four right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2053.77,
+          "ts_end": 2058.93,
+          "text": "the token length is equal to four in this batch which i have given so it will arrange it as 0 1 2 and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2058.93,
+          "ts_end": 2064.47,
+          "text": "3 and it will get the positional embedding uh it will get the positional embedding vectors for row",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2064.47,
+          "ts_end": 2071.34,
+          "text": "number 0 row number 1 row number 2 and row number 3 and then it will then what we are going to do is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2071.34,
+          "ts_end": 2076.78,
+          "text": "we are going to add the token embeddings for the four tokens and we are going to add the positional",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2076.78,
+          "ts_end": 2084.19,
+          "text": "embeddings for the four tokens so the x the um we have the input initial right the way it's been",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2084.41,
+          "ts_end": 2089.63,
+          "text": "transformed is like this so the four tokens which we had in every batch uh we'll convert them into",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2089.63,
+          "ts_end": 2096.35,
+          "text": "768 dimensional input vectors we'll then add the 768 dimensional positional vectors to each of them",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2096.35,
+          "ts_end": 2103.34,
+          "text": "and then finally we have a 768 dimensional uh embedding vector for each of these tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2104.79,
+          "ts_end": 2109.61,
+          "text": "awesome so now next what we are going to do is the next step is something which is called as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2109.61,
+          "ts_end": 2114.83,
+          "text": "drop emb which is the dropout embedding uh so this is just the dropout rate so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2115.05,
+          "ts_end": 2119.55,
+          "text": "what it will do is that it will take these uh it will take the embedding vectors for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2120.27,
+          "ts_end": 2125.89,
+          "text": "all the tokens and it will randomly turn off some weight values this generally helps the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2125.89,
+          "ts_end": 2131.13,
+          "text": "generalization performance and prevents overfitting we'll look at this in detail in one of the next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2131.13,
+          "ts_end": 2138.47,
+          "text": "classes after we get these uh embedding vectors let me show you the figure what happens next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2138.47,
+          "ts_end": 2142.21,
+          "text": "so once we get these embedding vectors as i showed you over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2146.68,
+          "ts_end": 2156.12,
+          "text": "yeah actually let me show it over here yeah so once we get these uh token ids and the token",
+          "frame_ids": [
+            "4i23dYoXp-A_f0006"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "This will give us a birds eye view of how everything fits together.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "A visual comparison showing an aerial view of a circular urban development and a close-up of a bird's eye (yellow iris) to illustrate the concept of perspective and overview.",
+              "diagram_elements": [
+                "Aerial cityscape photograph",
+                "Bird eye close-up photograph",
+                "Yellow decorative border/frame"
+              ],
+              "confidence": 0.85,
+              "frame_id": "4i23dYoXp-A_f0006",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 2148.766333,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0006.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2156.12,
+          "ts_end": 2162.6,
+          "text": "embeddings right we'll then pass it to the gpt model which essentially consists of the transformer",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_008",
+      "title": "Transformer block",
+      "ts_start": 2169.0,
+      "ts_end": 2220.0,
+      "segments": [
+        {
+          "ts_start": 2172.03,
+          "ts_end": 2176.15,
+          "text": "and after we add the positional embedding next what we have to do is we have to pass it through",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2176.15,
+          "ts_end": 2179.35,
+          "text": "the entire transformer block and also we later on we will add the positional embedding to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2179.37,
+          "ts_end": 2186.05,
+          "text": "layer normalization layer so this is exactly what is done over here after we get these embeddings and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2186.05,
+          "ts_end": 2190.83,
+          "text": "we apply the dropout layer we'll then pass it through the transformer block so in this one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2190.83,
+          "ts_end": 2195.63,
+          "text": "step actually several things are happening in this one step what we are doing is that we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2196.27,
+          "ts_end": 2200.13,
+          "text": "implementing multi-head attention we are implementing a dropout layer we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2200.13,
+          "ts_end": 2204.29,
+          "text": "implementing shortcut connections we are implementing layer norm we are implementing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2204.29,
+          "ts_end": 2208.51,
+          "text": "feed forward neural network with jlo activation then another dropout layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2209.56,
+          "ts_end": 2215.79,
+          "text": "and then remember we have 12 of these transformer blocks in gpt2 and then finally we have another",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_009",
+      "title": "Output logits",
+      "ts_start": 2220.0,
+      "ts_end": 2580.0,
+      "segments": [
+        {
+          "ts_start": 2222.71,
+          "ts_end": 2228.37,
+          "text": "to highlight in today's lecture is this last step which is the output which we have which are called",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2228.37,
+          "ts_end": 2232.87,
+          "text": "as logits and there is a reason why they are called as logits so let me explain that to you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2234.76,
+          "ts_end": 2241.1,
+          "text": "uh okay okay so when we reach the when we reach the output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2241.32,
+          "ts_end": 2246.98,
+          "text": "what we'll be having is that we'll have four tokens and each of those four tokens will have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2246.98,
+          "ts_end": 2253.38,
+          "text": "a 768 dimensional representation that's the output vectors right but now we want to predict the next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2253.38,
+          "ts_end": 2259.62,
+          "text": "world based on the input token based on the input sentence the input sentence as i mentioned was",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2259.62,
+          "ts_end": 2268.83,
+          "text": "every effort moves you we have to somehow predict the next word which is forward so after all of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2268.83,
+          "ts_end": 2273.67,
+          "text": "transformer blocks have been implemented the output is such that for every token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2275.17,
+          "ts_end": 2284.66,
+          "text": "uh for every token we'll have a 768 dimensional vector that's the output now what the main thing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2284.66,
+          "ts_end": 2290.96,
+          "text": "is that how will we predict the next world and so the way this is done is that the final output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2290.96,
+          "ts_end": 2295.64,
+          "text": "matrix which we have which we'll have will have this format where there will be four tokens which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2295.64,
+          "ts_end": 2301.16,
+          "text": "are the number of rows but there will be columns which is equal to vocabulary size which is 50257",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2301.72,
+          "ts_end": 2304.7,
+          "text": "and let me tell you why so if you look at token number one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2305.28,
+          "ts_end": 2311.5,
+          "text": "uh actually before that when we look at an input batch every effort moves you there are actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2311.5,
+          "ts_end": 2317.86,
+          "text": "four prediction tasks which are happening here uh you have you first look at one word every and you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2317.86,
+          "ts_end": 2322.2,
+          "text": "predict the next word which is effort then you look at the next which is every effort",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2323.76,
+          "ts_end": 2327.3,
+          "text": "this becomes an input in the next and then you predict the next word",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2328.32,
+          "ts_end": 2339.62,
+          "text": "then the next input is every effort moves and then you predict you only then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2339.96,
+          "ts_end": 2344.22,
+          "text": "there is the fourth task which is every effort moves you and then you predict the next word which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2344.22,
+          "ts_end": 2349.48,
+          "text": "is forward so when you look at this input batch which has four tokens or a context length of four",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2349.48,
+          "ts_end": 2354.82,
+          "text": "in this case we are actually doing four prediction tasks so when you look at token number one which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2354.82,
+          "ts_end": 2361.39,
+          "text": "is every we need to predict what what's the next token right out of the vocabulary what has the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2361.39,
+          "ts_end": 2367.75,
+          "text": "highest probability of coming next so if you look at the rows there will be the column length will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2367.75,
+          "ts_end": 2374.81,
+          "text": "be 50257 and every element here will represent probabilities so you will then take that element",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2374.81,
+          "ts_end": 2380.51,
+          "text": "which has the highest highest probability so let's say that is the 40 000 that is the 40 000",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2380.51,
+          "ts_end": 2386.53,
+          "text": "column over here so then we look at the vocabulary we look at the 40 000 token in the vocabulary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2387.3,
+          "ts_end": 2392.48,
+          "text": "which are and that seems to have the highest prior probability we'll choose only that token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2392.48,
+          "ts_end": 2397.68,
+          "text": "which has the highest probability so that's the 40 000 column and then that 40 000 column",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2397.68,
+          "ts_end": 2402.23,
+          "text": "will be effort now similarly when you look at token 2 so the input will be",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2402.23,
+          "ts_end": 2406.71,
+          "text": "every effort right and then you will again look at the row and you will see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2406.71,
+          "ts_end": 2411.69,
+          "text": "that column number which has the highest probability and let's say this column",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2411.69,
+          "ts_end": 2416.29,
+          "text": "number is 20,000 so you look at the token corresponding to 20,000 in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2416.29,
+          "ts_end": 2424.15,
+          "text": "vocabulary of 50257 and that should be moves similarly every effort moves you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2424.15,
+          "ts_end": 2428.59,
+          "text": "will be the input and we will again have a token corresponding to you and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2428.59,
+          "ts_end": 2431.97,
+          "text": "every effort moves you will be the input and then we'll have a token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2431.97,
+          "ts_end": 2436.29,
+          "text": "corresponding to forward so that's why the output which we expect will have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2436.29,
+          "ts_end": 2440.51,
+          "text": "this format which has these tokens which is the input sequence length and in this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2440.51,
+          "ts_end": 2446.33,
+          "text": "case is equal to 4 and the vocabulary size will be 50257 and then this will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2446.33,
+          "ts_end": 2449.81,
+          "text": "essentially give us an idea of what the next world will be at every single",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2449.81,
+          "ts_end": 2454.17,
+          "text": "prediction stage since there are four input output prediction tasks in this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2454.89,
+          "ts_end": 2460.8,
+          "text": "input sentence so that's why if you look at the output head later when you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2460.8,
+          "ts_end": 2464.7,
+          "text": "print out the output dimensions it dimensions will be the number of tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2464.7,
+          "ts_end": 2468.6,
+          "text": "and the number of columns will be equal to vocabulary size so even if you look",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2468.6,
+          "ts_end": 2473.5,
+          "text": "at the output head dimension remember when we reach up till this point the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2473.5,
+          "ts_end": 2477.16,
+          "text": "number of rows are equal to the number of tokens which is 4 number of columns",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2477.16,
+          "ts_end": 2481.58,
+          "text": "is the embedding dimension which is 768 that will be multiplied by this neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2481.58,
+          "ts_end": 2484.3,
+          "text": "network which has 768 rows and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2485.14,
+          "ts_end": 2489.7,
+          "text": "50257 columns so ultimately the result which will come in logits will have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2489.7,
+          "ts_end": 2496.3,
+          "text": "four rows and 50257 columns very similar to very similar to what we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2496.3,
+          "ts_end": 2500.32,
+          "text": "seen over here four rows and 50257 columns don't worry in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2500.32,
+          "ts_end": 2503.36,
+          "text": "subsequent lectures we will have a separate lecture for each of each of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2503.36,
+          "ts_end": 2507.28,
+          "text": "these but right now I just wanted to show you this overall thing of what we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2507.28,
+          "ts_end": 2510.8,
+          "text": "are going to implement when we reach the end of the next four to five lectures",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2510.8,
+          "ts_end": 2514.52,
+          "text": "we will get these logits matrix so that we'll know what the next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2514.62,
+          "ts_end": 2520.43,
+          "text": "world in the prediction is now see here what we are doing is that we have taken two texts",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2520.43,
+          "ts_end": 2526.05,
+          "text": "every effort moves us text number one which is also batch one and the second text is every day",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2526.05,
+          "ts_end": 2532.05,
+          "text": "holds up right so we are creating a batch which has two texts and the first step as i mentioned",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2532.05,
+          "ts_end": 2537.07,
+          "text": "is to get the token ids so these are the token ids these four token ids for the first batch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2537.07,
+          "ts_end": 2542.43,
+          "text": "these are the four token ids for the second batch what we do then is that we create an instance of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2542.43,
+          "ts_end": 2548.53,
+          "text": "the dummy gpt model with the configuration as i mentioned above with the configuration as this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2549.74,
+          "ts_end": 2554.4,
+          "text": "right and although we have not defined anything over here and everything is placeholder right now",
+          "frame_ids": [
+            "4i23dYoXp-A_f0007"
+          ],
+          "visuals": [
+            {
+              "category": "code",
+              "skip": false,
+              "title": "IMPLEMENTING A GPT MODEL FROM SCRATCH TO GEN",
+              "extracted_text": null,
+              "code": {
+                "language": "python",
+                "content": "GPT_CONFIG_124M = {\n    \"vocab_size\": 50257,           # Vocabulary size\n    \"context_length\": 1024,        # Context length\n    \"emb_dim\": 768,                # Embedding dimension\n    \"n_heads\": 12,                 # Number of attention heads\n    \"n_layers\": 12,                # Number of layers\n    \"drop_rate\": 0.1,              # Dropout rate\n    \"qkv_bias\": False              # Query-Key-Value bias\n}"
+              },
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "4i23dYoXp-A_f0007",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 2550.833,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0007.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2554.4,
+          "ts_end": 2560.24,
+          "text": "we can still run this code nothing is initialized here right so this block currently does nothing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2560.24,
+          "ts_end": 2565.34,
+          "text": "and even this layer currently does nothing but we can still execute this code and get the output so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2565.34,
+          "ts_end": 2569.58,
+          "text": "what will happen is that these two blocks will not essentially do anything but we can still",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2569.58,
+          "ts_end": 2572.28,
+          "text": "it's a functional code so we'll still get the logics",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2572.28,
+          "ts_end": 2572.76,
+          "text": "so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2572.82,
+          "ts_end": 2579.0,
+          "text": ", let's see what the result is so we'll pass in this batch to the model right now and let's",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_010",
+      "title": "LLM Architecture workflow summary",
+      "ts_start": 2580.0,
+      "ts_end": 2776.0,
+      "segments": [
+        {
+          "ts_start": 2584.22,
+          "ts_end": 2592.03,
+          "text": "right and your visualization should follow this workflow for now think of the workflow so first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2592.03,
+          "ts_end": 2596.99,
+          "text": "i have this first look at only one batch so i have four token ids these are the four token ids",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2596.99,
+          "ts_end": 2602.77,
+          "text": "these four token ids will be converted into 768 dimensional input embedding vectors",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2603.39,
+          "ts_end": 2608.95,
+          "text": "then i will add positional embedding vectors to each of them the resultant will be passed through",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2610.45,
+          "ts_end": 2615.59,
+          "text": "let's see what the result the other result will be pathro dropout layer then i'll have then i will go",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2615.59,
+          "ts_end": 2623.46,
+          "text": "through the transformers block then the result will go through the another normalization layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2624.08,
+          "ts_end": 2629.74,
+          "text": "which is also called as layer normalization layer and then until this point when i reach this stage",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2629.74,
+          "ts_end": 2633.5,
+          "text": "the output will have four rows corresponding to the four tokens and so i will add process structures into eachUT funcionaI put seven rows corresponding to the four tokens and so on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2633.5,
+          "ts_end": 2639.36,
+          "text": "768 columns because the embedding dimension is 768 that's for one batch now this will go through",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2639.36,
+          "ts_end": 2645.26,
+          "text": "the output embedding output head which is the final neural network and then the result will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2645.26,
+          "ts_end": 2652.26,
+          "text": "be number of tokens which is 4 and 50257 columns because i want to now get logits and see which one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2652.8,
+          "ts_end": 2659.58,
+          "text": "which word should come next so here you can see the result for the first batch there are four rows",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2659.58,
+          "ts_end": 2667.18,
+          "text": "and then 50257 columns this is exactly similar to the output which i was showing you over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2667.18,
+          "ts_end": 2673.32,
+          "text": "the output logits should have four tokens as the rows and 50257 columns and similarly for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2673.32,
+          "ts_end": 2679.34,
+          "text": "the second batch there are four rows and 50257 columns each parameter here should ideally",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2679.34,
+          "ts_end": 2685.45,
+          "text": "represent the probability of the next token remember when you look at these four tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2685.45,
+          "ts_end": 2690.11,
+          "text": "there are four input output tasks happening here not just one so every is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2690.11,
+          "ts_end": 2695.37,
+          "text": "the first input and effort should be the first output every effort is the first is the second",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2695.37,
+          "ts_end": 2701.59,
+          "text": "input and moves should be the second output every effort moves should be the third input and u should",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2701.59,
+          "ts_end": 2707.09,
+          "text": "be the third output every effort moves u should be the final input and the output should be forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2707.62,
+          "ts_end": 2711.69,
+          "text": "so right now these these outputs are random because we have not trained anything but",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2711.69,
+          "ts_end": 2716.59,
+          "text": "ultimately we'll just add the back propagation algorithm and then all of these probabilities",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2716.59,
+          "ts_end": 2720.09,
+          "text": "will start to make sense later we'll also apply softmax expression",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2720.11,
+          "ts_end": 2723.01,
+          "text": "as well and also controller come\u00e7a to work so we let's apply softmax just basically",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2723.01,
+          "ts_end": 2726.72,
+          "text": "so here we're done and we're glad you looked at my HTML brain and throw in our",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2728.72,
+          "ts_end": 2731.26,
+          "text": "inqu cristi for yourself entered definition offline ok and we will now absorb the second",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2731.26,
+          "ts_end": 2732.58,
+          "text": "read expression and head over to another page and we'll call it trade mark which is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2732.58,
+          "ts_end": 2733.76,
+          "text": "the method we'll use while reading this we'll have to try to integrate one of these techniques",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2733.76,
+          "ts_end": 2740.18,
+          "text": "directly into our text which is how we weredie.air euq't should on the order of 100\u88dc",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2740.18,
+          "ts_end": 2750.82,
+          "text": "per tick to get over a set of long queret be similarity n equal to n equal to one two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2750.82,
+          "ts_end": 2756.36,
+          "text": "token is a 50257 dimensional vector and it encodes the probability of what should come next",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2756.36,
+          "ts_end": 2762.28,
+          "text": "the embedding has 50257 dimensions because each of these dimensions refers to a unique token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2762.28,
+          "ts_end": 2768.1,
+          "text": "in the vocabulary at the end of this series of lectures when we implement the post-processing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2768.1,
+          "ts_end": 2773.9,
+          "text": "code we'll convert these 50257 dimensional vectors back into token ids which we can decode",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "4i23dYoXp-A_011",
+      "title": "Next steps and recap",
+      "ts_start": 2776.0,
+      "ts_end": 2930.0,
+      "segments": [
+        {
+          "ts_start": 2782.39,
+          "ts_end": 2789.19,
+          "text": "architecture what are the inputs what are the outputs etc and i hope you have gotten a sense",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2789.19,
+          "ts_end": 2793.89,
+          "text": "of what all we are going to implement in the subsequent lectures so in the next lectures we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2793.89,
+          "ts_end": 2798.89,
+          "text": "will go through every single block sequentially so my next lecture is planned for layer normalization",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2798.89,
+          "ts_end": 2804.87,
+          "text": "then after that we have a lecture on feed forward neural network with jlu activation then we have a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2804.87,
+          "ts_end": 2804.97,
+          "text": "lecture on feed forward neural network with jlu activation then we have a lecture on feed forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2804.97,
+          "ts_end": 2810.05,
+          "text": "lecture on shortcut connections then we'll have a lecture on how all of these come together in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2810.05,
+          "ts_end": 2815.67,
+          "text": "the transformer block and then finally we'll have the entire gpt model implementation and the last",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2815.67,
+          "ts_end": 2821.11,
+          "text": "lecture will be generating text from output tokens so this logits matrix which is there right which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2821.11,
+          "ts_end": 2829.29,
+          "text": "you obtained over here uh where was that yeah here was the logits matrix which was which was",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2829.29,
+          "ts_end": 2833.67,
+          "text": "returned how to convert this into the next word we'll see that in the last lecture in this series",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2833.67,
+          "ts_end": 2839.42,
+          "text": "of lectures okay so that that actually brings me to the end of this lecture i want to leave you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2840.0,
+          "ts_end": 2847.77,
+          "text": "with this one image this one image so what we have learned right now is this gpt backbone",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2847.77,
+          "ts_end": 2853.23,
+          "text": "so we have started this series with understanding the gpt backbone but remember this gpt backbone",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2853.23,
+          "ts_end": 2859.17,
+          "text": "consists of layer normalization jlu activation feed forward network and shortcut connection",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2859.17,
+          "ts_end": 2863.67,
+          "text": "and all of these actually come together all of this feed in together",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2863.67,
+          "ts_end": 2864.41,
+          "text": "uh",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2865.9,
+          "ts_end": 2873.89,
+          "text": "to make what is called as the transformer block uh that's why it's called transformer so you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2873.89,
+          "ts_end": 2877.97,
+          "text": "might be thinking what exactly is the transformer and why do we say that attention is the heart of",
+          "frame_ids": [
+            "4i23dYoXp-A_f0008"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": "Birds eye view of together:",
+              "code": null,
+              "math": null,
+              "diagram_summary": "A bird's eye (close-up of a yellow and orange eye) connected by a yellow curved line to a grid of image patches, illustrating how a convolutional neural network processes visual input through a birds-eye perspective.",
+              "diagram_elements": [
+                "Bird eye image",
+                "Image patches grid",
+                "Connecting line",
+                "Star annotation"
+              ],
+              "confidence": 0.75,
+              "frame_id": "4i23dYoXp-A_f0008",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 2877.966333,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0008.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2877.97,
+          "ts_end": 2883.01,
+          "text": "it the reason people say attention mechanism is the heart of transformer because if you if you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2883.01,
+          "ts_end": 2888.65,
+          "text": "unlock or unravel the transformer block you will see that the mass multi-head attention is a crucial",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2888.65,
+          "ts_end": 2893.31,
+          "text": "component of it but there are several other components which you also should be aware of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2893.31,
+          "ts_end": 2896.81,
+          "text": "and we'll cover that i hope you have got a bird's eye view",
+          "frame_ids": [
+            "4i23dYoXp-A_f0009"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "how everything fit together",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Visual composition showing an aerial cityscape photograph on the left and a close-up animal eye (appears to be a cat or similar creature with yellow iris) on the right, connected by a yellow curved line, illustrating how different visual elements combine.",
+              "diagram_elements": [
+                "Aerial cityscape photograph",
+                "Animal eye close-up",
+                "Yellow connecting curve",
+                "Star decoration"
+              ],
+              "confidence": 0.85,
+              "frame_id": "4i23dYoXp-A_f0009",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 2894.266333,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0009.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2897.45,
+          "ts_end": 2924.15,
+          "text": "of what we have planned for in today's lecture um thank you everyone i hope you are having a lot of fun with these whiteboard notes as well as through this coding assignments as well as through this coding part the transformers lectures which came before were a bit complicated but now it's getting a bit easier so you have been through the hard part of the course so congrats for that and now comes the very interesting part later thanks everyone i'll look forward to seeing you in the next lecture",
+          "frame_ids": [
+            "4i23dYoXp-A_f0010"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "A conceptual diagram showing the architecture of a GPT model with multiple transformer blocks, layer normalization, feed-forward networks, and shortcut connections, alongside images of an aerial city view and an animal eye to illustrate the 'birds eye view' concept.",
+              "diagram_elements": [
+                "Dummy GPT model",
+                "Transformer block",
+                "Layer normalization",
+                "GELU activation",
+                "Feed forward network",
+                "Shortcut connections",
+                "GPT architecture",
+                "Aerial city view image",
+                "Animal eye image",
+                "Mental model in which we will code the GPT architecture"
+              ],
+              "confidence": 0.75,
+              "frame_id": "4i23dYoXp-A_f0010",
+              "video_id": "4i23dYoXp-A",
+              "timestamp_sec": 2899.199667,
+              "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0010.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

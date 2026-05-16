@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Figure 3: Four sample alignments found by RNNsearch-50",
+  "extracted_text": "The x-axis and y-axis of each plot correspond to the words in the source sentence (English) and the generated translation (French), respectively. Each pixel shows the weight \u03b1\u1d62\u2c7c of the annotation of the j-th source word for the i-th target word (see Eq. (6)), in grayscale (0: black; 1: white). (a) an arbitrary sentence. (b-d) three randomly selected samples among the sentences without any unknown words and of length between 10 and 20 words from the test set.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Four heatmap visualizations showing attention weight alignments between English source words (x-axis) and French target words (y-axis) in neural machine translation, with pixel intensity representing alignment strength.",
+  "diagram_elements": [
+    "Plot (a): arbitrary sentence alignment",
+    "Plot (b): random sample alignment",
+    "Plot (c): random sample alignment",
+    "Plot (d): random sample alignment",
+    "x-axis: source sentence words (English)",
+    "y-axis: generated translation words (French)",
+    "grayscale intensity: weight \u03b1\u1d62\u2c7c"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0024",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2435.533,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0024.jpg"
+}

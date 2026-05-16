@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "-> A collection of 425 SMS spam messages was manually extracted from the Grumbletext Web site, which cell phone users make public claims about SMS spam messages, most of them without reporting the message received. The identification of the text of spam messages in the claims is a very hard and time consuming task and it involved carefully scanning hundreds of web pages. The Grumbletext Web site is: http://www.grumbletext.co.uk/\n\n-> A subset of 3,375 SMS randomly chosen ham messages of the NUS SMS Corpus (NSC), which is a collection of 10,000 legitimate messages collected for research at the Department of Computer Science at the National University of Singapore. The messages largely originate from Singaporeans and mostly from students attending the university. The messages were collected from volunteers who were made aware that their contributions were going to be made publicly available. The NUS SMS Corpus is available at: http://www.comp.nus.edu.sg/~rpnlpir/downloads/corpora/\n\n-> A list of 450 SMS ham messages collected from Caroline Tag's PhD Thesis available at http://etheses.bham.ac.uk/253/1/Tagg09PhD.pdf.\n\n-> Finally, we have incorporated the SMS Spam Corpus v.0.1 Big. It has 1,002 SMS ham messages and 322 spam messages, and it is public available at: http://www.esp.uem.es/jmgomez/smsspamcorpus/. This corpus has been used in several academic researches:",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "yZpy_hsC1bE_f0001",
+  "video_id": "yZpy_hsC1bE",
+  "timestamp_sec": 1025.999667,
+  "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0001.jpg"
+}

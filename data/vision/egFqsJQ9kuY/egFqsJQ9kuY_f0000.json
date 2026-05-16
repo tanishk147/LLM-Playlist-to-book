@@ -1,0 +1,30 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage workflow for preparing datasets and fine-tuning an LLM: Stage 1 covers dataset preparation and batching, Stage 2 covers loading and instruction fine-tuning the LLM, and Stage 3 covers evaluation of the LLM with response extraction and scoring.",
+  "diagram_elements": [
+    "Stage 1: Preparing the dataset",
+    "1) Dataset download and formatting",
+    "2) Batching the dataset",
+    "3) Creating data loaders",
+    "Stage 2: Fine-tuning the LLM",
+    "4) Loading a pretrained LLM",
+    "5) Instruction fine-tuning the LLM",
+    "6) Inspecting the modeling",
+    "Stage 3: Evaluating the LLM",
+    "7) Extracting responses",
+    "8) Qualitative evaluation",
+    "9) Scoring the responses",
+    "Training, testing, validation datasets",
+    "Dataloaders"
+  ],
+  "confidence": 0.92,
+  "frame_id": "egFqsJQ9kuY_f0000",
+  "video_id": "egFqsJQ9kuY",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/egFqsJQ9kuY/egFqsJQ9kuY_f0000.jpg"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A Miro whiteboard showing tensor outputs with handwritten annotations explaining apply softmax operation and attention weights with parameters (l, 2, 3, 3) and (b, num-heads, n_l).",
+  "diagram_elements": [
+    "tensor output with numerical values",
+    "apply softmax annotation",
+    "attention weights",
+    "parameters (l, 2, 3, 3)",
+    "parameters (b, num-heads, n_l)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0060",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2668.599667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0060.jpg"
+}

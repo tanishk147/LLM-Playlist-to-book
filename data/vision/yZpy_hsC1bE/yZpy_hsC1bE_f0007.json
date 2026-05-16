@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "pandas.DataFrame.to_csv",
+  "extracted_text": "Write object to a comma-separated values (csv) file.\n\nParameters:\n\npath_or_buf : str, path object, file-like object, or None, default None\nString, path object (implementing os.PathLike[str]), or file-like object implementing a write() function. If None, the result is returned as a string. If a non-binary file object is passed, it should be opened with newline='', disabling universal newlines. If a binary file object is passed, mode might need to contain a 'b'.\n\nsep : str, default ','\nString of length 1. Field delimiter for the output file.\n\nna_rep : str, default ''\n\nfloat_format : str, callable, default None",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "yZpy_hsC1bE_f0007",
+  "video_id": "yZpy_hsC1bE",
+  "timestamp_sec": 1510.166333,
+  "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0007.jpg"
+}

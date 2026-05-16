@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Workflow diagram showing six sequential steps for LLM training and text generation: Text generation \u2192 Text evaluation \u2192 Training & validation losses \u2192 LLM training function \u2192 Text generation strategies \u2192 additional implementation steps, with checkmarks and arrows indicating process flow.",
+  "diagram_elements": [
+    "1) Text generation",
+    "2) Text evaluation",
+    "3) Training & validation losses",
+    "4) LLM training function",
+    "5) Text generation strategies",
+    "6) (partially visible)",
+    "Train the model to generate human-like text",
+    "Implement additional LLM to generation strategies to reduce training data memorization"
+  ],
+  "confidence": 0.85,
+  "frame_id": "yXrGeDNuymY_f0001",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 178.399667,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0001.jpg"
+}

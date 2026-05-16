@@ -1,0 +1,28 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Step-by-step breakdown of multi-head attention mechanism showing the calculation of Keys, Queries, and Values matrices from input tensors, with dimensions and tensor operations annotated.",
+  "diagram_elements": [
+    "Step (4): Calculate Keys, Queries, Value Matrix",
+    "Input * Wk (Keys projection)",
+    "Input * Wq (Queries projection)",
+    "Input * Wv (Values projection)",
+    "1X3X6 input dimension",
+    "6X6 output dimension",
+    "Keys (1X3X6)",
+    "Queries (1X3X6)",
+    "Values (1X3X6)",
+    "d_out",
+    "num_tokens",
+    "Step (5): Unroll last dimension of Keys, Queries and Values to include num_heads and head_dim"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0013",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1090.166333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0013.jpg"
+}

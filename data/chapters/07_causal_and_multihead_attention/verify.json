@@ -1,0 +1,1217 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "Self-attention, as introduced in earlier chapters, lets every token attend to every other token in the sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence; no factual claim requiring citation."
+    },
+    {
+      "index": 2,
+      "text": "That is exactly what you want for tasks like sentiment classification, where the full context is available at inference time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Contextual motivation; no factual claim requiring citation."
+    },
+    {
+      "index": 3,
+      "text": "But language modeling is different: when a model generates the next word, it has not seen the words that come after the current position yet.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the problem domain; no factual claim requiring citation."
+    },
+    {
+      "index": 4,
+      "text": "Allowing the model to peek at future tokens during training would be cheating\u2014the model would learn to rely on information it cannot possibly have at generation time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational explanation; no factual claim requiring citation."
+    },
+    {
+      "index": 5,
+      "text": "The solution is **causal attention**, sometimes called **masked attention** [c2617].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2617"
+      ],
+      "status": "grounded",
+      "reason": "c2617 states 'Causal attention is also called masked attention,' which directly supports the claim."
+    },
+    {
+      "index": 6,
+      "text": "This chapter builds causal attention from the ground up, shows why the masking must happen *before* the softmax, adds dropout for regularization, and then scales the whole mechanism up to **multi-head attention**\u2014the version that actually runs inside GPT.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Chapter overview and roadmap; no factual claim requiring citation."
+    },
+    {
+      "index": 7,
+      "text": "Recall the standard self-attention pipeline: compute queries, keys, and values from the input; form an attention score matrix; apply softmax to get attention weights; and finally compute context vectors as a weighted sum of the values [c1938].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1938"
+      ],
+      "status": "grounded",
+      "reason": "c1938 states 'Context vectors are computed by multiplying attention weights with the values matrix,' which supports the final step described."
+    },
+    {
+      "index": 8,
+      "text": "Every token can attend to every other token, including tokens that appear later in the sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about unrestricted self-attention; no citation needed."
+    },
+    {
+      "index": 9,
+      "text": "Causal attention is a special form of self-attention [c2618] that restricts the model to only consider the previous and current inputs in a sequence when processing any given token [c2619].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2618",
+        "c2619"
+      ],
+      "status": "grounded",
+      "reason": "c2618 states 'Causal attention is a special form of self-attention' and c2619 states 'Causal attention restricts the model to only consider the previous and current inputs in a sequence when processing any given token.' Both claims directly support the sentence."
+    },
+    {
+      "index": 10,
+      "text": "Concretely, it is designed to prevent future tokens from influencing past tokens [c2640].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2640"
+      ],
+      "status": "grounded",
+      "reason": "c2640 states 'Causal attention is designed to prevent future tokens from influencing past tokens,' which directly supports the sentence."
+    },
+    {
+      "index": 11,
+      "text": "In GPT-like large language models, this is achieved by masking out future tokens that come after the current token when computing attention scores [c2622].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2622"
+      ],
+      "status": "grounded",
+      "reason": "c2622 states 'In GPT-like large language models, causal attention is achieved by masking out future tokens that come after the current token when computing attention scores,' which directly supports the sentence."
+    },
+    {
+      "index": 12,
+      "text": "[FIGURE: A 4\u00d74 attention score matrix with the upper triangle (above the diagonal) shaded in grey to indicate masked positions, and the lower triangle plus diagonal left open]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 13,
+      "text": "The causal mask is the set of attention weights above the diagonal that are masked out [c2627].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2627"
+      ],
+      "status": "grounded",
+      "reason": "c2627 states 'The causal attention mask is the set of attention weights above the diagonal that are masked out,' which directly supports the sentence."
+    },
+    {
+      "index": 14,
+      "text": "To understand the geometry: an upper triangular matrix has all elements below the diagonal set to zero [c2630], while a lower triangular matrix has all elements above the diagonal set to zero [c2631].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2630",
+        "c2631"
+      ],
+      "status": "grounded",
+      "reason": "c2630 states 'An upper triangular matrix has all elements below the diagonal set to zero' and c2631 states 'A lower triangular matrix has all elements above the diagonal set to zero.' Both claims directly support the sentence."
+    },
+    {
+      "index": 15,
+      "text": "The causal mask is upper-triangular\u2014it covers exactly the positions where token $j > i$, i.e., where token $j$ is in the future relative to token $i$.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the geometric interpretation; follows from the definitions already cited."
+    },
+    {
+      "index": 16,
+      "text": "The most direct approach is to create a lower-triangular matrix of ones and multiply it element-wise with the attention weights.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to a code example; no factual claim requiring citation."
+    },
+    {
+      "index": 17,
+      "text": "The following code creates such a mask:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to code block; no factual claim."
+    },
+    {
+      "index": 18,
+      "text": "mask_simple = torch.tril(torch.ones(context_length, context_length))",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2632"
+      ],
+      "status": "grounded",
+      "reason": "c2632 contains the exact code: 'mask_simple = torch.tril(torch.ones(context_length, context_length))'"
+    },
+    {
+      "index": 19,
+      "text": "After computing raw attention weights (before any normalization), you apply the mask:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to next code block; no factual claim."
+    },
+    {
+      "index": 20,
+      "text": "masked_attn_weights = attn_weights * mask_simple",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2636"
+      ],
+      "status": "grounded",
+      "reason": "c2636 contains the exact code: 'masked_attn_weights = attn_weights * mask_simple'"
+    },
+    {
+      "index": 21,
+      "text": "This zeros out all upper-triangular positions.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the code's effect; follows logically from the mask definition."
+    },
+    {
+      "index": 22,
+      "text": "But now each row no longer sums to one, so you must renormalize:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the problem; no citation needed."
+    },
+    {
+      "index": 23,
+      "text": "mask_simple_normalized = masked_attn_weights / masked_attn_weights.sum(dim=1, keepdim=True)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2638"
+      ],
+      "status": "grounded",
+      "reason": "c2638 contains the exact code: 'mask_simple_normalized = masked_attn_weights / masked_attn_weights.sum(dim=1, keepdim=True)'"
+    },
+    {
+      "index": 24,
+      "text": "Intuitively, this works, but it has a subtle flaw.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to the next section; no factual claim."
+    },
+    {
+      "index": 25,
+      "text": "Applying softmax first and then zeroing out future positions creates a data leakage problem [c2643].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2643"
+      ],
+      "status": "grounded",
+      "reason": "c2643 states 'Applying softmax before masking future tokens and then renormalizing creates a data leakage problem in causal attention,' which directly supports the sentence."
+    },
+    {
+      "index": 26,
+      "text": "The softmax has already \"seen\" the future token scores when computing the exponentials and the normalization denominator.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of why the data leakage occurs; follows from the definition of softmax."
+    },
+    {
+      "index": 27,
+      "text": "Even if you zero out those positions afterward and renormalize, the remaining weights are not the same as they would have been had the future tokens never participated in the softmax at all.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the consequence; follows from the data leakage problem."
+    },
+    {
+      "index": 28,
+      "text": "The correct approach is to apply an upper-triangular mask of negative infinity to the raw attention *scores* before softmax [c2645].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2645"
+      ],
+      "status": "grounded",
+      "reason": "c2645 states 'An upper triangular infinity mask is applied to attention scores before softmax to prevent data leakage from future tokens,' which directly supports the sentence."
+    },
+    {
+      "index": 29,
+      "text": "Masking in transformers sets attention scores for future tokens to large negative values, making their influence in the softmax calculation effectively zero [c2653].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2653"
+      ],
+      "status": "grounded",
+      "reason": "c2653 states 'Masking in transformers sets attention scores for future tokens to large negative values, making their influence in softmax calculation effectively zero,' which directly supports the sentence."
+    },
+    {
+      "index": 30,
+      "text": "Because $e^{-\\infty} = 0$, those positions contribute nothing to the softmax denominator, and the remaining weights automatically sum to one without any manual renormalization.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Mathematical explanation; follows from the properties of exponentials and softmax."
+    },
+    {
+      "index": 31,
+      "text": "The code for this preferred approach creates an upper-triangular mask (ones above the diagonal) and fills those positions with $-\\infty$:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to code block; no factual claim."
+    },
+    {
+      "index": 32,
+      "text": "mask = torch.triu(torch.ones(seq_len, seq_len), diagonal=1)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2649"
+      ],
+      "status": "grounded",
+      "reason": "c2649 contains the exact code: 'mask = torch.triu(torch.ones(seq_len, seq_len), diagonal=1)'"
+    },
+    {
+      "index": 33,
+      "text": "attention_scores = attention_scores.masked_fill(mask == 1, float('-inf'))",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2650"
+      ],
+      "status": "grounded",
+      "reason": "c2650 contains the exact code: 'attention_scores = attention_scores.masked_fill(mask == 1, float('-inf'))'"
+    },
+    {
+      "index": 34,
+      "text": "Then softmax is applied in the usual way:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to code block; no factual claim."
+    },
+    {
+      "index": 35,
+      "text": "attention_weights = torch.softmax(attention_scores / sqrt(d_k), dim=-1)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2651"
+      ],
+      "status": "grounded",
+      "reason": "c2651 contains the exact code: 'attention_weights = torch.softmax(attention_scores / sqrt(d_k), dim=-1)'"
+    },
+    {
+      "index": 36,
+      "text": "The causal masking mechanism prevents information leakage from future tokens while ensuring attention weight rows sum to one [c2652].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2652"
+      ],
+      "status": "grounded",
+      "reason": "c2652 states 'The causal masking mechanism prevents information leakage from future tokens while ensuring attention weight rows sum to one,' which directly supports the sentence."
+    },
+    {
+      "index": 37,
+      "text": "Regularization is important in large models.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement about regularization; no citation needed."
+    },
+    {
+      "index": 38,
+      "text": "Dropout is a deep learning technique where neurons in different layers are randomly switched to zero during training [c2654].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2654"
+      ],
+      "status": "grounded",
+      "reason": "c2654 states 'Dropout is a deep learning technique where neurons in different layers are randomly switched to zero during training,' which directly supports the sentence."
+    },
+    {
+      "index": 39,
+      "text": "In causal attention, dropout randomly zeros out attention weights according to a dropout mask while preserving the causal masking of future tokens [c2661].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2661"
+      ],
+      "status": "grounded",
+      "reason": "c2661 states 'Dropout in causal attention randomly zeros out attention weights according to a dropout mask while preserving the causal masking of future tokens,' which directly supports the sentence."
+    },
+    {
+      "index": 40,
+      "text": "For example, `torch.nn.Dropout(p=0.5)` creates a dropout layer that randomly zeroes elements with probability 0.5 and scales remaining elements by $1/(1-0.5) = 2$ [c2670].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2670"
+      ],
+      "status": "grounded",
+      "reason": "c2670 states 'torch.nn.Dropout(p=0.5) creates a dropout layer that randomly zeroes elements with probability 0.5 and scales remaining elements by 1/(1-0.5) = 2,' which directly supports the sentence."
+    },
+    {
+      "index": 41,
+      "text": "The scaling ensures that the expected value of the output is unchanged, so the same model can be used at inference time without any adjustment.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the purpose of scaling; follows from the definition of dropout."
+    },
+    {
+      "index": 42,
+      "text": "We now have all the ingredients to write a complete causal self-attention class.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to the next section; no factual claim."
+    },
+    {
+      "index": 43,
+      "text": "The CausalSelfAttention class incorporates causal attention and dropout into the self-attention mechanism, with the same structure as the base self-attention class except for the masking and dropout additions [c2672].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2672"
+      ],
+      "status": "grounded",
+      "reason": "c2672 states 'The CausalSelfAttention class incorporates causal attention and dropout into the self-attention mechanism, with the same structure as the base self-attention class except for masking and dropout additions,' which directly supports the sentence."
+    },
+    {
+      "index": 44,
+      "text": "The input to the causal attention class has shape `(batch_size, num_tokens, input_dimensions)` [c1941].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1941"
+      ],
+      "status": "grounded",
+      "reason": "c1941 states 'The input x to the causal attention class has shape (batch_size, num_tokens, input_dimensions),' which directly supports the sentence."
+    },
+    {
+      "index": 45,
+      "text": "The weight matrices $W_Q$, $W_K$, and $W_V$ are trainable parameters whose values are learned during LLM training [c2608].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2608"
+      ],
+      "status": "grounded",
+      "reason": "c2608 states 'WQ, WK, and WV are trainable weight matrices whose parameters need to be trained based on input data as part of LLM training,' which directly supports the sentence."
+    },
+    {
+      "index": 46,
+      "text": "The core of the forward pass\u2014computing scores, masking, softmax, dropout, and context vectors\u2014looks like this:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to code block; no factual claim."
+    },
+    {
+      "index": 47,
+      "text": "attn_scores = queries @ keys.transpose(1, 2)\nattn_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf)\nattn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)\nattn_weights = self.dropout(attn_weights)\ncontext_vec = attn_weights @ values",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2687"
+      ],
+      "status": "grounded",
+      "reason": "c2687 contains the exact code block with all five lines matching the cited claim."
+    },
+    {
+      "index": 48,
+      "text": "Notice the mask slicing `[:num_tokens, :num_tokens]`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to explanation; no factual claim."
+    },
+    {
+      "index": 49,
+      "text": "This ensures the causal mask is created only up to the number of tokens in the batch, handling cases where the batch is shorter than the maximum supported context size [c2696].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2696"
+      ],
+      "status": "grounded",
+      "reason": "c2696 states 'The mask slicing [:, :T] ensures the causal mask is created only up to the number of tokens T in the batch, handling cases where batch tokens are smaller than the supported context size,' which directly supports the sentence."
+    },
+    {
+      "index": 50,
+      "text": "An input embedding is a vector representation of a token that encodes semantic meaning but does not carry information about how other words in the sentence relate to it [c2603].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2603"
+      ],
+      "status": "grounded",
+      "reason": "c2603 states 'An input embedding is a vector representation of a token that encodes semantic meaning but does not carry information about how other words in the sentence relate to it,' which directly supports the sentence."
+    },
+    {
+      "index": 51,
+      "text": "The context vectors produced by causal attention remedy this: each context vector aggregates information from all *previous* tokens (and the token itself), weighted by learned attention scores.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the consequence of causal attention; follows from the definition of causal attention."
+    },
+    {
+      "index": 52,
+      "text": "A single causal attention head produces one set of context vectors.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement; no citation needed."
+    },
+    {
+      "index": 53,
+      "text": "Multi-head attention refers to dividing the attention mechanism into multiple heads, each operating independently [c1924, c1952].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1924",
+        "c1952"
+      ],
+      "status": "grounded",
+      "reason": "c1924 states 'Multi-head attention refers to dividing the attention mechanism into multiple heads, each operating independently' and c1952 states 'Multi-head attention refers to dividing the attention mechanism into multiple heads, where each head operates independently.' Both claims directly support the sentence."
+    },
+    {
+      "index": 54,
+      "text": "It is called \"multi-head\" because it aggregates the output of multiple independent attention heads [c1962].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1962"
+      ],
+      "status": "grounded",
+      "reason": "c1962 states 'Multi-head attention is called 'multi-head' because it aggregates the output of multiple independent attention heads,' which directly supports the sentence."
+    },
+    {
+      "index": 55,
+      "text": "The motivation is representational richness.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to motivation; no citation needed."
+    },
+    {
+      "index": 56,
+      "text": "Different heads can learn to attend to different aspects of the input\u2014one head might focus on syntactic relationships, another on semantic similarity\u2014and their outputs are combined to form a richer context representation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the motivation; no citation needed."
+    },
+    {
+      "index": 57,
+      "text": "The straightforward way to implement multi-head attention is to create multiple instances of the causal self-attention mechanism, each with its own weights, and then combine their outputs [c1964].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1964"
+      ],
+      "status": "grounded",
+      "reason": "c1964 states 'Multi-head attention involves creating multiple instances of the self-attention mechanism, each with its own weights, and then combining their outputs,' which directly supports the sentence."
+    },
+    {
+      "index": 58,
+      "text": "In the forward method, `torch.cat` is used with `dimension=-1` to concatenate outputs along the columns [c1966].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1966"
+      ],
+      "status": "grounded",
+      "reason": "c1966 states 'In the forward method, torch.cat is used with dimension=-1 to concatenate outputs along the columns,' which directly supports the sentence."
+    },
+    {
+      "index": 59,
+      "text": "In this wrapper approach, a causal attention module is applied to compute context vectors for each attention head separately, and the results are concatenated [c1118].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1118"
+      ],
+      "status": "grounded",
+      "reason": "c1118 states 'In the previous multi-head attention implementation, a causal attention module is applied to compute context vectors for each attention head separately, and the results are concatenated,' which directly supports the sentence."
+    },
+    {
+      "index": 60,
+      "text": "The output dimension $D_{out}$ of each attention head [c1969] is set so that the concatenated result has the desired total dimensionality.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1969"
+      ],
+      "status": "grounded",
+      "reason": "c1969 states 'D_out is the output dimension of each attention head,' which supports the reference to D_out as the output dimension of each head."
+    },
+    {
+      "index": 61,
+      "text": "While conceptually clean, this approach is less efficient: it requires a separate matrix multiplication for each head at the start of the forward pass [c1117].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1117"
+      ],
+      "status": "grounded",
+      "reason": "c1117 states 'Implementing multi-head attention with weight splits is a more efficient approach than the previous method because it reduces the number of matrix multiplications at the start,' which implies the wrapper approach requires more matrix multiplications, supporting the sentence."
+    },
+    {
+      "index": 62,
+      "text": "The production-grade approach\u2014used in GPT\u2014is to perform a single large matrix multiplication and then *split* the result across heads.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to the efficient approach; no citation needed."
+    },
+    {
+      "index": 63,
+      "text": "This is more computationally efficient than maintaining separate classes for a multi-head attention wrapper and causal attention [c1119].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1119"
+      ],
+      "status": "grounded",
+      "reason": "c1119 states 'Multi-head attention with weight splits is more computationally efficient than maintaining separate classes for multi-head attention wrapper and causal attention,' which directly supports the sentence."
+    },
+    {
+      "index": 64,
+      "text": "The key insight is that instead of having $h$ separate small weight matrices, you have one large weight matrix of dimension $d_{in} \\times d_{out}$, where:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the key insight; no citation needed."
+    },
+    {
+      "index": 65,
+      "text": "$$D_{out} = \\text{head\\_dimension} \\times \\text{number\\_of\\_heads}$$ [c1124]",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1124"
+      ],
+      "status": "grounded",
+      "reason": "c1124 contains the equation 'D_out = head_dimension \u00d7 number_of_heads,' which matches the sentence."
+    },
+    {
+      "index": 66,
+      "text": "Equivalently:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to equivalent equation; no factual claim."
+    },
+    {
+      "index": 67,
+      "text": "$$\\text{head\\_dim} = \\frac{d_{out}}{\\text{num\\_heads}}$$ [c1147]",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1147"
+      ],
+      "status": "grounded",
+      "reason": "c1147 contains the equation 'head_dim = d_out / number_of_heads,' which matches the sentence."
+    },
+    {
+      "index": 68,
+      "text": "The head dimension is the dimension of the representation within each individual attention head [c1146].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1146"
+      ],
+      "status": "grounded",
+      "reason": "c1146 states 'Head dimension (head_dim) is the dimension of the representation within each individual attention head,' which directly supports the sentence."
+    },
+    {
+      "index": 69,
+      "text": "For a concrete example, if $d_{out} = 6$ and $\\text{num\\_heads} = 2$, then:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introduction to a concrete example; no citation needed."
+    },
+    {
+      "index": 70,
+      "text": "$$\\text{head\\_dim} = d_{out} / \\text{num\\_heads} = 6 / 2 = 3$$ [c1163]",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1163"
+      ],
+      "status": "grounded",
+      "reason": "c1163 contains the equation 'head_dim = d_out / num_heads = 6 / 2 = 3,' which matches the sentence."
+    },
+    {
+      "index": 71,
+      "text": "The number of attention heads is the count of parallel attention mechanisms that operate on the output dimension [c1143].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1143"
+      ],
+      "status": "grounded",
+      "reason": "c1143 states 'Number of attention heads is the count of parallel attention mechanisms that operate on the output dimension,' which directly supports the sentence."
+    },
+    {
+      "index": 72,
+      "text": "The `__init__` method creates three linear projections\u2014one each for queries, keys, and values\u2014plus an output projection and a dropout layer:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to code block; no factual claim."
+    },
+    {
+      "index": 73,
+      "text": "self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)\nself.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)\nself.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1152"
+      ],
+      "status": "grounded",
+      "reason": "c1152 contains the exact code block with all three lines matching the cited claim."
+    },
+    {
+      "index": 74,
+      "text": "self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)\nself.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)\nself.out_proj = nn.Linear(d_out, d_out)\nself.dropout = nn.Dropout(dropout)\nself.register_buffer('mask', torch.triu(torch.ones(context_length, context_length), diagonal=1))",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1127"
+      ],
+      "status": "grounded",
+      "reason": "c1127 contains the exact code block with all five lines matching the cited claim."
+    },
+    {
+      "index": 75,
+      "text": "The mask is registered as a buffer rather than a parameter so that it moves to the correct device automatically but is not updated by the optimizer.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the design choice; no citation needed."
+    },
+    {
+      "index": 76,
+      "text": "The forward method of multi-head attention takes an input tensor with three dimensions: batch size, number of tokens, and input dimension $D_{in}$ [c1134].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1134"
+      ],
+      "status": "grounded",
+      "reason": "c1134 states 'The forward method of multi-head attention takes an input tensor with three dimensions: batch size, number of tokens, and input dimension (D_in),' which directly supports the sentence."
+    },
+    {
+      "index": 77,
+      "text": "$D_{in}$ represents the dimensionality of the vector embedding for each token [c1135].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1135"
+      ],
+      "status": "grounded",
+      "reason": "c1135 states 'D_in (input dimension) represents the dimensionality of the vector embedding for each token,' which directly supports the sentence."
+    },
+    {
+      "index": 78,
+      "text": "**Step 1 \u2014 Project to queries, keys, and values.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 79,
+      "text": "keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)\nqueries = self.W_query(x)\nvalues = self.W_value(x)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1128"
+      ],
+      "status": "grounded",
+      "reason": "c1128 contains the exact code block with all three lines matching the cited claim."
+    },
+    {
+      "index": 80,
+      "text": "In the Keys, Queries, and Values matrices with shape `(batch_size, num_tokens, d_out)`, each row corresponds to one token, and each token is represented as a $d_{out}$-dimensional vector [c1160].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1160"
+      ],
+      "status": "grounded",
+      "reason": "c1160 states 'In the Keys, Queries, and Values matrices with shape (batch_size, num_tokens, d_out), each row corresponds to one token, and each token is represented as a d_out-dimensional vector,' which directly supports the sentence."
+    },
+    {
+      "index": 81,
+      "text": "**Step 2 \u2014 Reshape to expose the head dimension.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 82,
+      "text": "The last dimension of keys, queries, and values ($d_{out}$) is unrolled to include the number of heads and head dimension [c1165]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1165"
+      ],
+      "status": "grounded",
+      "reason": "c1165 states 'The last dimension of keys, queries, and values (d_out) is unrolled to include the number of heads and head dimension,' which directly supports the sentence."
+    },
+    {
+      "index": 83,
+      "text": "$$d_{out} = \\text{head\\_dimension} \\times \\text{num\\_heads}$$ [c1167]",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1167"
+      ],
+      "status": "grounded",
+      "reason": "c1167 contains the equation 'd_out = head_dimension * num_heads,' which matches the sentence."
+    },
+    {
+      "index": 84,
+      "text": "keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)\nqueries = queries.view(b, num_tokens, self.num_heads, self.head_dim)\nvalues = values.view(b, num_tokens, self.num_heads, self.head_dim)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1178"
+      ],
+      "status": "grounded",
+      "reason": "c1178 contains the exact code block with all three lines matching the cited claim."
+    },
+    {
+      "index": 85,
+      "text": "After this reshape, each tensor has shape `(batch_size, num_tokens, num_heads, head_dim)`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the reshape result; follows from the code."
+    },
+    {
+      "index": 86,
+      "text": "**Step 3 \u2014 Transpose to bring the head dimension before the token dimension.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 87,
+      "text": "keys = keys.transpose(1, 2)\nqueries = queries.transpose(1, 2)\nvalues = values.transpose(1, 2)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1180"
+      ],
+      "status": "grounded",
+      "reason": "c1180 contains the exact code block with all three lines matching the cited claim."
+    },
+    {
+      "index": 88,
+      "text": "After transposing, the shape becomes `(batch_size, num_heads, num_tokens, head_dim)`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the transpose result; follows from the code."
+    },
+    {
+      "index": 89,
+      "text": "This layout lets PyTorch's batch matrix multiplication operate independently on each head.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the purpose; no citation needed."
+    },
+    {
+      "index": 90,
+      "text": "**Step 4 \u2014 Compute attention scores.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 91,
+      "text": "Attention scores are computed by multiplying queries with the transpose of keys along dimensions 2 and 3 [c1186]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1186"
+      ],
+      "status": "grounded",
+      "reason": "c1186 states 'Attention scores are computed by multiplying queries with the transpose of keys along dimensions 2 and 3,' which directly supports the sentence."
+    },
+    {
+      "index": 92,
+      "text": "attn_scores = queries @ keys.transpose(2, 3)  # Compute scaled dot-product attention scores for each head",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1205"
+      ],
+      "status": "grounded",
+      "reason": "c1205 contains the exact code: 'attn_scores = queries @ keys.transpose(2, 3)  # Compute scaled dot-product attention scores for each head'"
+    },
+    {
+      "index": 93,
+      "text": "Each element in an attention score matrix row encodes how much a particular token relates to the query token, or how much importance should be paid to that token when processing the query [c1934].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1934"
+      ],
+      "status": "grounded",
+      "reason": "c1934 states 'Each element in an attention score matrix row encodes how much a particular token relates to the query token, or how much importance should be paid to that token when processing the query,' which directly supports the sentence."
+    },
+    {
+      "index": 94,
+      "text": "**Step 5 \u2014 Apply the causal mask.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 95,
+      "text": "mask_bool = self.mask.bool()[:num_tokens, :num_tokens]\nattn_scores.masked_fill_(mask_bool, -torch.inf)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1206"
+      ],
+      "status": "grounded",
+      "reason": "c1206 contains the exact code block with both lines matching the cited claim."
+    },
+    {
+      "index": 96,
+      "text": "The causal attention mechanism ensures that when computing attention scores for a token, only attention scores with tokens that come before it (and itself) survive; all attention scores with future tokens are zeroed out [c1197].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1197"
+      ],
+      "status": "grounded",
+      "reason": "c1197 states 'Causal attention mechanism ensures that when computing attention scores for a token, only attention scores with tokens that come before it (and itself) survive; all attention scores with future tokens are zeroed out,' which directly supports the sentence."
+    },
+    {
+      "index": 97,
+      "text": "**Step 6 \u2014 Scale, softmax, and dropout.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 98,
+      "text": "attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1209"
+      ],
+      "status": "grounded",
+      "reason": "c1209 contains the exact code: 'attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)'"
+    },
+    {
+      "index": 99,
+      "text": "Attention weights differ from attention scores in that each row of attention weights sums to one, whereas attention scores do not have this property [c1228].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1228"
+      ],
+      "status": "grounded",
+      "reason": "c1228 states 'Attention weights differ from attention scores in that each row of attention weights sums to one, whereas attention scores do not have this property,' which directly supports the sentence."
+    },
+    {
+      "index": 100,
+      "text": "attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)\nattn_weights = self.dropout(attn_weights)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1133"
+      ],
+      "status": "grounded",
+      "reason": "c1133 contains the exact code block with both lines matching the cited claim."
+    },
+    {
+      "index": 101,
+      "text": "**Step 7 \u2014 Compute context vectors and project.**",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Section heading; no factual claim."
+    },
+    {
+      "index": 102,
+      "text": "The context vector matrix is computed by multiplying attention weights with the values matrix [c1213].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1213"
+      ],
+      "status": "grounded",
+      "reason": "c1213 states 'The context vector matrix is computed by multiplying attention weights with the values matrix,' which directly supports the sentence."
+    },
+    {
+      "index": 103,
+      "text": "In the context vector output, each row represents the context vector for a particular token with dimensions equal to `head_dim` [c1218].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1218"
+      ],
+      "status": "grounded",
+      "reason": "c1218 states 'In the context vector output, each row represents the context vector for a particular token with dimensions equal to head_dim,' which directly supports the sentence."
+    },
+    {
+      "index": 104,
+      "text": "context_vec = (attn_weights @ values).transpose(1, 2)\ncontext_vec = context_vec.contiguous().view(b, num_tokens, self.d_out)\ncontext_vec = self.out_proj(context_vec)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1225"
+      ],
+      "status": "grounded",
+      "reason": "c1225 contains the exact code block with all three lines matching the cited claim."
+    },
+    {
+      "index": 105,
+      "text": "The `.transpose(1, 2)` swaps the head and token dimensions back, and `.view(b, num_tokens, self.d_out)` concatenates the head outputs by merging the last two dimensions.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the code; follows from the operations."
+    },
+    {
+      "index": 106,
+      "text": "The output projection `self.out_proj` then mixes information across heads with a learned linear transformation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the output projection; no citation needed."
+    },
+    {
+      "index": 107,
+      "text": "The output dimension $d_{out}$ is the dimension of the context embedding vector produced for each token by the attention mechanism [c1140].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1140"
+      ],
+      "status": "grounded",
+      "reason": "c1140 states 'Output dimension (d_out) is the dimension of the context embedding vector produced for each token by the attention mechanism,' which directly supports the sentence."
+    },
+    {
+      "index": 108,
+      "text": "[FIGURE: Data flow diagram showing input tensor (b, T, d_in) \u2192 three linear projections \u2192 reshape and transpose to (b, num_heads, T, head_dim) \u2192 scaled dot-product attention per head \u2192 transpose and reshape back to (b, T, d_out) \u2192 output projection]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 109,
+      "text": "Let us verify the implementation with a small concrete example.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to example; no factual claim."
+    },
+    {
+      "index": 110,
+      "text": "We construct a batch of two sequences, each with three tokens of embedding dimension 6:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to code block; no factual claim."
+    },
+    {
+      "index": 111,
+      "text": "x = torch.tensor([[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0],\n                    [6.0, 5.0, 4.0, 3.0, 2.0, 1.0],\n                    [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]]])",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1138"
+      ],
+      "status": "grounded",
+      "reason": "c1138 contains the exact code block matching the cited claim."
+    },
+    {
+      "index": 112,
+      "text": "Then we instantiate the multi-head attention module and run a forward pass:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to code block; no factual claim."
+    },
+    {
+      "index": 113,
+      "text": "batch_size, context_length, d_in = batch.shape\nd_out = 6\nmha = MultiHeadAttention(d_in, d_out, context_length, 0.0, num_heads=2)\ncontext_vecs = mha(batch)\nprint(context_vecs.shape)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c1233"
+      ],
+      "status": "grounded",
+      "reason": "c1233 contains the exact code block with all five lines matching the cited claim."
+    },
+    {
+      "index": 114,
+      "text": "With `d_out = 6` and `num_heads = 2`, the head dimension is $6 / 2 = 3$ [c1163].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1163"
+      ],
+      "status": "grounded",
+      "reason": "c1163 contains the equation 'head_dim = d_out / num_heads = 6 / 2 = 3,' which directly supports the sentence."
+    },
+    {
+      "index": 115,
+      "text": "The output shape will be `(batch_size, num_tokens, 6)`, matching the input embedding dimension\u2014a common design choice that makes it easy to stack transformer blocks.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of the output shape and design choice; no citation needed."
+    },
+    {
+      "index": 116,
+      "text": "| Property | Wrapper (separate heads) | Weight-split (efficient) |",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Table header; no factual claim."
+    },
+    {
+      "index": 117,
+      "text": "|---|---|---|",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Table separator; no factual claim."
+    },
+    {
+      "index": 118,
+      "text": "| Number of QKV projections | One per head | One shared projection |",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Table row; no factual claim."
+    },
+    {
+      "index": 119,
+      "text": "| Matrix multiplications at start | $h$ separate | 1 large |",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Table row; no factual claim."
+    },
+    {
+      "index": 120,
+      "text": "| Conceptual clarity | High | Moderate |",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Table row; no factual claim."
+    },
+    {
+      "index": 121,
+      "text": "| Computational efficiency | Lower [c1117] | Higher [c1119] |",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1117",
+        "c1119"
+      ],
+      "status": "grounded",
+      "reason": "c1117 states the wrapper approach requires more matrix multiplications (less efficient), and c1119 states the weight-split approach is more efficient. Both claims support the table row."
+    },
+    {
+      "index": 122,
+      "text": "The weight-split implementation is what you will find in production GPT code.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Statement about production practice; no citation needed."
+    },
+    {
+      "index": 123,
+      "text": "The wrapper is useful for building intuition, but the efficient version is what we carry forward into the full model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Concluding statement; no citation needed."
+    },
+    {
+      "index": 124,
+      "text": "This chapter covered the full journey from unrestricted self-attention to the efficient multi-head causal attention used in GPT:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary introduction; no factual claim."
+    },
+    {
+      "index": 125,
+      "text": "**Causal masking**: Future token positions are filled with $-\\infty$ before softmax [c2645], preventing data leakage [c2643] and ensuring attention weight rows sum to one [c2652].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2645",
+        "c2643",
+        "c2652"
+      ],
+      "status": "grounded",
+      "reason": "c2645 states 'An upper triangular infinity mask is applied to attention scores before softmax,' c2643 states 'Applying softmax before masking future tokens and then renormalizing creates a data leakage problem,' and c2652 states 'The causal masking mechanism prevents information leakage from future tokens while ensuring attention weight rows sum to one.' All claims support the sentence."
+    },
+    {
+      "index": 126,
+      "text": "**Mask geometry**: An upper-triangular mask (ones above the diagonal, created with `torch.triu(..., diagonal=1)`) identifies future positions [c2649].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2649"
+      ],
+      "status": "grounded",
+      "reason": "c2649 contains the code 'mask = torch.triu(torch.ones(seq_len, seq_len), diagonal=1),' which directly supports the sentence."
+    },
+    {
+      "index": 127,
+      "text": "**Dropout**: Applied to attention weights after softmax to regularize training [c2661].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2661"
+      ],
+      "status": "grounded",
+      "reason": "c2661 states 'Dropout in causal attention randomly zeros out attention weights according to a dropout mask while preserving the causal masking of future tokens,' which supports the sentence."
+    },
+    {
+      "index": 128,
+      "text": "**Multi-head attention**: Multiple independent attention heads [c1924] are implemented efficiently by projecting to a large $d_{out}$, reshaping to expose the head dimension, running batched attention, and reshaping back [c1165, c1167].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1924",
+        "c1165",
+        "c1167"
+      ],
+      "status": "grounded",
+      "reason": "c1924 states 'Multi-head attention refers to dividing the attention mechanism into multiple heads, each operating independently,' c1165 states 'The last dimension of keys, queries, and values (d_out) is unrolled to include the number of heads and head dimension,' and c1167 states 'd_out = head_dimension * num_heads.' All claims support the sentence."
+    },
+    {
+      "index": 129,
+      "text": "**Output projection**: A final linear layer mixes information across heads [c1225].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1225"
+      ],
+      "status": "grounded",
+      "reason": "c1225 contains the code 'context_vec = self.out_proj(context_vec),' which shows the output projection is applied. The sentence's claim that it 'mixes information across heads' follows from the context of the multi-head attention mechanism."
+    },
+    {
+      "index": 130,
+      "text": "The attention series covered simplified self-attention, self-attention, causal attention, and multi-head attention [c359].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c359"
+      ],
+      "status": "grounded",
+      "reason": "c359 states 'The attention mechanism lecture series included four to five detailed lectures covering simplified self-attention, self-attention, causal attention, and multi-head attention,' which directly supports the sentence."
+    },
+    {
+      "index": 131,
+      "text": "With multi-head causal attention in hand, we have the core computational primitive of the transformer.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Concluding statement; no citation needed."
+    },
+    {
+      "index": 132,
+      "text": "The next step is to embed this module inside a full transformer block, add feed-forward layers and layer normalization, and stack those blocks into a complete GPT model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Forward-looking statement; no citation needed."
+    }
+  ],
+  "summary": {
+    "grounded": 95,
+    "unsupported": 0,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 37
+  }
+}

@@ -1,0 +1,1803 @@
+{
+  "video_id": "_xH-jXNFRjA",
+  "segments": [
+    {
+      "id": "_xH-jXNFRjA_000",
+      "title": "Introduction",
+      "ts_start": 0.0,
+      "ts_end": 142.0,
+      "segments": [
+        {
+          "ts_start": 3.65,
+          "ts_end": 9.25,
+          "text": "Hello everyone, welcome to this video in the Build Large Language Models from Scratch series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 9.85,
+          "ts_end": 18.01,
+          "text": "This is a conclusion video in which I'll try to quickly summarize what all we have completed in this lecture series so far.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 18.94,
+          "ts_end": 26.6,
+          "text": "You may be into two categories of students. The first is who has followed this entire series and who is watching this video.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 26.6,
+          "ts_end": 37.36,
+          "text": "Congratulations, you have made it this far. You are now one of the few students in the whole world, I would say, who knows how to build an entire large-language model completely from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 37.72,
+          "ts_end": 49.31,
+          "text": "If you have stumbled upon this video, and if you don't know about the rest of the playlist, I highly encourage you to go through all of the videos to develop a very firm understanding of large-language models.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 49.67,
+          "ts_end": 56.83,
+          "text": "I started this lecture series with the goal of teaching you how to be a fundamental researcher or a philologist.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 56.85,
+          "ts_end": 58.63,
+          "text": "I also wanted to share with you the fundamental engineering in machine learning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 59.01,
+          "ts_end": 65.04,
+          "text": "The main thing which you should really focus on is to understand the nuts and bolts of how things work.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 65.32,
+          "ts_end": 72.52,
+          "text": "Instead of running fancy large-language model applications, we should focus our attention to how large-language models are really built.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 72.72,
+          "ts_end": 78.5,
+          "text": "We should understand the nuts and bolts of large-language models, and that has been the whole focus of this series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 78.68,
+          "ts_end": 86.44,
+          "text": "The videos have been long, but they have been very satisfying, as I have seen from interactions with many students who have watched",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 87.36,
+          "ts_end": 88.16,
+          "text": "the videos.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 89.39,
+          "ts_end": 96.11,
+          "text": "When I started this lecture series, I took a lot of inspiration from this book, Build a Large-Language Model, by Sebastian Rushka.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0000"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 96.31,
+          "ts_end": 97.75,
+          "text": "So, thank you, Sebastian.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 98.79,
+          "ts_end": 105.15,
+          "text": "And this really helped me construct the courses, or construct the entire lecture series.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0001"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 105.49,
+          "ts_end": 112.15,
+          "text": "Here is the code file which we have run throughout this entire lecture series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 112.39,
+          "ts_end": 114.91,
+          "text": "As you can see, the code has become pretty long.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 115.05,
+          "ts_end": 117.73,
+          "text": "But every single thing has been explained in a lot of detail.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 117.73,
+          "ts_end": 123.41,
+          "text": "In the videos which we have seen throughout this course, I have explained every single code block to you.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 123.59,
+          "ts_end": 126.41,
+          "text": "And we do not assume anything in this lecture series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 126.59,
+          "ts_end": 128.55,
+          "text": "Everything is covered in-depth from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 128.99,
+          "ts_end": 132.29,
+          "text": "I have shared this code file with all of the students who have been watching.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 133.21,
+          "ts_end": 140.73,
+          "text": "And I hope that once you have access to this code file, you are able to run and construct the entire large-language model on your own.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "_xH-jXNFRjA_001",
+      "title": "Recap",
+      "ts_start": 142.0,
+      "ts_end": 272.0,
+      "segments": [
+        {
+          "ts_start": 142.3,
+          "ts_end": 145.7,
+          "text": "Here is the workflow of everything which we covered in this series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 145.94,
+          "ts_end": 148.4,
+          "text": "First, we started with stage number 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 148.52,
+          "ts_end": 149.12,
+          "text": "Then we started with stage 2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 149.14,
+          "ts_end": 151.08,
+          "text": "Then we sequentially moved to stage number 2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 151.18,
+          "ts_end": 153.1,
+          "text": "And then we moved to stage number 3.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 153.44,
+          "ts_end": 156.5,
+          "text": "Just like to build a house, we first need to lay the foundation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 156.78,
+          "ts_end": 160.98,
+          "text": "In stage number 1, we laid the foundation for building the large-language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 161.16,
+          "ts_end": 163.44,
+          "text": "We looked at data preparation and sampling.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 163.72,
+          "ts_end": 173.37,
+          "text": "Then we looked at the attention mechanism, which is the engine behind which or using which large-language models derive their power.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 174.5,
+          "ts_end": 178.44,
+          "text": "And finally, we looked at the large-language model architecture in stage 1.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 178.44,
+          "ts_end": 182.44,
+          "text": "How different blocks are arranged together to construct the large-language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 182.86,
+          "ts_end": 187.38,
+          "text": "Once stage 1 is finished, then we move to stage number 2, which is essentially pre-training.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 187.62,
+          "ts_end": 193.04,
+          "text": "In pre-training, we looked at how to implement the loss function for the large-language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 193.16,
+          "ts_end": 201.16,
+          "text": "How to do a backward pass and how to train more than 100 million or the billion parameters which are typically involved in the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 201.38,
+          "ts_end": 208.24,
+          "text": "We also saw how to load pre-trained weights from a large-language model such as OpenAI GPT-2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 208.24,
+          "ts_end": 211.0,
+          "text": "And that accelerates the pre-training process.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 211.46,
+          "ts_end": 215.2,
+          "text": "And then in stage number 3, we saw that pre-training is not enough.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 215.38,
+          "ts_end": 224.02,
+          "text": "To make sure that the LLM performs well on specific tasks such as classification or making our own personalized chatbot, we learned about fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 224.2,
+          "ts_end": 227.16,
+          "text": "We completed two hands-on projects fully from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 227.34,
+          "ts_end": 231.9,
+          "text": "We made an LLM classifier which can distinguish between spam versus no-spam emails.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 232.08,
+          "ts_end": 236.2,
+          "text": "And we also built our own personal assistant which can follow instructions.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 236.74,
+          "ts_end": 238.22,
+          "text": "These were included in the LLM classifier.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 238.24,
+          "ts_end": 243.56,
+          "text": "These were incredibly rewarding experiences and we displayed and understood everything from the very basics.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 244.34,
+          "ts_end": 252.2,
+          "text": "Now what I will do is that I will take you through individual steps and key components of what all we have covered in this journey so far.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 252.48,
+          "ts_end": 256.26,
+          "text": "If you have watched the lecture series, this will serve as a good recap for you.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 256.3,
+          "ts_end": 260.84,
+          "text": "And you can also use it as a quick revision before you go for interviews.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 261.78,
+          "ts_end": 265.88,
+          "text": "And if you have not watched the previous lecture videos,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 265.88,
+          "ts_end": 271.34,
+          "text": "this will serve as a good video for you to see what all we will be covering in this lecture series.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "_xH-jXNFRjA_002",
+      "title": "Data Preprocessing Pipeline",
+      "ts_start": 272.0,
+      "ts_end": 380.0,
+      "segments": [
+        {
+          "ts_start": 277.82,
+          "ts_end": 285.26,
+          "text": "The data pre-processing pipeline for an LLM is much different than a regression model or a classification model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 285.48,
+          "ts_end": 290.6,
+          "text": "When you have input texts in a large language model, the goal is to predict the next token rate.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 290.74,
+          "ts_end": 295.34,
+          "text": "So the first thing what you do is that you have to convert this input text into tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 295.88,
+          "ts_end": 298.3,
+          "text": "And then you have to convert the tokens into token IDs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 299.3,
+          "ts_end": 307.78,
+          "text": "After this, the next step is to convert these token IDs into the higher dimensional vector space so that the semantic meaning of different tokens is captured.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 308.32,
+          "ts_end": 316.52,
+          "text": "When you project the tokens into higher dimensional vector space, then you have to add the positional embeddings to these token embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 316.76,
+          "ts_end": 323.2,
+          "text": "So the projections of token IDs into higher dimensional vector spaces, as has been shown here, are called as token embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 323.3,
+          "ts_end": 326.08,
+          "text": "You have to add positional embedding vectors to the token embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 326.1,
+          "ts_end": 339.3,
+          "text": "The reason we add positional embeddings is because along with converting tokens into vector representations, the positions at which individual tokens show up is also very important when predicting the next token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 339.56,
+          "ts_end": 345.14,
+          "text": "When you add token embeddings to positional embeddings, it results into something which is called as input embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 345.28,
+          "ts_end": 352.18,
+          "text": "Now, these input embeddings are the output which we expect from the data pre-processing pipeline.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 352.52,
+          "ts_end": 356.14,
+          "text": "The whole goal of the data pre-processing pipeline is to take the input.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 356.16,
+          "ts_end": 372.94,
+          "text": "To take the input text from the huge number of documents, the training data which we are feeding to the large language model, and to convert all of those documents into sentences, then into tokens, then into token IDs, then into token embeddings, then add positional embeddings and convert it into input embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 373.04,
+          "ts_end": 378.82,
+          "text": "To give you a sense of the token embedding dimension in GPT-2, the embedding dimension is of 768.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "_xH-jXNFRjA_003",
+      "title": "Attention Mechanism",
+      "ts_start": 380.0,
+      "ts_end": 536.0,
+      "segments": [
+        {
+          "ts_start": 382.97,
+          "ts_end": 385.67,
+          "text": "After this, we move to understand the attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 386.29,
+          "ts_end": 389.81,
+          "text": "Attention mechanism is the driving engine which gives LLM its power.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 390.51,
+          "ts_end": 397.47,
+          "text": "So the main idea of attention is that when you look at vector embeddings, you just look at semantic meaning of one token, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 397.55,
+          "ts_end": 401.09,
+          "text": "You do not look at the relationship of one token with all the other tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 401.45,
+          "ts_end": 405.01,
+          "text": "However, when you are predicting the next token, context is very important.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 405.29,
+          "ts_end": 408.97,
+          "text": "You need to know how one token relates to all the other tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 409.07,
+          "ts_end": 412.89,
+          "text": "When you look at one token, how much importance should you give to other tokens?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 413.15,
+          "ts_end": 415.63,
+          "text": "And that importance is also called as attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 416.23,
+          "ts_end": 425.49,
+          "text": "So the whole goal of the attention mechanism is to convert the input vectors, to convert the input embedding vectors which look like this into something which is called as the context vectors.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 425.89,
+          "ts_end": 432.23,
+          "text": "So at the end of the attention, when the attention mechanism is implemented, the input vectors are converted into context vectors.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 432.33,
+          "ts_end": 437.33,
+          "text": "So you see the input embedding vector for journey and here is the context vector for journey.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 437.71,
+          "ts_end": 446.21,
+          "text": "Context vectors are much richer than input embedding vectors because they also contain information about how journey, let's say, relates to all the other tokens in the sentence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 446.23,
+          "ts_end": 455.52,
+          "text": "And to go from the input embedding vectors to the context vectors, there is a huge sequential flow which we need to understand.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 455.68,
+          "ts_end": 462.7,
+          "text": "We first multiply the inputs with the trainable query, key and the value matrices, which give us the queries, keys and the value matrix.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 462.92,
+          "ts_end": 467.0,
+          "text": "We multiply queries with the keys transpose, which gives us the attention score.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 467.2,
+          "ts_end": 470.56,
+          "text": "Then we scale the attention score with square root of the keys dimension.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 470.86,
+          "ts_end": 472.08,
+          "text": "We add dropout.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 472.14,
+          "ts_end": 475.9,
+          "text": "We implement causal attention, which means that we add a mask.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 476.58,
+          "ts_end": 481.48,
+          "text": "To all of those tokens, which are not involved in the next token prediction task.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 481.66,
+          "ts_end": 483.26,
+          "text": "And then we add a softmax layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 483.54,
+          "ts_end": 489.58,
+          "text": "So after implementing the scaling plus dropout plus softmax, we convert the attention scores into attention weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 489.8,
+          "ts_end": 494.84,
+          "text": "The attention weights are then multiplied with the values and then we get the context vector matrix.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 495.36,
+          "ts_end": 497.58,
+          "text": "Now this is only for one attention head.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 497.72,
+          "ts_end": 502.38,
+          "text": "When we consider a large language model, there are multiple attention heads which are acting.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 502.58,
+          "ts_end": 506.24,
+          "text": "The reason we have multiple attention heads is to capture multiple dependencies.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 506.58,
+          "ts_end": 510.04,
+          "text": "And long range dependencies within a large paragraph.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 510.4,
+          "ts_end": 517.52,
+          "text": "So when you combine the context vector matrices from multiple attention heads, you get this ultimate final context vector matrix.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 517.82,
+          "ts_end": 522.9,
+          "text": "That is the output when the input embedding matrix passes through the attention head.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 523.7,
+          "ts_end": 530.54,
+          "text": "So the whole revolution which happened with respect to large language models is because of this workflow, which I'm sharing on the screen right now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 530.68,
+          "ts_end": 534.92,
+          "text": "Taking the input embedding matrix and converting it into this context vector matrix.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 535.2,
+          "ts_end": 535.9,
+          "text": "That's the key.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "_xH-jXNFRjA_004",
+      "title": "LLM Architecture",
+      "ts_start": 536.0,
+      "ts_end": 945.0,
+      "segments": [
+        {
+          "ts_start": 537.06,
+          "ts_end": 540.98,
+          "text": "After you understood the attention mechanism, then we move to the LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 541.5,
+          "ts_end": 544.8,
+          "text": "Now remember that I'm going a bit fast here because this is a recap.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 545.28,
+          "ts_end": 546.34,
+          "text": "This is a summary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 546.56,
+          "ts_end": 553.22,
+          "text": "If you want to understand each and every element, I highly encourage you to go to that specific lecture and watch that entire video again.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 553.8,
+          "ts_end": 557.58,
+          "text": "Now the next step after understanding attention is to look at the LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 557.96,
+          "ts_end": 561.42,
+          "text": "So this is the bird's eye view of how the LLM architecture looks like.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 561.5,
+          "ts_end": 567.2,
+          "text": "And actually let me take another figure, which I think is a better representation of the LLM.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "other",
+              "skip": false,
+              "title": null,
+              "extracted_text": "You are a winner you have been specially selected to receive $1000 cash or a $2000 award\n\nHey, just wanted to check if we're still on for dinner tonight? Let me know!\n\nConvert the active sentence to passive: 'The chef cooks every day.'\n\nResponse: 'The meal is cooked every day by the chef.'",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Neural network architecture diagram showing hidden units, layers, and connections with annotations about replacing linear output layer with a layer that maps from hidden units to only 1 unit where 2 units regression the two classes.",
+              "diagram_elements": [
+                "Hidden units",
+                "Linear output layer",
+                "Regression layer",
+                "Input layer",
+                "Output"
+              ],
+              "confidence": 0.65,
+              "frame_id": "_xH-jXNFRjA_f0002",
+              "video_id": "_xH-jXNFRjA",
+              "timestamp_sec": 564.033,
+              "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 567.22,
+          "ts_end": 573.62,
+          "text": "So I'm just taking a screenshot of this figure here and I'm going to move it above.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 573.88,
+          "ts_end": 588.14,
+          "text": "So if you look at this architecture, this gives us a bird's eye view of what actually goes on when you look at a large language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 588.32,
+          "ts_end": 590.36,
+          "text": "So first, as I mentioned, you have inputs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 591.42,
+          "ts_end": 593.12,
+          "text": "First, as I mentioned, you have inputs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 593.22,
+          "ts_end": 595.08,
+          "text": "Those are converted into a bunch of tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 595.42,
+          "ts_end": 598.76,
+          "text": "Then the tokens are converted into vector embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 598.76,
+          "ts_end": 601.64,
+          "text": "We add positional embeddings and that gives us input embeddings.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 601.7,
+          "ts_end": 608.93,
+          "text": "The input embeddings are then passed into this block, into this token embedding layer, positional embedding layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 609.15,
+          "ts_end": 611.17,
+          "text": "And then we have a dropout layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 611.31,
+          "ts_end": 616.45,
+          "text": "And then we have these input embeddings, which are then passed into this blue block, which is the transformer block.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 616.69,
+          "ts_end": 619.71,
+          "text": "The transformer block is where all the magic happens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 619.93,
+          "ts_end": 624.17,
+          "text": "So you might be thinking, OK, now where does attention fit within the transformer block?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 624.35,
+          "ts_end": 628.51,
+          "text": "Within the transformer block, there is another module which is called as the attention module.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 628.89,
+          "ts_end": 637.21,
+          "text": "So the attention mechanism, which we learned about earlier, and the key query value, all of these things are actually happening inside this masked multi-head attention module.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 637.53,
+          "ts_end": 642.29,
+          "text": "So within the transformer block, there is a normalization layer, multi-head attention dropout layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 642.45,
+          "ts_end": 652.07,
+          "text": "These are shortcut connection, then other normalization layer, a feedforward neural network, another dropout layer, one more shortcut connection, and then we come out of the transformer block.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 652.43,
+          "ts_end": 657.87,
+          "text": "After coming out of the transformer block, there is a layer normalization layer and a final neural network,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 657.87,
+          "ts_end": 661.95,
+          "text": "which converts the transformer outputs into something which is called as the logits tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 662.55,
+          "ts_end": 669.07,
+          "text": "The logits tensor is then used to predict the next token, given an input sequence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 670.37,
+          "ts_end": 675.13,
+          "text": "Now, when you look at a GPT-2, let's say, there are 12 such transformer blocks which are arranged together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 675.37,
+          "ts_end": 680.11,
+          "text": "For larger LLMs, even multiple more transformer blocks are arranged together.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 680.37,
+          "ts_end": 683.37,
+          "text": "And within these transformer blocks, there is multi-head attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 683.69,
+          "ts_end": 688.09,
+          "text": "So within every transformer block, there can be 12 or there can be 24 attention heads.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 688.19,
+          "ts_end": 693.49,
+          "text": "So there are multiple transformer blocks, and within each transformer block, there are multiple attention heads.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 694.17,
+          "ts_end": 703.03,
+          "text": "The terminology is a bit complex, but once you get a visual feel of this architecture, it's actually quite easy to code it sequentially.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 703.25,
+          "ts_end": 710.77,
+          "text": "So once you understood this architecture, what we did in the lecture series is that we coded every single thing with respect to this architecture completely from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 710.95,
+          "ts_end": 716.42,
+          "text": "So you can search feedforward here, and here is the part 3 of the architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 716.68,
+          "ts_end": 718.4,
+          "text": "So in fact, we went sequentially.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 718.54,
+          "ts_end": 722.46,
+          "text": "With respect to all the parts, we first covered layer normalization.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 722.64,
+          "ts_end": 726.22,
+          "text": "Then we covered the feedforward neural network.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 726.42,
+          "ts_end": 728.26,
+          "text": "Then we covered the shortcut connections.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 728.7,
+          "ts_end": 730.94,
+          "text": "Then we covered the coding attention layers.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 731.12,
+          "ts_end": 734.7,
+          "text": "So everything is covered in coding as well, along with this whiteboard approach.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 735.22,
+          "ts_end": 744.66,
+          "text": "So once you figure out this LLM architecture, you will have a bird's eye view of what exactly happens with the input sequence, how it goes through the transformer, how it comes out of the transformer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 745.14,
+          "ts_end": 746.52,
+          "text": "We have the logits tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 746.78,
+          "ts_end": 748.9,
+          "text": "And that is then used to predict the next token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 748.92,
+          "ts_end": 751.62,
+          "text": "So this is my LLM prediction now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 751.74,
+          "ts_end": 760.06,
+          "text": "This next token, which is predicted by my LLM, is used to calculate the loss function between the LLM output and the true result.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 760.52,
+          "ts_end": 777.64,
+          "text": "After we get the loss function, the next step is to run the LLM pre-training loop, which means that once we have understood how to do the forward pass, which means that how to have an input sentence or how to have an input sequence, get the output from the LLM and get the loss based on the next token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 777.74,
+          "ts_end": 778.9,
+          "text": "And this loss, by the way, is the output.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 778.9,
+          "ts_end": 783.74,
+          "text": "This is the cross entropy loss between the next token prediction, which we have and the actual next token.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 784.1,
+          "ts_end": 793.94,
+          "text": "Once we know how to get the loss, then we have to do a back propagation, which means that then we have to take the partial derivative of the loss with respect to all of the parameters in the LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 794.48,
+          "ts_end": 796.58,
+          "text": "So here I have just mentioned the training loop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 796.66,
+          "ts_end": 798.74,
+          "text": "First, you calculate the loss on the entire batch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 798.88,
+          "ts_end": 805.02,
+          "text": "Then you do the backward pass, which means that you calculate the partial derivative of the loss with respect to all of the trainable weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 805.26,
+          "ts_end": 808.36,
+          "text": "So here you might be thinking, what all are the different trainable weights?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 808.36,
+          "ts_end": 813.82,
+          "text": "So there are trainable weights in the token embedding, positional embedding, because we don't know the...",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 813.82,
+          "ts_end": 817.9,
+          "text": "So when I say transform it into a vector space, we don't know what the ideal transformation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 818.26,
+          "ts_end": 820.54,
+          "text": "So we need to figure out those parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 820.78,
+          "ts_end": 822.86,
+          "text": "We need to figure out the positional embedding parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 823.38,
+          "ts_end": 824.92,
+          "text": "We need to have the...",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 824.92,
+          "ts_end": 828.54,
+          "text": "We need to figure out the scale and shift parameters in the layer normalization.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 829.64,
+          "ts_end": 837.32,
+          "text": "We need to train the query key and the value trainable weight matrices, these parameters in the mass multihead attention module.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 837.32,
+          "ts_end": 841.28,
+          "text": "Then the second layer normalization layer also has trainable parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 841.6,
+          "ts_end": 844.38,
+          "text": "The feed forward network also has trainable parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 844.74,
+          "ts_end": 848.76,
+          "text": "And the final output layer and the final layer norm also have trainable parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 849.12,
+          "ts_end": 851.94,
+          "text": "And remember that we have 12 such transformer blocks.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 852.24,
+          "ts_end": 858.86,
+          "text": "So that's why all of these parameters, when you add up, it leads to more than a million or more than even a billion parameters, which we need to train.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 859.22,
+          "ts_end": 862.04,
+          "text": "So we need to find the gradients for all of these parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 862.18,
+          "ts_end": 865.08,
+          "text": "And then we need to do a gradient update by something like",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 865.08,
+          "ts_end": 871.4,
+          "text": "wi plus one is equal to wi minus alpha times the partial gradient of loss with respect to the weights.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 871.7,
+          "ts_end": 874.48,
+          "text": "This is just a vanilla gradient descent, which I'm showing you.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 874.56,
+          "ts_end": 879.42,
+          "text": "Usually we implement some more sophisticated schemes like Adam or Adam with weight decay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 880.51,
+          "ts_end": 887.79,
+          "text": "Once you do this pre-training loop, you will actually get loss function as a loss as a function of the epochs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 887.87,
+          "ts_end": 892.43,
+          "text": "And this we have done on our own laptop, on our own system, but on a very small data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 892.75,
+          "ts_end": 895.13,
+          "text": "Keep in mind that the pre-training,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 895.13,
+          "ts_end": 899.29,
+          "text": "which is needed for actual LLMs like GPT-2, GPT-3, GPT-4, etc.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 899.55,
+          "ts_end": 907.89,
+          "text": "They are done on huge amounts of data set with millions of news articles, with millions of blogs, books, etc.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 908.09,
+          "ts_end": 911.23,
+          "text": "And that pre-training costs more than one million dollars also.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 911.55,
+          "ts_end": 917.01,
+          "text": "So it's impossible for us to pre-train an actual full blown large language models on our laptop.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 917.23,
+          "ts_end": 923.33,
+          "text": "But once you go through the lecture videos, which I'm showing you, you can run the pre-training loop for a small data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 923.39,
+          "ts_end": 925.11,
+          "text": "And that gives you an entire feel of how it works.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 925.13,
+          "ts_end": 926.03,
+          "text": "And that's how GPT is constructed.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 926.47,
+          "ts_end": 933.49,
+          "text": "What we did after this is that we took our architecture, we took our LLM architecture and we loaded pre-trained weights from GPT-2.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 934.31,
+          "ts_end": 938.77,
+          "text": "And then we actually predicted the next token based on the input sentence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 939.83,
+          "ts_end": 943.85,
+          "text": "This was the first fundamental result which we achieved in these lecture series.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "_xH-jXNFRjA_005",
+      "title": "LLM Fine Tuning",
+      "ts_start": 945.0,
+      "ts_end": 1157.0,
+      "segments": [
+        {
+          "ts_start": 948.49,
+          "ts_end": 955.11,
+          "text": "We learnt about two types of fine tuning, classification fine tuning, in which we built an email classification, LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 955.11,
+          "ts_end": 959.77,
+          "text": "So when you have given an email, the LLM can classify whether it's spam or not a spam.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0003"
+          ],
+          "visuals": [
+            {
+              "category": "other",
+              "skip": false,
+              "title": null,
+              "extracted_text": "You are a winner you have been specially selected to receive $1000 cash or a $2000 award.\n\nHey, just wanted to check if we're still on for dinner tonight? Let me know",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "_xH-jXNFRjA_f0003",
+              "video_id": "_xH-jXNFRjA",
+              "timestamp_sec": 959.633,
+              "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0003.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 959.97,
+          "ts_end": 964.63,
+          "text": "And then we also built an instruction fine tuned LLM fully from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 964.81,
+          "ts_end": 969.89,
+          "text": "So you have to give a bunch of instructions, inputs and outputs and train the LLM to do a good job on instructions.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 970.31,
+          "ts_end": 976.41,
+          "text": "So let's say if the instruction is convert the active sentence to passive, the active sentence is the chef cooks the meal every day.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 976.45,
+          "ts_end": 979.41,
+          "text": "The passive sentence is the meal is cooked every day by the chef.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 979.67,
+          "ts_end": 981.51,
+          "text": "And we train this fully from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 981.57,
+          "ts_end": 984.07,
+          "text": "Whatever I'm showing you right now has been implemented.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 985.15,
+          "ts_end": 989.93,
+          "text": "Based on the architecture which we have developed in code, we have not used it from anywhere else.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 990.86,
+          "ts_end": 993.5,
+          "text": "And then finally, we learnt about LLM evaluation.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0004"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "A Miro board showing a diagram of a layer that maps from 768 hidden units to only 2 units, where 768 represents the size of the original hidden state, with two chat interface mockups below demonstrating example interactions.",
+              "diagram_elements": [
+                "Original hidden output (768 units)",
+                "Layer that maps from 768 hidden units to only 2 units",
+                "Chat interface example 1: 'You are a smarter you have been specifically selected to receive $1000 cash in a $2000 event'",
+                "Chat interface example 2: 'Hey, just wanted to check if we're still on for dinner tonight? Let me know!'",
+                "Chat interface example 3: 'Convert the active sentence to passive: The chef cooks the meal every day'",
+                "Chat interface example 4: 'The meal is cooked every day by the chef'"
+              ],
+              "confidence": 0.65,
+              "frame_id": "_xH-jXNFRjA_f0004",
+              "video_id": "_xH-jXNFRjA",
+              "timestamp_sec": 990.999667,
+              "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0004.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 993.84,
+          "ts_end": 995.74,
+          "text": "We learnt about three types of evaluation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 996.08,
+          "ts_end": 1002.2,
+          "text": "The first is MMLU, which is based on this paper measuring massive multitask language understanding.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0005"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 1002.5,
+          "ts_end": 1010.56,
+          "text": "What they show in this paper here is that basically we have 57 tests which we can use to evaluate the LLM performance.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1011.24,
+          "ts_end": 1012.64,
+          "text": "That's one type of evaluation.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1013.02,
+          "ts_end": 1014.88,
+          "text": "The second type is using humans to evaluate.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1014.9,
+          "ts_end": 1016.26,
+          "text": "To compare and rate LLMs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1016.42,
+          "ts_end": 1021.7,
+          "text": "And the third type is using a powerful large language model to evaluate another LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1021.8,
+          "ts_end": 1023.68,
+          "text": "So this is the approach which we followed.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1023.82,
+          "ts_end": 1028.02,
+          "text": "So we used a tool called OLama to access Lama 3 LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1028.2,
+          "ts_end": 1036.11,
+          "text": "Especially we used this Lama 8 billion parameter Lama 3 8B instruct model which is already fine tuned.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1036.27,
+          "ts_end": 1037.51,
+          "text": "And it has 8 billion parameters.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1037.91,
+          "ts_end": 1039.27,
+          "text": "So it is super powerful.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1039.65,
+          "ts_end": 1042.65,
+          "text": "And what we did with this larger LLM is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1042.65,
+          "ts_end": 1046.21,
+          "text": "if the true output is this and if the model response is this,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1046.29,
+          "ts_end": 1050.87,
+          "text": "we asked the LLM to compare the output with the model response and to give an evaluation score.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1051.17,
+          "ts_end": 1054.19,
+          "text": "And this is the evaluation score given by the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1055.11,
+          "ts_end": 1059.93,
+          "text": "So based on the model response and the actual response, it assigns a score out of 100.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1060.15,
+          "ts_end": 1063.27,
+          "text": "So that's the third evaluation tactic which we learnt about.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1063.89,
+          "ts_end": 1068.07,
+          "text": "This is the entire details of what all we implemented in this course.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1068.17,
+          "ts_end": 1072.47,
+          "text": "We implemented a next word or next token prediction LLM from scratch.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0006"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": [
+                "W_i^{(l)} = W_i - \\lambda \\frac{\\partial L}{\\partial W}"
+              ],
+              "diagram_summary": "Handwritten diagram showing the process of loading pre-trained weights from GPT-2 and the weight update equation during training with L2 regularization.",
+              "diagram_elements": [
+                "Loading pre-trained weights from GPT-2",
+                "Weight update equation with L2 regularization term"
+              ],
+              "confidence": 0.75,
+              "frame_id": "_xH-jXNFRjA_f0006",
+              "video_id": "_xH-jXNFRjA",
+              "timestamp_sec": 1072.333,
+              "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0006.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1072.47,
+          "ts_end": 1075.89,
+          "text": "We implemented an email classification fine tuned LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1075.95,
+          "ts_end": 1078.43,
+          "text": "And we implemented an instruction fine tuned LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1078.65,
+          "ts_end": 1084.73,
+          "text": "Once you complete this lecture series, I am sure that you will understand the nuts and bolts of building a large language model.",
+          "frame_ids": [
+            "_xH-jXNFRjA_f0007"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "LLM evaluation framework showing three approaches: MMLU, Human assisted scoring, and using powerful LLMs to evaluate another LLM.",
+              "diagram_elements": [
+                "LLM Evaluation",
+                "MMLU",
+                "Human assisted scoring",
+                "Using powerful LLM to evaluate another"
+              ],
+              "confidence": 0.85,
+              "frame_id": "_xH-jXNFRjA_f0007",
+              "video_id": "_xH-jXNFRjA",
+              "timestamp_sec": 1078.799667,
+              "source_image": "data/frames/_xH-jXNFRjA/_xH-jXNFRjA_f0007.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1084.91,
+          "ts_end": 1088.59,
+          "text": "And you will be a much stronger machine learning and LLM engineer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1088.97,
+          "ts_end": 1092.07,
+          "text": "If you have completed this series and if you are watching this lecture,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1092.23,
+          "ts_end": 1096.03,
+          "text": "now I highly encourage you as next steps to dive into fundamental research.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1096.31,
+          "ts_end": 1097.93,
+          "text": "You have this code file, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1097.99,
+          "ts_end": 1099.61,
+          "text": "Start making changes.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1099.71,
+          "ts_end": 1102.11,
+          "text": "Start exploring small language models.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1103.57,
+          "ts_end": 1105.33,
+          "text": "What's the need for large language models?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1105.53,
+          "ts_end": 1107.41,
+          "text": "Can we just have three transformer blocks?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1107.61,
+          "ts_end": 1109.95,
+          "text": "You can now start making all these edits to the code.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1110.15,
+          "ts_end": 1112.47,
+          "text": "Because the code is in building blocks format, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1112.55,
+          "ts_end": 1116.21,
+          "text": "You can change hyper parameters, explore the effect of different optimizers,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1116.47,
+          "ts_end": 1120.27,
+          "text": "explore the effect of different learning rates, different number of transformer blocks,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1121.01,
+          "ts_end": 1123.47,
+          "text": "explore the effect of different evaluation strategies.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1124.21,
+          "ts_end": 1125.59,
+          "text": "It's an area of active research.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1126.17,
+          "ts_end": 1130.01,
+          "text": "Try to dive into research and that's the best way to stay at the cutting edge",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1130.01,
+          "ts_end": 1133.45,
+          "text": "and contribute to innovative and impactful LLM research.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1133.79,
+          "ts_end": 1136.19,
+          "text": "I hope all of you enjoyed this lecture series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1136.43,
+          "ts_end": 1140.41,
+          "text": "My whole goal for everyone who is learning through these lectures is to train you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1140.41,
+          "ts_end": 1143.31,
+          "text": "to become fundamental LLM and machine learning engineers",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1143.31,
+          "ts_end": 1147.49,
+          "text": "who can contribute to innovative research and not just deploy LLM APIs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1147.91,
+          "ts_end": 1151.35,
+          "text": "Thank you so much everyone and I look forward to seeing you in the next lecture.",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

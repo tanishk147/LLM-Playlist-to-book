@@ -1,0 +1,23 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+  "extracted_text": "an output for that time step. Since the encoder and decoder are both RNNs, each time step one of the RNNs does some processing, it updates its hidden state based on its inputs and previous inputs it has seen.\n\nLet's look at the hidden states for the encoder. Notice how the last hidden state is actually the context we pass along to the decoder.\n\nTime step: 6\n\nThe decoder also maintains a hidden state that it passes from one time step to the next. We just didn't visualize it in the graphic because we're concerned with the major parts of the model for now.\n\nLet's now look at another way to visualize a sequence-to-sequence model. This animation will make it easier to",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence-to-sequence neural machine translation model at time step 6: input flows through an encoder (green box) which produces context, then through a decoder (purple box) which generates output tokens.",
+  "diagram_elements": [
+    "Input (green box on left)",
+    "ENCODER (green box)",
+    "DECODER (purple box)",
+    "Output: 'I am a' (purple box on right)",
+    "Arrow from input to encoder",
+    "Arrow from encoder to decoder",
+    "Arrow from decoder to output"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0008",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 1319.333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0008.jpg"
+}

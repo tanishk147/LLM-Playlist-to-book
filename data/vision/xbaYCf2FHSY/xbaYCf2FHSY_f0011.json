@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "2.1 Model and Architectures",
+  "extracted_text": "We use the same model and architecture as GPT-2 [RWC+19], including the modified initialization, pre-normalization, and reversible tokenization described therein, with the exception that we use alternating dense and locally banded sparse attention patterns in the layers of the transformer, similar to the Sparse Transformer [CGRS19]. To study the dependence of ML performance on model size, we train 8 different sizes of model, ranging over three orders of magnitude from 125 million parameters to 175 billion parameters, with the last being the model we call GPT-3. Previous work [KMH+20] suggests that with enough training data, scaling of validation loss should approximately a smooth power law as a function of size; training models of many different sizes allows us to test this hypothesis both for validation loss and for",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "xbaYCf2FHSY_f0011",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 465.166333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0011.jpg"
+}

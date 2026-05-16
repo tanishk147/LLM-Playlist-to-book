@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": "Divide by \u221ahead_dim\nApply softmax",
+  "code": null,
+  "math": [
+    "d_{out}/num\\_heads = \\sqrt{6/2} = \\sqrt{3}"
+  ],
+  "diagram_summary": "Attention computation flow showing division by head dimension, softmax application, with tensor output displayed in terminal showing multi-dimensional numerical arrays.",
+  "diagram_elements": [
+    "Divide by \u221ahead_dim",
+    "d_out/num_heads calculation",
+    "\u221a3 result",
+    "Apply softmax",
+    "Tensor output with numerical values"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0054",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2328.499667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0054.jpg"
+}

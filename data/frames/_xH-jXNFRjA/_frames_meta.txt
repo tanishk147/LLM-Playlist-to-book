@@ -1,0 +1,30 @@
+frame:0    pts:8249970 pts_time:91.666333
+lavfi.scene_score=1.000000
+frame:1    pts:8261970 pts_time:91.799667
+lavfi.scene_score=0.412477
+frame:2    pts:9245970 pts_time:102.733
+lavfi.scene_score=0.996793
+frame:3    pts:50762970 pts_time:564.033
+lavfi.scene_score=0.486751
+frame:4    pts:86366970 pts_time:959.633
+lavfi.scene_score=0.342905
+frame:5    pts:86372970 pts_time:959.699667
+lavfi.scene_score=0.403590
+frame:6    pts:89189970 pts_time:990.999667
+lavfi.scene_score=0.505781
+frame:7    pts:89249970 pts_time:991.666333
+lavfi.scene_score=0.330359
+frame:8    pts:89852970 pts_time:998.366333
+lavfi.scene_score=1.000000
+frame:9    pts:89867970 pts_time:998.533
+lavfi.scene_score=0.309728
+frame:10   pts:89873970 pts_time:998.599667
+lavfi.scene_score=0.636027
+frame:11   pts:91049970 pts_time:1011.666333
+lavfi.scene_score=0.499297
+frame:12   pts:96509970 pts_time:1072.333
+lavfi.scene_score=0.388434
+frame:13   pts:97091970 pts_time:1078.799667
+lavfi.scene_score=0.350077
+frame:14   pts:103727970 pts_time:1152.533
+lavfi.scene_score=1.000000

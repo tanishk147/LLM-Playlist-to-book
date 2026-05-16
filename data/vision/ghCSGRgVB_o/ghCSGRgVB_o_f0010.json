@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "#pip install gensim\n\nimport gensim.downloader as api\nmodel = api.load(\"word2vec-google-news-300\")  # download the model and return as object ready for use\n\n[==================================================] 100.0% 1662.8/1662.8MB downloaded\n\nword_vectors=model\n\n# Let us look how the vector embedding of a word looks like\nprint(word_vectors['computer'])  # Example: Accessing the vector for the word 'computer'\n\n-1.73828125e-01 -8.30078125e-02  4.56542969e-02 -1.61132812e-02\n 1.86523438e-01 -6.05468750e-02 -4.17480469e-02  1.82617188e-01\n 2.20703125e-01 -1.22558594e-01 -2.55126953e-02 -3.08593750e-01\n 9.13085938e-02  1.60156250e-01  1.70898438e-01  1.19628906e-01\n 7.08007812e-02 -2.64892578e-01 -3.08837891e-01  4.06250000e-01\n-1.01562500e-01  5.71289062e-02 -7.26318359e-03 -9.17968750e-02\n-1.50390625e-01 -2.55859375e-01  2.16796875e-01 -3.63769531e-01\n 2.24609375e-01  8.00781250e-02  1.56250000e-01  5.27343750e-02\n 1.50390625e-01 -1.14746094e-01 -6.42578125e-01 -1.19140625e-02\n-7.17773438e-02  2.73437500e-01 -1.64062500e-01  7.29370117e-03\n-4.21875000e-01 -1.12792969e-01 -1.35742188e-01 -1.31835938e-01\n-1.37695312e-01 -7.66601562e-02  6.25000000e-02  4.98046875e-02"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "ghCSGRgVB_o_f0010",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 1029.299667,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0010.jpg"
+}

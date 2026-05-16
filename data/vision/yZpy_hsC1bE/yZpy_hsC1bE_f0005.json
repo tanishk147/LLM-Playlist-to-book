@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "train_df, validation_df, test_df = random_split(balanced_df)\n# Test size is implied to be 0.2 as the remainder\n\nprint(len(train_df))\nprint(len(validation_df))\nprint(len(test_df))\n\n1045\n149\n300\n\ntrain_df.to_csv(<=None)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "yZpy_hsC1bE_f0005",
+  "video_id": "yZpy_hsC1bE",
+  "timestamp_sec": 1480.066333,
+  "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0005.jpg"
+}

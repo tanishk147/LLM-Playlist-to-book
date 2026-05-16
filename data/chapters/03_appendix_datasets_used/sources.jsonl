@@ -1,0 +1,69 @@
+## Claims (cite these by ID inline as [cNNN])
+- c191 [fact | 1bLhvqZzdaQ @ 729-740s]
+  The loaded dataset contains exactly 1100 entries that can be accessed by index.
+- c205 [fact | 1bLhvqZzdaQ @ 1334-1340s]
+  The dataset contains 1100 pairs of instruction-response examples.
+- c207 [fact | 1bLhvqZzdaQ @ 1373-1380s]
+  With the 85-10-5 split, the training dataset contains 935 pairs.
+- c208 [fact | 1bLhvqZzdaQ @ 1380-1381s]
+  With the 85-10-5 split, the validation dataset contains 55 pairs.
+- c209 [fact | 1bLhvqZzdaQ @ 1383-1389s]
+  With the 85-10-5 split, the testing dataset contains 110 pairs.
+- c691 [fact | 7m2jV7BOFkA @ 2798-2802s]
+  The training dataset used contained 1100 instruction input-output pairs.
+- c692 [fact | 7m2jV7BOFkA @ 2802-2810s]
+  Using 85% of the 1100 instruction input-output pairs for training results in approximately 800 training pairs.
+- c695 [fact | 7m2jV7BOFkA @ 2825-2830s]
+  Stanford Alpaca repository contains a dataset of 52,000 instruction-output pairs for fine-tuning.
+- c696 [fact | 7m2jV7BOFkA @ 2831-2835s]
+  The Stanford Alpaca dataset is 50 times larger than the 1100 instruction-output pair dataset used in the example.
+- c2397 [fact | f6zqClXOh7Y @ 1575-1589s]
+  The dataset contains 747 spam examples and 747 non-spam examples, for a total of 1494 examples.
+- c2401 [fact | f6zqClXOh7Y @ 1687-1694s]
+  The test loader contains 38 batches, corresponding to 20% of the total dataset.
+- c2402 [fact | f6zqClXOh7Y @ 1687-1694s]
+  The number of test batches is exactly twice the number of validation batches because test data is 20% and validation data is 10% of the total dataset.
+- c2404 [fact | f6zqClXOh7Y @ 1708-1727s]
+  The training loader has dimensions of 130 by 8 by 120 (130 batches, 8 samples per batch, 120 tokens per sample).
+- c2405 [fact | f6zqClXOh7Y @ 1727-1739s]
+  The test loader has dimensions of 38 by 8 by 120.
+- c2406 [fact | f6zqClXOh7Y @ 1739-1748s]
+  The validation loader has dimensions of 19 by 8 by 120.
+- c2723 [fact | iQZFH8dr2yI @ 603-630s]
+  The Verdict is a short story published in 1908 used as the dataset for this tutorial.
+- c2725 [fact | iQZFH8dr2yI @ 688-699s]
+  The Verdict short story, when tokenized with byte pair encoding, produces 5145 tokens.
+- c3175 [fact | rsy5Ragmso8 @ 448-453s]
+  The dataset used for this demonstration is 'The Verdict' by Edith Wharton.
+- c3176 [fact | rsy5Ragmso8 @ 470-473s]
+  The Verdict by Edith Wharton was published in 1908.
+- c3177 [fact | rsy5Ragmso8 @ 476-489s]
+  The Verdict is available for free download and is included in a repository by Sebastian.
+- c3391 [fact | xbaYCf2FHSY @ 1136-1147s]
+  Common Crawl is a free and open repository of web crawl data that has maintained over 250 million pages spanning 17 years since 2007.
+- c3389 [fact | xbaYCf2FHSY @ 1148-1158s]
+  GPT-3 uses 410 billion tokens from the Common Crawl dataset, which constitutes 60% of the entire training dataset.
+- c3393 [fact | xbaYCf2FHSY @ 1199-1208s]
+  WebText2 is an enhanced version of the original WebText corpus that covers Reddit submissions from 2005 to 2020.
+- c3392 [fact | xbaYCf2FHSY @ 1220-1227s]
+  GPT-3 uses 19 billion words from the WebText2 dataset, which constitutes 22% of the training data.
+- c3394 [fact | xbaYCf2FHSY @ 1228-1235s]
+  The remaining 18-19% of GPT-3 training data comes from books and Wikipedia.
+- c3395 [fact | xbaYCf2FHSY @ 1239-1245s]
+  GPT-3 was trained on a total of 300 billion tokens.
+- c3623 [fact | yZpy_hsC1bE @ 1006-1012s]
+  The SMS Spam Collection dataset contains 425 spam messages manually extracted from the Grumbletext website.
+- c3629 [fact | yZpy_hsC1bE @ 1083-1090s]
+  The downloaded SMS Spam Collection dataset is saved as a tab-separated values file named SMSSpamCollection.tsv.
+- c3631 [fact | yZpy_hsC1bE @ 1128-1137s]
+  The SMS Spam Collection dataset can be loaded into a pandas DataFrame for easier data manipulation.
+- c3632 [fact | yZpy_hsC1bE @ 1143-1149s]
+  The SMS Spam Collection dataset contains a total of 5,572 emails.
+- c3635 [fact | yZpy_hsC1bE @ 1230-1249s]
+  After balancing, the dataset contains 747 instances of each class (ham and spam).
+- c3743 [fact | zuj_NJNouAA @ 216-222s]
+  The book used in this dataset is 'The Verdict' written by Edith Wharton and published in 1906.
+- c3744 [fact | zuj_NJNouAA @ 223-228s]
+  The book is publicly available to download.
+- c3745 [fact | zuj_NJNouAA @ 246-256s]
+  The dataset contains 20,000 characters.

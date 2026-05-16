@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "We also noticed we can use the underlying language model to begin to perform tasks without ever training on them. For example, performance on tasks like picking the right answer to a multiple choice question steadily increases as the underlying language model improves. While the absolute performance of these methods is still often quite low compared to the supervised state-of-the-art (for question answering it still outperformed a simple sliding-window baseline) it is encouraging that this behavior is robust across a broad set of tasks. Randomly initialized networks containing no information about the task and the world perform no better than random using these heuristics. This provides some insight to why generative pre-training can improve performance on downstream tasks.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "xbaYCf2FHSY_f0042",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 2463.066333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0042.jpg"
+}

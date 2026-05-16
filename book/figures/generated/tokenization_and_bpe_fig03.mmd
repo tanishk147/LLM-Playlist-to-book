@@ -1,0 +1,24 @@
+graph LR
+    A["Tokenization"] --> B["Word based"]
+    A --> C["Subword based<br/>(BPE tokenizer)"]
+    A --> D["Character based"]
+    
+    B --> E["Vocabulary Size"]
+    C --> E
+    D --> E
+    
+    B --> F["OOV Handling"]
+    C --> F
+    D --> F
+    
+    B --> G["Sequence Length"]
+    C --> G
+    D --> G
+    
+    style A fill:#e1f5ff
+    style B fill:#fff9c4
+    style C fill:#c8e6c9
+    style D fill:#f8bbd0
+    style E fill:#ede7f6
+    style F fill:#ede7f6
+    style G fill:#ede7f6

@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Step(7): Find attention scores",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-step attention mechanism showing computation of attention scores: Queries matrix multiplied by transposed Keys matrix, with intermediate tensor outputs and Head 1 annotation visible across three code terminal windows.",
+  "diagram_elements": [
+    "Queries matrix",
+    "Keys.Transpose(2, 3)",
+    "Head 1",
+    "tensor output with numerical values",
+    "Matrix multiplication operation"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0064",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2679.533,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0064.jpg"
+}

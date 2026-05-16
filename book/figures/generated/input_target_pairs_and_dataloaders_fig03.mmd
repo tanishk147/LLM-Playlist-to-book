@@ -1,0 +1,26 @@
+graph TB
+    subgraph stride1["Stride = 1 (Heavy Overlap)"]
+        direction LR
+        w1["Window 1"]
+        w2["Window 2"]
+        w3["Window 3"]
+        tokens1["Token Sequence: t₁ t₂ t₃ t₄ t₅ t₆ t₇ t₈"]
+        tokens1 --> w1
+        tokens1 --> w2
+        tokens1 --> w3
+        w1 -.->|overlap| w2
+        w2 -.->|overlap| w3
+    end
+    
+    subgraph stride_ctx["Stride = context_size (No Overlap)"]
+        direction LR
+        w4["Window 1"]
+        w5["Window 2"]
+        w6["Window 3"]
+        tokens2["Token Sequence: t₁ t₂ t₃ t₄ t₅ t₆ t₇ t₈"]
+        tokens2 --> w4
+        tokens2 --> w5
+        tokens2 --> w6
+        w4 -.->|no overlap| w5
+        w5 -.->|no overlap| w6
+    end

@@ -1,0 +1,29 @@
+[
+  {
+    "frame_id": "Bc-9sf0VihQ_f0000",
+    "video_id": "Bc-9sf0VihQ",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0000.jpg",
+    "phash": "e85f40dd127e1a72",
+    "edge_density": 0.13730947457107842,
+    "sha256": "9a5c2203ab6c59bad792d78781d7b137b34b555593f862b62a9f596516c3a6e6"
+  },
+  {
+    "frame_id": "Bc-9sf0VihQ_f0001",
+    "video_id": "Bc-9sf0VihQ",
+    "timestamp_sec": 554.433,
+    "path": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0001.jpg",
+    "phash": "e291df80f780b725",
+    "edge_density": 0.09126551011029412,
+    "sha256": "0f55c6c3e384b0f87a89c77d1566bbab9ba72d27ce69ea034f028c46d0c30201"
+  },
+  {
+    "frame_id": "Bc-9sf0VihQ_f0002",
+    "video_id": "Bc-9sf0VihQ",
+    "timestamp_sec": 557.099667,
+    "path": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0002.jpg",
+    "phash": "a15f454f0137346f",
+    "edge_density": 0.1136231532543573,
+    "sha256": "13beef8ba6192bab099bd7539d22b56160a049da1590652c7e4999422e62362a"
+  }
+]

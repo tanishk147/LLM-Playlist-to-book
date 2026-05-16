@@ -1,0 +1,65 @@
+[
+  {
+    "frame_id": "mk-6cFebjis_f0000",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0000.jpg",
+    "phash": "a05f007f007f327f",
+    "edge_density": 0.09483560134123094,
+    "sha256": "df79287bd212e9eea893102fc44f3f1de2e032358545d28e5640fd4484fbb827"
+  },
+  {
+    "frame_id": "mk-6cFebjis_f0001",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 266.766333,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0001.jpg",
+    "phash": "f48b8bb4c7ea801b",
+    "edge_density": 0.1450270841843682,
+    "sha256": "e68c5ae98c8510dbebf9c5cc6b4d33f500c49aebcf5538e4f77d4d4ed9079c1d"
+  },
+  {
+    "frame_id": "mk-6cFebjis_f0002",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 271.366333,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0002.jpg",
+    "phash": "807f007f407f4c7e",
+    "edge_density": 0.1513598473243464,
+    "sha256": "b28a7ba1b956cc5034e990a063ec4e0ff674ac1745968aae72cd52963fbde5d5"
+  },
+  {
+    "frame_id": "mk-6cFebjis_f0003",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 3876.266333,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0003.jpg",
+    "phash": "807e57d7c79c3830",
+    "edge_density": 0.11160992391748366,
+    "sha256": "8828f16fd39b0eb12b641a498337d70b697e68ca83c5bc3fa9453bc1297ffc4d"
+  },
+  {
+    "frame_id": "mk-6cFebjis_f0004",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 3879.033,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0004.jpg",
+    "phash": "ca1f157d25e56a82",
+    "edge_density": 0.0922987728077342,
+    "sha256": "26dc76269d9b6ebf1988e39543c605bf389d5c66a33179193091118e831d5a03"
+  },
+  {
+    "frame_id": "mk-6cFebjis_f0005",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 4168.566333,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0005.jpg",
+    "phash": "a27d007308ffa0fe",
+    "edge_density": 0.10817706205746187,
+    "sha256": "c2fbcb9d2626e846b8334a453a625e8a2002452d874695f94632b92fa724fdf5"
+  },
+  {
+    "frame_id": "mk-6cFebjis_f0006",
+    "video_id": "mk-6cFebjis",
+    "timestamp_sec": 4394.733,
+    "path": "data/frames/mk-6cFebjis/mk-6cFebjis_f0006.jpg",
+    "phash": "ed80ff80bf80a0be",
+    "edge_density": 0.04593226613562092,
+    "sha256": "14982e61232033888e25ff1383ec10ea1cf3573232bd12dc29d9821673989592"
+  }
+]

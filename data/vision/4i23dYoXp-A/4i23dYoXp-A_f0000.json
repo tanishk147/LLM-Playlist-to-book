@@ -1,0 +1,32 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 LLM Architecture Overview",
+  "extracted_text": "After learning about the attention mechanism, let us understand the LLM architecture",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage LLM development pipeline: Stage 1 shows building an LLM from data preparation and sampling through attention mechanisms; Stage 2 shows foundation model development with training loop, model evaluation, and preprocessing; Stage 3 shows applications including classifier and personal assistant with instruction dataset and finetuning.",
+  "diagram_elements": [
+    "Stage 1",
+    "Data preparation & sampling",
+    "Tokenization",
+    "Attention mechanisms",
+    "Building an LLM",
+    "Stage 2",
+    "Training loop",
+    "Model evaluation",
+    "Preprocessing",
+    "Foundation model",
+    "Load pretrained weights",
+    "Finetuning",
+    "Stage 3",
+    "Classifier",
+    "Personal assistant",
+    "Instruction dataset"
+  ],
+  "confidence": 0.85,
+  "frame_id": "4i23dYoXp-A_f0000",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0000.jpg"
+}

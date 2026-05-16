@@ -1,0 +1,15 @@
+{
+  "category": "terminal",
+  "skip": false,
+  "title": null,
+  "extracted_text": "erified HTTPS request is being made to host 'openaiPublic.blob.core.windows.net'. Adding certificate verification\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nFile already exists and is up-to-date: gpt2/124M/params.json\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/connectionpool.py:\nerified HTTPS request is being made to host 'openaiPublic.blob.core.windows.net'. Adding certificate verification\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nmodel.ckpt.data-00000-of-00001: 100%| | 498M/498M [09:33<00:00, 868kiB/s]\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/connectionpool.py:\nerified HTTPS request is being made to host 'openaiPublic.blob.core.windows.net'. Adding certificate verification\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nmodel.ckpt.index: 100%| | 5.21k/5.21k [00:00<00:00, 6.57MiB/s]\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/connectionpool.py:\nerified HTTPS request is being made to host 'openaiPublic.blob.core.windows.net'. Adding certificate verification\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nmodel.ckpt.meta: 100%| | 471k/471k [00:02<00:00, 223kiB/s]\n/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/urllib3/connectionpool.py:\nerified HTTPS request is being made to host 'openaiPublic.blob.core.windows.net'. Adding certificate verification\nhttps://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings\nwarnings.warn(\nab.bpe: 100%| | 456k/456k [00:02<00:00, 226kiB/s]\nAfter the execution of the previous code has been completed, let's inspect the contents of settings and params:",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "yXrGeDNuymY_f0020",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1968.066333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0020.jpg"
+}

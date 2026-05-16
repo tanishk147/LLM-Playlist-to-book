@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Tokenize the data",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Tokenization process showing text 'Fine Tuning is fun for all!' being converted into token IDs [34389, 13932, 278, 318, 1257, 329, 477, 0] and then decoded back to the original text.",
+  "diagram_elements": [
+    "Original text: 'Fine Tuning is fun for all!'",
+    "Token IDs: [34389, 13932, 278, 318, 1257, 329, 477, 0]",
+    "Encoding arrows (downward)",
+    "Decoding arrows (downward)",
+    "Decoded text: 'Fine Tuning is fun for all!'",
+    "Enco (label, partially visible)",
+    "Decc (label, partially visible)"
+  ],
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0005",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 594.766333,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0005.jpg"
+}

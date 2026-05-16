@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "MEASURING MASSIVE MULTITASK LANGUAGE UNDERSTANDING",
+  "extracted_text": "Published as a conference paper at ICLR 2021\n\nAuthors:\nDan Hendrycks (UC Berkeley)\nCollin Burns (Columbia University)\nSteven Basart (UChicago)\nAndy Zou (UC Berkeley)\nMantas Mazeika (UIUC)\nDawn Song (UC Berkeley)\nJacob Steinhardt (UC Berkeley)\n\nABSTRACT\n\nWe propose a new test to measure a text model's multitask accuracy. The test covers 57 tasks including elementary mathematics, US history, computer science, law, and more, assessing both world knowledge and problem solving ability. We find that while most recent models have near random-chance accuracy, the very largest GPT-3 model improves over random chance by almost 20 percentage points on average. However, on every one of the 57 tasks, the best models still need substantial improvements before they can reach expert-level accuracy. Models also have lopsided performance and frequently do not know when they are wrong. Worse, they still near-random-chance accuracy on some tasks. By comprehensively evaluating the breadth and depth of a model's academic and professional understanding, our test can be used to analyze models across many tasks and to identify important shortcomings.\n\nINTRODUCTION\n\nNatural Language Processing (NLP) models have achieved superhuman performance on a number of recently proposed benchmarks. However, these models are still well below human level performance for language understanding as a whole, suggesting a disconnect between our benchmarks and the actual capabilities of these models. The General Language Understanding Evaluation Benchmark (GLUE) and SuperGLUE are two prominent benchmarks, but they focus on a limited set of tasks, and top models achieved superhuman performance within a year. To address the shortcomings of GLUE, researchers designed the SuperGLUE benchmark to measure more difficult tasks (Wang et al., 2019). About a year since the release of SuperGLUE, performance is again essentially human-level (Raffel et al., 2019). While these benchmarks evaluate important dimensions of language understanding, they do not measure the breadth of knowledge and reasoning skills required for general intelligence.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "7m2jV7BOFkA_f0001",
+  "video_id": "7m2jV7BOFkA",
+  "timestamp_sec": 841.133,
+  "source_image": "data/frames/7m2jV7BOFkA/7m2jV7BOFkA_f0001.jpg"
+}

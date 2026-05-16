@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Embedding",
+  "extracted_text": "CLASS torch.nn.Embedding(num_embeddings, embedding_dim, padding_idx=None, max_norm=None, norm_type=2.0, scale_grad_by_freq=False, sparse=False, _weight=None, _freeze=False, device=None, dtype=None) [SOURCE]\n\nA simple lookup table that stores embeddings of a fixed dictionary and size.\n\nThis module is often used to store word embeddings and retrieve them using indices. The input to the module is a list of indices, and the output is the corresponding word embeddings.\n\nParameters\n\n\u2022 num_embeddings (int) - size of the dictionary of embeddings\n\u2022 embedding_dim (int) - the size of each embedding vector\n\u2022 padding_idx (int, optional) - If specified, the entries at padding_idx do not contribute to the gradient, therefore, the embedding vector at padding_idx is not updated during training, i.e. it remains as a fixed \"pad\". For a newly constructed Embedding, the embedding vector at padding_idx will default to all zeroes, but can be updated to another value to be used as the padding vector.\n\u2022 max_norm (float, optional) - If given, each embedding vector with norm larger than max_norm is renormalized to have norm max_norm.\n\u2022 norm_type (float, optional) - The p of the p-norm to compute for the max_norm option. Default 2.\n\u2022 scale_grad_by_freq (bool, optional) - If given, this will scale gradients by the inverse of frequency",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "ufrPLpKnapU_f0003",
+  "video_id": "ufrPLpKnapU",
+  "timestamp_sec": 1428.733,
+  "source_image": "data/frames/ufrPLpKnapU/ufrPLpKnapU_f0003.jpg"
+}

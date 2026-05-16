@@ -1,0 +1,4 @@
+graph LR
+    A["Stage 1: Pre-Training"] -->|Training on large,<br/>diverse dataset| B["Foundation Model"]
+    B --> C["Stage 2: Fine-Tuning"]
+    C -->|Training on task-specific<br/>data| D["Task-Specific Model"]

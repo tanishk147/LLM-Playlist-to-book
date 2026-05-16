@@ -1,0 +1,28 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Handwritten notes on a whiteboard showing transformer architecture components including token embeddings, positional embeddings, blocks, and attention layers with their corresponding transformer block paths and layer specifications.",
+  "diagram_elements": [
+    "Token Embeddings",
+    "Positional Embeddings",
+    "Blocks",
+    "Attention layers in Transformer blocks",
+    "transformer/h/0/attn/c_attn/w",
+    "transformer/h/0/attn/c_attn/b",
+    "Feedforward neural network weights in transformer block",
+    "transformer/h/0/mlp/c_fc/w",
+    "transformer/h/0/mlp/c_fc/b",
+    "transformer/h/0/c_proj/w",
+    "transformer/h/0/c_proj/b",
+    "h2, h2 \u2192 h12 similarity notation"
+  ],
+  "confidence": 0.75,
+  "frame_id": "izyxvl-2JlM_f0006",
+  "video_id": "izyxvl-2JlM",
+  "timestamp_sec": 686.899667,
+  "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0006.jpg"
+}

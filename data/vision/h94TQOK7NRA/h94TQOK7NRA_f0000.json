@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Causal attention",
+  "extracted_text": "(1) Causal attention, also known as Masked attention is a special form of self attention.\n\n(2) It restrict the model to only consider previous",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "h94TQOK7NRA_f0000",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0000.jpg"
+}

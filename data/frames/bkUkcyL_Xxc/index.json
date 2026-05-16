@@ -1,0 +1,29 @@
+[
+  {
+    "frame_id": "bkUkcyL_Xxc_f0000",
+    "video_id": "bkUkcyL_Xxc",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/bkUkcyL_Xxc/bkUkcyL_Xxc_f0000.jpg",
+    "phash": "807f007f027e7d72",
+    "edge_density": 0.10798270697167757,
+    "sha256": "8859f5a484a28e594c0a5f7648d5dfbb5eb351c9da0b1f85d9c6785b2687d01a"
+  },
+  {
+    "frame_id": "bkUkcyL_Xxc_f0001",
+    "video_id": "bkUkcyL_Xxc",
+    "timestamp_sec": 2969.633,
+    "path": "data/frames/bkUkcyL_Xxc/bkUkcyL_Xxc_f0001.jpg",
+    "phash": "fc80ff81fc84803f",
+    "edge_density": 0.05435868140659041,
+    "sha256": "cd97022a937c445148ea2d64dd5d859b267951b1c5c4b2bcd09e0324b206c4bc"
+  },
+  {
+    "frame_id": "bkUkcyL_Xxc_f0002",
+    "video_id": "bkUkcyL_Xxc",
+    "timestamp_sec": 2974.799667,
+    "path": "data/frames/bkUkcyL_Xxc/bkUkcyL_Xxc_f0002.jpg",
+    "phash": "817f80ff80ad2d35",
+    "edge_density": 0.07890390965413945,
+    "sha256": "65f62f0879261200b7aefc81bc8abc22edaef14dbba6574cb83765359a64ca9b"
+  }
+]

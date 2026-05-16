@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "We can now use PyTorch's tril function to create a mask where the values above the diagonal are zero:",
+  "code": {
+    "language": "python",
+    "content": "print(attn_weights)\n\ntensor([[0.1921, 0.1646, 0.1652, 0.1550, 0.1721, 0.1510],\n        [0.2041, 0.1659, 0.1662, 0.1496, 0.1665, 0.1477],\n        [0.2036, 0.1659, 0.1662, 0.1498, 0.1664, 0.1480],\n        [0.1869, 0.1667, 0.1668, 0.1571, 0.1661, 0.1564],\n        [0.1830, 0.1669, 0.1670, 0.1588, 0.1658, 0.1585],\n        [0.1935, 0.1663, 0.1666, 0.1542, 0.1666, 0.1529]],\n       grad_fn=<SoftmaxBackward0>)\n\ncontext_length = attn_scores.shape[0]\nmask_simple = torch.tril(torch.ones(context_length, context_length))\nprint(mask_simple)\n\ntensor([[1., 0., 0., 0., 0., 0.],\n        [1., 1., 0., 0., 0., 0.],\n        [1., 1., 1., 0., 0., 0.],\n        [1., 1., 1., 1., 0., 0.],\n        [1., 1., 1., 1., 1., 0.],\n        [1., 1., 1., 1., 1., 1.]])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "h94TQOK7NRA_f0004",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 1221.133,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0004.jpg"
+}

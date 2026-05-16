@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "img, label = training_data[sample_idx]\nfigure.add_subplot(rows, cols, i)\nplt.title(labels_map[label])\nplt.axis(\"off\")\nplt.imshow(img.squeeze(), cmap=\"gray\")\nplt.show()"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "iQZFH8dr2yI_f0004",
+  "video_id": "iQZFH8dr2yI",
+  "timestamp_sec": 1481.866333,
+  "source_image": "data/frames/iQZFH8dr2yI/iQZFH8dr2yI_f0004.jpg"
+}

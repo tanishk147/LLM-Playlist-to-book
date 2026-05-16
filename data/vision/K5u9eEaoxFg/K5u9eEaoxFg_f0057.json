@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "\\text{Divide by } \\sqrt{\\text{head-dim}}",
+    "\\sqrt{d_{out}/\\text{num-heads}} = \\sqrt{6/2} = \\sqrt{3}"
+  ],
+  "diagram_summary": "Tensor output showing attention scores with inf values highlighted, demonstrating division by head dimension for multi-head attention scaling.",
+  "diagram_elements": [
+    "tensor with numerical values",
+    "inf and -inf highlighted in yellow boxes",
+    "division by head-dim formula",
+    "scaling calculation with square root"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0057",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2417.966333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0057.jpg"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Step 7: Find attention scores\n\nQueries * Keys.Transpose (2,3)",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Transposed Values matrix showing tensor data with two attention heads (head 1 and head 2) labeled with hand-drawn annotations, followed by a step showing the computation of attention scores via matrix multiplication of Queries and transposed Keys.",
+  "diagram_elements": [
+    "Transposed Values matrix",
+    "head 1",
+    "head 2",
+    "Queries * Keys.Transpose (2,3)",
+    "tensor values with numerical data"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0033",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1810.299667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0033.jpg"
+}

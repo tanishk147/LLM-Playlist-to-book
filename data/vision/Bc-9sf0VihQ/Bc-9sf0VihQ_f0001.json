@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": null,
+  "extracted_text": "optimizer.state_dict()\n\nPyTorch\nhttps://pytorch.org \u203a docs \u203a stable \u203a generated \u203a torch.o...\ntorch.optim.Optimizer.state_dict\nReturns the state of the optimizer as a dict. It contains two entries: NOTE: The parameter IDs may look like indices but they are just IDs associating state ...\n\nPyTorch Forums\nhttps://discuss.pytorch.org \u203a what-does-optimizer-state-...\nWhat does `optimizer.state_dict()` store?\n8 Feb 2022 \u2014 An optimizer's state dictionary contains two types of information - parameters that are being optimized and any hyperparameters in use. For ...\n\nStack Overflow\nhttps://stackoverflow.com \u203a questions \u203a what-are-saved-...\nWhat are saved in optimizer's state_dict? what \"state\", ...\nThe optimizer's state_dict contains information about the optimizer's state (parameters to be optimized), as well as the hyperparameters used.\n1 answer \u00b7 Top answer: In contrast to model's state_dict, which saves learnable parameters, th...\n\nPyTorch: What's the purpose of saving the optimizer state?\nWhat is the purpose of optimizer's state_dict in PyTorch Big ...\nState_dict error for testing a model that is trained by loading ...\nPyTorch / device problem(cpu, gpu) when load state_dict for ...",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "Bc-9sf0VihQ_f0001",
+  "video_id": "Bc-9sf0VihQ",
+  "timestamp_sec": 554.433,
+  "source_image": "data/frames/Bc-9sf0VihQ/Bc-9sf0VihQ_f0001.jpg"
+}

@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Step (1): Combine heads.\nFlatten each token output into each\n(b, num_tokens)\n(b, num_tokens, num_heads, head_dim)\n(1, 3, 2, 3)",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention output flattening process: three token outputs (Token 1, Token 2, Token 3) from separate attention heads are combined and flattened into a single tensor with shape (b, num_tokens).",
+  "diagram_elements": [
+    "Input tensor with 3 tokens across multiple heads",
+    "Token 1",
+    "Token 2",
+    "Token 3",
+    "Flattened output tensor",
+    "Shape annotation (b, num_tokens, num_heads, head_dim)",
+    "Shape annotation (1, 3, 2, 3)"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0086",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3168.099667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0086.jpg"
+}

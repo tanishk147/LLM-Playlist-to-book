@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Transposed Keys:",
+  "extracted_text": "Shape: `(2, 3, 2)` which corresponds to `(batch_size, d_out, num_tokens)`",
+  "code": {
+    "language": "python",
+    "content": "keys_transposed = [\n                [[2, 1],    # Sequence 1\n                [1, 3],\n                [0, 2]],\n\n                [[1, 0],    # Sequence 2\n                [0, 1],\n                [2, 3]]\n            ]"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "h94TQOK7NRA_f0018",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 2806.133,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0018.jpg"
+}

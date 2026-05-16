@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "RECURRENT NEURAL NETWORKS",
+  "extracted_text": "RNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Recurrent Neural Network architecture showing input layer, hidden layer with recurrence connections, and output layer with feedback loops.",
+  "diagram_elements": [
+    "Input",
+    "Hidden Layer",
+    "Output",
+    "Recurrence"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0028",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2540.966333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0028.jpg"
+}

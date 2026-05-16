@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "lt_(self, d_in, d_out, context_length,\n    dropout, qkv_bias=False):\n  r()._init_()\n  d_out = d_out\n  W_query = nn.Linear(d_in, d_out, bias=qkv_bias)\n  W_key   = nn.Linear(d_in, d_out, bias=qkv_bias)\n  W_value = nn.Linear(d_in, d_out, bias=qkv_bias)\n  dropout = nn.Dropout(dropout) # New\n  register_buffer('mask', torch.triu(torch.ones(context_length, context_length), diagonal=1)) # New\n\nard(self, x):\n  num_tokens, d_in = x.shape # New batch dimension b\n  = self.W_key(x)\n  ies = self.W_query(x)\n  es = self.W_value(x)\n\n  _scores = queries @ keys.transpose(1, 2) # Changed transpose\n  _scores.masked_fill_( # New, _ ops are in-place\n  self.mask.bool()[:num_tokens, :num_tokens], -torch.inf) # `:num_tokens` to account for cases where the nu\n  _weights = torch.softmax(\n  attn_scores / keys.shape[-1]**0.5, dim=-1\n\n  ts = self.dropout(attn_weights) # New\n\n  c = attn_weights @ values\n  ril context_vec"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "h94TQOK7NRA_f0026",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 2881.833,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0026.jpg"
+}

@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "At the end of this chapter, we use multiple transformer blocks to implement the GPT model that we will train in the upcoming chapter\n\n7) Final GPT architecture\n\nWe combine the building blocks 1-5,",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Visual comparison showing an aerial cityscape photograph on the left connected via a yellow curved line to a close-up photograph of a bird's eye on the right, illustrating visual feature extraction.",
+  "diagram_elements": [
+    "Aerial cityscape image",
+    "Bird eye close-up image",
+    "Yellow connecting curve",
+    "7) Final GPT architecture box"
+  ],
+  "confidence": 0.75,
+  "frame_id": "4i23dYoXp-A_f0004",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 1224.533,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0004.jpg"
+}

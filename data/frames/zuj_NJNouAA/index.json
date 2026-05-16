@@ -1,0 +1,74 @@
+[
+  {
+    "frame_id": "zuj_NJNouAA_f0000",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0000.jpg",
+    "phash": "c17f40752636363e",
+    "edge_density": 0.11755993412990196,
+    "sha256": "8bda634c2af4a7b7703f3b2e71f4d770e25d41bbbe4ebbb55a9323fce21dd2a8"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0001",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 223.833,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0001.jpg",
+    "phash": "f2c9ed97e092c8c2",
+    "edge_density": 0.15617489617374727,
+    "sha256": "53ab8431d51513dc792cd0c29fe8636ce3aeec0516056227812323497c0f3fa4"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0002",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 226.199667,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0002.jpg",
+    "phash": "807f007f407f5c1f",
+    "edge_density": 0.14828548389842047,
+    "sha256": "1a9c0e67833359e53e925dc73a8ef052bb6aee38b9e180d2459d8a01a80bf830"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0003",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 2240.599667,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0003.jpg",
+    "phash": "817f007f017f312f",
+    "edge_density": 0.11230245353349674,
+    "sha256": "d8c3cc3a245428dc9702f73387adda62f46f134bdb7ad88910d4ef0e01abab74"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0004",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 3036.466333,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0004.jpg",
+    "phash": "a17e405f017f2537",
+    "edge_density": 0.12430300245098039,
+    "sha256": "ed7cccb1414277ffca5154ce5d653a07cbe3d440d36d86cd35ebfdaa108c2649"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0005",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 3222.233,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0005.jpg",
+    "phash": "807f407f007f0f4f",
+    "edge_density": 0.0976845469090414,
+    "sha256": "6b6907598873aa031f9f36f8b8de46091520faa6919b8f8474880007baa99fda"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0006",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 3382.766333,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0006.jpg",
+    "phash": "d02af7873eb891c1",
+    "edge_density": 0.13464211856617647,
+    "sha256": "dd09b9ad70caaa49e54dcc2a7d906fe98287fa62c28fd8f7a0816f7ea69d2afb"
+  },
+  {
+    "frame_id": "zuj_NJNouAA_f0007",
+    "video_id": "zuj_NJNouAA",
+    "timestamp_sec": 3387.233,
+    "path": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0007.jpg",
+    "phash": "e080ff80ff8580bf",
+    "edge_density": 0.07939921194172113,
+    "sha256": "4a0ea1e7dace3b20d09349eb2c562a4df72e7ae269893d76f5e78aaee734e50d"
+  }
+]

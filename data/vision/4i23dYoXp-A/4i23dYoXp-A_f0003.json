@@ -1,0 +1,17 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Language Models are Unsupervised Multitask Learners",
+  "extracted_text": "Table 2. Architecture hyperparameters for the 4 model sizes.\n\nfew modifications. Layer normalization (Ba et al., 20",
+  "code": null,
+  "math": [
+    "d_{model}"
+  ],
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "4i23dYoXp-A_f0003",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 1115.033,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0003.jpg"
+}

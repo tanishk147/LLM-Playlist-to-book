@@ -1,0 +1,15 @@
+{
+  "category": "terminal",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Ep 8 (Step 000065): Train loss 1.520, Val loss 0.238\nEp 8 (Step 000070): Train loss 0.985, Val loss 6.242\nEvery effort moves you know,\" was one of the axioms he had been the tip\nose grayish beard--as if he had the donkey. \"strongest,\" as his\nEp 9 (Step 000075): Train loss 0.717, Val loss 6.293\nEp 9 (Step 000080): Train loss 0.541, Val loss 6.393\nEvery effort moves you?\" \"Yes--quite insensible to the irony. She want\nwindow-curtains, I had the donkey. \"There were days when I\nEp 10 (Step 000085): Train loss 0.391, Val loss 6.452\nEvery effort moves you know,\" was one of the axioms he laid down across\nhen, on a later day, I had again run over from Monte Carlo; and Mrs. Gi\nTraining completed in 6.60 minutes.\n\nAs we can see, based on the results printed during the training, the training loss impr\n\nThe language skills of the model have improved quite a lot. In the beginning, the mod\nyou,,,,,,,,,\") or repeat the word \"and\".\n\nAt the end of the training, it can generate grammatically correct text.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "Zxf-34voZss_f0004",
+  "video_id": "Zxf-34voZss",
+  "timestamp_sec": 2146.399667,
+  "source_image": "data/frames/Zxf-34voZss/Zxf-34voZss_f0004.jpg"
+}

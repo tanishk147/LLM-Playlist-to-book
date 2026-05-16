@@ -1,0 +1,24 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "RNNs\nLSTMs\nAttention\nTransformers\n\n1980\n1997\n2014\n2017\n\nRecurrent neural networks \u2013 1980",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Timeline showing the evolution of neural network architectures from 1980 to 2017, with RNNs (1980), LSTMs (1997), Attention (2014), and Transformers (2017).",
+  "diagram_elements": [
+    "RNNs",
+    "LSTMs",
+    "Attention",
+    "Transformers",
+    "1980",
+    "1997",
+    "2014",
+    "2017"
+  ],
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0027",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2523.799667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0027.jpg"
+}

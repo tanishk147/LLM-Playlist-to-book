@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "To ensure that the data loaders are working and are indeed returning batches of the expected shape, dimensions of the last batch:\n\nTrain loader:\nInput batch dimensions: torch.Size([8, 120])\nLabel batch dimensions torch.Size([8])\n\nAs we can see, the input batches consist of 8 training examples with 120 tokens each, as expected.\n\nThe label tensor stores the class labels corresponding to the 8 training examples.",
+  "code": {
+    "language": "python",
+    "content": "print(\"Train loader:\")\nfor input_batch, target_batch in train_loader:\n    pass\n\nprint(\"Input batch dimensions:\", input_batch.shape)\nprint(\"Label batch dimensions\", target_batch.shape)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "f6zqClXOh7Y_f0006",
+  "video_id": "f6zqClXOh7Y",
+  "timestamp_sec": 1604.466333,
+  "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0006.jpg"
+}

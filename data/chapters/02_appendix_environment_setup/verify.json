@@ -1,0 +1,510 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "Before writing a single line of model code, you need a working environment.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence with no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "This chapter walks through every tool you will need throughout the book: PyTorch for tensor operations and training, tiktoken for tokenization, TensorFlow (briefly) for loading pre-trained GPT-2 weights, tqdm for download progress tracking, and Ollama for running open-source LLMs locally during evaluation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Overview/roadmap sentence describing chapter contents; no specific factual claim requiring citation."
+    },
+    {
+      "index": 3,
+      "text": "Getting these pieces in place now will save you from interruptions later.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational statement; no factual claim."
+    },
+    {
+      "index": 4,
+      "text": "One of the first decisions your code must make at runtime is which hardware device to use for computation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing for the device selection section."
+    },
+    {
+      "index": 5,
+      "text": "PyTorch supports three backends that are relevant here: CPU, CUDA (for NVIDIA GPUs), and MPS (Metal Performance Shaders, for Macs with Apple Silicon chips) [c2307].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2307"
+      ],
+      "status": "grounded",
+      "reason": "c2307 states the device can be CPU, CUDA for GPUs, or MPS for Macs with Apple silicon chips, which directly supports this sentence."
+    },
+    {
+      "index": 6,
+      "text": "The standard one-liner for selecting between CPU and CUDA is:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory phrase before code block; no factual claim."
+    },
+    {
+      "index": 7,
+      "text": "device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2309"
+      ],
+      "status": "grounded",
+      "reason": "c2309 contains this exact code."
+    },
+    {
+      "index": 8,
+      "text": "If you are on a MacBook with an Apple Silicon chip, you can go one step further and set the device to `torch.device('mps')` for faster execution [c2310].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2310"
+      ],
+      "status": "grounded",
+      "reason": "c2310 states that for MacBooks with Apple silicon chips, the device can be set to torch.device('mps') for faster execution."
+    },
+    {
+      "index": 9,
+      "text": "Apple Silicon is approximately 2\u00d7 faster than the Apple CPU for these workloads [c3861], so it is worth the extra line if you have the hardware.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3861"
+      ],
+      "status": "grounded",
+      "reason": "c3861 states Apple silicon is approximately 2x faster than Apple CPU."
+    },
+    {
+      "index": 10,
+      "text": "Intuitively, the device variable is passed around to every tensor and model call so that all computation happens in the same memory space.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about how device variables work; general technical explanation without specific factual claim requiring citation."
+    },
+    {
+      "index": 11,
+      "text": "Mixing devices \u2014 for example, keeping your model on GPU while your data stays on CPU \u2014 is a common source of runtime errors, so it pays to establish a consistent device selection strategy early.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General technical advice and motivation; no specific factual claim requiring citation."
+    },
+    {
+      "index": 12,
+      "text": "A subtle but important optimization concerns *when* you transfer tensors to the target device.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing for the optimization discussion."
+    },
+    {
+      "index": 13,
+      "text": "The recommended approach is to perform the device transfer inside a custom collate function, which runs as part of the data loading pipeline rather than inside the training loop [c2306, c2308].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2306",
+        "c2308"
+      ],
+      "status": "grounded",
+      "reason": "c2306 is a design_decision about custom collate function including code to move tensors to device. c2308 is a design_decision about performing device transfer in custom collate function. Both support this sentence."
+    },
+    {
+      "index": 14,
+      "text": "Because the collate function executes in background worker processes, the transfer happens concurrently with the forward and backward passes, preventing it from blocking the GPU during model training [c2308].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2308"
+      ],
+      "status": "grounded",
+      "reason": "c2308 states that performing device transfer in the custom collate function allows the transfer to happen as a background process, preventing it from blocking the GPU during model training."
+    },
+    {
+      "index": 15,
+      "text": "Later in the book you will load the original GPT-2 weights released by OpenAI.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Forward-looking statement about future content; no factual claim requiring citation."
+    },
+    {
+      "index": 16,
+      "text": "There is a small compatibility wrinkle: OpenAI originally saved those weights using TensorFlow, while the code in this series uses PyTorch [c3469].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3469"
+      ],
+      "status": "grounded",
+      "reason": "c3469 states OpenAI originally saved GPT-2 weights using TensorFlow, while the lecture series code uses PyTorch."
+    },
+    {
+      "index": 17,
+      "text": "The weights therefore cannot be loaded directly with `torch.load`; TensorFlow must be installed as an intermediary [c3470].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3470"
+      ],
+      "status": "grounded",
+      "reason": "c3470 states TensorFlow must be installed to load the GPT-2 weights, which were originally saved in TensorFlow format."
+    },
+    {
+      "index": 18,
+      "text": "You will need the following minimum versions:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory phrase before a list; no factual claim."
+    },
+    {
+      "index": 19,
+      "text": "**TensorFlow** \u2265 2.15 [c3472]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3472"
+      ],
+      "status": "grounded",
+      "reason": "c3472 states TensorFlow version should be greater than or equal to 2.15."
+    },
+    {
+      "index": 20,
+      "text": "**tqdm** \u2265 4.66 [c3473]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3473"
+      ],
+      "status": "grounded",
+      "reason": "c3473 states TQDM library version should be greater than or equal to 4.66."
+    },
+    {
+      "index": 21,
+      "text": "tqdm is installed specifically to track the download progress of the weight files [c3471], which can be several gigabytes.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3471"
+      ],
+      "status": "grounded",
+      "reason": "c3471 states TQDM library is installed to track the download progress of the weights."
+    },
+    {
+      "index": 22,
+      "text": "Having a progress bar is a small quality-of-life improvement that makes it clear the download has not stalled.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational/explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 23,
+      "text": "[GAP: explicit pip/conda install commands for PyTorch, tiktoken, TensorFlow, and tqdm are not present in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "GAP marker indicating missing content that should be verified externally."
+    },
+    {
+      "index": 24,
+      "text": "Once you have trained or fine-tuned a model, you will want to compare its outputs against a strong reference.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing for the Ollama section."
+    },
+    {
+      "index": 25,
+      "text": "Ollama is a lightweight application designed to run large language models on a laptop [c648].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c648"
+      ],
+      "status": "grounded",
+      "reason": "c648 defines Ollama as an efficient application to run large language models on your laptop."
+    },
+    {
+      "index": 26,
+      "text": "It supports several well-known open-source models, including:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory phrase before a list; no factual claim."
+    },
+    {
+      "index": 27,
+      "text": "**Llama 3** by Meta [c649]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c649"
+      ],
+      "status": "grounded",
+      "reason": "c649 states Ollama supports running LLAMA 3, developed by Meta."
+    },
+    {
+      "index": 28,
+      "text": "**Phi 3** by Microsoft [c650]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c650"
+      ],
+      "status": "grounded",
+      "reason": "c650 states Ollama supports running Phi 3, developed by Microsoft."
+    },
+    {
+      "index": 29,
+      "text": "**Mistral** [c651]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c651"
+      ],
+      "status": "grounded",
+      "reason": "c651 states Ollama supports running Mistral."
+    },
+    {
+      "index": 30,
+      "text": "**Gemma 2** [c652]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c652"
+      ],
+      "status": "grounded",
+      "reason": "c652 states Ollama supports running Gemma 2."
+    },
+    {
+      "index": 31,
+      "text": "An important distinction: Ollama is an inference-only tool [c657].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c657"
+      ],
+      "status": "grounded",
+      "reason": "c657 defines Ollama as a tool for generating text using LLM inference and does not support training or fine-tuning LLMs."
+    },
+    {
+      "index": 32,
+      "text": "You perform inference with an already pre-trained model; Ollama does not support training or fine-tuning [c653, c657].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c653",
+        "c657"
+      ],
+      "status": "grounded",
+      "reason": "c653 states using Ollama, you perform inference only, not pre-training; the model is already pre-trained. c657 states Ollama does not support training or fine-tuning LLMs."
+    },
+    {
+      "index": 33,
+      "text": "Think of it as a convenient local server for querying models, not a training framework.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory analogy; no factual claim requiring citation."
+    },
+    {
+      "index": 34,
+      "text": "Ollama is available for Mac OS, Linux, and Windows [c658].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c658"
+      ],
+      "status": "grounded",
+      "reason": "c658 states Ollama is available for download on Mac OS, Linux, and Windows."
+    },
+    {
+      "index": 35,
+      "text": "The Mac OS installer weighs in at 177 MB [c659], so the download is quick.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c659"
+      ],
+      "status": "grounded",
+      "reason": "c659 states the Ollama Mac OS installer file is 177 MB."
+    },
+    {
+      "index": 36,
+      "text": "The model files themselves are a different story \u2014 the Llama 3 8-billion-parameter model is 4.7 GB [c664] and takes roughly 15 to 20 minutes to download on a typical connection [c665].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c664",
+        "c665"
+      ],
+      "status": "grounded",
+      "reason": "c664 states the LLAMA 3 model files downloaded through Ollama are 4.7 GB in size. c665 states downloading the LLAMA 3 8 billion parameter model through Ollama takes approximately 15 to 20 minutes."
+    },
+    {
+      "index": 37,
+      "text": "On Mac, a single terminal command downloads (on first run) and starts the model:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory phrase before code block; no factual claim."
+    },
+    {
+      "index": 38,
+      "text": "ollama run llama3",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c660"
+      ],
+      "status": "grounded",
+      "reason": "c660 contains this exact code."
+    },
+    {
+      "index": 39,
+      "text": "When Ollama has successfully loaded Llama 3, right-hand-side arrows appear in the terminal, indicating the model is ready for interaction [c666].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c666"
+      ],
+      "status": "grounded",
+      "reason": "c666 states when Ollama successfully loads LLAMA 3, right-hand side arrows appear in the terminal indicating the model is ready for interaction."
+    },
+    {
+      "index": 40,
+      "text": "On Windows the process requires two commands in sequence: first start the server, then launch the model [c663].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c663"
+      ],
+      "status": "grounded",
+      "reason": "c663 states on Windows, the command sequence is 'ollama serve' followed by 'ollama run llama3'."
+    },
+    {
+      "index": 41,
+      "text": "ollama serve",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c662"
+      ],
+      "status": "grounded",
+      "reason": "c662 contains this exact code."
+    },
+    {
+      "index": 42,
+      "text": "Then, in the same or a second terminal:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional phrase; no factual claim."
+    },
+    {
+      "index": 43,
+      "text": "ollama run llama3",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c660"
+      ],
+      "status": "grounded",
+      "reason": "c660 contains this exact code."
+    },
+    {
+      "index": 44,
+      "text": "One operational detail to keep in mind: Ollama must remain running in the terminal for any downstream Python code to reach it [c668].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c668"
+      ],
+      "status": "grounded",
+      "reason": "c668 states Ollama must remain running in the terminal for code execution."
+    },
+    {
+      "index": 45,
+      "text": "Closing the terminal window will stop the server.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c668"
+      ],
+      "status": "grounded",
+      "reason": "c668 states shutting down the terminal will stop Ollama, which supports this statement."
+    },
+    {
+      "index": 46,
+      "text": "A good habit is to open a dedicated terminal tab for Ollama and leave it untouched while you work in other tabs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Practical advice/recommendation; no factual claim requiring citation."
+    },
+    {
+      "index": 47,
+      "text": "Typing prompts directly in the terminal is fine for quick checks, but for systematic evaluation you will want to call Ollama programmatically.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing for programmatic usage; no factual claim requiring citation."
+    },
+    {
+      "index": 48,
+      "text": "Rather than using the `ollama run` command each time, the recommended approach is to interact with the model through an API from Python [c670].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c670"
+      ],
+      "status": "grounded",
+      "reason": "c670 states instead of using the ollama run command in the terminal each time, interact with the llama model using an API through Python."
+    },
+    {
+      "index": 49,
+      "text": "You can verify that the Ollama session is reachable by checking whether `ollama_running` equals `true` in your verification code [c669].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c669"
+      ],
+      "status": "grounded",
+      "reason": "c669 states a code block can verify that the Ollama session is running properly by checking if 'ollama_running' equals true."
+    },
+    {
+      "index": 50,
+      "text": "[GAP: the specific Python API calls (e.g., the requests or ollama Python package usage) for interacting with Ollama programmatically are not present in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "GAP marker indicating missing content that should be verified externally."
+    },
+    {
+      "index": 51,
+      "text": "With this setup complete you have everything you need to move forward:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional phrase before summary table; no factual claim."
+    },
+    {
+      "index": 52,
+      "text": "| Tool | Purpose | Key version / note |\n|---|---|---|\n| PyTorch | Tensors, training, inference | Device: CPU / CUDA / MPS |\n| tiktoken | Tokenization | [GAP: version not specified in claims] |\n| TensorFlow | Loading GPT-2 weights | \u2265 2.15 [c3472] |\n| tqdm | Download progress bars | \u2265 4.66 [c3473] |\n| Ollama | Local LLM inference for evaluation | Inference only [c657] |",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3472",
+        "c3473",
+        "c657"
+      ],
+      "status": "grounded",
+      "reason": "The table rows with citations are grounded: c3472 supports TensorFlow \u2265 2.15, c3473 supports tqdm \u2265 4.66, c657 supports Ollama inference only. The GAP marker for tiktoken version is noted but does not affect grounding of cited claims."
+    },
+    {
+      "index": 53,
+      "text": "The next chapter begins building the model itself.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Forward-looking transition statement; no factual claim."
+    },
+    {
+      "index": 54,
+      "text": "Having your device selection sorted out now means you can drop `device` into model and data-loader code without revisiting this setup.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Concluding motivational statement; no factual claim requiring citation."
+    }
+  ],
+  "summary": {
+    "grounded": 40,
+    "unsupported": 0,
+    "contradicted": 0,
+    "needs_external_check": 2,
+    "narrative_ok": 12
+  }
+}

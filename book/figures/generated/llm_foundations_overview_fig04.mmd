@@ -1,0 +1,12 @@
+graph LR
+    A["Input Embeddings +<br/>Positional Encoding"] --> B["Multi-Head<br/>Attention"]
+    B --> C{"Add &<br/>Norm"}
+    C --> D["Feed-Forward<br/>Network"]
+    D --> E{"Add &<br/>Norm"}
+    E --> F["Output<br/>Representations"]
+    B -."Residual Connection".-> C
+    D -."Residual Connection".-> E
+    style A fill:#e1f5ff
+    style B fill:#fff3e0
+    style D fill:#fff3e0
+    style F fill:#e8f5e9

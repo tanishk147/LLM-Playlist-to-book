@@ -1,0 +1,22 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Vision Transformers (ViT) in Image Recognition \u2013 2024 Guide",
+  "extracted_text": "DEEP LEARNING\n\nAuthor: Gaudenz Boesch\nDate: November 25, 2023\n\nBuild, deploy, operate computer vision at scale\n\nVision Transformers (ViT) has recently emerged as a competitive alternative to Convolutional Neural Networks (CNNs) that are currently state-of-the-art (SOTA) in different computer vision tasks. ViT models outperform the current SOTA CNNs by almost x4 in terms of computational efficiency and accuracy.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Grid of 36 sample images showing various computer vision tasks and visualizations, including object detection, segmentation, and feature maps.",
+  "diagram_elements": [
+    "Brain/medical imaging",
+    "Feature visualizations (purple/green heatmaps)",
+    "Object detection boxes",
+    "Segmentation masks",
+    "Natural objects (fruits, animals, household items)",
+    "Architectural/structural images"
+  ],
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0016",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 1918.699667,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0016.jpg"
+}

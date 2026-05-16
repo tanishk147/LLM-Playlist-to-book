@@ -1,0 +1,12 @@
+{
+  "chapter_id": "causal_and_multihead_attention",
+  "title": "Causal Self-Attention and Multi-Head Attention",
+  "summary": {
+    "grounded": 95,
+    "unsupported": 0,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 37
+  },
+  "stripped_sentence_indices": []
+}

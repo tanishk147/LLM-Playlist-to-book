@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "(6 \\times 6) \\to \\text{lin} \\times \\text{dout}",
+    "\\text{Step 3: Initialize trainable weight matrices for key, query, value } (W_k, W_q, W_v) \\text{ } (6 \\times 6)",
+    "\\text{Step 4: Calculate Keys, Queries, Value Matrix } (\\text{Input} * W_k, \\text{Input} * W_q, \\text{Input} * W_v)"
+  ],
+  "diagram_summary": "Multi-step attention mechanism initialization showing tensor operations for key, query, and value weight matrices with numerical tensor examples displayed in code blocks.",
+  "diagram_elements": [
+    "Step 3: Initialize trainable weight matrices",
+    "Wk, Wq, Wv weight tensors (6\u00d76)",
+    "Step 4: Calculate Keys, Queries, Value Matrix",
+    "Input * Wk, Input * Wq, Input * Wv operations",
+    "Tensor output examples with numerical values"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0008",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 893.599667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0008.jpg"
+}

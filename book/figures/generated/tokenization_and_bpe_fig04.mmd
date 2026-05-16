@@ -1,0 +1,28 @@
+graph LR
+    A["Text"] --> B["Regex Split"]
+    B --> C["Token List"]
+    C --> D["Vocab Lookup"]
+    D --> E["ID List"]
+    E --> F["Reverse Lookup"]
+    F --> G["Token List"]
+    G --> H["Join"]
+    H --> I["Text"]
+    
+    style A fill:#e1f5ff
+    style E fill:#fff3e0
+    style I fill:#e1f5ff
+    
+    subgraph encode["Encode Path"]
+        A
+        B
+        C
+        D
+        E
+    end
+    
+    subgraph decode["Decode Path"]
+        F
+        G
+        H
+        I
+    end

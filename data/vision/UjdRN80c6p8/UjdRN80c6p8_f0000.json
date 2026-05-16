@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Self attention with trainable weights",
+  "extracted_text": "2) Compute attention weights \u2190 The attention weights are a normalized version of the attention scores\n\n3) Compute context vectors \u2190 The context vectors are computed as a weighted sum over the inputs\n\nIn this section, we will learn about the self attention mechanism used in the original transformer architecture, the GPT models and most other popular LLMs.\n\nThis self attention mechanism is also called as \"scaled dot-product attention\"",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Flow diagram showing two steps in attention computation: computing attention weights (normalized attention scores) and computing context vectors (weighted sum over inputs).",
+  "diagram_elements": [
+    "Compute attention weights",
+    "Compute context vectors",
+    "attention weights explanation",
+    "context vectors explanation"
+  ],
+  "confidence": 0.92,
+  "frame_id": "UjdRN80c6p8_f0000",
+  "video_id": "UjdRN80c6p8",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/UjdRN80c6p8/UjdRN80c6p8_f0000.jpg"
+}

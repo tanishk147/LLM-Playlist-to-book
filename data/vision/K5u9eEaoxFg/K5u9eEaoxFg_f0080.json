@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "# Original mask truncated to the number of tokens and converted to boolean\nmask_bool = self.mask.bool()[:num_tokens, :num_tokens]\n\n# Use the mask to fill attention scores\nattn_scores.masked_fill_(mask_bool, -torch.inf)\n\nattn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)\nattn_weights = self.dropout(attn_weights)\n\n# Shape: (b, num_tokens, num_heads, head_dim)\ncontext_vec = (attn_weights @ values).transpose(1, 2)\n\n# Combine heads, where self.d_out = self.num_heads * self.head_dim\ncontext_vec = context_vec.contiguous().view(b, num_tokens, self.d_out)\ncontext_vec = self.out_proj(context_vec) # optional projection\n\nreturn context_vec"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "K5u9eEaoxFg_f0080",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 3037.866333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0080.jpg"
+}

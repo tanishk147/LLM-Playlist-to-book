@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": "torch.argmax",
+  "extracted_text": "torch.argmax(input) \u2192 LongTensor\n\nReturns the indices of the maximum value of all elements in the input tensor.\n\nThis is the second value returned by torch.max(). See its documentation for the exact semantics of this method.\n\nNOTE: If there are multiple maximal values then the indices of the first maximal value are returned.\n\nParameters\ninput (Tensor) - the input tensor.\n\nExample:",
+  "code": {
+    "language": "python",
+    "content": ">>> a = torch.randn(4, 4)\n>>> a\ntensor([[ 1.3398,  0.2663, -0.2686,  0.2450],\n        [-0.7401, -0.8805, -0.3402, -1.1936],\n        [ 0.4907, -1.3948, -1.0691, -0.3132],\n        [-1.6092,  0.5419, -0.2993,  0.3195]])\n>>> torch.argmax(a)\ntensor(0)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "7TKCrt--bWI_f0002",
+  "video_id": "7TKCrt--bWI",
+  "timestamp_sec": 1677.533,
+  "source_image": "data/frames/7TKCrt--bWI/7TKCrt--bWI_f0002.jpg"
+}

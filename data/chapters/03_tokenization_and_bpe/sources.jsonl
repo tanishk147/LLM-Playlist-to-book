@@ -1,0 +1,186 @@
+## Claims (cite these by ID inline as [cNNN])
+- c2419 [definition | fKd8s29e-l4 @ 176-192s]
+  There are three main types of tokenization algorithms: word-based tokenizers, sub-word-based tokenizers, and character-based tokenizers.
+- c2423 [definition | fKd8s29e-l4 @ 268-280s]
+  Out-of-vocabulary (OOV) words are words that are not present in the vocabulary used by a tokenizer.
+- c2439 [definition | fKd8s29e-l4 @ 703-722s]
+  Sub-word based tokenization is a tokenization approach that combines features of word tokenization and character tokenization by selectively splitting words based on frequency.
+- c2490 [code | fKd8s29e-l4 @ 2549-2556s]
+  import tiktoken
+  tokenizer = tiktoken.get_encoding('gpt2')
+- c2504 [definition | fKd8s29e-l4 @ 2944-2952s]
+  The BPE tokenizer breaks down words not in its predefined vocabulary into smaller sub-word units or individual characters.
+- c2895 [definition | mk-6cFebjis @ 61-74s]
+  Data preprocessing is the procedure of processing text data (sentences, paragraphs, documents) before it is fed as input to a large language model.
+- c2898 [definition | mk-6cFebjis @ 107-110s]
+  Tokenization is the first step in the data preprocessing pipeline that converts text into tokens.
+- c2903 [definition | mk-6cFebjis @ 151-156s]
+  Byte pair encoding (BPE) is a subword-based tokenization method.
+- c2909 [definition | mk-6cFebjis @ 244-251s]
+  Word-based tokenization is converting an entire dataset into chunks of words.
+- c2912 [code | mk-6cFebjis @ 312-322s]
+  with open('the-verdict.txt', 'r') as f:
+      raw_text = f.read()
+- c2914 [code | mk-6cFebjis @ 423-453s]
+  import re
+  text = "Hello world. This is a test."
+  tokens = re.split(r'\s+', text)
+- c2917 [code | mk-6cFebjis @ 581-615s]
+  tokens = re.split(r'[,\.;:\?!"\-\(\)/]|\s+', text)
+  tokens = [token for token in tokens if token.strip()]
+- c2919 [definition | mk-6cFebjis @ 863-873s]
+  A vocabulary is a dictionary where every unique token is mapped to a unique integer called a token ID.
+- c2921 [code | mk-6cFebjis @ 902-934s]
+  vocab = sorted(set(preprocessed))
+  vocab_dict = {token: idx for idx, token in enumerate(vocab)}
+- c2922 [definition | mk-6cFebjis @ 1007-1027s]
+  A tokenizer class is a Python class that contains an encode method to convert text into token IDs and a decode method to convert token IDs back into text.
+- c2923 [code | mk-6cFebjis @ 1072-1182s]
+  class SimpleTokenizer:
+      def __init__(self, vocab):
+          self.string_to_int = vocab
+          self.int_to_string = {idx: token for token, idx in vocab.items()}
+      
+      def encode(self, text):
+          tokens = re.split(r'[,\.;:\?!"\-\(\)/]|\s+', text)
+          tokens = [token for token in tokens if token.strip()]
+          return [self.string_to_int[token] for token in tokens]
+      
+      def decode(self, ids):
+          text = ' '.join([self.int_to_string[idx] for idx in ids])
+          return re.sub(r'\s+([,\.;:\?!"\-\(\)/])', r'\1', text)
+- c2927 [definition | mk-6cFebjis @ 1371-1382s]
+  An unknown token is a special token added to the vocabulary to represent words that are not present in the vocabulary.
+- c2938 [definition | mk-6cFebjis @ 1787-1792s]
+  Word-based tokenization breaks down sentences into individual words as tokens.
+- c2942 [definition | mk-6cFebjis @ 1896-1919s]
+  Character-based tokenization uses individual characters as tokens instead of words.
+- c2947 [definition | mk-6cFebjis @ 2050-2070s]
+  Subword-based tokenization uses subwords as tokens, which are neither full words nor individual characters.
+- c2953 [definition | mk-6cFebjis @ 2191-2194s]
+  Byte pair encoding (BPE) is an algorithm for implementing subword-based tokenization.
+- c2956 [definition | mk-6cFebjis @ 2211-2227s]
+  In byte pair encoding, the algorithm identifies the most frequently occurring byte pair and replaces it with a new variable that does not occur in the data.
+- c3181 [definition | rsy5Ragmso8 @ 585-602s]
+  raw_text is the variable that stores the entire text content read from The Verdict file.
+- c3190 [code | rsy5Ragmso8 @ 978-988s]
+  result = re.split(r'[,.;:?_!()"\|\-\s]', text)
+- c3192 [code | rsy5Ragmso8 @ 1029-1047s]
+  [item for item in result if item.strip()]
+- c3201 [definition | rsy5Ragmso8 @ 1554-1561s]
+  A token ID is a unique integer assigned to each unique token in the vocabulary.
+- c3205 [code | rsy5Ragmso8 @ 1640-1657s]
+  vocab = sorted(set(preprocessed))
+  vocab_size = len(vocab)
+- c3209 [definition | rsy5Ragmso8 @ 1836-1845s]
+  Encoding is the process of converting tokens into token IDs.
+- c3210 [definition | rsy5Ragmso8 @ 1845-1889s]
+  A decoder is a reverse mapping from token IDs back to tokens, needed to convert LLM numerical output back into text.
+- c3212 [definition | rsy5Ragmso8 @ 1922-1933s]
+  The encode method converts sample text into tokens and assigns token ids based on the vocabulary.
+- c3213 [definition | rsy5Ragmso8 @ 1934-1949s]
+  The decode method takes token ids as input, converts them into individual tokens, and returns the original sample text.
+- c3216 [definition | rsy5Ragmso8 @ 1993-2000s]
+  The encode method takes text as input and outputs token ids.
+- c3217 [definition | rsy5Ragmso8 @ 2000-2005s]
+  The decode method takes token ids as input and outputs text.
+- c3218 [definition | rsy5Ragmso8 @ 2013-2030s]
+  The __init__ method of the tokenizer class takes a vocabulary parameter, which is a mapping from tokens to token ids.
+- c3219 [definition | rsy5Ragmso8 @ 2036-2048s]
+  The str2int variable in the tokenizer class stores the vocabulary as a mapping from tokens (strings) to token ids (integers).
+- c3220 [definition | rsy5Ragmso8 @ 2048-2079s]
+  The int2str variable in the tokenizer class is the reverse mapping of the vocabulary, mapping token ids (integers) back to tokens (strings).
+- c3222 [definition | rsy5Ragmso8 @ 2098-2121s]
+  The encode method preprocesses text by splitting it on punctuation marks (comma, full stop, colon, semicolon) and removing whitespace to create individual tokens.
+- c3223 [definition | rsy5Ragmso8 @ 2128-2166s]
+  The encode method converts individual tokens to token ids using the str2int vocabulary dictionary.
+- c3224 [definition | rsy5Ragmso8 @ 2166-2183s]
+  The decode method converts token ids back to individual tokens using the int2str reverse dictionary.
+- c3225 [definition | rsy5Ragmso8 @ 2183-2194s]
+  The decode method joins individual tokens together into a single string.
+- c3234 [definition | rsy5Ragmso8 @ 2618-2638s]
+  Special context tokens are reserved tokens used to handle unknown words and mark boundaries between text sources in tokenization.
+- c3235 [definition | rsy5Ragmso8 @ 2698-2704s]
+  The unknown token (UNK) is a special token assigned to any word in the input text that is not present in the vocabulary.
+- c3236 [definition | rsy5Ragmso8 @ 2703-2715s]
+  The end-of-text token (EOS) is a special token inserted between unrelated text sources to signal boundaries and prevent the model from mixing separate documents.
+- c3243 [code | rsy5Ragmso8 @ 3030-3071s]
+  # Adding special tokens to vocabulary
+  pre_processed.extend(['<|endoftext|>', '<|unk|>'])
+  vocab = {token: idx for idx, token in enumerate(sorted(pre_processed))}
+- c3245 [code | rsy5Ragmso8 @ 3187-3227s]
+  # In SimpleTokenizer v2 encode method: if a word is not in vocabulary, replace it with unknown token
+  if item not in self.str2int:
+      tokens.append(self.str2int['<|unk|>'])
+  else:
+      tokens.append(self.str2int[item])
+- c3248 [definition | rsy5Ragmso8 @ 3530-3552s]
+  BOS (Beginning of Sequence) token marks the start of a text and signifies to the LLM where a piece of context begins.
+- c3249 [definition | rsy5Ragmso8 @ 3552-3567s]
+  EOS (End of Sequence) token is positioned at the end of a text and is useful for separating unrelated text.
+- c3250 [definition | rsy5Ragmso8 @ 3567-3612s]
+  Padding token is used to extend shorter texts in a batch to match the length of the longest text, enabling parallel processing of variable-length sequences.
+- c3255 [definition | rsy5Ragmso8 @ 3789-3809s]
+  Tokenization is the process of preparing input text for training LLMs, divided into two steps: splitting text into individual words (tokens) and converting tokens into token IDs.
+- c3260 [definition | rsy5Ragmso8 @ 3938-3950s]
+  The encode method of a tokenizer class converts sample text into tokens and then converts these tokens into token IDs.
+- c3261 [definition | rsy5Ragmso8 @ 3950-3958s]
+  The decode method of a tokenizer class converts token IDs back into tokenized text and then recovers the original sample text.
+- c3263 [definition | rsy5Ragmso8 @ 3986-3999s]
+  Special tokens are added to the vocabulary to handle words not present in the vocabulary and to separate multiple text sources.
+- c2948 [fact | mk-6cFebjis @ 2053-2060s]
+  Byte pair encoding (BPE), used by GPT models, is a subword-based tokenization algorithm.
+- c2902 [fact | mk-6cFebjis @ 140-150s]
+  Tokenization can be broken down into three types: word-based tokenizer, subword-based tokenizer, and character-based tokenizer.
+- c2908 [fact | mk-6cFebjis @ 211-228s]
+  A word-based tokenizer will be constructed from scratch in this lecture, although it is not the tokenizer used in GPT models.
+- c3197 [fact | rsy5Ragmso8 @ 1328-1333s]
+  Byte pair encoding is an alternative tokenization scheme used in large language models, different from simple regex-based splitting.
+- c2967 [fact | mk-6cFebjis @ 2601-2606s]
+  The tiktoken library provides tokenizers using the same encodings as GPT-2.
+- c2939 [fact | mk-6cFebjis @ 1794-1804s]
+  Word-based tokenization requires handling out-of-vocabulary words with special context tokens.
+- c2491 [fact | fKd8s29e-l4 @ 2601-2608s]
+  The tiktoken byte pair encoding tokenizer has an encode method that converts words into token IDs.
+- c2961 [fact | mk-6cFebjis @ 2337-2348s]
+  The first step in BPE tokenization is to split all words into character-level tokens.
+- c2960 [fact | mk-6cFebjis @ 2316-2328s]
+  In BPE tokenization, a special end-of-word token is added after each word to indicate word boundaries.
+- c2506 [fact | fKd8s29e-l4 @ 3052-3056s]
+  The BPE tokenizer scans text from left to right and breaks it down into characters or sub-words based on what is present in the vocabulary, then assigns each a unique token ID.
+- c2417 [fact | fKd8s29e-l4 @ 80-109s]
+  In previous tokenization schemes covered, every word was treated as a unique token, along with special characters like comma, full stop, and exclamation mark.
+- c2959 [fact | mk-6cFebjis @ 2293-2300s]
+  Byte pair encoding applied to vocabulary achieves subword tokenization by retaining root words and breaking down rare words into subword units.
+- c2460 [design_decision | fKd8s29e-l4 @ 1307-1320s]
+  Byte pair encoding for large language models is a tweaked version of the standard BPE algorithm used to convert entire sentences into subwords.
+- c2943 [fact | mk-6cFebjis @ 1928-1952s]
+  Character-based tokenization requires a vocabulary of approximately 256 characters, which is much smaller than word-based tokenization.
+- c2468 [design_decision | fKd8s29e-l4 @ 1450-1488s]
+  In BPE preprocessing, a special end-of-word token (</w>) is appended to each word to mark word boundaries, enabling the algorithm to distinguish between subwords at word endings and the same subwords within words.
+- c2487 [fact | fKd8s29e-l4 @ 2462-2474s]
+  Implementing BPE from scratch is relatively complicated, so the tutorial uses the tiktoken Python library instead.
+- c2937 [fact | mk-6cFebjis @ 1695-1714s]
+  Other special context tokens used by some researchers include beginning of sequence, end of sequence, and padding tokens, in addition to unknown and end of text tokens.
+- c2952 [fact | mk-6cFebjis @ 2150-2183s]
+  Subword-based tokenization retains semantic similarity by sharing root word tokens across related words like 'tokens' and 'tokenizing'.
+- c2466 [fact | fKd8s29e-l4 @ 1412-1419s]
+  Word-based tokenization treats each unique word as a single token, resulting in four tokens for the dataset containing 'old', 'older', 'finest', and 'lowest'.
+- c3257 [fact | rsy5Ragmso8 @ 3828-3838s]
+  The tokenization pipeline for LLMs involves: tokenizing input text into words, converting words into token IDs, and later converting token IDs into vector representations.
+- c3196 [fact | rsy5Ragmso8 @ 1294-1316s]
+  The simple regex-based tokenization scheme splits text on whitespace and special characters, then filters out empty tokens.
+- c2499 [fact | fKd8s29e-l4 @ 2860-2862s]
+  Byte pair encoding reduces vocabulary length compared to word-level tokenization.
+- c3227 [fact | rsy5Ragmso8 @ 2302-2316s]
+  The tokenizer class uses re.split and item.strip methods to convert text into tokens.
+- c3199 [fact | rsy5Ragmso8 @ 1396-1403s]
+  The raw text from the book example contains 4,690 tokens after applying the regex-based tokenization scheme.
+- c3193 [fact | rsy5Ragmso8 @ 1047-1084s]
+  Using a list comprehension with item.strip() filters out whitespace tokens from the tokenization result.
+- c2435 [fact | fKd8s29e-l4 @ 584-625s]
+  In character-based tokenization, the word 'dinosaur' is split into eight separate character tokens (d, i, n, o, s, a, u, r), whereas in word-based tokenization it would be one token.
+- c3214 [architecture | rsy5Ragmso8 @ 1960-1975s]
+  The encode method in a tokenizer corresponds to the encoder block of a transformer architecture, converting text to token ids for training data.
+- c2944 [fact | mk-6cFebjis @ 1954-1957s]
+  Character-based tokenization solves the out-of-vocabulary (OOV) problem.

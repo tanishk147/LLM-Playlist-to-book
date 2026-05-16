@@ -1,0 +1,28 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "lecture \u2192 LLM finetuning approaches",
+  "extracted_text": "Finetuning: Adapting a pretrained model to a specific task by training the model on additional data",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage LLM finetuning pipeline: Stage 1 shows data preprocessing and attention mechanisms leading to building an LLM; Stage 2 shows pretraining and foundation model development with finetuning; Stage 3 shows classification and personal assistant applications with instruction dataset.",
+  "diagram_elements": [
+    "Data & preprocessing",
+    "Attention mechanism",
+    "LLM Architecture",
+    "Building an LLM",
+    "Pretraining",
+    "Model evaluation",
+    "Load weights",
+    "Finetuning",
+    "Foundation model",
+    "Classifier",
+    "Personal assistant",
+    "Instruction dataset"
+  ],
+  "confidence": 0.85,
+  "frame_id": "yZpy_hsC1bE_f0000",
+  "video_id": "yZpy_hsC1bE",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0000.jpg"
+}

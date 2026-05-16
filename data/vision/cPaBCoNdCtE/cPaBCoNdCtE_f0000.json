@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 Multi-head attention mechanism",
+  "extracted_text": "what all we have achieved so far\n\nThe term \"multi-head\" refers to dividing the attention mechanism into multiple heads, each operating independently\n\n(a) Stacking multiple single head attention layers\n\n(1) Implementing multi-head attention involves",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "cPaBCoNdCtE_f0000",
+  "video_id": "cPaBCoNdCtE",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/cPaBCoNdCtE/cPaBCoNdCtE_f0000.jpg"
+}

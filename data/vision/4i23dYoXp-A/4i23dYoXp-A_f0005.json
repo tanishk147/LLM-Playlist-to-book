@@ -1,0 +1,23 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Transformer blocks\n\nUsing this configuration, we will build a GPT placeholder architecture (Dummy GPT model)\n\nThis will give us a birds eye view of how everything fits together.",
+  "code": {
+    "language": "json",
+    "content": "\"n_heads\": 12,\n\"n_layers\": 12,\n\"drop_rate\": 0.1,\n\"qkv_bias\": False"
+  },
+  "math": null,
+  "diagram_summary": "Convolutional Neural Networks architecture diagram showing multiple layers and connections with annotations.",
+  "diagram_elements": [
+    "Convolutional layers",
+    "Pooling layers",
+    "Feature maps",
+    "Network connections"
+  ],
+  "confidence": 0.75,
+  "frame_id": "4i23dYoXp-A_f0005",
+  "video_id": "4i23dYoXp-A",
+  "timestamp_sec": 2143.199667,
+  "source_image": "data/frames/4i23dYoXp-A/4i23dYoXp-A_f0005.jpg"
+}

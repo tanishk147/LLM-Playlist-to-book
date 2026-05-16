@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Takeaways:",
+  "extracted_text": "\u2022 Meta is committed to openly accessible AI. Read Mark Zuckerberg's letter detailing why open source is good for developers, good for Meta, and good for the world.\n\u2022 Bringing open intelligence to all, our latest models expand context length to 128K, add support across eight languages, and include Llama 3.1 405B\u2014the first frontier-level open source AI model.\n\u2022 Llama 3.1 405B is in a class of its own, with unmatched flexibility, control, and state-of-the-art capabilities that rival the best closed source models. Our new model will enable the community to unlock new workflows, such as synthetic data generation and model distillation.\n\u2022 We're continuing to build out Llama to be a system by providing more components that work with the model, including a reference system. We want to empower developers with the tools to create their own custom agents and new types of agentic behaviors. We're bolstering this with new security and safety tools, including Llama Guard 3 and Prompt Guard, to help build responsibly. We're also releasing a request for comment on the Llama Stack API, a standard interface we hope will make it easier for third-party projects to leverage Llama models.\n\u2022 The ecosystem is primed and ready to go with over 25 partners, including AWS, NVIDIA, Databricks, Groq, Dell, Azure, Google Cloud, and Snowflake offering services on day one.\n\u2022 Try Llama 3.1 405B in the US on WhatsApp and at meta.ai by asking a challenging math or coding question.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "xbaYCf2FHSY_f0034",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 1545.566333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0034.jpg"
+}

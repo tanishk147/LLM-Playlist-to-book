@@ -1,0 +1,4504 @@
+{
+  "video_id": "XN7sevVxyUM",
+  "segments": [
+    {
+      "id": "XN7sevVxyUM_000",
+      "title": "Why we care about \u201cattention\u201d",
+      "ts_start": 0.0,
+      "ts_end": 379.0,
+      "segments": [
+        {
+          "ts_start": 4.58,
+          "ts_end": 11.14,
+          "text": "Hello everyone, welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "XN7sevVxyUM_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Lecture \u2192 Attention mechanism introduction",
+              "extracted_text": "we are going to look at this sub-section",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Two-stage pipeline showing the progression from data preparation through attention mechanism and LLM architecture (Stage 1) to training, model evaluation, and fine-tuning with a pretrained classifier (Stage 2), built on a foundational model.",
+              "diagram_elements": [
+                "STAGE 1",
+                "Data preparation",
+                "sampling",
+                "Attention mechanism",
+                "LLM architecture",
+                "Building on",
+                "Foundational model",
+                "STAGE 2",
+                "Training loop",
+                "Model evaluation",
+                "Load pretrained weights",
+                "Fine-tuning",
+                "Classifier"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0000",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 12.01,
+          "ts_end": 15.85,
+          "text": "Up till now, in this series, we have looked at a number of things.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 16.17,
+          "ts_end": 24.27,
+          "text": "In particular, we have spent a lot of time discussing the data preparation and the sampling stage of building a large language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 24.55,
+          "ts_end": 31.53,
+          "text": "In particular, if you want to build an entire large language model pipeline, it has to be done in three stages.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 31.53,
+          "ts_end": 38.91,
+          "text": "In stage 1, you have to look at the data preparation, then comes attention mechanism, then comes the LLM architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 39.67,
+          "ts_end": 45.73,
+          "text": "In stage 2, we have the training and the model evaluation, and in stage 3, we have the fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 46.51,
+          "ts_end": 54.81,
+          "text": "So we have spent around 5 to 6 lectures on the data preparation and sampling part, where we looked at word embedding,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 54.89,
+          "ts_end": 61.61,
+          "text": "we looked at tokenization, we looked at byte-pair encoding, we looked at positional encoding.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 62.37,
+          "ts_end": 68.95,
+          "text": "Essentially, we have looked at the entire data preprocessing pipeline of the LLM in a lot of detail.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 69.45,
+          "ts_end": 76.78,
+          "text": "Now, it's time to move to the second building block of stage 1, and that is the attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 77.76,
+          "ts_end": 86.96,
+          "text": "In one of the earlier lectures of this series, I told all of you that I think of transformers as the secret sauce behind the LLM.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 87.72,
+          "ts_end": 92.56,
+          "text": "So, if transformers is like a car, then attention mechanism...",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 92.58,
+          "ts_end": 95.48,
+          "text": "is essentially the engine which drives the car.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 96.43,
+          "ts_end": 104.39,
+          "text": "This is the mechanism, I think, which gives so much power to large language models, and that's why ChatGPT performs so well.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 105.45,
+          "ts_end": 111.13,
+          "text": "There are a few lectures on attention mechanism on YouTube, but they are not comprehensive at all.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 111.25,
+          "ts_end": 115.69,
+          "text": "It's impossible to cover everything related to attention mechanism in one lecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 116.98,
+          "ts_end": 119.68,
+          "text": "It's one of the most important concepts.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 119.72,
+          "ts_end": 123.4,
+          "text": "So I've planned a series of 4 to 5 lectures on attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 124.85,
+          "ts_end": 131.17,
+          "text": "Today's lecture will be a foundational overview, where we will understand the introduction to attention mechanism,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 131.43,
+          "ts_end": 135.89,
+          "text": "what it is, why it is really needed, and the types of attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 136.11,
+          "ts_end": 142.65,
+          "text": "Then what we'll be doing from the next lecture onwards is we'll be coding out the entire attention mechanism completely from scratch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 142.77,
+          "ts_end": 144.99,
+          "text": "We are not going to assume even a single thing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 147.06,
+          "ts_end": 153.86,
+          "text": "Okay, so in this lecture, we are going to look at this subsection, which is essentially the subsection on attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 153.88,
+          "ts_end": 163.8,
+          "text": "So let me switch my color to, I think I'll choose purple here, and let's start looking at attention mechanism in detail.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 164.02,
+          "ts_end": 174.76,
+          "text": "So first, let me motivate so that you get an intuition of why this name attention mechanism comes and what are we essentially trying to solve here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 174.98,
+          "ts_end": 176.68,
+          "text": "So let's look at this example.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 176.96,
+          "ts_end": 181.82,
+          "text": "Let's say you are a large language model like GPT and you have received this sentence.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 182.08,
+          "ts_end": 183.42,
+          "text": "The sentence is,",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 183.42,
+          "ts_end": 188.48,
+          "text": "The cat that was sitting on the mat which was next to the dog jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 189.59,
+          "ts_end": 193.61,
+          "text": "Now as a human, I can say that, okay, there is maybe a cat here.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 193.93,
+          "ts_end": 199.57,
+          "text": "The cat was sitting next to a dog and the cat was also on a mat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 199.73,
+          "ts_end": 203.53,
+          "text": "And then as a human, when I read this, I know that the cat jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 204.07,
+          "ts_end": 204.55,
+          "text": "Okay.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 204.89,
+          "ts_end": 211.47,
+          "text": "But as a large language model, if you look at the sentence, you'll soon realize that this sentence is a bit confusing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 211.81,
+          "ts_end": 213.69,
+          "text": "I can very clearly see that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 213.93,
+          "ts_end": 215.35,
+          "text": "The cat was sitting on the mat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 215.47,
+          "ts_end": 225.33,
+          "text": "If only this were the sentence, I could easily analyze that the cat is the main subject in this sentence and the cat was sitting and the object is the mat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 225.61,
+          "ts_end": 233.59,
+          "text": "But the thing is, when there are such complex sentences, which are also called long-term dependencies, where there is this second sentence which is attached.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 234.7,
+          "ts_end": 238.04,
+          "text": "So then it becomes a bit difficult for the large language model.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 238.52,
+          "ts_end": 243.66,
+          "text": "Because, so after this sentence, there will be a number of other sentences, right?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 244.5,
+          "ts_end": 255.54,
+          "text": "But the main thing which the large language model needs to really understand from this sentence is that the cat, which is the main subject, that subject actually jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 256.44,
+          "ts_end": 260.6,
+          "text": "So the main, the action which the subject performed is jumping.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 261.4,
+          "ts_end": 271.46,
+          "text": "So the LLM should understand that when it looks at cat, the word which it should be paying the most attention to is jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 272.98,
+          "ts_end": 274.48,
+          "text": "Notice how I use the word attention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 276.52,
+          "ts_end": 285.26,
+          "text": "So when I look at the word cat, of course, sitting is also important because the cat was earlier sitting on the mat, but now the cat has jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 285.72,
+          "ts_end": 295.66,
+          "text": "So there are a few words in this sentence, which the LLM needs to pay the most attention to in association with cat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 296.84,
+          "ts_end": 304.92,
+          "text": "And if you don't introduce the attention mechanism, it's very difficult for the LLM to know that the cat is the one who has jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 306.27,
+          "ts_end": 306.79,
+          "text": "Maybe.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 306.97,
+          "ts_end": 307.49,
+          "text": "Maybe.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 307.51,
+          "ts_end": 307.59,
+          "text": "Maybe.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 307.59,
+          "ts_end": 313.35,
+          "text": "If the attention mechanism was not there, the LLM would have been confused and it might think, oh the dog has jumped.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 313.53,
+          "ts_end": 318.75,
+          "text": "Or it might think that the main part of the sentence is that the cat is on a mat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 319.24,
+          "ts_end": 325.46,
+          "text": "So if the attention mechanism was not there, maybe the LLM would have thought that the cat is on the mat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 325.58,
+          "ts_end": 325.92,
+          "text": "That's it.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 326.56,
+          "ts_end": 332.0,
+          "text": "It would not know that I have to give a lot of attention to jumped in association with the cat.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 333.02,
+          "ts_end": 337.8,
+          "text": "This is the broad level intuition of why we need to learn about the attention mechanism.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 337.8,
+          "ts_end": 343.86,
+          "text": "when you have sentences such as this and then there is a big story after this the llm needs",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 343.86,
+          "ts_end": 349.52,
+          "text": "to analyze this sentence and it needs to process in relation to a particular word let's say in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 349.52,
+          "ts_end": 355.84,
+          "text": "relation to cat which other word should i pay the most attention to and that's where the attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 355.84,
+          "ts_end": 362.04,
+          "text": "mechanism comes into the picture it turns out that without attention mechanism if we use a recurrent",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 362.04,
+          "ts_end": 368.44,
+          "text": "neural network or some other neural network it does not capture the long-term dependencies",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 368.44,
+          "ts_end": 375.76,
+          "text": "between sentences that's the broad level intuition now let's dive deeper into what all we'll be",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_001",
+      "title": "4 types of attention mechanism",
+      "ts_start": 379.0,
+      "ts_end": 621.0,
+      "segments": [
+        {
+          "ts_start": 381.16,
+          "ts_end": 385.46,
+          "text": "mechanism itself there are essentially four types of attention mechanism",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 385.46,
+          "ts_end": 390.88,
+          "text": "the main attention mechanism which which is used in gpt",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 391.64,
+          "ts_end": 392.36,
+          "text": "generative",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 392.52,
+          "ts_end": 399.0,
+          "text": "retrain transformer and all the modern llms is this multi-head attention and many youtube videos",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 399.0,
+          "ts_end": 405.96,
+          "text": "and courses all many courses just directly start with multi-head attention it's a very difficult",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 405.96,
+          "ts_end": 410.54,
+          "text": "concept to understand if you directly start learning this so you have to go in a sequential",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 410.54,
+          "ts_end": 415.86,
+          "text": "manner so what i'll be covering in this in this series of lectures is first i'll start with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 415.86,
+          "ts_end": 421.26,
+          "text": "something called simplified self-attention so this is the purest and the most basic form of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 421.26,
+          "ts_end": 422.78,
+          "text": "the attention technique so that you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 422.78,
+          "ts_end": 422.92,
+          "text": "understand the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 422.94,
+          "ts_end": 429.62,
+          "text": "understand what is attention then we will move to self-attention so here we will also introduce",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 429.62,
+          "ts_end": 436.02,
+          "text": "trainable weights which form the basis of the actual mechanism which is used in the llms",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 436.02,
+          "ts_end": 443.14,
+          "text": "until this part we are still not at the actual mechanism but we are building up slowly after i",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 443.14,
+          "ts_end": 447.98,
+          "text": "cover self-attention the next thing which i'll move to is causal attention this is when things",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 447.98,
+          "ts_end": 453.84,
+          "text": "really start to get interesting we are predicting the next world right by looking at the past world",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 453.86,
+          "ts_end": 459.58,
+          "text": "so what causal attention does is that it's a type of self-attention uh that allows the model to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 459.58,
+          "ts_end": 465.18,
+          "text": "consider only the previous and the current inputs in a sequence and it masks out the future inputs",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 465.82,
+          "ts_end": 471.46,
+          "text": "no need to pay too much attention to this right now i'm just giving you a broad overview of what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 471.46,
+          "ts_end": 476.46,
+          "text": "all i'll cover in the subsequent lectures when we look at attention today we are not going to cover",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 476.46,
+          "ts_end": 483.16,
+          "text": "all of these today we are just going to look at more details about the history of how attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 483.16,
+          "ts_end": 483.84,
+          "text": "came into playing a role in our production and non-public lessons about cause and effect.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 483.84,
+          "ts_end": 490.55,
+          "text": "the picture why it is needed why it's better than rnn etc and then finally we'll move to multi-head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 490.55,
+          "ts_end": 495.49,
+          "text": "attention only when you've understood causal attention and self-attention and simplified",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 495.49,
+          "ts_end": 501.07,
+          "text": "self-attention you will be able to understand multi-head attention this is the main concept",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 501.07,
+          "ts_end": 507.4,
+          "text": "which is actually used in building gpd so multi-head attention is just basically a bunch",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 507.4,
+          "ts_end": 512.22,
+          "text": "of causal attention heads stacked together and we'll code out this multi-head attention fully",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 512.22,
+          "ts_end": 518.28,
+          "text": "from scratch i'll show you the dimensions how they work etc all of that is planned in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 518.28,
+          "ts_end": 524.16,
+          "text": "subsequent lectures so this multi-head attention is essentially an extension of self-attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 524.16,
+          "ts_end": 530.84,
+          "text": "and causal attention that enables the model to simultaneously attend to information from",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 530.84,
+          "ts_end": 535.7,
+          "text": "different representation subspaces don't worry about this just remember that the multi-head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 535.7,
+          "ts_end": 541.74,
+          "text": "attention allows the llm to look at input data and then process many parts of that input data in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 541.74,
+          "ts_end": 542.06,
+          "text": "parallel",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 542.28,
+          "ts_end": 548.48,
+          "text": "so for example if this is the sentence the multi-head attention allows the llm to have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 548.48,
+          "ts_end": 553.02,
+          "text": "let's say one attention head looks at this part one attention head looks at this part one attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 553.02,
+          "ts_end": 558.32,
+          "text": "head looks at this path etc this is just a crude description so that you get an understanding of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 558.32,
+          "ts_end": 564.22,
+          "text": "what do you mean by multi-head attention so i just wanted to show you this overview so that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 564.22,
+          "ts_end": 567.44,
+          "text": "you get an idea of how these four to five lectures are actually planned",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 568.52,
+          "ts_end": 572.8,
+          "text": "it is impossible as i mentioned to cover all of this in one lecture and that's why",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 572.86,
+          "ts_end": 577.28,
+          "text": "i will follow a very comprehensive approach i'll show everything on the whiteboard and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 577.28,
+          "ts_end": 582.46,
+          "text": "i have this uh google collab notebook where everything has already been implemented and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 582.46,
+          "ts_end": 587.16,
+          "text": "we'll go through this entire notebook see uh hiding future words with causal attention and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 587.16,
+          "ts_end": 593.54,
+          "text": "then i also have a section on uh essentially multi-head attention yeah see so at the end",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 593.54,
+          "ts_end": 596.84,
+          "text": "of these four to five lectures we'll be implementing this multi-head attention in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 596.84,
+          "ts_end": 603.66,
+          "text": "python and code it out from scratch okay for now let's continue with today's lecture which is an",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 603.66,
+          "ts_end": 609.34,
+          "text": "introduction to the attention mechanism and uh how researchers got to discovering attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 610.32,
+          "ts_end": 614.56,
+          "text": "so let's go back in time a bit because to always appreciate something new",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 614.56,
+          "ts_end": 620.38,
+          "text": "we need to know about the history of how of how we came to this uh innovation",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_002",
+      "title": "Problems with modeling long sequences",
+      "ts_start": 621.0,
+      "ts_end": 972.0,
+      "segments": [
+        {
+          "ts_start": 621.99,
+          "ts_end": 627.69,
+          "text": "so let's go right at the start where we are modeling let's say long sequences so we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 627.69,
+          "ts_end": 633.79,
+          "text": "one sequence in english and let's say we want to translate it to the german language so what's the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 634.53,
+          "ts_end": 640.03,
+          "text": "problem in modeling long sequences so let's look at this question what is the problem with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 640.03,
+          "ts_end": 644.61,
+          "text": "architectures without the attention mechanism which came before the llms",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 644.61,
+          "ts_end": 651.39,
+          "text": "so for reference we'll start with a language translation model so let's look at this this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 651.39,
+          "ts_end": 658.67,
+          "text": "figure here so i have words in the english language so can you or let's say i have the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 658.67,
+          "ts_end": 664.69,
+          "text": "german input sentence which i want to translate to english so this is the input sentence i have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 664.69,
+          "ts_end": 670.59,
+          "text": "the first word the second word then i have the third word etc uh and i want to translate this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 670.59,
+          "ts_end": 676.97,
+          "text": "into english okay so uh let's say we do a world by world translation if i translate the first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 676.97,
+          "ts_end": 682.15,
+          "text": "word to english it's can if i translate the second word to english it's you if i translate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 682.15,
+          "ts_end": 688.77,
+          "text": "the third word it's me the fourth word help so if you translate every german word word by word",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 689.37,
+          "ts_end": 693.29,
+          "text": "the translation comes out to be can you me help this sentence to translate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 695.62,
+          "ts_end": 700.38,
+          "text": "obviously not correct right so the main takeaway here is that the word by word",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 700.38,
+          "ts_end": 706.48,
+          "text": "translation does not work and you can also see this in Hindi so if the main",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 706.48,
+          "ts_end": 711.1,
+          "text": "text is in English so can you help me and if you want to translate it in Hindi",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 711.94,
+          "ts_end": 717.46,
+          "text": "so the Hindi translation is kya tum meri madat karoge so kya is associated with can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 717.46,
+          "ts_end": 723.62,
+          "text": "that's fine you is associated with tum but meri is the third word in in in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 723.62,
+          "ts_end": 727.52,
+          "text": "Hindi translation right but it's actually the fourth word in the English",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 727.52,
+          "ts_end": 731.5,
+          "text": "translation similarly madat is the fourth word in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 731.5,
+          "ts_end": 738.33,
+          "text": "Hindi translation but help is actually the third world in the English so the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 738.33,
+          "ts_end": 743.17,
+          "text": "main point here is that word by word translation does not work in this case",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 744.04,
+          "ts_end": 749.3,
+          "text": "and that was a major realization when people started modeling long sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 749.98,
+          "ts_end": 753.54,
+          "text": "and this is a general problem when you deal with sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 753.54,
+          "ts_end": 754.56,
+          "text": "you cannot do it somehow so when you do it\u0435 when you are doing sequences for a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 754.56,
+          "ts_end": 761.41,
+          "text": "to word by word translation you need contextual understanding and grammar alignment so whenever",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 761.41,
+          "ts_end": 765.49,
+          "text": "you are developing a model let's say which translates one sequence to another sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 765.49,
+          "ts_end": 769.91,
+          "text": "or tries to find the meaning of a sequence or makes the next word prediction from a sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 770.82,
+          "ts_end": 776.11,
+          "text": "you need to really understand the context you need to understand how different words relate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 776.11,
+          "ts_end": 781.27,
+          "text": "with each other what's the grammar of that particular language and only then will you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 781.27,
+          "ts_end": 789.27,
+          "text": "be able to process sequences or only then you will be able to model long sequences of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 789.27,
+          "ts_end": 794.61,
+          "text": "textual information that's understanding number one okay with this understanding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 794.61,
+          "ts_end": 798.79,
+          "text": "what people realized is that we cannot just use a normal neural network",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 799.7,
+          "ts_end": 805.08,
+          "text": "because if you have a normal neural network it does not have memory so we are going to use this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 805.08,
+          "ts_end": 809.98,
+          "text": "word memory a lot just like humans have memory we store information about the past",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 810.72,
+          "ts_end": 811.32,
+          "text": "in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 811.4,
+          "ts_end": 816.7,
+          "text": "order to do a good job in sequence to sequence translation the models need to have a memory",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 816.7,
+          "ts_end": 821.92,
+          "text": "the models need to know what has come in the past why because let's say i have a sentence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 821.92,
+          "ts_end": 827.72,
+          "text": "that harry potter went to station number nine three by four uh he did this he did this etc",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 827.72,
+          "ts_end": 836.4,
+          "text": "and then when i come to a sentence which is uh three to four sentences after the first sentence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 836.4,
+          "ts_end": 841.14,
+          "text": "which is harry potter came to station nine three by four i should not forget what came before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 841.5,
+          "ts_end": 846.14,
+          "text": "because the station number nine three by four is very important for me to know even if i come at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 846.14,
+          "ts_end": 850.78,
+          "text": "the end of the paragraph so if i'm making some prediction at the end of the paragraph and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 850.78,
+          "ts_end": 856.56,
+          "text": "word station comes over there i need to go back to the start i need to have memory of what came",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 856.56,
+          "ts_end": 861.6,
+          "text": "at the start that it was the station number nine three by four and this happens a lot",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 861.6,
+          "ts_end": 867.44,
+          "text": "with textual data if you want to have meaningful outcomes in terms of text summarization next word",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 867.44,
+          "ts_end": 871.6,
+          "text": "prediction language translation you definitely need to have a communication system where you can",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 871.6,
+          "ts_end": 876.0,
+          "text": "understanding of the meaning and for that you need the model to retain the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 876.0,
+          "ts_end": 882.26,
+          "text": "memory so to address this issue that word-by-word translation does not work",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 882.26,
+          "ts_end": 886.98,
+          "text": "in this particular case of translation people realize that a normal neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 886.98,
+          "ts_end": 890.82,
+          "text": "network will not work so they augmented a neural network with two sub modules",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 890.82,
+          "ts_end": 896.92,
+          "text": "the first sub module is an encoder and the second sub module is a decoder so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 896.92,
+          "ts_end": 901.42,
+          "text": "what the encoder does is that in the example which we saw it will receive the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 901.42,
+          "ts_end": 907.6,
+          "text": "German text and it will read and process the German text and then it will pass it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 907.6,
+          "ts_end": 911.8,
+          "text": "to the decoder and then the decoder will translate the German text back into",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 911.8,
+          "ts_end": 916.74,
+          "text": "English this is the simplest explanation of the encoder decoder and there is a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 916.74,
+          "ts_end": 922.78,
+          "text": "nice animation here which actually shows how the encoder decoder works so here",
+          "frame_ids": [
+            "XN7sevVxyUM_f0001"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Looking under the hood",
+              "extracted_text": "Under the hood, the model is composed of an encoder and a decoder.\n\nThe encoder processes each item in the input sequence, it compiles the information it captures into a vector (called the context). After processing the entire input sequence, the encoder sends the context over to the decoder, which begins producing the output sequence item by item.\n\nThe same applies in the case of machine translation.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence to sequence model architecture showing input sequence flowing through an encoder (green) which produces a context vector, passed to a decoder (purple) which produces an output sequence.",
+              "diagram_elements": [
+                "Input sequence (three circles)",
+                "ENCODER (green box)",
+                "Context vector (arrow between encoder and decoder)",
+                "DECODER (purple box)",
+                "Output sequence (empty box)"
+              ],
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0001",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 917.966333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0001.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 922.78,
+          "ts_end": 926.2,
+          "text": "you can see the input sequence comes in the German language it goes to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 926.2,
+          "ts_end": 932.0,
+          "text": "encoder a context is generated by the encoder it's called as a context vector",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 932.0,
+          "ts_end": 932.56,
+          "text": "and then it will pass it to the decoder and then the decoder will translate the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 932.56,
+          "ts_end": 937.5,
+          "text": "the context vector essentially captures meaning so it has memory and it captures",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 937.5,
+          "ts_end": 942.46,
+          "text": "meaning of okay instead of just word by word translation what does this sentence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 942.46,
+          "ts_end": 949.34,
+          "text": "represent and the encoder processes the entire input sequence and sends the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 949.34,
+          "ts_end": 953.34,
+          "text": "context over to the decoder so let me play this again the input sequence comes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 953.34,
+          "ts_end": 957.68,
+          "text": "to the encoder it generates a context vector which basically encodes meaning",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 957.68,
+          "ts_end": 962.6,
+          "text": "and then the encoder transfers the context vector to the decoder and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 962.6,
+          "ts_end": 967.46,
+          "text": "decoder generates the output in this case the output is the translation translated english text",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_003",
+      "title": "How RNNs work",
+      "ts_start": 972.0,
+      "ts_end": 1415.0,
+      "segments": [
+        {
+          "ts_start": 974.72,
+          "ts_end": 980.5,
+          "text": "encoder decoder blocks successfully is called recurrent neural networks so before really",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 980.5,
+          "ts_end": 985.76,
+          "text": "transformers came into the picture recurrent neural networks were was that architecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 985.76,
+          "ts_end": 993.35,
+          "text": "which was extremely popular for language translation and it really employed the encoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 993.35,
+          "ts_end": 1001.42,
+          "text": "decoder architecture it was implemented in the 1980s so let's look a bit more at how the rnn",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1001.42,
+          "ts_end": 1006.7,
+          "text": "actually works because when we if we understand how rnn works that's when we will understand the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1006.7,
+          "ts_end": 1012.0,
+          "text": "limitations of recurrent neural networks and that's when we will really appreciate why the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1012.0,
+          "ts_end": 1017.53,
+          "text": "attention mechanism needed to be discovered so here is how the encoder decoder blocks",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1017.55,
+          "ts_end": 1022.15,
+          "text": "in the rnn actually works what happens is that you first receive an input text okay",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1022.87,
+          "ts_end": 1029.55,
+          "text": "and that let's say is the german german text the input text is passed to the decode to the encoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1030.11,
+          "ts_end": 1035.67,
+          "text": "what the encoder will do is that at every step it will take the input and it will maintain",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1035.67,
+          "ts_end": 1040.71,
+          "text": "something which is called as the hidden state this hidden state was the biggest innovation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1040.71,
+          "ts_end": 1047.42,
+          "text": "in the recurrent neural networks this hidden state essentially captures the memory so imagine the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1047.94,
+          "ts_end": 1054.76,
+          "text": "first input which is the first german word comes the encoder augments it or the encoder maintains",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1054.76,
+          "ts_end": 1060.1,
+          "text": "a hidden state then you go to the next iteration then the second input word comes then the hidden",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1060.1,
+          "ts_end": 1065.68,
+          "text": "state also gets updated so as the hidden state gets updated it receives more and more memory",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1065.68,
+          "ts_end": 1071.36,
+          "text": "of what has come previously and the hidden state gets updated at each step and then there",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1071.36,
+          "ts_end": 1078.02,
+          "text": "is a final hidden state the final hidden state is basically the encoder output what we saw the context",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1078.58,
+          "ts_end": 1083.64,
+          "text": "over here so when we looked at the context vector which is passed from the encoder to the decoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1083.64,
+          "ts_end": 1088.5,
+          "text": "let's see over here yeah so here you see a context vector is passed from the encoder to the decoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1088.5,
+          "ts_end": 1094.14,
+          "text": "this context vector is the final hidden state this is basically the encoder telling the decoder that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1094.14,
+          "ts_end": 1099.66,
+          "text": "hey i have looked at the input text uh here's the meaning of this this text here is how i've",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1099.66,
+          "ts_end": 1104.22,
+          "text": "encoded it here's the context vector take this final hidden state and try to decode it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1105.0,
+          "ts_end": 1108.38,
+          "text": "and then the decoder uses this final hidden state to generate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1108.64,
+          "ts_end": 1113.28,
+          "text": "translated sentence and it generates the translated sentence one word at a time",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1114.84,
+          "ts_end": 1119.78,
+          "text": "so here is a schematic which actually explains this pretty well so i have an input text here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1119.78,
+          "ts_end": 1124.48,
+          "text": "so this is the first word in german the second word in german the third word in german",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1124.48,
+          "ts_end": 1130.64,
+          "text": "and the fourth word in german what the encoder block will do is that it will take each input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1130.64,
+          "ts_end": 1136.2,
+          "text": "sequentially and it will maintain a different hidden state so for the first input it has the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1136.2,
+          "ts_end": 1140.14,
+          "text": "first hidden state then we move to the next iteration then the second hidden state then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1140.14,
+          "ts_end": 1144.66,
+          "text": "the third hidden state and then finally when we have the last input we have this final hidden",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1144.66,
+          "ts_end": 1149.58,
+          "text": "state the final hidden state essentially contains the accumulation of all previous hidden state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1149.58,
+          "ts_end": 1155.36,
+          "text": "so it contains or encapsulates memory this is how memory is incorporated which was missing",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1155.36,
+          "ts_end": 1160.95,
+          "text": "earlier with just a normal neural network so this is the final hidden state and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1160.95,
+          "ts_end": 1165.92,
+          "text": "this final hidden state essentially memorizes the entire input and then this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1166.46,
+          "ts_end": 1173.22,
+          "text": "uh hidden state is passed to the decoder and then the decoder produces the final output which is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1173.22,
+          "ts_end": 1178.66,
+          "text": "translated english sentence so i want to show you another animation of this so that you understand",
+          "frame_ids": [
+            "XN7sevVxyUM_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Looking under the hood",
+              "extracted_text": "Under the hood, the model is composed of an encoder and a decoder.\n\nThe encoder processes each item in the input sequence, it compiles the information it captures into a vector (called the context). After processing the entire input sequence, the encoder sends the context over to the decoder, which begins producing the output sequence item by item.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence to sequence model architecture showing input flowing through an encoder (green), context (orange) passed between encoder and decoder (purple), and output produced by decoder.",
+              "diagram_elements": [
+                "Input",
+                "ENCODER",
+                "CONTEXT",
+                "DECODER",
+                "Output",
+                "SEQUENCE TO SEQUENCE MODEL"
+              ],
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0002",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1176.633,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1178.66,
+          "ts_end": 1186.34,
+          "text": "it much better um so here is how the rnn actually works right so see the input vector number one",
+          "frame_ids": [
+            "XN7sevVxyUM_f0003",
+            "XN7sevVxyUM_f0004",
+            "XN7sevVxyUM_f0005"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "The context is a vector (an array of numbers, basically) in the case of machine translation. The encoder and decoder tend to both be recurrent neural networks (Be sure to check out Luis Serrano's A friendly introduction to Recurrent Neural Networks for an intro to RNNs).\n\nThe context is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.\n\nYou can set the size of the context vector when you set up your model. It is basically the number of hidden units in the",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Encoder-decoder architecture for machine translation: input text 'Je suis \u00e9tudiant' flows through an encoder (green) which produces a context vector, then through a decoder (purple) which produces output. The context vector is visualized as a column of numerical values (0.11, 0.03, 0.81, -0.62).",
+              "diagram_elements": [
+                "Input text: 'Je suis \u00e9tudiant'",
+                "ENCODER",
+                "DECODER",
+                "Output",
+                "CONTEXT vector",
+                "Context values: 0.11, 0.03, 0.81, -0.62"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0003",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1178.699667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0003.jpg"
+            },
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": "I hope it can be a useful companion to reading the papers mentioned above (and the attention papers linked later in the post).\n\nA sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images...etc) and outputs another sequence of items. A trained model would work like this:\n\nIn neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence model architecture showing input sequence (green circles in box) flowing through a central blue SEQUENCE TO SEQUENCE MODEL block to produce an output sequence (purple box).",
+              "diagram_elements": [
+                "Input sequence (green circles)",
+                "SEQUENCE TO SEQUENCE MODEL (blue central block)",
+                "Output sequence (purple box)",
+                "Arrows showing data flow"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0004",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1180.766333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0004.jpg"
+            },
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Recurrent Neural Network",
+              "extracted_text": "Time step #1:\nAn RNN takes two input vectors:\n\nProcesses them",
+              "code": null,
+              "math": null,
+              "diagram_summary": "An RNN at time step #1 takes two input vectors (hidden state #0 and input vector #1) and processes them through a neural network unit to produce an output.",
+              "diagram_elements": [
+                "hidden state #0 (orange vector)",
+                "input vector #1 (green vector)",
+                "neural network unit (blue circle)",
+                "output arrow",
+                "hidden state #0 label",
+                "input #1 label"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0005",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1183.399667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0005.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1186.34,
+          "ts_end": 1192.08,
+          "text": "is the first word in german which needs to be translated so here you will see in this animation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1192.08,
+          "ts_end": 1196.66,
+          "text": "how the hidden state gets updated so the first word of german comes then the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1196.78,
+          "ts_end": 1204.75,
+          "text": "rnn maintains the hidden state zero and here you see uh the hidden state is the hidden state zero",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1204.75,
+          "ts_end": 1210.55,
+          "text": "and the input one is used to produce the output one and then we also have a hidden state one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1211.05,
+          "ts_end": 1215.57,
+          "text": "then as we move further we have the hidden state two hidden state three hidden state four and a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1215.57,
+          "ts_end": 1222.06,
+          "text": "final hidden state when the last word needs to be processed uh actually i can show you this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1222.06,
+          "ts_end": 1227.92,
+          "text": "again here so this is from a french to english translation using the recurrent neural network look",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1228.02,
+          "ts_end": 1233.78,
+          "text": "look here so we have a french input which is coming here just swing it to the then uh yeah so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1233.78,
+          "ts_end": 1239.72,
+          "text": "the first word goes into the encoder see now we have a hidden so let me expand it so and play from",
+          "frame_ids": [
+            "XN7sevVxyUM_f0006"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Neural Machine Translation - Sequence to Sequence Model",
+              "extracted_text": "Time step: 2\nsuis \u00e9tudiant",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation model showing an encoder-decoder architecture at time step 2, with input text 'suis \u00e9tudiant' processed through a green encoder block and purple decoder block, with hidden state information flowing between them.",
+              "diagram_elements": [
+                "Input: suis \u00e9tudiant",
+                "ENCODER (green block)",
+                "DECODER (purple block)",
+                "Hidden State #1 (orange box)",
+                "Output (purple bordered box on right)"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0006",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1237.699667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0006.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1239.72,
+          "ts_end": 1246.04,
+          "text": "the start okay so now the first word of french which is joe goes into the encoder it has went",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1246.04,
+          "ts_end": 1250.22,
+          "text": "into the encoder right now and the first hidden state is generated see in the orange color great",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1250.74,
+          "ts_end": 1257.02,
+          "text": "now this hidden state number one and the second input is used again look at this animation again",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1258.15,
+          "ts_end": 1262.21,
+          "text": "the hidden state number one and the second input which is sui s u i s is used",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1262.21,
+          "ts_end": 1267.88,
+          "text": "and then we have the hidden state number two then the hidden state number two and the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1267.88,
+          "ts_end": 1273.63,
+          "text": "three which is will be used to produce the final hidden state great this final hidden",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1273.63,
+          "ts_end": 1278.29,
+          "text": "state hidden state number three essentially contains all the information in the given",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1279.03,
+          "ts_end": 1288.25,
+          "text": "sequence plus it also contains some memory or some context regarding uh what came in the past and now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1288.73,
+          "ts_end": 1292.61,
+          "text": "the final hidden state is then passed to the decoder and the decoder produces the output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1292.61,
+          "ts_end": 1297.61,
+          "text": "in english one word at a time this is exactly how the recurrent neural network works okay",
+          "frame_ids": [
+            "XN7sevVxyUM_f0007"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Neural Machine Translation - Sequence to Sequence Model",
+              "extracted_text": "The next RNN step takes the second input vector and hidden state #1 to create the output of that time step. Later in the post, we'll use an animation like this to describe the vectors inside a neural machine translation model.\n\nIn the following visualization, each pulse for the encoder or decoder is that RNN processing its inputs and generating an output for that time step. Since the encoder and decoder are both RNNs, each time step one of the RNNs does some processing, it updates its hidden state based on its inputs and previous inputs it has seen.\n\nLet's look at the hidden states for the encoder. Notice how the last hidden state is actually the context we pass along to the decoder.\n\nTime step: 6\n\nThe decoder also maintains a hidden state that it passes from one time step to the next. We just didn't visualize it in this graphic because we're concerned with the major parts of the model for now.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation model showing encoder (green) processing input, passing context to decoder (purple), which generates output tokens at time step 6.",
+              "diagram_elements": [
+                "Input vector (green box)",
+                "ENCODER (green block)",
+                "DECODER (purple block)",
+                "Output: 'I am a' (purple box)",
+                "Context connection between encoder and decoder"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0007",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1295.433,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0007.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1297.61,
+          "ts_end": 1302.79,
+          "text": "now you might think that awesome right this is already doing sequence to sequence translations",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1302.79,
+          "ts_end": 1307.25,
+          "text": "and we are translating from one language to another language so why do we need attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1307.25,
+          "ts_end": 1314.49,
+          "text": "mechanism memory is being encoded here and we are passing in the context which means that we will be",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1314.49,
+          "ts_end": 1317.93,
+          "text": "able to identify how different words of the sequence are related to each other",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1318.73,
+          "ts_end": 1324.05,
+          "text": "so why do we need attention well there is a big problem with the recurrent neural network",
+          "frame_ids": [
+            "XN7sevVxyUM_f0008"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+              "extracted_text": "an output for that time step. Since the encoder and decoder are both RNNs, each time step one of the RNNs does some processing, it updates its hidden state based on its inputs and previous inputs it has seen.\n\nLet's look at the hidden states for the encoder. Notice how the last hidden state is actually the context we pass along to the decoder.\n\nTime step: 6\n\nThe decoder also maintains a hidden state that it passes from one time step to the next. We just didn't visualize it in the graphic because we're concerned with the major parts of the model for now.\n\nLet's now look at another way to visualize a sequence-to-sequence model. This animation will make it easier to",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation model at time step 6: input flows through an encoder (green box) which produces context, then through a decoder (purple box) which generates output tokens.",
+              "diagram_elements": [
+                "Input (green box on left)",
+                "ENCODER (green box)",
+                "DECODER (purple box)",
+                "Output: 'I am a' (purple box on right)",
+                "Arrow from input to encoder",
+                "Arrow from encoder to decoder",
+                "Arrow from decoder to output"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0008",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1319.333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0008.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1324.05,
+          "ts_end": 1333.67,
+          "text": "and that problem happens because the model the decoder has essentially no access to the previous",
+          "frame_ids": [
+            "XN7sevVxyUM_f0009"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+              "extracted_text": "The decoder also maintains a hidden state that it passes from one time step to the next. We just didn't visualize it in this graphic because we're concerned with the major parts of the model for now.\n\nLet's now look at another way to visualize a sequence-to-sequence model. This animation will make it easier to understand the static graphics that describe these models. This is called an \"unrolled\" view where instead of showing the one decoder, we show a copy of it for each time step. This way we can look at the inputs and outputs of each time step.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation model showing an encoding stage with three Encoder RNNs processing input, connected to a decoding stage with two Decoder RNNs generating output.",
+              "diagram_elements": [
+                "Encoding Stage",
+                "Encoder RNN (\u00d73)",
+                "Decoding Stage",
+                "Decoder RNN (\u00d72)",
+                "Connection arrow from encoder to decoder"
+              ],
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0009",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1324.599667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0009.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1333.67,
+          "ts_end": 1340.71,
+          "text": "hidden states so if you look at this video you will see that the decoder has access to only the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1340.71,
+          "ts_end": 1346.89,
+          "text": "final hidden state so hidden state 1 hidden state 2 hidden state 3 and then hidden state 3 is passed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1346.89,
+          "ts_end": 1347.77,
+          "text": "to the decoder see",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1348.13,
+          "ts_end": 1355.78,
+          "text": "the decoder has no access to the previous hidden states now why is this a big problem",
+          "frame_ids": [
+            "XN7sevVxyUM_f0010"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+              "extracted_text": "Let's now look at another way to visualize a sequence-to-sequence model. This animation will make it easier to understand the static graphics that describe these models. This is called an \"unrolled\" view where instead of showing the one decoder, we show a copy of it for each time step. This way we can look at the inputs and outputs of each time step.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation model showing an encoding stage with three Encoder RNNs processing input, connected to a decoding stage with a Decoder RNN that generates output.",
+              "diagram_elements": [
+                "Encoding Stage",
+                "Encoder RNN (three instances)",
+                "Decoding Stage",
+                "Decoder RNN",
+                "Context vector (arrow between encoder and decoder)"
+              ],
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0010",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1349.933,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0010.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1355.78,
+          "ts_end": 1363.67,
+          "text": "the reason it's a big problem is because when we have to process long sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1364.35,
+          "ts_end": 1370.17,
+          "text": "if the decoder just relies on one final hidden state that's a lot of pressure on the decoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1370.77,
+          "ts_end": 1375.33,
+          "text": "to essentially that one final hidden state needs to have the entire information",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1375.33,
+          "ts_end": 1379.03,
+          "text": "and for long sequences it usually fails",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1380.68,
+          "ts_end": 1385.8,
+          "text": "very hard for one final hidden state to have the entire information let me explain this bit more",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1386.85,
+          "ts_end": 1392.9,
+          "text": "so as we saw the encoder let me change my color here i think let me change it to green",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1396.11,
+          "ts_end": 1400.43,
+          "text": "yeah so as we saw the encoder processes the entire input text",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1401.47,
+          "ts_end": 1406.63,
+          "text": "the encoder processes the entire input text into one final hidden state which is the memory cell",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1407.15,
+          "ts_end": 1412.77,
+          "text": "and then decoder takes this this hidden state decoder takes this hidden state to essentially",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_004",
+      "title": "RNN Limitations",
+      "ts_start": 1415.0,
+      "ts_end": 1632.0,
+      "segments": [
+        {
+          "ts_start": 1419.58,
+          "ts_end": 1424.6,
+          "text": "attention to this point because if you understand this you will understand why attention mechanisms",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1424.6,
+          "ts_end": 1430.16,
+          "text": "are needed the biggest issue with the rnn is that a recurrent neural network cannot directly access",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1430.16,
+          "ts_end": 1437.22,
+          "text": "earlier hidden states as we saw in the video it only accesses the final hidden state so the rnn",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1437.22,
+          "ts_end": 1443.78,
+          "text": "can't directly access earlier hidden states from the encoder during the decoding phase it relies on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1443.8,
+          "ts_end": 1449.45,
+          "text": "only on the current hidden state which is the final hidden state and this leads to a loss or",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1449.45,
+          "ts_end": 1454.93,
+          "text": "this leads to a loss of context especially in complex sentences where dependencies might span",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1454.93,
+          "ts_end": 1462.91,
+          "text": "long distances um okay so let me actually explain this further what does it mean loss of context",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1462.91,
+          "ts_end": 1470.16,
+          "text": "right uh so as we saw the encoder compresses the entire input sequence into a single hidden state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1470.16,
+          "ts_end": 1475.85,
+          "text": "vector i hope you have understood up till this point now the problem happens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1475.91,
+          "ts_end": 1481.17,
+          "text": "let's say if the sentence if the input sentence is very long if the input sentence is very long",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1481.17,
+          "ts_end": 1485.89,
+          "text": "it really becomes very difficult for the recurrent neural network to capture all of that information",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1485.89,
+          "ts_end": 1492.48,
+          "text": "in one single final hidden state that becomes very difficult and this is the main drawback of the rnn",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1492.48,
+          "ts_end": 1498.9,
+          "text": "so for example let's take a practical case so let's say we take the example which we looked at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1498.9,
+          "ts_end": 1504.3,
+          "text": "at the start of the lecture which is the cat that was sitting on the mat which was next to the dog",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1504.3,
+          "ts_end": 1506.11,
+          "text": "jumped and let's say the cat was sitting on the mat which was next to the dog jumped and let's say",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1506.13,
+          "ts_end": 1511.23,
+          "text": "we want to convert this english into a french translation okay so the french translation will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1511.23,
+          "ts_end": 1516.45,
+          "text": "be lo shot whatever i cannot spell this out fully but this will be the french translation for this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1516.45,
+          "ts_end": 1520.71,
+          "text": "english sequence now as i mentioned to you before this english sequence is pretty long",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1521.98,
+          "ts_end": 1529.15,
+          "text": "uh the rnn or the encoder really needs to capture the dependencies very well so the final hidden",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1529.15,
+          "ts_end": 1534.97,
+          "text": "state needs to capture that the cat is the subject here and the cat is the one who has jumped",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1536.39,
+          "ts_end": 1542.71,
+          "text": "this information this context needs to be captured by the final hidden state and that is very hard if",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1542.71,
+          "ts_end": 1547.15,
+          "text": "you are putting all the pressure on one final hidden state to capture all this context especially",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1547.15,
+          "ts_end": 1554.71,
+          "text": "in long sequences so uh the key action which is jumped depends on the subject which is cat",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1555.43,
+          "ts_end": 1561.65,
+          "text": "but also on understanding longer dependencies so jumped depends on cat but we also need to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1561.65,
+          "ts_end": 1566.13,
+          "text": "understand that the cat was sitting on the mat and the cat was also sitting next to the dog",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1566.87,
+          "ts_end": 1571.75,
+          "text": "because the dog also might be referred somewhere else in the big text so we need to understand many",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1571.75,
+          "ts_end": 1579.3,
+          "text": "things from this sentence and these are also called as longer dependencies so jumped the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1579.52,
+          "ts_end": 1585.24,
+          "text": "action jumped of course depends on the subject cat but we also to understand this we also need",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1585.24,
+          "ts_end": 1590.04,
+          "text": "to understand longer dependencies that the cat was sitting next to the dog and the cat was also",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1590.04,
+          "ts_end": 1598.14,
+          "text": "sitting on the mat so to capture these longer dependencies or to capture this uh longer context",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1599.2,
+          "ts_end": 1606.66,
+          "text": "the rnn decoder struggles with this because it just has one final hidden state uh to get all",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1606.66,
+          "ts_end": 1613.8,
+          "text": "the information from this is called loss of context and loss of context was one of the biggest issues",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1613.8,
+          "ts_end": 1619.82,
+          "text": "because of which rnn was not as good as the gpt which exists right now which is based on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1619.82,
+          "ts_end": 1626.22,
+          "text": "the attention mechanism okay so these are the issues with rnn uh the decoder cannot access",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1626.22,
+          "ts_end": 1629.98,
+          "text": "the hidden states of the input which came in earlier so we cannot take the input from the",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_005",
+      "title": "Bahdanau Attention Mechanism",
+      "ts_start": 1632.0,
+      "ts_end": 2523.0,
+      "segments": [
+        {
+          "ts_start": 1635.39,
+          "ts_end": 1641.23,
+          "text": "into the picture okay we will capture long range dependencies with attention mechanisms and let's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1641.23,
+          "ts_end": 1648.07,
+          "text": "see how so rnn's work fine for translating short sentences and they did work amazingly actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1648.07,
+          "ts_end": 1653.53,
+          "text": "for quite a while for short sentences but researchers soon discovered that they don't",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1653.53,
+          "ts_end": 1658.63,
+          "text": "work for long text because they don't have direct access to previous words in the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1661.38,
+          "ts_end": 1666.72,
+          "text": "and decoder only receives the final hidden state right they don't even have access to the the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1666.72,
+          "ts_end": 1671.86,
+          "text": "decoder does not have access to all the prior words which came in the input so let's say i'm",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1671.86,
+          "ts_end": 1679.27,
+          "text": "decoding uh let's say i'm looking at this word um jumped right let's say i'm looking at the word",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1679.27,
+          "ts_end": 1685.39,
+          "text": "jumped cat is a word which has come way prior in the sequence so when i am looking at the word",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1685.39,
+          "ts_end": 1691.17,
+          "text": "jumped i need to give a lot of attention to the word cat but an rnn gets the entire encoded version",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1692.05,
+          "ts_end": 1697.11,
+          "text": "so how would the rnn know that jump actually if you're looking at jump you should pay a lot of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1697.11,
+          "ts_end": 1701.51,
+          "text": "attention to the word cat it does not even have access to this input vector for cat",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1702.28,
+          "ts_end": 1710.88,
+          "text": "this is where attention mechanism actually comes into the picture uh okay so as i said one of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1710.88,
+          "ts_end": 1716.38,
+          "text": "major shortcoming in the rnn is that the rnn must remember the entire encoded input in a single",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1716.38,
+          "ts_end": 1724.05,
+          "text": "hidden state before it passes the encoded input to the decoder the rnn has to remember",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1724.39,
+          "ts_end": 1730.17,
+          "text": "the entire encoded input in a single hidden state i am repeating this again because unless",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1730.17,
+          "ts_end": 1735.89,
+          "text": "you understand this you won't understand why we are learning about attention and it's very hard",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1735.89,
+          "ts_end": 1741.61,
+          "text": "for the rnn to encode the entire or to remember the entire encoded input in a single hidden state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1742.97,
+          "ts_end": 1748.35,
+          "text": "this is when the researcher started looking at other mechanisms and that's when in 2014",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1748.85,
+          "ts_end": 1753.17,
+          "text": "researchers developed the so-called bada now attention mechanism for rnns",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1755.32,
+          "ts_end": 1760.36,
+          "text": "attention mechanism they always think of the 2017 paper right attention is all you need",
+          "frame_ids": [
+            "XN7sevVxyUM_f0011"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 1760.36,
+          "ts_end": 1765.82,
+          "text": "but actually attention was introduced in a paper in 2014 which was called neural machine",
+          "frame_ids": [
+            "XN7sevVxyUM_f0012"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 1765.82,
+          "ts_end": 1772.92,
+          "text": "translation by jointly learning to align and translate um sadly many people don't remember",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1772.92,
+          "ts_end": 1778.72,
+          "text": "this now everyone just remembers attention is all you need but remember that this these authors",
+          "frame_ids": [
+            "XN7sevVxyUM_f0013",
+            "XN7sevVxyUM_f0014"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Attention Is All You Need",
+              "extracted_text": "Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in this paper solely for use in journalistic or scholarly works.\n\nAshish Vaswani*\nGoogle Brain\navaswani@google.com\n\nNoam Shazeer*\nGoogle Brain\nnoam@google.com\n\nNiki Parmar*\nGoogle Research\nnikip@google.com\n\nJakob Uszkoreit*\nGoogle Research\nusz@google.com\n\nLlion Jones*\nGoogle Research\nllion@google.com\n\nAidan N. Gomez\u2020,\u2021\nUniversity of Toronto\naidan@cs.toronto.edu\n\nLukasz Kaiser*\nGoogle Brain\nlukaszkaiser@google.com\n\nIllia Polosukhin*,\u2021\nillia.polosukhin@gmail.com\n\nAbstract\n\nThe dominant sequence transduction models are based on complex recurrent or convolutional neural networks that include an encoder and a decoder. The best performing models also connect the encoder and decoder through an attention mechanism. We propose a new simple network architecture, the Transformer, based solely on attention mechanisms, dispensing with recurrence and convolutions entirely. Experiments on two machine translation tasks show these models to be superior in quality while being more parallelizable and requiring significantly less time to train. Our model achieves 28.4 BLEU on the WMT 2014 English-to-German translation task, improving over the existing best results, including ensembles, by over 2 BLEU. On the WMT 2014 English-to-French translation task, our model establishes a new single-model state-of-the-art BLEU score of 41.8 after training for 3.5 days on eight GPUs, a small fraction of the training costs of the",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0013",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1773.799667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0013.jpg"
+            },
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Neural Machine Translation by Jointly Learning to Align and Translate",
+              "extracted_text": "Published as a conference paper at ICLR 2015\n\nDzmitry Bahdanau\nJacobs University Bremen, Germany\n\nKyunghyun Cho    Yoshua Bengio*\nUniversit\u00e9 de Montr\u00e9al\n\nAbstract\n\nNeural machine translation is a recently proposed approach to machine translation. Unlike the traditional statistical machine translation, the neural machine translation aims at building a single neural network that can be jointly tuned to maximize the translation performance. The models proposed recently for neural machine translation often belong to a family of encoder\u2013decoders and encode a source sentence into a fixed-length vector from which a decoder generates a translation. In this paper, we conjecture that the use of a fixed-length vector is a bottleneck in improving the performance of this basic encoder\u2013decoder architecture, and propose to extend this by allowing a model to automatically (soft-)search for parts of a source sentence that are relevant to predicting a target word, without having to form these parts as a hard segment explicitly. With this new approach, we achieve a translation performance comparable to the existing state-of-the-art phrase-based system on the task of English-to-French translation. Furthermore, qualitative analysis reveals that the (soft-)alignments found by the model agree",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0014",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 1776.633,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0014.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 1779.18,
+          "ts_end": 1785.14,
+          "text": "bada now benjio and kyung yoon cho they were the ones who worked on the first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1785.88,
+          "ts_end": 1793.06,
+          "text": "proposition of the attention mechanism so i just want to give credit here and this attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1793.06,
+          "ts_end": 1798.14,
+          "text": "mechanism was called bada now attention mechanism because the author of this paper was whose last",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1798.14,
+          "ts_end": 1804.5,
+          "text": "name was badana so what was the main idea behind this what the attention mechanism basically",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1806.41,
+          "ts_end": 1814.03,
+          "text": "prescribed is that okay let's take the encoder decoder rnn and let's modify the encoder decoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1817.01,
+          "ts_end": 1822.47,
+          "text": "can selectively access different parts of the input sequence at each decoding step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1822.47,
+          "ts_end": 1830.52,
+          "text": "let me repeat that remember in the original rnn the decoder only had access to the final hidden state",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1831.18,
+          "ts_end": 1838.48,
+          "text": "but the badana attention mechanism says that what if the decoder now can selectively access",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1839.28,
+          "ts_end": 1842.34,
+          "text": "different parts of the input sequence at each decoding step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1843.14,
+          "ts_end": 1848.06,
+          "text": "and let me explain to you what this means by a simple figure so let's say we are at this decoding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1848.64,
+          "ts_end": 1856.53,
+          "text": "where uh we want to so let's say the world is mir which is the german world and we want to decode",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1856.53,
+          "ts_end": 1863.21,
+          "text": "this so we are at this hidden state right now and we want to decode this okay if we use the original",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1863.21,
+          "ts_end": 1869.75,
+          "text": "rnn we just had access to this final hidden state but now what we say is that when you are decoding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1869.75,
+          "ts_end": 1878.09,
+          "text": "this uh hidden state what if you have access to all of the input tokens so follow this orange curve",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1878.87,
+          "ts_end": 1884.47,
+          "text": "here so what if you have access to this token what if you have access to this token what if",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1884.47,
+          "ts_end": 1890.78,
+          "text": "you have access to this token and what if you have access to this token so let's say when you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1890.78,
+          "ts_end": 1895.42,
+          "text": "are decoding you have access to all the tokens and you can decide how much attention to pay to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1895.42,
+          "ts_end": 1902.58,
+          "text": "each token so for example i think the german uh translation for you is do which is do so i know",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1902.58,
+          "ts_end": 1907.84,
+          "text": "that the maximum attention needs to be paid to this token so that's why you i've marked this with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1909.06,
+          "ts_end": 1916.22,
+          "text": "for all the other tokens well we pay less amount of attention what this does is that it allows the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1916.22,
+          "ts_end": 1921.66,
+          "text": "decoder to access all the tokens so if you are dealing with long sentences we can access all",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1921.66,
+          "ts_end": 1926.24,
+          "text": "the tokens even in long sentences and decide which token we want to pay more attention to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1926.24,
+          "ts_end": 1931.98,
+          "text": "so for example let's take this longer sentence which we have looked at a lot in today's lecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1932.5,
+          "ts_end": 1940.02,
+          "text": "yeah so let's say and we'll look at it once more again uh yeah so let's say we have look we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1940.24,
+          "ts_end": 1946.8,
+          "text": "looking at this sentence the the cat that was sitting on the mat which was next to the dog",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1946.8,
+          "ts_end": 1952.0,
+          "text": "jumped let's say we are looking at this sentence now in the decoder so let's say you are on the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1952.0,
+          "ts_end": 1957.2,
+          "text": "decoder part and you are decoding for jumped and you are translating it into french what we will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1957.2,
+          "ts_end": 1962.88,
+          "text": "do is that instead of just looking at the final hidden state we will have access to all of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1962.88,
+          "ts_end": 1967.26,
+          "text": "words let's say we have access to all of the input words and not just that we have access",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1967.26,
+          "ts_end": 1971.06,
+          "text": "to all of the input words and we can also decide how much attention to pay to each of the tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1971.08,
+          "ts_end": 1978.02,
+          "text": "pay to each of the input word so now i will say that okay i want to translate jumped right so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1978.02,
+          "ts_end": 1982.5,
+          "text": "of course a lot of attention should be paid to jumped but i will also pay a lot of attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1982.5,
+          "ts_end": 1989.88,
+          "text": "to cat because the cat is the one who has really jumped so i can decide which tokens to pay the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1989.88,
+          "ts_end": 1994.8,
+          "text": "maximum attention to so when i'm translating jumped i will pay attention to jumped and i",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1994.8,
+          "ts_end": 2000.62,
+          "text": "will pay attention to cat also because now i can access the token for cat this access itself was",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2000.62,
+          "ts_end": 2005.94,
+          "text": "not possible in rnn because we could not access the previous input tokens in an rnn and this was",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2005.94,
+          "ts_end": 2009.42,
+          "text": "the main problem which was solved by the introduction of the attention mechanism",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2009.42,
+          "ts_end": 2015.46,
+          "text": "so this figure actually explains the general idea behind the bhajana attention mechanism",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2016.78,
+          "ts_end": 2021.86,
+          "text": "let me zoom on to this figure once more yeah so if you look at this figure here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2022.66,
+          "ts_end": 2028.42,
+          "text": "when you are translating from do to english you pay attention to all the input tokens and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2028.42,
+          "ts_end": 2031.34,
+          "text": "you can have these attention weights which basically displays",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2031.42,
+          "ts_end": 2036.74,
+          "text": "how much you want to pay attention to each input token and that solves the problem of the loss of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2036.74,
+          "ts_end": 2044.64,
+          "text": "context which was present in the rnn so essentially using an attention mechanism using an attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2044.64,
+          "ts_end": 2051.58,
+          "text": "mechanism the text generating decoder part of the network can access all the input tokens selectively",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2052.63,
+          "ts_end": 2058.67,
+          "text": "and as i mentioned we can decide how much weight to give to each input token so this means that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2058.67,
+          "ts_end": 2065.56,
+          "text": "some input tokens are more important than others for generating a given output token this importance",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2065.56,
+          "ts_end": 2069.98,
+          "text": "is determined by the attention weights so this is where the attention weights and the attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2069.98,
+          "ts_end": 2077.3,
+          "text": "score comes into the picture which we'll learn about later now so this paper was introduced in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2077.3,
+          "ts_end": 2083.28,
+          "text": "2014 right this paper which is which introduced the badanao attention mechanism only three years",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2083.28,
+          "ts_end": 2089.58,
+          "text": "later the main transformers paper came out and that came out in 2017 so only three years later",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2089.58,
+          "ts_end": 2095.88,
+          "text": "researchers found that rnn architectures are not required for building deep neural networks for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2095.88,
+          "ts_end": 2101.4,
+          "text": "natural language processing and this is when the researchers proposed the transformer architecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2101.4,
+          "ts_end": 2107.55,
+          "text": "and at the main core of the transformer architecture was the badanao attention mechanism",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2107.55,
+          "ts_end": 2114.74,
+          "text": "so it was called self attention mechanism but it was really inspired a lot from the badanao attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2114.74,
+          "ts_end": 2120.4,
+          "text": "mechanism we will come to what self attention means badanao attention did not introduce the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2120.4,
+          "ts_end": 2121.12,
+          "text": "term self attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2121.14,
+          "ts_end": 2126.34,
+          "text": "but the transformers paper which really changed everything for llms that paper came in 2017",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2126.98,
+          "ts_end": 2132.32,
+          "text": "it introduced the transformer architecture with the self attention mechanism that was completely",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2132.32,
+          "ts_end": 2139.34,
+          "text": "based on the badanao attention mechanism this is that paper which came out in 2017 and here you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2139.34,
+          "ts_end": 2144.16,
+          "text": "will see attention attention basically the paper itself is titled attention is all you need",
+          "frame_ids": [
+            "XN7sevVxyUM_f0015"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Background",
+              "extracted_text": "transduction problems such as language modeling and machine translation [35, 2, 5]. Numerous efforts have since continued to push the boundaries of recurrent language models and encoder-decoder architectures [38, 24, 15].\n\nRecurrent models typically factor computation along the symbol positions of the input and output sequences. Aligning the positions to steps in computation time, they generate a sequence of hidden states h_t, as a function of the previous hidden state h_{t-1} and the input for position t. This inherently sequential nature precludes parallelization within training examples, which becomes critical at longer sequence lengths, as memory constraints limit batching across examples. Recent work has achieved significant improvements in computational efficiency through factorization tricks [21] and conditional computation [32], while also improving model performance in case of the latter. The fundamental constraint of sequential computation, however, remains.\n\nAttention mechanisms have become an integral part of compelling sequence modeling and transduction models in various tasks, allowing modeling of dependencies without regard to their distance in the input or output sequences [2, 19]. In all but a few cases [27], however, such attention mechanisms are used in conjunction with a recurrent network.\n\nIn this work we propose the Transformer, a model architecture eschewing recurrence and instead relying entirely on an attention mechanism to draw global dependencies between input and output. The Transformer allows for significantly more parallelization and can reach a new state of the art in translation quality after being trained for as little as twelve hours on eight P100 GPUs.\n\n2  Background\n\nThe goal of reducing sequential computation also forms the foundation of the Extended Neural GPU",
+              "code": null,
+              "math": [
+                "h_t",
+                "h_{t-1}"
+              ],
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0015",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2142.066333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0015.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2145.53,
+          "ts_end": 2151.2,
+          "text": "so this is how attention really came to be the core building block of large language models",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2151.62,
+          "ts_end": 2158.02,
+          "text": "i just want to explain to you this once more so that i drive this concept home about why attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2158.02,
+          "ts_end": 2163.08,
+          "text": "mechanism helps so let's say again the same sentence this is the sentence the cat that was",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2163.08,
+          "ts_end": 2168.94,
+          "text": "sitting on the mat which was next to the dog jumped and this is the french translation for this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2170.13,
+          "ts_end": 2175.03,
+          "text": "particular sequence so what the attention mechanism does is that at each decoding step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2175.03,
+          "ts_end": 2181.84,
+          "text": "so at each decoding step the model can look back at the entire input sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2182.94,
+          "ts_end": 2189.76,
+          "text": "and decide which parts are most relevant to generate the current world so for example",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2191.7,
+          "ts_end": 2198.2,
+          "text": "let's say we are predicting this word saute which is the french translation for jumped so when the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2198.2,
+          "ts_end": 2204.04,
+          "text": "decoder is predicting this french translation saute the attention mechanism allows the decoder",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2204.04,
+          "ts_end": 2211.94,
+          "text": "to focus on the part of the input that corresponds to jump so we can selectively look at which part",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2211.94,
+          "ts_end": 2214.08,
+          "text": "of the input to give maximum attention to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2214.89,
+          "ts_end": 2220.41,
+          "text": "and this dynamic focus on different parts of the input sequence is what helps the attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2220.41,
+          "ts_end": 2226.57,
+          "text": "mechanism to learn long range dependencies more effectively so remember we looked at how rns failed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2226.57,
+          "ts_end": 2233.03,
+          "text": "to understand or even learn long range dependencies uh one main or key thing of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2233.03,
+          "ts_end": 2239.44,
+          "text": "the attention mechanism is this word which is called as dynamic focus so dynamic focus which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2239.44,
+          "ts_end": 2245.26,
+          "text": "means that for every decoder for every decoding step we can selectively choose which inputs to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2245.4,
+          "ts_end": 2250.76,
+          "text": "focus on and how much attention to give to each input that's why it's called dynamic focus so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2250.76,
+          "ts_end": 2256.52,
+          "text": "this dynamic focus on different parts of the input sequence helps us to learn long range dependencies",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2256.52,
+          "ts_end": 2263.47,
+          "text": "more effectively and that's why the attention mechanism uh actually works so well there is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2263.47,
+          "ts_end": 2270.37,
+          "text": "another animation which i want to show you uh so here we saw the rnn right let me show you again so",
+          "frame_ids": [
+            "XN7sevVxyUM_f0016"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+              "extracted_text": "understand the static graphics that describe these models. This is called an \"unrolled\" view where instead of showing the one decoder, we show a copy of it for each time step. This way we can look at the inputs and outputs of each time step.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation model showing an unrolled encoder-decoder architecture with three encoder RNN blocks processing input and two decoder RNN blocks generating output.",
+              "diagram_elements": [
+                "Encoding Stage",
+                "Encoder RNN (\u00d73)",
+                "Decoding Stage",
+                "Decoder RNN (\u00d72)",
+                "Arrow connecting encoder to decoder"
+              ],
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0016",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2266.633,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0016.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2270.37,
+          "ts_end": 2275.81,
+          "text": "this is the recurrent neural network here you will see that just the final hidden state which is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2275.81,
+          "ts_end": 2280.65,
+          "text": "hidden state number three is actually passed to the decoding stage nothing else is passed",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2281.22,
+          "ts_end": 2285.21,
+          "text": "but now let me show you the modification of this with with the attention mechanism",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2285.9,
+          "ts_end": 2291.55,
+          "text": "so now uh if we do this with attention added what happens is that you will see that hidden",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2291.55,
+          "ts_end": 2296.03,
+          "text": "state number one is generated hidden state number two is generated hidden state number",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2296.03,
+          "ts_end": 2300.29,
+          "text": "three is generated but all of these hidden states are passed to the decoder which means",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2300.29,
+          "ts_end": 2305.47,
+          "text": "that the decoder at every step has access to all of the hidden states not just the final hidden",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2305.81,
+          "ts_end": 2310.61,
+          "text": "number three but even hidden states number one and hidden states number two this is an extremely",
+          "frame_ids": [
+            "XN7sevVxyUM_f0018"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Neural Machine Translation - Sequence to Sequence Model with Attention",
+              "extracted_text": "Second, an attention decoder does an extra step before producing its output. In order to focus on the parts of the output that are relevant to this decoding time step, the decoder does the following:\n\n\u2022 Look at the set of encoder hidden states it received \u2013 each encoder hidden state is most associated with a certain word in the input sentence",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Sequence-to-sequence neural machine translation architecture with attention: three encoder RNNs process input and pass hidden states to two attention decoder RNNs in the decoding stage.",
+              "diagram_elements": [
+                "Encoder RNN (three instances)",
+                "Encoder hidden states (orange boxes)",
+                "Attention Decoder RNN (two instances)",
+                "Encoding Stage",
+                "Decoding Stage"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0018",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2310.266333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0018.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2310.61,
+          "ts_end": 2318.09,
+          "text": "important point to remember uh one more thing which i want to show you here is that uh yeah",
+          "frame_ids": [
+            "XN7sevVxyUM_f0019",
+            "XN7sevVxyUM_f0020"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Attention at time step 4",
+              "extracted_text": "Second, an attention decoder does an extra step before producing its output. In order to focus on the parts of the input that are relevant to this decoding time step, the decoder does the following:\n\n1. Look at the set of encoder hidden states it received \u2013 each encoder hidden state is most associated with a certain word in the input sentence\n2. Give each hidden state a score (let's ignore how the scoring is done for now)\n3. Multiply each hidden state by its softmaxed score, thus amplifying hidden states with high scores, and drowning out hidden states with low scores\n\n1. Prepare inputs",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Diagram showing attention mechanism at time step 4 with encoder hidden states (brown/orange bars) and decoder hidden state (purple bar) being prepared as inputs.",
+              "diagram_elements": [
+                "Encoder hidden states",
+                "Decoder hidden state at time step 4",
+                "Prepare inputs"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0019",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2313.199667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0019.jpg"
+            },
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "Encoder-decoder attention mechanism showing encoding stage with hidden states (h1 h2 h3) flowing into attention decoding stage with h_init input, attention computation (cyan circle), and <END> token output.",
+              "diagram_elements": [
+                "Encoding Stage",
+                "h1 h2 h3",
+                "Attention Decoding Stage",
+                "h_init",
+                "Attention mechanism (cyan circle)",
+                "<END> token"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0020",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2316.399667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0020.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2318.09,
+          "ts_end": 2326.59,
+          "text": "this part so let's say uh yeah so let's say we are translating from french to english over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2326.59,
+          "ts_end": 2339.98,
+          "text": "i think let me play this again yeah so let's say we are translating from french to english here",
+          "frame_ids": [
+            "XN7sevVxyUM_f0021"
+          ],
+          "visuals": []
+        },
+        {
+          "ts_start": 2339.98,
+          "ts_end": 2345.7,
+          "text": "again let's see what is happening here so if we are at the decoder stage we want to generate this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2345.7,
+          "ts_end": 2351.62,
+          "text": "word i right for joe so this when we are at the decoder state the decoder has access to all of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2351.62,
+          "ts_end": 2357.4,
+          "text": "these hidden states one two and three when it's generating the english translation for joe but",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2357.4,
+          "ts_end": 2361.68,
+          "text": "what it does is that it gives more preference to the hidden state number one because it realized",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2361.68,
+          "ts_end": 2368.1,
+          "text": "that that joe is more important for translation to i similarly when we want to translate sui s u i s",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2368.1,
+          "ts_end": 2373.84,
+          "text": "it actually translates to m so when the decoder is translating this to english it has access to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2375.8,
+          "ts_end": 2378.44,
+          "text": "one two and three hidden states but it learns that the hidden state two is most important for this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2378.44,
+          "ts_end": 2384.68,
+          "text": "translation similarly when it's translating etude on with the attention mechanism it has translate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2384.68,
+          "ts_end": 2388.82,
+          "text": "it has access to one two and three hidden state but it learns that the hidden state number three",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2388.82,
+          "ts_end": 2395.2,
+          "text": "is the most important uh etc so this is how it actually works so at every decoding step we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2395.2,
+          "ts_end": 2401.45,
+          "text": "access to all the different uh hidden states and one more key thing to mention here is that the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2401.45,
+          "ts_end": 2406.53,
+          "text": "model it isn't just mindlessly aligning the first word at the output with the first word at the input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2406.63,
+          "ts_end": 2412.88,
+          "text": "it actually learns from the training phase how to align the words in the language pair so remember",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2412.88,
+          "ts_end": 2418.28,
+          "text": "at the start we saw that you cannot blindly do word to word translation that is not what's",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2418.28,
+          "ts_end": 2423.7,
+          "text": "happening here in the training phase the attention mechanism actually learns which word to align with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2423.7,
+          "ts_end": 2429.32,
+          "text": "which word so which word in the output should be aligned with which word in the input so this this",
+          "frame_ids": [
+            "XN7sevVxyUM_f0022"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": "Note that the model isn't just mindless aligning the first word at the output with the first word from the input. It actually learned from the training phase how to align words in that language pair (French and English in our example). An example for how precise this mechanism can be comes from the attention papers listed above:",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Attention alignment heatmap showing word-to-word correspondence between French source words (left axis) and English target words (top axis), with brightness indicating attention strength.",
+              "diagram_elements": [
+                "L' (French)",
+                "accord (French)",
+                "sur (French)",
+                "la (French)",
+                "zone (French)",
+                "\u00e9conomique (French)",
+                "europ\u00e9enne (French)",
+                "a (French)",
+                "\u00e9t\u00e9 (French)",
+                "sign\u00e9 (French)",
+                "The (English)",
+                "agreement (English)",
+                "on (English)",
+                "the (English)",
+                "European (English)",
+                "economic (English)",
+                "Area (English)",
+                "was (English)",
+                "signed (English)",
+                "in (English)",
+                "August (English)",
+                "1992 (English)",
+                ". (English)",
+                "<end> (English)"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0022",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2428.366333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0022.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2429.32,
+          "ts_end": 2435.1,
+          "text": "graph is actually presented in the 2014 paper and i think this graph is very interesting so you can",
+          "frame_ids": [
+            "XN7sevVxyUM_f0023"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Published as a conference paper at ICLR 2015",
+              "extracted_text": "We used the tokenization script from the open-source machine translation package, Moses.\nIn this paper, by a \"hidden unit\", we always mean the gated hidden unit (see Appendix A.1.1).",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Two heatmap matrices (a) and (b) showing correlation patterns with French and English text labels on axes, with white and gray squares indicating varying levels of correlation on a black background.",
+              "diagram_elements": [
+                "Matrix (a) - left heatmap with French labels",
+                "Matrix (b) - right heatmap with French labels",
+                "White and gray squares indicating correlation strength",
+                "<end> markers at bottom of matrices"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0023",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2433.499667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0023.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2435.1,
+          "ts_end": 2436.22,
+          "text": "also take a look at this",
+          "frame_ids": [
+            "XN7sevVxyUM_f0024"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": "Figure 3: Four sample alignments found by RNNsearch-50",
+              "extracted_text": "The x-axis and y-axis of each plot correspond to the words in the source sentence (English) and the generated translation (French), respectively. Each pixel shows the weight \u03b1\u1d62\u2c7c of the annotation of the j-th source word for the i-th target word (see Eq. (6)), in grayscale (0: black; 1: white). (a) an arbitrary sentence. (b-d) three randomly selected samples among the sentences without any unknown words and of length between 10 and 20 words from the test set.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Four heatmap visualizations showing attention weight alignments between English source words (x-axis) and French target words (y-axis) in neural machine translation, with pixel intensity representing alignment strength.",
+              "diagram_elements": [
+                "Plot (a): arbitrary sentence alignment",
+                "Plot (b): random sample alignment",
+                "Plot (c): random sample alignment",
+                "Plot (d): random sample alignment",
+                "x-axis: source sentence words (English)",
+                "y-axis: generated translation words (French)",
+                "grayscale intensity: weight \u03b1\u1d62\u2c7c"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0024",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2435.533,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0024.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2437.2,
+          "ts_end": 2442.34,
+          "text": "this is figure number three in the original the badana attention mechanism paper so here you can",
+          "frame_ids": [
+            "XN7sevVxyUM_f0025"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "Attention heatmap showing alignment weights between source text (French phrases on left) and target text (English words on top), with darker regions indicating lower attention and lighter regions indicating higher attention.",
+              "diagram_elements": [
+                "L' (source token)",
+                "accord (source token)",
+                "sur (source token)",
+                "la (source token)",
+                "zone (source token)",
+                "\u00e9conomique (source token)",
+                "europ\u00e9enne (source token)",
+                "a (source token)",
+                "\u00e9t\u00e9 (source token)",
+                "sign\u00e9 (source token)",
+                "en (source token)",
+                "ao\u00fbt (source token)",
+                "1992 (source token)",
+                "<end> (source token)",
+                "The (target token)",
+                "agreed (target token)",
+                "on (target token)",
+                "the (target token)",
+                "European (target token)",
+                "Economic (target token)",
+                "Area (target token)",
+                "was (target token)",
+                "signed (target token)",
+                "in (target token)",
+                "August (target token)",
+                "1992 (target token)",
+                "<end> (target token)"
+              ],
+              "confidence": 0.85,
+              "frame_id": "XN7sevVxyUM_f0025",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2440.566333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0025.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2442.34,
+          "ts_end": 2447.68,
+          "text": "see that let's see european economic area so let's say we want to translate european economic",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2447.68,
+          "ts_end": 2456.14,
+          "text": "area to french it actually translates to european economic zone so here it says that in french the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2456.14,
+          "ts_end": 2461.61,
+          "text": "order of this word is reversed as compared to english so let's see how the model actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2461.61,
+          "ts_end": 2467.15,
+          "text": "learns so european so it learns this european happens over here then economic is here and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2467.33,
+          "ts_end": 2474.52,
+          "text": "area is here so basically the point is that uh when the attention mechanism learns that european",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2474.52,
+          "ts_end": 2482.28,
+          "text": "maps to this european economic maps to economic and area maps to zone it does it's not just blindly",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2482.28,
+          "ts_end": 2488.54,
+          "text": "looking at the order because if you see the order european comes at one two three four fifth but",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2489.3,
+          "ts_end": 2493.42,
+          "text": "european which is the french translation comes at one two three four five six seventh",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2494.06,
+          "ts_end": 2496.74,
+          "text": "so order is different it's not blindly copying the order",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2497.88,
+          "ts_end": 2504.04,
+          "text": "number uh at which the world occurs it's actually learning from the training uh it's learning the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2504.04,
+          "ts_end": 2508.4,
+          "text": "dependencies between different worlds and that's how it does that does the translation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2509.93,
+          "ts_end": 2516.07,
+          "text": "um i'll be sharing the link to this paper in the information section the 2014 badano attention paper",
+          "frame_ids": [
+            "XN7sevVxyUM_f0026"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "Four heatmap matrices (a, b, c, d) showing correlation or similarity patterns with diagonal structures, labeled with French text along axes representing different categories or variables.",
+              "diagram_elements": [
+                "Matrix (a): accord, sur, la, zone, \u00e9conomique, europ\u00e9enne, \u00e9t\u00e9, sign\u00e9, en, ao\u00fbt, 1992, <end>",
+                "Matrix (b): convenient, de, noter, que, l', environnement, marin, est, le, moins, connu, de, l', environnement, <end>",
+                "Matrix (c): La, destruction, de, l', \u00e9quipement, signifie, que, la, Syrie, peut, plus, produire, de, nouvelles, armes, chimiques, <end>",
+                "Matrix (d): Cela, va, changer, mon, avenir, avec, ma, famille, a, dit, l', homme, <end>"
+              ],
+              "confidence": 0.75,
+              "frame_id": "XN7sevVxyUM_f0026",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2511.499667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0026.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2516.59,
+          "ts_end": 2520.61,
+          "text": "and i'll also be sharing the link to the 2017 attention is all you need papers",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_006",
+      "title": "History of RNNs, LSTMs, Attention and Transformers",
+      "ts_start": 2523.0,
+      "ts_end": 2648.0,
+      "segments": [
+        {
+          "ts_start": 2526.39,
+          "ts_end": 2528.69,
+          "text": "of the attention and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2528.71,
+          "ts_end": 2537.17,
+          "text": "transformers so that you have a timeline in mind so uh it all started in 1980 1980s is when the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2537.17,
+          "ts_end": 2542.12,
+          "text": "recurrent neural networks came into the picture and recurrent neural networks introduced this",
+          "frame_ids": [
+            "XN7sevVxyUM_f0028"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "RECURRENT NEURAL NETWORKS",
+              "extracted_text": "RNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Recurrent Neural Network architecture showing input layer, hidden layer with recurrence connections, and output layer with feedback loops.",
+              "diagram_elements": [
+                "Input",
+                "Hidden Layer",
+                "Output",
+                "Recurrence"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0028",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2540.966333,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0028.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2542.12,
+          "ts_end": 2548.24,
+          "text": "hidden layer the hidden state that was the key innovation here in 1997 came along short-term",
+          "frame_ids": [
+            "XN7sevVxyUM_f0029"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Recurrent neural networks - 1980 (Memory)",
+              "extracted_text": "RECURRENT NEURAL NETWORKS\n\nRNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Recurrent neural network architecture showing input layer connected to hidden layer with recurrent connections, and output layer, with feedback loops indicating memory mechanism.",
+              "diagram_elements": [
+                "Input",
+                "Hidden Layer",
+                "Output",
+                "Recurrent connections"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0029",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2544.433,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0029.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2548.24,
+          "ts_end": 2554.66,
+          "text": "memory networks and they were in advancements compared to lnn compared to rnn so recurrent",
+          "frame_ids": [
+            "XN7sevVxyUM_f0030"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Recurrent neural networks \u2013 1980 (Memory)",
+              "extracted_text": "RECURRENT NEURAL NETWORKS\n\nRNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Recurrent neural network architecture showing input layer connected to hidden layer with recurrent connections, producing output layer.",
+              "diagram_elements": [
+                "Input",
+                "Hidden Layer",
+                "Output",
+                "Recurrence"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0030",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2548.899667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0030.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2554.66,
+          "ts_end": 2559.14,
+          "text": "neural networks had this problem which is called vanish ingredients so when you stack multiple",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2559.44,
+          "ts_end": 2564.16,
+          "text": "feedback loops together it leads to the vanishing gradient problem long short-term memory solved",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2564.16,
+          "ts_end": 2570.94,
+          "text": "this so we had a long term memory route and a short-term memory route and that's how the lstm",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2570.94,
+          "ts_end": 2575.96,
+          "text": "actually operates but still both of these had problems with respect to longer context which",
+          "frame_ids": [
+            "XN7sevVxyUM_f0031"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Recurrent neural networks \u2013 1980 (Memory)",
+              "extracted_text": "RECURRENT NEURAL NETWORKS\n\nRNNs were designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.\n\nThey were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.",
+              "code": null,
+              "math": null,
+              "diagram_summary": "A recurrent neural network architecture showing input layer connected to hidden layer with recurrence feedback, producing output layer, with labeled input, recurrence, and output components.",
+              "diagram_elements": [
+                "Input",
+                "Hidden layer (multiple nodes)",
+                "Recurrence (feedback loop)",
+                "Output"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0031",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2572.733,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0031.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2575.96,
+          "ts_end": 2582.66,
+          "text": "was solved by the badana attention mechanism in 2014 where the decoder can can have access to each",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2582.66,
+          "ts_end": 2587.88,
+          "text": "of the input state when it's performing the decoding operation and it can selectively decide",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2589.44,
+          "ts_end": 2594.54,
+          "text": "which input to give more attention to then came the transformers architecture in 2017",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2595.26,
+          "ts_end": 2602.02,
+          "text": "and the transformers architecture really used the attention mechanism which was proposed in 2014",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2602.02,
+          "ts_end": 2607.94,
+          "text": "in this paper uh badana attention mechanism so this is the history we are living in the age",
+          "frame_ids": [
+            "XN7sevVxyUM_f0032"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": null,
+              "extracted_text": "RNNs                    LSTMs                    Attention                    Transformers\n\n1980                    1997                    2014                    2017\n\nRecurrent neural networks - 1980\n(Memory)\n\nRECURRENT",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Timeline showing the evolution of neural network architectures from RNNs (1980) through LSTMs (1997), Attention (2014), to Transformers (2017).",
+              "diagram_elements": [
+                "RNNs",
+                "LSTMs",
+                "Attention",
+                "Transformers",
+                "1980",
+                "1997",
+                "2014",
+                "2017"
+              ],
+              "confidence": 0.92,
+              "frame_id": "XN7sevVxyUM_f0032",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2605.233,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0032.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2607.94,
+          "ts_end": 2612.34,
+          "text": "right now where people only know about attention and transformers right but work has been going",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2612.34,
+          "ts_end": 2619.42,
+          "text": "on in this area for the past 43 to 45 years or even more so please keep this particular",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2619.86,
+          "ts_end": 2628.4,
+          "text": "uh figure in mind or historical mind map so that you are aware of how lucky we are to be living in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2628.4,
+          "ts_end": 2633.28,
+          "text": "these times where all of the research work has been accumulated for 50 years and now we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2633.28,
+          "ts_end": 2637.66,
+          "text": "reaping the benefits of these scientific advancements these advancements have not just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2637.66,
+          "ts_end": 2642.36,
+          "text": "happened in a period of one year or two years or three years they have taken time their researchers",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_007",
+      "title": "Self attention",
+      "ts_start": 2648.0,
+      "ts_end": 2880.0,
+      "segments": [
+        {
+          "ts_start": 2651.36,
+          "ts_end": 2657.1,
+          "text": "understood the flavor and an intuition behind the attention mechanism itself what the transformers",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2657.1,
+          "ts_end": 2661.48,
+          "text": "paper did is that it introduced another terminology which is actually called as self-attention",
+          "frame_ids": [
+            "XN7sevVxyUM_f0033"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Attention Is All You Need",
+              "extracted_text": "Provided proper attribution is provided, Google hereby grants permission to reproduce the tables and figures in this paper solely for use in journalistic or scholarly works.\n\nAshish Vaswani*\nGoogle Brain\navaswani@google.com\n\nNoam Shazeer*\nGoogle Brain\nnoam@google.com\n\nNiki Parmar*\nGoogle Research\nnikip@google.com\n\nJakob Uszkoreit*\nGoogle Research\nusz@google.com",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "XN7sevVxyUM_f0033",
+              "video_id": "XN7sevVxyUM",
+              "timestamp_sec": 2657.999667,
+              "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0033.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 2661.48,
+          "ts_end": 2669.25,
+          "text": "so self-attention is a bit different so self-attention is basically a mechanism that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2669.25,
+          "ts_end": 2674.55,
+          "text": "allows each position of the input sequence to attend to all positions in the same sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2674.55,
+          "ts_end": 2680.94,
+          "text": "so we are not looking at different sequences now when we looked at language translation",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2680.94,
+          "ts_end": 2682.86,
+          "text": "we looked at converting from",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2683.16,
+          "ts_end": 2687.34,
+          "text": "english to french or german to english right so we are looking at one sequence and we are looking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2687.34,
+          "ts_end": 2693.18,
+          "text": "at another sequence self-attention is basically different now instead of giving attention to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2693.18,
+          "ts_end": 2698.76,
+          "text": "another sequence all the attention is directed inwards so we are just looking within a particular",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2698.76,
+          "ts_end": 2703.56,
+          "text": "sequence so we are looking at different tokens within a sequence and see how these tokens are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2703.56,
+          "ts_end": 2709.62,
+          "text": "related to each other that's called as self-attention so self-attention is a key",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2709.62,
+          "ts_end": 2712.98,
+          "text": "component of contemporary large language models",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2713.92,
+          "ts_end": 2718.24,
+          "text": "so large language models remember are predicting the next world in a given sentence right",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2718.24,
+          "ts_end": 2722.4,
+          "text": "they can of course do language translation tasks as well but they were predominantly",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2722.4,
+          "ts_end": 2728.17,
+          "text": "trained for predicting the next world and they are able to do translation tasks which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2728.17,
+          "ts_end": 2732.31,
+          "text": "is also called as emergent behavior but they were trained to predict the next world",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2733.07,
+          "ts_end": 2738.15,
+          "text": "and that's why they have to so let's say when you want to predict the next world in a sentence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2738.15,
+          "ts_end": 2743.73,
+          "text": "you need to know that how different words are related to each other so let's say the cat jumped",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2744.21,
+          "ts_end": 2750.13,
+          "text": "wall next to the dog the dog also jumps something like that you need to know when you look at cat",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2750.13,
+          "ts_end": 2755.49,
+          "text": "which are the other words in this sentence which you should pay the most attention to for dog which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2755.49,
+          "ts_end": 2760.51,
+          "text": "are the words you should pay the most attention to so within a sentence itself you are deciding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2760.51,
+          "ts_end": 2765.71,
+          "text": "how different words of the sentence are related to each other and which word you should pay more",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2765.71,
+          "ts_end": 2771.84,
+          "text": "attention to when looking at a particular word that's called self-attention and self-attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2771.84,
+          "ts_end": 2778.88,
+          "text": "module is a key component of contemporary large language models so if you look at how this series",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2778.88,
+          "ts_end": 2784.34,
+          "text": "has progressed up till now we have looked at pre-processing steps like tokenization world",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2784.34,
+          "ts_end": 2789.76,
+          "text": "embedding positional embedding but now we have started looking at the llm architecture itself",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2789.76,
+          "ts_end": 2795.66,
+          "text": "right and one of the key points here is the self-attention module without really understanding",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2795.66,
+          "ts_end": 2801.28,
+          "text": "attention and self-attention we cannot proceed to the llm training which comes in phase number two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2801.84,
+          "ts_end": 2810.35,
+          "text": "of building a large language model okay so one last thing to mention is that in self-attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2810.77,
+          "ts_end": 2817.23,
+          "text": "the self really refers to the attention mechanisms ability to compute attention weights by relating",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2817.23,
+          "ts_end": 2823.53,
+          "text": "different positions in a single input sequence so as i mentioned we are looking at just one input",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2823.53,
+          "ts_end": 2828.53,
+          "text": "sequence and we are we are looking at the attention between different tokens of that sequence",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2828.53,
+          "ts_end": 2836.72,
+          "text": "so it learns the relationship between various parts of the input itself so this is different",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2836.72,
+          "ts_end": 2842.24,
+          "text": "than traditional attention mechanisms like the translation task which we saw where the focus is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2842.24,
+          "ts_end": 2847.08,
+          "text": "on the relationships between elements of two different sequences so for example if we want",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2847.08,
+          "ts_end": 2852.96,
+          "text": "to translate from english to german german to french english to hindi etc we have two sequences",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2852.96,
+          "ts_end": 2858.1,
+          "text": "right so traditional attention mechanisms look at one part of the sequence and another part of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2858.1,
+          "ts_end": 2859.82,
+          "text": "the sequence and how they are related to each other",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2859.84,
+          "ts_end": 2863.24,
+          "text": "in self-attention we basically learn the relationship",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2863.24,
+          "ts_end": 2870.9,
+          "text": "between various parts of the input itself so here we learn the relationship between various parts",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2870.9,
+          "ts_end": 2876.36,
+          "text": "of the input itself ah and that's the difference between traditional attention mechanisms and",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "XN7sevVxyUM_008",
+      "title": "Lecture recap",
+      "ts_start": 2880.0,
+      "ts_end": 3084.0,
+      "segments": [
+        {
+          "ts_start": 2884.06,
+          "ts_end": 2890.32,
+          "text": "so many things we covered the basic intuition of attention but before that i explained to you in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2890.32,
+          "ts_end": 2891.8,
+          "text": "a lot of detail about the short course",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2891.82,
+          "ts_end": 2897.76,
+          "text": "shortcomings in recurrent neural networks so just one thing if you take away from this lecture is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2897.76,
+          "ts_end": 2903.24,
+          "text": "that recurrent neural networks have a major shortcoming and that shortcoming is that they",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2903.24,
+          "ts_end": 2908.34,
+          "text": "have to remember the entire encoded input in a single hidden state before passing it to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2908.34,
+          "ts_end": 2913.34,
+          "text": "decoder and that's a problem when dealing with long sentences it leads to context loss",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2914.41,
+          "ts_end": 2919.65,
+          "text": "because the decoder does not have access to the previous inputs this is exactly the problem which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2919.65,
+          "ts_end": 2924.71,
+          "text": "is solved by attention mechanisms in attention mechanisms when you are decoding a particular part",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2925.76,
+          "ts_end": 2932.28,
+          "text": "like let's say when you are translating do which is German for you into English the decoder has",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2932.28,
+          "ts_end": 2937.06,
+          "text": "access to all of the tokens all of the inputs and then it decides how much attention to give",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2937.06,
+          "ts_end": 2944.08,
+          "text": "to each input this small insight leads to a revolution in GPT and as you can see chat GPT",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2944.08,
+          "ts_end": 2948.86,
+          "text": "is so awesome this small insight is at the heart is the engine of all that awesomeness",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2950.15,
+          "ts_end": 2950.43,
+          "text": "now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2950.51,
+          "ts_end": 2954.87,
+          "text": "what I have demonstrated here is an example of traditional attention because you are looking",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2954.87,
+          "ts_end": 2959.69,
+          "text": "at one sequence you are looking at this sequence which is in German and then you are looking at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2959.69,
+          "ts_end": 2964.69,
+          "text": "this sequence and then you are seeing which parts of the output sequence are more related to which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2964.69,
+          "ts_end": 2970.07,
+          "text": "parts of the input sequence this is traditional attention in self-attention you just look at one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2970.07,
+          "ts_end": 2974.71,
+          "text": "sequence and you look at different parts of that same sequence and how they are related with respect",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2974.71,
+          "ts_end": 2981.2,
+          "text": "to each other as I already mentioned to you before I have planned three to four more lectures",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2981.2,
+          "ts_end": 2986.2,
+          "text": "which are coming up in the attention series and what we are going to do in this lectures is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2986.2,
+          "ts_end": 2993.08,
+          "text": "we are going to first start in the next lecture with a simplified self-attention we will start",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2993.08,
+          "ts_end": 2998.24,
+          "text": "with the simplified self-attention and we'll code it out in Python then we will move to self-attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2998.7,
+          "ts_end": 3004.36,
+          "text": "we'll code it in Python then we'll move to causal attention we'll code it out in Python and then we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3004.36,
+          "ts_end": 3010.67,
+          "text": "move to multihead attention and we'll code it out uh and we'll code this also in python so all of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3010.67,
+          "ts_end": 3014.95,
+          "text": "the different modules i'll be showing the mathematical formulations on the whiteboard",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3014.95,
+          "ts_end": 3020.97,
+          "text": "and the rest will code it in python so in the next class let me show you where we'll begin with",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3021.44,
+          "ts_end": 3026.65,
+          "text": "in the next class we'll begin with this this part which is implementing self implementing a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3026.65,
+          "ts_end": 3032.55,
+          "text": "simplified attention mechanism uh so i also have whiteboards whiteboard nodes for this ready and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3032.55,
+          "ts_end": 3037.75,
+          "text": "then i'll take you through code remember this is a very serious lecture series where i i don't just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3037.75,
+          "ts_end": 3043.39,
+          "text": "want to give you the code directly i want to teach you the theory make your foundation strong and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3043.39,
+          "ts_end": 3049.05,
+          "text": "build everything from scratch in code we can always use a package for this lang chain is there",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3049.05,
+          "ts_end": 3054.79,
+          "text": "so many other packages are there we don't even need to uh go into the attention mechanism details",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3054.79,
+          "ts_end": 3059.69,
+          "text": "if we directly use the package but i don't think that's a good way to learn about large language",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3059.69,
+          "ts_end": 3062.63,
+          "text": "models the best way is to learn from basics to understand how to use the language models",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3062.65,
+          "ts_end": 3067.35,
+          "text": "understand the nuts and bolts of how things work and to build things out from scratch yourself",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3068.71,
+          "ts_end": 3073.69,
+          "text": "i hope you all are enjoying this series um thanks a lot everyone there are a number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 3073.69,
+          "ts_end": 3077.65,
+          "text": "exciting lectures which are planned ahead and i look forward to seeing you all in those lectures",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

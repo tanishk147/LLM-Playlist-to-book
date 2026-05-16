@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "ReLU Activation Function",
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "f(u) = max(0, u)"
+  ],
+  "diagram_summary": "ReLU activation function graph showing the piecewise linear relationship where output equals zero for negative inputs and equals the input value for positive inputs.",
+  "diagram_elements": [
+    "X Axis",
+    "Y Axis",
+    "max(0,x) curve",
+    "origin point at (0,0)",
+    "linear increase for positive x"
+  ],
+  "confidence": 0.95,
+  "frame_id": "d_PiwZe8UF4_f0002",
+  "video_id": "d_PiwZe8UF4",
+  "timestamp_sec": 436.399667,
+  "source_image": "data/frames/d_PiwZe8UF4/d_PiwZe8UF4_f0002.jpg"
+}

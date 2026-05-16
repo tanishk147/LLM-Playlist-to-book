@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "Lufthansa Chat Assistant",
+  "extracted_text": "Hi, I'm Elisa, your Lufthansa Chat Assistant.\nHere is a selection of topics I can help you with:\n\nFlight cancelled: check alternatives and rebook for free\n\nFlight not cancelled: calculate the cost for rebooking\n\nTravel plans changed: refund your ticket\n\nFAQ: receive information on COVID-19 travel regulations\n\nYou can choose one of the topics or type your question into the text field below.\n\nHi Elisa\n\nHello!\n\nPlease type here...",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "3dWzNZXA8DY_f0006",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 1162.433,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0006.jpg"
+}

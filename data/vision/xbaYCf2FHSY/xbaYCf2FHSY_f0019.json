@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "ple instructions \u2013 something which current NLP systems still l\now that scaling up language models greatly improves task-agr\netimes even reaching competitiveness with prior state-of-the-ar\nally, we train GPT-3, an autoregressive language model with 175 t\nany previous non-sparse language model, and test its performan\n. tasks, GPT-3 is applied without any gradient updates or fine-ti\nonstrations specified purely via text interaction with the model. O\non many NLP datasets, including translation, question-answerin\nul tasks that require on-the-fly reasoning or domain adaptation, st\nnovel word in a sentence, or performing 3-digit arithmetic. At the\nlatassets where GPT-3's few-shot learning still struggles, as well as\nmethodological issues related to training on large web corpora. F\norate samples of news articles which human evaluators have diff\nwritten by humans. We discuss broader societal impacts of this fi",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.65,
+  "frame_id": "xbaYCf2FHSY_f0019",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 757.533,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0019.jpg"
+}

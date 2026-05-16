@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Global Generative AI in Jobs Market",
+  "extracted_text": "By Technology, 2024-2033",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Stacked bar chart showing the growth of global generative AI in the jobs market from 2024 to 2033, broken down by four technology categories: Natural Language Processing, Computer Vision, Machine Learning, and Others.",
+  "diagram_elements": [
+    "Natural Language Processing (blue)",
+    "Computer Vision (teal/green)",
+    "Machine Learning (yellow)",
+    "Others (light green)",
+    "2024: 352.5",
+    "2033: 1,764.3",
+    "Y-axis: 0-2000",
+    "X-axis: Years 2024-2033"
+  ],
+  "confidence": 0.95,
+  "frame_id": "Xpr8D6LeAtw_f0011",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 581.899667,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0011.jpg"
+}

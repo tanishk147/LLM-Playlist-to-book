@@ -1,0 +1,29 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Hand-drawn diagram showing transformer architecture components including parameter dictionary keys (wte token embeddings, wpe positional embeddings, blocks), attention layers in transformer blocks, and output projection with Q, K, V matrices and softmax operations.",
+  "diagram_elements": [
+    "Parameter Dictionary Keys",
+    "wte: Token Embeddings",
+    "wpe: Positional Embeddings",
+    "Blocks",
+    "Attention layers in transformer blocks",
+    "Transformer block",
+    "h/0, h/1, etc.",
+    "Q, K, V",
+    "Softmax for h1, h2, h3",
+    "Output projection",
+    "Feed-forward network",
+    "Transformer h/mlp",
+    "ln_f"
+  ],
+  "confidence": 0.75,
+  "frame_id": "yXrGeDNuymY_f0012",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1709.866333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0012.jpg"
+}

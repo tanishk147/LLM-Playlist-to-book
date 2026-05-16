@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": true,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "f6zqClXOh7Y_f0005",
+  "video_id": "f6zqClXOh7Y",
+  "timestamp_sec": 1601.333,
+  "source_image": "data/frames/f6zqClXOh7Y/f6zqClXOh7Y_f0005.jpg"
+}

@@ -1,0 +1,568 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "Before diving into model architecture and training loops, it helps to know exactly what data we will be working with throughout this book.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence with no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "This chapter catalogs every dataset that appears in the series, explains where it comes from, and provides the key statistics you will need to follow along.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement of chapter purpose; no factual claim."
+    },
+    {
+      "index": 3,
+      "text": "There are four datasets in total: a short story used for pre-training demonstrations, a spam-classification corpus, an instruction fine-tuning set, and a much larger reference dataset from Stanford.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Overview statement organizing the chapter structure; no factual claim requiring citation."
+    },
+    {
+      "index": 4,
+      "text": "Each one is introduced at the appropriate point in the book, but having them all in one place makes it easy to come back here when you need a quick reminder.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional/organizational statement; no factual claim."
+    },
+    {
+      "index": 5,
+      "text": "The simplest dataset in the series is a short piece of fiction.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Characterization of dataset type; no factual claim requiring citation."
+    },
+    {
+      "index": 6,
+      "text": "The text used for the pre-training demonstrations is *The Verdict*, a short story by Edith Wharton [c3175].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3175"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3175 states 'The dataset used for this demonstration is 'The Verdict' by Edith Wharton,' which directly supports this sentence."
+    },
+    {
+      "index": 7,
+      "text": "The story was published in 1908 [c3176, c3176] and, because of its age, is in the public domain and available for free download; it is also included directly in the companion repository [c3177].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3176",
+        "c3177"
+      ],
+      "status": "grounded",
+      "reason": "c3176 confirms publication in 1908. c3177 confirms it is available for free download and included in the repository. The public domain inference follows logically from the 1908 date."
+    },
+    {
+      "index": 8,
+      "text": "One source in the playlist gives the publication year as 1906 [c3743] while two others give 1908 [c2723, c3176].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3743",
+        "c2723",
+        "c3176"
+      ],
+      "status": "grounded",
+      "reason": "c3743 states publication in 1906, c2723 and c3176 both state 1908. The sentence accurately reports these conflicting sources."
+    },
+    {
+      "index": 9,
+      "text": "The 1908 figure appears more frequently and is used here.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Editorial decision statement; no factual claim requiring external support."
+    },
+    {
+      "index": 10,
+      "text": "[GAP: definitive publication year needs verification against a bibliographic source.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "Gap marker indicating unresolved factual question about publication year."
+    },
+    {
+      "index": 11,
+      "text": "The story is deliberately small.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Characterization of design choice; no factual claim."
+    },
+    {
+      "index": 12,
+      "text": "The full text runs to roughly 20,000 characters [c3745], and when tokenized with byte-pair encoding (BPE) it produces **5,145 tokens** [c2725].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3745",
+        "c2725"
+      ],
+      "status": "grounded",
+      "reason": "c3745 confirms 20,000 characters. c2725 confirms 5,145 tokens with BPE tokenization."
+    },
+    {
+      "index": 13,
+      "text": "That is small enough to fit comfortably in memory and to train on quickly, which makes it ideal for illustrating concepts without requiring a GPU cluster.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement about the implications of dataset size; no factual claim."
+    },
+    {
+      "index": 14,
+      "text": "[FIGURE: Bar chart comparing the token count of The Verdict (~5,145 tokens) against a typical large pre-training corpus, to give a sense of scale]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; not a factual claim."
+    },
+    {
+      "index": 15,
+      "text": "Because the dataset is so compact, every experiment that uses it in this book is meant to demonstrate *mechanics*, not to produce a state-of-the-art language model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Editorial statement about experimental intent; no factual claim."
+    },
+    {
+      "index": 16,
+      "text": "Do not be surprised when the model trained on this data generates imperfect text \u2014 that is expected and intentional.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Guidance to reader; no factual claim."
+    },
+    {
+      "index": 17,
+      "text": "To put *The Verdict* in perspective, it is worth looking at what a production-scale pre-training dataset actually looks like.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional statement introducing comparison; no factual claim."
+    },
+    {
+      "index": 18,
+      "text": "GPT-3 was trained on a total of **300 billion tokens** [c3395], assembled from several sources:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3395"
+      ],
+      "status": "grounded",
+      "reason": "c3395 directly states 'GPT-3 was trained on a total of 300 billion tokens.'"
+    },
+    {
+      "index": 19,
+      "text": "Common Crawl | 410 billion (filtered down) | 60 % [c3389]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3389"
+      ],
+      "status": "grounded",
+      "reason": "c3389 states 'GPT-3 uses 410 billion tokens from the Common Crawl dataset, which constitutes 60% of the entire training dataset.'"
+    },
+    {
+      "index": 20,
+      "text": "WebText2 | 19 billion words | 22 % [c3392]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3392"
+      ],
+      "status": "grounded",
+      "reason": "c3392 states 'GPT-3 uses 19 billion words from the WebText2 dataset, which constitutes 22% of the training data.'"
+    },
+    {
+      "index": 21,
+      "text": "Books + Wikipedia | \u2014 | 18\u201319 % [c3394]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3394"
+      ],
+      "status": "grounded",
+      "reason": "c3394 states 'The remaining 18-19% of GPT-3 training data comes from books and Wikipedia.'"
+    },
+    {
+      "index": 22,
+      "text": "**Common Crawl** is a free, open repository of web-crawl data that has been maintained since 2007 and spans more than 250 million pages across 17 years [c3391].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3391"
+      ],
+      "status": "grounded",
+      "reason": "c3391 states 'Common Crawl is a free and open repository of web crawl data that has maintained over 250 million pages spanning 17 years since 2007.'"
+    },
+    {
+      "index": 23,
+      "text": "**WebText2** is an enhanced version of the original WebText corpus, covering Reddit submissions from 2005 to 2020 [c3393].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3393"
+      ],
+      "status": "grounded",
+      "reason": "c3393 states 'WebText2 is an enhanced version of the original WebText corpus that covers Reddit submissions from 2005 to 2020.'"
+    },
+    {
+      "index": 24,
+      "text": "These numbers are included here not because you will download Common Crawl for the exercises in this book, but because they ground your intuition: the 5,145-token *Verdict* dataset is a toy by comparison, and the techniques you learn on it scale directly to corpora many orders of magnitude larger.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about pedagogical purpose; no factual claim requiring citation."
+    },
+    {
+      "index": 25,
+      "text": "The second dataset appears when the book covers fine-tuning a pre-trained model for text classification.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Organizational statement about when dataset is introduced; no factual claim."
+    },
+    {
+      "index": 26,
+      "text": "The task is binary spam detection, and the data comes from the **SMS Spam Collection**, a well-known benchmark from the UCI Machine Learning Repository.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about dataset source and task; no specific factual claim requiring citation."
+    },
+    {
+      "index": 27,
+      "text": "The SMS Spam Collection contains a total of **5,572 messages** [c3632].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3632"
+      ],
+      "status": "grounded",
+      "reason": "c3632 states 'The SMS Spam Collection dataset contains a total of 5,572 emails.' (Note: claim says 'emails' but sentence says 'messages'; these are used interchangeably for this dataset.)"
+    },
+    {
+      "index": 28,
+      "text": "Among those, **425 spam messages** were manually extracted from the Grumbletext website [c3623].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3623"
+      ],
+      "status": "grounded",
+      "reason": "c3623 states 'The SMS Spam Collection dataset contains 425 spam messages manually extracted from the Grumbletext website.'"
+    },
+    {
+      "index": 29,
+      "text": "The dataset is downloaded and saved as a tab-separated values file named `SMSSpamCollection.tsv` [c3629], which can then be loaded into a pandas DataFrame for convenient manipulation [c3631].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3629",
+        "c3631"
+      ],
+      "status": "grounded",
+      "reason": "c3629 confirms the file format and name. c3631 confirms it can be loaded into a pandas DataFrame."
+    },
+    {
+      "index": 30,
+      "text": "Raw spam datasets are almost always imbalanced \u2014 there are far more legitimate messages than spam.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement about spam dataset characteristics; no specific factual claim requiring citation."
+    },
+    {
+      "index": 31,
+      "text": "To avoid training a model that simply learns to predict the majority class, the dataset is balanced.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of methodological choice; no factual claim."
+    },
+    {
+      "index": 32,
+      "text": "After balancing, the dataset contains **747 instances of each class** (ham and spam) [c3635], giving a total of **1,494 examples** [c2397].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3635",
+        "c2397"
+      ],
+      "status": "grounded",
+      "reason": "c3635 confirms 747 instances of each class after balancing. c2397 confirms total of 1,494 examples (747 spam + 747 non-spam)."
+    },
+    {
+      "index": 33,
+      "text": "Those examples are then split into training, validation, and test sets and wrapped in data loaders.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Procedural statement; no factual claim."
+    },
+    {
+      "index": 34,
+      "text": "Training | 130 | 8 | 120 [c2404]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2404"
+      ],
+      "status": "grounded",
+      "reason": "c2404 states 'The training loader has dimensions of 130 by 8 by 120 (130 batches, 8 samples per batch, 120 tokens per sample).'"
+    },
+    {
+      "index": 35,
+      "text": "Validation | 19 | 8 | 120 [c2406]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2406"
+      ],
+      "status": "grounded",
+      "reason": "c2406 states 'The validation loader has dimensions of 19 by 8 by 120.'"
+    },
+    {
+      "index": 36,
+      "text": "Test | 38 | 8 | 120 [c2405]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2405"
+      ],
+      "status": "grounded",
+      "reason": "c2405 states 'The test loader has dimensions of 38 by 8 by 120.'"
+    },
+    {
+      "index": 37,
+      "text": "The test loader contains exactly **38 batches**, corresponding to 20 % of the total dataset [c2401].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2401"
+      ],
+      "status": "grounded",
+      "reason": "c2401 states 'The test loader contains 38 batches, corresponding to 20% of the total dataset.'"
+    },
+    {
+      "index": 38,
+      "text": "Because the test set is twice the size of the validation set (20 % vs. 10 %), the number of test batches is exactly twice the number of validation batches [c2402].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2402"
+      ],
+      "status": "grounded",
+      "reason": "c2402 states 'The number of test batches is exactly twice the number of validation batches because test data is 20% and validation data is 10% of the total dataset.'"
+    },
+    {
+      "index": 39,
+      "text": "[FIGURE: Pie chart showing the 70/10/20 train/validation/test split of the balanced SMS Spam Collection (1,494 total examples)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; not a factual claim."
+    },
+    {
+      "index": 40,
+      "text": "The third dataset is used when the book covers instruction fine-tuning \u2014 the process of teaching a pre-trained model to follow natural-language instructions.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Organizational statement about when dataset is introduced; no factual claim."
+    },
+    {
+      "index": 41,
+      "text": "The dataset contains **1,100 instruction\u2013response pairs** [c205] formatted in the Alpaca style [c691].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c205",
+        "c691"
+      ],
+      "status": "grounded",
+      "reason": "c205 states 'The dataset contains 1100 pairs of instruction-response examples.' c691 states 'The training dataset used contained 1100 instruction input-output pairs,' confirming the Alpaca format context."
+    },
+    {
+      "index": 42,
+      "text": "The 1,100 examples are divided using an **85 % / 10 % / 5 %** train / validation / test split:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement about split methodology; no factual claim requiring citation."
+    },
+    {
+      "index": 43,
+      "text": "Training | 935 [c207]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c207"
+      ],
+      "status": "grounded",
+      "reason": "c207 states 'With the 85-10-5 split, the training dataset contains 935 pairs.'"
+    },
+    {
+      "index": 44,
+      "text": "Validation | 55 [c208]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c208"
+      ],
+      "status": "grounded",
+      "reason": "c208 states 'With the 85-10-5 split, the validation dataset contains 55 pairs.'"
+    },
+    {
+      "index": 45,
+      "text": "Test | 110 [c209]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c209"
+      ],
+      "status": "grounded",
+      "reason": "c209 states 'With the 85-10-5 split, the testing dataset contains 110 pairs.'"
+    },
+    {
+      "index": 46,
+      "text": "The full dataset of 1,100 entries can be accessed by index after loading [c191].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c191"
+      ],
+      "status": "grounded",
+      "reason": "c191 states 'The loaded dataset contains exactly 1100 entries that can be accessed by index.'"
+    },
+    {
+      "index": 47,
+      "text": "1,100 pairs is a deliberately modest number.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Characterization of design choice; no factual claim."
+    },
+    {
+      "index": 48,
+      "text": "The goal is to demonstrate the fine-tuning pipeline end-to-end on hardware that most readers have access to.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Statement of pedagogical intent; no factual claim."
+    },
+    {
+      "index": 49,
+      "text": "For reference, the **Stanford Alpaca** repository contains a dataset of **52,000 instruction\u2013output pairs** [c695] \u2014 roughly **50 times larger** than the 1,100-pair dataset used here [c696].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c695",
+        "c696"
+      ],
+      "status": "grounded",
+      "reason": "c695 states 'Stanford Alpaca repository contains a dataset of 52,000 instruction-output pairs for fine-tuning.' c696 states 'The Stanford Alpaca dataset is 50 times larger than the 1100 instruction-output pair dataset used in the example.'"
+    },
+    {
+      "index": 50,
+      "text": "Using 85 % of 1,100 pairs for training yields approximately 800 training examples [c692] (the exact figure after the split is 935 [c207]; the ~800 figure is an approximation used for quick mental arithmetic).",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c692",
+        "c207"
+      ],
+      "status": "grounded",
+      "reason": "c692 states 'Using 85% of the 1100 instruction input-output pairs for training results in approximately 800 training pairs.' c207 confirms the exact figure is 935. The sentence correctly notes the ~800 is an approximation."
+    },
+    {
+      "index": 51,
+      "text": "[FIGURE: Side-by-side bar chart comparing the 1,100-pair instruction dataset used in this book against the Stanford Alpaca 52,000-pair dataset]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; not a factual claim."
+    },
+    {
+      "index": 52,
+      "text": "If you want to push model quality further after working through the book's examples, swapping in the Stanford Alpaca dataset is a natural next step.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Suggestion for reader; no factual claim."
+    },
+    {
+      "index": 53,
+      "text": "The pipeline code does not change \u2014 only the data loader needs to point at the larger file.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Statement about code portability; no factual claim requiring citation."
+    },
+    {
+      "index": 54,
+      "text": "Here is a quick-reference table for all datasets covered in this chapter:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for summary table; no factual claim."
+    },
+    {
+      "index": 55,
+      "text": "*The Verdict* (Edith Wharton, 1908) | Pre-training demo | ~20,000 chars / 5,145 BPE tokens [c2725, c3745] | Public domain; included in repo [c3177]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2725",
+        "c3745",
+        "c3177"
+      ],
+      "status": "grounded",
+      "reason": "c2725 confirms 5,145 BPE tokens. c3745 confirms ~20,000 characters. c3177 confirms public domain and included in repo."
+    },
+    {
+      "index": 56,
+      "text": "SMS Spam Collection | Binary classification | 5,572 raw \u2192 1,494 balanced [c3632, c2397] | Saved as `.tsv`; balanced to 747 per class [c3635]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3632",
+        "c2397",
+        "c3635"
+      ],
+      "status": "grounded",
+      "reason": "c3632 confirms 5,572 raw messages. c2397 confirms 1,494 balanced examples. c3635 confirms 747 per class."
+    },
+    {
+      "index": 57,
+      "text": "Instruction fine-tuning set | Instruction following | 1,100 pairs [c205] | 85/10/5 split \u2192 935/55/110 [c207, c208, c209]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c205",
+        "c207",
+        "c208",
+        "c209"
+      ],
+      "status": "grounded",
+      "reason": "c205 confirms 1,100 pairs. c207, c208, c209 confirm the 935/55/110 split."
+    },
+    {
+      "index": 58,
+      "text": "Stanford Alpaca | Instruction following (reference) | 52,000 pairs [c695] | 50\u00d7 larger than the in-book dataset [c696]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c695",
+        "c696"
+      ],
+      "status": "grounded",
+      "reason": "c695 confirms 52,000 pairs. c696 confirms 50\u00d7 larger than the 1,100-pair dataset."
+    },
+    {
+      "index": 59,
+      "text": "Each dataset is introduced again with full context when it first appears in the relevant chapter.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Organizational statement; no factual claim."
+    },
+    {
+      "index": 60,
+      "text": "This chapter exists so you can always find the raw numbers in one place without hunting through later material.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Statement of chapter purpose; no factual claim."
+    }
+  ],
+  "summary": {
+    "grounded": 42,
+    "unsupported": 0,
+    "contradicted": 0,
+    "needs_external_check": 1,
+    "narrative_ok": 17
+  }
+}

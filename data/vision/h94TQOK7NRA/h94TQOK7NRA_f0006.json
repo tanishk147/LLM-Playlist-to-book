@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "torch.triu",
+  "extracted_text": "Returns the upper triangular part of a matrix (2-D tensor) or batch of matrices, other elements of the result tensor are set to 0.\n\nThe upper triangular part of the matrix is defined as the elements on and above the diagonal.\n\nThe argument controls which diagonal to consider. If = 0, all elements on and above the main diagonal are retained. A positive value excludes just as many diagonals above the main diagonal, and similarly a negative value includes just as many diagonals below the main diagonal. The main diagonal are the set of indices for where are the dimensions of the matrix.\n\n\u2022 ( ) - the input tensor.\n\u2022 ( ) - the diagonal to consider\n\n( ) - the output tensor.\n\nExample:",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.75,
+  "frame_id": "h94TQOK7NRA_f0006",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 1230.199667,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0006.jpg"
+}

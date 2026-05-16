@@ -1,0 +1,10 @@
+graph LR
+    A["Input: Q, K, V<br/>(from W_Q, W_K, W_V projections)"] --> B["Compute Scores<br/>Q · K^T"]
+    B --> C["Scale<br/>÷ √d_k"]
+    C --> D["Softmax<br/>(Attention Weights)"]
+    D --> E["Weighted Sum<br/>over Values"]
+    E --> F["Context Vectors<br/>(Output)"]
+    
+    style A fill:#e1f5ff
+    style F fill:#c8e6c9
+    style D fill:#fff9c4

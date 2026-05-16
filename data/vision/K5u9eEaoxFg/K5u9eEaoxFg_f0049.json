@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Step (8): Find attention weights",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention computation showing tensor operations across two attention heads with shape transformations and concatenation of outputs.",
+  "diagram_elements": [
+    "Head 2 (left branch)",
+    "Head 2 (right branch)",
+    "Shape (1, 2, 3, 3)",
+    "Shape (b, num_heads, head_dim, num_tokens)",
+    "Keys.transpose(2, 3) operation",
+    "Tensor output with numerical values",
+    "Step (8): Find attention weights"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0049",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2112.499667,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0049.jpg"
+}

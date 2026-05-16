@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Parameter dictionary keys for a transformer model showing three main components: token embeddings, positional embeddings, and blocks, with a note about attention layers in transformer blocks.",
+  "diagram_elements": [
+    "Parameter > Dictionary keys",
+    "wte: Token Embeddings",
+    "wpe: Positional Embeddings",
+    "blocks",
+    "Attention layers in transformer blocks"
+  ],
+  "confidence": 0.85,
+  "frame_id": "yXrGeDNuymY_f0007",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 863.066333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0007.jpg"
+}

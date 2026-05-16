@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture \u2192 Byte Pair Encoding",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Tokenization algorithms taxonomy showing three main approaches: Word-based, Sub-word-based, and Character-based tokenization methods.",
+  "diagram_elements": [
+    "Tokenization algorithms",
+    "Word based",
+    "Sub-word based",
+    "Character based"
+  ],
+  "confidence": 0.95,
+  "frame_id": "fKd8s29e-l4_f0000",
+  "video_id": "fKd8s29e-l4",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/fKd8s29e-l4/fKd8s29e-l4_f0000.jpg"
+}

@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": "CREATING INPUT-TARGET PAIRS",
+  "extracted_text": "In this section we implement a data loader that fetches the input-target pairs using a sliding window approach.\n\nTo get started, we will first tokenize the whole The Verdict short story we worked with earlier using the BPE tokenize\n\nExecuting the code above will return 5145, the total number of tokens in the training set, after applying the BPE toke",
+  "code": {
+    "language": "python",
+    "content": "with open(\"the-verdict.txt\", \"r\", encoding=\"utf-8\") as f:\n    raw_text = f.read()\n\nenc_text = tokenizer.encode(raw_text)\nprint(len(enc_text))"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "iQZFH8dr2yI_f0002",
+  "video_id": "iQZFH8dr2yI",
+  "timestamp_sec": 638.233,
+  "source_image": "data/frames/iQZFH8dr2yI/iQZFH8dr2yI_f0002.jpg"
+}

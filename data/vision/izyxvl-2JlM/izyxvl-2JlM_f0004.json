@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Handwritten diagram showing parameter dictionary keys structure with three main components: (1) wte - Token Embeddings, (2) wpe - Positional Embeddings, (3) blocks, followed by attention layers in transformer blocks with similar structure for h, k, v projections.",
+  "diagram_elements": [
+    "parameter_dictionary_keys",
+    "wte: Token Embeddings",
+    "wpe: Positional Embeddings",
+    "blocks",
+    "Attention layers in transformer blocks",
+    "transformer/h0/attn/c_attn/w",
+    "transformer/h0/attn/c_attn/b",
+    "transformer/h1/attn/c_attn/b",
+    "Similar for h, k, v - kh"
+  ],
+  "confidence": 0.75,
+  "frame_id": "izyxvl-2JlM_f0004",
+  "video_id": "izyxvl-2JlM",
+  "timestamp_sec": 622.166333,
+  "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0004.jpg"
+}

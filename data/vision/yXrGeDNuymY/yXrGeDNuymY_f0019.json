@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "print(\"Token embedding weight tensor dimensions:\", params[\"wte\"].shape)\n\n[[-0.11010301 -0.03926672  0.03310751 ... -0.1363697   0.01506208\n   0.04531523]\n [ 0.04034033 -0.04861503  0.04624869 ...  0.08605453  0.00253983\n   0.04318958]\n [-0.12746179  0.04793796  0.18410145 ...  0.08991534 -0.12972379\n  -0.08785918]\n ...\n [-0.04453601 -0.05483596  0.01225674 ...  0.10435229  0.09783269\n  -0.06952604]\n [ 0.1860082   0.01665728  0.04611587 ... -0.09625227  0.07847701\n  -0.02245961]\n [ 0.05135201 -0.02768905  0.0499369  ...  0.00704835  0.15519823\n   0.12067825]]\n\nToken embedding weight tensor dimensions: (50257, 768)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "yXrGeDNuymY_f0019",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1956.133,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0019.jpg"
+}

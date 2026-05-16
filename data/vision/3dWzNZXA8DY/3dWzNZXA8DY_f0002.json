@@ -1,0 +1,19 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "175B parameters",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Comparison of GPT model sizes showing parameter counts and decoder layers across three versions: GPT-1 (117M parameters, 12 decoders, 512 token size), GPT-2 (1.5B parameters, 48 decoders, 1024 token size), and GPT-3 (175B parameters, 96 decoders, 2048 token size).",
+  "diagram_elements": [
+    "GPT-1: 117M parameters, 12 decoders, 512 token size",
+    "GPT-2: 1.5B parameters, 48 decoders, 1024 token size",
+    "GPT-3: 175B parameters, 96 decoders, 2048 token size"
+  ],
+  "confidence": 0.95,
+  "frame_id": "3dWzNZXA8DY_f0002",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 500.133,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0002.jpg"
+}

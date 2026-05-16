@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Model Name",
+  "extracted_text": "Model Name | n_params | n_layers | d_model | n_heads | d_head\nGPT-3 Small | 125M | 12 | 768 | 12 | 64\nGPT-3 Medium | 350M | 24 | 1024 | 16 | 64\nGPT-3 Large | 760M | 24 | 1536 | 16 | 96\nGPT-3 XL | 1.3B | 24 | 2048 | 24 | 128\nGPT-3 2.7B | 2.7B | 32 | 2560 | 32 | 80\nGPT-3 6.7B | 6.7B | 32 | 4096 | 32 | 128\nGPT-3 13B | 13.0B | 40 | 5140 | 40 | 128\nGPT-3 175B or \"GPT-3\" | 175.0B | 96 | 12288 | 96 | 128",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "3dWzNZXA8DY_f0001",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 454.699667,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0001.jpg"
+}

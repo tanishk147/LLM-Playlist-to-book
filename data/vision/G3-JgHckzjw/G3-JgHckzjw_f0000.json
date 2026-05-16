@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": "Lecture \u2192 Coding the GPT model",
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "class DummyGPTModel(nn.Module):\n    def __init__(self, cfg):\n        super().__init__()\n        self.tok_emb = nn.Embedding(cfg[\"vocab_size\"], cfg[\"emb_dim\"])\n        self.pos_emb = nn.Embedding(cfg[\"context_length\"], cfg[\"emb_dim\"])\n        self.drop_emb = nn.Dropout(cfg[\"drop_rate\"])\n        self.trf_blocks = nn.Sequential(\n            *[DummyTransformerBlock(cfg) for _ in range(cfg[\"n_layers\"])]) #A\n        self.final_norm = DummyLayerNorm(cfg[\"emb_dim\"])\n        self.out_head = nn.Linear(\n            cfg[\"emb_dim\"], cfg[\"vocab_size\"], bias=False\n        )\n\n    def forward(self, in_idx):\n        batch_size, seq_len = in_idx.shape\n        tok_embeds = self.tok_emb(in_idx)\n        pos_embeds = self.pos_emb(torch.arange(seq_len, device=in_idx.device))\n        x = tok_embeds + pos_embeds\n        x = self.drop_emb(x)\n        x = self.trf_blocks(x)\n        x = self.final_norm(x)\n        logits = self.out_head(x)\n        return logits"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.92,
+  "frame_id": "G3-JgHckzjw_f0000",
+  "video_id": "G3-JgHckzjw",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/G3-JgHckzjw/G3-JgHckzjw_f0000.jpg"
+}

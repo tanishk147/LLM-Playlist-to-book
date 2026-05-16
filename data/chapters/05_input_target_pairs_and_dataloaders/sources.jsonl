@@ -1,0 +1,167 @@
+## Claims (cite these by ID inline as [cNNN])
+- c2711 [definition | iQZFH8dr2yI @ 182-216s]
+  Input-target pairs in LLMs are structured as: the input is a sequence of words up to a certain point, and the target is the next word that follows.
+- c2718 [definition | iQZFH8dr2yI @ 361-369s]
+  An autoregressive model is one where the output of one iteration becomes the input of the next iteration.
+- c2724 [code | iQZFH8dr2yI @ 670-696s]
+  with open("the-verdict.txt", "r", encoding="utf-8") as f:
+      raw_text = f.read()
+  
+  enc_text = tokenizer.encode(raw_text)
+  print(len(enc_text))
+- c2729 [definition | iQZFH8dr2yI @ 864-883s]
+  Input-output target pairs for next word prediction consist of two variables x and y, where x contains input tokens and y contains targets that are the inputs shifted by one position.
+- c2736 [definition | iQZFH8dr2yI @ 1024-1034s]
+  A context size of 4 means the model is trained to look at a sequence of 4 words or tokens to predict the next word in the sequence.
+- c2738 [definition | iQZFH8dr2yI @ 1069-1077s]
+  Context size intuitively represents how many words the model should pay attention to at one time to predict the next word.
+- c2747 [code | iQZFH8dr2yI @ 1174-1180s]
+  for i in range(1, context_size + 1):
+      context = encoded_data[:i]
+      desired = encoded_data[i]
+- c2752 [definition | iQZFH8dr2yI @ 1229-1244s]
+  In input-output pairs for language models, tokens on the left of the arrow represent the input to the model, and the token on the right represents the target token ID the model is supposed to predict.
+- c2764 [definition | iQZFH8dr2yI @ 1436-1440s]
+  A tensor can be thought of as a multi-dimensional array.
+- c2774 [definition | iQZFH8dr2yI @ 1886-1894s]
+  A dataset for language modeling must consist of input-output pairs, not just raw tokens.
+- c2777 [definition | iQZFH8dr2yI @ 1926-2140s]
+  Stride determines how many tokens to skip when sliding the context window to create the next input-output pair.
+- c2779 [definition | iQZFH8dr2yI @ 2197-2220s]
+  The __getitem__ method returns the input tensor row and target tensor row at a given index.
+- c2783 [definition | iQZFH8dr2yI @ 2386-2409s]
+  The create_data_loader function initializes a tokenizer, creates a dataset instance, and wraps it in a DataLoader for batch processing.
+- c2792 [definition | iQZFH8dr2yI @ 2614-2620s]
+  Number of workers is for parallel processing on different threads of the CPU.
+- c2807 [code | iQZFH8dr2yI @ 2998-3004s]
+  data_loader = DataLoader(dataset, batch_size=8)
+- c2814 [definition | iQZFH8dr2yI @ 3095-3131s]
+  Input-target pairs are sequences where the target is the input shifted by one position, used for training language models.
+- c2821 [definition | iQZFH8dr2yI @ 3275-3294s]
+  The number of workers parameter enables parallel computing by distributing data loading across multiple threads on the computer.
+- c2765 [design_decision | iQZFH8dr2yI @ 1447-1460s]
+  The data loader goal is to create an input tensor containing text that the LLM sees and a target tensor containing targets for the LLM to predict.
+- c2719 [fact | iQZFH8dr2yI @ 392-408s]
+  LLM pre-training uses self-supervised learning because input-target pairs are derived from the sentence structure itself without manual labeling.
+- c1599 [fact | Zxf-34voZss @ 131-152s]
+  LLMs are autoregressive models and do not have explicit labels; input-target pairs are created from the data itself using a data loader.
+- c2767 [design_decision | iQZFH8dr2yI @ 1537-1543s]
+  The data loader uses a sliding window approach to fetch input-output target pairs.
+- c2722 [fact | iQZFH8dr2yI @ 580-582s]
+  A data loader fetches input-target pairs using a sliding window approach.
+- c2710 [fact | iQZFH8dr2yI @ 153-162s]
+  Large language models use a specific technique for creating input-target pairs that differs from standard machine learning classification and regression tasks.
+- c2762 [design_decision | iQZFH8dr2yI @ 1410-1416s]
+  A data loader is used to iterate over the input dataset and return inputs and targets as PyTorch tensors.
+- c2766 [fact | iQZFH8dr2yI @ 1504-1509s]
+  PyTorch provides inbuilt Dataset and DataLoader classes for efficient data processing.
+- c1602 [hyperparameter | Zxf-34voZss @ 250-260s]
+  The stride used in creating input-target pairs is typically equal to the context size.
+- c2788 [fact | iQZFH8dr2yI @ 2513-2534s]
+  The DataLoader accesses the __getitem__ method of the dataset class to retrieve input-output pairs for batch processing.
+- c2732 [fact | iQZFH8dr2yI @ 924-963s]
+  For the text example, if the input is 'LLMs', the output should be 'learn'; if the input is 'LLMs learn', the output should be 'predict'; if the input is 'LLMs learn to predict', the output should be the next token.
+- c2760 [fact | iQZFH8dr2yI @ 1341-1352s]
+  Input-output pairs X and Y can be used to create inputs and outputs for language model training.
+- c2771 [fact | iQZFH8dr2yI @ 1742-1783s]
+  The data loader implements a next word prediction task where each input-output pair contains multiple prediction tasks equal to the context size.
+- c2804 [fact | iQZFH8dr2yI @ 2946-2953s]
+  Batch size is a trade-off and hyperparameter to experiment with when training LLMs.
+- c2709 [fact | iQZFH8dr2yI @ 103-116s]
+  Input-target pairs must be created before vector embeddings are fed to the LLM training process.
+- c2772 [design_decision | iQZFH8dr2yI @ 1815-1866s]
+  The data loader implementation consists of four steps: tokenizing the entire text, using a sliding window, returning the total number of rows in the dataset, and returning a single row from the dataset.
+- c2745 [fact | iQZFH8dr2yI @ 1144-1148s]
+  Input-output pairs are constructed by taking a sequence of tokens as input and the next token as the target output.
+- c2720 [fact | iQZFH8dr2yI @ 498-509s]
+  During LLM training, the prediction task is to predict the next word that follows the input block.
+- c2773 [fact | iQZFH8dr2yI @ 1834-1854s]
+  The sliding window approach works by sliding the input window by one token position to create the corresponding output.
+- c2794 [fact | iQZFH8dr2yI @ 2632-2707s]
+  A DataLoader with batch size of 1 and context size of 4 produces input-output pairs where the output tensor is the input tensor shifted by one position.
+- c2775 [architecture | iQZFH8dr2yI @ 1900-1934s]
+  The GPT dataset class takes four arguments: text file path, tokenizer, max_length (context size), and stride.
+- c2789 [architecture | iQZFH8dr2yI @ 2272-2281s]
+  The GPT dataset class is based on PyTorch's Dataset class and defines how individual rows are fetched from the dataset.
+- c2816 [architecture | iQZFH8dr2yI @ 3164-3189s]
+  A GPTDatasetV1 class is created and paired with a DataLoader to generate input-output pairs in a structured manner.
+- c2763 [fact | iQZFH8dr2yI @ 1422-1429s]
+  PyTorch optimization procedures require data in tensor format rather than raw arrays.
+- c2795 [fact | iQZFH8dr2yI @ 2728-2740s]
+  DataLoader allows specification of parameters including batch size, maximum length, and stride.
+- c2712 [fact | iQZFH8dr2yI @ 195-200s]
+  LLMs learn to predict one word at a time during training.
+- c2707 [fact | iQZFH8dr2yI @ 78-92s]
+  The data pre-processing stage for large language models includes tokenization as the first step.
+- c2785 [hyperparameter | iQZFH8dr2yI @ 2446-2458s]
+  GPT-2 and GPT-3 models typically use a context length of 256 tokens, allowing the model to attend to 256 tokens when predicting the next word.
+- c2822 [fact | iQZFH8dr2yI @ 3294-3311s]
+  The DataLoader extracts input-output pairs in batches (first batch, second batch, etc.) which are then converted into vector embeddings before being fed into the model.
+- c2784 [hyperparameter | iQZFH8dr2yI @ 2415-2470s]
+  The create_data_loader function takes arguments: text file, batch_size (default 4), max_length, stride, and num_workers.
+- c1601 [fact | Zxf-34voZss @ 208-219s]
+  In input-target pair construction, the target is the input shifted to the right by one token.
+- c2714 [fact | iQZFH8dr2yI @ 246-262s]
+  In subsequent iterations, the previous target becomes part of the input, and the next word becomes the new target.
+- c2728 [fact | iQZFH8dr2yI @ 680-685s]
+  An encoder converts text into token IDs.
+- c2715 [fact | iQZFH8dr2yI @ 232-240s]
+  Words that come after the target word are masked and not shown to the LLM during training.
+- c2802 [fact | iQZFH8dr2yI @ 2860-2872s]
+  An input size of four is relatively small; it is common to train LLMs with input sizes or context sizes of at least 256.
+- c2737 [fact | iQZFH8dr2yI @ 1034-1042s]
+  With context size 4, if the input is tokens 1, 2, 3, 4, the target output is tokens 2, 3, 4, 5.
+- c2815 [fact | iQZFH8dr2yI @ 3138-3158s]
+  For a context size of 4, a single input-target pair contains 4 predictions: if input is [1], output is 2; if [1,2], output is 3; if [1,2,3], output is 4; if [1,2,3,4], output is 5.
+- c2731 [fact | iQZFH8dr2yI @ 891-912s]
+  In the example with input array [1, 2, 3, 4], the corresponding output array is [2, 3, 4, 5], demonstrating the shift-by-one pattern for creating target pairs.
+- c2756 [fact | iQZFH8dr2yI @ 1285-1297s]
+  In language models, one input-output pair corresponds to multiple prediction tasks, as set by the context size.
+- c2713 [fact | iQZFH8dr2yI @ 222-232s]
+  In the first iteration of input-target pair creation, the input is the first word and the target is the second word.
+- c2733 [fact | iQZFH8dr2yI @ 970-992s]
+  In the demonstrated example, the context size is set to 4, meaning the model receives up to 4 words as input to predict the next word.
+- c2780 [architecture | iQZFH8dr2yI @ 2220-2250s]
+  The GPT dataset class implements a map-style dataset, which requires a __getitem__ method for the DataLoader to fetch individual samples.
+- c2782 [hyperparameter | iQZFH8dr2yI @ 2361-2386s]
+  drop_last is set to True in the DataLoader to drop the final batch if it is shorter than the batch size, preventing loss spikes during training.
+- c2755 [fact | iQZFH8dr2yI @ 1277-1285s]
+  In regression and classification problems, one input-output pair corresponds to one prediction task.
+- c2768 [fact | iQZFH8dr2yI @ 1579-1585s]
+  In the sliding window approach, the output tensor is created by shifting the input tensor by one position.
+- c1600 [hyperparameter | Zxf-34voZss @ 175-186s]
+  The context size (number of tokens seen before predicting the next token) is approximately 256 tokens.
+- c1606 [fact | Zxf-34voZss @ 430-438s]
+  Logits from the LLM output do not represent probabilities and do not sum to one; softmax must be applied to convert them into probability vectors.
+- c2820 [fact | iQZFH8dr2yI @ 3264-3275s]
+  In the example shown, batch size was set to 8, meaning 8 input-output pairs are processed before parameter updates.
+- c2786 [fact | iQZFH8dr2yI @ 1920-2156s]
+  The example implementation uses a context length of 4 tokens and a stride of 4.
+- c2769 [fact | iQZFH8dr2yI @ 1640-1652s]
+  Each row of the input tensor X represents one input context of size equal to the context window.
+- c2748 [fact | iQZFH8dr2yI @ 1180-1192s]
+  When i equals 1, the context is the first token ID (290) and the desired output is the next token ID (4920).
+- c2721 [fact | iQZFH8dr2yI @ 514-533s]
+  During training, all words past the target word are masked so the LLM cannot access them.
+- c2791 [fact | iQZFH8dr2yI @ 2603-2614s]
+  Data is chunked into batches so that the model updates its parameters after analyzing multiple batches rather than processing the entire dataset at once.
+- c2739 [fact | iQZFH8dr2yI @ 1102-1111s]
+  The input x consists of the first 4 token IDs: 290, 4920, 2241, and 287.
+- c2817 [hyperparameter | iQZFH8dr2yI @ 3209-3249s]
+  Stride dictates the overlap between consecutive batches; setting stride equal to context length prevents overlap between input batches while ensuring no words are missed.
+- c2801 [hyperparameter | iQZFH8dr2yI @ 2854-2860s]
+  Max length is set to four, meaning each tensor in a batch contains four token ids.
+- c2761 [design_decision | iQZFH8dr2yI @ 1380-1386s]
+  Data must be processed in batches to enable parallel computing across multiple CPUs.
+- c1607 [fact | Zxf-34voZss @ 446-455s]
+  Each value in a row of the probability tensor represents the probability that the corresponding token is the next token given the input sequence.
+- c2717 [fact | iQZFH8dr2yI @ 325-327s]
+  The output length in LLM training is always one word.
+- c2750 [fact | iQZFH8dr2yI @ 1204-1218s]
+  When i equals 3, the context is the first three token IDs (290, 4920, and 2241) and the desired output is 287.
+- c2810 [design_decision | iQZFH8dr2yI @ 3004-3054s]
+  Stride is increased to 4 to utilize the dataset fully without skipping any samples while avoiding overlap between batches.
+- c2742 [fact | iQZFH8dr2yI @ 1126-1131s]
+  If the input is tokens 290 and 4920, the output is 2241.
+- c2781 [fact | iQZFH8dr2yI @ 2272-2308s]
+  Each row in the dataset contains a number of tokens equal to the context length.

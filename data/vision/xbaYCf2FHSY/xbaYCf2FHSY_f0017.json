@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "on many benchmarks. The main disadvantages are the need for a new large dataset for poor generalization out-of-distribution [MPL19], and the potential to training data [GSL+18, NK19], potentially resulting in an unfair comparison. In this work we do not fine-tune GPT-3 because our focus is on task-agnostic fine-tuned in principle and this is a promising direction for future work.\n\n\u2022 Few-Shot (FS) is the term we will use in this work to refer to the setting demonstrations of the task at inference time as conditioning [RWC+19], but As shown in Figure 2.1, for a typical dataset an example has a context and a an English sentence and the French translation), and few-shot works by giving completion, and then one final example of context, with the model expected typically set K in the range of 10 to 100 as this is how many examples can fit (nctx = 2048). The main advantages of few-shot are a major reduction in the reduced potential to learn an overly narrow distribution from a large but narrow disadvantage is that results from this method have so far been much worse models. Also, a small amount of task specific data is still required. As in learning as described here for language models is related to few-shot learning ML [HYC01, VBL+16] \u2013 both involve learning based on a broad distribution of the pre-training data) and then rapidly adapting to a new task.\n\n\u2022 One-Shot (1S) is the same as few-shot except that only one demonstration is language description of the task, as shown in Figure 1. The reason to distinguish zero-shot (below) is that it most closely matches the way in which some task",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "xbaYCf2FHSY_f0017",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 743.499667,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0017.jpg"
+}

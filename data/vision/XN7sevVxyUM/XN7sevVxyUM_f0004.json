@@ -1,0 +1,20 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "I hope it can be a useful companion to reading the papers mentioned above (and the attention papers linked later in the post).\n\nA sequence-to-sequence model is a model that takes a sequence of items (words, letters, features of an images...etc) and outputs another sequence of items. A trained model would work like this:\n\nIn neural machine translation, a sequence is a series of words, processed one after another. The output is, likewise, a series of words:",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence-to-sequence model architecture showing input sequence (green circles in box) flowing through a central blue SEQUENCE TO SEQUENCE MODEL block to produce an output sequence (purple box).",
+  "diagram_elements": [
+    "Input sequence (green circles)",
+    "SEQUENCE TO SEQUENCE MODEL (blue central block)",
+    "Output sequence (purple box)",
+    "Arrows showing data flow"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0004",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 1180.766333,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0004.jpg"
+}

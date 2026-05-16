@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "logits[:, -1, :] = [[1.0, 1.8, 0.6, -0.5, 2.1],  # Logits for the 4th token\n                     [1.3, 2.0, 1.5, -0.6, 0.5]]  # Logits for the 4th token"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "F1Sm7z2R96w_f0009",
+  "video_id": "F1Sm7z2R96w",
+  "timestamp_sec": 1650.566333,
+  "source_image": "data/frames/F1Sm7z2R96w/F1Sm7z2R96w_f0009.jpg"
+}

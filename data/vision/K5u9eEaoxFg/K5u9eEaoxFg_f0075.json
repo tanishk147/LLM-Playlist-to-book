@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": "Mask attention scores to implement causal attention",
+  "code": null,
+  "math": [
+    "\\text{divide by } \\sqrt{\\text{head-dim}} = \\sqrt{d_{out}/\\text{num-heads}} = \\sqrt{6/2} = \\sqrt{3}"
+  ],
+  "diagram_summary": "Demonstration of masking attention scores to implement causal attention, showing tensor operations with -inf values masking future positions and the scaling factor calculation for multi-head attention.",
+  "diagram_elements": [
+    "tensor with -0.2252, -1.3722, -5.8961 values",
+    "-inf masking values (highlighted in yellow)",
+    "scaled attention scores after division by sqrt(head-dim)",
+    "second tensor output with -inf masked positions",
+    "scaling formula: sqrt(d_out/num_heads)"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0075",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2890.233,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0075.jpg"
+}

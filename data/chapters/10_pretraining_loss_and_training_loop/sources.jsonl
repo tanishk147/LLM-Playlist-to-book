@@ -1,0 +1,169 @@
+## Claims (cite these by ID inline as [cNNN])
+- c474 [equation | 7TKCrt--bWI @ 20-31s]
+  Mean Bias Error: \mathcal{L}_{MBE} = \frac{1}{N} \sum_{i=1}^{N} (y_i - f(x_i))
+- c475 [equation | 7TKCrt--bWI @ 20-31s]
+  Mean Absolute Error: \mathcal{L}_{MAE} = \frac{1}{N} \sum_{i=1}^{N} |y_i - f(x_i)|
+- c476 [equation | 7TKCrt--bWI @ 20-31s]
+  Mean Squared Error: \mathcal{L}_{MSE} = \frac{1}{N} \sum_{i=1}^{N} (y_i - f(x_i))^2
+- c477 [equation | 7TKCrt--bWI @ 20-31s]
+  Root Mean Squared Error: \mathcal{L}_{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - f(x_i))^2}
+- c478 [equation | 7TKCrt--bWI @ 20-31s]
+  Huber Loss: \mathcal{L}_{Huber} = \begin{cases} \frac{(y_i - f(x_i))^2}{2} & \text{if } |y_i - f(x_i)| \leq \delta \\ \delta|y_i - f(x_i)| - \frac{\delta}{2} & \text{otherwise} \end{cases}
+- c479 [equation | 7TKCrt--bWI @ 20-31s]
+  Log-Cosh Loss: \mathcal{L}_{LogCosh} = \frac{1}{N} \sum_{i=1}^{N} \log(\cosh(f(x_i) - y_i))
+- c480 [equation | 7TKCrt--bWI @ 20-31s]
+  Binary Cross-Entropy Loss: \mathcal{L}_{BCE} = -\frac{1}{N} \sum_{i=1}^{N} [y_i \log(p_i) + (1-y_i) \log(1-p_i)]
+- c481 [equation | 7TKCrt--bWI @ 20-31s]
+  Hinge Loss: \mathcal{L}_{Hinge} = max(0, 1 - (f(x) \cdot y))
+- c482 [equation | 7TKCrt--bWI @ 20-31s]
+  Cross-Entropy Loss: \mathcal{L}_{CE} = -\frac{1}{N} \sum_{i=1}^{N} \sum_{c=1}^{M} y_{i,c} \log(f(x_i)_c)
+- c483 [equation | 7TKCrt--bWI @ 20-31s]
+  Kullback-Leibler Divergence: \mathcal{L}_{KL} = -\sum_{i=1}^{N} y_i \cdot \log\left(\frac{y_i}{f(x_i)}\right)
+- c495 [definition | 7TKCrt--bWI @ 390-401s]
+  Embedding dimension is the size of the vector space into which token embeddings are projected to capture semantic meaning.
+- c496 [definition | 7TKCrt--bWI @ 401-412s]
+  The number of attention heads specifies how many self-attention mechanism blocks exist within one transformer block.
+- c502 [definition | 7TKCrt--bWI @ 514-522s]
+  In the context of language model training, 'target' refers to the true values that the model should predict.
+- c538 [definition | 7TKCrt--bWI @ 1381-1400s]
+  The text_to_token_ids function converts text input into token IDs using the tiktoken tokenizer.
+- c539 [definition | 7TKCrt--bWI @ 1400-1405s]
+  The token_ids_to_text function converts token IDs back into text, serving as the reverse of text_to_token_ids.
+- c542 [definition | 7TKCrt--bWI @ 1515-1526s]
+  Targets are the input token sequence shifted by one position, creating input-output pairs for training.
+- c547 [code | 7TKCrt--bWI @ 1673-1695s]
+  torch.argmax(input, dim=-1) returns the indices of the maximum value along the last dimension (columns).
+- c550 [definition | 7TKCrt--bWI @ 2369-2385s]
+  Cross entropy loss measures the difference between two probability distributions, specifically between predicted logits and target indices in language model training.
+- c552 [equation | 7TKCrt--bWI @ 2135-2148s]
+  Cross entropy loss is computed as: negative mean of log probabilities at target indices, or -1/N * Σ(log(p_i)) where p_i are probabilities at target indices.
+- c555 [code | 7TKCrt--bWI @ 2511-2528s]
+  torch.nn.functional.cross_entropy(logits_flat, targets_flat)
+- c569 [code | 7TKCrt--bWI @ 2999-3052s]
+  logits_flat = logits.view(-1, 50257)  # Flatten first two dimensions from (2, 3, 50257) to (6, 50257)
+  targets_flat = targets.view(-1)  # Flatten from (2, 3) to (6,)
+  loss = torch.nn.functional.cross_entropy(logits_flat, targets_flat)
+- c572 [definition | 7TKCrt--bWI @ 3079-3090s]
+  Perplexity measures how well the probability distribution predicted by the model matches the actual distribution of words in the dataset.
+- c574 [equation | 7TKCrt--bWI @ 3109-3116s]
+  Perplexity = exp(loss)
+- c581 [code | 7TKCrt--bWI @ 3257-3262s]
+  torch.nn.functional.cross_entropy(logit_tensor, target_tensor)
+- c582 [definition | 7TKCrt--bWI @ 3268-3280s]
+  Perplexity is a metric for measuring loss that is calculated as e raised to the loss value (exp(loss)).
+- c750 [definition | EhU32O7DkA4 @ 52-56s]
+  LLM decoding strategies are techniques used to control randomness and improve quality when generating the next token in sequence.
+- c751 [definition | EhU32O7DkA4 @ 65-78s]
+  Naive decoding strategy selects the generated token corresponding to the largest probability score among all tokens in the vocabulary.
+- c753 [definition | EhU32O7DkA4 @ 130-148s]
+  Temperature scaling is a decoding strategy where logits are divided by a temperature value before applying softmax to convert them into probabilities.
+- c754 [definition | EhU32O7DkA4 @ 159-209s]
+  Multinomial distribution sampling selects the next token probabilistically proportional to its probability score rather than deterministically choosing the maximum probability token.
+- c760 [definition | EhU32O7DkA4 @ 24-33s]
+  Top-K sampling is a decoding strategy that restricts sampled tokens to the top K most likely tokens and excludes all other tokens.
+- c762 [definition | EhU32O7DkA4 @ 359-371s]
+  Top-k sampling restricts the sample tokens to the top k most likely tokens and excludes all other tokens.
+- c769 [definition | EhU32O7DkA4 @ 498-508s]
+  Top-k sampling is a method that selects only the top k tokens with the highest logits for the next token prediction.
+- c771 [code | EhU32O7DkA4 @ 548-560s]
+  torch.topk(logits, k=3) returns the top 3 values and their indices
+- c773 [code | EhU32O7DkA4 @ 613-628s]
+  torch.where(condition, logits, -inf) replaces logits that don't meet the condition with negative infinity
+- c801 [definition | EhU32O7DkA4 @ 1266-1284s]
+  Temperature scaling adjusts the sharpness of probability distributions to either sharpen or flatten them, helping prevent overfitting through multinomial sampling.
+- c802 [definition | EhU32O7DkA4 @ 1285-1307s]
+  Top-k sampling restricts sampled tokens to the top k most likely tokens, preventing random or low-probability tokens from becoming the next token.
+- c1613 [definition | Zxf-34voZss @ 680-684s]
+  One epoch is going through the entire training set once.
+- c1618 [equation | Zxf-34voZss @ 727-753s]
+  p_new = p_old - step_size * loss_gradient
+- c1624 [code | Zxf-34voZss @ 895-898s]
+  loss.backward()
+- c1630 [equation | Zxf-34voZss @ 1046-1054s]
+  Token embedding parameters = vocabulary size × embedding dimension
+- c1631 [equation | Zxf-34voZss @ 1055-1060s]
+  Positional embedding parameters = context size × embedding dimension
+- c1644 [equation | Zxf-34voZss @ 1178-1184s]
+  Final layer parameters = embedding dimension × vocabulary size
+- c1719 [definition | Zxf-34voZss @ 2520-2529s]
+  Temperature scaling is a decoding strategy used to control randomness in model predictions.
+- c3025 [definition | oG1FPVnY0pI @ 12-26s]
+  Temperature Scaling is a technique used in Large Language Models to control randomness and diversity in generated text.
+- c3032 [definition | oG1FPVnY0pI @ 220-224s]
+  Temperature scaling is a technique for controlling randomness when sampling the next token from a probability distribution.
+- c3036 [definition | oG1FPVnY0pI @ 275-280s]
+  The probability distribution used for sampling the next token is the multinomial probability distribution.
+- c3037 [definition | oG1FPVnY0pI @ 309-339s]
+  Sampling from a distribution means drawing values where the outcome is not predetermined; for a multinomial distribution, samples are drawn according to the probability scores of mutually exclusive outcomes.
+- c3038 [definition | oG1FPVnY0pI @ 340-387s]
+  The multinomial distribution is used for k mutually exclusive outcomes, each with corresponding probabilities, where n independent trials are conducted to predict outcomes.
+- c3039 [code | oG1FPVnY0pI @ 340-351s]
+  weights = torch.tensor([0, 10, 3, 0], dtype=torch.float)
+  torch.multinomial(weights, 2)
+  # Returns: tensor([1, 2])
+- c3040 [code | oG1FPVnY0pI @ 340-351s]
+  torch.multinomial(weights, 5)  # ERROR without replacement
+  # RuntimeError: cannot sample n_sample > prob_dist.size(-1) samples without replacement
+- c3041 [code | oG1FPVnY0pI @ 340-351s]
+  torch.multinomial(weights, 4, replacement=True)
+  # Returns: tensor([2, 1, 1, 1])
+- c3045 [definition | oG1FPVnY0pI @ 480-492s]
+  Greedy decoding is the process of always selecting the token with the highest probability as the next token using torch.argmax.
+- c3049 [definition | oG1FPVnY0pI @ 629-676s]
+  The multinomial function samples the next token proportional to its probability score.
+- c3058 [definition | oG1FPVnY0pI @ 948-957s]
+  Temperature scaling is dividing the logits by a number greater than zero to control the probability distribution and token selection process.
+- c3061 [code | oG1FPVnY0pI @ 1079-1108s]
+  next_token_logits_2 = next_token_logits / 0.1
+  probabilities = softmax(next_token_logits_2)
+- c3063 [code | oG1FPVnY0pI @ 1172-1205s]
+  next_token_logits_3 = next_token_logits / 5
+  probabilities = softmax(next_token_logits_3)
+- c3074 [definition | oG1FPVnY0pI @ 1375-1438s]
+  Temperature is a parameter that controls the entropy of the probability distribution over tokens in language model sampling.
+- c3753 [definition | zuj_NJNouAA @ 423-432s]
+  Large language models are autoregressive models where input-output pairs are constructed from the text itself without pre-labeling.
+- c3754 [definition | zuj_NJNouAA @ 462-467s]
+  Context size is the maximum number of tokens an LLM can see before it predicts the next token.
+- c3758 [definition | zuj_NJNouAA @ 674-679s]
+  Stride is the step size used to move through the dataset when constructing consecutive input-output pairs.
+- c3763 [definition | zuj_NJNouAA @ 843-853s]
+  X represents the input tensor and Y represents the target tensor (the actual desired output values) in LLM input-output pair construction.
+- c3767 [definition | zuj_NJNouAA @ 906-926s]
+  Input-target pairs are created from training data by pairing inputs with their corresponding target outputs.
+- c3770 [definition | zuj_NJNouAA @ 994-1009s]
+  Target output is the expected output sequence that corresponds to a given input sequence, which the LLM should learn to predict during training.
+- c3775 [definition | zuj_NJNouAA @ 1072-1087s]
+  The transformer block is the main engine of the GPT architecture that transforms input embedding vectors into context vectors.
+- c3776 [definition | zuj_NJNouAA @ 1088-1125s]
+  Context vectors are richer representations than input embedding vectors because they encode both semantic meaning of a token and information about how that token relates to other tokens in the sequence.
+- c3779 [definition | zuj_NJNouAA @ 1185-1195s]
+  Logits are the raw output values produced by the GPT model architecture before normalization into probabilities.
+- c3785 [definition | zuj_NJNouAA @ 1338-1349s]
+  A logit tensor is converted into a softmax tensor, which is a probability tensor.
+- c3790 [definition | zuj_NJNouAA @ 1476-1488s]
+  Cross-entropy loss is computed by taking the logarithm of the target probabilities, summing them, taking the mean, and then negating the result.
+- c3791 [definition | zuj_NJNouAA @ 1488-1495s]
+  Negative log likelihood (NLL) is the negative of the logarithm of the target probabilities.
+- c3817 [definition | zuj_NJNouAA @ 2110-2115s]
+  Tiktoken provides a byte pair encoder that operates at character and sub-word level.
+- c3821 [definition | zuj_NJNouAA @ 2157-2170s]
+  A dataloader loops over the entire dataset and creates input-output pairs based on a specified context size and stride.
+- c3822 [definition | zuj_NJNouAA @ 2171-2180s]
+  max_length parameter specifies the context size (number of tokens to consider at once).
+- c3823 [definition | zuj_NJNouAA @ 2171-2180s]
+  stride parameter specifies how many steps to advance before creating the next input-output pair.
+- c3826 [definition | zuj_NJNouAA @ 2243-2253s]
+  PyTorch DataLoader is useful for processing data in batches and makes batch processing more convenient.
+- c3828 [definition | zuj_NJNouAA @ 2300-2308s]
+  The shuffle parameter shuffles the dataset order when batches are created, which is sometimes useful for generalization.
+- c3829 [definition | zuj_NJNouAA @ 2308-2323s]
+  The drop_last parameter drops the last batch if its size is smaller than the specified batch size.
+- c3851 [code | zuj_NJNouAA @ 2975-2988s]
+  nn.functional.cross_entropy(flattened_logits, flattened_target_batch)
+- c1622 [design_decision | Zxf-34voZss @ 859-869s]
+  The pre-training algorithm consists of finding the loss, performing the backward pass to get loss gradients, and updating parameters based on those gradients.
+- c1616 [fact | Zxf-34voZss @ 715-721s]
+  The backward pass is the most important step in the pre-training loop because it calculates the gradients of the loss.
+- c798 [fact | EhU32O7DkA4 @ 1204-1209s]
+  Top-k sampling and temperature scaling are decoding strategies that help avoid overfitting.

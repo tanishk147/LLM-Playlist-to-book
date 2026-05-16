@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Build",
+  "extracted_text": "LLMs from Scratch\n\nWhat are token embeddings and why we need them?",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "mk-6cFebjis_f0004",
+  "video_id": "mk-6cFebjis",
+  "timestamp_sec": 3879.033,
+  "source_image": "data/frames/mk-6cFebjis/mk-6cFebjis_f0004.jpg"
+}

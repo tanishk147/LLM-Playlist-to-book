@@ -1,0 +1,3748 @@
+{
+  "video_id": "yZpy_hsC1bE",
+  "duration_sec": 1643.9728125,
+  "segments": [
+    {
+      "ts_start": 4.59,
+      "ts_end": 10.83,
+      "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "lecture \u2192 LLM finetuning approaches",
+          "extracted_text": "Finetuning: Adapting a pretrained model to a specific task by training the model on additional data",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Three-stage LLM finetuning pipeline: Stage 1 shows data preprocessing and attention mechanisms leading to building an LLM; Stage 2 shows pretraining and foundation model development with finetuning; Stage 3 shows classification and personal assistant applications with instruction dataset.",
+          "diagram_elements": [
+            "Data & preprocessing",
+            "Attention mechanism",
+            "LLM Architecture",
+            "Building an LLM",
+            "Pretraining",
+            "Model evaluation",
+            "Load weights",
+            "Finetuning",
+            "Foundation model",
+            "Classifier",
+            "Personal assistant",
+            "Instruction dataset"
+          ],
+          "confidence": 0.85,
+          "frame_id": "yZpy_hsC1bE_f0000",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 11.43,
+      "ts_end": 18.67,
+      "text": "Today, what we are going to do is that we are going to have an introductory lecture on Large Language Model Fine-Tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 19.11,
+      "ts_end": 27.61,
+      "text": "If you have followed this series so far, we have conducted around 30 to 32 lectures and within these lectures, we have finished the stage 1,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 27.71,
+      "ts_end": 33.01,
+      "text": "which is understanding the LLM architecture, the attention mechanism, data preparation and sampling,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 33.57,
+      "ts_end": 41.41,
+      "text": "and we have also finished stage number 2, which is pre-training the LLM, model evaluation and loading pre-trained weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 42.69,
+      "ts_end": 52.92,
+      "text": "Now that stage 1 and stage 2 are finished, we are now ready to move to the last stage of building a LLM from scratch, and that is the stage of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 53.7,
+      "ts_end": 63.8,
+      "text": "With pre-training, we saw that we are getting good results and when we give an input text, we are getting output which makes a lot of sense and it's pretty awesome.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 63.8,
+      "ts_end": 71.66,
+      "text": "So it's like we have built our own GPT from scratch and here's the architecture which we use to construct our Large Language Model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 72.4,
+      "ts_end": 76.68,
+      "text": "We spent a huge amount of time and a number of lectures to understand this architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 78.19,
+      "ts_end": 83.13,
+      "text": "Awesome, so now we are ready to begin with this next stage, which is the stage of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 83.33,
+      "ts_end": 90.65,
+      "text": "So first, you might be thinking that, okay, we already pre-trained the Large Language Model and it seems to already work pretty well, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 90.91,
+      "ts_end": 94.89,
+      "text": "So then does that mean we have finished building our LLM? No.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 96.19,
+      "ts_end": 99.03,
+      "text": "Let me explain to you why do we need fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 99.59,
+      "ts_end": 104.73,
+      "text": "So let's say if you have pre-trained the model, that's fine, but what if you have a specific task?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 105.15,
+      "ts_end": 117.41,
+      "text": "So that specific task can be constructing a chatbot based on your own data as a company, or let's say you're an educational company who wants to make an educational app using your data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 118.42,
+      "ts_end": 122.42,
+      "text": "Let's say if you want to make a chatbot as an airline using your data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 123.87,
+      "ts_end": 126.69,
+      "text": "Essentially, if you want to make a specific chatbot, you can make a chatbot based on your data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 126.71,
+      "ts_end": 134.71,
+      "text": "But if you want to make a specific application, the pre-trained model is not enough because it's pre-trained on general data available from all over the internet.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 135.01,
+      "ts_end": 140.16,
+      "text": "You need to train the model again on additional data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 140.86,
+      "ts_end": 142.64,
+      "text": "This is called as fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 143.26,
+      "ts_end": 154.18,
+      "text": "So the formal definition of fine-tuning is adapting a pre-trained model to a specific task by training the model again on fine-tuned, on additional data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 154.4,
+      "ts_end": 157.66,
+      "text": "There are some things which are very important here, some terminologies.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 158.66,
+      "ts_end": 160.26,
+      "text": "The first terminology is this specific task.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 162.69,
+      "ts_end": 167.41,
+      "text": "So fine-tuning is needed when you have certain specific tasks which need to be performed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 167.81,
+      "ts_end": 174.05,
+      "text": "Such as if you're a company and if you want to develop a model, put it into production, you cannot just use a pre-trained model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 174.35,
+      "ts_end": 177.11,
+      "text": "As I mentioned, it's trained on a generic data, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 177.19,
+      "ts_end": 181.65,
+      "text": "It will not give answers which you expect based on your individual private data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 182.55,
+      "ts_end": 184.19,
+      "text": "So there is a specific task.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 184.43,
+      "ts_end": 188.39,
+      "text": "If you need to do a specific task, you need to fine-tune the pre-trained model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 188.39,
+      "ts_end": 191.55,
+      "text": "And the second thing is training the model again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 191.89,
+      "ts_end": 198.77,
+      "text": "That means that until now, the certain weights and biases of the model have been optimized during the pre-training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 199.21,
+      "ts_end": 202.03,
+      "text": "But now you're going to feed the model with additional data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 202.19,
+      "ts_end": 204.53,
+      "text": "So naturally, you will need to train the model again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 204.57,
+      "ts_end": 207.17,
+      "text": "The parameters, the weights, the biases are going to change.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 207.49,
+      "ts_end": 210.29,
+      "text": "And that's usually done in the process of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 211.58,
+      "ts_end": 215.76,
+      "text": "So there are some, in fact, a lot of articles written about fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 215.9,
+      "ts_end": 217.44,
+      "text": "So here is the schematic.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 217.6,
+      "ts_end": 219.1,
+      "text": "You have a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 219.16,
+      "ts_end": 219.96,
+      "text": "Which is pre-trained.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 220.1,
+      "ts_end": 223.16,
+      "text": "Then you train it further on custom data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 223.3,
+      "ts_end": 226.54,
+      "text": "And that leads to a fine-tuned large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 227.16,
+      "ts_end": 227.84,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 227.94,
+      "ts_end": 239.23,
+      "text": "So the formal definition of LLM fine-tuning is that fine-tuning LLM involves the additional training of a pre-existing model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 240.13,
+      "ts_end": 247.81,
+      "text": "Which has previously acquired patterns and features from an extensive data set using a smaller domain-specific data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 247.81,
+      "ts_end": 251.35,
+      "text": "So see, we are training a pre-existing model again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 251.51,
+      "ts_end": 253.17,
+      "text": "So that's why it's called additional training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 253.35,
+      "ts_end": 255.35,
+      "text": "Why are we training this model again?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 255.47,
+      "ts_end": 258.73,
+      "text": "Because we have a newer, smaller domain-specific data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 258.85,
+      "ts_end": 260.59,
+      "text": "So we need to train the model again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 260.67,
+      "ts_end": 262.23,
+      "text": "So that it adapts its parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 262.39,
+      "ts_end": 264.57,
+      "text": "It adapts its weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 264.67,
+      "ts_end": 265.49,
+      "text": "And its biases.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 267.32,
+      "ts_end": 267.84,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 268.32,
+      "ts_end": 274.34,
+      "text": "So fine-tuning is necessary to be done after pre-training is done.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 274.52,
+      "ts_end": 275.0,
+      "text": "Okay.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 275.38,
+      "ts_end": 278.54,
+      "text": "So OpenAI even provides this data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 279.57,
+      "ts_end": 281.27,
+      "text": "It has a description about fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 281.49,
+      "ts_end": 286.29,
+      "text": "Where it gives you instructions about how you can do fine-tuning using OpenAI as models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 286.95,
+      "ts_end": 289.97,
+      "text": "So to give you a practical example of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 290.13,
+      "ts_end": 293.43,
+      "text": "This is the website which I had made in the final year of my PhD.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 293.73,
+      "ts_end": 297.35,
+      "text": "It talks about my publications, my talks, my media, etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 297.91,
+      "ts_end": 302.15,
+      "text": "So let's say if you also have a website or if you have a blog post site like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 302.37,
+      "ts_end": 307.67,
+      "text": "And if you want to make a chatbot which does not answer like how ChatGPT answers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 307.67,
+      "ts_end": 310.93,
+      "text": "But you want the chatbot to answer like how you speak.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 311.47,
+      "ts_end": 311.95,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 312.09,
+      "ts_end": 316.37,
+      "text": "You want the chatbot to answer based on your data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 316.55,
+      "ts_end": 318.19,
+      "text": "How you generally write articles.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 318.41,
+      "ts_end": 322.11,
+      "text": "How you word the different paragraphs on your website.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 322.71,
+      "ts_end": 324.23,
+      "text": "You have a specific tone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 324.39,
+      "ts_end": 326.57,
+      "text": "And you want that tone to come in your chatbot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 326.75,
+      "ts_end": 329.57,
+      "text": "How will you do this with pre-training?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 329.73,
+      "ts_end": 330.53,
+      "text": "It's not possible.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 330.79,
+      "ts_end": 335.73,
+      "text": "Because in the pre-trained model, might be your data is not even there in the pre-training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 335.95,
+      "ts_end": 337.59,
+      "text": "So then you need to fine-tune.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 337.59,
+      "ts_end": 339.29,
+      "text": "You need to give additional data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 339.43,
+      "ts_end": 343.73,
+      "text": "Such as whatever is present on my website, my blogs, my publications, my talks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 343.93,
+      "ts_end": 348.01,
+      "text": "So that the model can understand and learn what is your tone of speaking.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 348.31,
+      "ts_end": 350.31,
+      "text": "How do you generally construct sentences.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 350.69,
+      "ts_end": 351.83,
+      "text": "And then it will adapt.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 352.46,
+      "ts_end": 359.56,
+      "text": "So the resulting chatbot which will be developed will now be speaking in your tone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 359.66,
+      "ts_end": 361.42,
+      "text": "Or my tone rather in this example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 361.68,
+      "ts_end": 363.02,
+      "text": "That is called as fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 363.26,
+      "ts_end": 366.96,
+      "text": "So the specific application which I am looking for is constructing a chatbot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 366.96,
+      "ts_end": 368.22,
+      "text": "Which speaks in my tone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 368.58,
+      "ts_end": 371.58,
+      "text": "For this specific application, I have this additional data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 371.78,
+      "ts_end": 375.02,
+      "text": "Which is my website, my publications, my talks and my media.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 375.18,
+      "ts_end": 376.32,
+      "text": "Which I will feed to the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 376.56,
+      "ts_end": 378.62,
+      "text": "And I will ask the model to be trained again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 378.74,
+      "ts_end": 380.62,
+      "text": "Or rather I will train the model again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 381.26,
+      "ts_end": 382.74,
+      "text": "Based on this additional data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 383.04,
+      "ts_end": 386.82,
+      "text": "This process of training the model again is called as fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 387.14,
+      "ts_end": 391.1,
+      "text": "So now the fine-tuned model will behave exactly like how I want.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 391.3,
+      "ts_end": 392.76,
+      "text": "It will speak in my tone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 392.92,
+      "ts_end": 395.3,
+      "text": "It will use grammatical sentences like I do.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 395.64,
+      "ts_end": 396.88,
+      "text": "That's a practical example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 396.96,
+      "ts_end": 403.44,
+      "text": "Another example is let's say you have your research publications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 403.62,
+      "ts_end": 405.36,
+      "text": "Like how I am describing right here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 405.5,
+      "ts_end": 407.24,
+      "text": "And you want to make a chatbot.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 407.48,
+      "ts_end": 411.78,
+      "text": "Which basically answers people's queries about your publications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 412.14,
+      "ts_end": 415.24,
+      "text": "So then you can feed specific data based on your publications.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 415.62,
+      "ts_end": 417.52,
+      "text": "That's another example of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 417.88,
+      "ts_end": 421.18,
+      "text": "In fact the reason I thought of this example was.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 421.3,
+      "ts_end": 422.32,
+      "text": "I saw a blog.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 423.36,
+      "ts_end": 426.06,
+      "text": "In fact I saw a question asked on.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 426.06,
+      "ts_end": 428.4,
+      "text": "The OpenAI question forum.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 428.66,
+      "ts_end": 430.22,
+      "text": "Where the person was saying that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 430.26,
+      "ts_end": 431.92,
+      "text": "They are a beginner at learning fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 432.16,
+      "ts_end": 434.32,
+      "text": "And their purpose is to create the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 434.4,
+      "ts_end": 437.22,
+      "text": "Which could use the tone of their voice from their blog.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 437.82,
+      "ts_end": 439.44,
+      "text": "Exactly like what we had discussed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 439.88,
+      "ts_end": 442.52,
+      "text": "And they are asking a number of questions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 442.62,
+      "ts_end": 444.54,
+      "text": "About how exactly to go about this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 444.66,
+      "ts_end": 447.58,
+      "text": "How to make sure that the accuracy obtained is very good.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 447.68,
+      "ts_end": 449.14,
+      "text": "How to prevent hallucinations.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 449.16,
+      "ts_end": 450.54,
+      "text": "Which are wrong answers etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 451.44,
+      "ts_end": 453.18,
+      "text": "And then there are a number of answers.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 453.28,
+      "ts_end": 454.76,
+      "text": "Which is given by the OpenAI community.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 454.76,
+      "ts_end": 456.9,
+      "text": "To help this person fine-tune their model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 458.56,
+      "ts_end": 459.12,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 459.26,
+      "ts_end": 461.74,
+      "text": "So this is the general introduction of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 461.9,
+      "ts_end": 463.66,
+      "text": "Now within fine-tuning itself.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 463.82,
+      "ts_end": 466.52,
+      "text": "There are two broad categories of fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 467.19,
+      "ts_end": 469.13,
+      "text": "And let me mark them here for you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 469.19,
+      "ts_end": 471.79,
+      "text": "The first category is called as instruction fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 471.97,
+      "ts_end": 474.57,
+      "text": "And this is much more common and much more broader.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 474.73,
+      "ts_end": 478.17,
+      "text": "The second category is called as classification fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 478.77,
+      "ts_end": 480.47,
+      "text": "What's the difference between the two?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 480.73,
+      "ts_end": 482.57,
+      "text": "So in instruction fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 482.61,
+      "ts_end": 485.65,
+      "text": "What we do is that we train the language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 486.13,
+      "ts_end": 487.15,
+      "text": "On a set of tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 487.37,
+      "ts_end": 489.17,
+      "text": "Using specific instructions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 490.05,
+      "ts_end": 493.09,
+      "text": "So here I have given two examples of instruction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 494.71,
+      "ts_end": 496.07,
+      "text": "Instruction based fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 496.31,
+      "ts_end": 498.17,
+      "text": "So let's say the instructions are.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 499.27,
+      "ts_end": 501.09,
+      "text": "Is the following text spam?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 501.53,
+      "ts_end": 502.89,
+      "text": "Answer with a yes or no.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 502.99,
+      "ts_end": 505.55,
+      "text": "This is an example of instruction based fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 505.75,
+      "ts_end": 507.63,
+      "text": "Because we are asking the LLM that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 507.75,
+      "ts_end": 509.61,
+      "text": "You will be given text like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 509.77,
+      "ts_end": 511.89,
+      "text": "And your task is to look at the text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 512.01,
+      "ts_end": 513.29,
+      "text": "And answer whether it's spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 513.43,
+      "ts_end": 515.83,
+      "text": "So classify or say whether it's yes or no.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 516.45,
+      "ts_end": 518.89,
+      "text": "That's why this is an example of instruction fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 518.99,
+      "ts_end": 520.25,
+      "text": "We are adding instructions here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 520.43,
+      "ts_end": 521.63,
+      "text": "Which are in blue color.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 521.77,
+      "ts_end": 522.59,
+      "text": "That's very important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 522.99,
+      "ts_end": 525.47,
+      "text": "Or the instruction could be your given sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 525.59,
+      "ts_end": 527.51,
+      "text": "And translate it into German appropriately.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 528.23,
+      "ts_end": 530.71,
+      "text": "That is another example of instruction fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 530.95,
+      "ts_end": 532.91,
+      "text": "So the LLM takes the input sentence.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 533.25,
+      "ts_end": 535.61,
+      "text": "In the first case it gives the output as yes or no.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 535.73,
+      "ts_end": 538.99,
+      "text": "In the second case it translates the English sentence into German.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 540.15,
+      "ts_end": 542.89,
+      "text": "The reason these are examples of instruction fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 542.93,
+      "ts_end": 544.81,
+      "text": "Is that we are giving a specific instruction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 545.07,
+      "ts_end": 546.17,
+      "text": "And the LLM is behaving.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 546.17,
+      "ts_end": 547.61,
+      "text": "Based on that instruction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 549.59,
+      "ts_end": 552.37,
+      "text": "The second example is classification fine-tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 552.57,
+      "ts_end": 554.01,
+      "text": "This is not as common.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 554.15,
+      "ts_end": 556.53,
+      "text": "But readers or listeners rather.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 556.61,
+      "ts_end": 558.95,
+      "text": "Who have learnt about machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 559.33,
+      "ts_end": 560.93,
+      "text": "And classification examples.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 560.99,
+      "ts_end": 562.49,
+      "text": "Such as brain tumor classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 563.31,
+      "ts_end": 565.35,
+      "text": "Image classification between cats and dogs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 565.51,
+      "ts_end": 566.39,
+      "text": "This is pretty similar.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 566.57,
+      "ts_end": 568.43,
+      "text": "But now you just use a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 568.75,
+      "ts_end": 571.21,
+      "text": "Instead of let's say a convolutional neural network.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 571.27,
+      "ts_end": 571.91,
+      "text": "For example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 572.03,
+      "ts_end": 575.41,
+      "text": "Or any other neural network to make the classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 575.89,
+      "ts_end": 576.63,
+      "text": "So here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 576.63,
+      "ts_end": 578.67,
+      "text": "No instruction is given to the LLM.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 578.71,
+      "ts_end": 580.07,
+      "text": "Just the input is given.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 580.13,
+      "ts_end": 581.05,
+      "text": "Without instructions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 582.08,
+      "ts_end": 583.74,
+      "text": "And the LLM has to classify.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 583.74,
+      "ts_end": 585.8,
+      "text": "Whether the email is spam or not spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 586.24,
+      "ts_end": 588.72,
+      "text": "Here also we saw a spam not spam example.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 588.78,
+      "ts_end": 590.58,
+      "text": "But here instructions were given.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 590.78,
+      "ts_end": 593.34,
+      "text": "That the LLM has to answer with a yes or no.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 594.04,
+      "ts_end": 595.82,
+      "text": "But here instruction is not given.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 595.92,
+      "ts_end": 597.28,
+      "text": "Just two categories will be there.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 597.34,
+      "ts_end": 598.16,
+      "text": "Spam and not spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 598.26,
+      "ts_end": 599.5,
+      "text": "And we train the LLM to.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 599.78,
+      "ts_end": 601.94,
+      "text": "Make the output based on these two categories.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 603.1,
+      "ts_end": 604.96,
+      "text": "So the LLM receives a text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 605.06,
+      "ts_end": 607.12,
+      "text": "And then it predicts whether it's a spam or no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 607.24,
+      "ts_end": 609.5,
+      "text": "Although the result is same in this case.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 609.56,
+      "ts_end": 610.34,
+      "text": "And this case.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 610.6,
+      "ts_end": 613.26,
+      "text": "The way the prompt itself is constructed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 613.44,
+      "ts_end": 615.24,
+      "text": "Or way the LLM is constructed is different.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 615.72,
+      "ts_end": 617.84,
+      "text": "That's why this what I'm highlighting right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 617.94,
+      "ts_end": 620.5,
+      "text": "This is an example of instruction fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 620.86,
+      "ts_end": 624.52,
+      "text": "And this example where the model input is given without instructions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 624.7,
+      "ts_end": 627.64,
+      "text": "That's an example of classification based fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 629.21,
+      "ts_end": 632.69,
+      "text": "Where we just classify into categories using large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 632.99,
+      "ts_end": 635.37,
+      "text": "When I saw this it was pretty surprising to me.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 635.43,
+      "ts_end": 637.79,
+      "text": "Because I did not know that LLMs could be used for classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 637.81,
+      "ts_end": 638.63,
+      "text": "Classification tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 639.01,
+      "ts_end": 643.15,
+      "text": "In fact classification fine tuning is also used for sentiment classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 643.17,
+      "ts_end": 645.55,
+      "text": "Such as angry, sad, happy etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 645.81,
+      "ts_end": 647.41,
+      "text": "If you have given piece of text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 647.49,
+      "ts_end": 650.07,
+      "text": "And if you want to classify it into either of these five buckets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 650.27,
+      "ts_end": 653.05,
+      "text": "You can use classification fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 654.14,
+      "ts_end": 660.44,
+      "text": "But instruction fine tuning is a much more common fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 660.64,
+      "ts_end": 662.8,
+      "text": "It can handle broader set of tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 663.66,
+      "ts_end": 665.8,
+      "text": "And usually it can even handle.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 665.8,
+      "ts_end": 668.76,
+      "text": "Or it rather needs larger data sets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 668.86,
+      "ts_end": 672.08,
+      "text": "Because you want it to handle a broader set of tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 672.42,
+      "ts_end": 677.8,
+      "text": "So greater amount of computational power is also usually needed for instruction based fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 678.18,
+      "ts_end": 680.54,
+      "text": "Why is greater amount of computational power needed?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 680.66,
+      "ts_end": 683.14,
+      "text": "Because you have given instructions to the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 683.24,
+      "ts_end": 687.22,
+      "text": "And it has to search for the entire corpus based on the instructions which you have given.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 687.52,
+      "ts_end": 690.96,
+      "text": "And the actions which it perform is not specific.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 691.24,
+      "ts_end": 693.2,
+      "text": "So for example here the action is pretty specific.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 693.46,
+      "ts_end": 694.34,
+      "text": "Spam or no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 694.34,
+      "ts_end": 698.38,
+      "text": "The action here which it has to perform can be something complex as translation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 698.84,
+      "ts_end": 702.78,
+      "text": "Using the same instruction based model you can do other things also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 703.1,
+      "ts_end": 706.86,
+      "text": "So one instruction based model can actually handle broader set of tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 706.96,
+      "ts_end": 708.88,
+      "text": "Such as translation, summarization etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 709.85,
+      "ts_end": 712.49,
+      "text": "But in classification fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 712.63,
+      "ts_end": 715.79,
+      "text": "The only action which is performed is classifying.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 715.87,
+      "ts_end": 718.07,
+      "text": "In which category the text belongs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 718.61,
+      "ts_end": 722.77,
+      "text": "So that's why the classification fine tuning can handle an arrow set of prompts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 723.64,
+      "ts_end": 725.06,
+      "text": "So when you think of classifying.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 725.08,
+      "ts_end": 728.26,
+      "text": "People usually only talk about instruction based fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 728.48,
+      "ts_end": 731.64,
+      "text": "But I find that classification fine tuning is also equally important.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 731.98,
+      "ts_end": 734.78,
+      "text": "So the example which we are going to start in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 734.96,
+      "ts_end": 737.94,
+      "text": "Is actually based on the concept of classification fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 739.76,
+      "ts_end": 742.4,
+      "text": "So now in instruction based fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 742.64,
+      "ts_end": 748.62,
+      "text": "What usually people also talk about is methods to make the fine tuning more efficient.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 748.98,
+      "ts_end": 750.94,
+      "text": "So within instruction based fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 751.04,
+      "ts_end": 754.76,
+      "text": "There are actually two other methods which are called as.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 754.76,
+      "ts_end": 756.42,
+      "text": "LoRa and QLoRa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 756.62,
+      "ts_end": 760.78,
+      "text": "So basically these come under the category of parameter efficient fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 761.04,
+      "ts_end": 763.3,
+      "text": "So it's a form of instruction fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 763.44,
+      "ts_end": 766.1,
+      "text": "Which is more efficient than full fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 766.6,
+      "ts_end": 770.22,
+      "text": "Essentially what is done in parameter efficient fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 770.32,
+      "ts_end": 772.62,
+      "text": "Is that we only update a subset of parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 772.88,
+      "ts_end": 775.64,
+      "text": "And freeze the rest of the parameters at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 775.9,
+      "ts_end": 778.44,
+      "text": "So this reduces the number of trainable parameters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 778.86,
+      "ts_end": 782.98,
+      "text": "Making memory requirements for instruction fine tuning more manageable.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 782.98,
+      "ts_end": 788.47,
+      "text": "So LoRa is basically an improved fine tuning method.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 788.71,
+      "ts_end": 790.83,
+      "text": "Where instead of fine tuning all the weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 790.95,
+      "ts_end": 792.67,
+      "text": "That constitute the weight matrix.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 792.93,
+      "ts_end": 797.27,
+      "text": "Two smaller matrices that approximate this larger matrix are fine tuned.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 797.57,
+      "ts_end": 800.23,
+      "text": "Right now we are not going into details of LoRa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 800.31,
+      "ts_end": 801.85,
+      "text": "We will cover that in a subsequent lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 802.05,
+      "ts_end": 803.29,
+      "text": "As it's a pretty broad topic.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 803.53,
+      "ts_end": 805.93,
+      "text": "But I just want to introduce the concept to you today.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 806.29,
+      "ts_end": 807.81,
+      "text": "And the second is QLoRa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 807.95,
+      "ts_end": 810.49,
+      "text": "Which is basically quantized LoRa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 811.74,
+      "ts_end": 813.56,
+      "text": "And this is a more manageable.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 813.56,
+      "ts_end": 815.18,
+      "text": "Memory efficient iteration of LoRa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 815.58,
+      "ts_end": 818.42,
+      "text": "And QLoRa takes LoRa a step further.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 818.52,
+      "ts_end": 821.7,
+      "text": "By quantizing the weights of the LoRa adapters to lower precision.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 822.31,
+      "ts_end": 825.32,
+      "text": "So right now just keep in mind that LoRa and QLoRa.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 825.4,
+      "ts_end": 828.12,
+      "text": "Are forms of more efficient fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 828.54,
+      "ts_end": 830.3,
+      "text": "Which reduce the memory requirement.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 830.62,
+      "ts_end": 833.86,
+      "text": "Which is traditionally needed in instruction based fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 835.4,
+      "ts_end": 835.98,
+      "text": "Awesome.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 836.02,
+      "ts_end": 838.62,
+      "text": "So I hope you have understood the differences between.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 841.59,
+      "ts_end": 844.43,
+      "text": "Instruction fine tuning and classification fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 844.43,
+      "ts_end": 847.71,
+      "text": "And now what we are going to do in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 847.85,
+      "ts_end": 850.81,
+      "text": "Is we are going to start working on a hands on problem.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 851.21,
+      "ts_end": 853.51,
+      "text": "Which is a fine tuning classification problem.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 854.32,
+      "ts_end": 856.84,
+      "text": "So we are going to look at the second category now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 857.32,
+      "ts_end": 860.0,
+      "text": "And we are going to take a real data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 860.5,
+      "ts_end": 861.94,
+      "text": "We are going to look at emails.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 862.26,
+      "ts_end": 863.46,
+      "text": "A huge set of emails.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 863.56,
+      "ts_end": 865.06,
+      "text": "Which are spam as well as no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 865.3,
+      "ts_end": 867.52,
+      "text": "And we are going to train a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 867.6,
+      "ts_end": 869.5,
+      "text": "To classify whether it's spam or no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 870.12,
+      "ts_end": 872.48,
+      "text": "We won't be doing all of this in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 872.48,
+      "ts_end": 874.6,
+      "text": "Because this involves a lot of steps.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 874.84,
+      "ts_end": 876.82,
+      "text": "First we have to download the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 876.96,
+      "ts_end": 878.48,
+      "text": "Pre process the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 878.6,
+      "ts_end": 879.82,
+      "text": "Create data loaders.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 879.92,
+      "ts_end": 882.12,
+      "text": "This is in the stage one of data set preparation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 883.05,
+      "ts_end": 885.45,
+      "text": "This data set will be all the emails.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 885.61,
+      "ts_end": 887.53,
+      "text": "Which will be classifying into spam and no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 888.15,
+      "ts_end": 889.59,
+      "text": "Then in stage number two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 889.67,
+      "ts_end": 891.31,
+      "text": "We will have to initialize the LLM model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 891.49,
+      "ts_end": 892.71,
+      "text": "Load pre trained weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 892.97,
+      "ts_end": 895.07,
+      "text": "Then modify the model for fine tuning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 895.31,
+      "ts_end": 896.73,
+      "text": "Implement evaluation utilities.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 897.23,
+      "ts_end": 900.21,
+      "text": "And then in the final stage we are going to fine tune the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 900.77,
+      "ts_end": 902.15,
+      "text": "Evaluate the fine tuned model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 902.57,
+      "ts_end": 903.57,
+      "text": "Use model on new data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 904.45,
+      "ts_end": 907.15,
+      "text": "I could have covered all of this in one lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 907.31,
+      "ts_end": 908.99,
+      "text": "But then I would have to rush through it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.13,
+      "ts_end": 911.91,
+      "text": "Instead I am going to split this into five to six lectures.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 912.15,
+      "ts_end": 915.35,
+      "text": "So that you understand the entire fine tuning process sequentially.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 915.71,
+      "ts_end": 919.29,
+      "text": "This is the philosophy which we follow in all of the lectures in this series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 919.45,
+      "ts_end": 922.69,
+      "text": "I take you through every single step in a lot of detail.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 923.01,
+      "ts_end": 925.15,
+      "text": "First on a white board and then through code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 925.83,
+      "ts_end": 927.35,
+      "text": "Today what we are going to do is.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 927.43,
+      "ts_end": 928.51,
+      "text": "We are going to do two things.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 928.59,
+      "ts_end": 932.23,
+      "text": "We are going to first download the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 932.23,
+      "ts_end": 934.51,
+      "text": "And the second thing what we are going to do.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 934.55,
+      "ts_end": 936.49,
+      "text": "Is we are going to pre process the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 937.38,
+      "ts_end": 939.9,
+      "text": "And in the next lecture we will create data loaders.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 940.08,
+      "ts_end": 940.88,
+      "text": "Initialize the model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 941.06,
+      "ts_end": 943.46,
+      "text": "And then later we will also load the pre trained weights.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 943.74,
+      "ts_end": 946.36,
+      "text": "For now let us just focus on step number one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 946.42,
+      "ts_end": 947.08,
+      "text": "And step number.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 947.4,
+      "ts_end": 949.6,
+      "text": "Yeah actually just step number one in this lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 949.7,
+      "ts_end": 951.78,
+      "text": "Which is download and pre process the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 951.9,
+      "ts_end": 953.92,
+      "text": "In the next lecture we will look at step two.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 954.02,
+      "ts_end": 955.56,
+      "text": "Which is creating data loaders.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 956.02,
+      "ts_end": 958.02,
+      "text": "So let me take you through code right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 959.82,
+      "ts_end": 960.22,
+      "text": "Right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 960.36,
+      "ts_end": 962.56,
+      "text": "So in this section of the series.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 962.56,
+      "ts_end": 965.44,
+      "text": "This section of the code I have titled as fine tuning for classification.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 966.02,
+      "ts_end": 968.84,
+      "text": "The first step as I mentioned is downloading the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 969.0,
+      "ts_end": 972.44,
+      "text": "This is just the code for downloading and unzipping the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 972.56,
+      "ts_end": 975.54,
+      "text": "Let me take you through the place where the data set exists.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 975.98,
+      "ts_end": 978.92,
+      "text": "So this is the UC Irvine machine learning repository.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 978.96,
+      "ts_end": 981.96,
+      "text": "It is quite famous because it has a large number of data sets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 982.3,
+      "ts_end": 986.16,
+      "text": "Within this repository there is also an SMS spam collection data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 986.44,
+      "ts_end": 988.62,
+      "text": "This is the data set which we will be using.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 988.68,
+      "ts_end": 990.54,
+      "text": "It contains a huge list of emails.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 990.62,
+      "ts_end": 992.32,
+      "text": "Both spam as well as non spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 992.56,
+      "ts_end": 995.91,
+      "text": "So if you scroll down here you will see that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 996.27,
+      "ts_end": 1000.35,
+      "text": "You will see information about what exactly is present in this data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1000.71,
+      "ts_end": 1005.65,
+      "text": "First you will see that 425 SMS spam messages were manually extracted.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1006.69,
+      "ts_end": 1011.99,
+      "text": "This is a UK forum in which cell phone users make public claims about SMS spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1012.35,
+      "ts_end": 1016.97,
+      "text": "So 425 spam messages and they also have 322 more spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1017.23,
+      "ts_end": 1019.65,
+      "text": "Which are publicly available at some other website.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1019.89,
+      "ts_end": 1023.05,
+      "text": "So overall there are 747 spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1023.05,
+      "ts_end": 1025.09,
+      "text": "Now let's look at the no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1025.37,
+      "ts_end": 1028.17,
+      "text": "So in no spam they have a large number of messages.",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0001"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": null,
+          "extracted_text": "-> A collection of 425 SMS spam messages was manually extracted from the Grumbletext Web site, which cell phone users make public claims about SMS spam messages, most of them without reporting the message received. The identification of the text of spam messages in the claims is a very hard and time consuming task and it involved carefully scanning hundreds of web pages. The Grumbletext Web site is: http://www.grumbletext.co.uk/\n\n-> A subset of 3,375 SMS randomly chosen ham messages of the NUS SMS Corpus (NSC), which is a collection of 10,000 legitimate messages collected for research at the Department of Computer Science at the National University of Singapore. The messages largely originate from Singaporeans and mostly from students attending the university. The messages were collected from volunteers who were made aware that their contributions were going to be made publicly available. The NUS SMS Corpus is available at: http://www.comp.nus.edu.sg/~rpnlpir/downloads/corpora/\n\n-> A list of 450 SMS ham messages collected from Caroline Tag's PhD Thesis available at http://etheses.bham.ac.uk/253/1/Tagg09PhD.pdf.\n\n-> Finally, we have incorporated the SMS Spam Corpus v.0.1 Big. It has 1,002 SMS ham messages and 322 spam messages, and it is public available at: http://www.esp.uem.es/jmgomez/smsspamcorpus/. This corpus has been used in several academic researches:",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "yZpy_hsC1bE_f0001",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1025.999667,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0001.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1028.41,
+      "ts_end": 1033.89,
+      "text": "As you can imagine it is easier to source legitimate no spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1034.31,
+      "ts_end": 1041.15,
+      "text": "The way they collected no spam messages is at the department of computer science at the National University of Singapore.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1041.84,
+      "ts_end": 1046.72,
+      "text": "So naturally if it is emails originating in the university between students.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1047.32,
+      "ts_end": 1049.36,
+      "text": "They are likely to be not spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1049.99,
+      "ts_end": 1053.13,
+      "text": "So we have much larger no spam messages compared to the spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1053.15,
+      "ts_end": 1056.83,
+      "text": "So the data set is a bit not balanced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1057.19,
+      "ts_end": 1060.09,
+      "text": "And the no spam messages are also called ham messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1060.47,
+      "ts_end": 1063.11,
+      "text": "I am not sure why this terminology exists.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1063.43,
+      "ts_end": 1065.63,
+      "text": "But no spam messages are called ham.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1065.79,
+      "ts_end": 1068.09,
+      "text": "And the spam messages are just called spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1068.49,
+      "ts_end": 1069.79,
+      "text": "So this is the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1069.97,
+      "ts_end": 1072.29,
+      "text": "You can even download the data set from here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1072.43,
+      "ts_end": 1075.79,
+      "text": "Or you can just run the code which I will be providing to you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1075.83,
+      "ts_end": 1077.23,
+      "text": "Which downloads and unzips the data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1077.69,
+      "ts_end": 1079.29,
+      "text": "Once you run this piece of code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1079.39,
+      "ts_end": 1082.65,
+      "text": "The data set will be downloaded onto your local machine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1082.65,
+      "ts_end": 1089.52,
+      "text": "And it will be downloaded in this collection smsspamcollection.tsv",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1089.52,
+      "ts_end": 1094.24,
+      "text": "So here you can see on my VS code there is this folder called smsspamcollection.",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0002"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": "SMS Spam Collection v.1",
+          "extracted_text": "1. DESCRIPTION\n--------------\n\nThe SMS Spam Collection v.1 (hereafter the corpus) is a set of SMS tagged messages that have been collected for SMS Spam research. It contains one set of SMS messages in English of 5,574 messages, tagged according to being ham (legitimate) or spam.\n\n1.1. Compilation\n--------------\n\nThis corpus has been collected from free or free for research sources at the Web:\n\n- A collection of between 425 SMS spam messages extracted manually from the Grumbletext Web site. This is a UK forum in which cell phone users make public claims about SMS spam messages, most of them without reporting the very spam",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "yZpy_hsC1bE_f0002",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1090.099667,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0002.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1094.44,
+      "ts_end": 1098.48,
+      "text": "And this is the .tsv file which I am showing on the screen to you right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1099.0,
+      "ts_end": 1104.0,
+      "text": "So here you can see that the messages can either be ham which is no spam or spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1104.28,
+      "ts_end": 1107.4,
+      "text": "So ham means not a spam and spam is of course spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1107.62,
+      "ts_end": 1111.02,
+      "text": "So as expected spam is free entry.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1111.12,
+      "ts_end": 1112.42,
+      "text": "And winner.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1112.42,
+      "ts_end": 1114.16,
+      "text": "Winner basically as things like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1114.24,
+      "ts_end": 1117.48,
+      "text": "So here we can see that these emails are indeed making sense.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1117.58,
+      "ts_end": 1119.18,
+      "text": "And this classification is making sense.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1119.46,
+      "ts_end": 1123.24,
+      "text": "So this is the entire data set which you can download either through code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1123.5,
+      "ts_end": 1127.96,
+      "text": "Or you can download it from the UC Irvine repository which I just showed you.",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0003"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": "File downloaded and saved as sms_spam_collection/SMSSpamCollection.tsv\n\nAfter executing the preceding code, the dataset is saved as a tab-separated text file, SMSSpamCollection.tsv, in the sms_spam_collection folder.\n\nWe can load it into a pandas DataFrame as follows:",
+          "code": {
+            "language": "python",
+            "content": "# Create an unverified SSL context\nssl_context = ssl._create_unverified_context()\n\n# Downloading the file\nwith urllib.request.urlopen(url, context=ssl_context) as response:\n    with open(zip_path, \"wb\") as out_file:\n        out_file.write(response.read())\n\n# Unzipping the file\nwith zipfile.ZipFile(zip_path, \"r\") as zip_ref:\n    zip_ref.extractall(extracted_path)\n\n# Add .csv file extension\noriginal_file_path = Path(extracted_path) / \"SMSSpamCollection\"\nos.rename(original_file_path, data_file_path)\nprint(f\"File downloaded and saved as {data_file_path}\")\n\ndownload_and_unzip_spam_data(url, zip_path, extracted_path, data_file_path)"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "yZpy_hsC1bE_f0003",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1126.899667,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0003.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1128.34,
+      "ts_end": 1132.1,
+      "text": "Once the data set is downloaded what you can do is that you can use pandas.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1132.34,
+      "ts_end": 1134.34,
+      "text": "And you can convert it into a data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1134.42,
+      "ts_end": 1136.74,
+      "text": "So that reading the data becomes much more easier.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1136.96,
+      "ts_end": 1139.96,
+      "text": "So you can print out the data frame and it looks something like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1139.96,
+      "ts_end": 1142.32,
+      "text": "So the label is either ham or spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1143.18,
+      "ts_end": 1146.7,
+      "text": "So here we can see that there are total 5572 rows.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1147.12,
+      "ts_end": 1148.88,
+      "text": "So 5572 emails.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1149.08,
+      "ts_end": 1153.82,
+      "text": "But now we can print the value counts for the label in this data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1154.31,
+      "ts_end": 1161.57,
+      "text": "So the label is a column name and we can print out the number of ham entries which are 4825 which are no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1162.07,
+      "ts_end": 1165.17,
+      "text": "And the number of spam entries is much lesser which is 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1166.24,
+      "ts_end": 1169.72,
+      "text": "Now what we can do here is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1169.72,
+      "ts_end": 1171.62,
+      "text": "We need to make the data set balanced right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1171.84,
+      "ts_end": 1174.28,
+      "text": "There are number of ways to make the data set balanced.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1174.46,
+      "ts_end": 1177.71,
+      "text": "But we will take a simple approach here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1177.91,
+      "ts_end": 1181.05,
+      "text": "Since this is not a classification machine learning class.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1181.27,
+      "ts_end": 1183.17,
+      "text": "This is a class on large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1183.41,
+      "ts_end": 1185.11,
+      "text": "So we are going to take a simple approach.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1185.23,
+      "ts_end": 1190.01,
+      "text": "And we are just going to randomly take 747 entries from no spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1190.21,
+      "ts_end": 1193.83,
+      "text": "So that the number of no spam and the number of spam emails match each other.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1193.95,
+      "ts_end": 1195.29,
+      "text": "Both should be 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1196.03,
+      "ts_end": 1197.57,
+      "text": "So as has been written here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1197.89,
+      "ts_end": 1198.89,
+      "text": "For simplicity.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1198.89,
+      "ts_end": 1202.07,
+      "text": "And because we prefer a small data set for educational purposes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1202.45,
+      "ts_end": 1207.33,
+      "text": "We subsample the data set so that it contains 747 instances from each class.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1208.03,
+      "ts_end": 1210.79,
+      "text": "So this is the function which creates a balanced data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1210.89,
+      "ts_end": 1212.61,
+      "text": "What this function is going to do is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1213.41,
+      "ts_end": 1215.91,
+      "text": "It's going to randomly sample ham instances.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1216.39,
+      "ts_end": 1218.89,
+      "text": "So that we can match the number of spam instances.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1219.17,
+      "ts_end": 1221.03,
+      "text": "That's equal to 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1221.21,
+      "ts_end": 1222.61,
+      "text": "It's done by this line of code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1223.63,
+      "ts_end": 1226.61,
+      "text": "And then we combine the ham subset with the spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1226.83,
+      "ts_end": 1227.67,
+      "text": "So the total.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1227.67,
+      "ts_end": 1229.77,
+      "text": "Now the new data frame is balanceDF.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1230.29,
+      "ts_end": 1233.97,
+      "text": "And if you print out the balanceDF value counts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1234.11,
+      "ts_end": 1235.43,
+      "text": "You will see that the number of ham.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1235.73,
+      "ts_end": 1237.87,
+      "text": "Which is no spam emails are 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1238.25,
+      "ts_end": 1240.67,
+      "text": "And the number of spam emails are 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1241.73,
+      "ts_end": 1245.37,
+      "text": "So after executing the previous code to balance the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1245.41,
+      "ts_end": 1248.75,
+      "text": "We can see that we now have an equal amount of spam and no spam messages.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1249.07,
+      "ts_end": 1250.75,
+      "text": "Great. This is exactly what we wanted.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1251.23,
+      "ts_end": 1252.85,
+      "text": "Now we can go a step further.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1252.97,
+      "ts_end": 1254.71,
+      "text": "And we can take a look at the labels.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1254.81,
+      "ts_end": 1256.95,
+      "text": "Instead of having ham and spam.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1258.05,
+      "ts_end": 1260.49,
+      "text": "We can assign ham to be equal to 0.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1260.63,
+      "ts_end": 1262.13,
+      "text": "And spam to be equal to 1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1263.55,
+      "ts_end": 1265.49,
+      "text": "So these are the label encodings.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1265.73,
+      "ts_end": 1267.65,
+      "text": "Of each of our emails.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1268.19,
+      "ts_end": 1270.51,
+      "text": "So one note which I have written here is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1270.57,
+      "ts_end": 1273.47,
+      "text": "This process is similar to converting text into token IDs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1273.93,
+      "ts_end": 1274.77,
+      "text": "Remember in.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1276.0,
+      "ts_end": 1278.22,
+      "text": "When we pre-trained the large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1278.32,
+      "ts_end": 1279.24,
+      "text": "We had a big vocabulary.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1279.48,
+      "ts_end": 1280.34,
+      "text": "The GPT vocabulary.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1280.84,
+      "ts_end": 1283.54,
+      "text": "Which had more than 50,000 words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1283.6,
+      "ts_end": 1285.6,
+      "text": "In fact it had 50257 tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1286.08,
+      "ts_end": 1287.92,
+      "text": "And every token had a token ID.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1289.27,
+      "ts_end": 1290.41,
+      "text": "This is a much simpler mapping.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1290.55,
+      "ts_end": 1292.61,
+      "text": "We have only two tokens kind of.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1292.73,
+      "ts_end": 1294.43,
+      "text": "And they are mapped to 0 and 1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1295.72,
+      "ts_end": 1298.42,
+      "text": "Now as we usually do in machine learning tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1298.64,
+      "ts_end": 1300.96,
+      "text": "We will take the data set and split it into three parts.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1301.48,
+      "ts_end": 1303.58,
+      "text": "We will take this 747 data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1303.82,
+      "ts_end": 1304.74,
+      "text": "And we will split it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1304.78,
+      "ts_end": 1306.42,
+      "text": "70% will be used for training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1306.98,
+      "ts_end": 1308.8,
+      "text": "10% we will use for validation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1309.16,
+      "ts_end": 1311.24,
+      "text": "And 20% we will use for testing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1313.16,
+      "ts_end": 1314.38,
+      "text": "As I have mentioned here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1314.44,
+      "ts_end": 1317.04,
+      "text": "These ratios are generally common in machine learning.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1317.1,
+      "ts_end": 1318.98,
+      "text": "To train, adjust and evaluate models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1319.38,
+      "ts_end": 1320.52,
+      "text": "So here you can see.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1320.52,
+      "ts_end": 1322.12,
+      "text": "I have written a random split function.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1322.34,
+      "ts_end": 1324.38,
+      "text": "What this function is doing is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1324.42,
+      "ts_end": 1325.94,
+      "text": "It just takes the train end.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1326.06,
+      "ts_end": 1327.74,
+      "text": "Which is the fraction of the training data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1327.86,
+      "ts_end": 1329.26,
+      "text": "Which is train frac.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1329.28,
+      "ts_end": 1330.5,
+      "text": "It is going to be 0.7.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1330.72,
+      "ts_end": 1332.58,
+      "text": "Validation frac is going to be 0.2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1332.78,
+      "ts_end": 1335.56,
+      "text": "So we first construct the training data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1335.72,
+      "ts_end": 1338.72,
+      "text": "Which is 70% of the main data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1338.88,
+      "ts_end": 1342.34,
+      "text": "The validation data frame is the remaining 20%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1342.34,
+      "ts_end": 1346.14,
+      "text": "And the test data frame is the remaining 20%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1346.14,
+      "ts_end": 1348.94,
+      "text": "The validation data frame is the 10%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1348.94,
+      "ts_end": 1350.5,
+      "text": "The test data frame is the 10%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1350.52,
+      "ts_end": 1353.2,
+      "text": "The validation data frame is the remaining 20% of the full data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1354.28,
+      "ts_end": 1356.36,
+      "text": "And then when this function is called out.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1356.44,
+      "ts_end": 1358.82,
+      "text": "It will actually return the training data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1358.94,
+      "ts_end": 1360.48,
+      "text": "The validation data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1360.58,
+      "ts_end": 1361.82,
+      "text": "And the testing data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1361.9,
+      "ts_end": 1363.7,
+      "text": "So it will return 3 data frames to us.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1364.94,
+      "ts_end": 1367.36,
+      "text": "So now we can actually test this function.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1367.5,
+      "ts_end": 1368.94,
+      "text": "So we have this balanced data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1369.02,
+      "ts_end": 1371.32,
+      "text": "And we pass it into this function called random split.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1371.7,
+      "ts_end": 1373.66,
+      "text": "And once it is passed into this function.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1373.8,
+      "ts_end": 1375.42,
+      "text": "We also specify the train fraction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1375.54,
+      "ts_end": 1376.46,
+      "text": "Which is 0.7.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1376.72,
+      "ts_end": 1378.72,
+      "text": "And we specify the validation fraction.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1378.84,
+      "ts_end": 1379.7,
+      "text": "Which is 0.1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1379.7,
+      "ts_end": 1382.28,
+      "text": "And then we construct the train data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1382.34,
+      "ts_end": 1383.46,
+      "text": "The validation data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1383.56,
+      "ts_end": 1384.62,
+      "text": "And the test data frame.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1385.41,
+      "ts_end": 1386.53,
+      "text": "So let us check.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1388.72,
+      "ts_end": 1391.72,
+      "text": "Whether the length makes sense.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1391.82,
+      "ts_end": 1393.74,
+      "text": "So I am just going to type in new code here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1393.88,
+      "ts_end": 1394.36,
+      "text": "So I am just going to type in new code here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1394.36,
+      "ts_end": 1396.91,
+      "text": "Which is length of train df.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1397.19,
+      "ts_end": 1398.73,
+      "text": "Let's see what is the length.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1399.78,
+      "ts_end": 1401.08,
+      "text": "It is 1045.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1403.24,
+      "ts_end": 1405.78,
+      "text": "Yeah so length of train df is 1045.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1406.58,
+      "ts_end": 1410.96,
+      "text": "Because the total number of spam and not spam is 747 plus 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1411.2,
+      "ts_end": 1412.42,
+      "text": "Because the total number of spam and not spam is 747 plus 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1412.42,
+      "ts_end": 1413.34,
+      "text": "Because the total number of spam and not spam is 747 plus 747 plus 747.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1413.34,
+      "ts_end": 1419.7,
+      "text": "Then let me also print out length of validation df.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1420.92,
+      "ts_end": 1421.44,
+      "text": "Then let me also print out length of validation df.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1421.44,
+      "ts_end": 1425.21,
+      "text": "And let me also print out length of test df.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1425.27,
+      "ts_end": 1426.89,
+      "text": "And let me print out.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1427.43,
+      "ts_end": 1428.75,
+      "text": "All of these actually.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1429.23,
+      "ts_end": 1431.49,
+      "text": "So that we can see.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1431.51,
+      "ts_end": 1433.87,
+      "text": "Although all of them indeed add up to 1494.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1436.15,
+      "ts_end": 1439.56,
+      "text": "So right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1439.74,
+      "ts_end": 1441.16,
+      "text": "So now I am printing this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1459.06,
+      "ts_end": 1462.36,
+      "text": "So here you see that the length of train df is 1045.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1464.12,
+      "ts_end": 1474.99,
+      "text": "df is 149 and test df is 300 so let's add them here 1045 1045 plus 149 plus 300 and let's see",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": null,
+          "extracted_text": "1045+149+300\n1494\nMaths solver",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Google calculator interface showing a math computation with result 1494 and a scientific calculator keypad with trigonometric and logarithmic functions.",
+          "diagram_elements": [
+            "Search query: 1045+149+300",
+            "Result display: 1494",
+            "Calculator buttons: Rad, Deg, x!, (, ), %, AC",
+            "Function buttons: Inv, sin, ln, 7, 8, 9, +",
+            "Function buttons: \u03c0, cos, log, 4, 5, 6, \u00d7",
+            "Function buttons: e, tan, \u221a, 1, 2, 3, \u2212",
+            "Function buttons: Ans, EXP, x^, 0, ., =, +",
+            "Maths solver button"
+          ],
+          "confidence": 0.95,
+          "frame_id": "yZpy_hsC1bE_f0004",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1474.299667,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1474.99,
+      "ts_end": 1481.47,
+      "text": "so it's 1494 and this is 747 plus 747 so that makes sense this is kind of a check that the",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0005"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": null,
+          "extracted_text": null,
+          "code": {
+            "language": "python",
+            "content": "train_df, validation_df, test_df = random_split(balanced_df)\n# Test size is implied to be 0.2 as the remainder\n\nprint(len(train_df))\nprint(len(validation_df))\nprint(len(test_df))\n\n1045\n149\n300\n\ntrain_df.to_csv(<=None)"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "yZpy_hsC1bE_f0005",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1480.066333,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0005.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1481.47,
+      "ts_end": 1486.67,
+      "text": "training validation and testing data frames have been created correctly i like to do these checks",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1486.67,
+      "ts_end": 1492.12,
+      "text": "once in a while to just make sure that we are on the right track in the code now what you can do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1492.12,
+      "ts_end": 1496.86,
+      "text": "is that we will also convert these data frames into csv files because we need to reuse them later",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1496.86,
+      "ts_end": 1506.83,
+      "text": "so we are just going to use the to csv function so you can search this to csv pandas what this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1506.83,
+      "ts_end": 1512.23,
+      "text": "does is that it can take your data frame and it can convert it into a csv file i'll also add the",
+      "frame_ids": [
+        "yZpy_hsC1bE_f0006",
+        "yZpy_hsC1bE_f0007"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": null,
+          "extracted_text": "Google Search Results for 'to_csv pandas'\n\nSearch results shown:\n1. pandas - Python\nhttps://pandas.pydata.org | docs | reference | api | pand...\npandas.DataFrame.to_csv \u2014 pandas 2.2.3 documentation\nWrite object to a comma-separated values (csv) file. Parameters: path_or_buffer, path object, file ...\n2.1  2.0  Dev  1.3\n\n2. Stack Overflow\nhttps://stackoverflow.com | questions | writing-a-panda...\nWriting a pandas DataFrame to CSV file - python\nTo write a pandas DataFrame to a CSV file, you will need DataFrame to_csv. This function offers many arguments with reasonable defaults.\n10 answers  Top answer: To delimit by a tab you can use the sep argument of to_csv: df.to_cs...\nPandas to_csv() slow saving large dataframe - Stack ...  6 answers  17 Nov 2016\nPandas DataFrame.to_csv raising IOError: No such file ...  6 answers  6 Nov 2017\npandas to_csv doesn't output the file - Stack Overflow  7 answers  17 Jan 2019\nPandas to_csv() checking for overwrite - python ...  4 answers  2 Nov 2016\nMore results from stackoverflow.com\n\n3. GeeksforGeeks\nhttps://www.geeksforgeeks.org | saving-a-pandas-dataf...\nSaving a Pandas Dataframe as a CSV\n29 Aug 2024 \u2014 In this article, we will learn how we can save a pandas dataframe as a CSV file by using the Pandas to_csv() method.",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "yZpy_hsC1bE_f0006",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1507.299667,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0006.jpg"
+        },
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "pandas.DataFrame.to_csv",
+          "extracted_text": "Write object to a comma-separated values (csv) file.\n\nParameters:\n\npath_or_buf : str, path object, file-like object, or None, default None\nString, path object (implementing os.PathLike[str]), or file-like object implementing a write() function. If None, the result is returned as a string. If a non-binary file object is passed, it should be opened with newline='', disabling universal newlines. If a binary file object is passed, mode might need to contain a 'b'.\n\nsep : str, default ','\nString of length 1. Field delimiter for the output file.\n\nna_rep : str, default ''\n\nfloat_format : str, callable, default None",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.92,
+          "frame_id": "yZpy_hsC1bE_f0007",
+          "video_id": "yZpy_hsC1bE",
+          "timestamp_sec": 1510.166333,
+          "source_image": "data/frames/yZpy_hsC1bE/yZpy_hsC1bE_f0007.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 1512.23,
+      "ts_end": 1518.27,
+      "text": "link to this in the information description so you can apply this function to the training data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1518.27,
+      "ts_end": 1522.39,
+      "text": "frame validation data frame and also to the testing data frame and then you can get the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1522.39,
+      "ts_end": 1523.27,
+      "text": "train.csv",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1523.27,
+      "ts_end": 1530.37,
+      "text": "validation.csv and the test.csv files so until now we have reached a stage where we have finished",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1530.37,
+      "ts_end": 1535.69,
+      "text": "the first step which i had mentioned over here and that first step was to download and pre-process",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1535.69,
+      "ts_end": 1541.09,
+      "text": "the data set we downloaded the data set we balanced the data set which was a part of pre-processing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1541.09,
+      "ts_end": 1548.17,
+      "text": "so that the number of spam and not spam are the same which is 747 and then we divided the data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1548.17,
+      "ts_end": 1553.27,
+      "text": "set into training 70 percent validation 20 percent and testing 10 percent",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1554.33,
+      "ts_end": 1559.07,
+      "text": "and now in the next lecture what we are going to see is that we are going to first create data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1559.07,
+      "ts_end": 1563.81,
+      "text": "loaders so that we can also do batch processing and it's generally much better when you work",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1563.81,
+      "ts_end": 1569.77,
+      "text": "with large language models to use data loaders and then we are going to see how can we load the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1569.77,
+      "ts_end": 1574.63,
+      "text": "pre-trained weights how can we modify the model etc you might be thinking right how can a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1574.63,
+      "ts_end": 1579.63,
+      "text": "classification task be done using large language models so what happens towards the end is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1579.63,
+      "ts_end": 1584.31,
+      "text": "we usually fit another neural network at the end of this and that's going to be the end of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1584.33,
+      "ts_end": 1589.85,
+      "text": "lecture and that will have a softmax output so that the class so that will be the classification",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1591.24,
+      "ts_end": 1596.44,
+      "text": "output so there is some augmentation which we'll need to do here so that the output is either spam",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1596.44,
+      "ts_end": 1601.66,
+      "text": "or no spam which is zero or one so we'll take the architecture the same architecture we worked on",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1601.66,
+      "ts_end": 1606.8,
+      "text": "earlier but we'll augment it we'll augment the end part of it the architecture so that it's suitable",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1606.8,
+      "ts_end": 1612.78,
+      "text": "for classification so this brings us to the end of the lecture thanks a lot everyone i hope you are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1612.78,
+      "ts_end": 1614.92,
+      "text": "liking this approach of whiteboard notes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1615.1,
+      "ts_end": 1620.56,
+      "text": "plus coding we have covered a huge number of lectures in this series before but if you are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1620.56,
+      "ts_end": 1625.34,
+      "text": "landing onto this video series for the first time it's fine i usually try to make every lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1625.34,
+      "ts_end": 1630.46,
+      "text": "self-contained but if you want to revise any of your concepts or want to learn these concepts from",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1630.46,
+      "ts_end": 1634.12,
+      "text": "scratch please go through the previous lectures in this series also",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1634.12,
+      "ts_end": 1637.7,
+      "text": "thanks a lot everyone and i look forward to seeing you in the next lecture",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 8,
+  "frames_with_content": 8
+}

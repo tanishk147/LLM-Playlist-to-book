@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing tensor shape transformations and parameter annotations for query/key/value projections across multiple heads.",
+  "diagram_elements": [
+    "head 2",
+    "(1, 2, 3, 3)",
+    "(b, num_heads, num_tokens, num_tokens)",
+    "(s, head_dim, num_tokens)",
+    "query, keys, transpose(2, 3), logits",
+    "tensor with shape annotations"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0051",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2168.233,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0051.jpg"
+}

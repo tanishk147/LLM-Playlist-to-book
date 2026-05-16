@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "tensor([[[[-8.2252,\n         [-1.3722, -7.0720,\n         [-5.8961, -2.7236, -1.0160]],\n\n        [[ 4.6567,\n         [-1.3167,  1.3964,\n         [ 2.3820,  2.7213,  0.8448]]])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0053",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2262.666333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0053.jpg"
+}

@@ -1,0 +1,18 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Technique 2: Top-K Sampling",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Handwritten explanation of top-K sampling technique showing the process of restricting sampled tokens to the top K most likely tokens and excluding all other tokens.",
+  "diagram_elements": [
+    "Technique 2: Top-K Sampling",
+    "Restrict the sampled token to the top K most likely tokens and exclude all other tokens"
+  ],
+  "confidence": 0.85,
+  "frame_id": "EhU32O7DkA4_f0000",
+  "video_id": "EhU32O7DkA4",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/EhU32O7DkA4/EhU32O7DkA4_f0000.jpg"
+}

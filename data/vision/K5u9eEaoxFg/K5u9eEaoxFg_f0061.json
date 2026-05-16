@@ -1,0 +1,24 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Multi-head attention mechanism showing tensor reshaping across multiple heads, with annotations for head dimensions and the process of finding attention weights and masking attention scores.",
+  "diagram_elements": [
+    "Head 2 (left tensor)",
+    "Head 2 (right tensor)",
+    "A (1, 2, 3, 3) - input shape",
+    "b (num_tokens, head_dim) - reshaped tensor",
+    "(1, 2, 3, 3) - output shape",
+    "(b, num_heads, head_dim, num_tokens) - tensor dimensions",
+    "Find attention weights",
+    "Mask attention scores to implement"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0061",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2671.066333,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0061.jpg"
+}

@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "OpenAI GPT-2 Weights",
+  "extracted_text": "Data Card | Code (0) | Discussion (1) | Suggestions (0)\n\n117M (1 directories)\n\nAbout this directory\n\nOld, incorrectly counted sizes: https://github.com/openai/gpt-2\n\nNote that our original parameter counts were wrong due to an error (in our previous blog posts and paper). Thus you may have seen small referred to as 117M and medium referred to as 345M.\n\nData Explorer\nVersion 5 (13.18 GB)\n- 117M\n  - 117M\n  - 124M\n  - 1558M\n  - 345M\n  - 355M\n  - 774M\n  - src\n  ... 6 more\n\nSummary\n- 47 files\n\nExercise | NLP\nDeep Learning",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "izyxvl-2JlM_f0007",
+  "video_id": "izyxvl-2JlM",
+  "timestamp_sec": 823.799667,
+  "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0007.jpg"
+}

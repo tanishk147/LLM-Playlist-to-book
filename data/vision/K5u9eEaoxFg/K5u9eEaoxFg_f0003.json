@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "x = torch.tensor([[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0],\n                    [6.0, 5.0, 4.0, 3.0, 2.0, 1.0],\n                    [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]]])"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "K5u9eEaoxFg_f0003",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 675.233,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0003.jpg"
+}

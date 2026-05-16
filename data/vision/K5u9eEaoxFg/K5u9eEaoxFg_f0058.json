@@ -1,0 +1,22 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Divide by head-dim = d_out/num_heads = \u221a(6/2) = \u221a3\nApply softmax",
+  "code": null,
+  "math": [
+    "\\text{head-dim} = \\frac{d_{out}}{\\text{num\\_heads}} = \\sqrt{\\frac{6}{2}} = \\sqrt{3}"
+  ],
+  "diagram_summary": "Tensor output showing multi-head attention computation with division by head dimension and softmax application, displaying numerical tensor values with shape annotations.",
+  "diagram_elements": [
+    "tensor output with numerical values",
+    "head-dim calculation",
+    "softmax operation",
+    "dimension scaling"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0058",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2427.233,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0058.jpg"
+}

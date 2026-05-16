@@ -1,0 +1,8 @@
+graph LR
+    A["GPTDatasetV1"] -->|pulls batches| B["DataLoader"]
+    B -->|batch| C["Input Tensor X"]
+    B -->|batch| D["Target Tensor Y<br/>(X shifted by 1)"]
+    style A fill:#e1f5ff
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#f3e5f5

@@ -1,0 +1,15 @@
+{
+  "category": "other",
+  "skip": false,
+  "title": "SMS Spam Collection",
+  "extracted_text": "The SMS Spam Collection is a public set of SMS labeled messages that have been collected for mobile phone spam research.\n\nDataset Characteristics\nMultivariate, Text, Domain-Theory\n\nSubject Area\nComputer Science\n\nAssociated Tasks\nClassification, Clustering\n\nFeature Type\nReal\n\n# Instances\n5574\n\n# Features\n-\n\nDataset Information\nAdditional Information\nThis corpus has been collected from free or free for research sources at the Internet:\n\n-> A collection of 425 SMS spam messages was manually extracted from the Grumbletext Web site. This is a UK forum in ...\n\nHas Missing Values?\n\nCreators\nTiago Almeida\nJos Hidalgo\n\nDOI\n10.24432/C5CC84\n\nLicense\nThis dataset is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.\n\nThis allows for the sharing and adaptation of datasets for any purpose, provided that the appropriate credit is given.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "0PpxZ3kNPWo_f0001",
+  "video_id": "0PpxZ3kNPWo",
+  "timestamp_sec": 74.033,
+  "source_image": "data/frames/0PpxZ3kNPWo/0PpxZ3kNPWo_f0001.jpg"
+}

@@ -1,0 +1,161 @@
+## Claims (cite these by ID inline as [cNNN])
+- c1267 [definition | NLn4eetGmf8 @ 542-737s]
+  The encoder is a component of the transformer architecture that takes tokenized input text and converts it into vector embeddings.
+- c1270 [definition | NLn4eetGmf8 @ 841-949s]
+  The decoder is a component of the transformer architecture that generates output text one word at a time, receiving both vector embeddings from the encoder and partial output text.
+- c1277 [definition | NLn4eetGmf8 @ 1279-1289s]
+  Attention mechanisms have become an integral part of sequence modeling, allowing modeling of dependencies without regard to the distance between input or output sequences.
+- c1280 [definition | NLn4eetGmf8 @ 1371-1389s]
+  Long-range dependencies refer to the need to understand context from distant parts of a sequence (such as earlier sentences) to accurately predict the next word in a later sentence.
+- c1288 [definition | NLn4eetGmf8 @ 1566-1586s]
+  BERT stands for Bi-directional Encoder Representations from Transformers.
+- c1289 [definition | NLn4eetGmf8 @ 1588-1596s]
+  GPT stands for Generative Pre-trained Transformers.
+- c1306 [definition | NLn4eetGmf8 @ 1921-1926s]
+  Vision Transformers (ViT) are transformer models applied to computer vision tasks such as image recognition and image classification.
+- c1313 [definition | NLn4eetGmf8 @ 2051-2060s]
+  Recurrent Neural Networks (RNNs) maintain a feedback loop to incorporate memory.
+- c1314 [definition | NLn4eetGmf8 @ 2061-2074s]
+  Long Short-Term Memory (LSTM) networks incorporate two separate paths: one for short-term memories and one for long-term memories.
+- c1324 [definition | NLn4eetGmf8 @ 2284-2297s]
+  BERT (Bidirectional Encoder Representations from Transformers) is a transformer variation that predicts hidden or masked words in a sentence.
+- c1328 [definition | NLn4eetGmf8 @ 2330-2343s]
+  GPT (Generative Pre-trained Transformer) performs left-to-right analysis, receiving incomplete text and predicting the next word one word at a time.
+- c1481 [definition | XN7sevVxyUM @ 234-238s]
+  Long-term dependencies in sentences are complex sentence structures where multiple clauses or phrases are connected, making it difficult for language models to identify relationships between distant words.
+- c1487 [definition | XN7sevVxyUM @ 416-423s]
+  Simplified self-attention is the purest and most basic form of the attention technique.
+- c1488 [definition | XN7sevVxyUM @ 430-436s]
+  Self-attention introduces trainable weights which form the basis of the actual mechanism used in LLMs.
+- c1502 [definition | XN7sevVxyUM @ 1036-1047s]
+  The hidden state in an RNN captures memory of previous inputs in the sequence.
+- c1504 [definition | XN7sevVxyUM @ 1071-1084s]
+  The final hidden state from the encoder is called the context vector.
+- c1517 [definition | XN7sevVxyUM @ 1463-1614s]
+  Loss of context is the problem that occurs when an RNN decoder struggles to capture longer dependencies and contextual information because it relies on only one final hidden state.
+- c1525 [definition | XN7sevVxyUM @ 1806-1842s]
+  The Bahdanau attention mechanism allows the decoder to selectively access different parts of the input sequence at each decoding step, rather than relying only on the final hidden state.
+- c1533 [definition | XN7sevVxyUM @ 2233-2256s]
+  Dynamic focus is the key property of the attention mechanism that allows the decoder to selectively choose which inputs to focus on and how much attention to give to each input at every decoding step.
+- c1535 [definition | XN7sevVxyUM @ 2537-2542s]
+  Recurrent Neural Networks (RNNs) are designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.
+- c1538 [definition | XN7sevVxyUM @ 2542-2548s]
+  The hidden state is the key innovation of RNNs that enables them to process sequential data.
+- c1541 [definition | XN7sevVxyUM @ 2564-2571s]
+  LSTMs solve the vanishing gradient problem by maintaining both a long-term memory route and a short-term memory route.
+- c1544 [definition | XN7sevVxyUM @ 2576-2588s]
+  The Bahdanau attention mechanism allows the decoder to have access to each input state during decoding and selectively decide which inputs to give more attention to.
+- c1548 [definition | XN7sevVxyUM @ 2662-2675s]
+  Self-attention is a mechanism that allows each position of an input sequence to attend to all positions in the same sequence.
+- c1553 [definition | XN7sevVxyUM @ 2811-2828s]
+  In self-attention, the term 'self' refers to the attention mechanism's ability to compute attention weights by relating different positions in a single input sequence.
+- c1557 [definition | XN7sevVxyUM @ 2920-2944s]
+  In attention mechanisms, when decoding a particular part, the decoder has access to all of the input tokens and decides how much attention to give to each input.
+- c1558 [definition | XN7sevVxyUM @ 2950-2970s]
+  Traditional attention looks at one input sequence and one output sequence, determining which parts of the output sequence are more related to which parts of the input sequence.
+- c1559 [definition | XN7sevVxyUM @ 2970-2981s]
+  Self-attention looks at one sequence and examines how different parts of that same sequence are related with respect to each other.
+- c1303 [fact | NLn4eetGmf8 @ 1857-1862s]
+  Both BERT and GPT have the word 'transformers' in their names because they originated from the transformer architecture.
+- c1326 [fact | NLn4eetGmf8 @ 2310-2314s]
+  BERT has only an encoder architecture and does not have a decoder.
+- c1295 [architecture | NLn4eetGmf8 @ 1877-1878s]
+  BERT uses an encoder architecture.
+- c1273 [architecture | NLn4eetGmf8 @ 1206-1232s]
+  The transformer architecture consists of two main blocks: an encoder block that converts input text to embedding vectors, and a decoder block that generates output text from embedding vectors and partial output.
+- c1534 [fact | XN7sevVxyUM @ 2090-2115s]
+  The Transformer architecture, introduced in 2017, was built with the self-attention mechanism at its core, which was inspired by the Bahdanau attention mechanism.
+- c1486 [fact | XN7sevVxyUM @ 386-399s]
+  Multi-head attention is the main attention mechanism used in GPT, generative pre-trained transformers, and modern LLMs.
+- c1546 [fact | XN7sevVxyUM @ 2595-2608s]
+  The Transformer architecture is built on the attention mechanism proposed in 2014.
+- c1497 [architecture | XN7sevVxyUM @ 887-917s]
+  The encoder-decoder architecture consists of two sub-modules: an encoder that processes the input sequence and a decoder that generates the output sequence.
+- c1527 [fact | XN7sevVxyUM @ 1916-1926s]
+  The attention mechanism solves the problem of long-range dependencies by allowing the decoder to access all input tokens even in long sentences and selectively focus on relevant tokens.
+- c1479 [fact | XN7sevVxyUM @ 78-96s]
+  Transformers are conceptualized as the secret sauce behind large language models, with the attention mechanism serving as the engine that drives the transformer.
+- c1521 [fact | XN7sevVxyUM @ 1661-1672s]
+  In standard RNN encoder-decoder architecture, the decoder only receives the final hidden state and does not have access to all prior input words.
+- c1320 [fact | NLn4eetGmf8 @ 2186-2212s]
+  The simplified transformer architecture consists of 8 steps: tokenization, encoding, decoding with partial output, and word-by-word generation.
+- c1268 [fact | NLn4eetGmf8 @ 366-382s]
+  The transformer architecture consists of 8 steps that convert input text to output text through encoding and decoding processes.
+- c1519 [fact | XN7sevVxyUM @ 1607-1626s]
+  Loss of context was one of the biggest issues that made RNNs less effective compared to models based on attention mechanisms like GPT.
+- c1499 [fact | XN7sevVxyUM @ 901-968s]
+  In the encoder-decoder architecture, the encoder processes the entire input sequence and generates a context vector, which is then passed to the decoder to generate the output sequence.
+- c1319 [fact | NLn4eetGmf8 @ 2174-2182s]
+  The original transformer architecture was developed for machine translation tasks, specifically translating English text into German and French.
+- c1302 [fact | NLn4eetGmf8 @ 1841-1845s]
+  GPT can complete missing text and perform sentiment analysis, though sentiment analysis is a specialty of BERT.
+- c1530 [fact | XN7sevVxyUM @ 2286-2311s]
+  In the attention-augmented encoder-decoder architecture, all encoder hidden states (not just the final one) are passed to the decoder at every decoding step.
+- c1275 [fact | NLn4eetGmf8 @ 1032-1042s]
+  The transformer uses feed forward layers with weights and parameters that are optimized during training to predict output words correctly.
+- c1269 [fact | NLn4eetGmf8 @ 386-416s]
+  The original transformer architecture was designed to convert English to German through machine translation.
+- c1526 [fact | XN7sevVxyUM @ 1870-1903s]
+  In the attention mechanism, the decoder has access to all input tokens and can decide how much attention to pay to each token when generating an output word.
+- c1524 [fact | XN7sevVxyUM @ 1760-1790s]
+  Attention was introduced in 2014, three years before the 2017 'Attention Is All You Need' paper that introduced the Transformer architecture.
+- c1545 [fact | XN7sevVxyUM @ 2589-2594s]
+  The Transformer architecture was introduced in 2017.
+- c1510 [architecture | XN7sevVxyUM @ 1298-1307s]
+  In sequence-to-sequence models, the encoder and decoder are both recurrent neural networks that each maintain and update hidden states at each time step.
+- c1542 [fact | XN7sevVxyUM @ 2571-2576s]
+  Both RNNs and LSTMs had problems with respect to longer context.
+- c1500 [architecture | XN7sevVxyUM @ 975-1001s]
+  Recurrent neural networks employ an encoder-decoder architecture for language translation.
+- c1537 [fact | XN7sevVxyUM @ 2537-2542s]
+  RNNs were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more.
+- c1281 [fact | NLn4eetGmf8 @ 1395-1407s]
+  The self-attention mechanism allows the model to capture long-range dependencies so that it can look far behind to sentences closer to the current one to identify the next word.
+- c1522 [fact | XN7sevVxyUM @ 1711-1742s]
+  A major shortcoming of RNNs is that they must remember the entire encoded input in a single hidden state before passing it to the decoder.
+- c1523 [fact | XN7sevVxyUM @ 1748-1804s]
+  The Bahdanau attention mechanism was developed in 2014 in the paper 'Neural Machine Translation by Jointly Learning to Align and Translate' by Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
+- c1296 [fact | NLn4eetGmf8 @ 1733-1740s]
+  GPT processes text from left to right, predicting only rightmost unknown information.
+- c1286 [fact | NLn4eetGmf8 @ 1514-1533s]
+  In ChatGPT, when you write an input, GPT gives attention to every sentence and then predicts what the next word could be, rather than just looking at the sentence before the current one.
+- c1276 [fact | NLn4eetGmf8 @ 1164-1172s]
+  The transformer can be understood at its simplest form as a neural network where parameters are optimized through training.
+- c1325 [fact | NLn4eetGmf8 @ 2302-2310s]
+  BERT pays attention to a sentence from both left and right directions, making it bidirectional.
+- c1297 [fact | NLn4eetGmf8 @ 1744-1748s]
+  BERT is bidirectional, attending to different parts of the sentence from both left and right directions.
+- c1327 [fact | NLn4eetGmf8 @ 2315-2327s]
+  BERT models are commonly used for sentiment analysis because they can capture the meanings of different words and how they relate to each other.
+- c1511 [design_decision | XN7sevVxyUM @ 1334-1348s]
+  The decoder has access only to the final hidden state from the encoder, not to previous intermediate hidden states.
+- c1271 [fact | NLn4eetGmf8 @ 853-900s]
+  The transformer generates output one word at a time, making previously generated words available to the model when predicting the next word.
+- c1505 [fact | XN7sevVxyUM @ 1084-1104s]
+  The context vector is passed from the encoder to the decoder to convey the encoded meaning of the input text.
+- c1513 [fact | XN7sevVxyUM @ 1396-1407s]
+  The encoder processes the entire input text into one final hidden state which serves as the memory cell for the decoder.
+- c1293 [fact | NLn4eetGmf8 @ 1727-1728s]
+  GPT generates one word at a time.
+- c1316 [fact | NLn4eetGmf8 @ 2113-2119s]
+  The terms 'transformers' and 'large language models' should not be used interchangeably as they are different concepts.
+- c1506 [fact | XN7sevVxyUM @ 1105-1113s]
+  The decoder uses the final hidden state to generate the translated sentence one word at a time.
+- c1308 [fact | NLn4eetGmf8 @ 1996-2002s]
+  Not all large language models (LLMs) are based on transformer architecture.
+- c1279 [fact | NLn4eetGmf8 @ 1326-1338s]
+  The self-attention mechanism allows the model to weigh the importance of different words and tokens relative to each other.
+- c1299 [fact | NLn4eetGmf8 @ 1790-1797s]
+  BERT can capture nuances and relationships between words by looking at the entire sentence from both directions.
+- c1480 [fact | XN7sevVxyUM @ 96-104s]
+  The attention mechanism is a key factor in the strong performance of large language models like ChatGPT.
+- c1514 [fact | XN7sevVxyUM @ 1425-1444s]
+  A recurrent neural network cannot directly access earlier hidden states during decoding; it only accesses the final hidden state from the encoder.
+- c1284 [fact | NLn4eetGmf8 @ 1455-1465s]
+  The paper 'Attention is All You Need' is named because of the self-attention mechanism and the intuition behind attention that was introduced.
+- c1283 [fact | NLn4eetGmf8 @ 1443-1454s]
+  Attention blocks in multi-head attention ensure that long-range dependencies in sentences are captured.
+- c1556 [fact | XN7sevVxyUM @ 2903-2925s]
+  In recurrent neural networks, the decoder does not have access to the previous inputs, which leads to context loss when dealing with long sentences.
+- c1290 [fact | NLn4eetGmf8 @ 1598-1603s]
+  GPT is a pre-trained or foundational model.

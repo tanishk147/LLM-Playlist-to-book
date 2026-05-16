@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "We now normalize each row so that the values in each row sum to 1:",
+  "code": {
+    "language": "python",
+    "content": "print(attn_scores)\n\nensor([[0.9995, 0.9544, 0.9422, 0.4753, 0.4576, 0.6310],\n        [0.9544, 1.4950, 1.4754, 0.8434, 0.7070, 1.0865],\n        [0.9422, 1.4754, 1.4570, 0.8296, 0.7154, 1.0605],\n        [0.4753, 0.8434, 0.8296, 0.4937, 0.3474, 0.6565],\n        [0.4576, 0.7070, 0.7154, 0.3474, 0.6654, 0.2935],\n        [0.6310, 1.0865, 1.0605, 0.6565, 0.2935, 0.9450]])\n\nattn_weights = torch.softmax(attn_scores, dim=-1)\nprint(attn_weights)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "eSRhpYLerw4_f0005",
+  "video_id": "eSRhpYLerw4",
+  "timestamp_sec": 3731.166333,
+  "source_image": "data/frames/eSRhpYLerw4/eSRhpYLerw4_f0005.jpg"
+}

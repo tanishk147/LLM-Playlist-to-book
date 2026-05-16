@@ -1,0 +1,20 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Semantically Similar Words Should Have Similar Vectors",
+  "extracted_text": "has_a_tail\nis_eatable\nhas_4_legs\nmakes_sound\nis_a_pet",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Word embedding vectors for four semantically related words (dog, cat, apple, banana) represented as numerical feature vectors with five attributes.",
+  "diagram_elements": [
+    "\"dog\" vector: [23, 2, 19, 12, 35]",
+    "\"cat\" vector: [31, 3, 21, 18, 31]",
+    "\"apple\" vector: [1, 22, 0, 0.5, 5]",
+    "\"banana\" vector: [2, 38, 0, 0.2, 7]"
+  ],
+  "confidence": 0.95,
+  "frame_id": "ghCSGRgVB_o_f0007",
+  "video_id": "ghCSGRgVB_o",
+  "timestamp_sec": 787.499667,
+  "source_image": "data/frames/ghCSGRgVB_o/ghCSGRgVB_o_f0007.jpg"
+}

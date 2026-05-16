@@ -1,0 +1,1479 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "Modern large language models did not appear out of nowhere.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence with no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "They are the product of a decades-long search for better ways to process sequential data\u2014text, speech, music\u2014and the story of how we got here is worth telling carefully.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Narrative framing; no specific factual claim."
+    },
+    {
+      "index": 3,
+      "text": "This chapter traces that history, from the early days of recurrent networks through the attention mechanism and into the transformer architecture that powers models like BERT and GPT today.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Chapter overview; narrative framing."
+    },
+    {
+      "index": 4,
+      "text": "By the end, you will understand not just *what* these components are, but *why* they were designed the way they were and what problems each design was trying to solve.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Learning objective statement; narrative framing."
+    },
+    {
+      "index": 5,
+      "text": "The transformer is, at its simplest, a neural network whose parameters are optimized through training to predict output words correctly [c1276].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1276"
+      ],
+      "status": "grounded",
+      "reason": "c1276 directly supports this definition of the transformer."
+    },
+    {
+      "index": 6,
+      "text": "It converts input text to output text through a structured pipeline [c1268], and in its original form that pipeline was designed specifically for machine translation\u2014converting English text into German and French [c1319, c1269].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1268",
+        "c1319",
+        "c1269"
+      ],
+      "status": "grounded",
+      "reason": "c1268 supports the pipeline claim; c1319 and c1269 both support the machine translation purpose."
+    },
+    {
+      "index": 7,
+      "text": "The transformer architecture consists of two main blocks [c1273]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1273"
+      ],
+      "status": "grounded",
+      "reason": "c1273 directly states the transformer consists of encoder and decoder blocks."
+    },
+    {
+      "index": 8,
+      "text": "An **encoder block** that converts input text into embedding vectors.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "This is part of the list introduced by c1273, but the specific claim about converting to embedding vectors is not explicitly cited here. However, c1267 supports this separately."
+    },
+    {
+      "index": 9,
+      "text": "A **decoder block** that generates output text from those embedding vectors and partial output already produced.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "This is part of the list introduced by c1273, but the specific claim about generating output is not explicitly cited here. However, c1270 supports this separately."
+    },
+    {
+      "index": 10,
+      "text": "[FIGURE: High-level transformer diagram showing input text flowing into an encoder block that produces embedding vectors, which feed into a decoder block alongside partial output text, producing final output text word by word]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 11,
+      "text": "The encoder is the component that takes tokenized input text and converts it into vector embeddings [c1267].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1267"
+      ],
+      "status": "grounded",
+      "reason": "c1267 directly defines the encoder as converting tokenized input to vector embeddings."
+    },
+    {
+      "index": 12,
+      "text": "The decoder is the component that generates output text one word at a time, receiving both the vector embeddings from the encoder and the partial output text generated so far [c1270].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1270"
+      ],
+      "status": "grounded",
+      "reason": "c1270 directly supports this definition of the decoder."
+    },
+    {
+      "index": 13,
+      "text": "The transformer generates output one word at a time, making previously generated words available to the model when predicting the next word [c1271].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1271"
+      ],
+      "status": "grounded",
+      "reason": "c1271 directly supports this claim."
+    },
+    {
+      "index": 14,
+      "text": "Intuitively, you can think of the encoder as a reading comprehension module and the decoder as a writing module.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive analogy; no factual claim requiring citation."
+    },
+    {
+      "index": 15,
+      "text": "The encoder reads and understands; the decoder writes, one token at a time, consulting the encoder's understanding as it goes.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Continuation of intuitive analogy; narrative framing."
+    },
+    {
+      "index": 16,
+      "text": "The transformer uses feed-forward layers with weights and parameters that are optimized during training to predict output words correctly [c1275].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1275"
+      ],
+      "status": "grounded",
+      "reason": "c1275 directly supports this claim."
+    },
+    {
+      "index": 17,
+      "text": "The full simplified transformer architecture can be broken down into 8 steps: tokenization, encoding, decoding with partial output, and word-by-word generation [c1320].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1320"
+      ],
+      "status": "grounded",
+      "reason": "c1320 directly supports the 8-step breakdown."
+    },
+    {
+      "index": 18,
+      "text": "It is worth noting upfront that the terms \"transformers\" and \"large language models\" should not be used interchangeably\u2014they are different concepts [c1316].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1316"
+      ],
+      "status": "grounded",
+      "reason": "c1316 directly supports this distinction."
+    },
+    {
+      "index": 19,
+      "text": "Not all large language models are based on transformer architecture [c1308].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1308"
+      ],
+      "status": "grounded",
+      "reason": "c1308 directly supports this claim."
+    },
+    {
+      "index": 20,
+      "text": "The transformer is one architecture; LLMs are a broader category of models, many of which happen to use transformers.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary/clarification of the previous two sentences; narrative framing."
+    },
+    {
+      "index": 21,
+      "text": "Transformers are conceptualized as the secret sauce behind large language models, with the attention mechanism serving as the engine that drives the transformer [c1479].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1479"
+      ],
+      "status": "grounded",
+      "reason": "c1479 directly supports this characterization."
+    },
+    {
+      "index": 22,
+      "text": "The attention mechanism is a key factor in the strong performance of large language models like ChatGPT [c1480].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1480"
+      ],
+      "status": "grounded",
+      "reason": "c1480 directly supports this claim."
+    },
+    {
+      "index": 23,
+      "text": "Attention mechanisms have become an integral part of sequence modeling, allowing modeling of dependencies without regard to the distance between input or output sequences [c1277].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1277"
+      ],
+      "status": "grounded",
+      "reason": "c1277 directly supports this claim."
+    },
+    {
+      "index": 24,
+      "text": "This last point\u2014*without regard to distance*\u2014is the crucial one.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Emphasis/transition; no new factual claim."
+    },
+    {
+      "index": 25,
+      "text": "To understand why it matters, we need to understand the problem that attention was invented to solve.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to next section; no factual claim."
+    },
+    {
+      "index": 26,
+      "text": "Consider a sentence like: *\"The trophy didn't fit in the suitcase because it was too big.\"*",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Example sentence; no factual claim."
+    },
+    {
+      "index": 27,
+      "text": "What does \"it\" refer to\u2014the trophy or the suitcase?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Rhetorical question; no factual claim."
+    },
+    {
+      "index": 28,
+      "text": "A human reader resolves this instantly by connecting \"it\" to \"trophy\" across several intervening words.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Observation about human reading; no factual claim about models or architecture."
+    },
+    {
+      "index": 29,
+      "text": "Now imagine this ambiguity stretched across multiple sentences or paragraphs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Narrative extension; no factual claim."
+    },
+    {
+      "index": 30,
+      "text": "Long-range dependencies refer to the need to understand context from distant parts of a sequence\u2014such as earlier sentences\u2014to accurately predict the next word in a later sentence [c1280].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1280"
+      ],
+      "status": "grounded",
+      "reason": "c1280 directly supports this definition."
+    },
+    {
+      "index": 31,
+      "text": "Long-term dependencies in sentences are complex sentence structures where multiple clauses or phrases are connected, making it difficult for language models to identify relationships between distant words [c1481].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1481"
+      ],
+      "status": "grounded",
+      "reason": "c1481 directly supports this definition."
+    },
+    {
+      "index": 32,
+      "text": "The self-attention mechanism allows the model to capture long-range dependencies so that it can look far behind to sentences closer to the current one to identify the next word [c1281].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1281"
+      ],
+      "status": "grounded",
+      "reason": "c1281 directly supports this claim."
+    },
+    {
+      "index": 33,
+      "text": "In ChatGPT, when you write an input, GPT gives attention to every sentence and then predicts what the next word could be, rather than just looking at the sentence immediately before the current one [c1286].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1286"
+      ],
+      "status": "grounded",
+      "reason": "c1286 directly supports this claim about ChatGPT's attention behavior."
+    },
+    {
+      "index": 34,
+      "text": "The self-attention mechanism also allows the model to weigh the importance of different words and tokens relative to each other [c1279].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1279"
+      ],
+      "status": "grounded",
+      "reason": "c1279 directly supports this claim."
+    },
+    {
+      "index": 35,
+      "text": "Attention blocks in multi-head attention ensure that long-range dependencies in sentences are captured [c1283].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1283"
+      ],
+      "status": "grounded",
+      "reason": "c1283 directly supports this claim."
+    },
+    {
+      "index": 36,
+      "text": "The paper that introduced the transformer was named \"Attention Is All You Need\" precisely because of the self-attention mechanism and the intuition behind attention that it introduced [c1284].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1284"
+      ],
+      "status": "grounded",
+      "reason": "c1284 directly supports this claim about the paper's naming."
+    },
+    {
+      "index": 37,
+      "text": "To appreciate what transformers solved, you need to understand what came before them.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to historical section; no factual claim."
+    },
+    {
+      "index": 38,
+      "text": "Recurrent Neural Networks (RNNs) are designed to work with sequential data by maintaining a hidden state that captures information about previous inputs [c1535].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1535"
+      ],
+      "status": "grounded",
+      "reason": "c1535 directly supports this definition of RNNs."
+    },
+    {
+      "index": 39,
+      "text": "The hidden state is the key innovation of RNNs that enables them to process sequential data [c1538].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1538"
+      ],
+      "status": "grounded",
+      "reason": "c1538 directly supports this claim."
+    },
+    {
+      "index": 40,
+      "text": "In an RNN, the hidden state captures memory of previous inputs in the sequence [c1502].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1502"
+      ],
+      "status": "grounded",
+      "reason": "c1502 directly supports this claim."
+    },
+    {
+      "index": 41,
+      "text": "RNNs were a significant advancement for generative models, allowing for the generation of sequences of text, music, and more [c1537].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1537"
+      ],
+      "status": "grounded",
+      "reason": "c1537 directly supports this claim."
+    },
+    {
+      "index": 42,
+      "text": "Recurrent Neural Networks maintain a feedback loop to incorporate memory [c1313].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1313"
+      ],
+      "status": "grounded",
+      "reason": "c1313 directly supports this claim."
+    },
+    {
+      "index": 43,
+      "text": "[FIGURE: RNN unrolled diagram showing input tokens x1, x2, x3 feeding into hidden states h1, h2, h3 sequentially, with each hidden state depending on the previous one]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 44,
+      "text": "For language translation, RNNs employ an encoder-decoder architecture [c1500].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1500"
+      ],
+      "status": "grounded",
+      "reason": "c1500 directly supports this claim."
+    },
+    {
+      "index": 45,
+      "text": "In sequence-to-sequence models, the encoder and decoder are both recurrent neural networks that each maintain and update hidden states at each time step [c1510].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1510"
+      ],
+      "status": "grounded",
+      "reason": "c1510 directly supports this claim."
+    },
+    {
+      "index": 46,
+      "text": "In the encoder-decoder architecture, the encoder processes the entire input sequence and generates a context vector, which is then passed to the decoder to generate the output sequence [c1499].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1499"
+      ],
+      "status": "grounded",
+      "reason": "c1499 directly supports this claim."
+    },
+    {
+      "index": 47,
+      "text": "The final hidden state from the encoder is called the **context vector** [c1504].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1504"
+      ],
+      "status": "grounded",
+      "reason": "c1504 directly supports this definition."
+    },
+    {
+      "index": 48,
+      "text": "The context vector is passed from the encoder to the decoder to convey the encoded meaning of the input text [c1505].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1505"
+      ],
+      "status": "grounded",
+      "reason": "c1505 directly supports this claim."
+    },
+    {
+      "index": 49,
+      "text": "The decoder uses this final hidden state to generate the translated sentence one word at a time [c1506].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1506"
+      ],
+      "status": "grounded",
+      "reason": "c1506 directly supports this claim."
+    },
+    {
+      "index": 50,
+      "text": "The decoder has access only to the final hidden state from the encoder, not to previous intermediate hidden states [c1511].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1511"
+      ],
+      "status": "grounded",
+      "reason": "c1511 directly supports this claim."
+    },
+    {
+      "index": 51,
+      "text": "The encoder processes the entire input text into one final hidden state which serves as the memory cell for the decoder [c1513].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1513"
+      ],
+      "status": "grounded",
+      "reason": "c1513 directly supports this claim."
+    },
+    {
+      "index": 52,
+      "text": "A recurrent neural network cannot directly access earlier hidden states during decoding; it only accesses the final hidden state from the encoder [c1514].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1514"
+      ],
+      "status": "grounded",
+      "reason": "c1514 directly supports this claim."
+    },
+    {
+      "index": 53,
+      "text": "In standard RNN encoder-decoder architecture, the decoder only receives the final hidden state and does not have access to all prior input words [c1521].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1521"
+      ],
+      "status": "grounded",
+      "reason": "c1521 directly supports this claim."
+    },
+    {
+      "index": 54,
+      "text": "[FIGURE: RNN encoder-decoder diagram showing encoder processing input tokens into a single context vector, which is passed to the decoder that generates output tokens one at a time]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 55,
+      "text": "Here is the fundamental problem: compressing an entire input sentence\u2014or paragraph, or document\u2014into a single fixed-size vector is a bottleneck.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Narrative explanation of the problem; no specific factual claim requiring citation."
+    },
+    {
+      "index": 56,
+      "text": "The longer the input, the more information gets squeezed into that one vector, and the more information gets lost.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence of the bottleneck; narrative explanation."
+    },
+    {
+      "index": 57,
+      "text": "A major shortcoming of RNNs is that they must remember the entire encoded input in a single hidden state before passing it to the decoder [c1522].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1522"
+      ],
+      "status": "grounded",
+      "reason": "c1522 directly supports this claim."
+    },
+    {
+      "index": 58,
+      "text": "In recurrent neural networks, the decoder does not have access to the previous inputs, which leads to context loss when dealing with long sentences [c1556].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1556"
+      ],
+      "status": "grounded",
+      "reason": "c1556 directly supports this claim."
+    },
+    {
+      "index": 59,
+      "text": "Loss of context is the problem that occurs when an RNN decoder struggles to capture longer dependencies and contextual information because it relies on only one final hidden state [c1517].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1517"
+      ],
+      "status": "grounded",
+      "reason": "c1517 directly supports this definition."
+    },
+    {
+      "index": 60,
+      "text": "Loss of context was one of the biggest issues that made RNNs less effective compared to models based on attention mechanisms like GPT [c1519].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1519"
+      ],
+      "status": "grounded",
+      "reason": "c1519 directly supports this claim."
+    },
+    {
+      "index": 61,
+      "text": "Long Short-Term Memory (LSTM) networks were developed to address some of these limitations.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement; no specific factual claim requiring citation."
+    },
+    {
+      "index": 62,
+      "text": "LSTMs incorporate two separate paths: one for short-term memories and one for long-term memories [c1314].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1314"
+      ],
+      "status": "grounded",
+      "reason": "c1314 directly supports this claim."
+    },
+    {
+      "index": 63,
+      "text": "LSTMs solve the vanishing gradient problem by maintaining both a long-term memory route and a short-term memory route [c1541].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1541"
+      ],
+      "status": "grounded",
+      "reason": "c1541 directly supports this claim."
+    },
+    {
+      "index": 64,
+      "text": "However, both RNNs and LSTMs had problems with respect to longer context [c1542].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1542"
+      ],
+      "status": "grounded",
+      "reason": "c1542 directly supports this claim."
+    },
+    {
+      "index": 65,
+      "text": "Even with the architectural improvements of LSTMs, the fundamental bottleneck of compressing everything into a fixed context vector remained.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence of the previous claim; narrative explanation."
+    },
+    {
+      "index": 66,
+      "text": "[FIGURE: LSTM cell diagram showing two separate pathways\u2014a cell state (long-term memory) and a hidden state (short-term memory)\u2014with input, forget, and output gates]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 67,
+      "text": "The breakthrough came in 2014.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement; no specific factual claim."
+    },
+    {
+      "index": 68,
+      "text": "The Bahdanau attention mechanism was developed in the paper \"Neural Machine Translation by Jointly Learning to Align and Translate\" by Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio [c1523].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1523"
+      ],
+      "status": "grounded",
+      "reason": "c1523 directly supports this claim about the Bahdanau mechanism and paper."
+    },
+    {
+      "index": 69,
+      "text": "Attention was introduced in 2014, three years before the 2017 \"Attention Is All You Need\" paper that introduced the Transformer architecture [c1524].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1524"
+      ],
+      "status": "grounded",
+      "reason": "c1524 directly supports this timeline claim."
+    },
+    {
+      "index": 70,
+      "text": "The Transformer architecture is built on the attention mechanism proposed in 2014 [c1546].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1546"
+      ],
+      "status": "grounded",
+      "reason": "c1546 directly supports this claim."
+    },
+    {
+      "index": 71,
+      "text": "The core idea of Bahdanau attention is elegant: instead of forcing the decoder to work from a single context vector, give it access to *all* of the encoder's hidden states.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation of the core idea; narrative framing."
+    },
+    {
+      "index": 72,
+      "text": "The Bahdanau attention mechanism allows the decoder to selectively access different parts of the input sequence at each decoding step, rather than relying only on the final hidden state [c1525].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1525"
+      ],
+      "status": "grounded",
+      "reason": "c1525 directly supports this claim."
+    },
+    {
+      "index": 73,
+      "text": "The Bahdanau attention mechanism allows the decoder to have access to each input state during decoding and selectively decide which inputs to give more attention to [c1544].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1544"
+      ],
+      "status": "grounded",
+      "reason": "c1544 directly supports this claim."
+    },
+    {
+      "index": 74,
+      "text": "In the attention-augmented encoder-decoder architecture, all encoder hidden states (not just the final one) are passed to the decoder at every decoding step [c1530].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1530"
+      ],
+      "status": "grounded",
+      "reason": "c1530 directly supports this claim."
+    },
+    {
+      "index": 75,
+      "text": "[FIGURE: Bahdanau attention diagram showing all encoder hidden states h1...hN being passed to the decoder, with attention weights alpha1...alphaN computed at each decoding step to form a weighted context vector]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 76,
+      "text": "The attention mechanism solves the problem of long-range dependencies by allowing the decoder to access all input tokens even in long sentences and selectively focus on relevant tokens [c1527].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1527"
+      ],
+      "status": "grounded",
+      "reason": "c1527 directly supports this claim."
+    },
+    {
+      "index": 77,
+      "text": "In the attention mechanism, the decoder has access to all input tokens and can decide how much attention to pay to each token when generating an output word [c1526].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1526"
+      ],
+      "status": "grounded",
+      "reason": "c1526 directly supports this claim."
+    },
+    {
+      "index": 78,
+      "text": "Dynamic focus is the key property of the attention mechanism that allows the decoder to selectively choose which inputs to focus on and how much attention to give to each input at every decoding step [c1533].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1533"
+      ],
+      "status": "grounded",
+      "reason": "c1533 directly supports this definition."
+    },
+    {
+      "index": 79,
+      "text": "In attention mechanisms, when decoding a particular part, the decoder has access to all of the input tokens and decides how much attention to give to each input [c1557].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1557"
+      ],
+      "status": "grounded",
+      "reason": "c1557 directly supports this claim."
+    },
+    {
+      "index": 80,
+      "text": "Traditional attention looks at one input sequence and one output sequence, determining which parts of the output sequence are more related to which parts of the input sequence [c1558].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1558"
+      ],
+      "status": "grounded",
+      "reason": "c1558 directly supports this definition."
+    },
+    {
+      "index": 81,
+      "text": "Intuitively, this is like a human translator who, when writing each word of a translation, can glance back at any word in the original sentence rather than relying solely on a mental summary of the whole thing.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive analogy; no factual claim requiring citation."
+    },
+    {
+      "index": 82,
+      "text": "The Bahdanau mechanism applied attention between two different sequences\u2014an input sequence and an output sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement; no specific factual claim requiring citation."
+    },
+    {
+      "index": 83,
+      "text": "The next conceptual leap was to apply attention *within a single sequence*.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement; no factual claim."
+    },
+    {
+      "index": 84,
+      "text": "This is self-attention.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement; no factual claim."
+    },
+    {
+      "index": 85,
+      "text": "Self-attention is a mechanism that allows each position of an input sequence to attend to all positions in the same sequence [c1548].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1548"
+      ],
+      "status": "grounded",
+      "reason": "c1548 directly supports this definition."
+    },
+    {
+      "index": 86,
+      "text": "In self-attention, the term \"self\" refers to the attention mechanism's ability to compute attention weights by relating different positions in a single input sequence [c1553].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1553"
+      ],
+      "status": "grounded",
+      "reason": "c1553 directly supports this definition."
+    },
+    {
+      "index": 87,
+      "text": "Self-attention looks at one sequence and examines how different parts of that same sequence are related with respect to each other [c1559].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1559"
+      ],
+      "status": "grounded",
+      "reason": "c1559 directly supports this claim."
+    },
+    {
+      "index": 88,
+      "text": "This is in contrast to traditional attention, which looks at one input sequence and one output sequence [c1558].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1558"
+      ],
+      "status": "grounded",
+      "reason": "c1558 directly supports this contrast."
+    },
+    {
+      "index": 89,
+      "text": "There are two forms of self-attention worth distinguishing:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement; no factual claim."
+    },
+    {
+      "index": 90,
+      "text": "**Simplified self-attention** is the purest and most basic form of the attention technique [c1487].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1487"
+      ],
+      "status": "grounded",
+      "reason": "c1487 directly supports this definition."
+    },
+    {
+      "index": 91,
+      "text": "**Self-attention with trainable weights** introduces trainable weights which form the basis of the actual mechanism used in LLMs [c1488].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1488"
+      ],
+      "status": "grounded",
+      "reason": "c1488 directly supports this claim."
+    },
+    {
+      "index": 92,
+      "text": "Multi-head attention is the main attention mechanism used in GPT, generative pre-trained transformers, and modern LLMs [c1486].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1486"
+      ],
+      "status": "grounded",
+      "reason": "c1486 directly supports this claim."
+    },
+    {
+      "index": 93,
+      "text": "The Transformer architecture, introduced in 2017, was built with the self-attention mechanism at its core, which was inspired by the Bahdanau attention mechanism [c1534].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1534"
+      ],
+      "status": "grounded",
+      "reason": "c1534 directly supports this claim."
+    },
+    {
+      "index": 94,
+      "text": "The Transformer architecture was introduced in 2017 [c1545].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1545"
+      ],
+      "status": "grounded",
+      "reason": "c1545 directly supports this claim."
+    },
+    {
+      "index": 95,
+      "text": "[FIGURE: Self-attention diagram showing a single input sequence where each token attends to every other token in the same sequence, with attention weights shown as a matrix]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 96,
+      "text": "With self-attention as its foundation, the transformer dispensed with recurrence entirely.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement; no specific factual claim requiring citation."
+    },
+    {
+      "index": 97,
+      "text": "There are no hidden states passed from one time step to the next.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about transformer architecture; no citation needed."
+    },
+    {
+      "index": 98,
+      "text": "Instead, the entire input sequence is processed in parallel, with self-attention allowing every position to communicate with every other position directly.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement; no specific factual claim requiring citation."
+    },
+    {
+      "index": 99,
+      "text": "The encoder-decoder architecture consists of two sub-modules: an encoder that processes the input sequence and a decoder that generates the output sequence [c1497].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1497"
+      ],
+      "status": "grounded",
+      "reason": "c1497 directly supports this definition."
+    },
+    {
+      "index": 100,
+      "text": "The encoder takes tokenized input text and converts it into vector embeddings [c1267].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1267"
+      ],
+      "status": "grounded",
+      "reason": "c1267 directly supports this claim."
+    },
+    {
+      "index": 101,
+      "text": "The decoder generates output text one word at a time, receiving both vector embeddings from the encoder and partial output text [c1270].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1270"
+      ],
+      "status": "grounded",
+      "reason": "c1270 directly supports this claim."
+    },
+    {
+      "index": 102,
+      "text": "The full pipeline, in simplified form, consists of 8 steps covering tokenization, encoding, decoding with partial output, and word-by-word generation [c1320, c1268].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1320",
+        "c1268"
+      ],
+      "status": "grounded",
+      "reason": "Both c1320 and c1268 support the 8-step pipeline claim."
+    },
+    {
+      "index": 103,
+      "text": "Both BERT and GPT have the word \"transformers\" in their names because they originated from the transformer architecture [c1303].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1303"
+      ],
+      "status": "grounded",
+      "reason": "c1303 directly supports this claim."
+    },
+    {
+      "index": 104,
+      "text": "BERT stands for Bidirectional Encoder Representations from Transformers [c1288].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1288"
+      ],
+      "status": "grounded",
+      "reason": "c1288 directly supports this definition."
+    },
+    {
+      "index": 105,
+      "text": "BERT uses an encoder architecture [c1295].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295"
+      ],
+      "status": "grounded",
+      "reason": "c1295 directly supports this claim."
+    },
+    {
+      "index": 106,
+      "text": "BERT has only an encoder architecture and does not have a decoder [c1326].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1326"
+      ],
+      "status": "grounded",
+      "reason": "c1326 directly supports this claim."
+    },
+    {
+      "index": 107,
+      "text": "BERT (Bidirectional Encoder Representations from Transformers) is a transformer variation that predicts hidden or masked words in a sentence [c1324].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1324"
+      ],
+      "status": "grounded",
+      "reason": "c1324 directly supports this claim."
+    },
+    {
+      "index": 108,
+      "text": "Rather than predicting the next word in a sequence, BERT is trained to fill in blanks\u2014a task called masked language modeling.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanation of masked language modeling; narrative framing."
+    },
+    {
+      "index": 109,
+      "text": "BERT pays attention to a sentence from both left and right directions, making it bidirectional [c1325].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1325"
+      ],
+      "status": "grounded",
+      "reason": "c1325 directly supports this claim."
+    },
+    {
+      "index": 110,
+      "text": "BERT is bidirectional, attending to different parts of the sentence from both left and right directions [c1297].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1297"
+      ],
+      "status": "grounded",
+      "reason": "c1297 directly supports this claim."
+    },
+    {
+      "index": 111,
+      "text": "BERT can capture nuances and relationships between words by looking at the entire sentence from both directions [c1299].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1299"
+      ],
+      "status": "grounded",
+      "reason": "c1299 directly supports this claim."
+    },
+    {
+      "index": 112,
+      "text": "[FIGURE: BERT bidirectional attention diagram showing a masked token in the center of a sentence with attention arrows flowing both left and right from all other tokens toward the masked position]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 113,
+      "text": "BERT models are commonly used for sentiment analysis because they can capture the meanings of different words and how they relate to each other [c1327].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1327"
+      ],
+      "status": "grounded",
+      "reason": "c1327 directly supports this claim."
+    },
+    {
+      "index": 114,
+      "text": "GPT can complete missing text and perform sentiment analysis, though sentiment analysis is a specialty of BERT [c1302].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1302"
+      ],
+      "status": "grounded",
+      "reason": "c1302 directly supports this claim."
+    },
+    {
+      "index": 115,
+      "text": "The bidirectional nature of BERT makes it particularly well-suited for tasks where you need to understand the full context of a sentence before making a prediction\u2014classification, named entity recognition, question answering, and sentiment analysis are natural fits.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence of BERT's bidirectionality; narrative explanation."
+    },
+    {
+      "index": 116,
+      "text": "GPT stands for Generative Pre-trained Transformers [c1289].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1289"
+      ],
+      "status": "grounded",
+      "reason": "c1289 directly supports this definition."
+    },
+    {
+      "index": 117,
+      "text": "GPT is a pre-trained or foundational model [c1290].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1290"
+      ],
+      "status": "grounded",
+      "reason": "c1290 directly supports this claim."
+    },
+    {
+      "index": 118,
+      "text": "GPT (Generative Pre-trained Transformer) performs left-to-right analysis, receiving incomplete text and predicting the next word one word at a time [c1328].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1328"
+      ],
+      "status": "grounded",
+      "reason": "c1328 directly supports this claim."
+    },
+    {
+      "index": 119,
+      "text": "GPT processes text from left to right, predicting only rightmost unknown information [c1296].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1296"
+      ],
+      "status": "grounded",
+      "reason": "c1296 directly supports this claim."
+    },
+    {
+      "index": 120,
+      "text": "GPT generates one word at a time [c1293].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1293"
+      ],
+      "status": "grounded",
+      "reason": "c1293 directly supports this claim."
+    },
+    {
+      "index": 121,
+      "text": "[FIGURE: GPT left-to-right generation diagram showing a sequence of tokens where each new token is predicted based only on the tokens to its left, with a causal mask blocking rightward attention]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 122,
+      "text": "Multi-head attention is the main attention mechanism used in GPT and modern LLMs [c1486].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1486"
+      ],
+      "status": "grounded",
+      "reason": "c1486 directly supports this claim."
+    },
+    {
+      "index": 123,
+      "text": "The contrast with BERT is stark and instructive:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement; no factual claim."
+    },
+    {
+      "index": 124,
+      "text": "| Property | BERT | GPT |\n|---|---|---|\n| Architecture | Encoder only | Decoder only |\n| Directionality | Bidirectional | Left-to-right |\n| Training objective | Predict masked words | Predict next word |\n| Primary use | Classification, analysis | Text generation |",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295",
+        "c1326",
+        "c1325",
+        "c1328",
+        "c1296"
+      ],
+      "status": "grounded",
+      "reason": "The table summarizes claims already cited: c1295 (BERT encoder), c1326 (BERT encoder-only), c1325 (BERT bidirectional), c1328 (GPT left-to-right), c1296 (GPT left-to-right). The training objectives and primary uses are logical consequences of the cited architectural and directional properties."
+    },
+    {
+      "index": 125,
+      "text": "BERT's bidirectionality makes it powerful for understanding tasks.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence of BERT's bidirectionality; narrative explanation."
+    },
+    {
+      "index": 126,
+      "text": "GPT's left-to-right, autoregressive design makes it powerful for generation tasks.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence of GPT's left-to-right design; narrative explanation."
+    },
+    {
+      "index": 127,
+      "text": "Both inherit from the transformer, but they use different halves of it.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; narrative framing."
+    },
+    {
+      "index": 128,
+      "text": "The transformer architecture has proven general enough to extend well beyond text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement; no specific factual claim requiring citation."
+    },
+    {
+      "index": 129,
+      "text": "Vision Transformers (ViT) are transformer models applied to computer vision tasks such as image recognition and image classification [c1306].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1306"
+      ],
+      "status": "grounded",
+      "reason": "c1306 directly supports this definition."
+    },
+    {
+      "index": 130,
+      "text": "This demonstrates that the core ideas of the transformer\u2014self-attention, parallel processing of sequences\u2014are not inherently linguistic.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence of Vision Transformers; narrative explanation."
+    },
+    {
+      "index": 131,
+      "text": "They apply wherever you have structured sequences of data.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Generalization; narrative explanation."
+    },
+    {
+      "index": 132,
+      "text": "It is worth pausing to appreciate how far the field traveled in a short time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to historical summary; no factual claim."
+    },
+    {
+      "index": 133,
+      "text": "**RNNs** introduced the idea of maintaining a hidden state across a sequence, enabling memory of previous inputs [c1535, c1538].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1535",
+        "c1538"
+      ],
+      "status": "grounded",
+      "reason": "Both c1535 and c1538 support this claim about RNNs and hidden states."
+    },
+    {
+      "index": 134,
+      "text": "They were a significant advancement for generative models [c1537].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1537"
+      ],
+      "status": "grounded",
+      "reason": "c1537 directly supports this claim."
+    },
+    {
+      "index": 135,
+      "text": "**LSTMs** addressed the vanishing gradient problem by maintaining separate long-term and short-term memory routes [c1541], but still struggled with longer context [c1542].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1541",
+        "c1542"
+      ],
+      "status": "grounded",
+      "reason": "c1541 supports the vanishing gradient claim; c1542 supports the longer context struggle."
+    },
+    {
+      "index": 136,
+      "text": "**Bahdanau attention (2014)** broke the bottleneck of the single context vector by giving the decoder access to all encoder hidden states [c1523, c1525].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1523",
+        "c1525"
+      ],
+      "status": "grounded",
+      "reason": "c1523 establishes the 2014 date; c1525 supports the claim about decoder access to all encoder states."
+    },
+    {
+      "index": 137,
+      "text": "This introduced the concept of dynamic focus [c1533].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1533"
+      ],
+      "status": "grounded",
+      "reason": "c1533 defines dynamic focus as a key property of attention mechanisms."
+    },
+    {
+      "index": 138,
+      "text": "**The Transformer (2017)** took self-attention as its core mechanism, inspired by Bahdanau attention [c1534], and eliminated recurrence entirely.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1534"
+      ],
+      "status": "grounded",
+      "reason": "c1534 supports the 2017 date and the self-attention core inspired by Bahdanau. The claim about eliminating recurrence is a logical consequence of the transformer's design."
+    },
+    {
+      "index": 139,
+      "text": "It was introduced in the paper \"Attention Is All You Need\" [c1284].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1284"
+      ],
+      "status": "grounded",
+      "reason": "c1284 references the 'Attention Is All You Need' paper."
+    },
+    {
+      "index": 140,
+      "text": "**BERT and GPT** emerged as specialized variants\u2014one encoder-only and bidirectional, one decoder-only and left-to-right\u2014each optimized for different families of tasks [c1295, c1326, c1296, c1328].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295",
+        "c1326",
+        "c1296",
+        "c1328"
+      ],
+      "status": "grounded",
+      "reason": "c1295 and c1326 support BERT as encoder-only; c1296 and c1328 support GPT as decoder-only and left-to-right."
+    },
+    {
+      "index": 141,
+      "text": "[FIGURE: Timeline diagram showing progression from RNNs \u2192 LSTMs \u2192 Bahdanau Attention (2014) \u2192 Transformer (2017) \u2192 BERT and GPT, with brief annotations at each step]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 142,
+      "text": "The transformer's dominance comes down to a few concrete advantages over its predecessors.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement; no specific factual claim."
+    },
+    {
+      "index": 143,
+      "text": "**Parallelism.** RNNs process sequences step by step; each hidden state depends on the previous one.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about RNN processing; no citation needed."
+    },
+    {
+      "index": 144,
+      "text": "Transformers process the entire sequence at once using self-attention, which makes training dramatically faster on modern hardware.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about transformer processing; no specific factual claim requiring citation."
+    },
+    {
+      "index": 145,
+      "text": "**Long-range dependencies.** Self-attention allows every token to directly attend to every other token in the sequence [c1548].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1548"
+      ],
+      "status": "grounded",
+      "reason": "c1548 directly supports this claim."
+    },
+    {
+      "index": 146,
+      "text": "There is no information bottleneck of the kind that plagued RNNs and LSTMs [c1522, c1542].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1522",
+        "c1542"
+      ],
+      "status": "grounded",
+      "reason": "c1522 and c1542 both support the claim that RNNs and LSTMs had bottleneck problems."
+    },
+    {
+      "index": 147,
+      "text": "Attention mechanisms allow modeling of dependencies without regard to the distance between input or output sequences [c1277].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1277"
+      ],
+      "status": "grounded",
+      "reason": "c1277 directly supports this claim."
+    },
+    {
+      "index": 148,
+      "text": "**Scalability.** The transformer's architecture scales well with data and compute.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement; no specific factual claim requiring citation."
+    },
+    {
+      "index": 149,
+      "text": "This is a large part of why models like GPT have grown to billions of parameters while remaining trainable.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence; narrative explanation."
+    },
+    {
+      "index": 150,
+      "text": "**Flexibility.** By using only the encoder (BERT), only the decoder (GPT), or both (original transformer), practitioners can tailor the architecture to their task.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about architectural flexibility; no specific factual claim requiring citation."
+    },
+    {
+      "index": 151,
+      "text": "Both BERT and GPT trace their lineage directly to the original transformer [c1303].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1303"
+      ],
+      "status": "grounded",
+      "reason": "c1303 directly supports this claim."
+    },
+    {
+      "index": 152,
+      "text": "This chapter has traced the evolution from recurrent networks to the transformer architecture.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim."
+    },
+    {
+      "index": 153,
+      "text": "We started with RNNs and their hidden-state mechanism [c1535], moved through LSTMs and their dual-memory design [c1314], and arrived at the Bahdanau attention mechanism of 2014 [c1523] that first gave decoders access to all encoder states rather than just the final one [c1525].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1535",
+        "c1314",
+        "c1523",
+        "c1525"
+      ],
+      "status": "grounded",
+      "reason": "All cited claims support the respective parts of this summary statement."
+    },
+    {
+      "index": 154,
+      "text": "The 2017 transformer [c1545] took self-attention\u2014the idea that each position in a sequence can attend to all other positions in the same sequence [c1548]\u2014and made it the core of a new architecture [c1534].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1545",
+        "c1548",
+        "c1534"
+      ],
+      "status": "grounded",
+      "reason": "c1545 supports the 2017 date; c1548 supports the self-attention definition; c1534 supports the core mechanism claim."
+    },
+    {
+      "index": 155,
+      "text": "From that foundation, BERT emerged as an encoder-only, bidirectional model suited for understanding tasks [c1295, c1325], while GPT emerged as a decoder-only, left-to-right model suited for generation [c1328, c1296].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295",
+        "c1325",
+        "c1328",
+        "c1296"
+      ],
+      "status": "grounded",
+      "reason": "c1295 supports BERT encoder-only; c1325 supports BERT bidirectional; c1328 and c1296 support GPT left-to-right. The characterization of tasks is a logical consequence of the architectural properties."
+    },
+    {
+      "index": 156,
+      "text": "In the next chapter, we will go deeper into the mechanics of self-attention itself\u2014how attention weights are computed, what queries, keys, and values are, and how multi-head attention extends the basic mechanism into the form used in production LLMs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Forward-looking statement about next chapter; no factual claim about current content."
+    }
+  ],
+  "summary": {
+    "grounded": 119,
+    "unsupported": 1,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 36
+  }
+}

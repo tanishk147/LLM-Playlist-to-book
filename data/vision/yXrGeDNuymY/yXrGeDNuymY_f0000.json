@@ -1,0 +1,21 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture \u2192 loading pre-trained OpenAI weights",
+  "extracted_text": "Using OpenAI openly shared weights",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Flowchart showing LLM training pipeline with four connected steps: Text generation, Text evaluation, Training & validation losses, and LLM train function.",
+  "diagram_elements": [
+    "1) Text generation",
+    "2) Text evaluation",
+    "3) Training & validation losses",
+    "4) LLM train function",
+    "Train the generate human"
+  ],
+  "confidence": 0.75,
+  "frame_id": "yXrGeDNuymY_f0000",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0000.jpg"
+}

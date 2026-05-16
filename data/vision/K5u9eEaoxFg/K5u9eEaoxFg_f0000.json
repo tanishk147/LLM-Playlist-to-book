@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Choosing an embedding dimension of 2 (d_out = 2) for the context vectors results in a final embedding dimension of 4 (d_out \u00d7 num_heads)",
+  "extracted_text": "A (b) Implementing multi-head attention with weight splits\n\n(1) Instead of maintaining 2 separate classes:\n\nMultiHead Attention Wrapper and Causal Attention,\n\nwe combined both of these into a single\n\nMultiHead Attention class.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0000",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0000.jpg"
+}

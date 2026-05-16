@@ -1,0 +1,29 @@
+[
+  {
+    "frame_id": "UjdRN80c6p8_f0000",
+    "video_id": "UjdRN80c6p8",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/UjdRN80c6p8/UjdRN80c6p8_f0000.jpg",
+    "phash": "a15f005f437f026f",
+    "edge_density": 0.11625561683006537,
+    "sha256": "696aa17b68208b2f38ef6dcc89387c5df1955d9343809d645ea25f9625448625"
+  },
+  {
+    "frame_id": "UjdRN80c6p8_f0001",
+    "video_id": "UjdRN80c6p8",
+    "timestamp_sec": 1070.299667,
+    "path": "data/frames/UjdRN80c6p8/UjdRN80c6p8_f0001.jpg",
+    "phash": "ea94ff80f5948585",
+    "edge_density": 0.09004778560729847,
+    "sha256": "8350da037c53e1880036a0dbee0248e8baca909aaba000b6c6315174f5c859f0"
+  },
+  {
+    "frame_id": "UjdRN80c6p8_f0002",
+    "video_id": "UjdRN80c6p8",
+    "timestamp_sec": 1073.233,
+    "path": "data/frames/UjdRN80c6p8/UjdRN80c6p8_f0002.jpg",
+    "phash": "817f047f017f143d",
+    "edge_density": 0.1099127476511438,
+    "sha256": "2bbb15ff8958a46a3820ca40f1f4ee4fd2334f469dd608c566e7a104cba6f582"
+  }
+]

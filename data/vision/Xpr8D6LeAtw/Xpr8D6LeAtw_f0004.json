@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "LLaMA: Open and Efficient Foundation Language Models",
+  "extracted_text": "arXiv\n\nAbstract\n\nWe introduce LLaMA, a collection of foundation language models ranging from 7B to 65B parameters. We train our models on trillions of tokens, and show that it is possible to train state-of-the-art models using publicly available datasets",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "Xpr8D6LeAtw_f0004",
+  "video_id": "Xpr8D6LeAtw",
+  "timestamp_sec": 398.066333,
+  "source_image": "data/frames/Xpr8D6LeAtw/Xpr8D6LeAtw_f0004.jpg"
+}

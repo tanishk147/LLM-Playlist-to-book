@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Implement functions to save and load the LLM weights to use or continue training the LLM later\n\nTrain the model to generate human-like text\n\nImplement additional LLM text generation strategies to reduce training data memorization\n\nAt the end of this chapter, load pretrained weights from OpenAI into our LLM model",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Flowchart showing the LLM development pipeline with 7 sequential steps: text generation, text evaluation, training & validation losses, LLM training function, text generation strategies, weight saving & loading, and pretrained weights from OpenAI, with checkmarks indicating completed steps and annotations describing each phase.",
+  "diagram_elements": [
+    "1) Text generation",
+    "2) Text evaluation",
+    "3) Training & validation losses",
+    "4) LLM training function",
+    "5) Text generation strategies",
+    "6) Weight saving & loading",
+    "7) Pretrained weights from OpenAI"
+  ],
+  "confidence": 0.92,
+  "frame_id": "z9fgKz1Drlc_f0007",
+  "video_id": "z9fgKz1Drlc",
+  "timestamp_sec": 495.833,
+  "source_image": "data/frames/z9fgKz1Drlc/z9fgKz1Drlc_f0007.jpg"
+}

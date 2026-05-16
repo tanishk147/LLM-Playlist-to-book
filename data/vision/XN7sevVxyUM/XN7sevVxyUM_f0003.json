@@ -1,0 +1,22 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "The context is a vector (an array of numbers, basically) in the case of machine translation. The encoder and decoder tend to both be recurrent neural networks (Be sure to check out Luis Serrano's A friendly introduction to Recurrent Neural Networks for an intro to RNNs).\n\nThe context is a vector of floats. Later in this post we will visualize vectors in color by assigning brighter colors to the cells with higher values.\n\nYou can set the size of the context vector when you set up your model. It is basically the number of hidden units in the",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Encoder-decoder architecture for machine translation: input text 'Je suis \u00e9tudiant' flows through an encoder (green) which produces a context vector, then through a decoder (purple) which produces output. The context vector is visualized as a column of numerical values (0.11, 0.03, 0.81, -0.62).",
+  "diagram_elements": [
+    "Input text: 'Je suis \u00e9tudiant'",
+    "ENCODER",
+    "DECODER",
+    "Output",
+    "CONTEXT vector",
+    "Context values: 0.11, 0.03, 0.81, -0.62"
+  ],
+  "confidence": 0.85,
+  "frame_id": "XN7sevVxyUM_f0003",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 1178.699667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0003.jpg"
+}

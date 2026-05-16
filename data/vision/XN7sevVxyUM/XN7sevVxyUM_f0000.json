@@ -1,0 +1,29 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture \u2192 Attention mechanism introduction",
+  "extracted_text": "we are going to look at this sub-section",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Two-stage pipeline showing the progression from data preparation through attention mechanism and LLM architecture (Stage 1) to training, model evaluation, and fine-tuning with a pretrained classifier (Stage 2), built on a foundational model.",
+  "diagram_elements": [
+    "STAGE 1",
+    "Data preparation",
+    "sampling",
+    "Attention mechanism",
+    "LLM architecture",
+    "Building on",
+    "Foundational model",
+    "STAGE 2",
+    "Training loop",
+    "Model evaluation",
+    "Load pretrained weights",
+    "Fine-tuning",
+    "Classifier"
+  ],
+  "confidence": 0.85,
+  "frame_id": "XN7sevVxyUM_f0000",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0000.jpg"
+}

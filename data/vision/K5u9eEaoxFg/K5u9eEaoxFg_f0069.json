@@ -1,0 +1,28 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "(6 \\times 6) \\to (dim) \\times \\text{dot}",
+    "\\text{head\\_dim} = Q = 3",
+    "1 \\times 3 \\times 6"
+  ],
+  "diagram_summary": "Multi-head attention mechanism breakdown showing steps to initialize trainable weight matrices for key, query, and value projections, with tensor dimension annotations and code output examples demonstrating matrix calculations.",
+  "diagram_elements": [
+    "Step (2): decode (1 but) (num_heads)",
+    "Step (3): Initialize trainable weight matrices for key, query, value (Wk, Wq, Wv)",
+    "Step (4): Calculate Keys, Queries, Value Matrix",
+    "Input * (Wk) Input * (Wv) Input * (Nv)",
+    "Keys (1X3X6)",
+    "Queries (1X3X6)",
+    "Values (1X3X6)",
+    "Terminal output windows showing tensor values"
+  ],
+  "confidence": 0.75,
+  "frame_id": "K5u9eEaoxFg_f0069",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2861.833,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0069.jpg"
+}

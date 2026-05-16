@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": "Shape: `(2, 2, 3)` which corresponds to `(batch_size, num_tokens, d_o\n\nKeys (`keys`):\n\nShape: `(2, 2, 3)` which corresponds to `(batch_size, num_tokens, d_o",
+  "code": {
+    "language": "python",
+    "content": "keys = [\n    [[2, 1, 0],  # Sequence 1, Token 1\n     [0, 3, 2]], # Sequence 1, Token 2\n    \n    [[1, 0, 2],  # Sequence 2, Token 1\n     [0, 1, 3]]  # Sequence 2, Token 2\n]"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "h94TQOK7NRA_f0013",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 2769.899667,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0013.jpg"
+}

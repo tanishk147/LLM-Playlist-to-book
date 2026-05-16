@@ -1,0 +1,29 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "lecture \u2192 Calculating the classification loss and accuracy",
+  "extracted_text": "Stage 1: Dataset preparation\n1) Download the dataset\n2) Preprocess dataset\n3) Create data loaders\n\nStage 2: Model setup\n4) Initialize model\n5) Load pretrained weights\n6) Modify model for finetuning\n7) Implement evaluation utilities\n\nStage 3: Model finetuning and usage\n8) Finetune model\n9) Evaluate finetuned model\n10) Use model on new data\n\nIn this section, we implement the utility function to calculate the classification loss and accuracy of the model",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Three-stage workflow diagram showing dataset preparation, model setup, and model finetuning with numbered steps flowing through each stage.",
+  "diagram_elements": [
+    "Stage 1: Dataset preparation",
+    "1) Download the dataset",
+    "2) Preprocess dataset",
+    "3) Create data loaders",
+    "Stage 2: Model setup",
+    "4) Initialize model",
+    "5) Load pretrained weights",
+    "6) Modify model for finetuning",
+    "7) Implement evaluation utilities",
+    "Stage 3: Model finetuning and usage",
+    "8) Finetune model",
+    "9) Evaluate finetuned model",
+    "10) Use model on new data"
+  ],
+  "confidence": 0.92,
+  "frame_id": "0PpxZ3kNPWo_f0000",
+  "video_id": "0PpxZ3kNPWo",
+  "timestamp_sec": 5.033,
+  "source_image": "data/frames/0PpxZ3kNPWo/0PpxZ3kNPWo_f0000.jpg"
+}

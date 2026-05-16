@@ -1,0 +1,21 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Lecture3 : Stages of building LLMs",
+  "extracted_text": "Creating an LLM = Pretraining + Finetuning\n\nPretraining:\n- Training on a large, diverse dataset\n\nRefinement:\n- training on diverse...",
+  "code": null,
+  "math": null,
+  "diagram_summary": "A flowchart showing the two-stage process of creating an LLM: pretraining on large diverse datasets and refinement/finetuning on diverse data.",
+  "diagram_elements": [
+    "Creating an LLM",
+    "Pretraining",
+    "Finetuning",
+    "Training on a large, diverse dataset",
+    "Refinement training on diverse..."
+  ],
+  "confidence": 0.75,
+  "frame_id": "-bsa3fCNGg4_f0000",
+  "video_id": "-bsa3fCNGg4",
+  "timestamp_sec": 6.466333,
+  "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0000.jpg"
+}

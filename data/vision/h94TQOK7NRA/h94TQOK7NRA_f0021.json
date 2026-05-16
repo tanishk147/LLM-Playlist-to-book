@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Transpose the Keys",
+  "extracted_text": "Shape: `(2, 2, 3)` which corresponds to `(batch_size, num_tokens, d_out)\n\nWe need to transpose the `keys` tensor from shape `(2, 2, 3)` to shape `(2, 3, 2)` so the dimensions align correctly for matrix multiplication with the `queries`.\n\nTransposed Keys:",
+  "code": {
+    "language": "python",
+    "content": "keys_transposed = [\n    [[2, 1],  # Sequence 1\n    [0, 1, 3]]  # Sequence 2, Token 2\n]"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "h94TQOK7NRA_f0021",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 2818.599667,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0021.jpg"
+}

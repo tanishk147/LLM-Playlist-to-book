@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Convolutional Neural Networks",
+  "extracted_text": "Step 5: Unroll last dimension of Keys, Queries and Values to include num_heads and head_dim\n\nhead_dim = d_out/num_heads = 6/2 = 3\n\n(b, num_tokens, d_out) \u2192 (b, num_tokens, num_heads, head_dim)",
+  "code": null,
+  "math": [
+    "\\text{head\\_dim} = \\frac{d\\_out}{\\text{num\\_heads}} = \\frac{6}{2} = 3"
+  ],
+  "diagram_summary": "Visualization of tensor reshaping for multi-head attention, showing the transformation of Keys, Queries, and Values from shape (1\u00d73\u00d76) to include num_heads and head_dim dimensions.",
+  "diagram_elements": [
+    "Keys (1\u00d73\u00d76)",
+    "Queries (1\u00d73\u00d76)",
+    "Values (1\u00d73\u00d76)",
+    "d_out",
+    "num_tokens",
+    "head_dim calculation",
+    "Reshape operation"
+  ],
+  "confidence": 0.85,
+  "frame_id": "K5u9eEaoxFg_f0014",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1126.433,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0014.jpg"
+}

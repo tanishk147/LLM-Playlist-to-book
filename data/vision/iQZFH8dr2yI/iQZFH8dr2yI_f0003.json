@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A 3x3 grid of grayscale images showing different clothing and footwear items from a fashion dataset, labeled with their respective categories.",
+  "diagram_elements": [
+    "Ankle Boot",
+    "Shirt",
+    "Bag",
+    "Ankle Boot",
+    "Trouser",
+    "Sandal",
+    "Coat",
+    "Sandal",
+    "Pullover"
+  ],
+  "confidence": 0.95,
+  "frame_id": "iQZFH8dr2yI_f0003",
+  "video_id": "iQZFH8dr2yI",
+  "timestamp_sec": 1471.299667,
+  "source_image": "data/frames/iQZFH8dr2yI/iQZFH8dr2yI_f0003.jpg"
+}

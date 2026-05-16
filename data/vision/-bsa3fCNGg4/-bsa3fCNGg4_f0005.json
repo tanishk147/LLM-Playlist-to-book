@@ -1,0 +1,21 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Figure 2.2: Total compute used during training",
+  "extracted_text": "Based on the analysis in Scaling Laws For [KMH+20] we train much larger models on many fewer tokens than is typical. As a consequence, our model is almost 10x larger than RoBERTa-Large (355M params), both models took roughly 50 percent of the compute during pre-training. Methodology for these calculations can be found in Appendix D.\n\nTable 2.2: Datasets used to train GPT-3. \"Weight in training mix\" refers to the fraction of our training batches that are drawn from a given dataset, which we intentionally do not make proportional to the size. As a result, when we train for 300 billion tokens, some datasets are seen up to 3.4 times during training, while others are seen less than once.\n\nA major methodological concern with language models pretrained on a broad swath of intern",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Table showing datasets used to train GPT-3 with columns for Dataset, Quantity (tokens), Weight in training mix, and Epochs elapsed training for 300B tokens.",
+  "diagram_elements": [
+    "Common Crawl (filtered): 410 billion tokens, 60%, 0.44 epochs",
+    "WebText2: 19 billion tokens, 22%, 2.9 epochs",
+    "Books1: 12 billion tokens, 8%, 1.9 epochs",
+    "Books2: 55 billion tokens, 8%, 0.43 epochs",
+    "Wikipedia: 3 billion tokens, 3%, 3.4 epochs"
+  ],
+  "confidence": 0.92,
+  "frame_id": "-bsa3fCNGg4_f0005",
+  "video_id": "-bsa3fCNGg4",
+  "timestamp_sec": 547.366333,
+  "source_image": "data/frames/-bsa3fCNGg4/-bsa3fCNGg4_f0005.jpg"
+}

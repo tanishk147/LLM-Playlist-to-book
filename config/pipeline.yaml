@@ -1,0 +1,108 @@
+# Pinned configuration for reproducibility.
+# Bumping any field here should invalidate downstream stages.
+
+models:
+  whisper: large-v3
+  # Haiku 4.5 for high-volume stages (vision, extraction, verification)
+  vision:   claude-haiku-4-5-20251001
+  extract:  claude-haiku-4-5-20251001
+  verify:   claude-haiku-4-5-20251001
+  figures:  claude-haiku-4-5-20251001
+  # Sonnet 4.6 for quality-critical stages (drafting, polishing, outline)
+  draft:    claude-sonnet-4-6
+  polish:   claude-sonnet-4-6
+  outline:  claude-sonnet-4-6
+
+# Token pricing in USD per 1M tokens.
+pricing:
+  claude-haiku-4-5-20251001:
+    input: 0.25
+    output: 1.25
+    cache_write: 0.30
+    cache_read: 0.03
+  claude-sonnet-4-6:
+    input: 3.00
+    output: 15.00
+    cache_write: 3.75
+    cache_read: 0.30
+
+thresholds:
+  # Keyframe extraction
+  scene_change: 0.30
+  phash_distance: 6
+  min_frame_interval_sec: 2.0
+
+  # Vision gating
+  min_edge_density: 0.04
+  vision_max_frames_per_video: 400
+
+  # Claim extraction
+  min_claim_confidence: 0.7
+
+  # Segmentation
+  segment_min_words: 200
+  segment_similarity_threshold: 0.55
+
+  # Chapter retrieval (BM25 + embeddings)
+  max_claims_per_chapter: 80
+  dense_retrieval_weight: 0.5
+
+caching:
+  enabled: true
+  ttl: "1h"
+  beta_header: "extended-cache-ttl-2025-04-11"
+
+reproducibility:
+  seed: 1729
+  hash_alg: sha256
+
+budget_usd:
+  per_chapter_max: 5.00
+  total_max: 150.00
+  abort_on_exceed: true
+
+generation:
+  draft_temperature: 0.2
+  verify_temperature: 0.0
+  polish_temperature: 0.3
+  outline_temperature: 0.0
+  extract_temperature: 0.0
+  max_output_tokens_chapter: 16000
+  max_output_tokens_extract: 4000
+
+paths:
+  data: data
+  raw: data/raw
+  transcripts: data/transcripts
+  frames: data/frames
+  vision: data/vision
+  claims_db: data/claims.sqlite
+  outline: data/outline.json
+  chapters: data/chapters
+  book: book
+  book_md: book/manuscript.md
+  book_tex: book/manuscript.tex
+  book_pdf: book/manuscript.pdf
+  figures_generated: book/figures/generated
+  figures_embedded: book/figures/embedded
+  refs_bib: book/refs.bib
+  reports: reports
+
+canonical_refs:
+  - id: raschka_llm_book
+    title: "Build a Large Language Model (From Scratch)"
+    author: "Sebastian Raschka"
+    year: 2024
+    note: "Confirmation only; not a source for new claims."
+  - id: vaswani_attention
+    title: "Attention Is All You Need"
+    arxiv: "1706.03762"
+    year: 2017
+  - id: kaplan_scaling
+    title: "Scaling Laws for Neural Language Models"
+    arxiv: "2001.08361"
+    year: 2020
+  - id: brown_gpt3
+    title: "Language Models are Few-Shot Learners"
+    arxiv: "2005.14165"
+    year: 2020

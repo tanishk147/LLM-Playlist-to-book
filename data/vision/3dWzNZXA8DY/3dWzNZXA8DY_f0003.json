@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "THE DRIVE TO BIGGER AI MODELS",
+  "extracted_text": "The scale of artificial-intelligence neural networks is growing exponentially, as measured by the models' parameters (roughly, the number of connections between their neurons)*.\n\n*Sparse' models, which have more than one trillion parameters but use only a fraction of them in each computation, are not shown.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Scatter plot showing the exponential growth of AI model parameters from 1950 to 2020, categorized by application type (Language, Image generation, Vision, Other).",
+  "diagram_elements": [
+    "Language (red dots)",
+    "Image generation (orange dots)",
+    "Vision (blue dots)",
+    "Other (gray dots)",
+    "Y-axis: Number of parameters (log scale) from 10 to 1 trillion",
+    "X-axis: Years from 1950 to 2020",
+    "Exponential growth trend"
+  ],
+  "confidence": 0.95,
+  "frame_id": "3dWzNZXA8DY_f0003",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 568.666333,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0003.jpg"
+}

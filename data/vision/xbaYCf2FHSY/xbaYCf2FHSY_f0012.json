@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": null,
+  "extracted_text": "We use the same model and architecture as GPT-2 [RWC+19], including the modified initialization, pre-normalization, and reversible tokenization described therein, with the exception that we use alternating dense and locally banded sparse attention patterns in the layers of the transformer, similar to the Sparse Transformer [CGRS19]. To study the dependence of ML performance on model size, we train 8 different sizes of model, ranging over three orders of magnitude from 125 million parameters to 175 billion parameters, with the last being the model we call GPT-3. Previous work [KMH+20] suggests that with enough training data, scaling of validation loss should be approximately a smooth power law as a function of size; training models of many different sizes allows us to test this hypothesis both for validation loss and for downstream language tasks.\n\nTable 2.1 shows the sizes and architectures of our 8 models. Here n_params is the total number of trainable parameters, n_layers is the total number of layers, d_model is the number of units in each bottleneck layer (we always have the feedforward layer four times the size of the bottleneck layer, d_ff = 4 * d_model), and d_head is the dimension of each attention head. All models use a context window of n_ctx = 2048 tokens. We partition the model across GPUs along both the depth and width dimension in order to minimize data-transfer between nodes. The precise architectural parameters for each model are chosen based on computational efficiency and load-balancing in the layout of models across GPU's. Previous work [KMH+20] suggests that validation loss is not strongly sensitive to these parameters within a reasonably broad range.\n\n2.2    Training Dataset\n\nDatasets for language models have rapidly expanded, culminating in the Common Crawl dataset\u00b2 [RSR+19] constituting nearly a trillion words. This size of dataset is sufficient to train our largest models without ever updating on the same sequence twice. However, we have found that unfiltered or lightly filtered versions of Common Crawl tend to have lower quality than more curated datasets. Therefore, we took 3 steps to improve the average quality of our datasets: (1) we downloaded and filtered a version of CommonCrawl based on similarity to a range of high-quality reference corpora, (2) we performed fuzzy deduplication at the document level, within and across datasets, to prevent redundancy and preserve the integrity of our held-out validation set as an accuracy measure of overfitting, and (3) we also added known high-quality reference corpora to the training mix to augment CommonCrawl and increase its diversity.\n\nDetails of the first two points (processing of Common Crawl) are described in Appendix A. For the third, we added",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "xbaYCf2FHSY_f0012",
+  "video_id": "xbaYCf2FHSY",
+  "timestamp_sec": 488.566333,
+  "source_image": "data/frames/xbaYCf2FHSY/xbaYCf2FHSY_f0012.jpg"
+}

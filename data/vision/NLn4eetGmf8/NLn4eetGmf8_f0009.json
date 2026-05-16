@@ -1,0 +1,25 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Embedding model pipeline showing how images, documents, and audio are converted into vector representations through an embedding model, resulting in objects represented as vectors in a 3D space.",
+  "diagram_elements": [
+    "images",
+    "Documents",
+    "Audio",
+    "Embedding Model",
+    "0.6 0.3 0.1 ...",
+    "0.8 0.5 0.3 ...",
+    "0.4 0.2 0.9 ...",
+    "Objects as vectors",
+    "3D vector space visualization"
+  ],
+  "confidence": 0.92,
+  "frame_id": "NLn4eetGmf8_f0009",
+  "video_id": "NLn4eetGmf8",
+  "timestamp_sec": 776.433,
+  "source_image": "data/frames/NLn4eetGmf8/NLn4eetGmf8_f0009.jpg"
+}

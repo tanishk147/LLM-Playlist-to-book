@@ -1,0 +1,31 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Lecture \u2192 How to train your LLMs",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "Flow diagram showing the LLM training pipeline with 7 main steps: text generation, text evaluation, training & validation losses, LLM training function, text generation strategies, weight saving & loading, and pretrained weights from OpenAI, with annotations describing implementation details for each step.",
+  "diagram_elements": [
+    "1) Text generation",
+    "2) Text evaluation",
+    "3) Training & validation losses",
+    "4) LLM training function",
+    "5) Text generation strategies",
+    "6) Weight saving & loading",
+    "7) Pretrained weights from OpenAI",
+    "Train the model to generate human-like text",
+    "Implement functions to save and load the LLM weights to use or continue training the LLM later",
+    "Implement additional LLM text generation strategies to reduce training data memorization",
+    "At the end of this chapter, load pretrained weights from OpenAI into our LLM model",
+    "LLM pretraining loop schematic",
+    "1) For each training epoch",
+    "2) For each batch in training set",
+    "3) Reset loss gradients"
+  ],
+  "confidence": 0.85,
+  "frame_id": "Zxf-34voZss_f0000",
+  "video_id": "Zxf-34voZss",
+  "timestamp_sec": 4.999667,
+  "source_image": "data/frames/Zxf-34voZss/Zxf-34voZss_f0000.jpg"
+}

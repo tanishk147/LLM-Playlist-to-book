@@ -1,0 +1,198 @@
+## Claims (cite these by ID inline as [cNNN])
+- c390 [definition | 4i23dYoXp-A @ 1034-1044s]
+  Number of attention heads refers to the count of separate query, key, and value matrix sets created in multi-head attention.
+- c1117 [definition | K5u9eEaoxFg @ 164-173s]
+  Implementing multi-head attention with weight splits is a more efficient approach than the previous method because it reduces the number of matrix multiplications at the start.
+- c1124 [equation | K5u9eEaoxFg @ 321-327s]
+  D_out = head_dimension × number_of_heads
+- c1127 [code | K5u9eEaoxFg @ 467-478s]
+  self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)
+  self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
+  self.out_proj = nn.Linear(d_out, d_out)
+  self.dropout = nn.Dropout(dropout)
+  self.register_buffer('mask', torch.triu(torch.ones(context_length, context_length), diagonal=1))
+- c1128 [code | K5u9eEaoxFg @ 479-486s]
+  keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)
+  queries = self.W_query(x)
+  values = self.W_value(x)
+- c1129 [code | K5u9eEaoxFg @ 450-456s]
+  keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)
+  values = values.view(b, num_tokens, self.num_heads, self.head_dim)
+  queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)
+- c1130 [code | K5u9eEaoxFg @ 450-456s]
+  keys = keys.transpose(1, 2)
+  queries = queries.transpose(1, 2)
+  values = values.transpose(1, 2)
+- c1131 [code | K5u9eEaoxFg @ 479-486s]
+  attn_scores = queries @ keys.transpose(2, 3)
+- c1132 [code | K5u9eEaoxFg @ 479-486s]
+  mask_bool = self.mask.bool()[:num_tokens, :num_tokens]
+  attn_scores.masked_fill_(mask_bool, -torch.inf)
+- c1133 [code | K5u9eEaoxFg @ 479-486s]
+  attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+  attn_weights = self.dropout(attn_weights)
+- c1134 [definition | K5u9eEaoxFg @ 587-615s]
+  The forward method of multi-head attention takes an input tensor with three dimensions: batch size, number of tokens, and input dimension (D_in).
+- c1135 [definition | K5u9eEaoxFg @ 616-626s]
+  D_in (input dimension) represents the dimensionality of the vector embedding for each token.
+- c1138 [code | K5u9eEaoxFg @ 673-678s]
+  x = torch.tensor([[[1.0, 2.0, 3.0, 4.0, 5.0, 6.0],
+                      [6.0, 5.0, 4.0, 3.0, 2.0, 1.0],
+                      [1.0, 1.0, 1.0, 1.0, 1.0, 1.0]]])
+- c1140 [definition | K5u9eEaoxFg @ 708-743s]
+  Output dimension (d_out) is the dimension of the context embedding vector produced for each token by the attention mechanism.
+- c1143 [definition | K5u9eEaoxFg @ 766-772s]
+  Number of attention heads is the count of parallel attention mechanisms that operate on the output dimension.
+- c1146 [definition | K5u9eEaoxFg @ 789-808s]
+  Head dimension (head_dim) is the dimension of the representation within each individual attention head, calculated as d_out divided by the number of heads.
+- c1147 [equation | K5u9eEaoxFg @ 796-808s]
+  head_dim = d_out / number_of_heads
+- c1152 [code | K5u9eEaoxFg @ 916-947s]
+  self.W_query = nn.Linear(d_in, d_out, bias=qkv_bias)
+  self.W_key = nn.Linear(d_in, d_out, bias=qkv_bias)
+  self.W_value = nn.Linear(d_in, d_out, bias=qkv_bias)
+- c1155 [code | K5u9eEaoxFg @ 916-947s]
+  keys = self.W_key(x)  # Shape: (b, num_tokens, d_out)
+  queries = self.W_query(x)  # Shape: (b, num_tokens, d_out)
+  values = self.W_value(x)  # Shape: (b, num_tokens, d_out)
+- c1160 [definition | K5u9eEaoxFg @ 1065-1092s]
+  In the Keys, Queries, and Values matrices with shape (batch_size, num_tokens, d_out), each row corresponds to one token, and each token is represented as a d_out-dimensional vector.
+- c1161 [code | K5u9eEaoxFg @ 1092-1118s]
+  keys = self.key(input)
+  queries = self.query(input)
+  values = self.value(input)
+- c1163 [equation | K5u9eEaoxFg @ 1125-1152s]
+  head_dim = d_out / num_heads = 6 / 2 = 3
+- c1165 [definition | K5u9eEaoxFg @ 1158-1175s]
+  The last dimension of keys, queries, and values (d_out) is unrolled to include the number of heads and head dimension.
+- c1166 [equation | K5u9eEaoxFg @ 1181-1187s]
+  head_dimension = d_out / num_heads
+- c1167 [equation | K5u9eEaoxFg @ 1187-1194s]
+  d_out = head_dimension * num_heads
+- c1174 [code | K5u9eEaoxFg @ 1387-1415s]
+  keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)
+  values = values.view(b, num_tokens, self.num_heads, self.head_dim)
+  queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)
+- c1178 [code | K5u9eEaoxFg @ 1493-1503s]
+  keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)
+  queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)
+  values = values.view(b, num_tokens, self.num_heads, self.head_dim)
+- c1180 [code | K5u9eEaoxFg @ 1541-1560s]
+  keys = keys.transpose(1, 2)
+  queries = queries.transpose(1, 2)
+  values = values.transpose(1, 2)
+- c1184 [code | K5u9eEaoxFg @ 1692-1701s]
+  attn_scores = queries @ keys.transpose(2, 3)
+- c1186 [definition | K5u9eEaoxFg @ 1726-1748s]
+  Attention scores are computed by multiplying queries with the transpose of keys along dimensions 2 and 3.
+- c1196 [code | K5u9eEaoxFg @ 2115-2139s]
+  attention_scores = queries @ keys.transpose(2, 3)
+- c1197 [definition | K5u9eEaoxFg @ 2180-2229s]
+  Causal attention mechanism ensures that when computing attention scores for a token, only attention scores with tokens that come before it (and itself) survive; all attention scores with future tokens are zeroed out.
+- c1205 [code | K5u9eEaoxFg @ 2451-2457s]
+  attn_scores = queries @ keys.transpose(2, 3)  # Compute scaled dot-product attention scores for each head
+- c1206 [code | K5u9eEaoxFg @ 2457-2484s]
+  mask_bool = self.mask.bool()[:num_tokens, :num_tokens]
+  attn_scores.masked_fill_(mask_bool, -torch.inf)
+- c1209 [code | K5u9eEaoxFg @ 2537-2573s]
+  attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+- c1213 [definition | K5u9eEaoxFg @ 2658-2663s]
+  The context vector matrix is computed by multiplying attention weights with the values matrix.
+- c1218 [definition | K5u9eEaoxFg @ 2817-2827s]
+  In the context vector output, each row represents the context vector for a particular token with dimensions equal to head_dim.
+- c1225 [code | K5u9eEaoxFg @ 3012-3039s]
+  context_vec = (attn_weights @ values).transpose(1, 2)
+  context_vec = context_vec.contiguous().view(b, num_tokens, self.d_out)
+  context_vec = self.out_proj(context_vec)
+- c1228 [definition | K5u9eEaoxFg @ 2749-2764s]
+  Attention weights differ from attention scores in that each row of attention weights sums to one, whereas attention scores do not have this property.
+- c1233 [code | K5u9eEaoxFg @ 3359-3438s]
+  batch_size, context_length, d_in = batch.shape
+  d_out = 6
+  mha = MultiHeadAttention(d_in, d_out, context_length, 0.0, num_heads=2)
+  context_vecs = mha(batch)
+  print(context_vecs.shape)
+- c1924 [definition | cPaBCoNdCtE @ 5-11s]
+  Multi-head attention refers to dividing the attention mechanism into multiple heads, each operating independently.
+- c1933 [equation | cPaBCoNdCtE @ 293-302s]
+  Attention scores are computed as: queries multiplied by keys transpose (Q × K^T).
+- c1934 [definition | cPaBCoNdCtE @ 309-339s]
+  Each element in an attention score matrix row encodes how much a particular token relates to the query token, or how much importance should be paid to that token when processing the query.
+- c1938 [equation | cPaBCoNdCtE @ 502-509s]
+  Context vectors are computed by multiplying attention weights with the values matrix.
+- c1941 [definition | cPaBCoNdCtE @ 605-614s]
+  The input x to the causal attention class has shape (batch_size, num_tokens, input_dimensions).
+- c1952 [definition | cPaBCoNdCtE @ 807-818s]
+  Multi-head attention refers to dividing the attention mechanism into multiple heads, where each head operates independently.
+- c1962 [definition | cPaBCoNdCtE @ 1184-1194s]
+  Multi-head attention is called 'multi-head' because it aggregates the output of multiple independent attention heads.
+- c1964 [definition | cPaBCoNdCtE @ 1237-1248s]
+  Multi-head attention involves creating multiple instances of the self-attention mechanism, each with its own weights, and then combining their outputs.
+- c1966 [code | cPaBCoNdCtE @ 1303-1316s]
+  In the forward method, torch.cat is used with dimension=-1 to concatenate outputs along the columns.
+- c1969 [definition | cPaBCoNdCtE @ 1381-1384s]
+  D_out is the output dimension of each attention head.
+- c2596 [definition | h94TQOK7NRA @ 5-11s]
+  Causal attention, also known as masked attention, is a special form of self-attention that restricts the model to only consider previous tokens.
+- c2603 [definition | h94TQOK7NRA @ 201-239s]
+  An input embedding is a vector representation of a token that encodes semantic meaning but does not carry information about how other words in the sentence relate to it.
+- c2608 [definition | h94TQOK7NRA @ 297-333s]
+  WQ, WK, and WV are trainable weight matrices whose parameters need to be trained based on input data as part of LLM training.
+- c2617 [definition | h94TQOK7NRA @ 576-586s]
+  Causal attention is also called masked attention.
+- c2618 [definition | h94TQOK7NRA @ 587-589s]
+  Causal attention is a special form of self-attention.
+- c2619 [definition | h94TQOK7NRA @ 590-601s]
+  Causal attention restricts the model to only consider the previous and current inputs in a sequence when processing any given token.
+- c2627 [definition | h94TQOK7NRA @ 855-865s]
+  The causal attention mask is the set of attention weights above the diagonal that are masked out.
+- c2630 [definition | h94TQOK7NRA @ 1192-1201s]
+  An upper triangular matrix has all elements below the diagonal set to zero.
+- c2631 [definition | h94TQOK7NRA @ 1208-1218s]
+  A lower triangular matrix has all elements above the diagonal set to zero.
+- c2632 [code | h94TQOK7NRA @ 1268-1306s]
+  mask_simple = torch.tril(torch.ones(context_length, context_length))
+- c2636 [code | h94TQOK7NRA @ 1360-1375s]
+  masked_attn_weights = attn_weights * mask_simple
+- c2638 [code | h94TQOK7NRA @ 1440-1454s]
+  mask_simple_normalized = masked_attn_weights / masked_attn_weights.sum(dim=1, keepdim=True)
+- c2640 [definition | h94TQOK7NRA @ 1487-1496s]
+  Causal attention is designed to prevent future tokens from influencing past tokens.
+- c2649 [code | h94TQOK7NRA @ 1750-1777s]
+  mask = torch.triu(torch.ones(seq_len, seq_len), diagonal=1)
+- c2650 [code | h94TQOK7NRA @ 1814-1866s]
+  attention_scores = attention_scores.masked_fill(mask == 1, float('-inf'))
+- c2651 [code | h94TQOK7NRA @ 1873-1881s]
+  attention_weights = torch.softmax(attention_scores / sqrt(d_k), dim=-1)
+- c2653 [definition | h94TQOK7NRA @ 1925-1936s]
+  Masking in transformers sets attention scores for future tokens to large negative values, making their influence in softmax calculation effectively zero.
+- c2654 [definition | h94TQOK7NRA @ 1977-1984s]
+  Dropout is a deep learning technique where neurons in different layers are randomly switched to zero during training.
+- c2670 [code | h94TQOK7NRA @ 2232-2239s]
+  torch.nn.Dropout(p=0.5) creates a dropout layer that randomly zeroes elements with probability 0.5 and scales remaining elements by 1/(1-0.5) = 2.
+- c2687 [code | h94TQOK7NRA @ 2890-2924s]
+  attn_scores = queries @ keys.transpose(1, 2)
+  attn_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf)
+  attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+  attn_weights = self.dropout(attn_weights)
+  context_vec = attn_weights @ values
+- c2696 [code | h94TQOK7NRA @ 3172-3201s]
+  The mask slicing [:, :T] ensures the causal mask is created only up to the number of tokens T in the batch, handling cases where batch tokens are smaller than the supported context size.
+- c2643 [design_decision | h94TQOK7NRA @ 1541-1568s]
+  Applying softmax before masking future tokens and then renormalizing creates a data leakage problem in causal attention.
+- c1119 [design_decision | K5u9eEaoxFg @ 202-208s]
+  Multi-head attention with weight splits is more computationally efficient than maintaining separate classes for multi-head attention wrapper and causal attention.
+- c2672 [architecture | h94TQOK7NRA @ 2450-2456s]
+  The CausalSelfAttention class incorporates causal attention and dropout into the self-attention mechanism, with the same structure as the base self-attention class except for masking and dropout additions.
+- c2661 [fact | h94TQOK7NRA @ 2122-2172s]
+  Dropout in causal attention randomly zeros out attention weights according to a dropout mask while preserving the causal masking of future tokens.
+- c2645 [design_decision | h94TQOK7NRA @ 1601-1612s]
+  An upper triangular infinity mask is applied to attention scores before softmax to prevent data leakage from future tokens.
+- c359 [fact | 4i23dYoXp-A @ 60-74s]
+  The attention mechanism lecture series included four to five detailed lectures covering simplified self-attention, self-attention, causal attention, and multi-head attention.
+- c2652 [fact | h94TQOK7NRA @ 1893-1914s]
+  The causal masking mechanism prevents information leakage from future tokens while ensuring attention weight rows sum to one.
+- c1118 [architecture | K5u9eEaoxFg @ 179-197s]
+  In the previous multi-head attention implementation, a causal attention module is applied to compute context vectors for each attention head separately, and the results are concatenated.
+- c2622 [design_decision | h94TQOK7NRA @ 659-668s]
+  In GPT-like large language models, causal attention is achieved by masking out future tokens that come after the current token when computing attention scores.

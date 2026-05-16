@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "json",
+    "content": "{\n  \"output\": \"Snippet, context, ancestor, children, comparisons, children, forge, serpenty, imaginary, jester, custodian, ui, pagoda, mosaic.\"\n},\n{\n  \"instruction\": \"Transcribe the recording into text.\",\n  \"input\": \"Recording about the history of Waterloo\",\n  \"output\": \"The Battle of Waterloo, fought on June 18, 1815, was the last major battle of the Napoleonic Wars. I fought between Napoleon Bonaparte's French forces and an allied force of British, Dutch, Belgian and Prussian troops, I Waterloo in the former Austrian Netherlands, now present-day Belgium. The battle was a defeat for Napoleon's forces and called to St Helena, where he would die in 1821. The battle marked the end of French domination of Europe and the begi last major battle of the Napoleonic Wars and is remembered as one of the most important battles in history. The victory French imperial ambitions in Europe. It also established the British as one of the most powerful nations in Europe. The and artillery tactics, and showed the beginning of the changing nature of warfare. Although the French forces greatly c led to the loss of the battle. This defeat signaled the end of French imperial power in Europe. The legacy of Waterloo position for the next one hundred years.\"\n},\n{\n  \"instruction\": \"Who is the world's most famous painter?\",\n  \"input\": \"\",\n  \"output\": \"The world's most famous painter is generally considered to be the Italian renaissance artist Leonarc Supper, both of which are considered masterpieces. Da Vinci was also a master of science, inventing the helicopter and musician, sculptor, and architect. His work has inspired generations of artists and continues to be revered today.\"\n},\n{\n  \"instruction\": \"Explain the concept of cogging torque.\",\n  \"input\": \"\",\n  \"output\": \"Cogging torque is the torque that is applied to a rotating device when the device experiences resist device. Cogging torque occurs due to the reaction force generated when the teeth of the gear drive mesh. This force pus transmitted from the gears to the shaft. The magnitude of the cogging torque can vary depend on the size and number is undesirable in most motorized applications, as it can lead to loss of efficiency. To reduce cogging torque, c which reduce the force of contact between the teeth when they come into contact with each other.\"\n},\n{\n  \"instruction\": \"Look up the boiling point of water.\""
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.85,
+  "frame_id": "1bLhvqZzdaQ_f0004",
+  "video_id": "1bLhvqZzdaQ",
+  "timestamp_sec": 856.533,
+  "source_image": "data/frames/1bLhvqZzdaQ/1bLhvqZzdaQ_f0004.jpg"
+}

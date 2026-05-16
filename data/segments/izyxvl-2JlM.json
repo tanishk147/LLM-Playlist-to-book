@@ -1,0 +1,2940 @@
+{
+  "video_id": "izyxvl-2JlM",
+  "segments": [
+    {
+      "id": "izyxvl-2JlM_000",
+      "title": "Recap of classification fine-tuning so far",
+      "ts_start": 0.0,
+      "ts_end": 366.0,
+      "segments": [
+        {
+          "ts_start": 4.89,
+          "ts_end": 11.47,
+          "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+          "frame_ids": [
+            "izyxvl-2JlM_f0000"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "Lecture \u2192 Model initialization with pretrained weights",
+              "extracted_text": "In this section, we will prepare the model for classification finetuning.\n\nIn this section, we initialize the pretrained model from the previous chapter that we will finetune\n\nStage 1:\nDataset preparation\n\nStage 2:\nModel setup\n\nStage 3:\nModel finetuning and usage\n\nIn the previous section, we prepared the SPAM prediction dataset for classification finetuning.\n\n1) Download the dataset\n2) Preprocess dataset\n4) Initialize model\n5) Load pretrained weights\n6) Model setup\n8) Finetune model\n9) Evaluate finetuned model",
+              "code": null,
+              "math": null,
+              "diagram_summary": "Three-stage workflow diagram showing dataset preparation, model setup, and model finetuning stages with sequential steps including downloading dataset, preprocessing, initializing model, loading pretrained weights, finetuning, and evaluation.",
+              "diagram_elements": [
+                "Stage 1: Dataset preparation",
+                "Stage 2: Model setup",
+                "Stage 3: Model finetuning and usage",
+                "1) Download the dataset",
+                "2) Preprocess dataset",
+                "4) Initialize model",
+                "5) Load pretrained weights",
+                "6) Model setup",
+                "8) Finetune model",
+                "9) Evaluate finetuned model"
+              ],
+              "confidence": 0.85,
+              "frame_id": "izyxvl-2JlM_f0000",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 5.033,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0000.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 12.16,
+          "ts_end": 19.5,
+          "text": "Today, we are going to continue with the classification fine-tuning example which we have been seeing for the past two lectures.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 20.06,
+          "ts_end": 33.42,
+          "text": "The main goal of today's lecture is to perform model initialization with pre-trained weights and then we will also do some changes in the GPT or the LLM architecture so that it can perform classification tasks.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 34.08,
+          "ts_end": 40.26,
+          "text": "Let me give you a quick recap of what all we have been doing in this hands-on LLM classification project.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 40.96,
+          "ts_end": 55.09,
+          "text": "Basically, we started out with this problem where we have been given certain text as data and we want to use a large language model to classify whether it's a spam or whether it's not a spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 55.74,
+          "ts_end": 58.84,
+          "text": "And this comes under the category of fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 59.3,
+          "ts_end": 64.38,
+          "text": "We already have built a pre-trained LLM model in this lecture series.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 65.18,
+          "ts_end": 67.74,
+          "text": "However, we have not fine-tuned it further.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 68.3,
+          "ts_end": 73.6,
+          "text": "Fine-tuning is extremely essential for adapting a pre-trained model to a specific task.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 73.84,
+          "ts_end": 77.66,
+          "text": "So, there are two types, instruction fine-tuning and classification fine-tuning.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 77.9,
+          "ts_end": 83.78,
+          "text": "We have started with instruction fine-tuning and are looking at this hands-on email classification example.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 85.57,
+          "ts_end": 90.51,
+          "text": "So, here are the steps which we are going to follow when we make this classification.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 90.83,
+          "ts_end": 94.69,
+          "text": "Up till now, we have covered these three steps which have been marked in blue.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 94.69,
+          "ts_end": 99.95,
+          "text": "So, we downloaded the data set, we pre-processed the data set and we created data loaders.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 100.15,
+          "ts_end": 104.67,
+          "text": "Let me quickly show you these three steps and what all we have implemented so far.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 106.23,
+          "ts_end": 110.47,
+          "text": "So, this is the data set which you can see in the UC Irvine machine learning repository.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 110.97,
+          "ts_end": 112.99,
+          "text": "It's called SMS spam collection.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 113.41,
+          "ts_end": 117.27,
+          "text": "And when you download this data set, you will see that it looks something like this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 117.61,
+          "ts_end": 121.29,
+          "text": "So, you have labels as ham which is not a spam and spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 122.98,
+          "ts_end": 125.76,
+          "text": "And the data set when you download.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 125.78,
+          "ts_end": 130.5,
+          "text": "You will see that the no spam, there are 4825 and spam there are only 747.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 130.92,
+          "ts_end": 138.56,
+          "text": "So, the first step we did was to balance this data set so that both the spam as well as no spam have 747 data counts.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 139.18,
+          "ts_end": 140.92,
+          "text": "So, that is data pre-processing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 140.98,
+          "ts_end": 148.6,
+          "text": "Then what we did is we created data loaders so that we can feed in the input and get feed in the input in batches.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 148.88,
+          "ts_end": 154.9,
+          "text": "So, the main aim of data loaders was also to convert the data set into a set of input and target pairs.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 154.9,
+          "ts_end": 159.02,
+          "text": "So, let me show you how these input and target pairs actually looked like.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 159.87,
+          "ts_end": 164.1,
+          "text": "In the last lecture, we converted the data set into these two tensors.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 164.12,
+          "ts_end": 170.8,
+          "text": "So, this first tensor here is the inputs tensor and this second tensor here is the targets tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 171.2,
+          "ts_end": 175.44,
+          "text": "You'll see that here every batch has eight input samples.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 175.5,
+          "ts_end": 178.94,
+          "text": "So, this I'm showing one batch over here and it has eight text samples.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 179.22,
+          "ts_end": 185.0,
+          "text": "So, each row here corresponds to one such sample and every column here corresponds to the number of samples.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 185.02,
+          "ts_end": 192.86,
+          "text": "So, we have broken down these sentences into tokens and used the byte pair encoder to convert these into token ids.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 193.02,
+          "ts_end": 198.46,
+          "text": "We have made sure that all of these sentences are converted into equal number of token ids.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 198.84,
+          "ts_end": 207.16,
+          "text": "And wherever the sentences are short, we have padded them with the token 50256 token id which corresponds to the end of text.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 207.48,
+          "ts_end": 210.08,
+          "text": "So, here you can see this is the input tensor.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 210.4,
+          "ts_end": 213.06,
+          "text": "It has eight rows and it has 120 tokens.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 214.15,
+          "ts_end": 215.07,
+          "text": "We get this.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 215.09,
+          "ts_end": 218.83,
+          "text": "We get this number 120 based on the longest text message in the data set.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 219.11,
+          "ts_end": 222.39,
+          "text": "And then if you look at the output tensor, it's just zeros or ones.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 222.57,
+          "ts_end": 227.43,
+          "text": "So, zero means zero stands for no spam and one stands for spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 227.85,
+          "ts_end": 239.12,
+          "text": "So, whenever you have you have the data set right now and when we want to train on the data set, the optimizer, which we'll define later, will process each batch.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 239.44,
+          "ts_end": 243.78,
+          "text": "So, in each batch, it will process these eight text samples.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 243.88,
+          "ts_end": 245.24,
+          "text": "And it also has this output.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 245.34,
+          "ts_end": 246.02,
+          "text": "It puts to work with.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 246.32,
+          "ts_end": 250.46,
+          "text": "So, using data loaders has made our job very easy in terms of data management.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 251.54,
+          "ts_end": 261.06,
+          "text": "So, you see, we have covered these three steps so far downloading the data set, pre-processing the data set by making sure that the no spam and spam categories are balanced.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 261.28,
+          "ts_end": 267.85,
+          "text": "And then finally, we also created the training data loader, the testing data loader and validation data loader.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 268.07,
+          "ts_end": 275.51,
+          "text": "We have used 70% of the data for training, 10% of the data for validation and 20% of the data for testing.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 275.95,
+          "ts_end": 280.65,
+          "text": "you will also see that in the code over here so you can see here 0.7 is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 280.65,
+          "ts_end": 285.81,
+          "text": "training data point 1 is the validation data and point 2 is the fraction of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 285.81,
+          "ts_end": 291.8,
+          "text": "testing data right and we have this spam data set class which is then fed as an",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 291.8,
+          "ts_end": 296.66,
+          "text": "input to our data loaders so this is the training data loader validation data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 296.66,
+          "ts_end": 300.96,
+          "text": "loader and the testing data loader the output of these data loaders are in the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 300.96,
+          "ts_end": 306.58,
+          "text": "batched format which I showed you in this visual representation if you want a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 306.58,
+          "ts_end": 311.04,
+          "text": "more detailed description of how we did the data downloading and how we perform",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 311.04,
+          "ts_end": 314.96,
+          "text": "the data pre-processing I would highly encourage you to go through the previous",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 314.96,
+          "ts_end": 320.02,
+          "text": "two lectures now we have come to stage 2 where our goal will be to first",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 320.02,
+          "ts_end": 323.9,
+          "text": "initialize the large language model which we are going to use then we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 323.9,
+          "ts_end": 328.8,
+          "text": "going to load pre-trained weights from GPT-2 and then we will modify the model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 328.8,
+          "ts_end": 330.7,
+          "text": "architecture a bit for fine-tuning",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 331.4,
+          "ts_end": 336.12,
+          "text": "and then finally we will implement evaluation utilities in today's lecture",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 336.12,
+          "ts_end": 341.93,
+          "text": "we will do step number four step number five and step number six so it will be a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 341.93,
+          "ts_end": 347.51,
+          "text": "comprehensive lecture and let's get started now we have these data loaders",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 347.51,
+          "ts_end": 351.81,
+          "text": "training testing and validation so now we come to the GPT architecture so here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 351.81,
+          "ts_end": 355.63,
+          "text": "you see in this lecture series so far we have constructed this architecture which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 355.63,
+          "ts_end": 360.69,
+          "text": "is which I have zoomed in on the screen right now don't focus on these two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 360.69,
+          "ts_end": 361.69,
+          "text": "images on the right just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 361.69,
+          "ts_end": 365.23,
+          "text": "look at this gray colored architecture this is the LLM architecture which we",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "izyxvl-2JlM_001",
+      "title": "Loading OpenAI GPT-2 pretrained weights",
+      "ts_start": 366.0,
+      "ts_end": 973.0,
+      "segments": [
+        {
+          "ts_start": 368.95,
+          "ts_end": 374.44,
+          "text": "to first load the pre-trained GPT-2 weights into this architecture and if",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 374.44,
+          "ts_end": 378.8,
+          "text": "you have not seen the previous lectures let me just give you that recap open AI",
+          "frame_ids": [
+            "izyxvl-2JlM_f0001"
+          ],
+          "visuals": [
+            {
+              "category": "other",
+              "skip": false,
+              "title": "OpenAI GPT-2 Weights",
+              "extracted_text": "All the official weights (from 124M to 1.5B) for the Tensorflow release of GPT-2\n\nAbout Dataset\n\nDirectly retrieved from the original repository: https://github.com/openai/gpt-2\n\nThe model itself is licensed under MIT.\n\nThe banner image comes from the 6-months follow-up post: https://openai.com/blog/gpt-2-6-month-follow-up/\n\nAll rights belong to OpenAI.\n\nUsability\n8.75\n\nLicense\nOther (specified in description)\n\nExpected update frequency\nNever\n\nTags\nExercise\nNLP",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.92,
+              "frame_id": "izyxvl-2JlM_f0001",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 377.299667,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0001.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 378.8,
+          "ts_end": 383.42,
+          "text": "has basically made the GPT-2 weights free freely available to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 383.42,
+          "ts_end": 387.84,
+          "text": "public and they have made weights available for multiple parameters 107",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 387.84,
+          "ts_end": 396.83,
+          "text": "7 million 124 million 774 million etc open a even had a public announcement for gpt2 and that they",
+          "frame_ids": [
+            "izyxvl-2JlM_f0002"
+          ],
+          "visuals": [
+            {
+              "category": "slide",
+              "skip": false,
+              "title": "GPT-2: 1.5B release",
+              "extracted_text": "November 5, 2019\n\nRead paper\nGPT-2 model",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "izyxvl-2JlM_f0002",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 391.966333,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0002.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 396.83,
+          "ts_end": 402.29,
+          "text": "release these weights what we are going to do is that instead of pre-training ourselves which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 402.29,
+          "ts_end": 406.83,
+          "text": "would involve a huge amount of cost and computational resources we are just going to load",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 406.83,
+          "ts_end": 411.95,
+          "text": "the pre-trained gpt2 weights into this gpt model and we have done this before when we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 413.29,
+          "ts_end": 419.73,
+          "text": "when we trained our large language model so let's get into code right now to see how this part is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 419.73,
+          "ts_end": 425.68,
+          "text": "done and then we'll move to step number two okay so i'm going to take you to code right now most",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 425.68,
+          "ts_end": 430.53,
+          "text": "of this lecture which we are going to do today will involve going through the code so i'll",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 430.53,
+          "ts_end": 437.33,
+          "text": "explain each part of the code to you step by step okay so now our first task is to prepare the model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 437.33,
+          "ts_end": 442.27,
+          "text": "which we will use for classification fine tuning to identify spam messages and what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 442.27,
+          "ts_end": 442.41,
+          "text": "we're going to do is we're going to use the model which we're going to use for classification",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 442.41,
+          "ts_end": 447.67,
+          "text": "is that we are going to use the same architecture which we have used and then load the pre-trained",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 447.67,
+          "ts_end": 453.89,
+          "text": "weights later we'll do a slight modification at this final layer but for now let's just see how",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 453.89,
+          "ts_end": 460.23,
+          "text": "to load the pre-trained weights so you can see that gpt when you download the weights from gpt2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 460.23,
+          "ts_end": 466.09,
+          "text": "you'll have models small model medium large and the extra large we are going to choose the gpt",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 466.09,
+          "ts_end": 472.49,
+          "text": "small with gpt2 small which has 124 million parameters right so we have a base configuration",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 472.49,
+          "ts_end": 480.19,
+          "text": "which means that the vocabulary size is 50257 the context length is 1024 the dropout rate is zero",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 480.19,
+          "ts_end": 485.91,
+          "text": "and the query key value bias term is set to true these are the same values which were used when",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 485.91,
+          "ts_end": 490.65,
+          "text": "gpt2 was trained and since we are recycling those weights we are using the same weights",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 490.65,
+          "ts_end": 496.56,
+          "text": "the pre-trained gpt2 weights we are retaining this configuration we are going to upload this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 496.56,
+          "ts_end": 501.52,
+          "text": "configuration with the model which we are going to choose and here you see we are choosing from",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 501.52,
+          "ts_end": 502.8,
+          "text": "this model configs dictionary",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 503.0,
+          "ts_end": 508.0,
+          "text": "we are choosing this choose model equal to gpt small so we have updated this base configuration",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 508.0,
+          "ts_end": 514.6,
+          "text": "with our model configuration as gpt to small in this last code what we are doing is that if our",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 514.6,
+          "ts_end": 520.32,
+          "text": "training data set has some text messages whose maximum length is greater than the context length",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 520.32,
+          "ts_end": 527.34,
+          "text": "which is 1024 what we are going to do is that we are going to set the maximum length equal to the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 527.34,
+          "ts_end": 531.46,
+          "text": "context length in short we are going to remove all of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 532.54,
+          "ts_end": 533.14,
+          "text": "tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 533.26,
+          "ts_end": 539.88,
+          "text": "which have higher length than the context length this is because our llm can only process tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 539.88,
+          "ts_end": 546.14,
+          "text": "with the maximum length equal to the context length and that is equal to 1024 in this particular case",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 547.49,
+          "ts_end": 553.09,
+          "text": "awesome now that we have the configuration ready what we are going to do is that we are going to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 554.31,
+          "ts_end": 562.35,
+          "text": "we are going to download the gpt2 parameters and there is a specific way to download the gpt2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 562.35,
+          "ts_end": 563.97,
+          "text": "parameters and for that we are going to use the gpt2 parameters and we are going to use the gpt2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 563.97,
+          "ts_end": 568.19,
+          "text": "uko just for that i am going to i am going to take you through the code file right now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 568.19,
+          "ts_end": 575.41,
+          "text": "so let me take you through vs code yeah so as i mentioned there is a specific way to download",
+          "frame_ids": [
+            "izyxvl-2JlM_f0003"
+          ],
+          "visuals": [
+            {
+              "category": "code",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": {
+                "language": "python",
+                "content": "import os\nimport requests  # Make sure requests is installed\nimport json\nimport numpy as np\nimport tensorflow as tf\nfrom tqdm import tqdm\n\ndef download_and_load_gpt2(model_size, models_dir):\n    # Validate model size\n    allowed_sizes = (\"124M\", \"355M\", \"774M\", \"1558M\")\n    if model_size not in allowed_sizes:\n        raise ValueError(f\"Model size not in {allowed_sizes}\")\n    \n    # Define paths\n    model_dir = os.path.join(models_dir, model_size)\n    base_url = \"https://openaipublic.blob.core.windows.net/gpt-2/models\"\n    filenames = [\n        \"checkpoint\", \"encoder.json\", \"params.json\",\n        \"model.ckpt.data-00000-of-00001\", \"model.ckpt.index\",\n        \"model.ckpt.meta\", \"vocab.bpe\"\n    ]\n    \n    # Download files\n    os.makedirs(model_dir, exist_ok=True)\n    for filename in filenames:\n        file_url = os.path.join(base_url, model_size, filename)\n        file_path = os.path.join(m"
+              },
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "izyxvl-2JlM_f0003",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 571.866333,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0003.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 575.41,
+          "ts_end": 579.49,
+          "text": "the gpt parameters and we have written this code called download",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 580.21,
+          "ts_end": 584.83,
+          "text": "gpt2 what this code does is that it basically downloads the weights",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 584.83,
+          "ts_end": 594.85,
+          "text": "and the entire model details which have been prescribed by uh open ai when they made the gpt2 weights public so we are going to download all these files and then we made the gpt2 weights public and so we gave the gpt2 weight parameters yes and we have Yesterday you can do a dataset which i took from my",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 594.85,
+          "ts_end": 601.31,
+          "text": "we are going to convert or we are going to return two things we are going to return settings and we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 601.31,
+          "ts_end": 606.69,
+          "text": "are going to return params what settings is basically is just these configurations the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 606.69,
+          "ts_end": 612.03,
+          "text": "vocabulary size the context length the embedding dimension number of attention heads and number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 612.03,
+          "ts_end": 618.81,
+          "text": "transformer layers what this params is basically is that the params is a dictionary and this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 618.81,
+          "ts_end": 623.97,
+          "text": "dictionary has been constructed in a very specific format so here is how the params dictionary looks",
+          "frame_ids": [
+            "izyxvl-2JlM_f0004"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "Handwritten diagram showing parameter dictionary keys structure with three main components: (1) wte - Token Embeddings, (2) wpe - Positional Embeddings, (3) blocks, followed by attention layers in transformer blocks with similar structure for h, k, v projections.",
+              "diagram_elements": [
+                "parameter_dictionary_keys",
+                "wte: Token Embeddings",
+                "wpe: Positional Embeddings",
+                "blocks",
+                "Attention layers in transformer blocks",
+                "transformer/h0/attn/c_attn/w",
+                "transformer/h0/attn/c_attn/b",
+                "transformer/h1/attn/c_attn/b",
+                "Similar for h, k, v - kh"
+              ],
+              "confidence": 0.75,
+              "frame_id": "izyxvl-2JlM_f0004",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 622.166333,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0004.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 623.97,
+          "ts_end": 630.84,
+          "text": "like when the params dictionary is returned we get five we get a dictionary with five keys we get",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 630.84,
+          "ts_end": 636.0,
+          "text": "token embeddings we get positional embeddings we get all the parameters which are present in this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 636.0,
+          "ts_end": 642.42,
+          "text": "transformer block which i'm marking in blue right now then we get the final normalization layer scale",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 642.42,
+          "ts_end": 647.68,
+          "text": "and shift parameters there is a separate lecture where we actually explain all of these parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 647.68,
+          "ts_end": 653.44,
+          "text": "and how these keys are imported from gpt2 but for now all you need to know is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 654.0,
+          "ts_end": 661.1,
+          "text": "when you run this function when you run this function load download and load gpt2 it will",
+          "frame_ids": [
+            "izyxvl-2JlM_f0005"
+          ],
+          "visuals": [
+            {
+              "category": "code",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": {
+                "language": "python",
+                "content": "def load_gpt2_params_from_tf_ckpt(ckpt_path, settings):\n    # Process the variable name to extract relevant parts\n    variable_name_parts = name.split(\"/\")[1:] # Skip the 'model/' prefix\n\n    # Identify the target dictionary for the variable\n    target_dict = params\n    if variable_name_parts[0].startswith(\"h\"):\n        layer_number = int(variable_name_parts[0][1:])\n        target_dict = params[\"blocks\"][layer_number]\n\n    # Recursively access or create nested dictionaries\n    for key in variable_name_parts[1:-1]:\n        target_dict = target_dict.setdefault(key, {})\n\n    # Assign the variable array to the last key\n    last_key = variable_name_parts[-1]\n    target_dict[last_key] = variable_array\n\n    return params"
+              },
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.95,
+              "frame_id": "izyxvl-2JlM_f0005",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 656.233,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0005.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 661.1,
+          "ts_end": 667.1,
+          "text": "give you the settings dictionary which is a list of the gpt2 configuration and it will give you the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 667.1,
+          "ts_end": 672.92,
+          "text": "params dictionary which consists of all the parameters organized in a specific format you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 672.92,
+          "ts_end": 678.5,
+          "text": "get the token embeddings positional embeddings the transformer layer parameters and the output final",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 678.5,
+          "ts_end": 683.68,
+          "text": "normalization layer parameters as well essentially the params dictionary contains all the parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 685.35,
+          "ts_end": 692.12,
+          "text": "now let's go back to code again right so what we are going to do is that from this file called gpt",
+          "frame_ids": [
+            "izyxvl-2JlM_f0006"
+          ],
+          "visuals": [
+            {
+              "category": "diagram",
+              "skip": false,
+              "title": null,
+              "extracted_text": null,
+              "code": null,
+              "math": null,
+              "diagram_summary": "Handwritten notes on a whiteboard showing transformer architecture components including token embeddings, positional embeddings, blocks, and attention layers with their corresponding transformer block paths and layer specifications.",
+              "diagram_elements": [
+                "Token Embeddings",
+                "Positional Embeddings",
+                "Blocks",
+                "Attention layers in Transformer blocks",
+                "transformer/h/0/attn/c_attn/w",
+                "transformer/h/0/attn/c_attn/b",
+                "Feedforward neural network weights in transformer block",
+                "transformer/h/0/mlp/c_fc/w",
+                "transformer/h/0/mlp/c_fc/b",
+                "transformer/h/0/c_proj/w",
+                "transformer/h/0/c_proj/b",
+                "h2, h2 \u2192 h12 similarity notation"
+              ],
+              "confidence": 0.75,
+              "frame_id": "izyxvl-2JlM_f0006",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 686.899667,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0006.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 692.12,
+          "ts_end": 697.34,
+          "text": "download 3 we are going to import download and load gpt2 that's the function which i just showed you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 697.34,
+          "ts_end": 701.88,
+          "text": "right now and when you run this function you have to pass in two arguments the first is the model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 701.88,
+          "ts_end": 708.08,
+          "text": "size and the model size we are going to get from this choose model and that's going to be 124",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 708.08,
+          "ts_end": 712.78,
+          "text": "million that is the model size and then you have to pass in the directory where you want to store",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 712.78,
+          "ts_end": 715.52,
+          "text": "the parameters so the directory i am passing it to the directory where you want to store the parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 715.54,
+          "ts_end": 721.62,
+          "text": "okay first we'll include that so you can see that this is the model size and then i'll remove this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 721.62,
+          "ts_end": 722.74,
+          "text": "code from here and in a bit we are going to do a process called load weights which we call the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 723.66,
+          "ts_end": 725.38,
+          "text": "gpt2 id to get the load weights to gpt1 right now what if we do the\u03ac of load weights 1 is this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 725.38,
+          "ts_end": 732.36,
+          "text": "initialner and then the different parameters of gpt 2 right here so our current dollar does say",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 732.36,
+          "ts_end": 743.02,
+          "text": "that l is in the class index and but when we run this in our class language we have to take the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 743.02,
+          "ts_end": 748.88,
+          "text": "the params dictionary and then it loads all the weights from params into our model so let me show",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 748.88,
+          "ts_end": 756.84,
+          "text": "you what this load dictionary does it takes this model uh it takes this model which we have created",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 757.3,
+          "ts_end": 761.74,
+          "text": "and at all the different places of this model where there are trainable parameters such as",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 761.74,
+          "ts_end": 767.0,
+          "text": "multihead attention layer normalization feed forward neural network token embedding positional",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 767.0,
+          "ts_end": 772.0,
+          "text": "embedding whatever i have marked with an arrow right now has trainable parameters right so this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 772.0,
+          "ts_end": 779.45,
+          "text": "load this load weights into gpt function what this does is that it takes the gpt2 parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 779.45,
+          "ts_end": 786.15,
+          "text": "and it loads all of those parameters into this model basically you can think of our model being",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 786.15,
+          "ts_end": 790.75,
+          "text": "fully equipped with the best parameters which have directly directly been loaded from gpt2",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 791.76,
+          "ts_end": 796.79,
+          "text": "in one of the previous lectures which is called pre-training uh we have explained this entire",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 796.79,
+          "ts_end": 802.41,
+          "text": "code what is this function load weights into gpt the gpt model class etc for now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 802.61,
+          "ts_end": 806.33,
+          "text": "just you can just follow along by understanding that we are loading the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 807.39,
+          "ts_end": 814.06,
+          "text": "parameters of gpt2 into our model so that our model is already pre-trained and if you have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 814.06,
+          "ts_end": 819.4,
+          "text": "already loaded this before this should run very fast because the file already exists if you are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 819.4,
+          "ts_end": 826.14,
+          "text": "running this for the first time please keep in mind that the total parameter file size which",
+          "frame_ids": [
+            "izyxvl-2JlM_f0007"
+          ],
+          "visuals": [
+            {
+              "category": "other",
+              "skip": false,
+              "title": "OpenAI GPT-2 Weights",
+              "extracted_text": "Data Card | Code (0) | Discussion (1) | Suggestions (0)\n\n117M (1 directories)\n\nAbout this directory\n\nOld, incorrectly counted sizes: https://github.com/openai/gpt-2\n\nNote that our original parameter counts were wrong due to an error (in our previous blog posts and paper). Thus you may have seen small referred to as 117M and medium referred to as 345M.\n\nData Explorer\nVersion 5 (13.18 GB)\n- 117M\n  - 117M\n  - 124M\n  - 1558M\n  - 345M\n  - 355M\n  - 774M\n  - src\n  ... 6 more\n\nSummary\n- 47 files\n\nExercise | NLP\nDeep Learning",
+              "code": null,
+              "math": null,
+              "diagram_summary": null,
+              "diagram_elements": null,
+              "confidence": 0.85,
+              "frame_id": "izyxvl-2JlM_f0007",
+              "video_id": "izyxvl-2JlM",
+              "timestamp_sec": 823.799667,
+              "source_image": "data/frames/izyxvl-2JlM/izyxvl-2JlM_f0007.jpg"
+            }
+          ]
+        },
+        {
+          "ts_start": 826.14,
+          "ts_end": 832.34,
+          "text": "is provided by gpt2 if you see these seven files if you add it up it comes to be around 500 megabytes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 832.86,
+          "ts_end": 838.48,
+          "text": "may take time depending on the internet speed once this is downloaded you will see that your",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 838.48,
+          "ts_end": 844.24,
+          "text": "model is now updated with all the weights from gpt2 you can even test whether the model was loaded",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 844.24,
+          "ts_end": 849.6,
+          "text": "correctly so you can pass in the input text every effort moves you and then you have the output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 849.6,
+          "ts_end": 854.68,
+          "text": "function generate text simple which we had defined earlier what this function does is that it takes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 854.68,
+          "ts_end": 860.6,
+          "text": "in the input text it passes the input text through our model and then it generates an output so generate",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 860.6,
+          "ts_end": 861.86,
+          "text": "15 new tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 863.18,
+          "ts_end": 867.94,
+          "text": "so here you can see that every effort moves you is the input and then the 15 new tokens are forward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 867.94,
+          "ts_end": 873.18,
+          "text": "dot the first step is to understand the importance of your work awesome right which means that the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 873.18,
+          "ts_end": 878.3,
+          "text": "pre-trained parameters are working because this is reasonable this text makes sense it is proper",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 878.3,
+          "ts_end": 885.22,
+          "text": "english now until now we are at a point where the gpt model parameters are loaded into our",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 885.22,
+          "ts_end": 891.76,
+          "text": "architecture now we come to the next stage where we have to start fine tuning the model right but",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 893.22,
+          "ts_end": 893.24,
+          "text": "before that model has to be stated so these models will be figured out by chanting simultaneously",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 893.24,
+          "ts_end": 893.54,
+          "text": "to our unconscious properties so if you can go ahead and start writing a model using the model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 893.54,
+          "ts_end": 899.26,
+          "text": "as a spam classifier let's see if our model can already classify spam messages by prompting it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 899.26,
+          "ts_end": 905.4,
+          "text": "with instructions so note that until now the model just predicts next tokens we have not yet trained",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 905.4,
+          "ts_end": 911.44,
+          "text": "it to predict whether spam or no spam but let's see if our model has inherently learned these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 911.44,
+          "ts_end": 915.62,
+          "text": "capabilities so what i'm going to do is that instead of providing text such as every effort",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 915.62,
+          "ts_end": 921.3,
+          "text": "moves you in the text prompt itself i'm going to say is the following text spam answer with a yes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 921.3,
+          "ts_end": 926.64,
+          "text": "or no and then i'm going to give the text you are a winner you have specifically selected you have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 926.64,
+          "ts_end": 931.14,
+          "text": "been specifically selected to receive thousand dollar cash or a two thousand dollar reward",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 931.74,
+          "ts_end": 936.86,
+          "text": "note that we have not given the model any data set about our spam or no spam so far we are just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 936.86,
+          "ts_end": 942.68,
+          "text": "checking whether based on the gpt2 training itself can it answer this so when you pass it",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 942.68,
+          "ts_end": 948.62,
+          "text": "through the generate text simple function let's see the answer so this is the question and the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 948.62,
+          "ts_end": 954.08,
+          "text": "answer with gpt2 generates is that the following text spam answer with yes or no you are a winner",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 954.73,
+          "ts_end": 960.7,
+          "text": "so it clearly fails the model struggles with following instructions and this is because the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 960.7,
+          "ts_end": 965.88,
+          "text": "model has only undergone gone pre-training right it lacks any fine tuning so without any",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 965.88,
+          "ts_end": 966.84,
+          "text": "classification finding you can use one of the following things as the answer has been generated",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "izyxvl-2JlM_002",
+      "title": "Adding classification head to model architecture",
+      "ts_start": 973.0,
+      "ts_end": 1207.0,
+      "segments": [
+        {
+          "ts_start": 974.05,
+          "ts_end": 982.2,
+          "text": "us go to step number let us go to step number two so step number one was loading treater and gpt",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 982.2,
+          "ts_end": 986.4,
+          "text": "two weights into the model and that we have finished right now and now we are moving to step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 986.4,
+          "ts_end": 991.56,
+          "text": "number two step number two is modifying the architecture by adding a classification head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 991.56,
+          "ts_end": 996.98,
+          "text": "so let me explain this to you in detail actually so you might be thinking that our model",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 996.98,
+          "ts_end": 1002.71,
+          "text": "has been trained to predict the next token right how are we doing classification so here is the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1002.71,
+          "ts_end": 1007.91,
+          "text": "part where this magic happens so if you remember the output layer so let's look at this linear",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1007.91,
+          "ts_end": 1015.08,
+          "text": "output layer in the text classification or in the text generation task for which this llm is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1015.08,
+          "ts_end": 1020.64,
+          "text": "typically trained on this output layer looks like this where you have input which is 768 of the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1020.64,
+          "ts_end": 1027.6,
+          "text": "embedding dimension size and the output is equal to 50257 because that's the vocabulary size so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1027.6,
+          "ts_end": 1028.02,
+          "text": "where you have the output which is 768 of the embedding dimension size and the output is equal",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1028.02,
+          "ts_end": 1038.3,
+          "text": "to 50257 and when you have every effort moves you if this is the input the output for every for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1038.3,
+          "ts_end": 1045.92,
+          "text": "every row the output will have 50257 columns because that's equal to vocabulary size so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1045.92,
+          "ts_end": 1052.86,
+          "text": "there will be 50257 entries for every 50257 entries for effort 50257 entries for moves and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1052.86,
+          "ts_end": 1058.76,
+          "text": "50257 entries for you so if you want to predict the next token after every effort moves you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1058.78,
+          "ts_end": 1063.16,
+          "text": "you look at the final row and then you choose that token id with the maximum probability",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1063.16,
+          "ts_end": 1068.88,
+          "text": "that gives you the next token this is how you predict the next tokens but now we don't need",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1068.88,
+          "ts_end": 1074.0,
+          "text": "the next token prediction right now our job is to simply classify whether it's a yes or no",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1074.0,
+          "ts_end": 1080.44,
+          "text": "so what we are going to now do is that we are going to do the same thing but the output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1080.44,
+          "ts_end": 1087.3,
+          "text": "dimension will change every effort moves you this is my input right now for every token we want",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1087.3,
+          "ts_end": 1088.42,
+          "text": "two outputs",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1089.97,
+          "ts_end": 1095.97,
+          "text": "either it's a yes or it's a no so two outputs for every two outputs for effort two outputs for",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1095.97,
+          "ts_end": 1101.73,
+          "text": "moves and two outputs for you so to get the final answer we are going to look at the final row which",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1101.73,
+          "ts_end": 1106.81,
+          "text": "is you since it contains all of the previous information and then we are going to see the yes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1106.81,
+          "ts_end": 1111.49,
+          "text": "value and then we are going to see the no value these values will be indicative of probabilities",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1111.49,
+          "ts_end": 1116.79,
+          "text": "so then we are going to based on which is higher we will classify whether it's spam or no spam",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1117.49,
+          "ts_end": 1119.79,
+          "text": "so instead of having this final neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1120.13,
+          "ts_end": 1128.72,
+          "text": "network output layer size as 50257 we are going to replace replace the original linear output layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1128.72,
+          "ts_end": 1135.4,
+          "text": "with a layer that maps from 768 hidden units into only two units and what are these two units",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1135.4,
+          "ts_end": 1144.66,
+          "text": "corresponding to the two units are corresponding to simply spam versus no spam this is the only",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1144.66,
+          "ts_end": 1149.34,
+          "text": "change which we are going to do in the llm architecture when I saw this for the first time I",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1149.34,
+          "ts_end": 1151.86,
+          "text": "was pretty amazed by it because I had never seen a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1152.3,
+          "ts_end": 1157.46,
+          "text": "classification head so this can be thought of as the classification head right now so let me just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1157.46,
+          "ts_end": 1164.92,
+          "text": "write the name this can be thought of as a classification head I was pretty amazed by",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1164.92,
+          "ts_end": 1169.04,
+          "text": "this because I had only done classification using neural networks and decision trees before",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1169.7,
+          "ts_end": 1174.58,
+          "text": "I never thought you can add this classification head on top of a GPT architecture and use that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1174.58,
+          "ts_end": 1180.86,
+          "text": "itself as the classifier it might be over killing it because even a decision tree or a neural",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1180.86,
+          "ts_end": 1185.28,
+          "text": "network might work but this is just a fun application to consider that llms can actually",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1185.34,
+          "ts_end": 1190.78,
+          "text": "be used to perform classification tasks whether llms perform better than neural networks or",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1190.78,
+          "ts_end": 1197.9,
+          "text": "decision trees that's a question of open research and that needs to be figured out still okay so this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1197.9,
+          "ts_end": 1203.84,
+          "text": "is the classification head now which is added on top of the GPT model architecture and that is used",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "izyxvl-2JlM_003",
+      "title": "Select layers which want to fine-tune",
+      "ts_start": 1207.0,
+      "ts_end": 1501.0,
+      "segments": [
+        {
+          "ts_start": 1210.14,
+          "ts_end": 1215.02,
+          "text": "we dive into the code is that we can actually select which layers we want to fine-tune so of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1216.3,
+          "ts_end": 1220.22,
+          "text": "course the classification head this was not present in the original GPT-2 architecture so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1220.22,
+          "ts_end": 1225.58,
+          "text": "these parameters we will need to fine-tune but we have an option to choose among all of these",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1225.58,
+          "ts_end": 1231.76,
+          "text": "parameters GPT-2 has already given me many parameters so how much do I need to fine-tune",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1232.44,
+          "ts_end": 1237.02,
+          "text": "so that's a call which you need to make right so one thing which I have mentioned here is that since",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1237.02,
+          "ts_end": 1242.48,
+          "text": "we already start with a pre-trained model as we have loaded the GPT-2 weights it is really not",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1242.48,
+          "ts_end": 1244.98,
+          "text": "necessary for us to fine-tune all the layers",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1246.78,
+          "ts_end": 1251.04,
+          "text": "because the lower layers such as the token embedding layer the positional embedding layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1251.04,
+          "ts_end": 1256.94,
+          "text": "the layer normalization here etc these lower layers really capture the basic language structures and",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1256.94,
+          "ts_end": 1263.36,
+          "text": "semantics which are applicable across a wide range of tasks and data set this is very important the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1263.36,
+          "ts_end": 1267.88,
+          "text": "lower layers if you see the lower layers have token embedding which captures captures the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1267.88,
+          "ts_end": 1273.26,
+          "text": "semantic meaning it has the positional embedding and then we have some amount of multi-head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1273.26,
+          "ts_end": 1276.4,
+          "text": "attention etc where token embeddings are converted into",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1276.78,
+          "ts_end": 1282.04,
+          "text": "context vectors or input embeddings are converted into context vectors which contain information",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1282.04,
+          "ts_end": 1287.6,
+          "text": "about how much attention one token pays to all other tokens and GPT-2 has been trained on huge",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1287.6,
+          "ts_end": 1293.54,
+          "text": "amounts of text so it already contains some information about meaning etc so if you give",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1293.54,
+          "ts_end": 1299.28,
+          "text": "an email let's say there is already some intuition baked in about whether this email is kind of a spam",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1299.28,
+          "ts_end": 1305.42,
+          "text": "or what kind of information is it representing that information is already captured in this lower",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1305.42,
+          "ts_end": 1306.08,
+          "text": "layer somehow",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1306.82,
+          "ts_end": 1312.24,
+          "text": "because GPT-2 is a very smart and intelligent model it does capture this information so we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1312.24,
+          "ts_end": 1316.6,
+          "text": "have a choice as to which layers we want to fine-tune so the choice which we are making",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1316.6,
+          "ts_end": 1321.04,
+          "text": "here is that we are only going to fine-tune the last layers so we are definitely going",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1321.04,
+          "ts_end": 1325.52,
+          "text": "to fine-tune this classification head we will definitely fine-tune the final linear",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1325.52,
+          "ts_end": 1330.4,
+          "text": "normalization layer which has the scale and the shift parameters and we are going to fine-tune",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1330.4,
+          "ts_end": 1336.81,
+          "text": "the final transformer block so remember the GPT-2 architecture had 12 transformer blocks like this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1338.77,
+          "ts_end": 1344.57,
+          "text": "instead of fine-tuning all of the 12 transformer blocks we are only going to fine-tune the final",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1344.57,
+          "ts_end": 1349.33,
+          "text": "transformer block we are going to assume that all the other transformer blocks inherently contain",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1349.33,
+          "ts_end": 1355.75,
+          "text": "some information about what the text in the data represents so this is a good mix between achieving",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1355.75,
+          "ts_end": 1361.37,
+          "text": "good accuracy as well as reducing the computational cost remember if you were to fine-tune everything",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1361.37,
+          "ts_end": 1366.79,
+          "text": "again then what's the purpose of loading pre-trained weights the reason we loaded pre-trained weights",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1366.79,
+          "ts_end": 1372.59,
+          "text": "from GPT-2 is because it would hopefully capture some semantic meaning as to what the text",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1372.59,
+          "ts_end": 1377.84,
+          "text": "represents. So what we are going to do is that we are only going to fine-tune three things.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1378.0,
+          "ts_end": 1382.66,
+          "text": "We are going to fine-tune the final output head which is this classification head over here",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1383.16,
+          "ts_end": 1387.78,
+          "text": "because of course that was not present in GPT-2. Then we are going to fine-tune the final",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1387.78,
+          "ts_end": 1392.4,
+          "text": "transformer block, the 12th transformer block and we are going to fine-tune the final layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1392.4,
+          "ts_end": 1397.5,
+          "text": "normalization module. That is what we are going to do. These three things we are going to fine-tune.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1397.62,
+          "ts_end": 1401.96,
+          "text": "Rest all the other parameters we are going to freeze which means we are not going to train",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1401.96,
+          "ts_end": 1408.88,
+          "text": "the remaining parameters. And one more thing which I wanted to explain before we go to the code is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1408.88,
+          "ts_end": 1415.96,
+          "text": "that let's see here right so every token will produce output two tokens right. So let's say",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1415.96,
+          "ts_end": 1421.16,
+          "text": "every effort moves you is my sentence. So what is the output whether it's spam or not spam. Which of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1421.16,
+          "ts_end": 1423.3,
+          "text": "these four tokens should I look at?",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1423.32,
+          "ts_end": 1427.62,
+          "text": "Should I look at the first token, the second token, third token or fourth token? Because all",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1427.62,
+          "ts_end": 1432.94,
+          "text": "of them will have this yes no values. Which token should I look at? So here there is a nice schematic",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1432.94,
+          "ts_end": 1438.72,
+          "text": "to mention that why should we always extract the last output token. We should always extract the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1438.72,
+          "ts_end": 1445.24,
+          "text": "last output token because the last token is the only one which with an attention score to all the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1445.24,
+          "ts_end": 1450.1,
+          "text": "other tokens. If you look at the second token let's say it will only contain the attention",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1450.1,
+          "ts_end": 1453.42,
+          "text": "with respect to first token. If you look at the third token it will",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1453.42,
+          "ts_end": 1458.28,
+          "text": "only contain attention with respect to previous two tokens. Whereas the last token has all the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1458.28,
+          "ts_end": 1463.1,
+          "text": "information it contains attention with respect to all the previous tokens. So if you want to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1463.1,
+          "ts_end": 1468.58,
+          "text": "predict whether it's a spam or not a spam you want to predict from that row which contains",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1468.58,
+          "ts_end": 1473.38,
+          "text": "maximum amount of information present in the sentence. So that is equal to the last token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1473.38,
+          "ts_end": 1479.1,
+          "text": "right here. So we are going to extract the last token output row and we are going to use that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1479.1,
+          "ts_end": 1482.5,
+          "text": "to predict whether the email is spam or whether the email is not a spam.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1483.86,
+          "ts_end": 1487.52,
+          "text": "So this is exactly all of this is what I'm going to show you in the code right now.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1487.86,
+          "ts_end": 1492.5,
+          "text": "So let's go to code. The first thing which we are going to do is add a classification",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1492.5,
+          "ts_end": 1497.72,
+          "text": "head at the top which is what I showed you over here in the figure. We are going to replace",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "izyxvl-2JlM_004",
+      "title": "Coding the finetuning architecture",
+      "ts_start": 1501.0,
+      "ts_end": 1904.0,
+      "segments": [
+        {
+          "ts_start": 1504.92,
+          "ts_end": 1510.0,
+          "text": "large language model to prepare it for classification fine tuning. To do this we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1510.0,
+          "ts_end": 1514.68,
+          "text": "replace the original output layer which maps the hidden representation to a vocabulary.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1514.7,
+          "ts_end": 1519.08,
+          "text": "So let's say we want a vocabulary size of 50257 with a smaller output layer that maps to only",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1519.08,
+          "ts_end": 1524.98,
+          "text": "two classes 0 and 1. So look at this we want this kind of an output layer which only has two outputs",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1524.98,
+          "ts_end": 1532.3,
+          "text": "either 0 or 1. So two neurons at the end. So one thing which I would like to mention is that we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1532.3,
+          "ts_end": 1536.92,
+          "text": "could technically use a single output node since we are dealing with a binary classification task.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1538.38,
+          "ts_end": 1543.94,
+          "text": "However this is not a generic approach. If we use a single output that's not generic if we have more",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1543.94,
+          "ts_end": 1544.68,
+          "text": "number of classes.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1545.82,
+          "ts_end": 1549.08,
+          "text": "What we are doing is that we are doing a more general approach.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1549.64,
+          "ts_end": 1553.84,
+          "text": "What we are going to say when we code the model architecture is that we are going to say that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1553.84,
+          "ts_end": 1557.42,
+          "text": "the final number of output nodes should be equal to the number of classes.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1557.76,
+          "ts_end": 1561.74,
+          "text": "So we are not hard coding the output nodes but we are getting the number of classes",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1561.74,
+          "ts_end": 1565.04,
+          "text": "and we are setting the final number of output nodes equal to that.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1565.26,
+          "ts_end": 1570.86,
+          "text": "So for example if we have three classes such as technology, sports or medicine our same code is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1570.86,
+          "ts_end": 1575.12,
+          "text": "going to work for this modification because then the final number of output nodes will be equal to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1575.12,
+          "ts_end": 1575.4,
+          "text": "three.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1575.82,
+          "ts_end": 1578.22,
+          "text": "That's just a small detail which I wanted to mention.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1578.93,
+          "ts_end": 1583.65,
+          "text": "So before we construct the model architecture we can print the original model architecture.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1583.93,
+          "ts_end": 1588.65,
+          "text": "So we print out the original model architecture and you can see that there are 12 transformer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1588.65,
+          "ts_end": 1594.18,
+          "text": "blocks. So here you see so the number of transformer block goes from 0 to 11.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1594.34,
+          "ts_end": 1598.54,
+          "text": "That's why there are 12 transformer blocks and there is an output projection layer at the end.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1600.91,
+          "ts_end": 1606.21,
+          "text": "Awesome. So this is the output header. So here you see this has input dimension of 760.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1606.39,
+          "ts_end": 1608.71,
+          "text": "And here you can also locate an output feature dimension of 50257.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1608.83,
+          "ts_end": 1613.71,
+          "text": "This is the one which we plan to change to two instead of 50257 we just want two",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1613.71,
+          "ts_end": 1620.72,
+          "text": "as the output features. So as discussed earlier the GPT model consists of embedding layers token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1620.72,
+          "ts_end": 1626.64,
+          "text": "embedding and positional embedding followed by 12 identical transformer block followed by a",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1626.64,
+          "ts_end": 1632.03,
+          "text": "final layer normalization and the output layer output header. So what we are going to do is that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1632.03,
+          "ts_end": 1634.75,
+          "text": "we are going to replace the output header with a new output layer.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1634.75,
+          "ts_end": 1640.05,
+          "text": "here as we have illustrated in this figure over here we want to replace this original output head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1640.05,
+          "ts_end": 1646.9,
+          "text": "with this new output head right to do that to get the model ready for classification fine tuning we",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1646.9,
+          "ts_end": 1652.38,
+          "text": "first freeze the model which means that we are going to first make all the layers non-trainable",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1652.38,
+          "ts_end": 1659.2,
+          "text": "so the way to freeze the entire model is that we just do for all the parameters in model dot",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1659.2,
+          "ts_end": 1664.68,
+          "text": "parameters we say that requires grad is equal to true equal to false which means that we are not",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1664.68,
+          "ts_end": 1669.7,
+          "text": "going to update this parameter at all which means that we are going to freeze all the model parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1670.32,
+          "ts_end": 1676.38,
+          "text": "then we are going to we are going to tell this model which are the parameters which we are going",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1676.38,
+          "ts_end": 1681.62,
+          "text": "to fine-tune so as I mentioned there are three sets of parameters which we are going to fine-tune",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1681.62,
+          "ts_end": 1686.46,
+          "text": "there is the final output head there is the final transformer block and there is a final layer norm",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1686.46,
+          "ts_end": 1692.84,
+          "text": "module so first let's modify the final output head architecture so we are going to say that model dot",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1692.84,
+          "ts_end": 1693.42,
+          "text": "output head",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1694.38,
+          "ts_end": 1694.86,
+          "text": "is",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1694.86,
+          "ts_end": 1700.34,
+          "text": ", now the size is input features are the embedding dimension though input feature remains the same",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1700.34,
+          "ts_end": 1706.08,
+          "text": "that's equal to 768 the output features now is equal to the number of classes so if number of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1706.08,
+          "ts_end": 1711.64,
+          "text": "classes equal to 2 the output features will be 2 which is in this case spam versus no spam if number",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1711.64,
+          "ts_end": 1716.86,
+          "text": "of classes is 3 the output features will be equal to 3 so that's one simple change which we make this",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1716.86,
+          "ts_end": 1724.52,
+          "text": "indicates to PyTorch that these parameters need to be updated these parameters need to change okay",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1725.82,
+          "ts_end": 1731.64,
+          "text": "so this new model model dot output output layer has its requires grad attribute set to true by",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1731.64,
+          "ts_end": 1737.06,
+          "text": "default which means that it's the only layer in the model that will be updated during training so",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1737.06,
+          "ts_end": 1742.42,
+          "text": "here we have freezed all the parameters but when we change the model output head structure the new",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1742.42,
+          "ts_end": 1747.96,
+          "text": "model output head output layer has requires grad attribute set to true by default which means we are",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1747.96,
+          "ts_end": 1754.43,
+          "text": "going to update those parameters so additionally as i mentioned we are going to update two more sets",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1754.43,
+          "ts_end": 1756.13,
+          "text": "of parameters we are going to look at.",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1756.17,
+          "ts_end": 1761.55,
+          "text": "the last transformer block the 12th transformer block and we are going to modify its parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1761.55,
+          "ts_end": 1767.55,
+          "text": "as well and we are going to look at the final layer normalization which connects the output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1767.55,
+          "ts_end": 1772.09,
+          "text": "of the transformer block to the final output head these we are going to make as trainable",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1772.09,
+          "ts_end": 1776.65,
+          "text": "so i mentioned this to you over here right the final transformer block and the final layer",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1776.65,
+          "ts_end": 1782.43,
+          "text": "normalization those we are going to make trainable so here you see what i am doing i am saying that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1782.43,
+          "ts_end": 1786.91,
+          "text": "you look at the transformer blocks and this minus one indicates that you look at the last",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1786.91,
+          "ts_end": 1791.69,
+          "text": "transformer block you look at the parameters in the last transformer block and then you set",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1791.69,
+          "ts_end": 1797.47,
+          "text": "all of those parameters to be equal to trainable by setting requires grad equal to true and then",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1797.47,
+          "ts_end": 1801.43,
+          "text": "you look at the model final normalization parameters which will be shift and scale",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1801.43,
+          "ts_end": 1806.75,
+          "text": "and those you change to params dot required grad equal to true now you see there is a lot of scope",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1806.75,
+          "ts_end": 1811.81,
+          "text": "for experimentation here you can even switch this off and try to see the result you can make the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1811.81,
+          "ts_end": 1812.15,
+          "text": "parameters",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1812.15,
+          "ts_end": 1817.33,
+          "text": "of last two transformer blocks to be trainable you can switch this off you can see the results",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1817.33,
+          "ts_end": 1822.79,
+          "text": "you can maybe make this as false and check the results so whatever code which i am showing to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1822.79,
+          "ts_end": 1829.43,
+          "text": "you right now there is a lot of room for exploration over here awesome so now you can see that we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1829.43,
+          "ts_end": 1836.42,
+          "text": "added a new output layer and mark certain layers as trainable or non-trainable great so let us just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1836.42,
+          "ts_end": 1842.52,
+          "text": "take one sample input so the sample input corresponds to do you have time uh so this has",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1842.52,
+          "ts_end": 1843.14,
+          "text": "four token",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1843.3,
+          "ts_end": 1847.18,
+          "text": "ids and what we are going to do is that we are going to pass the inputs through our model now",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1847.18,
+          "ts_end": 1854.52,
+          "text": "and let's see the output so as expected do has two tokens u has two tokens have has two tokens",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1854.52,
+          "ts_end": 1859.86,
+          "text": "and time has two tokens corresponding to spam or no spam and as i mentioned we are going to look",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1859.86,
+          "ts_end": 1865.36,
+          "text": "at the last we are going to look at the last row and we will extract only the last row to predict",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1865.36,
+          "ts_end": 1871.38,
+          "text": "whether spam or no spam and the reason we saw was that the last row the last token is the only one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1871.38,
+          "ts_end": 1877.3,
+          "text": "with an attention score to all other tokens so it contains maximum information until now we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1877.3,
+          "ts_end": 1885.07,
+          "text": "not done the training the models the parameters in this output head the parameters in this output",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1885.07,
+          "ts_end": 1890.07,
+          "text": "head and the parameters in the final transformer block final layer normalization are still random",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1890.07,
+          "ts_end": 1898.6,
+          "text": "they have not been trained on our spam and no spam data set but that's fine currently i just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1898.6,
+          "ts_end": 1902.14,
+          "text": "want to show you the output and the output will be random",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "izyxvl-2JlM_005",
+      "title": "Extracting last token output",
+      "ts_start": 1904.0,
+      "ts_end": 1992.0,
+      "segments": [
+        {
+          "ts_start": 1907.3,
+          "ts_end": 1912.2,
+          "text": "that for four tokens for each of the token there are two outputs here and we are going to look at",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1912.2,
+          "ts_end": 1917.56,
+          "text": "the two outputs of the last token and we are going to see whether for spam the value is higher or no",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1917.56,
+          "ts_end": 1921.18,
+          "text": "spam it's higher and then we are going to choose the one with the higher value and make our",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1921.18,
+          "ts_end": 1929.52,
+          "text": "prediction like that okay uh so remember that we are interested in fine tuning this model so that",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1929.52,
+          "ts_end": 1933.7,
+          "text": "it returns a class label that indicates whether the model input is spam or not a spam",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1933.94,
+          "ts_end": 1938.74,
+          "text": "to achieve this we don't need to fine tune all the four output rows as i mentioned we don't need to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1938.74,
+          "ts_end": 1944.56,
+          "text": "fine tune all these four output rows but we can focus on a single output token we will focus on",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1944.56,
+          "ts_end": 1948.52,
+          "text": "the last row corresponding to the last output token since it contains all the information",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1948.52,
+          "ts_end": 1954.64,
+          "text": "so to extract the last output token we are simply going to use this command outputs colon minus one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1954.64,
+          "ts_end": 1963.32,
+          "text": "and colon which will extract the last output row from this tensor uh so the reason why minus one",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1963.32,
+          "ts_end": 1965.04,
+          "text": "is comes in the middle here is that look at the uh the middle here is the one with the highest value",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1965.06,
+          "ts_end": 1971.26,
+          "text": "at the tensor dimension the number of rows is in the second second position right so that's why the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1971.26,
+          "ts_end": 1975.88,
+          "text": "second position we have to specify minus one since we are looking at the last row and when you",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1975.88,
+          "ts_end": 1981.54,
+          "text": "specify this you will see that out of these four the last output is extracted which is minus 3.58",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1981.54,
+          "ts_end": 1988.31,
+          "text": "983 and 3.9902 so until now what we have done is that we have just modified the model architecture",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    },
+    {
+      "id": "izyxvl-2JlM_006",
+      "title": "Next steps",
+      "ts_start": 1992.0,
+      "ts_end": 2083.0,
+      "segments": [
+        {
+          "ts_start": 1993.97,
+          "ts_end": 1998.45,
+          "text": "our data set what we need to do is that we need to define the loss we need to define a loss function",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 1998.45,
+          "ts_end": 2004.16,
+          "text": "and then we need to implement back propagation that's when the model will be trained so what",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2004.16,
+          "ts_end": 2008.36,
+          "text": "we'll be doing in the next section is that we'll be detailing the process of transforming the last",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2008.36,
+          "ts_end": 2013.38,
+          "text": "token into class label predictions and then we'll calculate the model accuracy and then we'll",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2013.38,
+          "ts_end": 2018.1,
+          "text": "calculate the loss function once we have the loss function based on our underlying training data",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2018.7,
+          "ts_end": 2023.12,
+          "text": "which has been collected from this machine learning uc irvine repository once we have",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2023.12,
+          "ts_end": 2024.66,
+          "text": "the loss function then we are ready to",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2024.7,
+          "ts_end": 2029.4,
+          "text": "do back propagation and then we are ready to fine tune the parameters so then we'll do the training",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2029.4,
+          "ts_end": 2034.89,
+          "text": "and testing after that in the subsequent lectures so next lecture will focus on calculating the",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2034.89,
+          "ts_end": 2040.63,
+          "text": "classification loss and accuracy uh thank you so much everyone this brings us to the end of",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2040.63,
+          "ts_end": 2045.67,
+          "text": "the lecture we are now quite close to performing this hands-on project and taking it to completion",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2046.19,
+          "ts_end": 2050.29,
+          "text": "because until now what we have done is that we have reached these steps we have reached step",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2050.29,
+          "ts_end": 2055.23,
+          "text": "number here where we now the model is ready to be fine tuned now in the next step we have to just",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2055.57,
+          "ts_end": 2060.59,
+          "text": "implement the loss and the accuracy evaluation utilities and then we'll fine tune the model test",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2060.59,
+          "ts_end": 2065.99,
+          "text": "the fine-tuned model on new data as well so there are a lot of fun lectures coming up and at the end",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2065.99,
+          "ts_end": 2071.03,
+          "text": "of this set of lectures you will have built your own classification fine tuning completely from",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2071.03,
+          "ts_end": 2076.12,
+          "text": "scratch thank you so much everyone i hope you learnt a lot and i look forward to seeing you in",
+          "frame_ids": [],
+          "visuals": []
+        },
+        {
+          "ts_start": 2076.12,
+          "ts_end": 2076.64,
+          "text": "the next lecture",
+          "frame_ids": [],
+          "visuals": []
+        }
+      ]
+    }
+  ]
+}

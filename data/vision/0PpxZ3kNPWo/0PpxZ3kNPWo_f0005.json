@@ -1,0 +1,18 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "torch.save",
+  "extracted_text": "Saves an object to a disk file.\n\nSee also: Saving and loading tensors\n\nParameters\n\u2022 obj (object) \u2013 saved object\n\u2022 f (Union[str, PathLike, BinaryIO, IO[bytes]]) \u2013 a file-like object (has to implement write and flush) or a string or os.PathLike object containing a file name\n\u2022 pickle_module (Any) \u2013 module used for pickling metadata and objects\n\u2022 pickle_protocol (int) \u2013 can be specified to override the default protocol\n\nNOTE\nA common PyTorch convention is to save tensors using .pt file extension.",
+  "code": {
+    "language": "python",
+    "content": "torch.save(obj, f, pickle_module=pickle, pickle_protocol=DEFAULT_PROTOCOL, _use_new_zipfile_serialization=True)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "0PpxZ3kNPWo_f0005",
+  "video_id": "0PpxZ3kNPWo",
+  "timestamp_sec": 2810.466333,
+  "source_image": "data/frames/0PpxZ3kNPWo/0PpxZ3kNPWo_f0005.jpg"
+}

@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "self.output_proj = nn.Linear(d_out, d_out)  # Linear layer to combine head outputs\nself.dropout = nn.Dropout(dropout)\nself.register_buffer(\n    \"mask\",\n    torch.triu(torch.ones(context_length, context_length),\n               diagonal=1)\n)\n\ndef forward(self, x):\n    b, num_tokens, d_in = x.shape\n    \n    keys = self.W_key(x) # Shape: (b, num_tokens, d_out)\n    queries = self.W_query(x)\n    values = self.W_value(x)\n    \n    # We implicitly split the matrix by adding a `num_heads` dimension\n    # Unroll last dim: (b, num_tokens, d_out) -> (b, num_tokens, num_heads, head_dim)\n    keys = keys.view(b, num_tokens, self.num_heads, self.head_dim)\n    values = values.view(b, num_tokens, self.num_heads, self.head_dim)\n    queries = queries.view(b, num_tokens, self.num_heads, self.head_dim)\n    \n    # Transpose: (b, num_tokens, num_heads, head_dim) -> (b, num_heads, num_tokens, head_dim)\n    keys = keys.transpose(1, 2)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "K5u9eEaoxFg_f0020",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 1384.833,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0020.jpg"
+}

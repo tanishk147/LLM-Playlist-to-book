@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Neural Machine Translation - Sequence to Sequence Model",
+  "extracted_text": "Time step: 2\nsuis \u00e9tudiant",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence-to-sequence neural machine translation model showing an encoder-decoder architecture at time step 2, with input text 'suis \u00e9tudiant' processed through a green encoder block and purple decoder block, with hidden state information flowing between them.",
+  "diagram_elements": [
+    "Input: suis \u00e9tudiant",
+    "ENCODER (green block)",
+    "DECODER (purple block)",
+    "Hidden State #1 (orange box)",
+    "Output (purple bordered box on right)"
+  ],
+  "confidence": 0.92,
+  "frame_id": "XN7sevVxyUM_f0006",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 1237.699667,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0006.jpg"
+}

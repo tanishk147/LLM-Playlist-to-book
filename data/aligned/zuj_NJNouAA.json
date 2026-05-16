@@ -1,0 +1,5600 @@
+{
+  "video_id": "zuj_NJNouAA",
+  "duration_sec": 3515.338625,
+  "segments": [
+    {
+      "ts_start": 4.67,
+      "ts_end": 10.71,
+      "text": "Hello everyone and welcome to this lecture in the Build Large Language Models from Scratch series.",
+      "frame_ids": [
+        "zuj_NJNouAA_f0000"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Lecture \u2192 LLM training and Validation loss",
+          "extracted_text": "Topics 1-3 are covered in this section\n\nIn the previous section, we introduced the loss computation to evaluate how well the model performs.\n\nIn this section, we apply the loss to the entire dataset, which we split into a training and validation portion\n\nImplement functions to save and load the LLM weights to use or continue training the LLM later\n\nAs the end of this chapter, load pretrained weights from OpenAI into our LLM model",
+          "code": null,
+          "math": null,
+          "diagram_summary": "Flowchart showing LLM training pipeline with 7 numbered steps: Text generation, Text evaluation, Loss & validation losses, LLM training function, Text generation strategies, Weight saving & loading, and Pretrained weights from OpenAI, with interconnecting arrows showing dependencies.",
+          "diagram_elements": [
+            "Text generation",
+            "Text evaluation",
+            "Loss & validation losses",
+            "LLM training function",
+            "Text generation strategies",
+            "Weight saving & loading",
+            "Pretrained weights from OpenAI"
+          ],
+          "confidence": 0.85,
+          "frame_id": "zuj_NJNouAA_f0000",
+          "video_id": "zuj_NJNouAA",
+          "timestamp_sec": 5.033,
+          "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0000.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 11.66,
+      "ts_end": 19.76,
+      "text": "Let me recap the stage of building the LLM in which we are at currently in terms of a diagram.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 20.32,
+      "ts_end": 26.96,
+      "text": "Okay, so we are in stage number 2 right now based on the schematic which is mentioned in front of you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 27.02,
+      "ts_end": 31.96,
+      "text": "And in the stage number 2, we are essentially learning how to build this foundational model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 31.96,
+      "ts_end": 38.36,
+      "text": "Or rather, we are going to learn how to train or pre-train a large language model in this stage.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 38.54,
+      "ts_end": 45.94,
+      "text": "In the previous stage, in all the previous set of lectures, we have looked at data preparation, attention mechanism, and LLM architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 46.38,
+      "ts_end": 56.2,
+      "text": "In fact, in this stage, we even looked at how to calculate the loss in terms of a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 56.32,
+      "ts_end": 61.9,
+      "text": "We looked at how to define the cross-entropy loss based on the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 62.28,
+      "ts_end": 64.2,
+      "text": "And targets of a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 64.7,
+      "ts_end": 67.34,
+      "text": "And that was the previous lecture which we had.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 67.5,
+      "ts_end": 71.42,
+      "text": "Now we will be looking at a much larger data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 71.58,
+      "ts_end": 77.74,
+      "text": "In fact, this is going to be a very interesting, hands on lecture in which we are going to collect data from a storybook.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 78.24,
+      "ts_end": 84.78,
+      "text": "And we are going to make predictions using the large language model, which we have built in the first stage.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 85.5,
+      "ts_end": 92.99,
+      "text": "And then we are going to measure the loss of our large language model based on the actual data which we have built.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 93.01,
+      "ts_end": 98.82,
+      "text": "need so in the previous lecture what we did is we looked at some simple examples we looked at just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 98.82,
+      "ts_end": 105.18,
+      "text": "two inputs the first input which we looked at was every effort moves and the second input was i",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 105.18,
+      "ts_end": 110.8,
+      "text": "really like we looked at these two inputs and we predicted outputs from our large language model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 110.8,
+      "ts_end": 115.64,
+      "text": "and then we calculated the loss between those outputs and the target values which we need",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 116.69,
+      "ts_end": 122.23,
+      "text": "now what we are going to do is we are going to look at an actual data set and on that data set",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 122.23,
+      "ts_end": 128.09,
+      "text": "we are going to find the training loss and we are going to find the validation loss so if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 128.09,
+      "ts_end": 133.27,
+      "text": "zoom into stage 2 of building an llm further in the previous lecture we have looked at text generation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 133.27,
+      "ts_end": 140.35,
+      "text": "and text evaluation so we saw the cross entropy loss in the previous lecture and how to calculate",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 140.35,
+      "ts_end": 145.89,
+      "text": "it for just two simple input text today we are going to calculate the training and validation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 145.89,
+      "ts_end": 152.43,
+      "text": "losses on the entire data set we will also split the data set into training set and validation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 152.87,
+      "ts_end": 156.21,
+      "text": "so let's get started it will be a completely hands-on lecture",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 156.83,
+      "ts_end": 162.05,
+      "text": "and after this lecture actually you will be equipped to take any storybook of your choice",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 162.05,
+      "ts_end": 169.72,
+      "text": "or for that matter any data set and train the large language model not really train it because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 169.72,
+      "ts_end": 174.78,
+      "text": "we are not training the parameters in this lecture do a forward pass of the large language model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 174.78,
+      "ts_end": 182.88,
+      "text": "get the outputs and then get the loss based on the true values which you need and you will get this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 183.22,
+      "ts_end": 188.5,
+      "text": "loss for any data set which you use you will just have to follow the same code which i will provide",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 188.5,
+      "ts_end": 193.94,
+      "text": "you at the end of this lecture we have not yet started doing the training procedure but once you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 193.94,
+      "ts_end": 199.16,
+      "text": "get this loss for the data set in the next lecture we are going to look at the llm training function",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 199.16,
+      "ts_end": 205.81,
+      "text": "where we will also dive dive deep into back propagation so at the end of today's lecture you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 205.81,
+      "ts_end": 211.89,
+      "text": "will have a very cool result which is applicable to a wide range of data sets so let's get started the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 211.89,
+      "ts_end": 214.79,
+      "text": "The data set which I am going to consider is called The Verdict.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 215.69,
+      "ts_end": 221.53,
+      "text": "It's a book written by an author named Edith Wharton and this book was published in 1906",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 221.53,
+      "ts_end": 222.15,
+      "text": "I think.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 222.65,
+      "ts_end": 228.34,
+      "text": "Here's how the book looks like and the book is publicly available to download.",
+      "frame_ids": [
+        "zuj_NJNouAA_f0001",
+        "zuj_NJNouAA_f0002"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": "the-verdict.txt",
+          "extracted_text": null,
+          "code": {
+            "language": "text",
+            "content": "I HAD always thought Jack Gisburn rather a cheap genius\u2014though a good fellow enough\u2014so it was no great surprise to me to hear that, in\n\n\"The height of his glory\"\u2014that was what the women called it. I can hear Mrs. Gideon Thwing\u2014his last Chicago sitter\u2014deploring his unau\n\nWell!\u2014even through the prism of Hermia's tears I felt able to face the fact with equanimity. Poor Jack Gisburn! The women had made him\u2014\n\nIt was not till three years later that, in the course of a few weeks' idling on the Riviera, it suddenly occurred to me to wonder why G\n\nOf course, if she had not dragged him down, she had equally, as Miss Croft contended, failed to \"lift him up\"\u2014she had not led him back\n\nThe desultory life of the Riviera lends itself to such purely academic speculations; and having, on my way to Monte Carlo, caught a glit\n\nI found the couple at tea beneath their palm-trees; and Mrs. Gisburn's welcome was so genial that, in the ensuing weeks, I claimed it f\n\nI have mentioned that Mrs. Gisburn was rich; and it was immediately perceptible that her husband was extracting from this circumstance a\n\n\"Money's only excuse is to put beauty into circulation,\" was one of the axioms he laid down across the Sevres and silver of an exquisite\n\nPoor Jack! It had always been his fate to have women say such things to him; the fact should be set down in extenuation. What struck me\n\n\"My dear, since I've chucked painting people don't say that stuff about me\u2014they say it about Victor Grindle,\" was his only protest, as\n\nI glanced after him, struck by his last word. Victor Grindle was, in fact, becoming the man of the moment\u2014as Jack himself, one night ph"
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "zuj_NJNouAA_f0002",
+          "video_id": "zuj_NJNouAA",
+          "timestamp_sec": 226.199667,
+          "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0002.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 228.6,
+      "ts_end": 231.5,
+      "text": "I'll share the link, you can download the book from this link.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 232.0,
+      "ts_end": 236.78,
+      "text": "And it's not a very long book, it's a pretty short book in fact, but we are using this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 236.78,
+      "ts_end": 243.52,
+      "text": "just because I want to demonstrate an example which runs very fast on my laptop and it will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 243.52,
+      "ts_end": 245.38,
+      "text": "run very fast on your laptop also.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 245.96,
+      "ts_end": 251.08,
+      "text": "In fact, if you take a look at this data set and if you count the number of characters,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 251.93,
+      "ts_end": 255.88,
+      "text": "you'll see that the number of characters in this data set is 20,000 characters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 257.48,
+      "ts_end": 264.42,
+      "text": "What we'll do on the data set first is that we'll first convert this data set into tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 264.98,
+      "ts_end": 267.48,
+      "text": "So we'll use a tokenization scheme for that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 267.54,
+      "ts_end": 267.94,
+      "text": "Which is called a tokenization scheme.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 267.96,
+      "ts_end": 269.24,
+      "text": "It's called as byte pair encoding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 272.21,
+      "ts_end": 276.21,
+      "text": "So byte pair encoding is the tokenization scheme which we are going to use.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 276.53,
+      "ts_end": 281.87,
+      "text": "And what this will do is that in byte pair encoding, one word is not one token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 282.03,
+      "ts_end": 287.85,
+      "text": "It's a sub-word based tokenization scheme where even characters can be tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 288.23,
+      "ts_end": 293.31,
+      "text": "Just pairs of letters such as T and H, this can be one token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 293.47,
+      "ts_end": 295.59,
+      "text": "Just T can be one token, etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 296.35,
+      "ts_end": 299.17,
+      "text": "So if you use byte pair encoding, you'll find that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 299.17,
+      "ts_end": 300.99,
+      "text": "This data set has 5000 tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 301.45,
+      "ts_end": 303.95,
+      "text": "Don't worry, I'm going to show all of this in the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 304.15,
+      "ts_end": 311.3,
+      "text": "But just if you search tick token, you'll see that this is the byte pair encoder which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 311.3,
+      "ts_end": 311.88,
+      "text": "we are using.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 312.06,
+      "ts_end": 315.5,
+      "text": "And it's the same encoder which OpenAI actually used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 315.7,
+      "ts_end": 321.36,
+      "text": "And using this encoder, we can encode our data set into tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 322.95,
+      "ts_end": 323.39,
+      "text": "Great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 323.47,
+      "ts_end": 327.65,
+      "text": "So this is the data set which I'm considering and remember, you can use any data set which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 327.65,
+      "ts_end": 329.79,
+      "text": "you want on publicly available books.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 329.97,
+      "ts_end": 330.11,
+      "text": "Thank you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 331.0,
+      "ts_end": 336.4,
+      "text": "Now, the next step, what we are going to do is that we are going to divide the data set",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 336.4,
+      "ts_end": 337.76,
+      "text": "into training and validation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 338.14,
+      "ts_end": 342.38,
+      "text": "Remember, this is the same thing what we do for all machine learning problems, because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 342.38,
+      "ts_end": 344.8,
+      "text": "the training loss is not the one which really matters.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 344.9,
+      "ts_end": 350.04,
+      "text": "What matters is how our large language model is doing on text, which it has not seen before.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 350.65,
+      "ts_end": 352.41,
+      "text": "So we'll do a simple thing over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 352.53,
+      "ts_end": 358.7,
+      "text": "Let's say this is the entire data set, we are going to use a train test ratio of 0.90.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 359.06,
+      "ts_end": 361.1,
+      "text": "And we are just going to do a simple split.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 361.1,
+      "ts_end": 364.94,
+      "text": "The training data will be the first 90% of the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 365.22,
+      "ts_end": 368.54,
+      "text": "And the validation data will be the latter half.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 369.91,
+      "ts_end": 371.63,
+      "text": "So the remaining 10%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 371.63,
+      "ts_end": 376.91,
+      "text": "And that's how we are going to split the training and the validation set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 376.97,
+      "ts_end": 381.91,
+      "text": "So if you imagine the entire data to be like this, what I'm going to do is that I'm going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 381.91,
+      "ts_end": 384.21,
+      "text": "to reserve the first 90%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 384.21,
+      "ts_end": 386.19,
+      "text": "So this is 90%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 386.19,
+      "ts_end": 387.95,
+      "text": "And this is 10%.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 387.95,
+      "ts_end": 390.25,
+      "text": "So I'm going to reserve this for training purposes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 390.99,
+      "ts_end": 392.59,
+      "text": "And I'm going to reserve the training set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 392.59,
+      "ts_end": 395.57,
+      "text": "And I'm going to reserve the 10% for validation or testing purpose.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 397.01,
+      "ts_end": 400.39,
+      "text": "Now what I'm going to do after this is pretty interesting.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 401.15,
+      "ts_end": 406.03,
+      "text": "Usually in other machine learning problems, getting the inputs and outputs is pretty easy,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 406.13,
+      "ts_end": 406.25,
+      "text": "right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 406.31,
+      "ts_end": 410.35,
+      "text": "You just have images of cats and dogs and the output is whether it's a cat or whether",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 410.35,
+      "ts_end": 410.89,
+      "text": "it's a dog.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 411.17,
+      "ts_end": 412.37,
+      "text": "So it's pretty simple.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 412.47,
+      "ts_end": 415.29,
+      "text": "You have inputs which are images and you have outputs which are the labels.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 415.57,
+      "ts_end": 419.07,
+      "text": "You don't have to do anything special to create these input output pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 419.37,
+      "ts_end": 422.51,
+      "text": "But it's not as simple in the case of a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 423.23,
+      "ts_end": 425.29,
+      "text": "Large language models are autoregressive models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 426.44,
+      "ts_end": 429.08,
+      "text": "We don't label anything beforehand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 429.3,
+      "ts_end": 432.34,
+      "text": "But from the text itself, we construct the inputs and the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 433.03,
+      "ts_end": 438.75,
+      "text": "And so we need to understand the process through which we construct these input output pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 439.86,
+      "ts_end": 445.26,
+      "text": "So in the code, we are going to use the data loader to chunk the training and the validation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 445.26,
+      "ts_end": 449.26,
+      "text": "data into input and output data sets or input and output pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 449.52,
+      "ts_end": 451.9,
+      "text": "And let me show you how I'm going to do that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 452.0,
+      "ts_end": 454.26,
+      "text": "If you understand this part, it will be much easier.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 454.26,
+      "ts_end": 456.84,
+      "text": "For you to visualize what comes next, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 457.04,
+      "ts_end": 460.84,
+      "text": "So the first thing which we have to decide is what is the context size which I'm going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 460.84,
+      "ts_end": 461.22,
+      "text": "to use.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 461.62,
+      "ts_end": 466.7,
+      "text": "In other words, what is the maximum number of tokens the LLM can see before it predicts",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 466.7,
+      "ts_end": 467.26,
+      "text": "the next token.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 467.7,
+      "ts_end": 472.48,
+      "text": "So I'm going to show you how to construct the input output data pairs on this data set",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 472.48,
+      "ts_end": 474.32,
+      "text": "using the context size of four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 474.78,
+      "ts_end": 476.9,
+      "text": "So that is the first thing which I need to decide.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 477.42,
+      "ts_end": 479.16,
+      "text": "Context size equal to four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 481.52,
+      "ts_end": 482.4,
+      "text": "Okay, great.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 482.54,
+      "ts_end": 484.64,
+      "text": "So now let me look at this data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 485.38,
+      "ts_end": 486.94,
+      "text": "So I create the input output pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 487.3,
+      "ts_end": 494.65,
+      "text": "My first input is this, I had always thought, and since the context size is four, I'm looking",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 494.65,
+      "ts_end": 496.01,
+      "text": "at four tokens at a time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 496.07,
+      "ts_end": 501.23,
+      "text": "And although one word is not one token, I'm just assuming it here for the sake of demonstration.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 501.85,
+      "ts_end": 506.11,
+      "text": "So this is my first input and I'm going to label it, let me use the same color here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 506.33,
+      "ts_end": 508.95,
+      "text": "And I'm going to label this as X1, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 509.33,
+      "ts_end": 510.59,
+      "text": "This is my first input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 510.77,
+      "ts_end": 512.25,
+      "text": "Now what is the first output?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 512.59,
+      "ts_end": 515.71,
+      "text": "The first output is just this input shifted by one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 515.71,
+      "ts_end": 520.06,
+      "text": "So then it will be this, had always thought Jack.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 521.44,
+      "ts_end": 522.4,
+      "text": "This is Y1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 522.94,
+      "ts_end": 524.68,
+      "text": "Let me write this down over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 526.58,
+      "ts_end": 531.48,
+      "text": "So ultimately the input will be a tensor X and I'm currently, I'm just writing the first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 531.48,
+      "ts_end": 532.16,
+      "text": "row of this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 532.28,
+      "ts_end": 539.4,
+      "text": "So this will be, I had always thought that's my first input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 540.7,
+      "ts_end": 546.0,
+      "text": "And let me also collect the output tensor over here with a different color of course.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 546.28,
+      "ts_end": 548.44,
+      "text": "And this will be X1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 548.46,
+      "ts_end": 555.22,
+      "text": "Had always thought Jack, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 555.99,
+      "ts_end": 559.99,
+      "text": "Now let us focus on this first input output pair for just a moment.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 560.58,
+      "ts_end": 564.94,
+      "text": "The first thing to notice is that of course the output is just the input shifted to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 564.94,
+      "ts_end": 565.54,
+      "text": "right by one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 565.7,
+      "ts_end": 570.28,
+      "text": "But another thing to notice is that this one input output pair essentially has four prediction",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 570.28,
+      "ts_end": 570.7,
+      "text": "tasks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 571.1,
+      "ts_end": 572.84,
+      "text": "What are the four prediction tasks?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 573.04,
+      "ts_end": 576.81,
+      "text": "The first is that when I is the input, had is the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 577.4,
+      "ts_end": 579.82,
+      "text": "So the index corresponds that way.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 579.9,
+      "ts_end": 580.56,
+      "text": "When I is the input, had is the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 580.56,
+      "ts_end": 583.0,
+      "text": "When I had is the input, always is the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 583.53,
+      "ts_end": 588.07,
+      "text": "When I had always is the input, so when these three are the input, thought is the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 588.33,
+      "ts_end": 594.98,
+      "text": "And when I had always thought is the input, then Jack is the output, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 595.54,
+      "ts_end": 601.26,
+      "text": "So essentially when X is given an input, when we pass it through an LLM, it will produce",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 601.26,
+      "ts_end": 602.9,
+      "text": "these four tokens as the output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 604.77,
+      "ts_end": 609.61,
+      "text": "And then the output produced by LLM will be compared to this, which is the actual output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 609.61,
+      "ts_end": 610.27,
+      "text": "which we want.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 610.27,
+      "ts_end": 611.89,
+      "text": "For this input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 612.23,
+      "ts_end": 613.57,
+      "text": "Let me repeat that again.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 613.71,
+      "ts_end": 618.43,
+      "text": "If this is an input, I had always thought the actual output which we want is had always",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 618.43,
+      "ts_end": 619.01,
+      "text": "thought Jack.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 619.47,
+      "ts_end": 623.41,
+      "text": "But you'll see that when you pass these four tokens through the large language model, it's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 623.41,
+      "ts_end": 624.57,
+      "text": "not trained currently, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 624.65,
+      "ts_end": 627.29,
+      "text": "So it will predict some random words over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 627.9,
+      "ts_end": 632.34,
+      "text": "And then we have to find the loss between those random tokens and what we want.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 632.7,
+      "ts_end": 637.6,
+      "text": "That's how you get the loss between the first input pair and the second first input and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 637.6,
+      "ts_end": 638.3,
+      "text": "the first output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 638.7,
+      "ts_end": 639.18,
+      "text": "Right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 639.18,
+      "ts_end": 645.89,
+      "text": "Now let's move ahead a bit and let us see how to construct the second second input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 646.03,
+      "ts_end": 648.11,
+      "text": "So I'm going to rub this output pair right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 649.15,
+      "ts_end": 650.71,
+      "text": "Okay, so we have the first input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 650.81,
+      "ts_end": 654.67,
+      "text": "Now we have an option of how we are going to actually construct the second input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 654.99,
+      "ts_end": 659.24,
+      "text": "And let me show you how we are going to do that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 659.5,
+      "ts_end": 663.64,
+      "text": "Okay, so the first option is that you just move it to the right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 663.8,
+      "ts_end": 668.84,
+      "text": "So then X1 is I had always thought right, X2 will be had always thought Jack.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 668.84,
+      "ts_end": 673.51,
+      "text": "Now this movement, which we are going to do is also called a stride.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 675.24,
+      "ts_end": 679.04,
+      "text": "And that's the second parameter which you have to decide along with the context size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 679.68,
+      "ts_end": 684.36,
+      "text": "So if you put stride equal to one, like I've done in this case, the second input will have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 684.36,
+      "ts_end": 685.12,
+      "text": "will be X2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 685.24,
+      "ts_end": 689.22,
+      "text": "And that has a lot of overlap with the first input right had always thought is overlapping.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 691.45,
+      "ts_end": 693.09,
+      "text": "So you can also do this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 693.17,
+      "ts_end": 699.97,
+      "text": "But usually what's done in models such as GPT is that the stride, which we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 699.97,
+      "ts_end": 700.91,
+      "text": "to define right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 701.15,
+      "ts_end": 704.39,
+      "text": "Is equal is fixed to be equal to the context size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 705.07,
+      "ts_end": 706.85,
+      "text": "And that is equal to four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 707.01,
+      "ts_end": 708.93,
+      "text": "So we are going to use a stride of four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 709.01,
+      "ts_end": 715.63,
+      "text": "What this will do is that when X1 if X1 is this input, we are going to have 123 and four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 715.75,
+      "ts_end": 717.89,
+      "text": "So then X2 will start from here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 718.15,
+      "ts_end": 722.96,
+      "text": "So the next two will be Jack, this one rather, this will be X2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 723.28,
+      "ts_end": 727.66,
+      "text": "You see what stride equal to four does it, it makes sure that we don't have any overlap.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 727.88,
+      "ts_end": 731.24,
+      "text": "But it will make sure that we also don't skip any token as the input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 731.34,
+      "ts_end": 737.78,
+      "text": "When you look at X3, this will be the, this will be X3, which will be the third input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 738.2,
+      "ts_end": 743.29,
+      "text": "When you look at X4, this will be X4, which is the fourth input, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 744.64,
+      "ts_end": 747.06,
+      "text": "This is how the inputs are created.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 747.44,
+      "ts_end": 748.98,
+      "text": "And you don't skip anything.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 749.85,
+      "ts_end": 752.63,
+      "text": "But also you make sure there are no overlaps between inputs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 752.73,
+      "ts_end": 756.91,
+      "text": "So now if you look at the input tensor, the first is I had always thought, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 757.31,
+      "ts_end": 760.73,
+      "text": "The second will be Jack Gisborne, rather a.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 761.27,
+      "ts_end": 761.93,
+      "text": "Jack Gisborne.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 767.49,
+      "ts_end": 769.99,
+      "text": "That is the second input, which is X2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 770.11,
+      "ts_end": 773.27,
+      "text": "The third input would be cheap genius dash dash though.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 773.61,
+      "ts_end": 778.57,
+      "text": "So the third will be cheap genius dash dash though.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 779.56,
+      "ts_end": 783.44,
+      "text": "So that's how this entire input tensor matrix will be created.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 783.6,
+      "ts_end": 786.04,
+      "text": "Sorry, this input tensor will be created like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 786.26,
+      "ts_end": 789.72,
+      "text": "We'll stride through the entire data set and we'll collect these pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 789.84,
+      "ts_end": 795.04,
+      "text": "So then the first row will be X1, the second row will be X2, the third row will be X3 and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 795.04,
+      "ts_end": 797.64,
+      "text": "we'll keep on accumulating these rows until we reach the end.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 798.55,
+      "ts_end": 800.13,
+      "text": "And how are the outputs created?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 800.47,
+      "ts_end": 804.47,
+      "text": "Once the inputs are created, the output is just the input shifted by one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 804.63,
+      "ts_end": 809.81,
+      "text": "So for the first input, I had always thought the output was had always thought Jack, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 809.89,
+      "ts_end": 811.71,
+      "text": "Now Jack Gisborne, rather a.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 811.85,
+      "ts_end": 820.2,
+      "text": "If this is the input, the output would be Gisborne, Gisborne, rather a cheap.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 821.39,
+      "ts_end": 822.95,
+      "text": "So this will be Y2.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 823.25,
+      "ts_end": 824.79,
+      "text": "The first row will be Y1.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 824.95,
+      "ts_end": 826.63,
+      "text": "And similarly, we'll construct.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 826.81,
+      "ts_end": 827.45,
+      "text": "All the inputs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 827.47,
+      "ts_end": 832.08,
+      "text": "From the other output output pairs till we reach the end of the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 832.4,
+      "ts_end": 838.46,
+      "text": "So that is how input output pairs are created in the case of a large language model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 838.68,
+      "ts_end": 843.0,
+      "text": "So if you have a data set like this, what's very important is this X and this Y.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 843.2,
+      "ts_end": 848.14,
+      "text": "So the X is the input and the Y is the target, which is the actual value.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 848.5,
+      "ts_end": 850.26,
+      "text": "So let me write this here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 850.32,
+      "ts_end": 852.58,
+      "text": "X is the input and Y is the target.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 853.14,
+      "ts_end": 857.3,
+      "text": "Now the loss will be between the LLM output, which we have not seen yet.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 857.86,
+      "ts_end": 859.12,
+      "text": "We will also get LLM output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 859.38,
+      "ts_end": 861.64,
+      "text": "So this input will be passed into.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 862.52,
+      "ts_end": 865.38,
+      "text": "This input will be passed into our LLM model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 867.31,
+      "ts_end": 870.49,
+      "text": "And then we'll get the output from the LLM, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 870.81,
+      "ts_end": 875.27,
+      "text": "And that will also be a tensor with the same format as this target tensor.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 875.61,
+      "ts_end": 880.93,
+      "text": "And then what we are going to do is that we are going to then find the loss between the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 881.45,
+      "ts_end": 885.09,
+      "text": "we are going to find the loss between the LLM output and the target.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 885.43,
+      "ts_end": 888.75,
+      "text": "And this is the loss which we are going to find in today's lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 889.23,
+      "ts_end": 892.79,
+      "text": "And this is the loss which we eventually want to minimize, okay?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 893.49,
+      "ts_end": 898.53,
+      "text": "I hope you have understood this part and I deliberately wanted to show you visually because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 898.53,
+      "ts_end": 904.01,
+      "text": "students are generally quite unclear regarding how input output pairs are created in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 904.01,
+      "ts_end": 905.49,
+      "text": "context of large language models.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 905.83,
+      "ts_end": 909.91,
+      "text": "Now here I showed you the input target pairs, I should call them.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 909.99,
+      "ts_end": 913.21,
+      "text": "Here I showed you the input target pairs for the training data, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 913.59,
+      "ts_end": 919.29,
+      "text": "These are the input and let me call them targets because outputs will be what I refer to as,",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 919.29,
+      "ts_end": 920.09,
+      "text": "the LLM predictions.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 921.01,
+      "ts_end": 925.47,
+      "text": "So I created the input and the target pairs for the training data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 925.67,
+      "ts_end": 929.07,
+      "text": "Similarly we'll have the input and the target pairs for the validation data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 929.29,
+      "ts_end": 931.51,
+      "text": "And that will give us the validation loss.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 932.45,
+      "ts_end": 937.03,
+      "text": "The input and target pairs will give us the train loss for the training data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 937.99,
+      "ts_end": 942.35,
+      "text": "And the similar tensors will give us the validation loss for the validation data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 943.36,
+      "ts_end": 948.36,
+      "text": "Now let me explain to you the rest of the process and then we'll, I'll take you through",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 948.36,
+      "ts_end": 948.62,
+      "text": "code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 948.74,
+      "ts_end": 949.22,
+      "text": "But first.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 949.22,
+      "ts_end": 952.52,
+      "text": "I want you to understand how exactly is the loss function calculated.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 953.14,
+      "ts_end": 957.24,
+      "text": "So that the code becomes so much more easier to understand.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 957.54,
+      "ts_end": 961.98,
+      "text": "Now let's say you create the input and target pairs like this, which is the first step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 962.28,
+      "ts_end": 966.14,
+      "text": "First you look at the first row of the input and the first row of the target.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 967.24,
+      "ts_end": 969.54,
+      "text": "And then let's see how do we get the loss.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 969.84,
+      "ts_end": 972.3,
+      "text": "So let's say, let's look at the first input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 972.42,
+      "ts_end": 976.76,
+      "text": "So I'm going to look at the first input now, which is I had always thought, which is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 976.76,
+      "ts_end": 977.68,
+      "text": "first row over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 977.68,
+      "ts_end": 983.42,
+      "text": "And remember that based on the input, we have to get the LLM model output, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 983.48,
+      "ts_end": 984.76,
+      "text": "What is our model predicting?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 984.94,
+      "ts_end": 989.22,
+      "text": "We need to know that because I have the actual output corresponding to this input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 989.34,
+      "ts_end": 993.14,
+      "text": "So if the input is this, I know that the output is had always thought jack.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 993.32,
+      "ts_end": 994.18,
+      "text": "That is my output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 994.4,
+      "ts_end": 999.08,
+      "text": "So let me even write that here, the output, or rather the target, I should call it the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 999.08,
+      "ts_end": 1007.76,
+      "text": "target value for this input is had, had always thought jack, right?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1007.92,
+      "ts_end": 1009.32,
+      "text": "That is the target output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1009.32,
+      "ts_end": 1012.44,
+      "text": "So that is the target output which I need, but of course my LLM is not going to give",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1012.44,
+      "ts_end": 1016.08,
+      "text": "me this at the first, first shot because we have not trained it yet.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1016.2,
+      "ts_end": 1018.4,
+      "text": "So I need to first know what my LLM is predicting.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1018.8,
+      "ts_end": 1024.66,
+      "text": "And for that, we are going to go through the entire, not right now, but I'm just going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1024.66,
+      "ts_end": 1028.3,
+      "text": "to show you the schematic of what we are going to put the input through.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1028.48,
+      "ts_end": 1033.4,
+      "text": "So the input which we have that will go into this entire GPT architecture or the entire",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1033.4,
+      "ts_end": 1036.78,
+      "text": "LLM architecture, which we have trained in stage number one.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1037.48,
+      "ts_end": 1039.22,
+      "text": "So in the previous lectures, we have.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1039.32,
+      "ts_end": 1043.54,
+      "text": "Actually build this entire architecture from scratch, and you can see that there are so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1043.54,
+      "ts_end": 1045.5,
+      "text": "many different modules in this architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1045.78,
+      "ts_end": 1048.72,
+      "text": "And let me quickly explain to you what we are actually doing.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1048.9,
+      "ts_end": 1051.82,
+      "text": "So we take in the input, imagine those four tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1051.96,
+      "ts_end": 1057.46,
+      "text": "I had always thought we tokenize them using the tick token or the byte pair encoder.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1057.62,
+      "ts_end": 1062.22,
+      "text": "Then we convert them into token embeddings, which are vector representations in higher",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1062.22,
+      "ts_end": 1063.06,
+      "text": "dimensional spaces.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1063.34,
+      "ts_end": 1065.48,
+      "text": "We add positional embeddings to it.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1065.86,
+      "ts_end": 1067.36,
+      "text": "We add the dropout layer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1067.52,
+      "ts_end": 1068.62,
+      "text": "At this stage.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1069.32,
+      "ts_end": 1071.68,
+      "text": "Our input passes through the transformer block.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1071.88,
+      "ts_end": 1075.08,
+      "text": "So the blue block, which I've shown over here, this is the transformer block.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1075.38,
+      "ts_end": 1078.66,
+      "text": "And this is the main engine of the GPT architecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1079.2,
+      "ts_end": 1083.76,
+      "text": "The main thing which happens in the transformer block is that the input embedding vectors",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1083.76,
+      "ts_end": 1087.26,
+      "text": "are transformed into something which is called as context vectors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1088.16,
+      "ts_end": 1092.82,
+      "text": "Now what are context vectors and how do they differ from input embedding vectors?",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1093.3,
+      "ts_end": 1095.12,
+      "text": "Context vectors are more richer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1095.32,
+      "ts_end": 1098.32,
+      "text": "So if you look at one word, let's say, if you look at effort here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1099.67,
+      "ts_end": 1103.25,
+      "text": "If you look at the input embedding vector for effort, it just encodes semantic meaning",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1103.25,
+      "ts_end": 1104.03,
+      "text": "about effort.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1104.27,
+      "ts_end": 1108.97,
+      "text": "It does not contain any information about how effort relates to the other tokens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1109.41,
+      "ts_end": 1115.39,
+      "text": "But the context vector is much richer because the context vector for effort not only contains",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1115.39,
+      "ts_end": 1121.0,
+      "text": "semantic meaning about effort, but it also contains information about when effort, when",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1121.0,
+      "ts_end": 1124.9,
+      "text": "we are looking at effort, how much information should we pay to every moves and you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1125.28,
+      "ts_end": 1127.8,
+      "text": "So in other, in other words, it pays attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1127.94,
+      "ts_end": 1129.76,
+      "text": "The context vector includes attention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1129.76,
+      "ts_end": 1135.36,
+      "text": "which is given to the other tokens when we look at a particular token and that's what gives all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1135.36,
+      "ts_end": 1142.38,
+      "text": "the power to the large language model so this multi-head attention is the main driver behind",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1142.38,
+      "ts_end": 1147.76,
+      "text": "the transformer block so if you look at the whole gpt architecture the transformer block is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1147.76,
+      "ts_end": 1154.88,
+      "text": "engine of the gpt architecture and within the transformer block the multi-head attention is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1154.88,
+      "ts_end": 1159.72,
+      "text": "what allows us to convert these input embedding vectors into context vectors which encodes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1159.72,
+      "ts_end": 1164.78,
+      "text": "information about how tokens relate to other tokens that's how the llms capture meaning and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1164.78,
+      "ts_end": 1170.08,
+      "text": "that's how they do so well so gpt does so well because it has this multi-head attention mechanism",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1170.08,
+      "ts_end": 1175.53,
+      "text": "so you can see that the transformer has a number of building blocks we have the layer normalization",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1175.53,
+      "ts_end": 1181.37,
+      "text": "multi-head attention dropout shortcut connection feed forward neural network etc and then finally",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1181.37,
+      "ts_end": 1184.17,
+      "text": "when the input comes out of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1184.63,
+      "ts_end": 1184.93,
+      "text": "uh",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1184.93,
+      "ts_end": 1190.43,
+      "text": "out of the gpt model architecture we get something which is called as the logits",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1190.43,
+      "ts_end": 1195.05,
+      "text": "we get something which is called as the logits tensor and it's very important to understand",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1195.71,
+      "ts_end": 1200.33,
+      "text": "what the logit tensor is and what's the dimensions of this logic sensor so let's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1200.33,
+      "ts_end": 1205.11,
+      "text": "say the input is i had always thought and when we pass it through the gpt model which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1205.11,
+      "ts_end": 1208.17,
+      "text": "is when it passes through the entire architecture which i just showed you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1208.17,
+      "ts_end": 1214.15,
+      "text": "we get this logits tensor now i had always thought uh those are the tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1214.15,
+      "ts_end": 1219.93,
+      "text": "and when you look at the logits tensor corresponding to every token there are these logits there is a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1219.93,
+      "ts_end": 1226.73,
+      "text": "logits vector whose dimensions are equal to the vocabulary size so if you look at i the logits",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1226.73,
+      "ts_end": 1233.93,
+      "text": "for i are 50257 because that's our vocabulary size if you look at had the logits for had are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1233.93,
+      "ts_end": 1240.47,
+      "text": "50257 because that's the vocabulary if you look at always the logits for always are 50257 because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1240.47,
+      "ts_end": 1246.08,
+      "text": "that's the vocabulary size and similarly for thought now when the logits tensor come out of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1246.08,
+      "ts_end": 1250.8,
+      "text": "the gpt architecture they are not normalized so if we look at the logits for i they don't add up to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1250.8,
+      "ts_end": 1257.24,
+      "text": "one so the next step is to convert these logits tensor into a probability tensor and that makes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1257.24,
+      "ts_end": 1262.76,
+      "text": "sure that when you look at every token the logits or the probabilities add up to one so now you can",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1262.76,
+      "ts_end": 1268.16,
+      "text": "see that every logit essentially has a meaning because it adds up to one the way to predict the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1268.16,
+      "ts_end": 1270.8,
+      "text": "output now is that you look at i and you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1270.8,
+      "ts_end": 1276.12,
+      "text": "look at that logit which has the highest value okay and let's say it corresponds to index number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1276.12,
+      "ts_end": 1284.03,
+      "text": "50 in this vocabulary of 50257 or maybe 5000 and then you look at the token corresponding to that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1284.03,
+      "ts_end": 1290.75,
+      "text": "index and maybe it's something random like a c h now you look at had and you look at the logit",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1290.75,
+      "ts_end": 1297.35,
+      "text": "which has the highest value you get the index corresponding to this maybe it is 3 1 1 0 1 and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1297.35,
+      "ts_end": 1300.81,
+      "text": "then you find the token corresponding to this index maybe it's something completely random",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1300.83,
+      "ts_end": 1308.75,
+      "text": "similarly for always you get the index which has the highest probability and you get the outputs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1308.75,
+      "ts_end": 1317.07,
+      "text": "like a a m m o let's say a m o c and then you look at thought and you find the index corresponding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1317.07,
+      "ts_end": 1325.97,
+      "text": "to the highest probability and let's say this is 6 1 1 6 1 1 1 and then you get the outputs so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1325.97,
+      "ts_end": 1330.91,
+      "text": "these are the output tokens now which are llm is predicting and these are the output tokens which are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1330.93,
+      "ts_end": 1338.05,
+      "text": "which we need to make sure that they need to be as close to our target as possible okay i hope you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1338.05,
+      "ts_end": 1342.47,
+      "text": "have understood the workflow which we are trying to follow here we first have a logit tensor we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1342.47,
+      "ts_end": 1348.71,
+      "text": "convert it into a softmax tensor which which is a probability tensor and i just gave you the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1348.71,
+      "ts_end": 1355.44,
+      "text": "intuition that based on this tensor how do you make the output for this input right so what is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1355.44,
+      "ts_end": 1361.08,
+      "text": "done now is that after this point let's say we have this probability tensor right then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1361.08,
+      "ts_end": 1367.38,
+      "text": "what we actually do is that we look at the targets this is the actual value which we want",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1367.38,
+      "ts_end": 1373.76,
+      "text": "and we look at the index which each token in the target corresponds to so had has index 23 in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1373.76,
+      "ts_end": 1380.34,
+      "text": "vocabulary always has index 3881 in our vocabulary thought has index 1 1 2 2 3 in our vocabulary",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1380.34,
+      "ts_end": 1386.06,
+      "text": "jack has index 15 in the vocabulary i'm assigning these random values for now just for demonstration",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1386.06,
+      "ts_end": 1390.5,
+      "text": "purposes now let me show you one thing here so first let me rub these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1391.56,
+      "ts_end": 1398.24,
+      "text": "uh rub these colors okay now what's the next is that based on these based on these index indices",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1398.84,
+      "ts_end": 1405.96,
+      "text": "uh let's say we look at i and we look at index number 23 let's say this is index number 23 and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1405.96,
+      "ts_end": 1415.28,
+      "text": "we take its uh value that will be p1 then we look at had and then we uh that so the target for had",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1415.28,
+      "ts_end": 1420.14,
+      "text": "is always and its index is 3881 let's say we look at that index and find the probability corresponding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1420.14,
+      "ts_end": 1421.52,
+      "text": "to that index that's pt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1421.56,
+      "ts_end": 1427.18,
+      "text": "two then we look at the third row and find index number one one two two three and find the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1427.18,
+      "ts_end": 1435.67,
+      "text": "probability corresponding to that that's p3 and then we uh find uh the index number 15 in the last",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1435.67,
+      "ts_end": 1441.91,
+      "text": "row and then we find the probability corresponding to that so then that will be p4 ideally if in an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1441.91,
+      "ts_end": 1447.35,
+      "text": "ideal world if the llm is trained perfectly these probabilities will be close to one and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1448.18,
+      "ts_end": 1452.5,
+      "text": "if these probabilities are close to one it means that our llm is also predicting the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1452.52,
+      "ts_end": 1459.5,
+      "text": "values right uh as the output but when the llm is not trained at all these probabilities will not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1459.5,
+      "ts_end": 1464.48,
+      "text": "be close to one at all they might be very low which means that our llm does not think that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1464.48,
+      "ts_end": 1470.72,
+      "text": "this target needs to be the output because it has not been trained so the whole goal is that to make",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1470.72,
+      "ts_end": 1476.12,
+      "text": "sure that these probabilities get as close to one as possible and that's why we uh employ the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1476.12,
+      "ts_end": 1481.76,
+      "text": "categorical or i should call it the cross entropy loss so i first take the logarithm of all these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1482.52,
+      "ts_end": 1487.84,
+      "text": "i add up these log values then i take the mean and then i take the negative this is also called",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1487.84,
+      "ts_end": 1495.1,
+      "text": "as the negative log likelihood uh this is called as the negative log likelihood and the whole goal",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1495.1,
+      "ts_end": 1500.12,
+      "text": "of training the llm is to make sure that this this negative log likelihood which i'm going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1500.12,
+      "ts_end": 1506.98,
+      "text": "calling nll and if you plot n n l of x as a function of x so it's negative of logarithm",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1506.98,
+      "ts_end": 1512.68,
+      "text": "right so it will look something like uh it will look something like this since it's the negative",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1513.96,
+      "ts_end": 1520.38,
+      "text": "it will look something like this and our whole goal is to make sure that the loss comes down and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1520.38,
+      "ts_end": 1526.08,
+      "text": "it comes down to zero as much as possible so now today what we are going to do is that today we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1526.08,
+      "ts_end": 1531.66,
+      "text": "not going to train the llm we are just going to see the starting point of this loss uh which which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1531.66,
+      "ts_end": 1536.24,
+      "text": "will be very high value but then in the subsequent lecture we are going to train the large language",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1536.24,
+      "ts_end": 1541.61,
+      "text": "model so that this loss comes as down as possible so this is the workflow which i showed you for one",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1544.03,
+      "ts_end": 1550.41,
+      "text": "uh and then how do we get the loss now remember that we don't just have one input we have all",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1550.41,
+      "ts_end": 1556.99,
+      "text": "these inputs uh which are stacked together in a batch so remember that this data loader processes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1556.99,
+      "ts_end": 1563.91,
+      "text": "inputs in a batch so each batch has an accumulation of inputs right based on the size of the batch so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1563.91,
+      "ts_end": 1569.46,
+      "text": "now let me show you how multiple inputs in a batch are processed so let's say we have a batch which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1569.46,
+      "ts_end": 1574.2,
+      "text": "has two inputs together so let's say this is a batch whose batch size is equal to two",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1574.44,
+      "ts_end": 1582.21,
+      "text": "which means that there are two inputs together uh in a batch at a time right so this is one batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1582.21,
+      "ts_end": 1588.71,
+      "text": "and this has two inputs i had always thought jack gispan rather also this is x1 and this is x2",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1589.19,
+      "ts_end": 1594.39,
+      "text": "and this is y1 and these are this is y2 these are the target outputs so for the first input x1",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1594.39,
+      "ts_end": 1599.31,
+      "text": "my output should be had always thought jack which we also saw in the previous example where just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1599.31,
+      "ts_end": 1604.57,
+      "text": "one input was there and my second input is jack gispan rather oh the output should be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1604.67,
+      "ts_end": 1607.83,
+      "text": "gisborne rather achieve that's what i want these are the targets right",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1608.29,
+      "ts_end": 1613.65,
+      "text": "now similar to the similar to what we saw for one input the steps are pretty similar",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1613.65,
+      "ts_end": 1618.61,
+      "text": "for the case of batches as well i am trying to see a color which should work the best here yeah",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1618.61,
+      "ts_end": 1622.97,
+      "text": "so what we'll do is that we'll first take the input and we'll pass it through the entire gpt",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1622.97,
+      "ts_end": 1628.13,
+      "text": "architecture in this case what we'll get is that we'll get two logics tensors the first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1628.13,
+      "ts_end": 1633.63,
+      "text": "logits tensor is for the first batch first input the second logits tensor is for the second input",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1634.67,
+      "ts_end": 1638.65,
+      "text": "look at the size of this tensor now we have two batches here and in each batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1638.65,
+      "ts_end": 1642.01,
+      "text": "there are four rows and in each row there are five zero two five seven",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1642.01,
+      "ts_end": 1646.29,
+      "text": "columns in the previous case where there are just one input the size was just four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1646.29,
+      "ts_end": 1650.93,
+      "text": "into five zero two five seven but now we have two such batches right two such",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1650.93,
+      "ts_end": 1656.56,
+      "text": "inputs so this is input number one and here's input number two right so in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1656.56,
+      "ts_end": 1660.34,
+      "text": "code what we'll do is that when we get this logits tensor we'll flatten this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1660.34,
+      "ts_end": 1664.28,
+      "text": "out we'll flatten the batch dimension out which means we'll merge both of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1664.28,
+      "ts_end": 1669.21,
+      "text": "these together we'll merge both of this together so that now the my cumulative",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1669.21,
+      "ts_end": 1673.19,
+      "text": "logits tensor looks something like this this is my first input this is my second",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1673.19,
+      "ts_end": 1677.89,
+      "text": "input all merged together the size of this now will be eight rows multiplied",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1677.89,
+      "ts_end": 1683.33,
+      "text": "by five zero two five seven that will be the size of this okay and the next steps",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1683.33,
+      "ts_end": 1687.97,
+      "text": "are pretty similar we add we apply softmax we convert this into a tensor of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1687.97,
+      "ts_end": 1693.05,
+      "text": "probabilities and then we look at the target we look at the target tokens and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1693.05,
+      "ts_end": 1694.13,
+      "text": "we stack this target",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1694.47,
+      "ts_end": 1699.31,
+      "text": "also so for the first input these four are the target outputs for the first for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1699.31,
+      "ts_end": 1703.17,
+      "text": "the second input these four are the target outputs and we get the token IDs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1703.17,
+      "ts_end": 1707.73,
+      "text": "corresponding to these target outputs we stack them together and then we find for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1707.73,
+      "ts_end": 1713.61,
+      "text": "each row we find the value corresponding to these token IDs and then these values",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1713.61,
+      "ts_end": 1720.45,
+      "text": "are noted down as P 1 1 P 1 2 P 1 3 P 1 4 this for input 1 P 2 1 P 2 2 P 2 3 P 2",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1720.45,
+      "ts_end": 1724.21,
+      "text": "4 that's for input number 2 and then similarly we get the cross entropy",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1724.47,
+      "ts_end": 1728.97,
+      "text": "loss so this is the loss for the first input this is the loss for the second",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1728.97,
+      "ts_end": 1732.95,
+      "text": "input and then we add add it together and ultimately it will also look",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1732.95,
+      "ts_end": 1738.27,
+      "text": "something like this and the whole goal is that in this case also we want to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1738.27,
+      "ts_end": 1742.77,
+      "text": "minimize this loss and bring it as close to zero as possible so now I hope you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1742.77,
+      "ts_end": 1746.97,
+      "text": "see that even for a batch of two inputs the process of getting the loss is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1746.97,
+      "ts_end": 1752.87,
+      "text": "pretty similar as what the process was for just one input right and I want you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1752.87,
+      "ts_end": 1754.45,
+      "text": "to keep this visual workflow in mind and then I will talk to you later about the next step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1754.47,
+      "ts_end": 1758.51,
+      "text": "mind so that when we come to the code you will really understand what is happening over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1758.97,
+      "ts_end": 1764.49,
+      "text": "so in the code there is going to come a time when we are going to apply the data loader to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1764.49,
+      "ts_end": 1769.87,
+      "text": "the training and validation set and the training data set is going to look like this after it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1769.87,
+      "ts_end": 1776.13,
+      "text": "passes the data loader and i want you to analyze this right i told you that the input is processed",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1776.13,
+      "ts_end": 1783.88,
+      "text": "into batches right so here you can see that uh let's look at first each row for now right each",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1783.88,
+      "ts_end": 1792.16,
+      "text": "row corresponds to one batch so this is x and this is y so what this 2 comma 256 means is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1792.16,
+      "ts_end": 1796.86,
+      "text": "that so let's look at our case right now let's look at the case which we took for the batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1797.54,
+      "ts_end": 1802.84,
+      "text": "uh we looked at x1 we looked at x and y right this is the first batch and the size here was",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1802.84,
+      "ts_end": 1809.82,
+      "text": "2 comma 4 because there were two uh there were two inputs and each input had four tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1810.42,
+      "ts_end": 1813.7,
+      "text": "and here also it was two comma four because there are two outputs and four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1813.88,
+      "ts_end": 1818.74,
+      "text": "tokens similarly what i want you to note over here is that when you look at this training data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1818.74,
+      "ts_end": 1824.56,
+      "text": "loader it's exactly similar to the example which we saw so let's look at the first row over here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1826.07,
+      "ts_end": 1832.73,
+      "text": "let's look at the first row over here uh it has two inputs but it has 256 tokens because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1832.73,
+      "ts_end": 1838.65,
+      "text": "that is the context size we are going to use when we go to code so that's x the first input and it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1838.65,
+      "ts_end": 1843.74,
+      "text": "has two uh it has two inputs so it's x1 comma x2",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1844.94,
+      "ts_end": 1848.66,
+      "text": "and that's exactly what we saw right why there is two here because there is x1",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1849.36,
+      "ts_end": 1853.8,
+      "text": "uh so if you zoom this in further let me show you how it looks like it will be",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1854.36,
+      "ts_end": 1864.86,
+      "text": "um i uh i had always this will be 256 now not four like what i had shown you because",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1864.86,
+      "ts_end": 1870.02,
+      "text": "the context size is 256 this will be x1 and then x2 will be another input batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1870.56,
+      "ts_end": 1876.64,
+      "text": "this will be x1 x2 and then similarly we have y1 y2 which are shifted by one i already have a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1876.66,
+      "ts_end": 1880.84,
+      "text": "told you right how to construct the y1 and y2 they are the inputs just shifted by one",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1881.36,
+      "ts_end": 1884.88,
+      "text": "so these are y1 and y2 and they will also have the size of 256.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1886.75,
+      "ts_end": 1890.07,
+      "text": "this is just the first batch the first row is just the first batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1891.39,
+      "ts_end": 1897.19,
+      "text": "where each batch had two inputs of 256 tokens each similarly here we can see that there are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1897.19,
+      "ts_end": 1902.71,
+      "text": "nine batches so there are nine training set batches each batch has two samples and each",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1902.71,
+      "ts_end": 1907.43,
+      "text": "sample has 256 tokens each so i don't want you to be scared when you see this in the code",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1907.97,
+      "ts_end": 1912.05,
+      "text": "Similarly, in the validation we just have one batch because only 10% is used.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1912.21,
+      "ts_end": 1917.65,
+      "text": "Each batch has two samples and each sample has 256 tokens each.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1919.1,
+      "ts_end": 1923.1,
+      "text": "I hope you have understood this visual workflow which I have constructed over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1923.26,
+      "ts_end": 1926.84,
+      "text": "I could have directly taken you through the code but then it would have been very difficult",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1926.84,
+      "ts_end": 1928.86,
+      "text": "to understand the different steps in the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1929.8,
+      "ts_end": 1934.26,
+      "text": "Now I am going to take you through the code and we are going to see how to calculate the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1934.26,
+      "ts_end": 1936.96,
+      "text": "loss for this verdict short story step by step.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1936.96,
+      "ts_end": 1941.66,
+      "text": "But please keep this intuition of this workflow in mind, then everything will be very clear",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1941.66,
+      "ts_end": 1942.06,
+      "text": "for you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1942.78,
+      "ts_end": 1944.54,
+      "text": "Okay, so now we are at the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1944.66,
+      "ts_end": 1949.68,
+      "text": "Before we get started, I want to clarify that we are actually using a relatively small data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1949.68,
+      "ts_end": 1954.9,
+      "text": "set and that is because we want to run the code in a few minutes on our laptop computer.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1955.26,
+      "ts_end": 1959.08,
+      "text": "I could have used a larger data set but it would have taken a huge amount of time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1960.68,
+      "ts_end": 1965.92,
+      "text": "Just to give you a sense of how much time it takes to run big data sets, LAMA 7 billion",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1965.92,
+      "ts_end": 1967.3,
+      "text": "that model.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1969.26,
+      "ts_end": 1976.19,
+      "text": "Required 184320 GPU hours and it was trained on 2 trillion tokens and training this LLM",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1976.19,
+      "ts_end": 1977.89,
+      "text": "would cost about $700,000.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1978.53,
+      "ts_end": 1983.05,
+      "text": "That's why I cannot show it to you on the full scale data set but I am showing it to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1983.05,
+      "ts_end": 1987.79,
+      "text": "you on a smaller data set and the whole logic is completely scalable for larger data as",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1987.79,
+      "ts_end": 1988.07,
+      "text": "well.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1988.57,
+      "ts_end": 1990.01,
+      "text": "Okay, so here's the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1990.11,
+      "ts_end": 1994.39,
+      "text": "The first thing what we are doing is that we are getting this data set link from here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1994.39,
+      "ts_end": 1997.41,
+      "text": "and I'll share this link with you in the YouTube.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 1997.41,
+      "ts_end": 2000.37,
+      "text": "And I am importing this data set over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2000.95,
+      "ts_end": 2010.13,
+      "text": "So here you can see that I am reading the data set and I am storing the all the information",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2010.13,
+      "ts_end": 2012.35,
+      "text": "all the text in this variable called text data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2012.83,
+      "ts_end": 2017.69,
+      "text": "And let's check whether the text is loaded fine by printing out the first hundred words.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2017.83,
+      "ts_end": 2023.85,
+      "text": "So here I am printing the first hundred characters and here you can see that the first hundred",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2023.85,
+      "ts_end": 2025.13,
+      "text": "characters have been printed.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2025.25,
+      "ts_end": 2027.61,
+      "text": "And they look very closely matching with the code.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2027.61,
+      "ts_end": 2029.23,
+      "text": "Let's see what was actually there in my text.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2029.37,
+      "ts_end": 2032.53,
+      "text": "I had always thought Jack Gispun rather a cheap genius.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2032.81,
+      "ts_end": 2036.75,
+      "text": "And here also I had always thought Jack Gispun rather a cheap genius awesome.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2037.43,
+      "ts_end": 2042.45,
+      "text": "Let's print the last hundred characters it for me the Stroud strand alone and let's see",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2042.45,
+      "ts_end": 2043.55,
+      "text": "whether that also matches.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2049.1,
+      "ts_end": 2052.84,
+      "text": "Okay I think this also matches the whole data set is not being displayed over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2052.98,
+      "ts_end": 2055.92,
+      "text": "But now we are pretty sure that the data has been loaded fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2056.28,
+      "ts_end": 2060.98,
+      "text": "Let's move to the next step in the next step what I want to show is that we can print out",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2060.98,
+      "ts_end": 2064.94,
+      "text": "the total number of characters in this data and it's 20479 that's fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2065.22,
+      "ts_end": 2069.74,
+      "text": "But remember I told you about the byte pair encoder what we are going to do is that we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2069.74,
+      "ts_end": 2073.5,
+      "text": "are going to use the byte pair encoder tokenizer to encode this text data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2073.78,
+      "ts_end": 2078.22,
+      "text": "And we had already defined the tokenizer in the previous lecture but I am going to do",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2078.22,
+      "ts_end": 2085.46,
+      "text": "it once more here so that yeah so that everything is from scratch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2085.56,
+      "ts_end": 2091.1,
+      "text": "So what we are actually going to do is that we are going to import tick token and we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2091.46,
+      "ts_end": 2094.32,
+      "text": "going to define this tokenizer from the tick token library.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2094.82,
+      "ts_end": 2105.24,
+      "text": "So let me write it down here okay yeah so we are importing this tick token library which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2105.24,
+      "ts_end": 2110.24,
+      "text": "is the same library openai uses for their tokenization and we are going to get the encoding",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2110.24,
+      "ts_end": 2115.3,
+      "text": "from tick token which is a byte pair encoder character and sub world level encoder basically.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2115.62,
+      "ts_end": 2122.2,
+      "text": "And we are going to encode the entire text data using this encoder and we are going to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2122.2,
+      "ts_end": 2126.04,
+      "text": "print out the number of tokens right so the number of tokens are 5145.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2126.82,
+      "ts_end": 2132.22,
+      "text": "So with 5145 tokens the text is very short for training and LLM but again it's for educational",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2132.22,
+      "ts_end": 2132.82,
+      "text": "purposes.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2135.24,
+      "ts_end": 2139.3,
+      "text": "Okay the next step is that we are going to divide the data set into training and validation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2139.3,
+      "ts_end": 2143.88,
+      "text": "data and we are going to use the data loader exactly what I told you over here right.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2143.96,
+      "ts_end": 2148.76,
+      "text": "So we have loaded the data set now and we have to divide it into training and validation.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2149.76,
+      "ts_end": 2151.14,
+      "text": "Okay let's do that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2151.28,
+      "ts_end": 2152.72,
+      "text": "Before that what I am going to show you is that we are going to use the data loader and",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2152.72,
+      "ts_end": 2156.66,
+      "text": "what I am going to show you is that remember I told you what our data loader does our data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2156.66,
+      "ts_end": 2162.96,
+      "text": "loader we have to specify this context size and we have to specify the stride our data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2162.96,
+      "ts_end": 2167.96,
+      "text": "loader loops over this entire data set and creates this input output pairs that's what",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2167.96,
+      "ts_end": 2170.0,
+      "text": "I have implemented in the code right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2170.9,
+      "ts_end": 2177.32,
+      "text": "So here you can see that max length is the context size and stride is the how many steps",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2177.32,
+      "ts_end": 2179.56,
+      "text": "we want to leave before creating the next input.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2180.02,
+      "ts_end": 2180.96,
+      "text": "So first.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2181.12,
+      "ts_end": 2182.5,
+      "text": "So we create two tensors.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2182.5,
+      "ts_end": 2183.58,
+      "text": "Input and the target.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2183.78,
+      "ts_end": 2189.46,
+      "text": "So these are the X and Y tensors which I showed and then we loop over the entire we loop over",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2189.46,
+      "ts_end": 2194.32,
+      "text": "the entire data set we create the input chunk we create the target chunk which is based",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2194.32,
+      "ts_end": 2197.1,
+      "text": "on the context length and we append it to the tensor.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2197.78,
+      "ts_end": 2201.0,
+      "text": "So the first row here will be the first input chunk.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2201.14,
+      "ts_end": 2205.76,
+      "text": "The first row in the target will be the first target chunk then we move over in the second",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2205.76,
+      "ts_end": 2209.26,
+      "text": "loop then we fill the second row of the input and the target.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2209.4,
+      "ts_end": 2212.48,
+      "text": "Similarly we loop over the entire data set and fill the input tensor.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2212.48,
+      "ts_end": 2220.27,
+      "text": "And the target tensor that's what this GPT data set origin one creates and then we use",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2220.27,
+      "ts_end": 2225.87,
+      "text": "the create data loader function it takes the input output data sets which which have been",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2225.87,
+      "ts_end": 2232.21,
+      "text": "created in the GPT data set v1 class and then we create this data loader instance.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2232.69,
+      "ts_end": 2239.43,
+      "text": "So data loader is already provided by PyTorch so let me show you this I'll also add the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2239.43,
+      "ts_end": 2239.95,
+      "text": "link to this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2240.05,
+      "ts_end": 2242.29,
+      "text": "So data sets and data loaders right.",
+      "frame_ids": [
+        "zuj_NJNouAA_f0003"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "Datasets & DataLoaders",
+          "extracted_text": "Run in Google Colab | Download Notebook | View on GitHub\nColab | Notebook | GitHub\n\nLearn the Basics || Quickstart || Tensors || || Transforms || Build Model || Autograd || Optimization || Save & Load Model\n\nCode for processing data samples can get messy and hard to maintain; we ideally want our dataset code to be decoupled from our model training code for better readability and modularity. PyTorch provides two data primitives:\n\nown data. | stores the samples and their corresponding labels, and\n| that allow you to use pre-loaded datasets as well as your own\nto enable easy access to the samples.\nwraps an iterable around the\n\nPyTorch domain libraries provide a number of pre-loaded datasets (such as FashionMNIST) that subclass and implement functions specific to the particular data. They can be used to prototype and benchmark your model. You can find them here: Image Datasets, Text Datasets, and Audio Datasets\n\nLoading a Dataset\n\nHere is an example of how to load the Fashion-MNIST dataset from TorchVision. Fashion-MNIST is a dataset of Zalando's article images consisting of 60,000 training examples and 10,000 test examples. Each example comprises a 28x28 grayscale image and an associated label from one of 10 classes.\n\nWe load the FashionMNIST Dataset with the following parameters:",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.85,
+          "frame_id": "zuj_NJNouAA_f0003",
+          "video_id": "zuj_NJNouAA",
+          "timestamp_sec": 2240.599667,
+          "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0003.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 2242.33,
+      "ts_end": 2243.07,
+      "text": "They are very useful.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2243.09,
+      "ts_end": 2245.25,
+      "text": "They are useful for processing data also in batches.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2245.33,
+      "ts_end": 2251.54,
+      "text": "Remember we want to use batches over here using a data loader like this just makes processing",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2251.54,
+      "ts_end": 2252.98,
+      "text": "the batches much more convenient.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2253.28,
+      "ts_end": 2258.58,
+      "text": "So if we create an instance of this data loader and we feed in the data set which we created",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2258.58,
+      "ts_end": 2263.3,
+      "text": "the input output data set which I mentioned over here input and targets and then here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2263.3,
+      "ts_end": 2271.27,
+      "text": "we specify the batch size we specify shuffle these arguments are not useful in the current",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2271.27,
+      "ts_end": 2272.21,
+      "text": "context right now.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2273.51,
+      "ts_end": 2277.05,
+      "text": "I'll also explain them to you later when we are going to train the LLM see the output",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2277.05,
+      "ts_end": 2277.49,
+      "text": "etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2278.19,
+      "ts_end": 2282.99,
+      "text": "But remember that for now the only important aspect here is that we are going to create",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2282.99,
+      "ts_end": 2287.17,
+      "text": "an instance of this data loader feed in this data set and define the batch size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2287.43,
+      "ts_end": 2291.33,
+      "text": "If you want to do parallel processing you can also set the number of workers etc.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2291.71,
+      "ts_end": 2297.39,
+      "text": "Okay so now an instance of the data loader is created and let me actually take some time",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2297.39,
+      "ts_end": 2299.27,
+      "text": "to explain the shuffle and the drop last.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2299.99,
+      "ts_end": 2302.95,
+      "text": "So what this shuffle essentially does is that.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2302.99,
+      "ts_end": 2303.49,
+      "text": "It shuffles the data loader.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2303.51,
+      "ts_end": 2307.93,
+      "text": "It shuffles the data set order when batches are created that's sometimes useful for generalization.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2308.21,
+      "ts_end": 2315.23,
+      "text": "What this drop last actually does is that if the last batch size is very small and some",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2315.23,
+      "ts_end": 2320.55,
+      "text": "very small data is left at the last batch and it's not equal to the full batch size",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2320.55,
+      "ts_end": 2322.55,
+      "text": "then it just drops that last batch.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2322.93,
+      "ts_end": 2328.73,
+      "text": "So here we are setting the drop last equal to true and see the thing which I want to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2328.73,
+      "ts_end": 2332.77,
+      "text": "mention here is that max length equal to 256 which means that the context size which we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2332.77,
+      "ts_end": 2333.87,
+      "text": "are going to use is 256.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2333.89,
+      "ts_end": 2336.29,
+      "text": "And we will also see that later.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2337.47,
+      "ts_end": 2346.75,
+      "text": "We are going to use a context size of 256 over here and that set by the GPT configuration",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2347.64,
+      "ts_end": 2348.76,
+      "text": "which we are going to provide.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2349.04,
+      "ts_end": 2350.68,
+      "text": "So I will also mention it over here.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2353.4,
+      "ts_end": 2359.04,
+      "text": "Okay so for now I hope you have understood the GPT dataset version 1 class and this create",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2359.04,
+      "ts_end": 2364.18,
+      "text": "data loader function which basically creates the input and the output data pairs and then",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2364.18,
+      "ts_end": 2365.78,
+      "text": "it also specifies the batch size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2366.58,
+      "ts_end": 2370.5,
+      "text": "One more thing I want to mention before we create the training and the validation data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2370.5,
+      "ts_end": 2373.58,
+      "text": "set is that this is the configuration which we are going to use.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2373.7,
+      "ts_end": 2380.54,
+      "text": "So look at the context length that's 256 which means that we are going to look at 256 tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2380.54,
+      "ts_end": 2381.14,
+      "text": "at one time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2381.38,
+      "ts_end": 2386.52,
+      "text": "Whenever I showed you this example here I showed four tokens I showed the context length",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2386.52,
+      "ts_end": 2388.84,
+      "text": "of four because that's easier to demonstrate.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2389.14,
+      "ts_end": 2394.04,
+      "text": "So when you try to understand the code always try to think of four as being replaced with",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2394.04,
+      "ts_end": 2394.36,
+      "text": "256.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2394.36,
+      "ts_end": 2397.32,
+      "text": "Rest all the workflow remains exactly the same.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2398.76,
+      "ts_end": 2403.14,
+      "text": "Okay the next thing what we are going to do is that we are going to split the data set.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2403.88,
+      "ts_end": 2408.88,
+      "text": "So we are going to use a train test split of 90% the first 90% of the data is a training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2408.88,
+      "ts_end": 2415.14,
+      "text": "data the remaining 10% is the validation data and here's the main part where magic happens.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2415.36,
+      "ts_end": 2418.7,
+      "text": "So we are going to create a data loader based on the training data.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2418.88,
+      "ts_end": 2424.22,
+      "text": "What this does is that it splits the training data into the input and the target tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2424.22,
+      "ts_end": 2424.58,
+      "text": "pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2425.22,
+      "ts_end": 2430.88,
+      "text": "Which we have seen over here and we are also going to create a validation data loader which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2430.88,
+      "ts_end": 2434.62,
+      "text": "splits the validation data into input and the target pairs because we also need the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2434.62,
+      "ts_end": 2435.3,
+      "text": "validation loss.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2435.84,
+      "ts_end": 2439.18,
+      "text": "So here you see the train data loader is an object.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2439.36,
+      "ts_end": 2445.44,
+      "text": "So we create the train data loader based on this create data loader version one function",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2446.19,
+      "ts_end": 2452.92,
+      "text": "and we specify that batch size equal to two maximum length is GPT config context length.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2453.08,
+      "ts_end": 2454.16,
+      "text": "So that's 256.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2454.56,
+      "ts_end": 2455.54,
+      "text": "That's the context size.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2455.6,
+      "ts_end": 2460.68,
+      "text": "Stride equal to the context size remember I had mentioned to you that generally when",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2460.68,
+      "ts_end": 2467.14,
+      "text": "these LLM architectures are run the stride and the context size are matched because we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2467.14,
+      "ts_end": 2471.4,
+      "text": "make sure that no word is lost but at the same time there is no overlap between consecutive",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2471.4,
+      "ts_end": 2476.92,
+      "text": "inputs awesome right and then drop last equal to true shuffle equal to true and we are not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2476.92,
+      "ts_end": 2482.24,
+      "text": "doing parallel processing so I am putting number of workers equal to zero similarly",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2482.24,
+      "ts_end": 2484.54,
+      "text": "we construct the validation loader.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2485.24,
+      "ts_end": 2489.58,
+      "text": "With a batch size of two max length which is the context length of one zero two four",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2489.58,
+      "ts_end": 2495.92,
+      "text": "and the stride sorry context length of 256 and the stride of 256 when GPT two smallest",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2495.92,
+      "ts_end": 2500.12,
+      "text": "version was trained they actually used a context length of one zero two four and you can even",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2500.12,
+      "ts_end": 2504.78,
+      "text": "do that but it just takes a long time all you need to do is just replace this with one",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2504.78,
+      "ts_end": 2510.64,
+      "text": "zero two four and just run the same code which I will be providing to you but please be patient",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2510.64,
+      "ts_end": 2513.2,
+      "text": "when you run the code on your end it might take some time.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2513.44,
+      "ts_end": 2515.06,
+      "text": "We can do some sanity checks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2515.08,
+      "ts_end": 2521.55,
+      "text": "So ideally the number of tokens which we want in our training data set should not be less",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2521.55,
+      "ts_end": 2526.25,
+      "text": "than our back context length right because then we don't have enough tokens to predict",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2526.25,
+      "ts_end": 2530.83,
+      "text": "the next word so here I have just written that if this is the case if our number of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2530.83,
+      "ts_end": 2535.91,
+      "text": "training tokens is less than our context length then print an error similarly if the number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2535.91,
+      "ts_end": 2540.83,
+      "text": "of validation tokens is less than the context length print an error it does not print an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2540.83,
+      "ts_end": 2542.23,
+      "text": "error which means we are good to go.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2543.36,
+      "ts_end": 2545.44,
+      "text": "One more thing I want to mention.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2545.6,
+      "ts_end": 2549.98,
+      "text": "Here is that we are using a batch size of two in large language models in training GPT",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2549.98,
+      "ts_end": 2555.1,
+      "text": "level models they usually use a pretty large batch size but we use a relatively small batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2555.1,
+      "ts_end": 2559.7,
+      "text": "size to reduce the computational resource demand and because the data set is also very",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2559.7,
+      "ts_end": 2560.56,
+      "text": "small to begin with.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2561.23,
+      "ts_end": 2565.75,
+      "text": "To give you a context Lama two seven billion was trained with a batch size of one zero",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2565.75,
+      "ts_end": 2566.17,
+      "text": "two four.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2566.29,
+      "ts_end": 2571.45,
+      "text": "Here we are using batch size of two because I want to run it very quickly on my laptop.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2572.52,
+      "ts_end": 2576.14,
+      "text": "One more check we can do to make sure that the data is loaded correctly.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2576.3,
+      "ts_end": 2577.64,
+      "text": "One more thing to make sure that the data is loaded correctly is that remember both",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2577.64,
+      "ts_end": 2582.14,
+      "text": "in the training and the validation there are now X&Y pairs input and target pairs.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2582.96,
+      "ts_end": 2587.02,
+      "text": "So the training has inputs and targets and the validation is inputs and targets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2587.48,
+      "ts_end": 2590.28,
+      "text": "Let's actually print out the shape of these inputs and targets.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2590.54,
+      "ts_end": 2592.52,
+      "text": "So the training loader has this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2592.66,
+      "ts_end": 2599.0,
+      "text": "If you print out the X&Y shape in the training loader it will look like this and if you print",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2599.0,
+      "ts_end": 2601.88,
+      "text": "out the X&Y shape in the validation loader it will look like this.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2602.06,
+      "ts_end": 2603.86,
+      "text": "So if you look at the train loader.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2603.9,
+      "ts_end": 2605.12,
+      "text": "Let's look at the first row.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2605.12,
+      "ts_end": 2610.36,
+      "text": "this is the X and what I'm highlighting now is the Y what this represents is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2610.36,
+      "ts_end": 2616.76,
+      "text": "that the input so in one batch so this is one batch so first row corresponds to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2616.76,
+      "ts_end": 2620.76,
+      "text": "the first batch the first column of the first row is the input the second column",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2620.76,
+      "ts_end": 2626.45,
+      "text": "of the first row is the output if you look at the first batch input you will",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2626.45,
+      "ts_end": 2632.69,
+      "text": "see that there are two samples each sample has 256 tokens similarly if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2632.69,
+      "ts_end": 2637.13,
+      "text": "look at the first batch output you will see that there are two samples and 256",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2637.13,
+      "ts_end": 2641.87,
+      "text": "tokens this is the target which we want and this is the input which is there",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2643.33,
+      "ts_end": 2649.25,
+      "text": "similarly since 256 tokens are exhausted in the input and we have to loop over",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2649.25,
+      "ts_end": 2653.03,
+      "text": "the entire data set there are it turns out that there are nine such batches",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2653.03,
+      "ts_end": 2658.11,
+      "text": "which are created in the training data and there is one batch which is created",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2658.11,
+      "ts_end": 2661.97,
+      "text": "in the validation data similar to the training data in the validation data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2661.97,
+      "ts_end": 2662.67,
+      "text": "you will see that there is one batch which is created in the validation data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2662.67,
+      "ts_end": 2667.19,
+      "text": "you will see that the batch has two samples each sample has 256 tokens and I",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2667.19,
+      "ts_end": 2670.83,
+      "text": "also printed the length of the training loader here and you can even print the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2670.83,
+      "ts_end": 2677.81,
+      "text": "length of the validation loader and you will get that the length of the training",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2677.81,
+      "ts_end": 2682.57,
+      "text": "loader is equal to 9 because there are 9 batches each batch has 2 samples and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2682.57,
+      "ts_end": 2686.93,
+      "text": "length of the validation loader is equal to 1 and there is just one batch with 2",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2686.93,
+      "ts_end": 2693.47,
+      "text": "samples I hope now this part is clear to you to make sure you understand this part",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2693.47,
+      "ts_end": 2698.13,
+      "text": "that is why I actually went through this entire whiteboard demonstration to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2698.13,
+      "ts_end": 2702.93,
+      "text": "show you that towards the end we are going to get something like this in the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2702.93,
+      "ts_end": 2707.53,
+      "text": "in the code and remember I spent some time to explain these sizes and these",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2707.53,
+      "ts_end": 2712.43,
+      "text": "dimensions I hope you are following along and if I directly went through the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2712.43,
+      "ts_end": 2715.63,
+      "text": "code and when we reach this part it would have been impossible for you to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2715.63,
+      "ts_end": 2719.17,
+      "text": "understand this that's why it was very important for me to go through this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2719.17,
+      "ts_end": 2722.67,
+      "text": "entire whiteboard demonstration so that you understand the dimensions of what's",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2722.67,
+      "ts_end": 2723.37,
+      "text": "really going on",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2724.04,
+      "ts_end": 2728.18,
+      "text": "so up till now what we have created is that we have created the we have the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2728.18,
+      "ts_end": 2731.92,
+      "text": "input and the targets and we have batched them into the input and the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2733.0,
+      "ts_end": 2736.9,
+      "text": "target data but we have still not got the output predictions right we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2736.9,
+      "ts_end": 2742.64,
+      "text": "still not got the GPT model predictions so that's what we are going to do next",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2744.04,
+      "ts_end": 2747.84,
+      "text": "one more thing before going next is that we can print out the training tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2747.84,
+      "ts_end": 2755.0,
+      "text": "and validation tokens just for the sake of sanity so this makes sure that the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2755.16,
+      "ts_end": 2759.96,
+      "text": "data is now loaded correctly now we can actually go to the next part which is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2759.96,
+      "ts_end": 2764.74,
+      "text": "getting the LLM model outputs so in one of the previous lectures we have defined",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2764.74,
+      "ts_end": 2770.02,
+      "text": "this GPT model class what this GPT model class does is that it essentially",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2770.02,
+      "ts_end": 2774.02,
+      "text": "implements every single thing what I've shown in this figure it takes the inputs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2774.02,
+      "ts_end": 2779.56,
+      "text": "it takes the inputs and then it returns a logit tensor remember the logit",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2779.56,
+      "ts_end": 2784.54,
+      "text": "tensor as it is written does not encode probabilities we need to convert it to a",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2784.54,
+      "ts_end": 2789.12,
+      "text": "probability sensor using the softmax so the GPT model class which we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2789.12,
+      "ts_end": 2794.1,
+      "text": "constructed returns the logit sensor and we have several lectures on this for now",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2794.1,
+      "ts_end": 2799.06,
+      "text": "you can just keep in mind that okay first the inputs are converted into",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2799.06,
+      "ts_end": 2803.1,
+      "text": "token embeddings we add the positional embeddings then we add a dropout layer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2803.1,
+      "ts_end": 2808.3,
+      "text": "then we pass the output of the dropout layer to through this transformer block",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2808.3,
+      "ts_end": 2811.76,
+      "text": "this transformer block which I have highlighted right now that has the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2811.76,
+      "ts_end": 2814.46,
+      "text": "multi-head attention mechanism which is the main",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2814.54,
+      "ts_end": 2818.76,
+      "text": "engine behind the LLMs power after coming out of the transformer we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2818.76,
+      "ts_end": 2822.62,
+      "text": "another layer normalization layer followed by output neural network which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2822.62,
+      "ts_end": 2828.43,
+      "text": "uses this logit tensor then we create an instance of this GPT model class and we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2828.43,
+      "ts_end": 2833.61,
+      "text": "call it model and we are using the same GPT model config 124 million parameters",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2833.61,
+      "ts_end": 2838.33,
+      "text": "which I had defined over here we have to specify the vocabulary size context",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2838.33,
+      "ts_end": 2842.39,
+      "text": "length embedding dimension number of attention heads number of transformer",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2842.39,
+      "ts_end": 2844.93,
+      "text": "blocks dropout rate and whether the query",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2845.09,
+      "ts_end": 2849.35,
+      "text": "value bias is set to false in this lecture I am NOT going to explain all of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2849.35,
+      "ts_end": 2853.39,
+      "text": "these parameters because that was the subject of previous lectures if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2853.39,
+      "ts_end": 2856.99,
+      "text": "don't understand what those parameters mean I encourage you to check out the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2856.99,
+      "ts_end": 2862.17,
+      "text": "previous lectures in a lot of detail we have around six lectures on that and six",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2862.17,
+      "ts_end": 2866.63,
+      "text": "lectures explaining how we constructed this GPT model class for now just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2866.63,
+      "ts_end": 2871.25,
+      "text": "remember that we have got the output logits and we have constructed an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2871.25,
+      "ts_end": 2875.07,
+      "text": "instance of the GPT model class so when you pass an instance when you pass an",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2875.09,
+      "ts_end": 2879.96,
+      "text": "input to this model it will give you the logits now we are actually ready to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2879.96,
+      "ts_end": 2884.88,
+      "text": "implement the loss because we have the we have the targets over here we have",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2884.88,
+      "ts_end": 2890.28,
+      "text": "the targets over here and we also have the GPT model output and now we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2890.28,
+      "ts_end": 2893.74,
+      "text": "actually going to implement the exact same steps over here remember first we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2893.74,
+      "ts_end": 2899.0,
+      "text": "take the softmax then we index with the probabilities then we index these tokens",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2899.0,
+      "ts_end": 2904.4,
+      "text": "based on the target tokens and then we get the cross entropy loss right using",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2904.4,
+      "ts_end": 2905.46,
+      "text": "the negative log-like",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2905.6,
+      "ts_end": 2911.0,
+      "text": "and we did the same thing for this batch over here so now i want you to keep this in mind",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2911.0,
+      "ts_end": 2916.28,
+      "text": "when we had a batch remember what we did first when we had a batch we first flattened the logits",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2916.28,
+      "ts_end": 2920.92,
+      "text": "right this is exactly what we are going to do when we calculate the loss so there is a function",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2920.92,
+      "ts_end": 2927.48,
+      "text": "called calculate loss batch which takes the input batch and the target batch right what this means",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2927.48,
+      "ts_end": 2932.48,
+      "text": "is that it's exactly like what i've shown over here this is the input batch x and this is the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2932.48,
+      "ts_end": 2938.18,
+      "text": "target batch y it's just that instead of four tokens there will be 256 then what we are going",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2938.18,
+      "ts_end": 2943.9,
+      "text": "to do in the code is that we are going to pass the input batch through the model the gpt model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2943.9,
+      "ts_end": 2948.76,
+      "text": "and gets the logits tensor so until now in the code we are at this stage where we have got the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2948.76,
+      "ts_end": 2954.86,
+      "text": "logits tensor then we are going to flatten the logits 0.1 so see we are going to flatten the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2954.86,
+      "ts_end": 2961.77,
+      "text": "logits 0.1 and we get this now remember up till now we have not implemented softmax",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2961.77,
+      "ts_end": 2962.69,
+      "text": "we have not",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2962.69,
+      "ts_end": 2962.87,
+      "text": "you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2962.93,
+      "ts_end": 2969.37,
+      "text": "indexed this probability tensor with the target index indices and we have not got the negative",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2969.37,
+      "ts_end": 2975.39,
+      "text": "log likelihood it turns out that with just one line of code nn.functional.crossentropy we can",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2975.39,
+      "ts_end": 2981.77,
+      "text": "do all of these three steps so when you do the nn.functional.crossentropy on the flattens logits",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2981.77,
+      "ts_end": 2987.69,
+      "text": "tensor and the flatten target batch so remember the flatten target batch is this is this tensor",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2987.69,
+      "ts_end": 2996.09,
+      "text": "over here this is the flattens targets batch so what the nn.functional.crossentropy does is that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 2996.09,
+      "ts_end": 3003.3,
+      "text": "it first applies softmax to the logits tensor because that is the first argument it first",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3003.3,
+      "ts_end": 3010.24,
+      "text": "applies softmax to this first argument which is also shown in this white ball and then it takes",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3010.24,
+      "ts_end": 3016.22,
+      "text": "the values corresponding to the indices in the second argument so then it takes the values in",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3016.22,
+      "ts_end": 3018.28,
+      "text": "this corresponding to the indices in this argument and then it takes the values corresponding to the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3018.28,
+      "ts_end": 3025.36,
+      "text": "second argument so it it then gets this p11 p12 etc this matrix and then it also gets the negative",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3025.36,
+      "ts_end": 3030.56,
+      "text": "log likelihood it calculates the negative log likelihood so in one line of code we actually",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3030.56,
+      "ts_end": 3038.02,
+      "text": "get the loss and this is an awesome function which is a very powerful function in pytorch you can take",
+      "frame_ids": [
+        "zuj_NJNouAA_f0004"
+      ],
+      "visuals": [
+        {
+          "category": "slide",
+          "skip": false,
+          "title": "torch.nn.functional.cross_entropy",
+          "extracted_text": "torch.nn.functional.cross_entropy(input, target, weight=None, size_average=None, ignore_index=-100, reduce=None, reduction='mean', label_smoothing=0.0) [SOURCE]\n\nCompute the cross entropy loss between input logits and target.\n\nSee CrossEntropyLoss for details.\n\nParameters\n\n\u2022 input (Tensor) \u2013 Predicted unnormalized logits; see Shape section below for supported shapes.\n\u2022 target (Tensor) \u2013 Ground truth class indices or class probabilities; see Shape section below for supported shapes.\n\u2022 weight (Tensor, optional) \u2013 a manual rescaling weight given to each class. If given, has to be a Tensor of size C\n\u2022 size_average (bool, optional) \u2013 Deprecated (see reduction). By default, the losses are averaged over each loss element in the batch. Note that for some losses, there are multiple elements per sample. If the field size_average is set to False, the losses are instead summed for each minibatch. Ignored when reduce is False. Default: True\n\u2022 ignore_index (int, optional) \u2013 Specifies a target value that is ignored and does not contribute to the input gradient. When size_average is True, the loss is averaged over non-ignored targets. Note that ignore_index is only applicable when the target contains class indices. Default: -100\n\u2022 reduce (bool, optional) \u2013 Deprecated (see reduction). By default, the losses are averaged or",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.95,
+          "frame_id": "zuj_NJNouAA_f0004",
+          "video_id": "zuj_NJNouAA",
+          "timestamp_sec": 3036.466333,
+          "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0004.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 3038.02,
+      "ts_end": 3045.69,
+      "text": "a look at this i'll also share the link to this uh this uh torch pytorch function with you awesome so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3045.69,
+      "ts_end": 3048.27,
+      "text": "this is how we calculate the loss between",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3048.41,
+      "ts_end": 3054.33,
+      "text": "an input batch and a target batch but now remember that we have to calculate the loss for all of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3054.33,
+      "ts_end": 3058.99,
+      "text": "batches right and that's why we are defining a function called calculate loss loader which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3058.99,
+      "ts_end": 3063.93,
+      "text": "calculates the loss from all of the batches together the main function in this the main",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3063.93,
+      "ts_end": 3069.79,
+      "text": "part in this is that you get the input and target batch for the entire data loader which means that",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3069.79,
+      "ts_end": 3076.43,
+      "text": "so here we just looked at one input and one output batch right one target batch but you will see here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3076.43,
+      "ts_end": 3078.23,
+      "text": "there are many input and out target",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3078.41,
+      "ts_end": 3084.11,
+      "text": "batches uh so row one row one of input and row one of target is the first batch row two is the second",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3084.11,
+      "ts_end": 3088.77,
+      "text": "batch so there are multiple batches and we have to aggregate the loss for all of those right so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3088.77,
+      "ts_end": 3094.27,
+      "text": "similarly you get the input and target batch uh and then you loop over so when you are looking at",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3094.27,
+      "ts_end": 3099.79,
+      "text": "one batch you just run this earlier function and then you just aggregate the losses together so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3099.79,
+      "ts_end": 3104.17,
+      "text": "when you run the loss for one batch you will get the loss then you add it with the loss for the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3104.17,
+      "ts_end": 3108.33,
+      "text": "second batch and similarly you get the total loss and then ultimately you just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3108.41,
+      "ts_end": 3112.75,
+      "text": "divide the total loss with the number of batches which will give you a mean loss per batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3113.9,
+      "ts_end": 3118.38,
+      "text": "the different parts of the code which are added before ensure that if the length of the data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3118.38,
+      "ts_end": 3124.88,
+      "text": "loader is zero it we return that the loss is not a number because length of data loader is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3124.88,
+      "ts_end": 3130.38,
+      "text": "zero does not make sense both our training and the validation data loaders currently",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3130.94,
+      "ts_end": 3135.46,
+      "text": "training data loader is of length nine because there are nine batches validation data loader",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3135.46,
+      "ts_end": 3138.78,
+      "text": "is of length one because there is one batch if the length of the data",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3139.02,
+      "ts_end": 3142.36,
+      "text": "loader is itself zero which means that there are no batches and there is nothing to compute",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3143.38,
+      "ts_end": 3149.66,
+      "text": "similarly when we when we call this calc loss loader function and if we don't specify the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3149.66,
+      "ts_end": 3154.74,
+      "text": "number of batches so if by default it's none we set the number of batches equal to the length of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3154.74,
+      "ts_end": 3159.08,
+      "text": "the data loader so for the training data loader that will be equal to nine for the validation",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3159.08,
+      "ts_end": 3164.96,
+      "text": "data loader that will be equal to one now if someone specifies the number of batches here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3164.96,
+      "ts_end": 3170.62,
+      "text": "which are more than the number of batches in the data loader we set the actual number of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3170.62,
+      "ts_end": 3177.37,
+      "text": "batches to be minimum of those two right so the number of batches equal to minimum of number of",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3177.37,
+      "ts_end": 3181.85,
+      "text": "batches set here and remember that in the data loader also there is a provision to set the number",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3181.85,
+      "ts_end": 3187.11,
+      "text": "of batches so the ultimate batch size which is used for computation will be minimum of those two",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3187.11,
+      "ts_end": 3193.63,
+      "text": "that's it and then we take the one input and one target at a time we find the loss according to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3193.63,
+      "ts_end": 3195.57,
+      "text": "this calc loss batch function which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3195.57,
+      "ts_end": 3195.77,
+      "text": "implies the number of batches set here and then we set the number of batches set here",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3195.77,
+      "ts_end": 3201.65,
+      "text": "and then we implement the functional cross nn.functional.cross entropy loss and then we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3201.65,
+      "ts_end": 3207.01,
+      "text": "actually add all of the losses together from every input target batch and then we just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3207.01,
+      "ts_end": 3214.83,
+      "text": "divide by that number of batches and this is how we got get the average cross entropy loss per batch",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3214.83,
+      "ts_end": 3221.37,
+      "text": "this the output of this function is the loss of our large language model on this book the verdict",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3221.37,
+      "ts_end": 3226.27,
+      "text": "data set which we considered in today's lecture now let's actually run",
+      "frame_ids": [
+        "zuj_NJNouAA_f0005"
+      ],
+      "visuals": [
+        {
+          "category": "code",
+          "skip": false,
+          "title": "the-verdict.txt",
+          "extracted_text": null,
+          "code": {
+            "language": "text",
+            "content": "unexpected discovery; and as I turned, my eye fell on a small picture above the mantel-piece\u2014the only object breaking the plain oak panelling of t\n\nkey, standing in the rain under a wall.\n\n, breathing a little quickly.\n\non everlasting foundations. You lucky chap, where did you get it?\"\n\ne.\"\n\nHe was such an inflexible hermit.\"\n\nto paint him when he was dead.\"\n\nscape through my surprise, for he answered with a deprecating laugh: \"Yes\u2014she's an awful simpleton, you know, Mrs. Stroud. Her only idea was to hav\n\nhistory?\"\n\nloried in him\u2014or thought she did. But she couldn't bear not to have all the drawing-rooms with her. She couldn't bear the fact that, on varnishing\n\nened after he was dead.\"\n\nent for you?\""
+          },
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.75,
+          "frame_id": "zuj_NJNouAA_f0005",
+          "video_id": "zuj_NJNouAA",
+          "timestamp_sec": 3222.233,
+          "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0005.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 3227.07,
+      "ts_end": 3231.15,
+      "text": "let's actually call this function on the data which we have and let's see the output which we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3231.15,
+      "ts_end": 3238.82,
+      "text": "get right okay so what I'm going to do now is that I am going to call this calc loss loader",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3238.82,
+      "ts_end": 3245.6,
+      "text": "and I am going to input the train loader the model and the device and here you see",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3245.6,
+      "ts_end": 3252.2,
+      "text": "torch.device if torch.qda is available else it will run on CPU so my code is",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3252.2,
+      "ts_end": 3257.12,
+      "text": "running on my CPU right now and I'm calling this calc loss loader function for both the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3257.12,
+      "ts_end": 3262.7,
+      "text": "train loss and for the validation loss so when I call it for the train loss as I input the train",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3262.7,
+      "ts_end": 3267.48,
+      "text": "loader here when I call it for the validation loss I input the validation loader and the model",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3267.48,
+      "ts_end": 3273.9,
+      "text": "is essentially the instance which we have already created here this is the model an instance of the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3273.9,
+      "ts_end": 3283.22,
+      "text": "GPT model class and that is the second argument the third argument is the device so if if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3283.22,
+      "ts_end": 3287.96,
+      "text": "want to run on CPU it can even run on CPU like I am showing right now so I have uncompressed",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3287.98,
+      "ts_end": 3292.78,
+      "text": "I have commented these lines right now uncommenting these lines will allow the code to run on",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3292.78,
+      "ts_end": 3298.9,
+      "text": "Apple silicon chips if available which is approximately 2x faster than on Apple CPU so",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3298.9,
+      "ts_end": 3305.44,
+      "text": "right now my code is running on Apple CPU you can also run it on qda if qda is available or if you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3305.44,
+      "ts_end": 3310.38,
+      "text": "have GPU access you can even run it on GPU so right now what I am going to do is that I am just",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3310.38,
+      "ts_end": 3315.44,
+      "text": "going to click on this run and I am going to show you live how much time it is taking for me to run",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3317.98,
+      "ts_end": 3323.2,
+      "text": "and I am going to show you that here what we have essentially done is that we have loaded this",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3323.2,
+      "ts_end": 3331.78,
+      "text": "entire data set we have converted this into input output pairs we have passed the data set into the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3331.78,
+      "ts_end": 3337.76,
+      "text": "GPT architecture block so we have passed the data set into this llm architecture block which looks",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3337.76,
+      "ts_end": 3344.48,
+      "text": "like this and then we have got the llm outputs and then we have compared the loss with the targets",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3344.48,
+      "ts_end": 3348.26,
+      "text": "and with these outputs and then we have collected an aggregate metric of this loss",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3348.4,
+      "ts_end": 3352.9,
+      "text": "so here you can see I have got the training loss and I have got the validation loss and I got it",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3352.9,
+      "ts_end": 3358.92,
+      "text": "live in less than 30 seconds I would say now you can take this code and you can do whatever you",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3358.92,
+      "ts_end": 3365.0,
+      "text": "want you can increase the context size to 1024 all you need to do is go here and change the",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3365.58,
+      "ts_end": 3372.2,
+      "text": "context size to 1024 to mimic conditions more closely to GPT-2 you can even go to",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3372.2,
+      "ts_end": 3377.93,
+      "text": "internet and search Harry Potter book download",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3379.42,
+      "ts_end": 3385.26,
+      "text": "you can download the Harry Potter book there is an ebook series here just make sure the just make",
+      "frame_ids": [
+        "zuj_NJNouAA_f0006"
+      ],
+      "visuals": [
+        {
+          "category": "other",
+          "skip": false,
+          "title": null,
+          "extracted_text": "\u0915\u0947\u0902\u0926\u094d\u0930\u0940\u092f \u0935\u093f\u0926\u094d\u092f\u093e\u0932\u092f \u0913.\u090f\u0928.\u091c\u0940.\u0938\u0940. \u092e\u0947\u0939\u0938\u093e\u0928\u093e\n\u0915\u0947\u0902\u0926\u094d\u0930\u0940\u092f \u0935\u093f\u0926\u094d\u092f\u093e\u0932\u092f \u0938\u0902\u0917\u0920\u0928",
+          "code": null,
+          "math": null,
+          "diagram_summary": null,
+          "diagram_elements": null,
+          "confidence": 0.75,
+          "frame_id": "zuj_NJNouAA_f0006",
+          "video_id": "zuj_NJNouAA",
+          "timestamp_sec": 3382.766333,
+          "source_image": "data/frames/zuj_NJNouAA/zuj_NJNouAA_f0006.jpg"
+        }
+      ]
+    },
+    {
+      "ts_start": 3385.26,
+      "ts_end": 3391.14,
+      "text": "sure about the copyright versions similarly you can go ahead and download any data set which you",
+      "frame_ids": [
+        "zuj_NJNouAA_f0007"
+      ],
+      "visuals": []
+    },
+    {
+      "ts_start": 3391.14,
+      "ts_end": 3396.34,
+      "text": "want and just train the large language or just run this code on the data set which you are considering",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3396.34,
+      "ts_end": 3402.12,
+      "text": "it will be truly awesome for you to use your own data set and get this training and validation loss",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3402.12,
+      "ts_end": 3406.82,
+      "text": "because once you have obtained the training and validation loss that really opens up the door for",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3406.82,
+      "ts_end": 3409.3,
+      "text": "us to back propagate so in this case we have got the training and validation loss and we have got",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3409.32,
+      "ts_end": 3411.42,
+      "text": "the training and validation loss so in the next lecture what we are going to do is that we are",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3411.42,
+      "ts_end": 3416.12,
+      "text": "actually going to define an LLM training function which implements the back propagation and which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3416.12,
+      "ts_end": 3420.78,
+      "text": "tries to minimize the training and the validation loss so then it will make sure that the outputs",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3421.72,
+      "ts_end": 3427.82,
+      "text": "being generated are very coherent and then even if you run this code on another data set",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3428.6,
+      "ts_end": 3434.04,
+      "text": "even in the next code when we do the pre-training you can do the same pre-training on your custom",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3434.04,
+      "ts_end": 3438.96,
+      "text": "data set so the code which we have developed today is pretty generalizable and uh",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3440.09,
+      "ts_end": 3445.29,
+      "text": "i hope you try you understood what we are trying to demonstrate today we are trying to demonstrate",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3445.29,
+      "ts_end": 3450.83,
+      "text": "through a real hands-on example how we can actually take a data set from the internet and we",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3450.83,
+      "ts_end": 3456.89,
+      "text": "can divide it into input target pairs we can run the data set through a large language model which",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3456.89,
+      "ts_end": 3462.23,
+      "text": "we ourselves have developed if you have not been through the previous lectures this this model i",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3462.23,
+      "ts_end": 3467.8,
+      "text": "have not taken it from anywhere we have developed it live we have developed it from scratch without",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3467.8,
+      "ts_end": 3470.62,
+      "text": "Without any single library like langchain or any other library.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3470.86,
+      "ts_end": 3473.28,
+      "text": "We have coded this from the basic building blocks.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3473.48,
+      "ts_end": 3475.62,
+      "text": "And that has been used to produce this output.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3475.84,
+      "ts_end": 3477.04,
+      "text": "That's even more satisfying.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3478.55,
+      "ts_end": 3479.41,
+      "text": "Okay students.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3479.41,
+      "ts_end": 3481.49,
+      "text": "So that brings me to the end of this lecture.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3481.69,
+      "ts_end": 3486.09,
+      "text": "I deliberately wanted to give you a feel of the whiteboard teaching.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3486.85,
+      "ts_end": 3489.19,
+      "text": "So that you understand the intuition theory.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3489.39,
+      "ts_end": 3490.51,
+      "text": "And also the coding.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3490.67,
+      "ts_end": 3494.13,
+      "text": "Which is my main goal in every lecture which I conduct.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3494.96,
+      "ts_end": 3497.9,
+      "text": "In the next lecture we are going to look at LLM pre-training.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3497.9,
+      "ts_end": 3499.86,
+      "text": "I will be sharing this code file with you.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3499.9,
+      "ts_end": 3502.16,
+      "text": "If you can run it before the next lecture it's awesome.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3502.42,
+      "ts_end": 3503.54,
+      "text": "If not it's fine.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3503.6,
+      "ts_end": 3505.98,
+      "text": "I will try to make the next lecture so that it's self contained.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3506.26,
+      "ts_end": 3507.34,
+      "text": "Thank you so much everyone.",
+      "frame_ids": [],
+      "visuals": []
+    },
+    {
+      "ts_start": 3507.5,
+      "ts_end": 3509.46,
+      "text": "And I look forward to seeing you in the next lecture.",
+      "frame_ids": [],
+      "visuals": []
+    }
+  ],
+  "frames_total": 8,
+  "frames_with_content": 6
+}

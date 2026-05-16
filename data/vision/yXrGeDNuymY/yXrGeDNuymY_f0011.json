@@ -1,0 +1,30 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": null,
+  "math": [
+    "\\text{Layer Normalization}",
+    "\\text{log}(S) \\rightarrow \\text{transformer w/o ln}(S) \\rightarrow \\text{layer norm shift}",
+    "\\text{Similarly for } h_1, h_2, \\ldots, h_{12}",
+    "\\text{(4) (g) Final norm scale}",
+    "\\text{(5) (b) Final norm shift}",
+    "\\text{params } [b]"
+  ],
+  "diagram_summary": "Handwritten diagram showing transformer architecture with layer normalization, depicting multiple transformer blocks with layer norm shifts, final norm scale and shift parameters, and parameter notation.",
+  "diagram_elements": [
+    "Layer Normalization",
+    "transformer w/o ln",
+    "layer norm shift",
+    "Final norm scale",
+    "Final norm shift",
+    "params [b]",
+    "h1, h2, ... h12"
+  ],
+  "confidence": 0.75,
+  "frame_id": "yXrGeDNuymY_f0011",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1687.699667,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0011.jpg"
+}

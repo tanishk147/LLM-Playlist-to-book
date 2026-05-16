@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": "numpy.triu",
+  "extracted_text": "Upper triangle of an array.\n\nReturn a copy of an array with the elements below the k-th diagonal zeroed. For arrays with ndim exceeding 2, triu will apply to the final two axes.\n\nPlease refer to the documentation for tril for further details.\n\nSee also\ntril\nlower triangle of an array",
+  "code": {
+    "language": "python",
+    "content": ">>> import numpy as np\n>>> np.triu([[1,2,3],[4,5,6],[7,8,9],[11,12]], -1)\narray([[ 1,  2,  3],\n       [ 4,  5,  6],\n       [ 0,  8,  9],\n       [ 0,  0, 12]])\n\n>>> np.triu(np.arange(3*4*5).reshape(3, 4, 5))"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "h94TQOK7NRA_f0003",
+  "video_id": "h94TQOK7NRA",
+  "timestamp_sec": 1205.966333,
+  "source_image": "data/frames/h94TQOK7NRA/h94TQOK7NRA_f0003.jpg"
+}

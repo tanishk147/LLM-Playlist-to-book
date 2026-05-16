@@ -1,0 +1,15 @@
+{
+  "category": "slide",
+  "skip": false,
+  "title": "Instructions",
+  "extracted_text": "1. Customize the model parameters using the sliders.\n2. Use the \"Toggle Monitor\" button to enable/disable the dashboard to see graphs, analysis, or visualization.\n3. Visualize the dataset by clicking the \"Visualize Data\" button.\n4. Train the model by clicking the \"Start Training\" button.\n5. Once trained, test the model by clicking the \"Test\" button or analyze the results by clicking the \"Analyse\" button.\n6. If the accuracy is not satisfactory, try adjusting the parameters and train again.\n7. You can also increase or decrease the number of hidden layer neurons by clicking \"+\" or \"-\" in the model visualization. By default, each hidden layer has 10 neurons.\n\nSuggested parameter combinations:\n\n\u2022 Combination 1: Epochs: 1, Learning Rate: 0.1, Test-Train Split: 0.1, Hidden Layer 1 Neurons: 10, Hidden Layer 2 Neurons: 10\n\u2022 Combination 2: Epochs: 5, Learning Rate: 0.01, Test-Train Split: 0.2, Hidden Layer 1 Neurons: 10, Hidden Layer 2 Neurons: 10\n\u2022 Combination 3: Epochs: 10, Learning Rate: 0.001, Test-Train Split: 0.2, Hidden Layer 1 Neurons: 15, Hidden Layer 2 Neurons: 15\n\nDuring training, the top graph represents the loss, and the second graph represents the training accuracy. The graphs below show the same metrics after each epoch.",
+  "code": null,
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "3dWzNZXA8DY_f0008",
+  "video_id": "3dWzNZXA8DY",
+  "timestamp_sec": 1326.933,
+  "source_image": "data/frames/3dWzNZXA8DY/3dWzNZXA8DY_f0008.jpg"
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "frame_id": "egFqsJQ9kuY_f0000",
+    "video_id": "egFqsJQ9kuY",
+    "timestamp_sec": 5.033,
+    "path": "data/frames/egFqsJQ9kuY/egFqsJQ9kuY_f0000.jpg",
+    "phash": "c05f097f096e5e58",
+    "edge_density": 0.11436536203022875,
+    "sha256": "986f400d77750b9643f77d02a1aa8adfd9628cf64384809f08ed35b7186222e6"
+  },
+  {
+    "frame_id": "egFqsJQ9kuY_f0001",
+    "video_id": "egFqsJQ9kuY",
+    "timestamp_sec": 167.133,
+    "path": "data/frames/egFqsJQ9kuY/egFqsJQ9kuY_f0001.jpg",
+    "phash": "807f007f605f3d2d",
+    "edge_density": 0.16349539164624183,
+    "sha256": "17fcbc9e47d691ae250d35bc1ac6d3210700e843305ac699325373ddfe292062"
+  }
+]

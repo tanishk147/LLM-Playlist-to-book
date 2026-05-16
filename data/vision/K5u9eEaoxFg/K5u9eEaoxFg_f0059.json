@@ -1,0 +1,18 @@
+{
+  "category": "code",
+  "skip": false,
+  "title": null,
+  "extracted_text": null,
+  "code": {
+    "language": "python",
+    "content": "# We implicitly split the matrix by adding a num_heads dimension\n# Unroll last dim: (b, num_tokens, d_out) -> (b, num_tokens, num_heads, head_dim)\nkeys = keys.view(b, num_tokens, self.num_heads, self.head_dim)\nvalues = values.view(b, num_tokens, self.num_heads, self.head_dim)\nqueries = queries.view(b, num_tokens, self.num_heads, self.head_dim)\n\n# Transpose: (b, num_tokens, num_heads, head_dim) -> (b, num_heads, num_tokens, head_dim)\nkeys = keys.transpose(1, 2)\nqueries = queries.transpose(1, 2)\nvalues = values.transpose(1, 2)\n\n# Compute scaled dot-product attention (aka self-attention) with a causal mask\nattn_scores = queries @ keys.transpose(2, 3)  # Dot product for each head\n\n# Original mask truncated to the number of tokens and converted to boolean\nmask_bool = self.mask.bool()[:num_tokens, :num_tokens]\n\n# Use the mask to fill attention scores\nattn_scores.masked_fill_(mask_bool, -torch.inf)\n\nattn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)\nattn_weights = self.dropout(attn_weights)"
+  },
+  "math": null,
+  "diagram_summary": null,
+  "diagram_elements": null,
+  "confidence": 0.95,
+  "frame_id": "K5u9eEaoxFg_f0059",
+  "video_id": "K5u9eEaoxFg",
+  "timestamp_sec": 2449.033,
+  "source_image": "data/frames/K5u9eEaoxFg/K5u9eEaoxFg_f0059.jpg"
+}

@@ -1,0 +1,21 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Neural Machine Translation - SEQUENCE TO SEQUENCE MODEL",
+  "extracted_text": "understand the static graphics that describe these models. This is called an \"unrolled\" view where instead of showing the one decoder, we show a copy of it for each time step. This way we can look at the inputs and outputs of each time step.",
+  "code": null,
+  "math": null,
+  "diagram_summary": "Sequence-to-sequence neural machine translation model showing an unrolled encoder-decoder architecture with three encoder RNN blocks processing input and two decoder RNN blocks generating output.",
+  "diagram_elements": [
+    "Encoding Stage",
+    "Encoder RNN (\u00d73)",
+    "Decoding Stage",
+    "Decoder RNN (\u00d72)",
+    "Arrow connecting encoder to decoder"
+  ],
+  "confidence": 0.95,
+  "frame_id": "XN7sevVxyUM_f0016",
+  "video_id": "XN7sevVxyUM",
+  "timestamp_sec": 2266.633,
+  "source_image": "data/frames/XN7sevVxyUM/XN7sevVxyUM_f0016.jpg"
+}

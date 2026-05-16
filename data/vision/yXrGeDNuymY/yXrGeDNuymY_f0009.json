@@ -1,0 +1,23 @@
+{
+  "category": "diagram",
+  "skip": false,
+  "title": "Parameter Dictionary Keys",
+  "extracted_text": null,
+  "code": null,
+  "math": null,
+  "diagram_summary": "A handwritten diagram showing three parameter dictionary keys with annotations and numerical references on the right side.",
+  "diagram_elements": [
+    "(1) wte: Token Embeddings",
+    "(2) wpe: Positional Embeddings",
+    "(3) Blocks",
+    "7684",
+    "50257",
+    "768",
+    "1024"
+  ],
+  "confidence": 0.85,
+  "frame_id": "yXrGeDNuymY_f0009",
+  "video_id": "yXrGeDNuymY",
+  "timestamp_sec": 1622.333,
+  "source_image": "data/frames/yXrGeDNuymY/yXrGeDNuymY_f0009.jpg"
+}
