@@ -1,0 +1,168 @@
+## Claims (cite these by ID inline as [cNNN])
+- c1331 [definition | UjdRN80c6p8 @ 22-31s]
+  Self-attention mechanism is also called scaled dot-product attention.
+- c1332 [definition | UjdRN80c6p8 @ 148-168s]
+  Attention weights are a normalized version of attention scores.
+- c1333 [definition | UjdRN80c6p8 @ 208-243s]
+  Context vectors are computed as a weighted sum over the input vectors.
+- c1344 [definition | UjdRN80c6p8 @ 329-333s]
+  Self-attention mechanism is also called scaled dot product attention.
+- c1350 [definition | UjdRN80c6p8 @ 520-536s]
+  Self-attention mechanism is implemented using three trainable weight matrices: Query (WQ), Key (WK), and Value (WV).
+- c1367 [code | UjdRN80c6p8 @ 1067-1082s]
+  torch.nn.Parameter is a Tensor subclass used to mark tensors as module parameters, which are automatically added to the module's parameter list and appear in the parameters() iterator.
+- c1368 [code | UjdRN80c6p8 @ 1084-1115s]
+  Query, Key, and Value weight matrices are initialized as torch.nn.Parameter objects with random values and shape (D_in, D_out).
+- c1373 [code | UjdRN80c6p8 @ 1381-1396s]
+  keys = inputs @ W_k
+  values = inputs @ W_v
+  queries = inputs @ W_q
+- c1395 [definition | UjdRN80c6p8 @ 2189-2208s]
+  Attention weights are normalized attention scores where each row sums to one, making them interpretable as probability distributions over tokens.
+- c1403 [definition | UjdRN80c6p8 @ 2411-2416s]
+  Attention weights are computed by scaling attention scores by the square root of the key embedding dimension, then applying softmax.
+- c1406 [code | UjdRN80c6p8 @ 2459-2521s]
+  d_k = keys.shape[-1]  # Extract key embedding dimension from last axis
+  attention_scores_scaled = attention_scores / (d_k ** 0.5)  # Scale by sqrt(d_k)
+  attention_weights = softmax(attention_scores_scaled, dim=-1)  # Apply softmax over columns
+- c1443 [code | UjdRN80c6p8 @ 3836-3852s]
+  keys = x @ W_key
+  queries = x @ W_query
+  values = x @ W_value
+- c1445 [code | UjdRN80c6p8 @ 3887-3942s]
+  attention_scores = attention_scores / (keys.shape[-1] ** 0.5)
+  attention_weights = softmax(attention_scores, dim=-1)
+- c1448 [code | UjdRN80c6p8 @ 3952-3965s]
+  context_vector = attention_weights @ values
+- c1465 [definition | UjdRN80c6p8 @ 4451-4468s]
+  An attention weight between two tokens (e.g., between 'journey' and 'your') indicates how much the model should attend to the second token when processing the first token as the query.
+- c1469 [definition | UjdRN80c6p8 @ 4539-4560s]
+  Query in attention mechanism is analogous to a search query in a database and represents the current token the model is focusing on.
+- c1470 [definition | UjdRN80c6p8 @ 4570-4581s]
+  Key in attention mechanism represents items in the input sequence and is used to match with the query.
+- c1471 [definition | UjdRN80c6p8 @ 4593-4602s]
+  Value in attention mechanism represents the actual content or representation of the input items themselves.
+- c1481 [definition | XN7sevVxyUM @ 234-238s]
+  Long-term dependencies in sentences are complex sentence structures where multiple clauses or phrases are connected, making it difficult for language models to identify relationships between distant words.
+- c1487 [definition | XN7sevVxyUM @ 416-423s]
+  Simplified self-attention is the purest and most basic form of the attention technique.
+- c1488 [definition | XN7sevVxyUM @ 430-436s]
+  Self-attention introduces trainable weights which form the basis of the actual mechanism used in LLMs.
+- c1502 [definition | XN7sevVxyUM @ 1036-1047s]
+  The hidden state in an RNN captures memory of previous inputs in the sequence.
+- c1504 [definition | XN7sevVxyUM @ 1071-1084s]
+  The final hidden state from the encoder is called the context vector.
+- c1517 [definition | XN7sevVxyUM @ 1463-1614s]
+  Loss of context is the problem that occurs when an RNN decoder struggles to capture longer dependencies and contextual information because it relies on only one final hidden state.
+- c1525 [definition | XN7sevVxyUM @ 1806-1842s]
+  The Bahdanau attention mechanism allows the decoder to selectively access different parts of the input sequence at each decoding step, rather than relying only on the final hidden state.
+- c1533 [definition | XN7sevVxyUM @ 2233-2256s]
+  Dynamic focus is the key property of the attention mechanism that allows the decoder to selectively choose which inputs to focus on and how much attention to give to each input at every decoding step.
+- c1535 [definition | XN7sevVxyUM @ 2537-2542s]
+  Recurrent Neural Networks (RNNs) are designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.
+- c1538 [definition | XN7sevVxyUM @ 2542-2548s]
+  The hidden state is the key innovation of RNNs that enables them to process sequential data.
+- c1541 [definition | XN7sevVxyUM @ 2564-2571s]
+  LSTMs solve the vanishing gradient problem by maintaining both a long-term memory route and a short-term memory route.
+- c1544 [definition | XN7sevVxyUM @ 2576-2588s]
+  The Bahdanau attention mechanism allows the decoder to have access to each input state during decoding and selectively decide which inputs to give more attention to.
+- c1548 [definition | XN7sevVxyUM @ 2662-2675s]
+  Self-attention is a mechanism that allows each position of an input sequence to attend to all positions in the same sequence.
+- c1553 [definition | XN7sevVxyUM @ 2811-2828s]
+  In self-attention, the term 'self' refers to the attention mechanism's ability to compute attention weights by relating different positions in a single input sequence.
+- c1557 [definition | XN7sevVxyUM @ 2920-2944s]
+  In attention mechanisms, when decoding a particular part, the decoder has access to all of the input tokens and decides how much attention to give to each input.
+- c1558 [definition | XN7sevVxyUM @ 2950-2970s]
+  Traditional attention looks at one input sequence and one output sequence, determining which parts of the output sequence are more related to which parts of the input sequence.
+- c1559 [definition | XN7sevVxyUM @ 2970-2981s]
+  Self-attention looks at one sequence and examines how different parts of that same sequence are related with respect to each other.
+- c2155 [definition | eSRhpYLerw4 @ 5-11s]
+  Self-attention is a mechanism that transforms an input vector (token embedding) into a context vector through attention weights computed from all input vectors.
+- c2158 [definition | eSRhpYLerw4 @ 40-47s]
+  A simplified self-attention mechanism without trainable weights is a variant of self-attention that does not include learnable parameters.
+- c2176 [definition | eSRhpYLerw4 @ 404-423s]
+  In the notation used, x_i denotes the vector representation of the i-th token, where x_1 is the first token, x_2 is the second token, and so on.
+- c2178 [definition | eSRhpYLerw4 @ 485-505s]
+  Attention weights determine how much attention to give to each input token when computing the context vector for any embedding vector.
+- c2179 [definition | eSRhpYLerw4 @ 498-515s]
+  The context vector, denoted by z, is derived from attention weights and input vectors.
+- c2181 [definition | eSRhpYLerw4 @ 653-672s]
+  Vector embeddings capture semantic meaning, such that semantically related words like 'journey' and 'starts' are positioned closer to each other in vector space.
+- c2183 [definition | eSRhpYLerw4 @ 801-830s]
+  A query is the element or token being examined; in this example, the word 'journey' (x2) is the query.
+- c2184 [definition | eSRhpYLerw4 @ 837-858s]
+  A context vector (z2) for a query contains information about both the query token itself and all other input elements in the sequence.
+- c2187 [definition | eSRhpYLerw4 @ 891-927s]
+  Attention scores are intermediate values that quantify how much importance or attention should be paid to each input word relative to a query word.
+- c2193 [definition | eSRhpYLerw4 @ 1166-1174s]
+  The dot product of two vectors a and b is calculated as a · b = Σ(a_i * b_i), which equals |a||b| cos θ, where θ is the angle between the vectors.
+- c2207 [definition | eSRhpYLerw4 @ 1590-1661s]
+  Normalization is the process of transforming attention scores so that they sum to one, enabling interpretable statements about attention allocation as percentages.
+- c2216 [definition | eSRhpYLerw4 @ 2065-2096s]
+  Softmax normalization takes the exponent of every element and divides by the summation of all exponents: softmax(x_i) = e^x_i / Σ(e^x_j).
+- c2224 [definition | eSRhpYLerw4 @ 2270-2277s]
+  Naive Softmax attention weights are computed by taking the exponent of each attention score and dividing by the summation of the exponents.
+- c2229 [code | eSRhpYLerw4 @ 2405-2410s]
+  torch.nn.Softmax(dim=None) applies the Softmax function to rescale n-dimensional input Tensor elements to the range [0,1] and sum to 1.
+- c2236 [definition | eSRhpYLerw4 @ 2632-2639s]
+  A context vector is an enriched embedding vector that combines contributions from all input embedding vectors weighted by their corresponding attention weights.
+- c2246 [equation | eSRhpYLerw4 @ 2930-2955s]
+  Context vector Z_i = sum over all tokens j of (attention_weight_j * embedding_vector_j)
+- c2250 [definition | eSRhpYLerw4 @ 3131-3150s]
+  An attention weight matrix is a matrix where each row represents the attention weights for one particular query word, and each column represents the attention weight between that query and a key word.
+- c2265 [definition | eSRhpYLerw4 @ 3681-3692s]
+  The dim parameter in torch.softmax specifies the dimension of the input tensor along which the normalization will be computed.
+- c1343 [fact | UjdRN80c6p8 @ 290-292s]
+  In the simplified attention mechanism, attention weights were obtained through normalization.
+- c2161 [fact | eSRhpYLerw4 @ 100-107s]
+  The second lecture will cover self-attention with trainable weights as implemented in modern LLMs including GPT.
+- c2186 [fact | eSRhpYLerw4 @ 858-877s]
+  In this lecture, trainable weights are not used in the attention mechanism; trainable weights are added later in actual LLM implementations to improve context understanding and learning.
+- c1474 [design_decision | UjdRN80c6p8 @ 4652-4661s]
+  Causal attention modifies the self-attention mechanism to prevent the model from accessing future information in the sequence.
+- c1348 [fact | UjdRN80c6p8 @ 483-489s]
+  Trainable weight matrices in self-attention are optimized when the large language model is trained.
+- c1534 [fact | XN7sevVxyUM @ 2090-2115s]
+  The Transformer architecture, introduced in 2017, was built with the self-attention mechanism at its core, which was inspired by the Bahdanau attention mechanism.
+- c1342 [fact | UjdRN80c6p8 @ 286-289s]
+  In the simplified attention mechanism, attention scores were calculated using dot product.
+- c2199 [fact | eSRhpYLerw4 @ 1300-1311s]
+  In self-attention mechanisms, the dot product determines the extent to which elements of a sequence attend to one another.
+- c2157 [fact | eSRhpYLerw4 @ 26-39s]
+  This lecture covers the mathematical foundations of attention and implements a simplified version of the attention mechanism from scratch in Python.
+- c1560 [fact | XN7sevVxyUM @ 2986-3015s]
+  The lecture series will cover simplified self-attention, self-attention, causal attention, and multihead attention, with mathematical formulations on whiteboard and code implementations in Python.
+- c2282 [fact | eSRhpYLerw4 @ 4643-4661s]
+  Trainable weights allow the attention mechanism to capture long-range dependencies by learning contextual patterns beyond semantic embedding space.
+- c2279 [design_decision | eSRhpYLerw4 @ 4595-4643s]
+  Trainable weights in attention allow the model to learn attention patterns beyond semantic similarity, enabling it to assign high attention to contextually important words even when they are not semantically related to the query.
+- c1549 [fact | XN7sevVxyUM @ 2675-2710s]
+  Self-attention differs from traditional attention mechanisms used in sequence-to-sequence tasks like language translation, where attention is directed between two different sequences rather than within a single sequence.
+- c1335 [fact | UjdRN80c6p8 @ 157-164s]
+  Attention scores and attention weights encode information about how much the query vector and the input embedding vector are related to each other.
+- c1439 [design_decision | UjdRN80c6p8 @ 3757-3780s]
+  Self-attention is organized as a Python class (SelfAttentionVersion1) derived from nn.Module to enable reusable instantiation and integration into larger LLM implementations.
+- c1422 [fact | UjdRN80c6p8 @ 3117-3123s]
+  Attention weights sum to one after softmax normalization.
+- c1459 [architecture | UjdRN80c6p8 @ 4375-4381s]
+  Self-attention requires three trainable weight matrices: WQ (query weight matrix), WK (key weight matrix), and WV (value weight matrix).
+- c2208 [fact | eSRhpYLerw4 @ 1667-1674s]
+  The primary goal of normalization in attention is to obtain attention weights that sum up to one.
+- c1523 [fact | XN7sevVxyUM @ 1748-1804s]
+  The Bahdanau attention mechanism was developed in 2014 in the paper 'Neural Machine Translation by Jointly Learning to Align and Translate' by Dzmitry Bahdanau, Kyunghyun Cho, and Yoshua Bengio.
+- c2278 [problem | eSRhpYLerw4 @ 4472-4524s]
+  Using only dot product to compute attention weights means attention is based solely on semantic similarity, which fails to capture contextual importance when semantically unrelated words are important in context.
+- c1345 [fact | UjdRN80c6p8 @ 321-328s]
+  Self-attention mechanism is used in the original transformer architecture, GPT models, and most other popular large language models.
+- c1397 [fact | UjdRN80c6p8 @ 2155-2181s]
+  Normalization of attention scores serves two purposes: making attention interpretable and helping backpropagation by keeping scales consistent between 0 and 1.
+- c1542 [fact | XN7sevVxyUM @ 2571-2576s]
+  Both RNNs and LSTMs had problems with respect to longer context.
+- c2197 [design_decision | eSRhpYLerw4 @ 1244-1283s]
+  Attention scores are calculated using the dot product between a query vector and each input vector.
+- c2226 [fact | eSRhpYLerw4 @ 2352-2363s]
+  Softmax attention weights are always positive because they result from the exponent operation.
+- c1554 [fact | XN7sevVxyUM @ 2828-2876s]
+  Self-attention learns the relationship between various parts of the input itself, whereas traditional attention mechanisms focus on relationships between elements of two different sequences.
+- c1543 [fact | XN7sevVxyUM @ 2576-2583s]
+  The Bahdanau attention mechanism was introduced in 2014.

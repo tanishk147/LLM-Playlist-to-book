@@ -1,0 +1,2011 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Data Preprocessing: Input-Target Pairs, Token Embeddings, and Positional Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "Before a large language model can learn anything, raw text must be transformed into a form the model can actually consume.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 2,
+      "text": "That transformation is what this chapter is about.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 3,
+      "text": "We will walk through the complete data preprocessing pipeline: creating input-target pairs from raw text, batching those pairs efficiently with a DataLoader, converting token IDs into dense vector embeddings, and finally injecting positional information so the model knows where each token sits in a sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 4,
+      "text": "By the end, you will have a clear picture of how a string of text becomes the numerical input that feeds into LLM training.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 5,
+      "text": "The pipeline has four distinct stages [c3023]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3023"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 6,
+      "text": "1. **Tokenization** \u2014 splitting raw text into tokens\n2. **Token embeddings** \u2014 mapping token IDs to dense vectors\n3. **Positional embeddings** \u2014 encoding each token's position in the sequence\n4. **Input embeddings** \u2014 combining token and positional embeddings into a single representation",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 7,
+      "text": "Chapters 2 and 3 covered tokenization in depth.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 8,
+      "text": "Here we pick up at stage two and work all the way through stage four, but we begin with a prerequisite that sits between tokenization and embedding: constructing the input-target pairs that define what the model is actually trying to learn.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 9,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 10,
+      "text": "### Creating Input-Target Pairs",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 11,
+      "text": "#### Why LLMs Need a Special Pairing Strategy",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 12,
+      "text": "Standard supervised learning tasks \u2014 classification, regression \u2014 come with explicit labels.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 13,
+      "text": "Language modeling is different.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 14,
+      "text": "The labels are already hidden inside the text itself: every token is simultaneously an input (when predicting the next token) and a target (when it is the token being predicted).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 15,
+      "text": "Large language models use a specific technique for creating input-target pairs that differs from standard machine learning classification and regression tasks [c2710].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2710"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 16,
+      "text": "The fundamental definition is simple.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 17,
+      "text": "Input-target pairs in LLMs are structured as: the input is a sequence of words up to a certain point, and the target is the next word that follows [c2711].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2711"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 18,
+      "text": "More precisely, there are two variables, $x$ and $y$, where $x$ contains input tokens and $y$ contains targets that are the inputs shifted by one position [c2729].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2729"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 19,
+      "text": "Tokens on the left of the arrow represent the input to the model, and the token on the right represents the target token ID the model is supposed to predict [c2752].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2752"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 20,
+      "text": "Intuitively, this is the \"fill in the next word\" game.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 21,
+      "text": "Given the sequence `[\"The\", \"cat\", \"sat\"]`, the model should predict `\"on\"`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 22,
+      "text": "Given `[\"The\", \"cat\", \"sat\", \"on\"]`, it should predict `\"the\"`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 23,
+      "text": "The same corpus of text generates thousands of such pairs automatically \u2014 no human labeling required.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 24,
+      "text": "Input-target pairs must be created before vector embeddings are fed to the LLM training process [c2709].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2709"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 25,
+      "text": "A dataset for language modeling must consist of input-output pairs, not just raw tokens [c2774].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2774"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 26,
+      "text": "#### Context Size and the Sliding Window",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 27,
+      "text": "The number of tokens the model looks at to make a single prediction is called the **context size**.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 28,
+      "text": "A context size of 4 means the model is trained to look at a sequence of 4 words or tokens to predict the next word in the sequence [c2736].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2736"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 29,
+      "text": "Intuitively, context size represents how many words the model should pay attention to at one time to predict the next word [c2738].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2738"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 30,
+      "text": "Each input-output pair contains multiple prediction tasks, not just one.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 31,
+      "text": "Input-output pairs for LLM training are constructed based on context size, where each pair contains multiple prediction tasks corresponding to predicting the next word at each position [c2978].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2978"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 32,
+      "text": "To see this concretely, consider a context window of size 4 over the token sequence `[t0, t1, t2, t3, t4]`:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 33,
+      "text": "- Input `[t0]` \u2192 target `t1`\n- Input `[t0, t1]` \u2192 target `t2`\n- Input `[t0, t1, t2]` \u2192 target `t3`\n- Input `[t0, t1, t2, t3]` \u2192 target `t4`",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 34,
+      "text": "Input-output pairs are constructed by taking a sequence of tokens as input and the next token as the target output [c2745].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2745"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 35,
+      "text": "The following code snippet illustrates this loop:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 36,
+      "text": "# Source: [c2747]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 37,
+      "text": "for i in range(1, context_size + 1):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 38,
+      "text": "The **sliding window** is the mechanism that generates new pairs by advancing through the token stream.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 39,
+      "text": "A data loader fetches input-target pairs using a sliding window approach [c2722].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2722"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 40,
+      "text": "The sliding window approach works by sliding the input window by one token position to create the corresponding output [c2773].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2773"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 41,
+      "text": "**Stride** controls how far the window moves between consecutive pairs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 42,
+      "text": "Stride determines how many tokens to skip when sliding the context window to create the next input-output pair [c2777].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2777"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 43,
+      "text": "A stride of 1 means maximum overlap between consecutive windows (and therefore the most training pairs); a larger stride reduces overlap and produces fewer, more independent pairs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 44,
+      "text": "[FIGURE: Diagram showing a token sequence with a sliding window of context_size=4 and stride=1, illustrating how the window shifts to produce successive input-target pairs]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 45,
+      "text": "#### Loading the Raw Text",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 46,
+      "text": "Before building pairs, we need encoded tokens.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "The following code reads a text file and encodes it with a tokenizer:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "# Source: [c2724]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 49,
+      "text": "with open(\"the-verdict.txt\", \"r\", encoding=\"utf-8\") as f:",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 50,
+      "text": "This gives us a flat list of integer token IDs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 51,
+      "text": "The next step is to organize those IDs into structured input-target pairs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 52,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 53,
+      "text": "### The Dataset and DataLoader Abstraction",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 54,
+      "text": "#### Why Use a DataLoader?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 55,
+      "text": "Iterating over pairs one at a time is fine for illustration, but real training requires **batches** \u2014 groups of pairs processed together before updating model parameters.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 56,
+      "text": "Batch size specifies how many input-output pairs are processed before updating model parameters [c2984].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2984"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 57,
+      "text": "A data loader is a PyTorch tool that processes data by creating input-output target pairs using a sliding window approach [c2980].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2980"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 58,
+      "text": "A data loader is used to iterate over the input dataset and return inputs and targets as PyTorch tensors [c2762].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2762"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 59,
+      "text": "A tensor can be thought of as a multi-dimensional array [c2764].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2764"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 60,
+      "text": "#### Dataset Structure",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 61,
+      "text": "In a data loader implementation, the input tensor $X$ contains rows representing input contexts, and the target tensor $Y$ contains corresponding prediction targets which are the input shifted by one word [c2981].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2981"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 62,
+      "text": "The `__getitem__` method returns the input tensor row and target tensor row at a given index [c2779].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2779"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 63,
+      "text": "The `create_data_loader` function initializes a tokenizer, creates a dataset instance, and wraps it in a DataLoader for batch processing [c2783].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2783"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "Here is a minimal example of wrapping a dataset in a DataLoader:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 65,
+      "text": "# Source: [c2807]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 66,
+      "text": "data_loader = DataLoader(dataset, batch_size=8)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 67,
+      "text": "The DataLoader extracts input-output pairs in batches (first batch, second batch, etc.) which are then converted into vector embeddings before being fed into the model [c2822].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2822"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 68,
+      "text": "#### Workers and Parallel Loading",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 69,
+      "text": "The number of workers parameter enables parallel computing by distributing data loading across multiple threads on the computer [c2821].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2821"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 70,
+      "text": "Number of workers is for parallel processing on different threads of the CPU [c2792].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2792"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 71,
+      "text": "The number of workers parameter in a data loader specifies how many threads are used for parallel processing on the CPU [c2986].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2986"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 72,
+      "text": "On machines with multiple CPU cores, increasing this value can significantly speed up data loading.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 73,
+      "text": "#### Verifying the Output",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 74,
+      "text": "A DataLoader with batch size of 1 and context size of 4 produces input-output pairs where the output tensor is the input tensor shifted by one position [c2794].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2794"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 75,
+      "text": "Input-target pairs are sequences where the target is the input shifted by one position, used for training language models [c2814].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2814"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 76,
+      "text": "[FIGURE: Illustration of a batch of input-target pairs as two tensors X and Y, each of shape (batch_size, context_size), with Y being X shifted right by one token]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 77,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 78,
+      "text": "### Token Embeddings: From IDs to Vectors",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 79,
+      "text": "#### What Is a Token Embedding?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 80,
+      "text": "Once we have batches of integer token IDs, we need to convert them into continuous vectors that the model can process mathematically.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 81,
+      "text": "Token embeddings map words into a vector space where each word is represented as a vector with a fixed number of dimensions [c2528].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2528"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 82,
+      "text": "Token embeddings serve as the input to training large language models such as GPT [c2515].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2515"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 83,
+      "text": "The terminology can be confusing.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 84,
+      "text": "Token Embeddings are also called Vector Embeddings or Word Embeddings, though Word Embeddings is not entirely accurate terminology [c2509].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2509"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 85,
+      "text": "The reason is that \"token\" is a broader term than \"word\" \u2014 a token might be a subword, a punctuation mark, or a special symbol \u2014 which is why Token Embeddings is the preferred terminology [c2511].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2511"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 86,
+      "text": "Token embeddings for large language models are created by converting token IDs into embedding vectors using an embedding weight matrix [c2541].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2541"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 87,
+      "text": "The large language model workflow has three main steps: (1) tokenizing input text into tokens, (2) converting tokens into token IDs, and (3) converting token IDs into token embeddings, which serve as input to training the model [c2514].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2514"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 88,
+      "text": "#### The Embedding Weight Matrix",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 89,
+      "text": "An embedding layer weight matrix is a lookup table that stores vector embeddings for each token ID in the vocabulary, with dimensions of (vocabulary_size, embedding_dimension) [c2993].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2993"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 90,
+      "text": "A token embedding matrix (or embedding layer) requires two quantities: the vector dimension (the size each token is projected to) and the vocabulary size (the number of unique token IDs) [c3300].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3300"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 91,
+      "text": "The embedding weight matrix functions both as a matrix of weights for vector embeddings and as a lookup table for finding vector representations by token ID [c2568].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2568"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 92,
+      "text": "An embedding layer maps vocabulary IDs to dense vectors of a specified embedding dimension [c2575].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2575"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 93,
+      "text": "[FIGURE: A rectangular matrix of shape (vocab_size, embedding_dim) with rows labeled by token IDs, illustrating how a row lookup retrieves the embedding vector for a given token]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 94,
+      "text": "#### Word2Vec: A Historical Perspective",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 95,
+      "text": "Before the era of end-to-end trained LLMs, word embeddings were often pre-trained separately.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 96,
+      "text": "The following code loads a classic Word2Vec model trained on Google News:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 97,
+      "text": "# Source: [c2531]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 98,
+      "text": "import gensim.downloader as api",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 99,
+      "text": "This returns a 300-dimensional vector for the word `'computer'`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 100,
+      "text": "Modern LLMs do not use pre-trained Word2Vec vectors; instead, they learn their own embeddings from scratch as part of end-to-end training.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 101,
+      "text": "Creating token embeddings for large vocabularies is computationally expensive, which is one reason why training large language models like GPT takes a huge amount of time [c2526].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2526"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 102,
+      "text": "#### `torch.nn.Embedding`: The PyTorch Lookup Table",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 103,
+      "text": "PyTorch provides a dedicated module for this purpose.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "`torch.nn.Embedding` is a lookup table that stores embeddings of a fixed dictionary and size, used to store word embeddings and retrieve them using indices [c2555].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2555"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 105,
+      "text": "# Source: [c2998]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 106,
+      "text": "torch.nn.Embedding(num_embeddings, embedding_dim)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 107,
+      "text": "# Source: [c2556]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 108,
+      "text": "embedding_layer = torch.nn.Embedding(num_embeddings=6, embedding_dim=3)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 109,
+      "text": "`torch.nn.Embedding(num_embeddings, embedding_dim)` creates an embedding layer that stores embeddings of a fixed dictionary and size, functioning as a lookup table that retrieves embeddings using token indices [c3303].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3303"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 110,
+      "text": "To inspect the underlying weight matrix:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 111,
+      "text": "# Source: [c2559]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 112,
+      "text": "embedding_layer.weight",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 113,
+      "text": "An embedding layer is a lookup table that maps token IDs to their corresponding vector representations [c3317].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3317"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 114,
+      "text": "The embedding layer operates as a lookup mechanism that retrieves pre-stored vector representations indexed by token IDs [c3321].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3321"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 115,
+      "text": "Embedding layers function as lookup tables that map indices to corresponding embedding vectors [c3330].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3330"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 116,
+      "text": "An embedding layer lookup operation retrieves only the embedding vectors corresponding to the input IDs, without computing embeddings for unused vocabulary IDs [c2579].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2579"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 117,
+      "text": "This is an important efficiency property: even if the vocabulary has 50,000 entries, a forward pass only touches the rows corresponding to the tokens actually present in the current batch.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 118,
+      "text": "In convolutional neural networks, spatial features of an image are exploited before giving it as input for training, similar to how token embeddings work [c2585].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2585"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 119,
+      "text": "The analogy is instructive: just as a CNN transforms raw pixel values into feature maps, the embedding layer transforms raw token IDs into feature vectors.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 120,
+      "text": "#### Building the Token Embedding Layer for GPT",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 121,
+      "text": "For a GPT-scale model, the embedding layer is substantially larger:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 122,
+      "text": "# Source: [c3003]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 123,
+      "text": "vocab_size = 50257",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 124,
+      "text": "A simpler form of the same call:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 125,
+      "text": "# Source: [c2577]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 126,
+      "text": "embedding = torch.nn.Embedding(vocab_size, embedding_dim)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 127,
+      "text": "With a batch size of 8 and a context size of 4, the token embedding layer produces an output tensor of shape $8 \\times 4 \\times 256$ [c3017].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3017"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 128,
+      "text": "Each of the 8 sequences in the batch contains 4 tokens, and each token is represented by a 256-dimensional vector.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 129,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "### The Problem with Token Embeddings Alone",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 131,
+      "text": "Token embeddings capture semantic meaning \u2014 words with similar meanings end up close together in the vector space.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 132,
+      "text": "But they have a critical blind spot.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 133,
+      "text": "Token embedding does not take into account the position of words in a sequence, so identical words at different positions receive the same embedding vector [c3006].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3006"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 134,
+      "text": "Token embeddings alone do not encode positional information about where words appear in a sentence [c2594].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2594"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 135,
+      "text": "Consider the sentences \"The dog bit the man\" and \"The man bit the dog.\" The token embeddings for \"dog\" and \"man\" are identical in both sentences, even though their roles are completely reversed.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 136,
+      "text": "Without positional information, the model cannot distinguish these two sentences.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 137,
+      "text": "It is important to inject additional position information to the large language model along with capturing semantic meaning through token embeddings [c3280].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3280"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 138,
+      "text": "Without token embeddings, the semantic relationship between related words like 'dog' and 'puppy' or 'cat' and 'kitten' is lost [c3275] \u2014 but without positional embeddings, the *order* of those words is lost.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3275"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 139,
+      "text": "Both are essential.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 141,
+      "text": "### Positional Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 142,
+      "text": "#### What Is Positional Encoding?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 143,
+      "text": "Positional encoding is a technique that injects additional positional information into large language models to complement token embeddings [c3008].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3008"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 144,
+      "text": "Positional Encoding is the final step in LLM data pre-processing that encodes information about the position of tokens in a sequence [c3276].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3276"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 145,
+      "text": "The terms positional encoding and positional embedding are used interchangeably to refer to vectors in a higher dimensional space [c3295].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3295"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 146,
+      "text": "Both absolute and relative positional embeddings enable large language models to understand the order and relationship between tokens, leading to more accurate and context-aware predictions [c3287].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3287"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 147,
+      "text": "#### Absolute vs. Relative Positional Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 148,
+      "text": "Absolute positional embeddings and relative positional embeddings are two different approaches to encoding position information [c3348].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3348"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 149,
+      "text": "**Absolute positional embeddings** assign a unique vector to each position index (0, 1, 2, \u2026).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 150,
+      "text": "In absolute positional embedding, the same token receives different final embeddings when it appears at different positions in the sequence because different positional embeddings are added to the same token embedding [c3283].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3283"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 151,
+      "text": "Absolute positional encoding is well-suited for tasks where fixed order of tokens is crucial, such as sequence generation [c3011].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3011"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 152,
+      "text": "GPT models (GPT-3, GPT-4) use absolute positional embeddings that are optimized during the training process [c3290].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3290"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 153,
+      "text": "This is a key design choice: rather than using a fixed mathematical formula, GPT learns its positional embeddings from data, just like it learns its token embeddings.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 154,
+      "text": "**Relative positional embeddings** take a different approach.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 155,
+      "text": "Relative positional encoding emphasizes the relative distance between tokens rather than their absolute positions in the sequence [c3010].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3010"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 156,
+      "text": "Intuitively, relative encodings let the model reason about \"how far apart\" two tokens are, rather than \"what slot each token occupies.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 157,
+      "text": "[FIGURE: Side-by-side comparison of absolute positional embeddings (each position gets a unique fixed vector) vs. relative positional embeddings (distances between positions are encoded)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 158,
+      "text": "#### The Sinusoidal Formula (Original Transformer)",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 159,
+      "text": "The original Transformer paper proposed a fixed, formula-based approach to absolute positional encoding.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 160,
+      "text": "The positional encoding for even dimensions uses a sine function:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 161,
+      "text": "$$PE_{(pos,2i)} = \\sin\\!\\left(\\frac{pos}{10000^{2i/d_{\\text{model}}}}\\right)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 162,
+      "text": "[c3292]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3292"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 163,
+      "text": "And for odd dimensions, a cosine function:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 164,
+      "text": "$$PE_{(pos,2i+1)} = \\cos\\!\\left(\\frac{pos}{10000^{2i/d_{\\text{model}}}}\\right)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 165,
+      "text": "[c3293]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3293"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 166,
+      "text": "Here, $pos$ is the position of the token in the sequence, $i$ is the dimension index, and $d_{\\text{model}}$ is the embedding dimension.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 167,
+      "text": "The consequence of this design is that each position gets a unique pattern of sine and cosine values across all dimensions, and the model can potentially generalize to sequence lengths not seen during training.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 168,
+      "text": "GPT-style models, however, do not use this fixed formula.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 169,
+      "text": "They use learned positional embeddings instead [c3290].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3290"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 170,
+      "text": "#### Implementing Learned Positional Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 171,
+      "text": "The implementation of learned positional embeddings mirrors the token embedding layer exactly \u2014 it is simply another `torch.nn.Embedding` table, but indexed by position rather than token ID.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 172,
+      "text": "Positional embedding matrix values are initialized randomly, similar to token embedding initialization [c3021].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3021"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 173,
+      "text": "Both token embedding and positional embedding values must be optimized during the training process of large language models [c3022].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3022"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 174,
+      "text": "To generate positional embeddings for a sequence of length `max_length`, we first create a sequence of position indices:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "# Source: [c3329]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 176,
+      "text": "torch.arange(max_length)  # creates a sequence of integers from 0 to max_length-1, used to index into the positional embedding lookup table",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 177,
+      "text": "Passing positions 0, 1, 2, and 3 to the positional embedding lookup table generates four 256-dimensional positional embedding vectors [c3331].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3331"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 178,
+      "text": "The same four positional embedding vectors are reused across all input sequences in a batch because positions are identical across sequences [c3327].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3327"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 179,
+      "text": "[FIGURE: A positional embedding lookup table of shape (context_size, embedding_dim), showing how position indices 0, 1, 2, 3 map to four distinct embedding vectors]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 180,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 181,
+      "text": "### Combining Token and Positional Embeddings",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 182,
+      "text": "#### The Addition Operation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 183,
+      "text": "With both token embeddings (shape $8 \\times 4 \\times 256$) and positional embeddings (shape $4 \\times 256$) in hand, the final step is to add them together.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 184,
+      "text": "Positional embeddings are added to token embeddings using Python broadcasting, where the same positional embedding vectors are added to each row of the token embedding matrix [c3342].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3342"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 185,
+      "text": "When adding token embeddings and positional embeddings in Python, broadcasting converts the $4 \\times 256$ positional embedding tensor into $8 \\times 4 \\times 256$ by duplicating values eight times [c3018].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3018"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 186,
+      "text": "The same positional embedding values are added to each row of the token embeddings across all 8 batches during the broadcasting operation [c3335].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3335"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 187,
+      "text": "Intuitively, broadcasting means we do not need to manually tile the positional embedding matrix across the batch dimension \u2014 PyTorch handles this automatically.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 188,
+      "text": "The result is an **input embedding** tensor of shape $8 \\times 4 \\times 256$, where each vector encodes both the identity of the token and its position in the sequence.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 189,
+      "text": "[FIGURE: Diagram showing token embedding tensor (8\u00d74\u00d7256) plus positional embedding tensor (4\u00d7256) via broadcasting, producing input embedding tensor (8\u00d74\u00d7256)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 190,
+      "text": "#### The Complete Pipeline",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 191,
+      "text": "We now have all four stages of the data preprocessing pipeline in place [c3023]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3023"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 192,
+      "text": "1. **Tokenization**: Raw text \u2192 token IDs (covered in earlier chapters)\n2. **Token embeddings**: Token IDs \u2192 dense vectors via `torch.nn.Embedding(vocab_size, embedding_dim)` [c3003]\n3. **Positional embeddings**: Position indices \u2192 dense vectors via a second `torch.nn.Embedding(context_size, embedding_dim)` [c3021]\n4. **Input embeddings**: Token embeddings + positional embeddings \u2192 final input tensor [c3342]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3003",
+        "c3021",
+        "c3342"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 193,
+      "text": "The LLM data pre-processing pipeline consists of four stages: tokenization, token embeddings, positional embeddings, and input embeddings [c3023].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3023"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 194,
+      "text": "Token embeddings have shape $8 \\times 4 \\times 256$ and positional embeddings have shape $4 \\times 256$ [c3017].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3017"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 195,
+      "text": "An autoregressive model is one where the output of one iteration becomes the input of the next iteration [c2718].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2718"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 196,
+      "text": "The input embeddings produced by this pipeline feed directly into the first layer of the transformer, and during inference, the model's own predictions loop back as new inputs \u2014 hence \"autoregressive.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 197,
+      "text": "[FIGURE: End-to-end pipeline diagram: raw text \u2192 tokenizer \u2192 token IDs \u2192 DataLoader (sliding window, batching) \u2192 token embedding layer \u2192 + positional embedding layer \u2192 input embeddings \u2192 LLM]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 198,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 199,
+      "text": "### Putting It All Together: A Worked Example",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 200,
+      "text": "Let us trace a concrete example through the entire pipeline to make sure all the pieces connect.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 201,
+      "text": "**Step 1 \u2014 Tokenize and encode.** We read a text file and encode it into a list of integer token IDs [c2724].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2724"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 202,
+      "text": "Suppose the encoded sequence has 1,000 tokens.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 203,
+      "text": "**Step 2 \u2014 Build input-target pairs.** With a context size of 4 and a stride of 1, the sliding window produces pairs where each input is 4 tokens and each target is those same 4 tokens shifted right by one [c2777, c2729].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2777",
+        "c2729"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 204,
+      "text": "The data loader uses a sliding window approach to fetch input-output target pairs [c2767].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2767"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 205,
+      "text": "**Step 3 \u2014 Batch.** A DataLoader with batch size 8 groups 8 such pairs into a single batch [c2807].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2807"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 206,
+      "text": "The input tensor $X$ has shape $8 \\times 4$ and the target tensor $Y$ has shape $8 \\times 4$ [c2981].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2981"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 207,
+      "text": "**Step 4 \u2014 Token embeddings.** We pass $X$ through `torch.nn.Embedding(50257, 256)` [c3003].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3003"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 208,
+      "text": "The lookup retrieves one 256-dimensional vector per token ID, producing an output of shape $8 \\times 4 \\times 256$ [c3017].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3017"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 209,
+      "text": "**Step 5 \u2014 Positional embeddings.** We create position indices `[0, 1, 2, 3]` with `torch.arange(4)` [c3329] and pass them through a second `torch.nn.Embedding(4, 256)`.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3329"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 210,
+      "text": "This produces a tensor of shape $4 \\times 256$ [c3331].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3331"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 211,
+      "text": "**Step 6 \u2014 Input embeddings.** We add the two tensors.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 212,
+      "text": "Broadcasting expands the positional embedding from $4 \\times 256$ to $8 \\times 4 \\times 256$ [c3018], and the element-wise sum gives us the final input embedding tensor of shape $8 \\times 4 \\times 256$ [c3342].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3018",
+        "c3342"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 213,
+      "text": "This tensor is what the transformer's attention mechanism will receive.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 214,
+      "text": "Every vector in it encodes both *what* the token is (semantic content from the token embedding) and *where* it sits in the sequence (positional content from the positional embedding).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 215,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 216,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 217,
+      "text": "This chapter covered the full data preprocessing pipeline that bridges raw text and the numerical inputs consumed by an LLM:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 218,
+      "text": "- **Input-target pairs** are created by treating each token as a prediction target for the preceding context.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 219,
+      "text": "The sliding window with a configurable stride generates these pairs efficiently [c2722, c2777].\n- **The DataLoader** wraps a dataset of input-target pairs into batches of PyTorch tensors, with optional parallel loading via multiple worker threads [c2762, c2821].\n- **Token embeddings** are dense vector representations stored in a lookup table (`torch.nn.Embedding`).",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2722",
+        "c2777",
+        "c2762",
+        "c2821"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 220,
+      "text": "Each token ID maps to a row in the embedding weight matrix [c2993, c3317].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2993",
+        "c3317"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 221,
+      "text": "The values are learned during training [c3022].\n- **Token embeddings alone are insufficient** because they carry no information about token order [c3006, c2594].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3022",
+        "c3006",
+        "c2594"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 222,
+      "text": "Positional embeddings address this gap.\n- **Positional embeddings** come in two flavors \u2014 absolute and relative [c3348].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3348"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 223,
+      "text": "GPT-style models use learned absolute positional embeddings [c3290], initialized randomly and optimized during training [c3021, c3022].\n- **Input embeddings** are the element-wise sum of token and positional embeddings, combined via broadcasting [c3342, c3018].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3290",
+        "c3021",
+        "c3022",
+        "c3342",
+        "c3018"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 224,
+      "text": "The result is a tensor of shape $(batch\\_size, context\\_size, embedding\\_dim)$ that serves as the input to the transformer.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 225,
+      "text": "With this pipeline in place, we are ready to move on to the transformer architecture itself \u2014 the attention mechanism, feed-forward layers, and the full GPT model that will learn to predict the next token from these carefully constructed input embeddings.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    }
+  ],
+  "summary": {
+    "grounded": 89,
+    "unsupported": 57,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 80
+  }
+}

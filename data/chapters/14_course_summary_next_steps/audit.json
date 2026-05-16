@@ -1,0 +1,14 @@
+{
+  "chapter_id": "course_summary_next_steps",
+  "title": "Summary, Reflections, and Next Steps",
+  "summary": {
+    "grounded": 104,
+    "unsupported": 1,
+    "contradicted": 0,
+    "needs_external_check": 2,
+    "narrative_ok": 21
+  },
+  "stripped_sentence_indices": [
+    114
+  ]
+}

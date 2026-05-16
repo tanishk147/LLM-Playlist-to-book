@@ -1,0 +1,176 @@
+## Claims (cite these by ID inline as [cNNN])
+- c2509 [definition | ghCSGRgVB_o @ 26-36s]
+  Token Embeddings are also called Vector Embeddings or Word Embeddings, though Word Embeddings is not entirely accurate terminology.
+- c2528 [definition | ghCSGRgVB_o @ 1078-1087s]
+  Token embeddings map words into a vector space where each word is represented as a vector with a fixed number of dimensions.
+- c2531 [code | ghCSGRgVB_o @ 1013-1026s]
+  import gensim.downloader as api
+  model = api.load("word2vec-google-news-300")
+  word_vectors = model
+  print(word_vectors['computer'])
+- c2555 [definition | ghCSGRgVB_o @ 2288-2302s]
+  torch.nn.Embedding is a lookup table that stores embeddings of a fixed dictionary and size, used to store word embeddings and retrieve them using indices.
+- c2556 [code | ghCSGRgVB_o @ 2288-2302s]
+  embedding_layer = torch.nn.Embedding(num_embeddings=6, embedding_dim=3)
+- c2559 [code | ghCSGRgVB_o @ 2391-2399s]
+  embedding_layer.weight
+- c2575 [definition | ghCSGRgVB_o @ 2946-2962s]
+  An embedding layer maps vocabulary IDs to dense vectors of a specified embedding dimension.
+- c2577 [code | ghCSGRgVB_o @ 2983-2991s]
+  embedding = torch.nn.Embedding(vocab_size, embedding_dim)
+  # Example: torch.nn.Embedding(4, 5) creates a 4x5 embedding matrix
+- c2711 [definition | iQZFH8dr2yI @ 182-216s]
+  Input-target pairs in LLMs are structured as: the input is a sequence of words up to a certain point, and the target is the next word that follows.
+- c2718 [definition | iQZFH8dr2yI @ 361-369s]
+  An autoregressive model is one where the output of one iteration becomes the input of the next iteration.
+- c2724 [code | iQZFH8dr2yI @ 670-696s]
+  with open("the-verdict.txt", "r", encoding="utf-8") as f:
+      raw_text = f.read()
+  
+  enc_text = tokenizer.encode(raw_text)
+  print(len(enc_text))
+- c2729 [definition | iQZFH8dr2yI @ 864-883s]
+  Input-output target pairs for next word prediction consist of two variables x and y, where x contains input tokens and y contains targets that are the inputs shifted by one position.
+- c2736 [definition | iQZFH8dr2yI @ 1024-1034s]
+  A context size of 4 means the model is trained to look at a sequence of 4 words or tokens to predict the next word in the sequence.
+- c2738 [definition | iQZFH8dr2yI @ 1069-1077s]
+  Context size intuitively represents how many words the model should pay attention to at one time to predict the next word.
+- c2747 [code | iQZFH8dr2yI @ 1174-1180s]
+  for i in range(1, context_size + 1):
+      context = encoded_data[:i]
+      desired = encoded_data[i]
+- c2752 [definition | iQZFH8dr2yI @ 1229-1244s]
+  In input-output pairs for language models, tokens on the left of the arrow represent the input to the model, and the token on the right represents the target token ID the model is supposed to predict.
+- c2764 [definition | iQZFH8dr2yI @ 1436-1440s]
+  A tensor can be thought of as a multi-dimensional array.
+- c2774 [definition | iQZFH8dr2yI @ 1886-1894s]
+  A dataset for language modeling must consist of input-output pairs, not just raw tokens.
+- c2777 [definition | iQZFH8dr2yI @ 1926-2140s]
+  Stride determines how many tokens to skip when sliding the context window to create the next input-output pair.
+- c2779 [definition | iQZFH8dr2yI @ 2197-2220s]
+  The __getitem__ method returns the input tensor row and target tensor row at a given index.
+- c2783 [definition | iQZFH8dr2yI @ 2386-2409s]
+  The create_data_loader function initializes a tokenizer, creates a dataset instance, and wraps it in a DataLoader for batch processing.
+- c2792 [definition | iQZFH8dr2yI @ 2614-2620s]
+  Number of workers is for parallel processing on different threads of the CPU.
+- c2807 [code | iQZFH8dr2yI @ 2998-3004s]
+  data_loader = DataLoader(dataset, batch_size=8)
+- c2814 [definition | iQZFH8dr2yI @ 3095-3131s]
+  Input-target pairs are sequences where the target is the input shifted by one position, used for training language models.
+- c2821 [definition | iQZFH8dr2yI @ 3275-3294s]
+  The number of workers parameter enables parallel computing by distributing data loading across multiple threads on the computer.
+- c2978 [definition | mk-6cFebjis @ 3084-3124s]
+  Input-output pairs for LLM training are constructed based on context size, where each pair contains multiple prediction tasks corresponding to predicting the next word at each position.
+- c2980 [definition | mk-6cFebjis @ 3175-3202s]
+  A data loader is a PyTorch tool that processes data by creating input-output target pairs using a sliding window approach.
+- c2981 [definition | mk-6cFebjis @ 3262-3298s]
+  In a data loader implementation, the input tensor X contains rows representing input contexts, and the target tensor Y contains corresponding prediction targets which are the input shifted by one word.
+- c2984 [definition | mk-6cFebjis @ 3657-3680s]
+  Batch size specifies how many input-output pairs are processed before updating model parameters.
+- c2986 [definition | mk-6cFebjis @ 3686-3691s]
+  The number of workers parameter in a data loader specifies how many threads are used for parallel processing on the CPU.
+- c2993 [definition | mk-6cFebjis @ 4206-4262s]
+  An embedding layer weight matrix is a lookup table that stores vector embeddings for each token ID in the vocabulary, with dimensions of (vocabulary_size, embedding_dimension).
+- c2998 [code | mk-6cFebjis @ 4381-4407s]
+  torch.nn.Embedding(num_embeddings, embedding_dim)
+  # Creates an embedding layer with num_embeddings rows and embedding_dim columns
+  # Stores embeddings of a fixed dictionary and size
+- c3003 [code | mk-6cFebjis @ 4641-4672s]
+  vocab_size = 50257
+  embedding_dim = 256
+  token_embedding_layer = torch.nn.Embedding(vocab_size, embedding_dim)
+  # Creates embedding matrix with 50257 rows and 256 columns
+- c3006 [definition | mk-6cFebjis @ 4988-5010s]
+  Token embedding does not take into account the position of words in a sequence, so identical words at different positions receive the same embedding vector.
+- c3008 [definition | mk-6cFebjis @ 5032-5054s]
+  Positional encoding is a technique that injects additional positional information into large language models to complement token embeddings.
+- c3010 [definition | mk-6cFebjis @ 5190-5212s]
+  Relative positional encoding emphasizes the relative distance between tokens rather than their absolute positions in the sequence.
+- c3276 [definition | ufrPLpKnapU @ 247-249s]
+  Positional Encoding is the final step in LLM data pre-processing that encodes information about the position of tokens in a sequence.
+- c3292 [equation | ufrPLpKnapU @ 1120-1127s]
+  PE_{(pos,2i)} = sin(pos/10000^{2i/d_{model}})
+- c3293 [equation | ufrPLpKnapU @ 1120-1127s]
+  PE_{(pos,2i+1)} = cos(pos/10000^{2i/d_{model}})
+- c3300 [definition | ufrPLpKnapU @ 1357-1401s]
+  A token embedding matrix (or embedding layer) requires two quantities: the vector dimension (the size each token is projected to) and the vocabulary size (the number of unique token ids).
+- c3303 [code | ufrPLpKnapU @ 1419-1433s]
+  torch.nn.Embedding(num_embeddings, embedding_dim) creates an embedding layer that stores embeddings of a fixed dictionary and size, functioning as a lookup table that retrieves embeddings using token indices.
+- c3317 [definition | ufrPLpKnapU @ 1838-1853s]
+  An embedding layer is a lookup table that maps token IDs to their corresponding vector representations.
+- c3329 [code | ufrPLpKnapU @ 2412-2438s]
+  torch.arange(max_length) creates a sequence of integers from 0 to max_length-1, used to index into the positional embedding lookup table.
+- c3348 [definition | ufrPLpKnapU @ 2860-2875s]
+  Absolute positional embeddings and relative positional embeddings are two different approaches to encoding position information.
+- c3023 [fact | mk-6cFebjis @ 5545-5610s]
+  The LLM data pre-processing pipeline consists of four stages: tokenization, token embeddings, positional embeddings, and input embeddings.
+- c3017 [fact | mk-6cFebjis @ 5405-5418s]
+  Token embeddings have shape 8 by 4 by 256 and positional embeddings have shape 4 by 256.
+- c2722 [fact | iQZFH8dr2yI @ 580-582s]
+  A data loader fetches input-target pairs using a sliding window approach.
+- c3342 [fact | ufrPLpKnapU @ 2665-2690s]
+  Positional embeddings are added to token embeddings using Python broadcasting, where the same positional embedding vectors are added to each row of the token embedding matrix.
+- c3287 [fact | ufrPLpKnapU @ 939-977s]
+  Both absolute and relative positional embeddings enable large language models to understand the order and relationship between tokens, leading to more accurate and context-aware predictions.
+- c3283 [fact | ufrPLpKnapU @ 521-596s]
+  In absolute positional embedding, the same token receives different final embeddings when it appears at different positions in the sequence because different positional embeddings are added to the same token embedding.
+- c2767 [design_decision | iQZFH8dr2yI @ 1537-1543s]
+  The data loader uses a sliding window approach to fetch input-output target pairs.
+- c2822 [fact | iQZFH8dr2yI @ 3294-3311s]
+  The DataLoader extracts input-output pairs in batches (first batch, second batch, etc.) which are then converted into vector embeddings before being fed into the model.
+- c2594 [fact | ghCSGRgVB_o @ 3570-3578s]
+  Token embeddings alone do not encode positional information about where words appear in a sentence.
+- c3018 [fact | mk-6cFebjis @ 5418-5433s]
+  When adding token embeddings and positional embeddings in Python, broadcasting converts the 4 by 256 positional embedding tensor into 8 by 4 by 256 by duplicating values eight times.
+- c2709 [fact | iQZFH8dr2yI @ 103-116s]
+  Input-target pairs must be created before vector embeddings are fed to the LLM training process.
+- c2745 [fact | iQZFH8dr2yI @ 1144-1148s]
+  Input-output pairs are constructed by taking a sequence of tokens as input and the next token as the target output.
+- c2515 [fact | ghCSGRgVB_o @ 142-148s]
+  Token embeddings serve as the input to training large language models such as GPT.
+- c3331 [fact | ufrPLpKnapU @ 2406-2454s]
+  Passing positions 0, 1, 2, and 3 to the positional embedding lookup table generates four 256-dimensional positional embedding vectors.
+- c2514 [architecture | ghCSGRgVB_o @ 57-148s]
+  The large language model workflow has three main steps: (1) tokenizing input text into tokens, (2) converting tokens into token IDs, and (3) converting token IDs into token embeddings, which serve as input to training the model.
+- c3290 [fact | ufrPLpKnapU @ 1032-1048s]
+  GPT models (GPT-3, GPT-4) use absolute positional embeddings that are optimized during the training process.
+- c3335 [fact | ufrPLpKnapU @ 2571-2588s]
+  The same positional embedding values are added to each row of the token embeddings across all 8 batches during the broadcasting operation.
+- c2568 [fact | ghCSGRgVB_o @ 2648-2663s]
+  The embedding weight matrix functions both as a matrix of weights for vector embeddings and as a lookup table for finding vector representations by token ID.
+- c3280 [fact | ufrPLpKnapU @ 440-452s]
+  It is important to inject additional position information to the large language model along with capturing semantic meaning through token embeddings.
+- c2511 [fact | ghCSGRgVB_o @ 44-50s]
+  Token is a broader term than word, which is why Token Embeddings is the preferred terminology.
+- c2710 [fact | iQZFH8dr2yI @ 153-162s]
+  Large language models use a specific technique for creating input-target pairs that differs from standard machine learning classification and regression tasks.
+- c3295 [fact | ufrPLpKnapU @ 1192-1208s]
+  The terms positional encoding and positional embedding are used interchangeably to refer to vectors in a higher dimensional space.
+- c2541 [fact | ghCSGRgVB_o @ 1600-1626s]
+  Token embeddings for large language models are created by converting token IDs into embedding vectors using an embedding weight matrix.
+- c2794 [fact | iQZFH8dr2yI @ 2632-2707s]
+  A DataLoader with batch size of 1 and context size of 4 produces input-output pairs where the output tensor is the input tensor shifted by one position.
+- c2579 [fact | ghCSGRgVB_o @ 3020-3045s]
+  An embedding layer lookup operation retrieves only the embedding vectors corresponding to the input IDs, without computing embeddings for unused vocabulary IDs.
+- c3011 [fact | mk-6cFebjis @ 5218-5224s]
+  Absolute positional encoding is well-suited for tasks where fixed order of tokens is crucial, such as sequence generation.
+- c2585 [fact | ghCSGRgVB_o @ 3321-3331s]
+  In convolutional neural networks, spatial features of an image are exploited before giving it as input for training, similar to how token embeddings work.
+- c3022 [fact | mk-6cFebjis @ 5514-5538s]
+  Both token embedding and positional embedding values must be optimized during the training process of large language models.
+- c2526 [fact | ghCSGRgVB_o @ 929-936s]
+  Creating token embeddings for large vocabularies is computationally expensive, which is one reason why training large language models like GPT takes a huge amount of time.
+- c3321 [architecture | ufrPLpKnapU @ 1882-1910s]
+  The embedding layer operates as a lookup mechanism that retrieves pre-stored vector representations indexed by token IDs.
+- c3021 [fact | mk-6cFebjis @ 5487-5512s]
+  Positional embedding matrix values are initialized randomly, similar to token embedding initialization.
+- c2773 [fact | iQZFH8dr2yI @ 1834-1854s]
+  The sliding window approach works by sliding the input window by one token position to create the corresponding output.
+- c3327 [fact | ufrPLpKnapU @ 2271-2384s]
+  The same four positional embedding vectors are reused across all input sequences in a batch because positions are identical across sequences.
+- c3275 [fact | ufrPLpKnapU @ 175-189s]
+  Without token embeddings, the semantic relationship between related words like 'dog' and 'puppy' or 'cat' and 'kitten' is lost.
+- c3330 [fact | ufrPLpKnapU @ 2394-2406s]
+  Embedding layers function as lookup tables that map indices to corresponding embedding vectors.
+- c2762 [design_decision | iQZFH8dr2yI @ 1410-1416s]
+  A data loader is used to iterate over the input dataset and return inputs and targets as PyTorch tensors.

@@ -22,9 +22,10 @@ how to rebuild from scratch.
 ```bash
 # Ubuntu / Debian
 sudo apt-get install -y ffmpeg pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended
+npm install -g @mermaid-js/mermaid-cli  # Optional: for rendering architecture diagrams
 
 # macOS (Homebrew)
-brew install ffmpeg pandoc yt-dlp
+brew install ffmpeg pandoc yt-dlp mermaid-cli
 brew install --cask mactex          # ~5GB; or --cask basictex for a lighter install
 ```
 

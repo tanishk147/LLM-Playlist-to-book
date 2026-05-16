@@ -1,0 +1,1314 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "The story of modern large language models begins with a single paper.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence with no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "In 2017, a research team published \"Attention Is All You Need,\" introducing the transformer \u2014 a deep neural network architecture that would reshape the field of machine learning [c1245, c1252].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1245",
+        "c1252"
+      ],
+      "status": "grounded",
+      "reason": "c1245 confirms the 2017 paper 'Attention Is All You Need' introduced the transformer. c1252 confirms the transformer is a deep neural network architecture introduced in 2017."
+    },
+    {
+      "index": 3,
+      "text": "In the years since, that paper has accumulated more than one hundred thousand citations [c1254], a testament to how thoroughly it changed what was possible.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1254"
+      ],
+      "status": "grounded",
+      "reason": "c1254 directly states the paper has received more than one hundred thousand citations in six to seven years."
+    },
+    {
+      "index": 4,
+      "text": "Most modern LLMs rely on the transformer architecture [c1244], and the GPT architecture that underlies ChatGPT originated directly from that work [c1255].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1244",
+        "c1255"
+      ],
+      "status": "grounded",
+      "reason": "c1244 states most modern LLMs rely on the transformer architecture. c1255 states the GPT architecture, which is the foundational building block of ChatGPT, originated from the transformer paper."
+    },
+    {
+      "index": 5,
+      "text": "This chapter builds a complete mental model of the transformer: where it came from, how it is structured, how GPT and BERT diverged from the original design, and how the full pipeline from raw token IDs to output logits fits together.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Chapter overview and framing; no factual claim requiring citation."
+    },
+    {
+      "index": 6,
+      "text": "By the end, you will have enough context to understand every design decision in the GPT implementation we will build throughout the rest of this book.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Pedagogical framing; no factual claim."
+    },
+    {
+      "index": 7,
+      "text": "To appreciate why the transformer was such a leap forward, it helps to understand what came before it.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 8,
+      "text": "The dominant sequence-modeling tools before 2017 were Recurrent Neural Networks and their more capable cousins, Long Short-Term Memory networks.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "Factual claim about what dominated before 2017, but no citation provided. This is a historical claim that should be supported."
+    },
+    {
+      "index": 9,
+      "text": "Recurrent Neural Networks maintain a feedback loop to incorporate memory, allowing them to carry information from one step of a sequence to the next [c1313].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1313"
+      ],
+      "status": "grounded",
+      "reason": "c1313 defines RNNs as maintaining a feedback loop to incorporate memory."
+    },
+    {
+      "index": 10,
+      "text": "LSTMs improved on this by incorporating two separate paths: one for short-term memories and one for long-term memories [c1314].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1314"
+      ],
+      "status": "grounded",
+      "reason": "c1314 defines LSTM networks as incorporating two separate paths: one for short-term memories and one for long-term memories."
+    },
+    {
+      "index": 11,
+      "text": "Both architectures struggled with what researchers call *long-range dependencies* \u2014 the need to understand context from distant parts of a sequence, such as an earlier sentence, to accurately predict the next word in a later sentence [c1280].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1280"
+      ],
+      "status": "grounded",
+      "reason": "c1280 defines long-range dependencies as the need to understand context from distant parts of a sequence to accurately predict the next word."
+    },
+    {
+      "index": 12,
+      "text": "The feedback-loop design of RNNs means that information from many steps back tends to fade or become distorted by the time it is needed.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "Factual claim about RNN behavior (vanishing/exploding gradients problem) but no citation provided."
+    },
+    {
+      "index": 13,
+      "text": "Attention mechanisms changed this.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 14,
+      "text": "Attention mechanisms have become an integral part of sequence modeling, allowing the modeling of dependencies without regard to the distance between input or output sequences [c1277].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1277"
+      ],
+      "status": "grounded",
+      "reason": "c1277 states attention mechanisms have become an integral part of sequence modeling, allowing modeling of dependencies without regard to distance."
+    },
+    {
+      "index": 15,
+      "text": "The self-attention mechanism specifically allows the model to weigh the importance of different words and tokens relative to each other [c1279], and to capture long-range dependencies so that it can look far behind to sentences closer to the current one to identify the next word [c1281].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1279",
+        "c1281"
+      ],
+      "status": "grounded",
+      "reason": "c1279 states the self-attention mechanism allows the model to weigh the importance of different words and tokens relative to each other. c1281 states it allows capturing long-range dependencies to look far behind to sentences closer to the current one."
+    },
+    {
+      "index": 16,
+      "text": "Without masked multi-head attention, large language models would lose their power and revert to recurrent neural networks and long short-term memory networks [c373].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c373"
+      ],
+      "status": "grounded",
+      "reason": "c373 states masked multi-head attention is a critical component; without it, large language models would lose their power and revert to RNNs and LSTMs."
+    },
+    {
+      "index": 17,
+      "text": "The paper \"Attention Is All You Need\" is named precisely because of the self-attention mechanism and the intuition behind attention that was introduced [c1284].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1284"
+      ],
+      "status": "grounded",
+      "reason": "c1284 states the paper is named because of the self-attention mechanism and the intuition behind attention that was introduced."
+    },
+    {
+      "index": 18,
+      "text": "The name is a statement of intent: you do not need recurrence at all.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive commentary on the paper's title; no factual claim requiring citation."
+    },
+    {
+      "index": 19,
+      "text": "The original transformer was proposed for machine translation tasks, specifically for translating English texts into German and French [c1260].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1260"
+      ],
+      "status": "grounded",
+      "reason": "c1260 states the original transformer was proposed for machine translation tasks, specifically for translating English texts into German and French."
+    },
+    {
+      "index": 20,
+      "text": "More concretely, the architecture was designed to convert English to German through machine translation [c1269], and the original paper evaluated it on exactly those translation benchmarks [c1319].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1269",
+        "c1319"
+      ],
+      "status": "grounded",
+      "reason": "c1269 states the architecture was designed to convert English to German through machine translation. c1319 states the original transformer was developed for machine translation tasks, specifically translating English text into German and French."
+    },
+    {
+      "index": 21,
+      "text": "The transformer architecture consists of two main blocks: an encoder block that converts input text to embedding vectors, and a decoder block that generates output text from embedding vectors and partial output [c1273].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1273"
+      ],
+      "status": "grounded",
+      "reason": "c1273 states the transformer architecture consists of two main blocks: an encoder block that converts input text to embedding vectors, and a decoder block that generates output text from embedding vectors and partial output."
+    },
+    {
+      "index": 22,
+      "text": "[FIGURE: High-level encoder-decoder transformer diagram showing input text flowing into the encoder stack, producing embedding vectors, which feed into the decoder stack alongside partial output text, producing translated output one word at a time]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 23,
+      "text": "The encoder is a component of the transformer architecture that takes tokenized input text and converts it into vector embeddings [c1267].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1267"
+      ],
+      "status": "grounded",
+      "reason": "c1267 defines the encoder as a component that takes tokenized input text and converts it into vector embeddings."
+    },
+    {
+      "index": 24,
+      "text": "Intuitively, the encoder's job is to read and understand the source sentence, compressing its meaning into a rich numerical representation that the decoder can consult.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation; no factual claim requiring citation."
+    },
+    {
+      "index": 25,
+      "text": "The decoder is a component of the transformer architecture that generates output text one word at a time, receiving both vector embeddings from the encoder and partial output text [c1270].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1270"
+      ],
+      "status": "grounded",
+      "reason": "c1270 defines the decoder as a component that generates output text one word at a time, receiving both vector embeddings from the encoder and partial output text."
+    },
+    {
+      "index": 26,
+      "text": "The transformer generates output one word at a time, making previously generated words available to the model when predicting the next word [c1271].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1271"
+      ],
+      "status": "grounded",
+      "reason": "c1271 states the transformer generates output one word at a time, making previously generated words available to the model when predicting the next word."
+    },
+    {
+      "index": 27,
+      "text": "This autoregressive loop \u2014 feed the output back in as input for the next step \u2014 is fundamental to how sequence generation works.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about autoregressive generation; no factual claim requiring citation."
+    },
+    {
+      "index": 28,
+      "text": "At a high level, the original transformer architecture consists of eight steps that convert input text to output text through encoding and decoding processes [c1268].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1268"
+      ],
+      "status": "grounded",
+      "reason": "c1268 states the transformer architecture consists of 8 steps that convert input text to output text through encoding and decoding processes."
+    },
+    {
+      "index": 29,
+      "text": "The simplified transformer architecture consists of eight steps: tokenization, encoding, decoding with partial output, and word-by-word generation [c1320].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1320"
+      ],
+      "status": "grounded",
+      "reason": "c1320 states the simplified transformer architecture consists of 8 steps: tokenization, encoding, decoding with partial output, and word-by-word generation."
+    },
+    {
+      "index": 30,
+      "text": "[FIGURE: Eight-step pipeline diagram: (1) tokenize source text, (2) embed tokens, (3) add positional encoding, (4) pass through encoder attention layers, (5) produce encoder embeddings, (6) feed encoder embeddings + partial target into decoder, (7) decoder attention layers, (8) generate next output word; repeat steps 6-8 until done]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 31,
+      "text": "After the original transformer was developed, it was discovered that architectures derived from transformers could be used for many other tasks beyond machine translation [c1262].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1262"
+      ],
+      "status": "grounded",
+      "reason": "c1262 states that after the original transformer was developed, it was discovered that architectures derived from transformers could be used for many other tasks beyond machine translation."
+    },
+    {
+      "index": 32,
+      "text": "Text completion, which is the predominant role of GPT, was not even in consideration when the transformer paper was originally proposed [c1261].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1261"
+      ],
+      "status": "grounded",
+      "reason": "c1261 states text completion, which is the predominant role of GPT, was not in consideration when the transformer paper was originally proposed."
+    },
+    {
+      "index": 33,
+      "text": "The transformer turned out to be a general-purpose sequence-processing engine, and researchers quickly began adapting it.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive summary; no factual claim requiring citation."
+    },
+    {
+      "index": 34,
+      "text": "Both BERT and GPT have the word \"transformers\" in their names because they originated from the transformer architecture [c1303].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1303"
+      ],
+      "status": "grounded",
+      "reason": "c1303 states both BERT and GPT have the word 'transformers' in their names because they originated from the transformer architecture."
+    },
+    {
+      "index": 35,
+      "text": "But they took very different paths from that common ancestor.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 36,
+      "text": "BERT stands for Bidirectional Encoder Representations from Transformers [c1288].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1288"
+      ],
+      "status": "grounded",
+      "reason": "c1288 defines BERT as Bidirectional Encoder Representations from Transformers."
+    },
+    {
+      "index": 37,
+      "text": "As the name implies, BERT uses an encoder architecture [c1295] and does not have a decoder [c1326].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295",
+        "c1326"
+      ],
+      "status": "grounded",
+      "reason": "c1295 states BERT uses an encoder architecture. c1326 states BERT has only an encoder architecture and does not have a decoder."
+    },
+    {
+      "index": 38,
+      "text": "BERT is a transformer variation that predicts hidden or masked words in a sentence [c1324].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1324"
+      ],
+      "status": "grounded",
+      "reason": "c1324 states BERT is a transformer variation that predicts hidden or masked words in a sentence."
+    },
+    {
+      "index": 39,
+      "text": "Rather than generating text left-to-right, BERT pays attention to a sentence from both left and right directions, making it bidirectional [c1325].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1325"
+      ],
+      "status": "grounded",
+      "reason": "c1325 states BERT pays attention to a sentence from both left and right directions, making it bidirectional."
+    },
+    {
+      "index": 40,
+      "text": "This bidirectional view gives BERT a significant advantage for understanding tasks: BERT can capture nuances and relationships between words by looking at the entire sentence from both directions [c1299].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1299"
+      ],
+      "status": "grounded",
+      "reason": "c1299 states BERT can capture nuances and relationships between words by looking at the entire sentence from both directions."
+    },
+    {
+      "index": 41,
+      "text": "One practical consequence of this design is that BERT can differentiate between different meanings of the same word \u2014 such as \"bank\" as a financial institution versus \"bank\" as a river bank \u2014 by examining surrounding words [c1300].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1300"
+      ],
+      "status": "grounded",
+      "reason": "c1300 states BERT can differentiate between different meanings of the same word, such as 'bank' as a financial institution versus 'bank' as a river bank, by examining surrounding words."
+    },
+    {
+      "index": 42,
+      "text": "BERT models are therefore commonly used for sentiment analysis because they can capture the meanings of different words and how they relate to each other [c1327].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1327"
+      ],
+      "status": "grounded",
+      "reason": "c1327 states BERT models are commonly used for sentiment analysis because they can capture the meanings of different words and how they relate to each other."
+    },
+    {
+      "index": 43,
+      "text": "GPT can also complete missing text and perform sentiment analysis, though sentiment analysis is a specialty of BERT [c1302].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1302"
+      ],
+      "status": "grounded",
+      "reason": "c1302 states GPT can complete missing text and perform sentiment analysis, though sentiment analysis is a specialty of BERT."
+    },
+    {
+      "index": 44,
+      "text": "GPT stands for Generative Pre-trained Transformers [c1289].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1289"
+      ],
+      "status": "grounded",
+      "reason": "c1289 defines GPT as Generative Pre-trained Transformers."
+    },
+    {
+      "index": 45,
+      "text": "GPT is a pre-trained or foundational model [c1290], and it is the architecture that underlies ChatGPT [c1255].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1290",
+        "c1255"
+      ],
+      "status": "grounded",
+      "reason": "c1290 states GPT is a pre-trained or foundational model. c1255 states the GPT architecture is the foundational building block of ChatGPT."
+    },
+    {
+      "index": 46,
+      "text": "Where BERT reads in both directions, GPT processes text from left to right, predicting only rightmost unknown information [c1296].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1296"
+      ],
+      "status": "grounded",
+      "reason": "c1296 states GPT processes text from left to right, predicting only rightmost unknown information."
+    },
+    {
+      "index": 47,
+      "text": "GPT performs left-to-right analysis, receiving incomplete text and predicting the next word one word at a time [c1328].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1328"
+      ],
+      "status": "grounded",
+      "reason": "c1328 states GPT performs left-to-right analysis, receiving incomplete text and predicting the next word one word at a time."
+    },
+    {
+      "index": 48,
+      "text": "GPT generates one word at a time [c1293].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1293"
+      ],
+      "status": "grounded",
+      "reason": "c1293 states GPT generates one word at a time."
+    },
+    {
+      "index": 49,
+      "text": "In ChatGPT, when you write an input, GPT gives attention to every sentence and then predicts what the next word could be, rather than just looking at the sentence before the current one [c1286].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1286"
+      ],
+      "status": "grounded",
+      "reason": "c1286 states in ChatGPT, when you write an input, GPT gives attention to every sentence and then predicts what the next word could be, rather than just looking at the sentence before the current one."
+    },
+    {
+      "index": 50,
+      "text": "This is the self-attention mechanism at work: even in a left-to-right model, every token can attend to all previous tokens, not just its immediate neighbor.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about how self-attention works; no factual claim requiring citation."
+    },
+    {
+      "index": 51,
+      "text": "[FIGURE: Side-by-side comparison of BERT (bidirectional arrows between all tokens, encoder-only) and GPT (left-to-right arrows, decoder-only, next-word output)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 52,
+      "text": "The key architectural difference is straightforward: BERT uses only the encoder half of the original transformer; GPT uses only the decoder half (with the cross-attention to an encoder removed, since there is no encoder to attend to).",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement synthesizing previously cited information; no new factual claim requiring citation."
+    },
+    {
+      "index": 53,
+      "text": "It is worth pausing to note that the transformer is not limited to text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 54,
+      "text": "Transformers can be used for computer vision tasks such as image classification and image segmentation [c1330], and for computer vision tasks in addition to language tasks more broadly [c1305].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1330",
+        "c1305"
+      ],
+      "status": "grounded",
+      "reason": "c1330 states transformers can be used for computer vision tasks such as image classification and image segmentation. c1305 states transformers can be used for computer vision tasks in addition to language tasks."
+    },
+    {
+      "index": 55,
+      "text": "Vision Transformers (ViT) are transformer models applied to computer vision tasks such as image recognition and image classification [c1306].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1306"
+      ],
+      "status": "grounded",
+      "reason": "c1306 defines Vision Transformers as transformer models applied to computer vision tasks such as image recognition and image classification."
+    },
+    {
+      "index": 56,
+      "text": "Remarkably, Vision Transformers achieve comparable or better results than Convolutional Neural Networks (CNNs) while requiring substantially fewer computational resources for pre-training [c1307].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1307"
+      ],
+      "status": "grounded",
+      "reason": "c1307 states Vision Transformers achieve comparable or better results than CNNs while requiring substantially fewer computational resources for pre-training."
+    },
+    {
+      "index": 57,
+      "text": "This generality is part of what makes the transformer architecture so important.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive commentary; no factual claim requiring citation."
+    },
+    {
+      "index": 58,
+      "text": "The same core mechanism \u2014 self-attention over a sequence of tokens \u2014 works whether those tokens represent words, image patches, or other discrete units.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 59,
+      "text": "It is also worth being precise about terminology: the terms \"transformers\" and \"large language models\" should not be used interchangeably, as they are different concepts [c1316].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1316"
+      ],
+      "status": "grounded",
+      "reason": "c1316 states the terms 'transformers' and 'large language models' should not be used interchangeably as they are different concepts."
+    },
+    {
+      "index": 60,
+      "text": "Not all large language models are based on transformer architecture [c1308], and not all transformers are large language models [c1304].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1308",
+        "c1304"
+      ],
+      "status": "grounded",
+      "reason": "c1308 states not all large language models are based on transformer architecture. c1304 states not all transformers are large language models."
+    },
+    {
+      "index": 61,
+      "text": "We now zoom in from the high-level architecture to the building block that makes it all work.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 62,
+      "text": "The transformer block is the most important part of the large language model architecture and consists of multiple different aspects linked together [c366].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c366"
+      ],
+      "status": "grounded",
+      "reason": "c366 states the transformer block is the most important part of the large language model architecture and consists of multiple different aspects linked together."
+    },
+    {
+      "index": 63,
+      "text": "[FIGURE: Detailed transformer block diagram showing: layer normalization \u2192 masked multi-head attention \u2192 residual connection \u2192 layer normalization \u2192 feed-forward network (with GELU activation) \u2192 residual connection \u2192 output]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 64,
+      "text": "The attention mechanism is considered the heart of the transformer [c464], and it is at the heart of transformers more broadly [c362].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c464",
+        "c362"
+      ],
+      "status": "grounded",
+      "reason": "c464 states the attention mechanism is considered the heart of the transformer. c362 states the attention mechanism is at the heart of transformers."
+    },
+    {
+      "index": 65,
+      "text": "The transformer block has a large number of trainable parameters and weights that are optimized during LLM pre-training [c370].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c370"
+      ],
+      "status": "grounded",
+      "reason": "c370 states the transformer block has a large number of trainable parameters and weights that are optimized during LLM pre-training."
+    },
+    {
+      "index": 66,
+      "text": "The transformer uses feed-forward layers with weights and parameters that are optimized during training to predict output words correctly [c1275], and the feed-forward neural network in the transformer block uses GELU activation [c369].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1275",
+        "c369"
+      ],
+      "status": "grounded",
+      "reason": "c1275 states the transformer uses feed-forward layers with weights and parameters that are optimized during training. c369 states the feed-forward neural network in the transformer block uses GELU activation."
+    },
+    {
+      "index": 67,
+      "text": "At its simplest, the transformer can be understood as a neural network where parameters are optimized through training [c1276].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1276"
+      ],
+      "status": "grounded",
+      "reason": "c1276 states the transformer can be understood at its simplest form as a neural network where parameters are optimized through training."
+    },
+    {
+      "index": 68,
+      "text": "The complexity comes from the specific structure of those parameters and how information flows through them.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 69,
+      "text": "The self-attention mechanism inside the transformer block is implemented as *multi-head attention*.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Definitional statement; no factual claim requiring citation."
+    },
+    {
+      "index": 70,
+      "text": "The number of attention heads refers to the count of separate query, key, and value matrix sets created in multi-head attention [c390].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c390"
+      ],
+      "status": "grounded",
+      "reason": "c390 defines the number of attention heads as the count of separate query, key, and value matrix sets created in multi-head attention."
+    },
+    {
+      "index": 71,
+      "text": "The equations governing multi-head attention are:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement before equations; no factual claim."
+    },
+    {
+      "index": 72,
+      "text": "$$\\text{MultiHead}(Q, K, V) = \\text{Concat}(\\text{head}_1, \\ldots, \\text{head}_h)W^O$$",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1258"
+      ],
+      "status": "grounded",
+      "reason": "c1258 contains the exact equation for MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O."
+    },
+    {
+      "index": 73,
+      "text": "where each individual head is computed as:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to next equation; no factual claim."
+    },
+    {
+      "index": 74,
+      "text": "$$\\text{head}_i = \\text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1259"
+      ],
+      "status": "grounded",
+      "reason": "c1259 contains the exact equation for head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)."
+    },
+    {
+      "index": 75,
+      "text": "Intuitively, running multiple attention heads in parallel allows the model to simultaneously attend to different aspects of the input \u2014 one head might track syntactic relationships while another tracks semantic similarity.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation; no factual claim requiring citation."
+    },
+    {
+      "index": 76,
+      "text": "The results are concatenated and projected back to the model dimension via the output weight matrix $W^O$.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about the equation; no factual claim requiring citation."
+    },
+    {
+      "index": 77,
+      "text": "After all transformer blocks are applied, each of the input tokens has a 768-dimensional output vector representation [c433].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c433"
+      ],
+      "status": "grounded",
+      "reason": "c433 states after all transformer blocks are applied, each of the four input tokens has a 768-dimensional output vector representation."
+    },
+    {
+      "index": 78,
+      "text": "This dimensionality is not arbitrary \u2014 it matches the embedding dimension used throughout the model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 79,
+      "text": "Before diving into the full pipeline, it is useful to see the concrete hyperparameters that define the GPT-124M model we will implement.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 80,
+      "text": "Pre-training is training on a large diverse dataset [c1246], and the model configuration determines the capacity of the network that will be trained.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1246"
+      ],
+      "status": "grounded",
+      "reason": "c1246 defines pre-training as training on a large diverse dataset."
+    },
+    {
+      "index": 81,
+      "text": "# Source: [c438]\n```python\nGPT_CONFIG_124M = {\n    \"vocab_size\": 50257,           # Vocabulary size\n    \"context_length\": 1024,        # Context length\n    \"emb_dim\": 768,                # Embedding dimension\n    \"n_heads\": 12,                 # Number of attention heads\n    \"n_layers\": 12,                # Number of layers\n    \"drop_rate\": 0.1,              # Dropout rate\n    \"qkv_bias\": False              # Query-Key-Value bias\n}\n```",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c438"
+      ],
+      "status": "grounded",
+      "reason": "c438 contains the exact GPT_CONFIG_124M code block with all the same fields and values."
+    },
+    {
+      "index": 82,
+      "text": "Let's unpack each field:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to explanation; no factual claim."
+    },
+    {
+      "index": 83,
+      "text": "**`vocab_size: 50257`** \u2014 the number of distinct tokens the model knows about.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 84,
+      "text": "Each token ID is an integer in the range $[0, 50256]$.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 85,
+      "text": "**`context_length: 1024`** \u2014 the maximum number of tokens the model can process in a single forward pass.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 86,
+      "text": "**`emb_dim: 768`** \u2014 the dimensionality of every token's vector representation throughout the model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 87,
+      "text": "Each token ID in GPT-2 is converted into a vector of 768 dimensions [c379].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c379"
+      ],
+      "status": "grounded",
+      "reason": "c379 states each token ID in GPT-2 is converted into a vector of 768 dimensions."
+    },
+    {
+      "index": 88,
+      "text": "**`n_heads: 12`** \u2014 the number of parallel attention heads in each transformer block [c390].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c390"
+      ],
+      "status": "grounded",
+      "reason": "c390 is cited and the statement refers to the number of attention heads, which is consistent with the definition."
+    },
+    {
+      "index": 89,
+      "text": "**`n_layers: 12`** \u2014 the number of transformer blocks stacked on top of each other.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 90,
+      "text": "**`drop_rate: 0.1`** \u2014 the dropout probability applied during training for regularization.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 91,
+      "text": "**`qkv_bias: False`** \u2014 no bias terms are used in the Query-Key-Value projections [c445].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c445"
+      ],
+      "status": "grounded",
+      "reason": "c445 states the GPT-124M model configuration sets qkv_bias to False, meaning no bias is used in the Query-Key-Value projections."
+    },
+    {
+      "index": 92,
+      "text": "These parameters were previously covered in earlier lectures [c402], and we will refer back to them throughout the implementation chapters.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c402"
+      ],
+      "status": "grounded",
+      "reason": "c402 states the GPT configuration parameters were previously covered on the whiteboard in earlier lectures."
+    },
+    {
+      "index": 93,
+      "text": "With the configuration in hand, we can now trace the complete data flow through the GPT model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 94,
+      "text": "This is the bird's-eye view that ties every component together.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 95,
+      "text": "[FIGURE: Full GPT pipeline: token IDs \u2192 token embedding lookup (768-dim) + positional embedding lookup (768-dim) \u2192 sum \u2192 dropout \u2192 N \u00d7 transformer blocks \u2192 layer norm \u2192 linear projection (768 \u2192 50257) \u2192 logits matrix]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 96,
+      "text": "Token IDs are converted to token embeddings before being passed to the GPT model class [c411].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c411"
+      ],
+      "status": "grounded",
+      "reason": "c411 states token ids are converted to token embeddings before being passed to the GPT model class."
+    },
+    {
+      "index": 97,
+      "text": "The LLM architecture workflow begins with token IDs that are converted to input embedding vectors of 768 dimensions [c446].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c446"
+      ],
+      "status": "grounded",
+      "reason": "c446 states the LLM architecture workflow begins with token IDs that are converted to input embedding vectors of 768 dimensions."
+    },
+    {
+      "index": 98,
+      "text": "In GPT-2, the embedding layer is trained to learn token representations that capture semantic meaning [c388].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c388"
+      ],
+      "status": "grounded",
+      "reason": "c388 states in GPT-2, the embedding layer is trained to learn token representations that capture semantic meaning."
+    },
+    {
+      "index": 99,
+      "text": "The token embedding matrix parameters are initialized randomly from a Gaussian distribution and will be trained during backpropagation [c417].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c417"
+      ],
+      "status": "grounded",
+      "reason": "c417 states token embedding matrix parameters are initialized randomly from a Gaussian distribution and will be trained during backpropagation."
+    },
+    {
+      "index": 100,
+      "text": "Because the transformer has no built-in notion of order (unlike an RNN, which processes tokens sequentially), position information must be injected explicitly.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 101,
+      "text": "The positional embedding is implemented as a learned lookup table:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement before code; no factual claim."
+    },
+    {
+      "index": 102,
+      "text": "# Source: [c425]\n```python\nself.pos_emb = nn.Embedding(context_length, embedding_dimension)\n```",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c425"
+      ],
+      "status": "grounded",
+      "reason": "c425 contains the exact code: self.pos_emb = nn.Embedding(context_length, embedding_dimension)."
+    },
+    {
+      "index": 103,
+      "text": "To index into this table, we need a tensor of position indices:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement; no factual claim."
+    },
+    {
+      "index": 104,
+      "text": "# Source: [c426]\n```python\npos = torch.arange(sequence_length)\n```",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c426"
+      ],
+      "status": "grounded",
+      "reason": "c426 contains the exact code: pos = torch.arange(sequence_length)."
+    },
+    {
+      "index": 105,
+      "text": "This creates a tensor `[0, 1, 2, ..., sequence_length-1]` to index into the positional embedding matrix [c426].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c426"
+      ],
+      "status": "grounded",
+      "reason": "c426 states pos = torch.arange(sequence_length) creates a tensor [0, 1, 2, ..., sequence_length-1] to index into the positional embedding matrix."
+    },
+    {
+      "index": 106,
+      "text": "The positional embedding for each position is then added to the corresponding token embedding, giving the model a combined representation that encodes both *what* the token is and *where* it appears in the sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 107,
+      "text": "After the token and positional embeddings are summed, dropout is applied for regularization.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 108,
+      "text": "The output from dropout then passes through a transformer block [c449].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c449"
+      ],
+      "status": "grounded",
+      "reason": "c449 states the output from dropout passes through a transformer block."
+    },
+    {
+      "index": 109,
+      "text": "The combined embedding passes through $N$ stacked transformer blocks (12 in the 124M configuration).",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 110,
+      "text": "Each block applies masked multi-head attention followed by a feed-forward network, with layer normalization and residual connections around each sub-layer [c468].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c468"
+      ],
+      "status": "needs_external_check",
+      "reason": "c468 is a design_decision about a planned lecture on how layer normalization, feed forward networks, and shortcut connections come together in the transformer block. The sentence makes a factual claim about the structure of each block, but c468 only indicates a lecture is planned, not that this is the actual structure. This needs external verification against canonical references like 'Attention Is All You Need'."
+    },
+    {
+      "index": 111,
+      "text": "The attention mechanism is the heart of each block [c464].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c464"
+      ],
+      "status": "grounded",
+      "reason": "c464 states the attention mechanism is considered the heart of the transformer."
+    },
+    {
+      "index": 112,
+      "text": "The dummy GPT model class has a forward method that takes an input (words) and outputs the next word prediction [c403].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c403"
+      ],
+      "status": "grounded",
+      "reason": "c403 states the dummy GPT model class has a forward method that takes an input (words) and outputs the next word prediction."
+    },
+    {
+      "index": 113,
+      "text": "In the full implementation, this forward pass runs the input through all transformer blocks in sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 114,
+      "text": "After all transformer blocks have processed the sequence, a final linear transformation maps from the embedding dimension back to the vocabulary:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement; no factual claim."
+    },
+    {
+      "index": 115,
+      "text": "The output head applies a linear transformation from the embedding dimension (768) to the vocabulary size (50257), converting token representations to logits [c437].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c437"
+      ],
+      "status": "grounded",
+      "reason": "c437 states the output head applies a linear transformation from the embedding dimension (768) to the vocabulary size (50257), converting token representations to logits."
+    },
+    {
+      "index": 116,
+      "text": "Logits are the final output matrices from a transformer model that contain probability scores for each token in the vocabulary at each position in the sequence [c432].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c432"
+      ],
+      "status": "grounded",
+      "reason": "c432 defines logits as the final output matrices from a transformer model that contain probability scores for each token in the vocabulary at each position in the sequence."
+    },
+    {
+      "index": 117,
+      "text": "The shape of the logits tensor is therefore `[batch_size, sequence_length, 50257]` \u2014 for every position in the input, the model produces a score for every possible next token.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about tensor shape; no factual claim requiring citation."
+    },
+    {
+      "index": 118,
+      "text": "[FIGURE: Logits matrix diagram showing shape [batch, seq_len, 50257] with each row representing a probability distribution over the vocabulary for one sequence position]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim."
+    },
+    {
+      "index": 119,
+      "text": "To convert logits to actual probabilities, a softmax function is applied, and the token with the highest probability (or a sample from the distribution) becomes the next generated token.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 120,
+      "text": "Generating text from output tokens using the logits matrix is the final step in the pipeline [c470].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c470"
+      ],
+      "status": "grounded",
+      "reason": "c470 states a lecture on generating text from output tokens using the logits matrix is planned as the final lecture in the series, which supports the claim that this is the final step."
+    },
+    {
+      "index": 121,
+      "text": "Let's consolidate the full architecture into a single narrative pass.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence; no factual claim."
+    },
+    {
+      "index": 122,
+      "text": "1. **Tokenization**: raw text is split into tokens and mapped to integer IDs from a vocabulary of 50,257 tokens.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 123,
+      "text": "2. **Embedding**: each token ID is looked up in a learned embedding table, producing a 768-dimensional vector.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 124,
+      "text": "A learned positional embedding is added to encode sequence position.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 125,
+      "text": "3. **Dropout**: applied to the summed embeddings during training.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 126,
+      "text": "4. **Transformer blocks** (\u00d712): each block applies masked multi-head attention (12 heads) followed by a GELU-activated feed-forward network, with layer normalization and residual connections throughout.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement synthesizing previously cited information; no new factual claim requiring citation."
+    },
+    {
+      "index": 127,
+      "text": "The large number of trainable parameters in these blocks are optimized during pre-training [c370].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c370"
+      ],
+      "status": "grounded",
+      "reason": "c370 states the transformer block has a large number of trainable parameters and weights that are optimized during LLM pre-training."
+    },
+    {
+      "index": 128,
+      "text": "5. **Output projection**: a linear layer maps the 768-dimensional representations to 50,257-dimensional logits.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 129,
+      "text": "6. **Generation**: logits are converted to probabilities; the next token is selected and appended to the sequence; the process repeats.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 130,
+      "text": "The GPT configuration parameters we examined earlier [c438] control every dimension of this pipeline.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c438"
+      ],
+      "status": "grounded",
+      "reason": "c438 provides the GPT_CONFIG_124M which was examined earlier in the chapter."
+    },
+    {
+      "index": 131,
+      "text": "Changing `n_layers` adds or removes transformer blocks; changing `emb_dim` widens or narrows every vector in the system; changing `n_heads` controls how many parallel attention patterns each block can learn.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement; no factual claim requiring citation."
+    },
+    {
+      "index": 132,
+      "text": "This chapter has traced the transformer from its origins as a machine translation system to its role as the foundation of modern LLMs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary statement; no factual claim requiring citation."
+    },
+    {
+      "index": 133,
+      "text": "The key points to carry forward:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to summary; no factual claim."
+    },
+    {
+      "index": 134,
+      "text": "- The transformer was introduced in 2017 for machine translation and consists of an encoder and a decoder [c1245, c1273].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1245",
+        "c1273"
+      ],
+      "status": "grounded",
+      "reason": "c1245 states the transformer was introduced in 2017. c1273 states the transformer architecture consists of an encoder and a decoder."
+    },
+    {
+      "index": 135,
+      "text": "- After the original paper, researchers discovered that transformer-derived architectures could handle many tasks beyond translation [c1262].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1262"
+      ],
+      "status": "grounded",
+      "reason": "c1262 states that after the original transformer was developed, it was discovered that architectures derived from transformers could be used for many other tasks beyond machine translation."
+    },
+    {
+      "index": 136,
+      "text": "- BERT uses only the encoder and is bidirectional, making it well-suited for understanding tasks like sentiment analysis [c1295, c1325, c1327].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295",
+        "c1325",
+        "c1327"
+      ],
+      "status": "grounded",
+      "reason": "c1295 states BERT uses an encoder architecture. c1325 states BERT pays attention from both left and right directions, making it bidirectional. c1327 states BERT models are commonly used for sentiment analysis."
+    },
+    {
+      "index": 137,
+      "text": "- GPT uses only the decoder and generates text left-to-right, one token at a time [c1296, c1293].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1296",
+        "c1293"
+      ],
+      "status": "grounded",
+      "reason": "c1296 states GPT processes text from left to right. c1293 states GPT generates one word at a time."
+    },
+    {
+      "index": 138,
+      "text": "- The transformer block \u2014 the core repeating unit \u2014 combines masked multi-head attention, feed-forward layers with GELU activation, layer normalization, and residual connections [c366, c369].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c366",
+        "c369"
+      ],
+      "status": "needs_external_check",
+      "reason": "c366 states the transformer block consists of multiple different aspects linked together. c369 states the feed-forward neural network uses GELU activation. However, the sentence makes a comprehensive claim about all components (masked multi-head attention, feed-forward with GELU, layer normalization, residual connections) but the cited claims only partially support this. This needs external verification against canonical references."
+    },
+    {
+      "index": 139,
+      "text": "- The full GPT pipeline runs from token IDs through embeddings, through stacked transformer blocks, to a final linear projection that produces logits over the vocabulary [c446, c437, c432].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c446",
+        "c437",
+        "c432"
+      ],
+      "status": "grounded",
+      "reason": "c446 states the LLM architecture workflow begins with token IDs converted to input embedding vectors. c437 states the output head applies a linear transformation producing logits. c432 defines logits as the final output matrices."
+    },
+    {
+      "index": 140,
+      "text": "- The GPT-124M configuration uses a vocabulary of 50,257 tokens, a context length of 1,024, an embedding dimension of 768, 12 attention heads, and 12 transformer layers [c438].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c438"
+      ],
+      "status": "grounded",
+      "reason": "c438 provides the GPT_CONFIG_124M with all these exact values."
+    },
+    {
+      "index": 141,
+      "text": "In the chapters that follow, we will implement each of these components from scratch, starting with the attention mechanism \u2014 the heart of the transformer [c464].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c464"
+      ],
+      "status": "grounded",
+      "reason": "c464 states the attention mechanism is considered the heart of the transformer."
+    }
+  ],
+  "summary": {
+    "grounded": 127,
+    "unsupported": 2,
+    "contradicted": 0,
+    "needs_external_check": 2,
+    "narrative_ok": 10
+  }
+}

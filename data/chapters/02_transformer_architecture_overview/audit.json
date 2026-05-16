@@ -1,0 +1,15 @@
+{
+  "chapter_id": "transformer_architecture_overview",
+  "title": "The Transformer Architecture: From Attention Is All You Need to GPT",
+  "summary": {
+    "grounded": 127,
+    "unsupported": 2,
+    "contradicted": 0,
+    "needs_external_check": 2,
+    "narrative_ok": 10
+  },
+  "stripped_sentence_indices": [
+    8,
+    12
+  ]
+}

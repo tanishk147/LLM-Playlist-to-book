@@ -1,0 +1,223 @@
+## Claims (cite these by ID inline as [cNNN])
+- c731 [definition | Bc-9sf0VihQ @ 230-238s]
+  model.state_dict() is a dictionary mapping each layer of a PyTorch model to its parameter tensors.
+- c733 [definition | Bc-9sf0VihQ @ 245-252s]
+  Learnable parameters of any torch.nn.Module are contained in model.parameters().
+- c742 [definition | Bc-9sf0VihQ @ 474-498s]
+  The optimizer state dictionary stores both hyperparameters (such as learning rate and weight decay) and historical data used by the optimizer (such as past gradient values and squared gradient values).
+- c746 [definition | Bc-9sf0VihQ @ 555-570s]
+  optimizer.state_dict() returns the state of the optimizer as a dictionary containing two entries: 'state' (a dict holding current optimization state per parameter) and 'param_groups' (a list containing all parameter groups).
+- c747 [code | Bc-9sf0VihQ @ 613-665s]
+  checkpoint = torch.load('model_and_optimizer.pth')
+  model = GPTModel()
+  model.load_state_dict(checkpoint['model'])
+  optimizer = torch.optim.AdamW(model.parameters())
+  optimizer.load_state_dict(checkpoint['optimizer'])
+  model.train()
+- c750 [definition | EhU32O7DkA4 @ 52-56s]
+  LLM decoding strategies are techniques used to control randomness and improve quality when generating the next token in sequence.
+- c751 [definition | EhU32O7DkA4 @ 65-78s]
+  Naive decoding strategy selects the generated token corresponding to the largest probability score among all tokens in the vocabulary.
+- c753 [definition | EhU32O7DkA4 @ 130-148s]
+  Temperature scaling is a decoding strategy where logits are divided by a temperature value before applying softmax to convert them into probabilities.
+- c754 [definition | EhU32O7DkA4 @ 159-209s]
+  Multinomial distribution sampling selects the next token probabilistically proportional to its probability score rather than deterministically choosing the maximum probability token.
+- c760 [definition | EhU32O7DkA4 @ 24-33s]
+  Top-K sampling is a decoding strategy that restricts sampled tokens to the top K most likely tokens and excludes all other tokens.
+- c762 [definition | EhU32O7DkA4 @ 359-371s]
+  Top-k sampling restricts the sample tokens to the top k most likely tokens and excludes all other tokens.
+- c769 [definition | EhU32O7DkA4 @ 498-508s]
+  Top-k sampling is a method that selects only the top k tokens with the highest logits for the next token prediction.
+- c771 [code | EhU32O7DkA4 @ 548-560s]
+  torch.topk(logits, k=3) returns the top 3 values and their indices
+- c773 [code | EhU32O7DkA4 @ 613-628s]
+  torch.where(condition, logits, -inf) replaces logits that don't meet the condition with negative infinity
+- c801 [definition | EhU32O7DkA4 @ 1266-1284s]
+  Temperature scaling adjusts the sharpness of probability distributions to either sharpen or flatten them, helping prevent overfitting through multinomial sampling.
+- c802 [definition | EhU32O7DkA4 @ 1285-1307s]
+  Top-k sampling restricts sampled tokens to the top k most likely tokens, preventing random or low-probability tokens from becoming the next token.
+- c3025 [definition | oG1FPVnY0pI @ 12-26s]
+  Temperature Scaling is a technique used in Large Language Models to control randomness and diversity in generated text.
+- c3032 [definition | oG1FPVnY0pI @ 220-224s]
+  Temperature scaling is a technique for controlling randomness when sampling the next token from a probability distribution.
+- c3036 [definition | oG1FPVnY0pI @ 275-280s]
+  The probability distribution used for sampling the next token is the multinomial probability distribution.
+- c3037 [definition | oG1FPVnY0pI @ 309-339s]
+  Sampling from a distribution means drawing values where the outcome is not predetermined; for a multinomial distribution, samples are drawn according to the probability scores of mutually exclusive outcomes.
+- c3038 [definition | oG1FPVnY0pI @ 340-387s]
+  The multinomial distribution is used for k mutually exclusive outcomes, each with corresponding probabilities, where n independent trials are conducted to predict outcomes.
+- c3039 [code | oG1FPVnY0pI @ 340-351s]
+  weights = torch.tensor([0, 10, 3, 0], dtype=torch.float)
+  torch.multinomial(weights, 2)
+  # Returns: tensor([1, 2])
+- c3040 [code | oG1FPVnY0pI @ 340-351s]
+  torch.multinomial(weights, 5)  # ERROR without replacement
+  # RuntimeError: cannot sample n_sample > prob_dist.size(-1) samples without replacement
+- c3041 [code | oG1FPVnY0pI @ 340-351s]
+  torch.multinomial(weights, 4, replacement=True)
+  # Returns: tensor([2, 1, 1, 1])
+- c3045 [definition | oG1FPVnY0pI @ 480-492s]
+  Greedy decoding is the process of always selecting the token with the highest probability as the next token using torch.argmax.
+- c3049 [definition | oG1FPVnY0pI @ 629-676s]
+  The multinomial function samples the next token proportional to its probability score.
+- c3058 [definition | oG1FPVnY0pI @ 948-957s]
+  Temperature scaling is dividing the logits by a number greater than zero to control the probability distribution and token selection process.
+- c3061 [code | oG1FPVnY0pI @ 1079-1108s]
+  next_token_logits_2 = next_token_logits / 0.1
+  probabilities = softmax(next_token_logits_2)
+- c3063 [code | oG1FPVnY0pI @ 1172-1205s]
+  next_token_logits_3 = next_token_logits / 5
+  probabilities = softmax(next_token_logits_3)
+- c3074 [definition | oG1FPVnY0pI @ 1375-1438s]
+  Temperature is a parameter that controls the entropy of the probability distribution over tokens in language model sampling.
+- c3462 [code | yXrGeDNuymY @ 165-177s]
+  def download_and_load_gpt2(model_size, models_dir):
+      allowed_sizes = ("124M", "355M", "774M", "1558M")
+      if model_size not in allowed_sizes:
+          raise ValueError(f"Model size not in {allowed_sizes}")
+      model_dir = os.path.join(models_dir, model_size)
+      base_url = "https://openaipublic.blob.core.windows.net/gpt-2/models"
+      filenames = ["checkpoint", "encoder.json", "params.json", "model.ckpt.data-00000-of-00001", "model.ckpt.index", "model.ckpt.meta", "vocab.bpe"]
+      os.makedirs(model_dir, exist_ok=True)
+      for filename in filenames:
+          file_url = os.path.join(base_url, model_size, filename)
+          file_path = os.path.join(model_dir, filename)
+          download_file(file_url, file_path)
+- c3479 [code | yXrGeDNuymY @ 354-379s]
+  from gpt_download3 import download_and_load_gpt2
+  
+  settings, params = download_and_load_gpt2(model_size="124M", models_dir="gpt2")
+- c3481 [definition | yXrGeDNuymY @ 500-531s]
+  The checkpoint file contains the path where all current parameters and weights of the GPT-2 model are stored.
+- c3483 [definition | yXrGeDNuymY @ 532-553s]
+  The encoder.json file is a vocabulary mapping tokens to their corresponding token IDs.
+- c3485 [definition | yXrGeDNuymY @ 567-601s]
+  The vocab.bpe file contains a list of byte-pair encoded token merges, ordered by merge frequency with the highest probability merges at the top.
+- c3486 [definition | yXrGeDNuymY @ 572-585s]
+  Byte-pair encoding is a sub-word tokenization scheme that merges the most frequently occurring pairs of tokens into single tokens.
+- c3488 [definition | yXrGeDNuymY @ 627-630s]
+  The hparams.json file contains all the hyperparameter settings and configuration values for the GPT-2 model.
+- c3492 [definition | yXrGeDNuymY @ 642-654s]
+  The embedding dimension is the size of the vector space into which each token ID is converted; for GPT-2 small, each token is represented as a 768-dimensional vector.
+- c3494 [definition | yXrGeDNuymY @ 663-670s]
+  N_heads is the number of attention heads present in each transformer block.
+- c3495 [definition | yXrGeDNuymY @ 670-676s]
+  N_layers is the number of transformer blocks in the model.
+- c3503 [definition | yXrGeDNuymY @ 789-808s]
+  The settings dictionary contains the same hyperparameters as those in hparams.json: vocabulary size, context length, embedding dimension, number of attention heads, and number of transformer blocks.
+- c3505 [definition | yXrGeDNuymY @ 867-888s]
+  The params dictionary for GPT-2 has five keys: WTE (token embeddings), WPE (positional embeddings), blocks (transformer block parameters), final normalization scale (G), and final normalization shift (B).
+- c3506 [definition | yXrGeDNuymY @ 902-933s]
+  WTE (token embeddings) key stores parameters for converting input token IDs into token embeddings.
+- c3507 [definition | yXrGeDNuymY @ 915-936s]
+  WPE (positional embeddings) key stores parameters for adding positional information to token embeddings.
+- c3511 [definition | yXrGeDNuymY @ 1073-1080s]
+  The blocks key contains all trainable weights and parameters within the transformer blocks, including attention layers, feed-forward networks, output projections, and layer normalization parameters.
+- c3513 [definition | yXrGeDNuymY @ 1193-1200s]
+  In GPT-2, the query, key, and value weight matrices in the attention layer are fused into a single large matrix called C_ATTN.
+- c3517 [definition | yXrGeDNuymY @ 1020-1043s]
+  Layer normalization in GPT-2 includes trainable scale (G) and shift (B) parameters applied after mean subtraction and variance normalization.
+- c3521 [code | yXrGeDNuymY @ 1591-1620s]
+  def load_gpt2_params_from_tf_ckpt(ckpt_path, settings):
+      # Initialize parameters dictionary with empty blocks for each layer
+      params = {"blocks": [{} for _ in range(settings["n_layer"])]}
+      
+      # Iterate over each variable in the checkpoint
+      for name, _ in tf.train.list_variables(ckpt_path):
+          # Load the variable and remove singleton dimensions
+          variable_array = np.squeeze(tf.train.load_variable(ckpt_path, name))
+          
+          # Process the variable name to extract relevant parts
+          variable_name_parts = name.split("/")[1:] # Skip the 'model/' prefix
+          
+          # Identify the target dictionary for the variable
+          target_dict = params
+          if variable_name_parts[0].startswith("h"):
+              layer_number = int(variable_name_parts[0][1:])
+              target_dict = params["blocks"][layer_number]
+          
+          # Recursively access or create nested dictionaries
+          for key in variable_name_parts[1:-1]:
+              target_dict = target_dict.setdefault(key, {})
+          
+          # Assign the variable array to the last key
+          last_key = variable_name_parts[-1]
+          target_dict[last_key] = variable_array
+- c3524 [code | yXrGeDNuymY @ 1726-1767s]
+  from gpt_download3 import download_and_load_gpt2
+  
+  settings, params = download_and_load_gpt2(model_size="124M", models_dir="gpt2")
+- c3533 [code | yXrGeDNuymY @ 1988-2044s]
+  model_configs = {
+      "gpt2-small (124M)": {"emb_dim": 768, "n_layers": 12, "n_heads": 12},
+      "gpt2-medium (355M)": {"emb_dim": 1024, "n_layers": 24, "n_heads": 16},
+      "gpt2-large (774M)": {"emb_dim": 1280, "n_layers": 36, "n_heads": 20},
+      "gpt2-xl (1558M)": {"emb_dim": 1600, "n_layers": 48, "n_heads": 25},
+  }
+  
+  model_name = "gpt2-small (124M)"
+  NEW_CONFIG = GPT_CONFIG_124M.copy()
+  NEW_CONFIG.update(model_configs[model_name])
+- c3544 [code | yXrGeDNuymY @ 2272-2286s]
+  def assign(left, right):
+      if left.shape != right.shape:
+          raise ValueError(f"Shape mismatch: {left.shape} vs {right.shape}")
+      return right
+- c3556 [code | yXrGeDNuymY @ 2605-2635s]
+  generate(model, input_token_ids=['every', 'effort', 'moves', 'you'], max_new_tokens=25, temperature=1.5, top_k=50)
+- c3468 [design_decision | yXrGeDNuymY @ 248-256s]
+  The GPT-2 weights will be loaded into a GPT model class and used for text generation.
+- c724 [fact | Bc-9sf0VihQ @ 94-106s]
+  Text generation strategies including temperature scaling and top-k sampling can be integrated together to reduce overfitting in text generation.
+- c729 [fact | Bc-9sf0VihQ @ 148-159s]
+  Building the foundation for weight saving and loading is necessary for working with pre-trained weights from OpenAI.
+- c3564 [fact | yXrGeDNuymY @ 2684-2688s]
+  Output from the pre-trained GPT-2 model is more coherent than output from the untrained model.
+- c726 [fact | Bc-9sf0VihQ @ 124-130s]
+  The next lecture will load pre-trained weights from OpenAI into the model instead of training from scratch.
+- c797 [fact | EhU32O7DkA4 @ 1182-1199s]
+  Probabilistic decoding strategies prevent the GPT model from memorizing passages when predicting next words.
+- c3562 [fact | yXrGeDNuymY @ 2658-2669s]
+  With pre-trained GPT-2 weights loaded, inference execution is fast because the model does not require training.
+- c3453 [fact | yXrGeDNuymY @ 35-58s]
+  The lecture will integrate the custom GPT model class with publicly released GPT-2 OpenAI weights.
+- c720 [fact | Bc-9sf0VihQ @ 28-32s]
+  Saving and loading model weights helps save memory and time.
+- c784 [architecture | EhU32O7DkA4 @ 867-897s]
+  The generate function takes as parameters: a GPT model instance, maximum new tokens to generate, context size, temperature value, top-k value, and end-of-sequence token id.
+- c798 [fact | EhU32O7DkA4 @ 1204-1209s]
+  Top-k sampling and temperature scaling are decoding strategies that help avoid overfitting.
+- c749 [fact | Bc-9sf0VihQ @ 676-690s]
+  Saving and loading model and optimizer states is especially important for training large language models to avoid losing progress and having to restart from scratch.
+- c791 [design_decision | EhU32O7DkA4 @ 1062-1089s]
+  The author uses a new generate function with top-k and temperature scaling instead of naive maximum probability decoding to improve token generation quality.
+- c804 [architecture | EhU32O7DkA4 @ 1313-1344s]
+  The decoding workflow is: obtain logit tensor from GPT model → apply top-k sampling → replace non-top-k tokens with negative infinity → apply temperature scaling (divide by temperature) → apply softmax → sample from multinomial distribution to predict next token.
+- c719 [fact | Bc-9sf0VihQ @ 21-28s]
+  Loading and saving model weights is especially important when dealing with large models like the large language model built in this series.
+- c781 [architecture | EhU32O7DkA4 @ 824-843s]
+  The token generation pipeline applies operations in sequence: top-k filtering, temperature scaling, softmax, and multinomial sampling.
+- c730 [fact | Bc-9sf0VihQ @ 170-179s]
+  The two main PyTorch functions for saving and loading model parameters are torch.save() and model.load_state_dict().
+- c799 [fact | EhU32O7DkA4 @ 1199-1209s]
+  ChatGPT produces new output each time because of decoding strategies like top-k sampling and temperature scaling, rather than memorizing user input.
+- c3469 [fact | yXrGeDNuymY @ 259-271s]
+  OpenAI originally saved GPT-2 weights using TensorFlow, while the lecture series code uses PyTorch.
+- c3476 [fact | yXrGeDNuymY @ 341-351s]
+  Pre-processing steps are required after downloading GPT-2 weights before they can be integrated with the GPT architecture.
+- c748 [fact | Bc-9sf0VihQ @ 641-660s]
+  When loading a saved checkpoint, the optimizer state dictionary restores both the optimizer parameters and the history of gradients and squared gradients.
+- c718 [fact | Bc-9sf0VihQ @ 12-21s]
+  This lecture focuses on learning how to load and save PyTorch model weights.
+- c780 [design_decision | EhU32O7DkA4 @ 785-809s]
+  Integrating temperature scaling with top-k sampling ensures both creativity in token selection and prevention of random low-probability tokens from being selected.
+- c3567 [design_decision | yXrGeDNuymY @ 2737-2746s]
+  The custom-built GPT model allows exploration of hyperparameter tuning and architectural modifications that are not possible with ChatGPT.
+- c3550 [design_decision | yXrGeDNuymY @ 2364-2393s]
+  Feed forward neural network weights and biases for both the fully connected layer and projection layer are assigned from downloaded GPT-2 values.
+- c741 [fact | Bc-9sf0VihQ @ 458-469s]
+  It is recommended to save the optimizer state in addition to model parameters when checkpointing training.
+- c3561 [fact | yXrGeDNuymY @ 2644-2653s]
+  Without GPT-2 weights, the model generates incoherent output.
+- c3541 [design_decision | yXrGeDNuymY @ 2093-2106s]
+  The goal is to replace random weight initializations in the GPT model with downloaded GPT-2 parameters from the params dictionary.

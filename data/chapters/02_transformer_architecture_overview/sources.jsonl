@@ -1,0 +1,169 @@
+## Claims (cite these by ID inline as [cNNN])
+- c366 [definition | 4i23dYoXp-A @ 326-337s]
+  The transformer block is the most important part of the large language model architecture and consists of multiple different aspects linked together.
+- c369 [definition | 4i23dYoXp-A @ 416-422s]
+  The feed forward neural network in the transformer block uses GELU activation.
+- c390 [definition | 4i23dYoXp-A @ 1034-1044s]
+  Number of attention heads refers to the count of separate query, key, and value matrix sets created in multi-head attention.
+- c425 [code | 4i23dYoXp-A @ 2000-2023s]
+  self.pos_emb = nn.Embedding(context_length, embedding_dimension)
+- c426 [code | 4i23dYoXp-A @ 2045-2064s]
+  pos = torch.arange(sequence_length) creates a tensor [0, 1, 2, ..., sequence_length-1] to index into the positional embedding matrix.
+- c432 [definition | 4i23dYoXp-A @ 2223-2233s]
+  Logits are the final output matrices from a transformer model that contain probability scores for each token in the vocabulary at each position in the sequence.
+- c438 [code | 4i23dYoXp-A @ 2542-2554s]
+  GPT_CONFIG_124M = {
+      "vocab_size": 50257,           # Vocabulary size
+      "context_length": 1024,        # Context length
+      "emb_dim": 768,                # Embedding dimension
+      "n_heads": 12,                 # Number of attention heads
+      "n_layers": 12,                # Number of layers
+      "drop_rate": 0.1,              # Dropout rate
+      "qkv_bias": False              # Query-Key-Value bias
+  }
+- c1246 [definition | NLn4eetGmf8 @ 24-38s]
+  Pre-training is training on a large diverse dataset.
+- c1252 [definition | NLn4eetGmf8 @ 151-158s]
+  A transformer is a deep neural network architecture introduced in 2017.
+- c1258 [equation | NLn4eetGmf8 @ 259-265s]
+  MultiHead(Q, K, V) = Concat(head_1, ..., head_h)W^O
+- c1259 [equation | NLn4eetGmf8 @ 259-265s]
+  head_i = Attention(QW_i^Q, KW_i^K, VW_i^V)
+- c1267 [definition | NLn4eetGmf8 @ 542-737s]
+  The encoder is a component of the transformer architecture that takes tokenized input text and converts it into vector embeddings.
+- c1270 [definition | NLn4eetGmf8 @ 841-949s]
+  The decoder is a component of the transformer architecture that generates output text one word at a time, receiving both vector embeddings from the encoder and partial output text.
+- c1277 [definition | NLn4eetGmf8 @ 1279-1289s]
+  Attention mechanisms have become an integral part of sequence modeling, allowing modeling of dependencies without regard to the distance between input or output sequences.
+- c1280 [definition | NLn4eetGmf8 @ 1371-1389s]
+  Long-range dependencies refer to the need to understand context from distant parts of a sequence (such as earlier sentences) to accurately predict the next word in a later sentence.
+- c1288 [definition | NLn4eetGmf8 @ 1566-1586s]
+  BERT stands for Bi-directional Encoder Representations from Transformers.
+- c1289 [definition | NLn4eetGmf8 @ 1588-1596s]
+  GPT stands for Generative Pre-trained Transformers.
+- c1306 [definition | NLn4eetGmf8 @ 1921-1926s]
+  Vision Transformers (ViT) are transformer models applied to computer vision tasks such as image recognition and image classification.
+- c1313 [definition | NLn4eetGmf8 @ 2051-2060s]
+  Recurrent Neural Networks (RNNs) maintain a feedback loop to incorporate memory.
+- c1314 [definition | NLn4eetGmf8 @ 2061-2074s]
+  Long Short-Term Memory (LSTM) networks incorporate two separate paths: one for short-term memories and one for long-term memories.
+- c1324 [definition | NLn4eetGmf8 @ 2284-2297s]
+  BERT (Bidirectional Encoder Representations from Transformers) is a transformer variation that predicts hidden or masked words in a sentence.
+- c1328 [definition | NLn4eetGmf8 @ 2330-2343s]
+  GPT (Generative Pre-trained Transformer) performs left-to-right analysis, receiving incomplete text and predicting the next word one word at a time.
+- c1303 [fact | NLn4eetGmf8 @ 1857-1862s]
+  Both BERT and GPT have the word 'transformers' in their names because they originated from the transformer architecture.
+- c1245 [fact | NLn4eetGmf8 @ 4-12s]
+  The transformer architecture is a deep neural network architecture introduced in the 2017 paper 'Attention Is All You Need'.
+- c1326 [fact | NLn4eetGmf8 @ 2310-2314s]
+  BERT has only an encoder architecture and does not have a decoder.
+- c1255 [fact | NLn4eetGmf8 @ 188-196s]
+  The GPT architecture, which is the foundational building block of ChatGPT, originated from the transformer paper.
+- c1273 [architecture | NLn4eetGmf8 @ 1206-1232s]
+  The transformer architecture consists of two main blocks: an encoder block that converts input text to embedding vectors, and a decoder block that generates output text from embedding vectors and partial output.
+- c1295 [architecture | NLn4eetGmf8 @ 1877-1878s]
+  BERT uses an encoder architecture.
+- c1296 [fact | NLn4eetGmf8 @ 1733-1740s]
+  GPT processes text from left to right, predicting only rightmost unknown information.
+- c469 [design_decision | 4i23dYoXp-A @ 2816-2821s]
+  A lecture on the entire GPT model implementation is planned.
+- c411 [architecture | 4i23dYoXp-A @ 1503-1516s]
+  Token ids are converted to token embeddings before being passed to the GPT model class.
+- c1290 [fact | NLn4eetGmf8 @ 1598-1603s]
+  GPT is a pre-trained or foundational model.
+- c1302 [fact | NLn4eetGmf8 @ 1841-1845s]
+  GPT can complete missing text and perform sentiment analysis, though sentiment analysis is a specialty of BERT.
+- c388 [fact | 4i23dYoXp-A @ 1008-1021s]
+  In GPT-2, the embedding layer is trained to learn token representations that capture semantic meaning.
+- c403 [architecture | 4i23dYoXp-A @ 1298-1340s]
+  The dummy GPT model class has a forward method that takes an input (words) and outputs the next word prediction.
+- c1268 [fact | NLn4eetGmf8 @ 366-382s]
+  The transformer architecture consists of 8 steps that convert input text to output text through encoding and decoding processes.
+- c1320 [fact | NLn4eetGmf8 @ 2186-2212s]
+  The simplified transformer architecture consists of 8 steps: tokenization, encoding, decoding with partial output, and word-by-word generation.
+- c1261 [fact | NLn4eetGmf8 @ 283-290s]
+  Text completion, which is the predominant role of GPT, was not in consideration when the transformer paper was originally proposed.
+- c379 [fact | 4i23dYoXp-A @ 660-672s]
+  Each token ID in GPT-2 is converted into a vector of 768 dimensions, and the output is generated such that dimensions are matched to the input token embedding dimensions.
+- c1262 [fact | NLn4eetGmf8 @ 307-315s]
+  After the original transformer was developed, it was discovered that architectures derived from transformers could be used for many other tasks beyond machine translation.
+- c1275 [fact | NLn4eetGmf8 @ 1032-1042s]
+  The transformer uses feed forward layers with weights and parameters that are optimized during training to predict output words correctly.
+- c1319 [fact | NLn4eetGmf8 @ 2174-2182s]
+  The original transformer architecture was developed for machine translation tasks, specifically translating English text into German and French.
+- c1269 [fact | NLn4eetGmf8 @ 386-416s]
+  The original transformer architecture was designed to convert English to German through machine translation.
+- c1286 [fact | NLn4eetGmf8 @ 1514-1533s]
+  In ChatGPT, when you write an input, GPT gives attention to every sentence and then predicts what the next word could be, rather than just looking at the sentence before the current one.
+- c1293 [fact | NLn4eetGmf8 @ 1727-1728s]
+  GPT generates one word at a time.
+- c1284 [fact | NLn4eetGmf8 @ 1455-1465s]
+  The paper 'Attention is All You Need' is named because of the self-attention mechanism and the intuition behind attention that was introduced.
+- c437 [fact | 4i23dYoXp-A @ 2469-2496s]
+  The output head applies a linear transformation from the embedding dimension (768) to the vocabulary size (50257), converting token representations to logits.
+- c468 [design_decision | 4i23dYoXp-A @ 2810-2816s]
+  A lecture on how layer normalization, feed forward networks, and shortcut connections come together in the transformer block is planned.
+- c464 [fact | 4i23dYoXp-A @ 2878-2883s]
+  The attention mechanism is considered the heart of the transformer.
+- c373 [fact | 4i23dYoXp-A @ 534-561s]
+  Masked multi-head attention is a critical component of the transformer block; without it, large language models would lose their power and revert to recurrent neural networks and long short-term memory networks.
+- c1299 [fact | NLn4eetGmf8 @ 1790-1797s]
+  BERT can capture nuances and relationships between words by looking at the entire sentence from both directions.
+- c1330 [fact | NLn4eetGmf8 @ 2361-2370s]
+  Transformers can be used for computer vision tasks such as image classification and image segmentation.
+- c1308 [fact | NLn4eetGmf8 @ 1996-2002s]
+  Not all large language models (LLMs) are based on transformer architecture.
+- c445 [design_decision | 4i23dYoXp-A @ 2542-2554s]
+  The GPT-124M model configuration sets qkv_bias to False, meaning no bias is used in the Query-Key-Value projections.
+- c362 [fact | 4i23dYoXp-A @ 175-182s]
+  The attention mechanism is at the heart of transformers.
+- c1297 [fact | NLn4eetGmf8 @ 1744-1748s]
+  BERT is bidirectional, attending to different parts of the sentence from both left and right directions.
+- c446 [architecture | 4i23dYoXp-A @ 2592-2603s]
+  The LLM architecture workflow begins with token IDs that are converted to input embedding vectors of 768 dimensions.
+- c402 [fact | 4i23dYoXp-A @ 1260-1267s]
+  The GPT configuration parameters were previously covered on the whiteboard in earlier lectures.
+- c1305 [fact | NLn4eetGmf8 @ 1910-1918s]
+  Transformers can be used for computer vision tasks in addition to language tasks.
+- c1325 [fact | NLn4eetGmf8 @ 2302-2310s]
+  BERT pays attention to a sentence from both left and right directions, making it bidirectional.
+- c1271 [fact | NLn4eetGmf8 @ 853-900s]
+  The transformer generates output one word at a time, making previously generated words available to the model when predicting the next word.
+- c470 [design_decision | 4i23dYoXp-A @ 2816-2834s]
+  A lecture on generating text from output tokens using the logits matrix is planned as the final lecture in the series.
+- c1260 [fact | NLn4eetGmf8 @ 272-332s]
+  The original transformer was proposed for machine translation tasks, specifically for translating English texts into German and French.
+- c1244 [fact | NLn4eetGmf8 @ 4-12s]
+  Most modern LLMs rely on the transformer architecture.
+- c1276 [fact | NLn4eetGmf8 @ 1164-1172s]
+  The transformer can be understood at its simplest form as a neural network where parameters are optimized through training.
+- c1327 [fact | NLn4eetGmf8 @ 2315-2327s]
+  BERT models are commonly used for sentiment analysis because they can capture the meanings of different words and how they relate to each other.
+- c1279 [fact | NLn4eetGmf8 @ 1326-1338s]
+  The self-attention mechanism allows the model to weigh the importance of different words and tokens relative to each other.
+- c433 [fact | 4i23dYoXp-A @ 2241-2253s]
+  After all transformer blocks are applied, each of the four input tokens has a 768-dimensional output vector representation.
+- c370 [fact | 4i23dYoXp-A @ 438-447s]
+  The transformer block has a large number of trainable parameters and weights that are optimized during LLM pre-training.
+- c1316 [fact | NLn4eetGmf8 @ 2113-2119s]
+  The terms 'transformers' and 'large language models' should not be used interchangeably as they are different concepts.
+- c1254 [fact | NLn4eetGmf8 @ 178-180s]
+  The paper 'Attention is all you need' has received more than one hundred thousand citations in six to seven years.
+- c364 [architecture | 4i23dYoXp-A @ 275-303s]
+  The LLM architecture begins with tokenization, followed by vector embedding and positional embedding, then converts embeddings into context vectors through masked multi-head attention.
+- c372 [architecture | 4i23dYoXp-A @ 464-476s]
+  After the transformer block, output layers decode the transformer output to produce the next word.
+- c1307 [fact | NLn4eetGmf8 @ 1947-1958s]
+  Vision Transformers (ViT) achieve comparable or better results than Convolutional Neural Networks (CNNs) while requiring substantially fewer computational resources for pre-training.
+- c449 [architecture | 4i23dYoXp-A @ 2616-2624s]
+  The output from dropout passes through a transformer block.
+- c1281 [fact | NLn4eetGmf8 @ 1395-1407s]
+  The self-attention mechanism allows the model to capture long-range dependencies so that it can look far behind to sentences closer to the current one to identify the next word.
+- c1300 [fact | NLn4eetGmf8 @ 1801-1807s]
+  BERT can differentiate between different meanings of the same word, such as 'bank' as a financial institution versus 'bank' as a river bank, by examining surrounding words.
+- c1285 [fact | NLn4eetGmf8 @ 1465-1476s]
+  In attention mechanisms, an attention score is calculated as a matrix that indicates the relative importance of words in relation to other words.
+- c1304 [fact | NLn4eetGmf8 @ 1898-1900s]
+  Not all transformers are large language models (LLMs).
+- c417 [design_decision | 4i23dYoXp-A @ 1637-1657s]
+  Token embedding matrix parameters are initialized randomly from a Gaussian distribution and will be trained during backpropagation.

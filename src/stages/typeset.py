@@ -15,6 +15,7 @@ import json
 import os
 import re
 import shutil
+import sqlite3
 import subprocess
 from datetime import datetime
 from pathlib import Path
@@ -55,17 +56,32 @@ def _have_tool(name: str) -> bool:
     return shutil.which(name) is not None
 
 
+def _get_mmdc_path() -> str | None:
+    if shutil.which("mmdc"):
+        return "mmdc"
+    if Path("/opt/homebrew/bin/mmdc").exists():
+        return "/opt/homebrew/bin/mmdc"
+    if Path("/usr/local/bin/mmdc").exists():
+        return "/usr/local/bin/mmdc"
+    return None
+
 def _render_mermaid_to_png(mmd_path: Path, out_png: Path) -> bool:
     """Use mermaid-cli (mmdc) if available. Returns True on success."""
-    if not _have_tool("mmdc"):
+    mmdc_cmd = _get_mmdc_path()
+    if not mmdc_cmd:
         return False
     try:
+        env = os.environ.copy()
+        env["PUPPETEER_EXECUTABLE_PATH"] = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
         res = subprocess.run(
-            ["mmdc", "-i", str(mmd_path), "-o", str(out_png), "-b", "white"],
+            [mmdc_cmd, "-i", str(mmd_path), "-o", str(out_png), "-b", "white"],
             capture_output=True,
             text=True,
             timeout=60,
+            env=env,
         )
+        if res.returncode != 0:
+            log.warning("mmdc failed for %s:\n%s\n%s", mmd_path, res.stdout, res.stderr)
         return res.returncode == 0 and out_png.exists()
     except Exception as e:
         log.warning("mermaid-cli failed for %s: %s", mmd_path, e)
@@ -155,19 +171,34 @@ def _build_manuscript_md(cfg: Config) -> Path:
     # oneside = no alternating margins/page numbers. openany = no blank pages before chapters.
     parts.append('classoption: [11pt, oneside, openany]')
     parts.append('header-includes:')
-    # pagestyle plain removes the running chapter name headers from the top of pages
     parts.append('  - \\pagestyle{plain}')
     parts.append('geometry: margin=1in')
     parts.append('linkcolor: blue')
     parts.append('toc: true')
     parts.append('toc-depth: 2')
     parts.append('numbersections: true')
+    # sectionnumdepth is Pandoc's own template variable for \setcounter{secnumdepth}{N}.
+    # 1 = number chapters + sections only; subsections (###) never get numbered.
+    # This prevents X.0.Y entries when chapters jump # → ### without a ## in between.
+    parts.append('sectionnumdepth: 1')
     parts.append('bibliography: refs.bib')
     parts.append('---')
     parts.append("")
 
-    # regex to remove internal claim citations like [c2490]
-    claim_ref_re = re.compile(r'\s*\[@?c\d+\]')
+    # Strip claim citations: single [c23] or multi [c23, c1593] or [@c23]
+    claim_ref_re = re.compile(r'\s*\[@?c\d+(?:,\s*@?c\d+)*\]')
+    # Strip embedded video section numbers from headings (e.g. "### 12.1 Title" → "### Title")
+    heading_num_re = re.compile(r'^(#{1,6}\s+)\d+\.\d+\s+', flags=re.MULTILINE)
+    h2_re = re.compile(r"^##\s+", flags=re.MULTILINE)
+    deep_heading_re = re.compile(r"^(#{3,6})(\s+)", flags=re.MULTILINE)
+
+    def _shift_headings_up(md: str) -> str:
+        """If chapter has only one ## (the title), promote ### → ## and #### → ###.
+        Without this, ### renders as \\subsection under a phantom section 0,
+        producing X.0.Y numbering in the TOC."""
+        if len(h2_re.findall(md)) > 1:
+            return md  # Real ## sections exist; structure is already correct
+        return deep_heading_re.sub(lambda m: m.group(1)[1:] + m.group(2), md)
 
     # Chapters
     for ch in outline.get("chapters") or []:
@@ -180,7 +211,9 @@ def _build_manuscript_md(cfg: Config) -> Path:
         md = _replace_figures(md, ch["id"], figures, cfg)
         # Normalize chapter heading to top-level (Pandoc book class will paginate)
         # The draft prompt instructed `## <title>`; lift to `# <title>` for book class.
+        md = _shift_headings_up(md)
         md = re.sub(r"^##\s+", "# ", md, count=1, flags=re.MULTILINE)
+        md = heading_num_re.sub(r'\1', md)
         md = claim_ref_re.sub("", md)
         parts.append(md.rstrip())
         parts.append("\n\\clearpage\n")
@@ -197,6 +230,7 @@ def _build_manuscript_md(cfg: Config) -> Path:
             md = polished.read_text()
             md = _replace_figures(md, ap["id"], figures, cfg)
             md = re.sub(r"^##\s+", "# ", md, count=1, flags=re.MULTILINE)
+            md = heading_num_re.sub(r'\1', md)
             md = claim_ref_re.sub("", md)
             parts.append(md.rstrip())
             parts.append("\n\\clearpage\n")
@@ -205,6 +239,84 @@ def _build_manuscript_md(cfg: Config) -> Path:
     manuscript_md.parent.mkdir(parents=True, exist_ok=True)
     manuscript_md.write_text("\n".join(parts))
     return manuscript_md
+
+
+def _compute_pipeline_stats(cfg: Config) -> dict:
+    stats = {"total_claims": 0, "superseded": 0, "grounding_pct": 0.0, "video_count": 0}
+    db = cfg.path("claims_db")
+    if db.exists():
+        conn = sqlite3.connect(str(db))
+        conn.row_factory = sqlite3.Row
+        stats["total_claims"] = conn.execute("SELECT COUNT(*) FROM claims").fetchone()[0]
+        stats["superseded"] = conn.execute(
+            "SELECT COUNT(*) FROM claims WHERE extra LIKE '%superseded_by%'"
+        ).fetchone()[0]
+        conn.close()
+    manifest_path = cfg.path("raw") / "manifest.json"
+    if manifest_path.exists():
+        stats["video_count"] = len(read_json(manifest_path))
+    grounded = narrative = unsupported = 0
+    for f in cfg.path("chapters").glob("*/verify.json"):
+        try:
+            for s in json.loads(f.read_text()).get("sentences", []):
+                st = s.get("status", "")
+                if st == "grounded":
+                    grounded += 1
+                elif st == "narrative_ok":
+                    narrative += 1
+                elif st == "unsupported":
+                    unsupported += 1
+        except Exception:
+            pass
+    total_audited = grounded + narrative + unsupported
+    if total_audited:
+        stats["grounding_pct"] = round((grounded + narrative) / total_audited * 100, 1)
+    return stats
+
+
+def _write_latex_titlepage(cfg: Config, stats: dict) -> Path:
+    playlist_url = cfg.playlist.get("playlist_url", "")
+    book = cfg.playlist.get("book", {})
+    title = _latex_escape(book.get("title", ""))
+    subtitle = _latex_escape(book.get("subtitle", ""))
+    author = _latex_escape(book.get("author", ""))
+    date = datetime.now().strftime(book.get("date_format", "%B %Y"))
+    total = f"{stats['total_claims']:,}".replace(",", "{,}")
+    superseded = f"{stats['superseded']:,}".replace(",", "{,}")
+    grounding = f"{stats['grounding_pct']:.1f}\\%"
+    videos = str(stats["video_count"])
+    tex = (
+        "\\renewcommand{\\maketitle}{%\n"
+        "  \\begin{titlepage}\n"
+        "  \\centering\n"
+        "  \\vspace*{2.5cm}\n"
+        f"  {{\\Huge\\bfseries {title}\\par}}\n"
+        "  \\vspace{0.6cm}\n"
+        f"  {{\\large\\itshape {subtitle}\\par}}\n"
+        "  \\vspace{2.5cm}\n"
+        "  \\begin{tabular}{@{}lr@{}}\n"
+        "    \\toprule\n"
+        "    \\multicolumn{2}{c}{{\\large\\bfseries Pipeline Statistics}} \\\\\n"
+        "    \\midrule\n"
+        f"    Videos processed   & {videos} \\\\\n"
+        f"    Claims extracted   & {total} \\\\\n"
+        f"    Superseded claims  & {superseded} \\\\\n"
+        f"    Grounded sentences & {grounding} \\\\\n"
+        "    \\bottomrule\n"
+        "  \\end{tabular}\n"
+        "  \\par\\vspace{1.8cm}\n"
+        "  {\\small Source playlist:}\\par\\smallskip\n"
+        f"  {{\\small\\url{{{playlist_url}}}}}\\par\n"
+        "  \\vfill\n"
+        f"  {{\\large {author}\\par}}\n"
+        "  \\vspace{0.5cm}\n"
+        f"  {{\\large {date}\\par}}\n"
+        "  \\end{titlepage}\n"
+        "}\n"
+    )
+    out = cfg.root / "book" / "latex_titlepage.tex"
+    out.write_text(tex)
+    return out
 
 
 def _write_bibtex(cfg: Config) -> Path:
@@ -244,6 +356,9 @@ def _run_pandoc(cfg: Config, manuscript_md: Path) -> Path:
     ]
     if latex_header.exists():
         common_args.append(f"--include-in-header={latex_header}")
+    latex_titlepage = cfg.root / "book" / "latex_titlepage.tex"
+    if latex_titlepage.exists():
+        common_args.append(f"--include-in-header={latex_titlepage}")
 
     # First produce .tex (handy for debugging)
     log.info("Pandoc: building manuscript.tex")
@@ -281,6 +396,10 @@ def run(cfg: Config) -> None:
     manuscript_md = _build_manuscript_md(cfg)
     log.info("Writing refs.bib")
     _write_bibtex(cfg)
+    stats = _compute_pipeline_stats(cfg)
+    log.info("Stats: %d claims, %d superseded, %.1f%% grounded",
+             stats["total_claims"], stats["superseded"], stats["grounding_pct"])
+    _write_latex_titlepage(cfg, stats)
     log.info("Running Pandoc")
     pdf = _run_pandoc(cfg, manuscript_md)
     log.info("Built: %s", pdf)
