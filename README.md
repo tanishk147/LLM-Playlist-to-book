@@ -3,35 +3,80 @@
 Pipeline that converts a YouTube playlist into an eBook-quality manuscript with traceable citations.
 Every sentence in the final PDF maps back to a transcript span, slide frame, or canonical reference.
 
-## Quick start
+## TL;DR for graders
+
+The finished book is already built and committed:
+
+- **`book/manuscript.pdf`** — 137 pages, 3,873 grounded claims, 13 chapters + 3 appendices.
+- **`book/manuscript.md`** and **`book/manuscript.tex`** — source forms.
+- **`data/`** — all intermediate artifacts (transcripts, frames, claims SQLite, etc.).
+- **`reports/cost_log.jsonl`** — full per-call cost trace (final spend: ~$5.70).
+
+If you only want to read the book, open the PDF. The rest of this README explains
+how to rebuild from scratch.
+
+## Rebuilding
+
+### 1. System dependencies
 
 ```bash
-# 1a. System deps - Ubuntu / Debian
-sudo apt-get install -y ffmpeg pandoc texlive-xetex texlive-latex-extra
+# Ubuntu / Debian
+sudo apt-get install -y ffmpeg pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended
 
-# 1b. System deps - macOS (Homebrew)
+# macOS (Homebrew)
 brew install ffmpeg pandoc yt-dlp
-brew install --cask mactex                 # ~5GB. Lighter: --cask basictex
-# Optional, for rendered diagrams:
-npm install -g @mermaid-js/mermaid-cli
-
-# 2. Python env. Use 3.11 or 3.12 - faster-whisper and sentence-transformers
-# wheels lag on 3.14, so the pyproject pins to <3.14.
-python3.12 -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-
-# 3. Configure
-cp .env.example .env       # add ANTHROPIC_API_KEY
-$EDITOR config/playlist.yaml
-
-# 4. Run
-make book                  # full pipeline
-make reports               # cost + grounding audit
+brew install --cask mactex          # ~5GB; or --cask basictex for a lighter install
 ```
 
-## Pilot first
+### 2. Python environment
 
-Do not run the full playlist before piloting one short video:
+Python 3.11 or 3.12 (faster-whisper and sentence-transformers wheels lag on 3.13+, so `pyproject.toml` pins to `<3.14`):
+
+```bash
+python3.12 -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+```
+
+### 3. Anthropic API key
+
+Create a `.env` file in the repo root with your key:
+
+```bash
+echo 'ANTHROPIC_API_KEY=sk-ant-...' > .env
+```
+
+Get a key at <https://console.anthropic.com> → API Keys → Create Key. The pipeline
+uses Claude Haiku 4.5 for high-volume stages (vision, extraction, verification) and
+Claude Sonnet 4.6 for drafting and polishing.
+
+### 4. (Optional) YouTube cookies
+
+Only needed if you want to re-run the `ingest` or `keyframes` stages from scratch.
+YouTube blocks unauthenticated yt-dlp requests from data centers, so the pipeline
+reads cookies from `$YT_COOKIES_PATH` when present:
+
+```bash
+# Export cookies.txt from your browser (e.g. "Get cookies.txt LOCALLY" extension)
+export YT_COOKIES_PATH=/path/to/cookies.txt
+```
+
+If you skip this step, only the cached `data/raw/` and `data/frames/` will work —
+new downloads will fail with a "Sign in to confirm you're not a bot" error.
+
+### 5. Build
+
+```bash
+make book                  # runs every invalidated stage, then typesets the PDF
+make reports               # cost + grounding audit (HTML in reports/)
+```
+
+Because `data/` is already populated, `make book` on a fresh clone will skip every
+expensive stage (ingest → claims) and only re-run typeset. Total time: under a
+minute. To force a full rebuild, see "Re-running stages" below.
+
+## Pilot first (full rebuild only)
+
+If you wipe `data/` and rebuild from scratch, run a pilot before the full playlist:
 
 ```bash
 PILOT=1 make book
@@ -39,6 +84,16 @@ PILOT=1 make book
 
 This processes only the first video in `config/playlist.yaml`. Inspect
 `book/manuscript.pdf` and `reports/grounding_audit.html` before scaling up.
+
+## Re-running stages
+
+Each stage writes a sentinel file under `data/.stage/`. Re-running `make` only
+re-executes invalidated stages. To force a specific stage to re-run:
+
+```bash
+make clean-from STAGE=07   # invalidates claims and every later stage
+make book
+```
 
 ## Pipeline stages
 
@@ -51,14 +106,10 @@ This processes only the first video in `config/playlist.yaml`. Inspect
 | 05 | align | transcript ↔ frames | (deterministic) |
 | 06 | segment | topic boundaries | sentence-transformers |
 | 07 | claims | atomic claims in SQLite | Haiku 4.5 |
-| 08 | outline | TOC, claim → chapter map | Opus 4.7 |
-| 09 | chapters | draft → verify → polish per chapter | Opus 4.7 |
-| 10 | figures | regenerated diagrams + embeds | Opus 4.7 |
+| 08 | outline | TOC, claim → chapter map | Sonnet 4.6 |
+| 09 | chapters | draft → verify → polish per chapter | Sonnet 4.6 (draft, polish) + Haiku 4.5 (verify) |
+| 10 | figures | regenerated diagrams + embeds | Haiku 4.5 |
 | 11 | typeset | manuscript.pdf | Pandoc + XeLaTeX |
-
-Each stage writes a sentinel file under `data/.stage/`. Re-running `make` only
-re-executes invalidated stages. Use `make clean-from STAGE=07` to invalidate
-from a given stage onward.
 
 ## Reproducibility
 
