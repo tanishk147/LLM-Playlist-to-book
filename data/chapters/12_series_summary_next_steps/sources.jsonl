@@ -1,0 +1,149 @@
+## Claims (cite these by ID inline as [cNNN])
+- c1765 [fact | _xH-jXNFRjA @ 10-18s]
+  This video is a conclusion video summarizing the Build Large Language Models from Scratch lecture series.
+- c1766 [fact | _xH-jXNFRjA @ 27-37s]
+  Students who complete this lecture series will know how to build an entire large-language model completely from scratch.
+- c1767 [fact | _xH-jXNFRjA @ 50-57s]
+  The lecture series was designed to teach fundamental research and philology in machine learning.
+- c1768 [fact | _xH-jXNFRjA @ 59-72s]
+  The lecture series focuses on understanding the nuts and bolts of how large-language models are built rather than running fancy applications.
+- c1769 [fact | _xH-jXNFRjA @ 89-105s]
+  The lecture series was inspired by the book 'Build a Large-Language Model' by Sebastian Rushka.
+- c1770 [fact | _xH-jXNFRjA @ 106-132s]
+  A code file has been developed and shared throughout the entire lecture series.
+- c1771 [fact | _xH-jXNFRjA @ 115-123s]
+  Every single code block in the lecture series has been explained in detail.
+- c1772 [fact | _xH-jXNFRjA @ 124-129s]
+  The lecture series covers everything in-depth from scratch without assuming prior knowledge.
+- c1773 [architecture | _xH-jXNFRjA @ 142-156s]
+  The large-language model development workflow consists of three sequential stages: stage 1 (foundation and architecture), stage 2 (pre-training), and stage 3 (fine-tuning).
+- c1774 [fact | _xH-jXNFRjA @ 161-163s]
+  Stage 1 covers data preparation and sampling as foundational components for building a large-language model.
+- c1775 [fact | _xH-jXNFRjA @ 164-173s]
+  The attention mechanism is the engine that gives large-language models their power.
+- c1776 [architecture | _xH-jXNFRjA @ 174-182s]
+  Stage 1 includes studying how different blocks are arranged together to construct the large-language model architecture.
+- c1777 [fact | _xH-jXNFRjA @ 183-193s]
+  Stage 2 focuses on pre-training, which includes implementing the loss function for the large-language model.
+- c1778 [fact | _xH-jXNFRjA @ 193-201s]
+  Pre-training involves training more than 100 million or billion parameters typically involved in large-language models using backward pass optimization.
+- c1779 [fact | _xH-jXNFRjA @ 201-211s]
+  Loading pre-trained weights from models such as OpenAI GPT-2 accelerates the pre-training process.
+- c1780 [fact | _xH-jXNFRjA @ 212-224s]
+  Stage 3 covers fine-tuning, which is necessary to make large-language models perform well on specific tasks such as classification or building personalized chatbots.
+- c1781 [fact | _xH-jXNFRjA @ 224-236s]
+  Two hands-on projects were completed: an LLM classifier that distinguishes between spam and non-spam emails, and a personal assistant that can follow instructions.
+- c1782 [fact | _xH-jXNFRjA @ 278-285s]
+  The data preprocessing pipeline for an LLM differs from pipelines for regression or classification models.
+- c1783 [fact | _xH-jXNFRjA @ 286-291s]
+  The goal of an LLM is to predict the next token.
+- c1784 [fact | _xH-jXNFRjA @ 291-295s]
+  The first step in LLM preprocessing is to convert input text into tokens.
+- c1785 [fact | _xH-jXNFRjA @ 296-298s]
+  Tokens must be converted into token IDs.
+- c1786 [fact | _xH-jXNFRjA @ 299-308s]
+  Token IDs are projected into higher dimensional vector space to capture semantic meaning of tokens.
+- c1787 [definition | _xH-jXNFRjA @ 317-323s]
+  Token embeddings are projections of token IDs into higher dimensional vector spaces.
+- c1788 [fact | _xH-jXNFRjA @ 323-326s]
+  Positional embeddings must be added to token embeddings.
+- c1789 [fact | _xH-jXNFRjA @ 326-339s]
+  Positional embeddings are added because token positions are important for predicting the next token.
+- c1790 [definition | _xH-jXNFRjA @ 340-345s]
+  Input embeddings are the result of adding token embeddings and positional embeddings.
+- c1791 [fact | _xH-jXNFRjA @ 345-352s]
+  Input embeddings are the output of the data preprocessing pipeline.
+- c1792 [fact | _xH-jXNFRjA @ 356-373s]
+  The data preprocessing pipeline converts input text from training documents into sentences, tokens, token IDs, token embeddings, and finally input embeddings.
+- c1793 [hyperparameter | _xH-jXNFRjA @ 373-379s]
+  GPT-2 uses an embedding dimension of 768.
+- c1794 [definition | _xH-jXNFRjA @ 386-390s]
+  Attention mechanism is the driving engine that gives LLMs their power.
+- c1795 [fact | _xH-jXNFRjA @ 390-401s]
+  Vector embeddings represent the semantic meaning of individual tokens without capturing relationships between tokens.
+- c1796 [fact | _xH-jXNFRjA @ 401-409s]
+  Context is important when predicting the next token because you need to know how one token relates to all other tokens.
+- c1797 [definition | _xH-jXNFRjA @ 409-416s]
+  Attention is the importance assigned to other tokens when looking at one token.
+- c1798 [fact | _xH-jXNFRjA @ 416-432s]
+  The goal of the attention mechanism is to convert input embedding vectors into context vectors.
+- c1799 [fact | _xH-jXNFRjA @ 438-446s]
+  Context vectors are richer than input embedding vectors because they contain information about how a token relates to all other tokens in the sentence.
+- c1800 [architecture | _xH-jXNFRjA @ 456-463s]
+  The attention mechanism workflow: multiply inputs with trainable query, key, and value matrices to produce queries, keys, and values.
+- c1801 [architecture | _xH-jXNFRjA @ 463-467s]
+  Multiply queries with keys transpose to compute attention scores.
+- c1802 [architecture | _xH-jXNFRjA @ 467-471s]
+  Scale attention scores by the square root of the key dimension.
+- c1803 [design_decision | _xH-jXNFRjA @ 471-472s]
+  Dropout is applied after scaling attention scores.
+- c1804 [design_decision | _xH-jXNFRjA @ 472-482s]
+  Causal attention is implemented by adding a mask to tokens not involved in the next token prediction task.
+- c1805 [architecture | _xH-jXNFRjA @ 482-490s]
+  A softmax layer is applied after masking to convert attention scores into attention weights.
+- c1806 [architecture | _xH-jXNFRjA @ 490-495s]
+  Attention weights are multiplied with values to produce the context vector matrix.
+- c1807 [fact | _xH-jXNFRjA @ 495-498s]
+  A single attention head produces one context vector matrix.
+- c1808 [architecture | _xH-jXNFRjA @ 498-502s]
+  Large language models use multiple attention heads acting in parallel.
+- c1809 [design_decision | _xH-jXNFRjA @ 503-510s]
+  Multiple attention heads are used to capture multiple dependencies and long-range dependencies within large paragraphs.
+- c1810 [architecture | _xH-jXNFRjA @ 510-523s]
+  Context vector matrices from multiple attention heads are combined to produce the final output context vector matrix.
+- c1811 [fact | _xH-jXNFRjA @ 524-535s]
+  The revolution in large language models is driven by the workflow of converting input embedding matrices into context vector matrices through attention.
+- c1812 [architecture | _xH-jXNFRjA @ 558-662s]
+  LLM architecture consists of input tokens converted to embeddings, passed through transformer blocks, then through layer normalization and a final neural network that outputs logits for next token prediction.
+- c1813 [definition | _xH-jXNFRjA @ 593-595s]
+  Input tokens are converted into vector embeddings.
+- c1814 [definition | _xH-jXNFRjA @ 599-602s]
+  Positional embeddings are added to token embeddings to create input embeddings.
+- c1815 [architecture | _xH-jXNFRjA @ 617-652s]
+  The transformer block contains a normalization layer, multi-head attention, dropout layer, shortcut connections, another normalization layer, a feedforward neural network, and another dropout layer.
+- c1816 [definition | _xH-jXNFRjA @ 624-637s]
+  The masked multi-head attention module is where the attention mechanism with key, query, and value projections operates within the transformer block.
+- c1817 [definition | _xH-jXNFRjA @ 658-669s]
+  The logits tensor is the output of the final neural network that converts transformer outputs and is used to predict the next token.
+- c1818 [fact | _xH-jXNFRjA @ 670-675s]
+  GPT-2 contains 12 transformer blocks arranged sequentially.
+- c1819 [fact | _xH-jXNFRjA @ 675-680s]
+  Larger LLMs contain more than 12 transformer blocks arranged together.
+- c1820 [fact | _xH-jXNFRjA @ 684-688s]
+  Each transformer block can contain 12 or 24 attention heads.
+- c1821 [definition | _xH-jXNFRjA @ 779-784s]
+  The loss function used in LLM training is cross entropy loss between the predicted next token and the actual next token.
+- c1822 [architecture | _xH-jXNFRjA @ 808-849s]
+  Trainable parameters in an LLM include token embeddings, positional embeddings, layer normalization scale and shift parameters, query/key/value weight matrices in multi-head attention, feedforward network weights, and final output layer weights.
+- c1823 [design_decision | _xH-jXNFRjA @ 865-874s]
+  The gradient update rule used is wi+1 = wi - α * ∂L/∂wi, which is vanilla gradient descent.
+- c1824 [fact | _xH-jXNFRjA @ 875-879s]
+  More sophisticated optimization schemes like Adam or Adam with weight decay are typically used instead of vanilla gradient descent for LLM training.
+- c1825 [fact | _xH-jXNFRjA @ 895-908s]
+  Pre-training of actual LLMs like GPT-2, GPT-3, and GPT-4 is performed on huge datasets containing millions of news articles, blogs, and books.
+- c1826 [fact | _xH-jXNFRjA @ 908-911s]
+  Pre-training costs for actual large language models exceed one million dollars.
+- c1827 [definition | _xH-jXNFRjA @ 948-960s]
+  Classification fine tuning is a type of LLM fine tuning where the model is trained to classify inputs into categories, such as determining whether an email is spam or not spam.
+- c1828 [definition | _xH-jXNFRjA @ 960-970s]
+  Instruction fine tuning is a type of LLM fine tuning where the model is trained on a dataset of instructions, inputs, and outputs to perform well on instruction-following tasks.
+- c1829 [fact | _xH-jXNFRjA @ 970-979s]
+  An example instruction fine tuning task is converting active voice sentences to passive voice, such as converting 'the chef cooks the meal every day' to 'the meal is cooked every day by the chef'.
+- c1830 [fact | _xH-jXNFRjA @ 982-990s]
+  The implementations shown in the course were built from scratch using a custom architecture, not imported from external sources.
+- c1831 [definition | _xH-jXNFRjA @ 996-1011s]
+  MMLU (Measuring Massive Multitask Language Understanding) is an evaluation benchmark that uses 57 tests to evaluate LLM performance across diverse domains.
+- c1832 [definition | _xH-jXNFRjA @ 1013-1016s]
+  Human evaluation is a type of LLM evaluation method where humans compare and rate the outputs of different LLMs.
+- c1833 [definition | _xH-jXNFRjA @ 1016-1024s]
+  LLM-based evaluation is a type of LLM evaluation method where a powerful large language model is used to evaluate the outputs of another LLM.
+- c1834 [fact | _xH-jXNFRjA @ 1024-1028s]
+  Ollama is a tool used to access and run the Llama 3 LLM locally.
+- c1835 [fact | _xH-jXNFRjA @ 1028-1038s]
+  Llama 3 8B instruct is a fine-tuned language model with 8 billion parameters.
+- c1836 [fact | _xH-jXNFRjA @ 1040-1060s]
+  In LLM-based evaluation, a larger LLM compares the true output with the model response and assigns an evaluation score out of 100.
+- c1837 [fact | _xH-jXNFRjA @ 1068-1078s]
+  The course implements three main components: a next token prediction LLM built from scratch, an email classification fine-tuned LLM, and an instruction fine-tuned LLM.
+- c1838 [architecture | _xH-jXNFRjA @ 1068-1078s]
+  The weight update equation during training with L2 regularization is: W_i^{(l)} = W_i - λ ∂L/∂W, where pre-trained weights from GPT-2 are loaded as initialization.

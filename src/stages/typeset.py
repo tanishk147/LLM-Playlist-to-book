@@ -156,7 +156,9 @@ def _build_manuscript_md(cfg: Config) -> Path:
 
     parts: list[str] = []
 
-    # Title metadata block (YAML for Pandoc)
+    # Title metadata block (YAML for Pandoc).
+    # `title:` must be set so Pandoc emits \maketitle, which is overridden by
+    # the renewcommand in book/latex_titlepage.tex (written by _write_latex_titlepage).
     title = cfg.playlist["book"]["title"]
     subtitle = cfg.playlist["book"]["subtitle"]
     author = cfg.playlist["book"]["author"]
@@ -170,17 +172,16 @@ def _build_manuscript_md(cfg: Config) -> Path:
     parts.append('documentclass: book')
     # oneside = no alternating margins/page numbers. openany = no blank pages before chapters.
     parts.append('classoption: [11pt, oneside, openany]')
-    parts.append('header-includes:')
-    parts.append('  - \\pagestyle{plain}')
+    # NOTE: YAML `header-includes` is intentionally NOT used here. Pandoc's
+    # `--include-in-header=...` CLI flag (passed in _run_pandoc) replaces
+    # the YAML key, so all our overrides live in latex_titlepage.tex /
+    # latex_header.tex instead.
     parts.append('geometry: margin=1in')
     parts.append('linkcolor: blue')
     parts.append('toc: true')
-    parts.append('toc-depth: 2')
+    # Chapter + section only in TOC; deeper subsections clutter the listing.
+    parts.append('toc-depth: 1')
     parts.append('numbersections: true')
-    # sectionnumdepth is Pandoc's own template variable for \setcounter{secnumdepth}{N}.
-    # 1 = number chapters + sections only; subsections (###) never get numbered.
-    # This prevents X.0.Y entries when chapters jump # → ### without a ## in between.
-    parts.append('sectionnumdepth: 1')
     parts.append('bibliography: refs.bib')
     parts.append('---')
     parts.append("")
@@ -192,6 +193,24 @@ def _build_manuscript_md(cfg: Config) -> Path:
     h2_re = re.compile(r"^##\s+", flags=re.MULTILINE)
     deep_heading_re = re.compile(r"^(#{3,6})(\s+)", flags=re.MULTILINE)
 
+    # Regex to match fenced code blocks (``` or ~~~) so we can protect them
+    _code_block_re = re.compile(r"^(`{3,}|~{3,}).*?\n.*?\1\s*$", flags=re.MULTILINE | re.DOTALL)
+
+    def _mask_code_blocks(md: str) -> tuple[str, list[str]]:
+        """Replace code blocks with placeholders so heading regexes don't touch them."""
+        blocks: list[str] = []
+        def _save(m: re.Match) -> str:
+            blocks.append(m.group(0))
+            return f"\n<!--CODE_BLOCK_{len(blocks) - 1}-->\n"
+        masked = _code_block_re.sub(_save, md)
+        return masked, blocks
+
+    def _unmask_code_blocks(md: str, blocks: list[str]) -> str:
+        """Restore code blocks from placeholders."""
+        for i, block in enumerate(blocks):
+            md = md.replace(f"<!--CODE_BLOCK_{i}-->", block)
+        return md
+
     def _shift_headings_up(md: str) -> str:
         """If chapter has only one ## (the title), promote ### → ## and #### → ###.
         Without this, ### renders as \\subsection under a phantom section 0,
@@ -199,6 +218,32 @@ def _build_manuscript_md(cfg: Config) -> Path:
         if len(h2_re.findall(md)) > 1:
             return md  # Real ## sections exist; structure is already correct
         return deep_heading_re.sub(lambda m: m.group(1)[1:] + m.group(2), md)
+
+    def _normalize_chapter_headings(md: str) -> str:
+        """Ensure chapter has exactly one top-level `# Title` heading.
+
+        Some polished chapters already start with `# Title`; others use
+        `## Title`.  Only promote the first `##` → `#` when the chapter
+        does NOT already begin with a `#` heading.
+        """
+        # Mask code blocks so `# comments` inside code aren't mangled
+        md, blocks = _mask_code_blocks(md)
+
+        # Check if the document already starts with a single # heading
+        first_line = md.lstrip().split("\n", 1)[0]
+        already_has_h1 = first_line.startswith("# ") and not first_line.startswith("## ")
+
+        md = _shift_headings_up(md)
+
+        if not already_has_h1:
+            # Promote the first ## to # (chapter title)
+            md = re.sub(r"^##\s+", "# ", md, count=1, flags=re.MULTILINE)
+
+        md = heading_num_re.sub(r'\1', md)
+
+        # Restore code blocks
+        md = _unmask_code_blocks(md, blocks)
+        return md
 
     # Chapters
     for ch in outline.get("chapters") or []:
@@ -209,11 +254,7 @@ def _build_manuscript_md(cfg: Config) -> Path:
             continue
         md = polished.read_text()
         md = _replace_figures(md, ch["id"], figures, cfg)
-        # Normalize chapter heading to top-level (Pandoc book class will paginate)
-        # The draft prompt instructed `## <title>`; lift to `# <title>` for book class.
-        md = _shift_headings_up(md)
-        md = re.sub(r"^##\s+", "# ", md, count=1, flags=re.MULTILINE)
-        md = heading_num_re.sub(r'\1', md)
+        md = _normalize_chapter_headings(md)
         md = claim_ref_re.sub("", md)
         parts.append(md.rstrip())
         parts.append("\n\\clearpage\n")
@@ -229,20 +270,40 @@ def _build_manuscript_md(cfg: Config) -> Path:
                 continue
             md = polished.read_text()
             md = _replace_figures(md, ap["id"], figures, cfg)
-            md = re.sub(r"^##\s+", "# ", md, count=1, flags=re.MULTILINE)
-            md = heading_num_re.sub(r'\1', md)
+            md = _normalize_chapter_headings(md)
             md = claim_ref_re.sub("", md)
             parts.append(md.rstrip())
             parts.append("\n\\clearpage\n")
 
     manuscript_md = cfg.path("book_md")
     manuscript_md.parent.mkdir(parents=True, exist_ok=True)
-    manuscript_md.write_text("\n".join(parts))
+    
+    # Replace Unicode minus sign with ASCII hyphen to prevent LaTeX errors in code blocks
+    final_text = "\n".join(parts).replace("−", "-")
+    manuscript_md.write_text(final_text)
+    
     return manuscript_md
 
 
 def _compute_pipeline_stats(cfg: Config) -> dict:
-    stats = {"total_claims": 0, "superseded": 0, "grounding_pct": 0.0, "video_count": 0}
+    """Stats shown on the title page.
+
+    Reports two grounding signals:
+      * citation_pct   — share of claim-bearing sentences that carry a verified
+                         citation. The strictest measure of grounding.
+      * grounding_pct  — share of ALL sentences kept after verification
+                         (grounded + narrative_ok). Unsupported sentences are
+                         stripped before typeset, so this is what survives.
+    """
+    stats = {
+        "total_claims": 0,
+        "superseded": 0,
+        "grounding_pct": 0.0,
+        "citation_pct": 0.0,
+        "video_count": 0,
+        "chapter_count": 0,
+        "book_sentences": 0,
+    }
     db = cfg.path("claims_db")
     if db.exists():
         conn = sqlite3.connect(str(db))
@@ -255,7 +316,13 @@ def _compute_pipeline_stats(cfg: Config) -> dict:
     manifest_path = cfg.path("raw") / "manifest.json"
     if manifest_path.exists():
         stats["video_count"] = len(read_json(manifest_path))
-    grounded = narrative = unsupported = 0
+    outline_path = cfg.path("outline")
+    if outline_path.exists():
+        try:
+            stats["chapter_count"] = len(read_json(outline_path).get("chapters") or [])
+        except Exception:
+            pass
+    grounded = narrative = unsupported = external = needs_check = 0
     for f in cfg.path("chapters").glob("*/verify.json"):
         try:
             for s in json.loads(f.read_text()).get("sentences", []):
@@ -266,11 +333,21 @@ def _compute_pipeline_stats(cfg: Config) -> dict:
                     narrative += 1
                 elif st == "unsupported":
                     unsupported += 1
+                elif st == "external_ok":
+                    external += 1
+                elif st == "needs_external_check":
+                    needs_check += 1
         except Exception:
             pass
-    total_audited = grounded + narrative + unsupported
+    total_audited = grounded + narrative + unsupported + external + needs_check
+    claim_bearing = total_audited - narrative
+    stats["book_sentences"] = grounded + narrative + external
     if total_audited:
-        stats["grounding_pct"] = round((grounded + narrative) / total_audited * 100, 1)
+        stats["grounding_pct"] = round(
+            (grounded + narrative + external) / total_audited * 100, 1
+        )
+    if claim_bearing:
+        stats["citation_pct"] = round((grounded + external) / claim_bearing * 100, 1)
     return stats
 
 
@@ -281,35 +358,58 @@ def _write_latex_titlepage(cfg: Config, stats: dict) -> Path:
     subtitle = _latex_escape(book.get("subtitle", ""))
     author = _latex_escape(book.get("author", ""))
     date = datetime.now().strftime(book.get("date_format", "%B %Y"))
+    # `{,}` keeps LaTeX from inserting math-mode spacing around the thousands
+    # separator (a `,` token alone would be parsed as a math binary operator
+    # if the table cell entered math mode for any reason).
     total = f"{stats['total_claims']:,}".replace(",", "{,}")
     superseded = f"{stats['superseded']:,}".replace(",", "{,}")
+    book_sentences = f"{stats['book_sentences']:,}".replace(",", "{,}")
+    citation = f"{stats['citation_pct']:.1f}\\%"
     grounding = f"{stats['grounding_pct']:.1f}\\%"
     videos = str(stats["video_count"])
+    chapters = str(stats["chapter_count"])
+    # Header overrides: Pandoc's `--include-in-header` CLI flag shadows YAML
+    # `header-includes`, so override the section numbering depth here.
+    # Default Pandoc emits \setcounter{secnumdepth}{5} when numbersections=true;
+    # cap at 1 (chapter+section) so `### foo` never becomes `6.0.1 foo`.
     tex = (
+        "\\setcounter{secnumdepth}{1}\n"
+        "\\setcounter{tocdepth}{1}\n"
+        "\\pagestyle{plain}\n"
         "\\renewcommand{\\maketitle}{%\n"
         "  \\begin{titlepage}\n"
         "  \\centering\n"
-        "  \\vspace*{2.5cm}\n"
+        "  \\vspace*{2cm}\n"
         f"  {{\\Huge\\bfseries {title}\\par}}\n"
         "  \\vspace{0.6cm}\n"
         f"  {{\\large\\itshape {subtitle}\\par}}\n"
-        "  \\vspace{2.5cm}\n"
+        "  \\vspace{2cm}\n"
         "  \\begin{tabular}{@{}lr@{}}\n"
         "    \\toprule\n"
-        "    \\multicolumn{2}{c}{{\\large\\bfseries Pipeline Statistics}} \\\\\n"
+        "    \\multicolumn{2}{c}{{\\large\\bfseries Build statistics}} \\\\\n"
         "    \\midrule\n"
-        f"    Videos processed   & {videos} \\\\\n"
-        f"    Claims extracted   & {total} \\\\\n"
-        f"    Superseded claims  & {superseded} \\\\\n"
-        f"    Grounded sentences & {grounding} \\\\\n"
+        f"    Videos processed        & {videos} \\\\\n"
+        f"    Chapters                & {chapters} \\\\\n"
+        f"    Atomic claims extracted & {total} \\\\\n"
+        f"    Superseded claims       & {superseded} \\\\\n"
+        f"    Sentences in book       & {book_sentences} \\\\\n"
+        f"    Citation rate           & {citation} \\\\\n"
+        f"    Verification pass rate  & {grounding} \\\\\n"
         "    \\bottomrule\n"
         "  \\end{tabular}\n"
-        "  \\par\\vspace{1.8cm}\n"
-        "  {\\small Source playlist:}\\par\\smallskip\n"
+        "  \\par\\vspace{1.2cm}\n"
+        "  \\begin{minipage}{0.82\\textwidth}\\centering\\footnotesize\n"
+        "  \\textit{Every sentence maps back to a transcript span, slide frame, "
+        "or canonical reference. Citation rate measures claim-bearing sentences "
+        "with a verified citation; verification pass rate counts all sentences "
+        "that survived audit.}\n"
+        "  \\end{minipage}\n"
+        "  \\par\\vspace{1.4cm}\n"
+        "  {\\small\\textbf{Source playlist}\\par}\\smallskip\n"
         f"  {{\\small\\url{{{playlist_url}}}}}\\par\n"
         "  \\vfill\n"
         f"  {{\\large {author}\\par}}\n"
-        "  \\vspace{0.5cm}\n"
+        "  \\vspace{0.4cm}\n"
         f"  {{\\large {date}\\par}}\n"
         "  \\end{titlepage}\n"
         "}\n"

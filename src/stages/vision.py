@@ -34,13 +34,13 @@ def _process_frame(
     cfg: Config,
     frame_record: dict,
     out_path: Path,
-) -> None:
+) -> bool:
     if out_path.exists():
-        return
+        return False
     image_path = cfg.root / frame_record["path"]
     if not image_path.exists():
         log.warning("Missing image: %s", image_path)
-        return
+        return False
 
     prompt = load_prompt("vision_extract")
     msg = Message(
@@ -62,7 +62,7 @@ def _process_frame(
         )
     except Exception as e:
         log.error("Vision call failed for %s: %s", frame_record["frame_id"], e)
-        return
+        return False
 
     raw = _strip_json_fence(resp.text)
     try:
@@ -77,6 +77,7 @@ def _process_frame(
     parsed["source_image"] = frame_record["path"]
 
     write_json(out_path, parsed)
+    return True
 
 
 def run(cfg: Config) -> None:
@@ -102,8 +103,8 @@ def run(cfg: Config) -> None:
         out_dir = vision_root / vd.name
         out_dir.mkdir(parents=True, exist_ok=True)
         for i, rec in enumerate(records):
-            _process_frame(client, cfg, rec, out_dir / f"{rec['frame_id']}.json")
+            did_work = _process_frame(client, cfg, rec, out_dir / f"{rec['frame_id']}.json")
             # Free-tier limit: 15 RPM → ~4s/call minimum. Paid tier ignores this.
-            if i < len(records) - 1:
+            if did_work and i < len(records) - 1:
                 time.sleep(4)
         log.info("Vision pass complete for %s: %d frames", vd.name, len(records))

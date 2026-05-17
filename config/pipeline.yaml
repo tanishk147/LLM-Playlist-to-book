@@ -47,6 +47,13 @@ thresholds:
   max_claims_per_chapter: 80
   dense_retrieval_weight: 0.5
 
+  # Supersession detection (cross-video claim refactor).
+  # Higher = stricter (fewer false positives). Older defaults flagged
+  # too many valid refinements as supersessions.
+  supersession_embed_threshold: 0.88
+  supersession_code_token_threshold: 0.75
+  supersession_code_embed_threshold: 0.75
+
 caching:
   enabled: true
   ttl: "1h"

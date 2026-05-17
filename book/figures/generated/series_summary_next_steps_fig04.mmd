@@ -1,0 +1,13 @@
+graph LR
+    A["input tokens"] --> B["embeddings"]
+    B --> C["N × transformer blocks"]
+    C --> D["layer norm"]
+    D --> E["linear layer"]
+    E --> F["logits"]
+    
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#f3e5f5
+    style F fill:#e8f5e9

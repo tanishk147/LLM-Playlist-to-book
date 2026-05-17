@@ -1,0 +1,7 @@
+graph LR
+    A["Raw Text"] --> B["Tokens"]
+    B --> C["Token IDs"]
+    C --> D["Token Embeddings"]
+    E["Positional Embeddings"]
+    D --> F["Input Embeddings"]
+    E --> F

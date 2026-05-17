@@ -1,0 +1,2177 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Building the Transformer Block: Layer Norm, GELU, Feed-Forward, and Shortcut Connections",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "The transformer block is the fundamental building block of GPT and other large language model architectures [c2051].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2051"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 2,
+      "text": "Before we can assemble a complete transformer block, we need to understand and implement each of its sub-components individually.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 3,
+      "text": "This chapter works through those components one by one\u2014layer normalization, the GELU activation function, the feed-forward network, and shortcut connections\u2014and then assembles them into a working transformer block.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "The five components of a transformer block are: masked multi-head attention, layer normalization, dropout, a feed-forward neural network, and the GELU activation function [c2058].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2058"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 5,
+      "text": "We have already covered multi-head attention in detail.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 6,
+      "text": "Here we focus on the remaining pieces, which together form the normalization and transformation machinery that makes deep transformer networks trainable [c277, c278].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c277",
+        "c278"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 7,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 8,
+      "text": "### Layer Normalization",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 9,
+      "text": "#### Why Normalize at All?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 10,
+      "text": "Training deep neural networks is hard.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 11,
+      "text": "One reason is a phenomenon called **internal covariate shift**: the input distribution to each layer changes across training iterations, making weight updates difficult and delaying convergence [c1038].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1038"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 12,
+      "text": "When the distribution of activations shifts unpredictably from one batch to the next, the layers downstream must constantly adapt to a moving target.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 13,
+      "text": "Normalization is a technique that stabilizes these distributions.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 14,
+      "text": "Layer normalization addresses this by normalizing the output of every layer based on the mean and standard deviation of that layer's own activations [c1099].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1099"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 15,
+      "text": "The key idea is that we compute statistics *per sample* rather than across the batch.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 16,
+      "text": "#### Layer Norm vs. Batch Norm",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 17,
+      "text": "It is worth pausing to distinguish layer normalization from batch normalization, because the two are often confused.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 18,
+      "text": "- **Batch normalization** performs normalization for an entire batch [c1100].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1100"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 19,
+      "text": "It computes the mean and variance across the batch dimension, which means the normalization statistics depend on what other samples happen to be in the same mini-batch.\n- **Layer normalization** normalizes along the feature dimension (columns) [c1097].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1097"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 20,
+      "text": "It computes statistics independently for each sample, so the normalization of one sample is completely unaffected by other samples in the batch.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 21,
+      "text": "For language models, layer normalization is strongly preferred.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 22,
+      "text": "Sequence lengths vary, batch sizes can be small, and at inference time you often process a single sequence\u2014all situations where batch statistics are unreliable.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 23,
+      "text": "#### The Math",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 24,
+      "text": "Layer normalization normalizes each sample in a batch independently by subtracting the mean and dividing by the square root of variance computed across the features for that sample [c1058].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1058"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 25,
+      "text": "Concretely, given a sample with feature values $X_1, X_2, X_3, X_4$, the mean is [c1044]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1044"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 26,
+      "text": "$$\\mu = \\frac{X_1 + X_2 + X_3 + X_4}{4} = 2.15$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 27,
+      "text": "The variance is [c1045]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1045"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 28,
+      "text": "$$\\sigma^2 = \\frac{1}{4}\\left[(X_1 - \\mu)^2 + (X_2 - \\mu)^2 + (X_3 - \\mu)^2 + (X_4 - \\mu)^2\\right]$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 29,
+      "text": "And the normalized value for each feature is [c1046]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1046"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 30,
+      "text": "$$\\hat{X} = \\frac{X - \\mu}{\\sqrt{\\sigma^2}}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 31,
+      "text": "In formula form, layer normalization is [c1059]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1059"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 32,
+      "text": "$$y_{\\text{normalized}} = \\frac{y - \\mu}{\\sqrt{\\text{variance}}}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 33,
+      "text": "applied independently to each sample in the batch.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 34,
+      "text": "After normalization, the result has mean 0 and variance 1 [c2064].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2064"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 35,
+      "text": "This is the raw normalization step.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 36,
+      "text": "#### Scale and Shift Parameters",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 37,
+      "text": "Raw normalization to zero mean and unit variance is useful, but it is too rigid.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 38,
+      "text": "The network should be able to learn that some layers benefit from a different scale or offset.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 39,
+      "text": "This is why layer normalization includes **scale** and **shift** parameters.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 40,
+      "text": "Scale and shift are trainable parameters in layer normalization that have the same dimension as the input and are applied to the normalized output [c1078].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1078"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 41,
+      "text": "They allow the model to undo the normalization if that turns out to be optimal for a given layer, while still benefiting from the numerical stability that normalization provides during the early stages of training.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 42,
+      "text": "#### A Note on Bessel's Correction",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 43,
+      "text": "When computing variance in PyTorch, you will encounter the `unbiased` flag.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 44,
+      "text": "Bessel's correction is the use of $n - 1$ instead of $n$ in the formula for the sample variance and sample standard deviation, where $n$ is the number of observations in a sample [c1083].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1083"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 45,
+      "text": "In layer normalization we typically use the biased estimator (dividing by $n$, i.e., `unbiased=False`) because we are normalizing the entire feature vector of a sample, not estimating a population statistic from a subset.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 46,
+      "text": "#### Computing Layer Norm Step by Step in PyTorch",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "Let us walk through the computation manually before looking at the full class.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "First, create a small batch and pass it through a linear layer:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 49,
+      "text": "# Source: [c1057]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 50,
+      "text": "torch.manual_seed(123)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 51,
+      "text": "Now compute the mean across the feature dimension:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 52,
+      "text": "# Source: [c1060]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 53,
+      "text": "mean = output.mean(dim=-1, keepdim=True)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 54,
+      "text": "Then compute the variance:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 55,
+      "text": "# Source: [c1062]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 56,
+      "text": "variance = output.var(dim=-1, keepdim=True)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 57,
+      "text": "And finally normalize:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 58,
+      "text": "# Source: [c1063]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 59,
+      "text": "normalized_output = (output - mean) / torch.sqrt(variance)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 60,
+      "text": "The `dim=-1` argument is critical: it tells PyTorch to compute statistics along the last dimension (the feature dimension), which is exactly what layer normalization requires [c1097].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1097"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 61,
+      "text": "#### The LayerNorm Class",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 62,
+      "text": "Layer normalization is a class that takes the output of a layer and applies normalization to it [c1066].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1066"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 63,
+      "text": "The forward method takes input with a certain number of rows and embedding dimension columns [c1073].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1073"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "Here is the complete implementation:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 65,
+      "text": "# Source: [c2107]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 66,
+      "text": "class LayerNorm(nn.Module):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 67,
+      "text": "A few things to notice:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 68,
+      "text": "- `self.eps = 1e-5` is a small epsilon value added to prevent division by zero [c2104].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2104"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 69,
+      "text": "Without it, a sample with zero variance would cause a numerical explosion.\n- `self.scale` is initialized to ones and `self.shift` to zeros, so at initialization the layer normalization is an identity transformation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 70,
+      "text": "The model learns to deviate from this as training proceeds.\n- `unbiased=False` uses the biased variance estimator (dividing by $n$) rather than Bessel's correction.\n- The final line `self.scale * norm_x + self.shift` applies the trainable scale and shift element-wise.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 71,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 72,
+      "text": "### The GELU Activation Function",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 73,
+      "text": "#### The Problem with ReLU",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 74,
+      "text": "The most familiar activation function is ReLU (Rectified Linear Unit).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 75,
+      "text": "ReLU returns the input value for $x > 0$ and returns zero for $x < 0$ [c2002].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2002"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 76,
+      "text": "It is simple, fast, and works well in many settings.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 77,
+      "text": "However, it has a well-known failure mode.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 78,
+      "text": "The **dead neuron problem** occurs when a neuron's output becomes negative, ReLU sets it to zero, and the neuron stops contributing to the learning process [c2005].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2005"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 79,
+      "text": "Because the gradient of ReLU is exactly zero for all negative inputs, a neuron that consistently receives negative pre-activations will never receive a gradient signal and will never update its weights [c2004].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2004"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 80,
+      "text": "In a deep network, this can silently kill large fractions of the model's capacity.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 81,
+      "text": "#### Introducing GELU",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 82,
+      "text": "GELU (Gaussian Error Linear Unit) is a smooth activation function that is differentiable at $x = 0$, unlike ReLU [c2075].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2075"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 83,
+      "text": "The exact definition is [c2006]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2006"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 84,
+      "text": "$$\\text{GELU}(x) = x \\cdot \\Phi(x)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 85,
+      "text": "where $\\Phi(x)$ is the cumulative distribution function of the standard Gaussian distribution.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 86,
+      "text": "Intuitively, GELU multiplies the input by the probability that a standard normal random variable is less than or equal to $x$.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 87,
+      "text": "For large positive $x$, $\\Phi(x) \\approx 1$ and GELU behaves like the identity.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 88,
+      "text": "For large negative $x$, $\\Phi(x) \\approx 0$ and GELU suppresses the signal.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 89,
+      "text": "But crucially, near zero the transition is smooth and differentiable, which means gradients can flow even for slightly negative inputs\u2014avoiding the hard cutoff that kills neurons in ReLU.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 90,
+      "text": "#### The Approximation Used in GPT-2",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 91,
+      "text": "Computing $\\Phi(x)$ exactly requires the error function, which is expensive.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 92,
+      "text": "In practice, GPT-2 uses a polynomial approximation [c2009]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2009"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 93,
+      "text": "$$\\text{GELU}(x) \\approx 0.5 \\cdot x \\cdot \\left(1 + \\tanh\\!\\left(\\sqrt{\\frac{2}{\\pi}} \\cdot \\left(x + 0.044715 \\cdot x^3\\right)\\right)\\right)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 94,
+      "text": "This approximation is the one used in GPT-2 [c2108] and is what we implement here.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2108"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 95,
+      "text": "#### Implementing GELU",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 96,
+      "text": "# Source: [c2109]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 97,
+      "text": "class GELU(nn.Module):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 98,
+      "text": "[GAP: The closing parenthesis of the `return` statement and the class appear to be missing from the source claim; the code as given in c2109 is syntactically incomplete.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 99,
+      "text": "The structure mirrors the approximation formula exactly.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 100,
+      "text": "`torch.sqrt(torch.tensor(2.0 / torch.pi))` computes $\\sqrt{2/\\pi}$, and `torch.pow(x, 3)` computes $x^3$.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "[FIGURE: Side-by-side plot of ReLU and GELU activation functions over the range x \u2208 [-3, 3], showing ReLU's hard zero cutoff vs. GELU's smooth curve that allows small negative outputs near zero]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 102,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 103,
+      "text": "### The Feed-Forward Network",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "#### Purpose and Position",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 105,
+      "text": "The goal of implementing the feed-forward neural network sub-module is to create a component that is part of the LLM transformer block [c1999].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1999"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 106,
+      "text": "Within the transformer block, the feed-forward neural network processes each element of the input sequence separately, without considering relationships with other elements [c2092].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2092"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 107,
+      "text": "This is in contrast to the self-attention block, which analyzes relationships between input elements and assigns attention scores based on how one input element relates to others [c2091].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2091"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 108,
+      "text": "The two components are therefore complementary: attention mixes information across positions, while the feed-forward network transforms each position independently.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 109,
+      "text": "#### The Expansion-Contraction Pattern",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 110,
+      "text": "The feed-forward neural network in a transformer block has an expansion layer followed by a compression layer, preserving input and output dimensions [c2070].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2070"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 111,
+      "text": "Specifically, the FeedForward neural network consists of three layers [c2110]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2110"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 112,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 113,
+      "text": "An **expansion layer** that increases the dimension to 4 times the embedding dimension\n2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 114,
+      "text": "A **GELU activation function**\n3.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 115,
+      "text": "A **contraction layer** that reduces back to the original embedding dimension",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 116,
+      "text": "The expansion layer in the feed-forward network has a hidden layer with neurons four times larger than the embedding dimension [c2072].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2072"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 117,
+      "text": "For GPT-2's embedding dimension of 768, this means the feed-forward network projects from 768 dimensions to 3072, applies GELU, and then projects back from 3072 to 768 [c2031].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2031"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 118,
+      "text": "Why expand and then contract?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 119,
+      "text": "Intuitively, the expansion into a higher-dimensional space gives the network more room to represent complex, non-linear transformations of each token's representation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 120,
+      "text": "The GELU activation introduces non-linearity in that expanded space, and the contraction brings the result back to the dimension expected by the rest of the block.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 121,
+      "text": "The feedforward module uses GELU activation function between the expansion and contraction layers [c2038].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2038"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 122,
+      "text": "The feed-forward network processes input through expansion, GELU activation, and contraction, with output dimensions matching the input dimensions [c2120].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2120"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 123,
+      "text": "#### Implementation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 124,
+      "text": "`nn.Sequential` is a PyTorch module that chains neural network layers together by forwarding outputs sequentially to inputs of subsequent modules [c2033].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2033"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 125,
+      "text": "This makes it a natural fit for the feed-forward network, where data flows linearly through expansion \u2192 activation \u2192 contraction.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 126,
+      "text": "The FF object is an instance of the feed-forward class that takes the embedding dimension from configuration and creates layers with GELU activation function, initializing weights randomly [c2119].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2119"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 127,
+      "text": "[GAP: The complete FeedForward class code block is not present in the supplied claims.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 128,
+      "text": "Claims c2110 and c2031 describe the architecture but do not supply a verbatim code listing for the full class.]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 129,
+      "text": "The architecture described by the claims is:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "FeedForward:",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 131,
+      "text": "This matches the description in [c2110] and the concrete dimensions in [c2031].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2110",
+        "c2031"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 132,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 133,
+      "text": "### Shortcut Connections and the Vanishing Gradient Problem",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 134,
+      "text": "#### The Vanishing Gradient Problem",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 135,
+      "text": "To understand why shortcut connections matter, we first need to understand the problem they solve.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 136,
+      "text": "The **vanishing gradient problem** occurs when gradients become extremely small or approach zero during backpropagation through deep layers, preventing weight updates and causing training stagnancy [c224].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c224"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 137,
+      "text": "During backpropagation, gradients are computed by repeatedly applying the chain rule as we move backward through the network.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 138,
+      "text": "In a deep network, this means multiplying many partial derivatives together.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 139,
+      "text": "If each of those partial derivatives is a small number (less than 1), the product shrinks exponentially with depth.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "By the time the gradient reaches the early layers, it is effectively zero, and those layers stop learning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 141,
+      "text": "Shortcut connections help transformers solve the vanishing gradient problem [c275].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c275"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 142,
+      "text": "#### What Are Shortcut Connections?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 143,
+      "text": "Shortcut connections are also known as skip connections or residual connections [c211, c217, c241].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c211",
+        "c217",
+        "c241"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 144,
+      "text": "They are achieved by adding the output of one layer to the output of a later layer [c228].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c228"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 145,
+      "text": "In a transformer block diagram, shortcut connections are represented by plus symbols with associated arrows that bypass the linear flow of data [c216, c2050].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c216",
+        "c2050"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 146,
+      "text": "More precisely, shortcut connections add the output of one layer to the output of the previous layer, creating an alternative path for gradient flow [c2079].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2079"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 147,
+      "text": "A neural network with shortcut connections allows the output of any layer to be added to the input of the previous layer [c247].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c247"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "Shortcut connections can be added between any layers of the transformer block [c274].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c274"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 149,
+      "text": "[FIGURE: Diagram of a residual block showing input y_l flowing both through a transformation f(y_l) and directly via a skip arrow, with the two paths summing to produce y_{l+1} = f(y_l) + y_l]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 150,
+      "text": "#### The Residual Block Formula",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 151,
+      "text": "In a residual block with shortcut connections, the output of layer $l+1$ is [c234]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c234"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 152,
+      "text": "$$y_{l+1} = f(y_l) + y_l$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 153,
+      "text": "where $f(y_l)$ is the output of the neural network transformation and $y_l$ is the output of the previous layer.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 154,
+      "text": "The addition of $y_l$ directly is the skip connection.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 155,
+      "text": "In code, this is expressed as [c255]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c255"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 156,
+      "text": "# Source: [c255]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 157,
+      "text": "x = x + layer_output",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 158,
+      "text": "This single line is the entire implementation of a shortcut connection.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 159,
+      "text": "The input `x` is added to whatever the layer produced.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 160,
+      "text": "#### Why Shortcut Connections Preserve Gradients: The Math",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 161,
+      "text": "To see why shortcut connections help with vanishing gradients, let us work through the calculus.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 162,
+      "text": "The partial derivative of loss with respect to $y_l$ can be expressed using the chain rule as [c236]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c236"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 163,
+      "text": "$$\\frac{\\partial L}{\\partial y_l} = \\frac{\\partial L}{\\partial y_{l+1}} \\times \\frac{\\partial y_{l+1}}{\\partial y_l}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 164,
+      "text": "Now, when $y_{l+1} = f(y_l) + y_l$, the partial derivative $\\frac{\\partial y_{l+1}}{\\partial y_l}$ becomes [c237]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c237"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 165,
+      "text": "$$\\frac{\\partial y_{l+1}}{\\partial y_l} = \\frac{\\partial f(y_l)}{\\partial y_l} + 1$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 166,
+      "text": "The consequence is crucial: even if $\\frac{\\partial f(y_l)}{\\partial y_l}$ is very small (the vanishing gradient scenario), the total derivative is $\\frac{\\partial f(y_l)}{\\partial y_l} + 1$, which is at least 1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 167,
+      "text": "The gradient can never vanish to zero through this path because the shortcut connection contributes a constant additive term of 1 to the derivative.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 168,
+      "text": "With shortcut connections, gradient magnitude remains stable across layers, preventing the vanishing gradient problem [c2082].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2082"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 169,
+      "text": "#### Demonstrating the Effect",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 170,
+      "text": "To see the vanishing gradient problem in action and verify that shortcut connections fix it, we can build a simple deep network and compare gradients with and without skip connections.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 171,
+      "text": "A deep neural network class takes `layer_sizes` as an argument, which specifies the number of neurons in each layer.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 172,
+      "text": "For example, `[3, 3, 3, 3, 1]` means 5 layers with 3 neurons each and a final layer with 1 neuron [c248].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c248"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 173,
+      "text": "The loss function is defined as the squared difference between the model output and the ground truth target [c260]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c260"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 174,
+      "text": "$$\\text{loss} = (Y - \\text{target})^2$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 175,
+      "text": "In code:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 176,
+      "text": "# Source: [c262]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 177,
+      "text": "loss = (model(x) - target) ** 2",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 178,
+      "text": "After calling `loss.backward()`, we can inspect the `.grad` attribute of each layer's weights to see how large the gradients are at each depth.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 179,
+      "text": "Without shortcut connections, you will observe that gradients shrink dramatically in the early layers.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 180,
+      "text": "With shortcut connections, the gradients remain at a similar magnitude throughout the network.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 181,
+      "text": "[FIGURE: Bar chart comparing gradient magnitudes at each layer depth for a deep network with and without shortcut connections, showing exponential decay without shortcuts vs. stable magnitudes with shortcuts]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 182,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 183,
+      "text": "### Assembling the Transformer Block",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 184,
+      "text": "#### Components Review",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 185,
+      "text": "We now have all the pieces we need.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 186,
+      "text": "The GPT architecture has four key components: layer normalization, GELU activation, feed-forward neural network, and shortcut connections [c2148].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2148"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 187,
+      "text": "The full transformer block stacking order is [c2083]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2083"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 188,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 189,
+      "text": "Layer normalization\n2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 190,
+      "text": "Multi-head attention\n3.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 191,
+      "text": "Dropout\n4.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 192,
+      "text": "Shortcut connection (add input to output of attention)\n5.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 193,
+      "text": "Layer normalization\n6.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 194,
+      "text": "Feed-forward neural network with GELU\n7.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 195,
+      "text": "Dropout\n8.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 196,
+      "text": "Shortcut connection (add input to output of feed-forward)",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 197,
+      "text": "[FIGURE: Vertical flow diagram of the complete transformer block showing the two sub-paths (attention path and feed-forward path), each with pre-layer-norm, the operation, dropout, and a residual addition]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 198,
+      "text": "#### Pre-Layer Norm vs. Post-Layer Norm",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 199,
+      "text": "The original transformer model applied layer normalization *after* the self-attention and feed-forward neural network, a pattern called **post-layer norm** [c2130].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2130"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 200,
+      "text": "Modern transformer implementations use **pre-layer norm** instead [c2132].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2132"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 201,
+      "text": "Layer normalization is applied *before* the multi-head attention mechanism and *before* the feed-forward neural network, a pattern called pre-layer norm [c2129].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2129"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 202,
+      "text": "This is the design used in GPT-2 and most modern LLMs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 203,
+      "text": "Why does this matter?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 204,
+      "text": "Pre-layer norm stabilizes the residual stream.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 205,
+      "text": "Because the shortcut connection adds the un-normalized input directly to the output, the residual stream accumulates values across many layers.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 206,
+      "text": "Normalizing *before* each operation keeps the inputs to each sub-layer well-conditioned, which improves training stability.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 207,
+      "text": "Layer normalization is implemented twice within the transformer block: before the multi-head attention and before the feed-forward neural network [c2067].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2067"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 208,
+      "text": "#### The Transformer Block Components in Detail",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 209,
+      "text": "Let us look at each named component of the transformer block class:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 210,
+      "text": "- **ATT**: The ATT object is an instance of the multi-head attention class that takes embedding vectors and converts them into context vectors, with input and output dimensions equal to the embedding dimension [c2113].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2113"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 211,
+      "text": "Multi-head attention takes an input matrix X and multiplies it with trainable queries, keys, and values matrices to produce context vectors [c2059].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2059"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 212,
+      "text": "- **FF**: The FF object is an instance of the feed-forward class that takes the embedding dimension from configuration and creates layers with GELU activation function, initializing weights randomly [c2119].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2119"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 213,
+      "text": "- **norm_one** and **norm_two**: `norm_one` is the first layer normalization layer applied before the multi-head attention, and `norm_two` is the second layer normalization layer applied before the feed-forward neural network [c2121].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2121"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 214,
+      "text": "- **drop_shortcut**: The `drop_shortcut` object is a dropout layer from PyTorch (`torch.nn.Dropout`) [c2123].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2123"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 215,
+      "text": "Dropout randomly turns off some layer outputs during training to improve generalization and prevent overfitting [c2068].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2068"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 216,
+      "text": "In a transformer block, each element of an input sequence is represented by a fixed-size vector equal to the embedding dimension [c2084].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2084"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 217,
+      "text": "This means the block's input and output shapes are identical: `(batch_size, sequence_length, embedding_dimension)`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 218,
+      "text": "The shortcut connections rely on this shape consistency\u2014you can only add two tensors if they have the same shape.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 219,
+      "text": "#### The Transformer Block Class",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 220,
+      "text": "A transformer block class in PyTorch includes a multi-head attention mechanism and a feed-forward neural network [c2128].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2128"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 221,
+      "text": "The transformer block implements shortcut connections (residual connections) that add the input of the block to the output of each component [c2133].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2133"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 222,
+      "text": "A dropout layer and residual shortcut connection are applied after the feed-forward network to prevent vanishing gradients [c2141].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2141"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 223,
+      "text": "[GAP: The complete TransformerBlock class code listing is not present in the supplied claims.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 224,
+      "text": "The architecture is described across multiple claims (c2083, c2121, c2123, c2128, c2133) but no single verbatim code block for the full class is available.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 225,
+      "text": "Based on the architectural description, the forward pass of the transformer block follows this logic:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 226,
+      "text": "# First sub-block: attention",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 227,
+      "text": "This structure directly implements the stacking order described in [c2083], with pre-layer norm [c2129] and shortcut connections after each sub-block [c2133].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2083",
+        "c2129",
+        "c2133"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 228,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 229,
+      "text": "### Putting It All Together: The GPT Architecture",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 230,
+      "text": "The GPT architecture consists of four main components: the GPT backbone, layer normalization, GELU activation function, and feed-forward neural network [c2049].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2049"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 231,
+      "text": "The transformer block is the fundamental unit that is stacked repeatedly to form the full model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 232,
+      "text": "[FIGURE: High-level diagram of the GPT architecture showing token embeddings feeding into a stack of N transformer blocks, each containing the pre-norm attention and pre-norm feed-forward sub-blocks, followed by a final layer norm and output projection]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 233,
+      "text": "Each transformer block takes a sequence of embedding vectors, applies masked self-attention to let each position attend to previous positions, applies a position-wise feed-forward transformation, and returns a sequence of the same shape.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 234,
+      "text": "Stacking many such blocks allows the model to build increasingly abstract representations of the input sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 235,
+      "text": "The design choices we have made in this chapter\u2014pre-layer norm, GELU activation, the 4\u00d7 expansion factor in the feed-forward network, and shortcut connections throughout\u2014are not arbitrary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 236,
+      "text": "They reflect lessons learned from training large models and are the specific choices made in GPT-2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 237,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 238,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 239,
+      "text": "In this chapter we built every sub-component of the transformer block from scratch:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 240,
+      "text": "1. **Layer normalization** normalizes each sample independently along the feature dimension [c1058], using trainable scale and shift parameters [c1078] and a small epsilon for numerical stability [c2104].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1058",
+        "c1078",
+        "c2104"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 241,
+      "text": "It addresses internal covariate shift [c1038] and is applied twice per transformer block [c2067].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1038",
+        "c2067"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 242,
+      "text": "2. **GELU activation** provides a smooth, differentiable alternative to ReLU [c2075] that avoids the dead neuron problem [c2005].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2075",
+        "c2005"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 243,
+      "text": "It is approximated by the formula $0.5 \\cdot x \\cdot (1 + \\tanh(\\sqrt{2/\\pi} \\cdot (x + 0.044715 \\cdot x^3)))$ [c2009, c2108].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2009",
+        "c2108"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 244,
+      "text": "3. **The feed-forward network** expands the embedding dimension by a factor of 4, applies GELU, and contracts back to the original dimension [c2110], processing each sequence position independently [c2092].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2110",
+        "c2092"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 245,
+      "text": "4. **Shortcut connections** add the input of each sub-block to its output [c228], providing an additive term of 1 in the gradient computation [c237] that prevents gradients from vanishing in deep networks [c224, c275].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c228",
+        "c237",
+        "c224",
+        "c275"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 246,
+      "text": "5. **The transformer block** assembles these components in pre-layer-norm order [c2129, c2132]: normalize \u2192 attend \u2192 dropout \u2192 add \u2192 normalize \u2192 feed-forward \u2192 dropout \u2192 add [c2083].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2129",
+        "c2132",
+        "c2083"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 247,
+      "text": "With the transformer block complete, we have the core machinery needed to build a full GPT model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 248,
+      "text": "The next step is to stack multiple transformer blocks, add token and positional embeddings at the input, and add a final linear projection at the output to produce logits over the vocabulary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    }
+  ],
+  "summary": {
+    "grounded": 78,
+    "unsupported": 86,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 85
+  }
+}

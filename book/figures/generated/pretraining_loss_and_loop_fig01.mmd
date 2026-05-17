@@ -5,4 +5,4 @@ graph TD
     D --> E["Backward pass: Calculate gradients"]
     E --> F["Optimizer step: Update weights"]
     F --> B
-    B -.->|next epoch| A
+    B -.->|epoch complete| A

@@ -2,17 +2,23 @@
   % Input
   \node[rectangle, draw, fill=lightgray, minimum width=2cm, minimum height=0.8cm] (input) {Input Text};
   
-  % Layers
-  \node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=input] (layer1) {Layer 1\\(Neurons)};
-  \node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=layer1] (layer2) {Layer 2\\(Neurons)};
-  \node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=layer2] (layern) {Layer N\\(Neurons)};
+  % Layer 1
+  \node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=input] (layer1) {Layer 1\\(neurons)};
+  \draw[->, thick] (input) -- (layer1);
+  \node[above right=0.3cm and 0.5cm of input.south east, font=\small] {parameters};
+  
+  % Layer 2
+  \node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=layer1] (layer2) {Layer 2\\(neurons)};
+  \draw[->, thick] (layer1) -- (layer2);
+  \node[above right=0.3cm and 0.5cm of layer1.south east, font=\small] {parameters};
+  
+  % Layer N
+  \node[rectangle, draw, fill=lightblue, minimum width=2cm, minimum height=1.2cm, below of=layer2] (layern) {Layer N\\(neurons)};
+  \draw[->, thick] (layer2) -- (layern);
+  \node[above right=0.3cm and 0.5cm of layer2.south east, font=\small] {parameters};
   
   % Output
   \node[rectangle, draw, fill=lightgray, minimum width=2cm, minimum height=0.8cm, below of=layern] (output) {Output Text};
-  
-  % Arrows with parameter labels
-  \draw[->, thick] (input) -- (layer1) node[midway, right, font=\small] {parameters};
-  \draw[->, thick] (layer1) -- (layer2) node[midway, right, font=\small] {parameters};
-  \draw[->, thick] (layer2) -- (layern) node[midway, right, font=\small] {parameters};
-  \draw[->, thick] (layern) -- (output) node[midway, right, font=\small] {parameters};
+  \draw[->, thick] (layern) -- (output);
+  \node[above right=0.3cm and 0.5cm of layern.south east, font=\small] {parameters};
 \end{tikzpicture}

@@ -1,0 +1,9 @@
+graph LR
+    A["test entry"] --> B["format_input"]
+    B --> C["model.generate"]
+    C --> D["decode token IDs"]
+    D --> E["strip instruction prefix"]
+    E --> F["isolated response string"]
+    
+    style A fill:#e1f5ff
+    style F fill:#c8e6c9

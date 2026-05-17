@@ -1,0 +1,109 @@
+## Claims (cite these by ID inline as [cNNN])
+- c438 [code | 4i23dYoXp-A @ 2542-2554s]
+  GPT_CONFIG_124M = {
+      "vocab_size": 50257,           # Vocabulary size
+      "context_length": 1024,        # Context length
+      "emb_dim": 768,                # Embedding dimension
+      "n_heads": 12,                 # Number of attention heads
+      "n_layers": 12,                # Number of layers
+      "drop_rate": 0.1,              # Dropout rate
+      "qkv_bias": False              # Query-Key-Value bias
+  }
+- c494 [hyperparameter | 7TKCrt--bWI @ 368-378s]
+  For computational efficiency in the tutorial, a context length of 256 tokens is used instead of 1024.
+- c498 [hyperparameter | 7TKCrt--bWI @ 419-426s]
+  Dropout rate can be set to zero and is a regularization parameter.
+- c499 [design_decision | 7TKCrt--bWI @ 426-431s]
+  Query, key, and value weight matrices are initialized without bias terms.
+- c526 [hyperparameter | 7TKCrt--bWI @ 1119-1125s]
+  GPT-2 has a vocabulary size of 50257 tokens.
+- c529 [hyperparameter | 7TKCrt--bWI @ 1291-1301s]
+  Vocabulary size is 50257.
+- c531 [hyperparameter | 7TKCrt--bWI @ 1291-1301s]
+  Embedding dimension is 768.
+- c532 [hyperparameter | 7TKCrt--bWI @ 1301-1308s]
+  Number of attention heads is 12.
+- c533 [hyperparameter | 7TKCrt--bWI @ 1301-1308s]
+  Number of transformer blocks is 12.
+- c534 [hyperparameter | 7TKCrt--bWI @ 1301-1308s]
+  Dropout rate is 0.1.
+- c535 [hyperparameter | 7TKCrt--bWI @ 1308-1315s]
+  Query, key, and value bias is set to false.
+- c537 [design_decision | 7TKCrt--bWI @ 1363-1381s]
+  Context length is reduced to 256 tokens instead of 1024 to reduce computational resource requirements and allow execution on laptops.
+- c888 [hyperparameter | F1Sm7z2R96w @ 2030-2037s]
+  The GPT model configuration uses 12 transformer blocks.
+- c1670 [hyperparameter | Zxf-34voZss @ 1864-1866s]
+  The model configuration uses a vocabulary size of 50257.
+- c1671 [hyperparameter | Zxf-34voZss @ 1866-1868s]
+  The model configuration uses a context length of 256.
+- c1673 [hyperparameter | Zxf-34voZss @ 1886-1889s]
+  The model configuration uses a vector embedding dimension of 768.
+- c1674 [hyperparameter | Zxf-34voZss @ 1894-1895s]
+  The model configuration uses 12 attention heads.
+- c1675 [hyperparameter | Zxf-34voZss @ 1896-1898s]
+  The model configuration uses 12 transformer layers.
+- c1676 [hyperparameter | Zxf-34voZss @ 1898-1900s]
+  The model configuration uses a dropout rate of 0.1.
+- c1677 [design_decision | Zxf-34voZss @ 1900-1911s]
+  The query, key, and value weight matrices do not use bias terms (bias is false).
+- c1748 [design_decision | __OiQznq4ao @ 346-372s]
+  The GPT-2 medium model (355 million parameters) is chosen instead of the smaller 124 million parameter model because the smaller model does not perform well in instruction fine-tuning tasks.
+- c1737 [fact | __OiQznq4ao @ 427-430s]
+  GPT-2 medium has a context size of 1024 tokens.
+- c1738 [fact | __OiQznq4ao @ 430-434s]
+  GPT-2 medium has 24 transformer blocks.
+- c1740 [hyperparameter | __OiQznq4ao @ 443-450s]
+  GPT-2 base configuration uses vocabulary size of 50257.
+- c1741 [hyperparameter | __OiQznq4ao @ 451-457s]
+  GPT-2 base configuration uses dropout rate of 0.0.
+- c1742 [hyperparameter | __OiQznq4ao @ 456-464s]
+  GPT-2 base configuration sets query-key-value bias to true.
+- c2841 [hyperparameter | izyxvl-2JlM @ 466-472s]
+  GPT-2 small model has 124 million parameters.
+- c3125 [hyperparameter | r7unILsP0Es @ 785-791s]
+  Learning rate is set to 0.00005 for the AdamW optimizer.
+- c3126 [hyperparameter | r7unILsP0Es @ 785-791s]
+  Weight decay is set to 0.1 for the AdamW optimizer.
+- c3128 [hyperparameter | r7unILsP0Es @ 840-842s]
+  Number of epochs is set to 1 for the training process.
+- c3129 [hyperparameter | r7unILsP0Es @ 845-850s]
+  Evaluation frequency is set to 5 batches, meaning results are printed after every 5 batches.
+- c3131 [hyperparameter | r7unILsP0Es @ 877-883s]
+  Evaluation iterations is set to 5, meaning evaluation loss is calculated after every 5 batches.
+- c3434 [hyperparameter | xbaYCf2FHSY @ 2592-2594s]
+  GPT-2 Medium has 345 million parameters.
+- c3490 [hyperparameter | yXrGeDNuymY @ 634-637s]
+  GPT-2 small model context length is 1024.
+- c3492 [definition | yXrGeDNuymY @ 642-654s]
+  The embedding dimension is the size of the vector space into which each token ID is converted; for GPT-2 small, each token is represented as a 768-dimensional vector.
+- c3494 [definition | yXrGeDNuymY @ 663-670s]
+  N_heads is the number of attention heads present in each transformer block.
+- c3495 [definition | yXrGeDNuymY @ 670-676s]
+  N_layers is the number of transformer blocks in the model.
+- c3496 [fact | yXrGeDNuymY @ 676-687s]
+  The hyperparameter values shown are for the smallest GPT-2 model (124 million parameters).
+- c3499 [fact | yXrGeDNuymY @ 709-715s]
+  As GPT-2 model complexity increases, the number of transformer blocks also increases.
+- c3537 [architecture | yXrGeDNuymY @ 1948-1953s]
+  GPT-2 medium (355M) has embedding dimension 1024, 24 layers, and 16 attention heads.
+- c3538 [architecture | yXrGeDNuymY @ 1948-1953s]
+  GPT-2 large (774M) has embedding dimension 1280, 36 layers, and 20 attention heads.
+- c3539 [architecture | yXrGeDNuymY @ 1948-1953s]
+  GPT-2 XL (1558M) has embedding dimension 1600, 48 layers, and 25 attention heads.
+- c3536 [architecture | yXrGeDNuymY @ 1962-1973s]
+  GPT-2 small (124M) has embedding dimension 768, 12 layers, and 12 attention heads.
+- c3557 [hyperparameter | yXrGeDNuymY @ 2624-2629s]
+  Temperature is set to 1.5 for text generation.
+- c3558 [design_decision | yXrGeDNuymY @ 2629-2635s]
+  Top-K sampling with K=50 restricts token selection to the 50 most likely candidates during generation.
+- c3569 [hyperparameter | yXrGeDNuymY @ 2832-2841s]
+  The Adam optimizer is used with a learning rate of 5e-4 and weight decay of 0.1.
+- c3830 [hyperparameter | zuj_NJNouAA @ 2329-2334s]
+  max_length is set to 256, meaning the context size used is 256 tokens.
+- c3834 [hyperparameter | zuj_NJNouAA @ 2439-2482s]
+  Training data loader is created with batch_size=2, max_length=256 (GPT config context length), stride=256, drop_last=True, shuffle=True, num_workers=0.
+- c3836 [hyperparameter | zuj_NJNouAA @ 2482-2496s]
+  Validation data loader is created with batch_size=2, max_length=256, stride=256.
+- c3847 [hyperparameter | zuj_NJNouAA @ 2838-2845s]
+  The GPT model configuration requires specification of vocabulary size, context length, embedding dimension, number of attention heads, number of transformer blocks, dropout rate, and query-value bias setting.

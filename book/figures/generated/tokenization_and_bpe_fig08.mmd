@@ -8,13 +8,5 @@ graph LR
     B3 --> C
     C --> D["Token Embeddings<br/>(Converting token IDs to vectors)"]
     E["Positional Embeddings<br/>(Encoding position information)"] --> F
-    D --> F["Input Embeddings<br/>(Token + Positional)"]
+    D --> F["Input Embeddings<br/>(Token + Positional Embeddings)"]
     F --> G["Ready for Embedding Layer"]
-    
-    style A fill:#e1f5ff
-    style B fill:#fff3e0
-    style C fill:#f3e5f5
-    style D fill:#e8f5e9
-    style E fill:#e8f5e9
-    style F fill:#fce4ec
-    style G fill:#c8e6c9

@@ -6,16 +6,17 @@
   
   % X tensor (input)
   \node[tensor] (X) at (0, 0) {X\\(batch\_size, context\_size)};
-  \node[label] at (X.north) {Input tokens};
+  \node[label] at (X.north) {Input Tokens};
   
   % Y tensor (target)
   \node[tensor] (Y) at (5, 0) {Y\\(batch\_size, context\_size)};
-  \node[label] at (Y.north) {Target tokens};
+  \node[label] at (Y.north) {Target Tokens};
   
   % Shift arrow
   \draw[arrow] (X.east) -- (Y.west);
   \node[font=\small] at (2.5, 0.5) {shift right by 1};
   
-  % Example data below
-  \node[font=\small, anchor=north] at (0, -1.2) {X: [t₀, t₁, t₂, ...]\\Y: [t₁, t₂, t₃, ...]};
+  % Example annotation
+  \node[font=\small, below=1.5cm of X] (ex_x) {X: [token\\textsubscript{0}, token\\textsubscript{1}, ...]};
+  \node[font=\small, below=1.5cm of Y] (ex_y) {Y: [token\\textsubscript{1}, token\\textsubscript{2}, ...]};
 \end{tikzpicture}

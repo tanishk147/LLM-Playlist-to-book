@@ -10,13 +10,13 @@
     xticklabels={The Verdict, GPT-3},
     ytick={1e3, 1e6, 1e9, 1e12},
     yticklabel={$10^3$, $10^6$, $10^9$, $10^{12}$},
-    bar width=0.6cm,
+    grid=major,
     width=10cm,
     height=6cm,
-    grid=major,
-    grid style={gray!30},
+    bar width=0.6cm,
+    enlarge x limits=0.2
   ]
     \addplot[fill=steelblue, draw=black] coordinates {(1, 5145)};
-    \addplot[fill=coral, draw=black] coordinates {(2, 300e9)};
+    \addplot[fill=coral, draw=black] coordinates {(2, 300000000000)};
   \end{axis}
 \end{tikzpicture}

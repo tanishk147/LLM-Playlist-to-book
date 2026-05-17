@@ -1,0 +1,24 @@
+graph TD
+    A["<b>Stage 1: Preparing the Dataset</b>"] --> B["1) Dataset download and versioning"]
+    A --> C["2) Batching the dataset"]
+    A --> D["3) Creating data loaders"]
+    
+    B --> E["<b>Stage 2: Finetuning the LLM</b>"]
+    C --> E
+    D --> E
+    
+    E --> F["4) Loading a pretrained LLM"]
+    E --> G["5) Instruction finetuning the model"]
+    E --> H["6) Inspecting the modeling"]
+    
+    F --> I["<b>Stage 3: Evaluating the LLM</b>"]
+    G --> I
+    H --> I
+    
+    I --> J["7) Extracting responses"]
+    I --> K["8) Qualitative evaluation"]
+    I --> L["9) Scoring the responses"]
+    
+    J --> M["Evaluate performance on held out test set"]
+    K --> M
+    L --> M

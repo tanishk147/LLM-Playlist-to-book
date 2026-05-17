@@ -1,0 +1,11 @@
+graph TD
+    A["<b>Instruction Fine-tuning</b><br/>Input → Instruction + Text → Free-form Output"] 
+    B["<b>Classification Fine-tuning</b><br/>Input → Text Only → Discrete Class Label"]
+    
+    A --> A1["Foundation Model"]
+    A1 --> A2["+ Instruction Dataset"]
+    A2 --> A3["Free-form Output"]
+    
+    B --> B1["Foundation Model"]
+    B1 --> B2["+ Classification Labels"]
+    B2 --> B3["Discrete Class Label"]

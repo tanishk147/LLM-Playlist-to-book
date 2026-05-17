@@ -1,0 +1,1348 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "By this point in the series, you have done something that most practitioners never attempt: you have built a large language model completely from scratch [c1766].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1766"
+      ],
+      "status": "grounded",
+      "reason": "c1766 directly states that students who complete the lecture series will know how to build an entire large-language model completely from scratch."
+    },
+    {
+      "index": 2,
+      "text": "Not by calling a library function, not by wrapping an API, but by writing every component yourself and understanding why each piece exists [c1830].",
+      "type": "narrative",
+      "cited_claim_ids": [
+        "c1830"
+      ],
+      "status": "narrative_ok",
+      "reason": "This is elaborative framing that reinforces the claim about building from scratch. c1830 supports the general idea that implementations were built from scratch rather than imported."
+    },
+    {
+      "index": 3,
+      "text": "This final chapter consolidates that journey, revisits the key ideas that make LLMs work, and points toward the advanced topics that await you beyond this foundation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing sentence with no factual claim requiring citation."
+    },
+    {
+      "index": 4,
+      "text": "Before diving into the recap, it helps to anchor everything in the high-level workflow that structured the entire series.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition sentence with no factual claim."
+    },
+    {
+      "index": 5,
+      "text": "Large language model development follows three sequential stages [c1773]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1773"
+      ],
+      "status": "grounded",
+      "reason": "c1773 directly states that LLM development workflow consists of three sequential stages."
+    },
+    {
+      "index": 6,
+      "text": "**Stage 1 \u2014 Foundation and Architecture**: data preparation, the attention mechanism, and assembling the transformer block into a full model.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1773",
+        "c1774",
+        "c1775",
+        "c1776"
+      ],
+      "status": "grounded",
+      "reason": "c1773 identifies Stage 1 as foundation and architecture. c1774 covers data preparation, c1775 covers attention mechanism, c1776 covers assembling blocks into architecture."
+    },
+    {
+      "index": 7,
+      "text": "**Stage 2 \u2014 Pre-training**: implementing the loss function, running the backward pass, and loading pre-trained weights to accelerate training.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1773",
+        "c1777",
+        "c1778",
+        "c1779"
+      ],
+      "status": "grounded",
+      "reason": "c1773 identifies Stage 2 as pre-training. c1777 covers loss function, c1778 covers backward pass, c1779 covers loading pre-trained weights."
+    },
+    {
+      "index": 8,
+      "text": "**Stage 3 \u2014 Fine-tuning**: adapting the pre-trained model to specific tasks such as classification or instruction following.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1773",
+        "c1780"
+      ],
+      "status": "grounded",
+      "reason": "c1773 identifies Stage 3 as fine-tuning. c1780 states fine-tuning is necessary for specific tasks like classification or personalized chatbots (instruction following)."
+    },
+    {
+      "index": 9,
+      "text": "[FIGURE: Three-stage LLM development pipeline: boxes labeled Stage 1 (Foundation & Architecture), Stage 2 (Pre-training), and Stage 3 (Fine-tuning) connected by arrows left to right]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 10,
+      "text": "Each stage builds directly on the previous one.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical framing statement with no factual claim requiring citation."
+    },
+    {
+      "index": 11,
+      "text": "You cannot fine-tune a model you have not pre-trained, and you cannot pre-train a model whose architecture you do not understand.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Logical consequence statement, not a factual claim requiring citation."
+    },
+    {
+      "index": 12,
+      "text": "The series was deliberately designed to teach the nuts and bolts of how large language models are built rather than simply running fancy applications on top of them [c1768].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1768"
+      ],
+      "status": "grounded",
+      "reason": "c1768 directly states the lecture series focuses on understanding the nuts and bolts of how LLMs are built rather than running fancy applications."
+    },
+    {
+      "index": 13,
+      "text": "The first thing that distinguishes LLM development from conventional machine learning is the data pipeline [c1782].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1782"
+      ],
+      "status": "grounded",
+      "reason": "c1782 states that the data preprocessing pipeline for an LLM differs from pipelines for regression or classification models."
+    },
+    {
+      "index": 14,
+      "text": "In a regression or classification setting you typically have a fixed feature matrix.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General background statement about conventional ML, not a specific factual claim requiring citation."
+    },
+    {
+      "index": 15,
+      "text": "In an LLM the goal is to predict the next token [c1783], and that changes everything about how you prepare your data.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1783"
+      ],
+      "status": "grounded",
+      "reason": "c1783 directly states the goal of an LLM is to predict the next token."
+    },
+    {
+      "index": 16,
+      "text": "The pipeline proceeds through a well-defined sequence of transformations [c1792]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1792"
+      ],
+      "status": "grounded",
+      "reason": "c1792 describes the data preprocessing pipeline converting input text through multiple stages."
+    },
+    {
+      "index": 17,
+      "text": "Raw text from training documents is split into **tokens** [c1784].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1784"
+      ],
+      "status": "grounded",
+      "reason": "c1784 states the first step in LLM preprocessing is to convert input text into tokens."
+    },
+    {
+      "index": 18,
+      "text": "Tokens are mapped to integer **token IDs** [c1785].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1785"
+      ],
+      "status": "grounded",
+      "reason": "c1785 states tokens must be converted into token IDs."
+    },
+    {
+      "index": 19,
+      "text": "Token IDs are projected into a higher-dimensional vector space to capture semantic meaning \u2014 these are the **token embeddings** [c1786, c1787].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1786",
+        "c1787"
+      ],
+      "status": "grounded",
+      "reason": "c1786 states token IDs are projected into higher dimensional vector space to capture semantic meaning. c1787 defines token embeddings as projections of token IDs into higher dimensional vector spaces."
+    },
+    {
+      "index": 20,
+      "text": "**Positional embeddings** are added to the token embeddings because token positions matter for predicting the next token [c1788, c1789].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1788",
+        "c1789"
+      ],
+      "status": "grounded",
+      "reason": "c1788 states positional embeddings must be added to token embeddings. c1789 states positional embeddings are added because token positions are important for predicting the next token."
+    },
+    {
+      "index": 21,
+      "text": "The sum of token embeddings and positional embeddings forms the **input embeddings** [c1790], which are the final output of the preprocessing pipeline [c1791].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1790",
+        "c1791"
+      ],
+      "status": "grounded",
+      "reason": "c1790 defines input embeddings as the result of adding token embeddings and positional embeddings. c1791 states input embeddings are the output of the data preprocessing pipeline."
+    },
+    {
+      "index": 22,
+      "text": "[FIGURE: Data preprocessing pipeline: raw text \u2192 tokens \u2192 token IDs \u2192 token embeddings + positional embeddings \u2192 input embeddings]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 23,
+      "text": "As a concrete reference point, GPT-2 uses an embedding dimension of 768 [c1793].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1793"
+      ],
+      "status": "grounded",
+      "reason": "c1793 states GPT-2 uses an embedding dimension of 768."
+    },
+    {
+      "index": 24,
+      "text": "Intuitively, a higher-dimensional embedding space gives the model more \"room\" to encode nuanced semantic distinctions between tokens.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation with no factual claim requiring citation."
+    },
+    {
+      "index": 25,
+      "text": "The attention mechanism is the single most important component in the entire architecture [c1775, c1794].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1775",
+        "c1794"
+      ],
+      "status": "grounded",
+      "reason": "c1775 states the attention mechanism is the engine that gives LLMs their power. c1794 defines attention mechanism as the driving engine that gives LLMs their power."
+    },
+    {
+      "index": 26,
+      "text": "To understand why it is necessary, consider what token embeddings alone give you: a representation of the semantic meaning of each individual token, but no information about how tokens relate to one another [c1795].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1795"
+      ],
+      "status": "grounded",
+      "reason": "c1795 states vector embeddings represent the semantic meaning of individual tokens without capturing relationships between tokens."
+    },
+    {
+      "index": 27,
+      "text": "When predicting the next token, you need to know how every token in the context relates to every other token [c1796].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1796"
+      ],
+      "status": "grounded",
+      "reason": "c1796 states context is important when predicting the next token because you need to know how one token relates to all other tokens."
+    },
+    {
+      "index": 28,
+      "text": "Attention solves this by assigning an importance score to every other token when processing a given token [c1797].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1797"
+      ],
+      "status": "grounded",
+      "reason": "c1797 defines attention as the importance assigned to other tokens when looking at one token."
+    },
+    {
+      "index": 29,
+      "text": "The goal is to convert the input embedding vectors into richer **context vectors** that encode these inter-token relationships [c1798].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1798"
+      ],
+      "status": "grounded",
+      "reason": "c1798 states the goal of the attention mechanism is to convert input embedding vectors into context vectors."
+    },
+    {
+      "index": 30,
+      "text": "Context vectors are richer than input embedding vectors precisely because they contain information about how a token relates to all other tokens in the sentence [c1799].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1799"
+      ],
+      "status": "grounded",
+      "reason": "c1799 states context vectors are richer than input embedding vectors because they contain information about how a token relates to all other tokens in the sentence."
+    },
+    {
+      "index": 31,
+      "text": "The mechanics of computing attention follow a precise sequence [c1800, c1801, c1802, c1803, c1804, c1805, c1806]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1800",
+        "c1801",
+        "c1802",
+        "c1803",
+        "c1804",
+        "c1805",
+        "c1806"
+      ],
+      "status": "grounded",
+      "reason": "The cited claims collectively describe the attention mechanism workflow."
+    },
+    {
+      "index": 32,
+      "text": "Multiply the input embeddings by three trainable weight matrices to produce **queries**, **keys**, and **values**.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1800"
+      ],
+      "status": "grounded",
+      "reason": "c1800 states the attention mechanism workflow includes multiplying inputs with trainable query, key, and value matrices."
+    },
+    {
+      "index": 33,
+      "text": "Compute **attention scores** by multiplying queries with the transpose of the keys.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1801"
+      ],
+      "status": "grounded",
+      "reason": "c1801 states multiply queries with keys transpose to compute attention scores."
+    },
+    {
+      "index": 34,
+      "text": "**Scale** the attention scores by the square root of the key dimension.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1802"
+      ],
+      "status": "grounded",
+      "reason": "c1802 states scale attention scores by the square root of the key dimension."
+    },
+    {
+      "index": 35,
+      "text": "Apply **dropout** after scaling.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1803"
+      ],
+      "status": "grounded",
+      "reason": "c1803 states dropout is applied after scaling attention scores."
+    },
+    {
+      "index": 36,
+      "text": "Apply a **causal mask** to prevent tokens from attending to future positions \u2014 this is what makes the attention mechanism suitable for next-token prediction [c1804].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1804"
+      ],
+      "status": "grounded",
+      "reason": "c1804 states causal attention is implemented by adding a mask to tokens not involved in the next token prediction task."
+    },
+    {
+      "index": 37,
+      "text": "Pass the masked scores through a **softmax** to obtain **attention weights**.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1805"
+      ],
+      "status": "grounded",
+      "reason": "c1805 states a softmax layer is applied after masking to convert attention scores into attention weights."
+    },
+    {
+      "index": 38,
+      "text": "Multiply the attention weights by the values to produce the **context vector matrix**.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1806"
+      ],
+      "status": "grounded",
+      "reason": "c1806 states attention weights are multiplied with values to produce the context vector matrix."
+    },
+    {
+      "index": 39,
+      "text": "[FIGURE: Single attention head diagram: Q, K, V projections \u2192 QK^T scaled \u2192 causal mask \u2192 softmax \u2192 multiply by V \u2192 context vector]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 40,
+      "text": "A single attention head produces one context vector matrix [c1807].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1807"
+      ],
+      "status": "grounded",
+      "reason": "c1807 states a single attention head produces one context vector matrix."
+    },
+    {
+      "index": 41,
+      "text": "Real LLMs use **multi-head attention**, running multiple attention heads in parallel [c1808].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1808"
+      ],
+      "status": "grounded",
+      "reason": "c1808 states large language models use multiple attention heads acting in parallel."
+    },
+    {
+      "index": 42,
+      "text": "The motivation is that different heads can capture different types of dependencies and long-range relationships within large paragraphs [c1809].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1809"
+      ],
+      "status": "grounded",
+      "reason": "c1809 states multiple attention heads are used to capture multiple dependencies and long-range dependencies within large paragraphs."
+    },
+    {
+      "index": 43,
+      "text": "The context vector matrices from all heads are then combined to produce the final output context vector matrix [c1810].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1810"
+      ],
+      "status": "grounded",
+      "reason": "c1810 states context vector matrices from multiple attention heads are combined to produce the final output context vector matrix."
+    },
+    {
+      "index": 44,
+      "text": "The revolution in large language models is, at its core, this workflow: converting input embedding matrices into context vector matrices through attention [c1811].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1811"
+      ],
+      "status": "grounded",
+      "reason": "c1811 states the revolution in large language models is driven by the workflow of converting input embedding matrices into context vector matrices through attention."
+    },
+    {
+      "index": 45,
+      "text": "With the attention mechanism understood, the full architecture assembles naturally.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement with no factual claim."
+    },
+    {
+      "index": 46,
+      "text": "At the highest level, the model takes input tokens, converts them to embeddings, passes them through a stack of transformer blocks, applies a final layer normalization, and feeds the result through a linear layer that outputs **logits** for next-token prediction [c1812].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1812"
+      ],
+      "status": "grounded",
+      "reason": "c1812 describes the LLM architecture as input tokens converted to embeddings, passed through transformer blocks, then through layer normalization and a final neural network that outputs logits."
+    },
+    {
+      "index": 47,
+      "text": "[FIGURE: Full LLM architecture: input tokens \u2192 embeddings \u2192 N \u00d7 transformer blocks \u2192 layer norm \u2192 linear layer \u2192 logits]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 48,
+      "text": "Each **transformer block** contains the following components in sequence [c1815]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 describes the transformer block components."
+    },
+    {
+      "index": 49,
+      "text": "- A normalization layer",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 lists normalization layer as a component of the transformer block."
+    },
+    {
+      "index": 50,
+      "text": "- The masked multi-head attention module (where the Q/K/V projections operate) [c1816]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1816"
+      ],
+      "status": "grounded",
+      "reason": "c1816 defines the masked multi-head attention module as where the attention mechanism with key, query, and value projections operates within the transformer block."
+    },
+    {
+      "index": 51,
+      "text": "- A dropout layer",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 lists dropout layer as a component of the transformer block."
+    },
+    {
+      "index": 52,
+      "text": "- Shortcut (residual) connections",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 lists shortcut connections as a component of the transformer block."
+    },
+    {
+      "index": 53,
+      "text": "- A second normalization layer",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 lists another normalization layer as a component of the transformer block."
+    },
+    {
+      "index": 54,
+      "text": "- A feedforward neural network",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 lists a feedforward neural network as a component of the transformer block."
+    },
+    {
+      "index": 55,
+      "text": "- A second dropout layer",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1815 lists another dropout layer as a component of the transformer block."
+    },
+    {
+      "index": 56,
+      "text": "The **logits tensor** output by the final linear layer is what the model uses to predict the next token [c1817].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1817"
+      ],
+      "status": "grounded",
+      "reason": "c1817 defines the logits tensor as the output of the final neural network that is used to predict the next token."
+    },
+    {
+      "index": 57,
+      "text": "GPT-2 stacks 12 transformer blocks sequentially [c1818]; larger LLMs use more than 12 [c1819].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1818",
+        "c1819"
+      ],
+      "status": "grounded",
+      "reason": "c1818 states GPT-2 contains 12 transformer blocks. c1819 states larger LLMs contain more than 12 transformer blocks."
+    },
+    {
+      "index": 58,
+      "text": "Each transformer block can contain 12 or 24 attention heads [c1820].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1820"
+      ],
+      "status": "grounded",
+      "reason": "c1820 states each transformer block can contain 12 or 24 attention heads."
+    },
+    {
+      "index": 59,
+      "text": "These numbers give you a sense of the scale involved even in a \"small\" model like GPT-2.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 60,
+      "text": "Pre-training is the process of teaching the model to predict the next token across a massive corpus of text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General description of pre-training, not a specific factual claim requiring citation."
+    },
+    {
+      "index": 61,
+      "text": "The loss function used is **cross-entropy loss** between the predicted next token and the actual next token [c1821].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1821"
+      ],
+      "status": "grounded",
+      "reason": "c1821 states the loss function used in LLM training is cross entropy loss between the predicted next token and the actual next token."
+    },
+    {
+      "index": 62,
+      "text": "The trainable parameters that get updated during this process span the entire model [c1822]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists trainable parameters in an LLM."
+    },
+    {
+      "index": 63,
+      "text": "- Token embeddings",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists token embeddings as trainable parameters."
+    },
+    {
+      "index": 64,
+      "text": "- Positional embeddings",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists positional embeddings as trainable parameters."
+    },
+    {
+      "index": 65,
+      "text": "- Layer normalization scale and shift parameters",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists layer normalization scale and shift parameters as trainable parameters."
+    },
+    {
+      "index": 66,
+      "text": "- Query, key, and value weight matrices in every multi-head attention module",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists query/key/value weight matrices in multi-head attention as trainable parameters."
+    },
+    {
+      "index": 67,
+      "text": "- Feedforward network weights in every transformer block",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists feedforward network weights as trainable parameters."
+    },
+    {
+      "index": 68,
+      "text": "- Final output layer weights",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1822"
+      ],
+      "status": "grounded",
+      "reason": "c1822 lists final output layer weights as trainable parameters."
+    },
+    {
+      "index": 69,
+      "text": "The vanilla gradient descent update rule is [c1823]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1823"
+      ],
+      "status": "grounded",
+      "reason": "c1823 states the gradient update rule used is vanilla gradient descent."
+    },
+    {
+      "index": 70,
+      "text": "$$w_{i+1} = w_i - \\alpha \\frac{\\partial L}{\\partial w_i}$$",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1823"
+      ],
+      "status": "grounded",
+      "reason": "c1823 provides the gradient update rule wi+1 = wi - \u03b1 * \u2202L/\u2202wi, which matches the equation."
+    },
+    {
+      "index": 71,
+      "text": "In practice, more sophisticated optimizers such as Adam or Adam with weight decay are used instead of vanilla gradient descent [c1824].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1824"
+      ],
+      "status": "grounded",
+      "reason": "c1824 states more sophisticated optimization schemes like Adam or Adam with weight decay are typically used instead of vanilla gradient descent."
+    },
+    {
+      "index": 72,
+      "text": "The weight update with L2 regularization takes the form [c1838]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1838"
+      ],
+      "status": "grounded",
+      "reason": "c1838 provides the weight update equation with L2 regularization."
+    },
+    {
+      "index": 73,
+      "text": "$$W_i^{(l)} = W_i - \\lambda \\frac{\\partial L}{\\partial W}$$",
+      "type": "equation",
+      "cited_claim_ids": [
+        "c1838"
+      ],
+      "status": "grounded",
+      "reason": "c1838 provides the weight update equation with L2 regularization: W_i^{(l)} = W_i - \u03bb \u2202L/\u2202W."
+    },
+    {
+      "index": 74,
+      "text": "where pre-trained weights from GPT-2 can be loaded as initialization [c1838].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1838"
+      ],
+      "status": "grounded",
+      "reason": "c1838 states pre-trained weights from GPT-2 are loaded as initialization."
+    },
+    {
+      "index": 75,
+      "text": "Pre-training a model from scratch at production scale is a sobering exercise.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim."
+    },
+    {
+      "index": 76,
+      "text": "Actual LLMs like GPT-2, GPT-3, and GPT-4 are pre-trained on huge datasets containing millions of news articles, blogs, and books [c1825].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1825"
+      ],
+      "status": "grounded",
+      "reason": "c1825 states actual LLMs like GPT-2, GPT-3, and GPT-4 are pre-trained on huge datasets containing millions of news articles, blogs, and books."
+    },
+    {
+      "index": 77,
+      "text": "The compute costs for pre-training these models exceed one million dollars [c1826].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1826"
+      ],
+      "status": "grounded",
+      "reason": "c1826 states pre-training costs for actual large language models exceed one million dollars."
+    },
+    {
+      "index": 78,
+      "text": "This is why the series also covers loading pre-trained weights from models such as OpenAI GPT-2 \u2014 doing so accelerates the process enormously and makes the experiments in this course tractable [c1779].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1779"
+      ],
+      "status": "grounded",
+      "reason": "c1779 states loading pre-trained weights from models such as OpenAI GPT-2 accelerates the pre-training process."
+    },
+    {
+      "index": 79,
+      "text": "Pre-training typically involves optimizing more than 100 million or even billions of parameters using the backward pass [c1778].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1778"
+      ],
+      "status": "grounded",
+      "reason": "c1778 states pre-training involves training more than 100 million or billion parameters using backward pass optimization."
+    },
+    {
+      "index": 80,
+      "text": "Understanding this scale is important context for appreciating why fine-tuning (Stage 3) is so valuable: you get to start from a model that already understands language rather than learning from random noise.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 81,
+      "text": "Pre-training gives you a model that can predict the next token.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement about pre-training outcome, not a specific factual claim."
+    },
+    {
+      "index": 82,
+      "text": "Fine-tuning is what makes that model useful for specific tasks [c1780].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1780"
+      ],
+      "status": "grounded",
+      "reason": "c1780 states fine-tuning is necessary to make large-language models perform well on specific tasks."
+    },
+    {
+      "index": 83,
+      "text": "The series covered two distinct flavors of fine-tuning.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement with no factual claim."
+    },
+    {
+      "index": 84,
+      "text": "**Classification fine-tuning** trains the model to assign inputs to discrete categories [c1827].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1827"
+      ],
+      "status": "grounded",
+      "reason": "c1827 defines classification fine tuning as training the model to classify inputs into categories."
+    },
+    {
+      "index": 85,
+      "text": "The hands-on project here was an LLM classifier that distinguishes between spam and non-spam emails [c1781].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1781"
+      ],
+      "status": "grounded",
+      "reason": "c1781 states one of the two hands-on projects was an LLM classifier that distinguishes between spam and non-spam emails."
+    },
+    {
+      "index": 86,
+      "text": "Intuitively, you are taking a model that already understands language and adding a small classification head that maps its representations to a fixed set of labels.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation with no factual claim requiring citation."
+    },
+    {
+      "index": 87,
+      "text": "**Instruction fine-tuning** trains the model on a dataset of instructions, inputs, and outputs so that it learns to follow natural language instructions [c1828].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1828"
+      ],
+      "status": "grounded",
+      "reason": "c1828 defines instruction fine tuning as training the model on a dataset of instructions, inputs, and outputs to perform well on instruction-following tasks."
+    },
+    {
+      "index": 88,
+      "text": "A concrete example: given the instruction \"convert to passive voice\" and the input \"the chef cooks the meal every day,\" the model should produce \"the meal is cooked every day by the chef\" [c1829].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1829"
+      ],
+      "status": "grounded",
+      "reason": "c1829 provides an example instruction fine tuning task of converting active voice to passive voice with the exact same example."
+    },
+    {
+      "index": 89,
+      "text": "The hands-on project here was a personal assistant that can follow instructions [c1781].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1781"
+      ],
+      "status": "grounded",
+      "reason": "c1781 states one of the two hands-on projects was a personal assistant that can follow instructions."
+    },
+    {
+      "index": 90,
+      "text": "[FIGURE: Two fine-tuning paths branching from a pre-trained LLM: left branch \u2192 classification head \u2192 spam/not-spam; right branch \u2192 instruction dataset \u2192 instruction-following assistant]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 91,
+      "text": "Together, these two projects \u2014 the spam classifier and the personal assistant \u2014 represent the two most common fine-tuning paradigms you will encounter in practice [c1837].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1837"
+      ],
+      "status": "grounded",
+      "reason": "c1837 states the course implements an email classification fine-tuned LLM and an instruction fine-tuned LLM, representing the two main components."
+    },
+    {
+      "index": 92,
+      "text": "Building a model is only half the work; you also need to know whether it is any good.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement with no factual claim."
+    },
+    {
+      "index": 93,
+      "text": "The series introduced three evaluation approaches.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement with no factual claim."
+    },
+    {
+      "index": 94,
+      "text": "**MMLU (Measuring Massive Multitask Language Understanding)** is a standardized evaluation benchmark that uses 57 tests to evaluate LLM performance across diverse domains [c1831].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1831"
+      ],
+      "status": "grounded",
+      "reason": "c1831 defines MMLU as an evaluation benchmark that uses 57 tests to evaluate LLM performance across diverse domains."
+    },
+    {
+      "index": 95,
+      "text": "It provides a single comparable number that lets you position your model relative to published results.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 96,
+      "text": "The breadth of 57 tests is what makes it a useful signal \u2014 a model that scores well on MMLU has demonstrated competence across a wide range of knowledge areas.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 97,
+      "text": "**Human evaluation** is the most direct method: humans compare and rate the outputs of different LLMs [c1832].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1832"
+      ],
+      "status": "grounded",
+      "reason": "c1832 defines human evaluation as humans comparing and rating the outputs of different LLMs."
+    },
+    {
+      "index": 98,
+      "text": "It is expensive and slow, but it captures qualities \u2014 fluency, helpfulness, tone \u2014 that automated metrics often miss.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 99,
+      "text": "**LLM-based evaluation** uses a powerful large language model to evaluate the outputs of another LLM [c1833].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1833"
+      ],
+      "status": "grounded",
+      "reason": "c1833 defines LLM-based evaluation as using a powerful large language model to evaluate the outputs of another LLM."
+    },
+    {
+      "index": 100,
+      "text": "In practice, a larger LLM compares the true output with the model's response and assigns an evaluation score out of 100 [c1836].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1836"
+      ],
+      "status": "grounded",
+      "reason": "c1836 states in LLM-based evaluation, a larger LLM compares the true output with the model response and assigns an evaluation score out of 100."
+    },
+    {
+      "index": 101,
+      "text": "The series used **Ollama** as the tool to access and run **Llama 3** locally [c1834].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1834"
+      ],
+      "status": "grounded",
+      "reason": "c1834 states Ollama is a tool used to access and run the Llama 3 LLM locally."
+    },
+    {
+      "index": 102,
+      "text": "Llama 3 8B Instruct, a fine-tuned model with 8 billion parameters [c1835], served as the evaluator in these experiments.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1835"
+      ],
+      "status": "grounded",
+      "reason": "c1835 states Llama 3 8B instruct is a fine-tuned language model with 8 billion parameters."
+    },
+    {
+      "index": 103,
+      "text": "LLM-based evaluation is increasingly popular because it scales better than human evaluation while capturing more nuance than simple benchmark scores.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 104,
+      "text": "The tradeoff is that you are trusting one model's judgment to evaluate another \u2014 a circularity worth keeping in mind.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 105,
+      "text": "It is worth pausing to take stock of the concrete artifacts produced across the three stages.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement with no factual claim."
+    },
+    {
+      "index": 106,
+      "text": "The series implements three main components [c1837]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1837"
+      ],
+      "status": "grounded",
+      "reason": "c1837 states the course implements three main components."
+    },
+    {
+      "index": 107,
+      "text": "1. A **next-token prediction LLM** built entirely from scratch.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1837"
+      ],
+      "status": "grounded",
+      "reason": "c1837 lists a next token prediction LLM built from scratch as one of the three main components."
+    },
+    {
+      "index": 108,
+      "text": "2. An **email classification fine-tuned LLM** that distinguishes spam from non-spam.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1837"
+      ],
+      "status": "grounded",
+      "reason": "c1837 lists an email classification fine-tuned LLM as one of the three main components."
+    },
+    {
+      "index": 109,
+      "text": "3. An **instruction fine-tuned LLM** that acts as a personal assistant.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1837"
+      ],
+      "status": "grounded",
+      "reason": "c1837 lists an instruction fine-tuned LLM as one of the three main components."
+    },
+    {
+      "index": 110,
+      "text": "Every single code block was explained in detail [c1771], and the entire implementation was built from scratch using a custom architecture rather than imported from external sources [c1830].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1771",
+        "c1830"
+      ],
+      "status": "grounded",
+      "reason": "c1771 states every single code block in the lecture series has been explained in detail. c1830 states the implementations shown in the course were built from scratch using a custom architecture."
+    },
+    {
+      "index": 111,
+      "text": "A single code file was developed and shared throughout the series [c1770], so you have a coherent, runnable artifact rather than a collection of disconnected snippets.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1770"
+      ],
+      "status": "grounded",
+      "reason": "c1770 states a code file has been developed and shared throughout the entire lecture series."
+    },
+    {
+      "index": 112,
+      "text": "The series was inspired by the book *Build a Large Language Model* by Sebastian Raschka [c1769], and it was designed to teach fundamental research methodology in machine learning [c1767] \u2014 not just how to use LLMs, but how to think about them.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1769",
+        "c1767"
+      ],
+      "status": "grounded",
+      "reason": "c1769 states the lecture series was inspired by the book 'Build a Large-Language Model' by Sebastian Rushka. c1767 states the lecture series was designed to teach fundamental research and philology in machine learning."
+    },
+    {
+      "index": 113,
+      "text": "Completing this series puts you in a strong position to engage with the research literature and with production-grade tooling.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 114,
+      "text": "Here are the natural next directions.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement with no factual claim."
+    },
+    {
+      "index": 115,
+      "text": "Full fine-tuning updates every parameter in the model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement with no factual claim requiring citation."
+    },
+    {
+      "index": 116,
+      "text": "For large models this is prohibitively expensive.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement with no factual claim requiring citation."
+    },
+    {
+      "index": 117,
+      "text": "**LoRA (Low-Rank Adaptation)** and **QLoRA (Quantized LoRA)** are techniques that dramatically reduce the number of trainable parameters during fine-tuning by injecting small trainable matrices into the existing weight structure.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "This is a factual claim about LoRA/QLoRA techniques but has no citation. The claims provided do not contain information about LoRA or QLoRA."
+    },
+    {
+      "index": 118,
+      "text": "[GAP: specific LoRA/QLoRA mechanics and citations were not covered in the supplied claims \u2014 consult the research literature for details.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "GAP marker indicating missing information about LoRA/QLoRA mechanics."
+    },
+    {
+      "index": 119,
+      "text": "Because you now understand exactly which weight matrices exist in the transformer block [c1822] and how they are updated [c1823, c1824], you are well-equipped to understand what LoRA is doing when it decomposes those matrices into low-rank factors.",
+      "type": "narrative",
+      "cited_claim_ids": [
+        "c1822",
+        "c1823",
+        "c1824"
+      ],
+      "status": "narrative_ok",
+      "reason": "This is a connective statement that uses cited claims to frame understanding of LoRA, but makes no new factual claim about LoRA itself."
+    },
+    {
+      "index": 120,
+      "text": "GPT-2 with 12 transformer blocks and 768-dimensional embeddings [c1793, c1818] is a tractable starting point, but the same architecture scales directly to much larger models by increasing the number of blocks [c1819], the number of attention heads per block [c1820], and the embedding dimension.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1793",
+        "c1818",
+        "c1819",
+        "c1820"
+      ],
+      "status": "grounded",
+      "reason": "c1793 states GPT-2 uses 768 embedding dimension. c1818 states GPT-2 has 12 transformer blocks. c1819 states larger LLMs use more blocks. c1820 states blocks can have different numbers of attention heads."
+    },
+    {
+      "index": 121,
+      "text": "The principles you have learned \u2014 attention, transformer blocks, pre-training, fine-tuning \u2014 are identical at every scale.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 122,
+      "text": "The three evaluation methods covered in the series \u2014 MMLU [c1831], human evaluation [c1832], and LLM-based scoring [c1833] \u2014 are a solid foundation, but the evaluation landscape is rich.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1831",
+        "c1832",
+        "c1833"
+      ],
+      "status": "grounded",
+      "reason": "The cited claims confirm the three evaluation methods were covered in the series."
+    },
+    {
+      "index": 123,
+      "text": "Benchmarks like HellaSwag, TruthfulQA, and BIG-Bench extend MMLU's coverage.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "This is a factual claim about other benchmarks but has no citation. The claims provided do not contain information about HellaSwag, TruthfulQA, or BIG-Bench."
+    },
+    {
+      "index": 124,
+      "text": "[GAP: specific details on these benchmarks were not covered in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "GAP marker indicating missing information about specific benchmarks."
+    },
+    {
+      "index": 125,
+      "text": "Fine-tuning adapts a model's weights.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement with no factual claim requiring citation."
+    },
+    {
+      "index": 126,
+      "text": "An alternative approach is to leave the weights fixed and instead give the model access to external knowledge through retrieval or tool calls.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "This is a factual claim about RAG and tool-use approaches but has no citation. The claims provided do not contain information about these techniques."
+    },
+    {
+      "index": 127,
+      "text": "[GAP: RAG and tool-use mechanics were not covered in the supplied claims.]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "GAP marker indicating missing information about RAG and tool-use mechanics."
+    },
+    {
+      "index": 128,
+      "text": "The central insight of this entire series is captured in a single sentence: the revolution in large language models is driven by the workflow of converting input embedding matrices into context vector matrices through attention [c1811].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1811"
+      ],
+      "status": "grounded",
+      "reason": "c1811 states the revolution in large language models is driven by the workflow of converting input embedding matrices into context vector matrices through attention."
+    },
+    {
+      "index": 129,
+      "text": "Everything else \u2014 the transformer block, the pre-training objective, the fine-tuning strategies \u2014 is scaffolding around that core idea.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 130,
+      "text": "You started with raw text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Narrative summary statement with no factual claim."
+    },
+    {
+      "index": 131,
+      "text": "You learned to tokenize it, embed it, and encode positional information into it [c1792].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1792"
+      ],
+      "status": "grounded",
+      "reason": "c1792 describes the data preprocessing pipeline converting input text into tokens, token IDs, token embeddings, and positional embeddings."
+    },
+    {
+      "index": 132,
+      "text": "You built the attention mechanism from first principles, understanding why queries, keys, and values exist and why causal masking is necessary [c1800, c1804].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1800",
+        "c1804"
+      ],
+      "status": "grounded",
+      "reason": "c1800 describes the attention mechanism workflow with queries, keys, and values. c1804 describes causal attention masking."
+    },
+    {
+      "index": 133,
+      "text": "You assembled transformer blocks and stacked them into a full GPT-style architecture [c1812, c1815].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1812",
+        "c1815"
+      ],
+      "status": "grounded",
+      "reason": "c1812 describes the full LLM architecture. c1815 describes the transformer block components."
+    },
+    {
+      "index": 134,
+      "text": "You pre-trained the model using cross-entropy loss and gradient-based optimization [c1821, c1823].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1821",
+        "c1823"
+      ],
+      "status": "grounded",
+      "reason": "c1821 states the loss function is cross-entropy loss. c1823 describes the gradient update rule."
+    },
+    {
+      "index": 135,
+      "text": "You fine-tuned it for classification and instruction following [c1827, c1828].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1827",
+        "c1828"
+      ],
+      "status": "grounded",
+      "reason": "c1827 defines classification fine-tuning. c1828 defines instruction fine-tuning."
+    },
+    {
+      "index": 136,
+      "text": "And you evaluated it using benchmarks, human judgment, and LLM-based scoring [c1831, c1832, c1833].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1831",
+        "c1832",
+        "c1833"
+      ],
+      "status": "grounded",
+      "reason": "c1831 defines MMLU benchmark evaluation. c1832 defines human evaluation. c1833 defines LLM-based evaluation."
+    },
+    {
+      "index": 137,
+      "text": "That is the complete picture.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Narrative summary statement with no factual claim."
+    },
+    {
+      "index": 138,
+      "text": "The field will continue to evolve \u2014 new architectures, new training recipes, new evaluation frameworks \u2014 but the foundation you have built here is durable.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Interpretive statement with no factual claim requiring citation."
+    },
+    {
+      "index": 139,
+      "text": "The nuts and bolts do not change as fast as the headlines do [c1768].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1768"
+      ],
+      "status": "grounded",
+      "reason": "c1768 states the series focuses on understanding the nuts and bolts of how LLMs are built, implying their fundamental importance and stability."
+    }
+  ],
+  "summary": {
+    "grounded": 125,
+    "unsupported": 2,
+    "contradicted": 0,
+    "needs_external_check": 3,
+    "narrative_ok": 9
+  }
+}

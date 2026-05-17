@@ -1,0 +1,201 @@
+## Claims (cite these by ID inline as [cNNN])
+- c169 [definition | 1bLhvqZzdaQ @ 44-54s]
+  A foundation model is a pre-trained large language model that has been trained on large-scale data and can be fine-tuned for downstream tasks.
+- c178 [code | 1bLhvqZzdaQ @ 421-429s]
+  Instruction: convert 45 km to meters
+  Response: 45 km is 45000 meters
+- c179 [code | 1bLhvqZzdaQ @ 429-437s]
+  Instruction: provide a synonym for bright
+  Response: a synonym for bright is radiant
+- c180 [code | 1bLhvqZzdaQ @ 437-450s]
+  Instruction: edit the following sentence to remove all passive voice. The song was composed by the artist
+  Response: the artist composed the song
+- c181 [definition | 1bLhvqZzdaQ @ 490-502s]
+  Supervised instruction fine-tuning is the approach of providing a large set of instruction-response pairs to train a language model to follow instructions.
+- c188 [definition | 1bLhvqZzdaQ @ 619-651s]
+  Each instruction-response pair in the dataset contains three keys: instruction, input, and output.
+- c196 [definition | 1bLhvqZzdaQ @ 860-899s]
+  The Stanford Alpaca prompt format consists of a template: 'Below is an instruction that describes a task paired with an input that provides further context. Write a response that appropriately completes the request.' followed by the instruction, input, and output fields.
+- c199 [definition | 1bLhvqZzdaQ @ 951-984s]
+  In Alpaca prompt style, the instruction and input fields are separated in the prompt template.
+- c200 [definition | 1bLhvqZzdaQ @ 989-1016s]
+  In Phi-3 prompt style, the instruction and input are fused together in a 'user' field, and the output is placed in an 'assistant' field.
+- c201 [code | 1bLhvqZzdaQ @ 1056-1146s]
+  def format_input(entry):
+      instruction_text = "Below is an instruction that describes a task paired with an input that provides further context. Write a response that appropriately completes the request."
+      instruction = entry['instruction']
+      input_text = entry.get('input', '')
+      if input_text:
+          prompt = f"{instruction_text}\n\nInstruction:\n{instruction}\n\nInput:\n{input_text}"
+      else:
+          prompt = f"{instruction_text}\n\nInstruction:\n{instruction}"
+      return prompt
+- c607 [code | 7m2jV7BOFkA @ 506-544s]
+  Loop over test data and select the first three entries, generate output from fine-tuned LLM, convert token IDs to text, remove instruction input from output to isolate the response, and print instruction, correct response, and model response.
+- c626 [definition | 7m2jV7BOFkA @ 954-962s]
+  Human preference comparison is an evaluation method where a human uses their own intuition and understanding to benchmark or compare LLMs.
+- c627 [definition | 7m2jV7BOFkA @ 981-995s]
+  Method 3 LLM evaluation involves comparing the true expected output against the model response by asking a large language model to assign a score based on this comparison.
+- c636 [code | 7m2jV7BOFkA @ 1186-1221s]
+  The code iterates through all instruction-input pairs in the test data, calls the generate function on each pair, and appends the model response to the instruction_data_with_response file.
+- c640 [code | 7m2jV7BOFkA @ 1317-1331s]
+  torch.save(model.state_dict(), 'gpt2medium355_million_sft.pth')
+- c641 [code | 7m2jV7BOFkA @ 1334-1347s]
+  model.load_state_dict(torch.load('gpt2medium355_million_sft.pth'))
+- c648 [definition | 7m2jV7BOFkA @ 1495-1502s]
+  Ollama is an efficient application to run large language models on your laptop.
+- c657 [definition | 7m2jV7BOFkA @ 1633-1642s]
+  Ollama is a tool for generating text using LLM inference and does not support training or fine-tuning LLMs.
+- c660 [code | 7m2jV7BOFkA @ 1711-1730s]
+  ollama run llama3
+- c662 [code | 7m2jV7BOFkA @ 1740-1748s]
+  ollama serve
+- c1722 [definition | __OiQznq4ao @ 49-65s]
+  Instruction finetuning is the process of training a pretrained LLM with a specific dataset to teach it to correctly follow instructions.
+- c1744 [code | __OiQznq4ao @ 584-606s]
+  from gpt_download3 import download_and_load_gpt2
+  
+  BASE_CONFIG = {
+      "vocab_size": 50257,
+      "context_length": 1024,
+      "drop_rate": 0.0,
+      "qkv_bias": True
+  }
+  
+  model_configs = {
+      "gpt2-small (124M)": {"emb_dim": 768, "n_layers": 12, "n_heads": 12},
+      "gpt2-medium (355M)": {"emb_dim": 1024, "n_layers": 24, "n_heads": 16},
+      "gpt2-large (774M)": {"emb_dim": 1280, "n_layers": 36, "n_heads": 20},
+      "gpt2-xl (1558M)": {"emb_dim": 1600, "n_layers": 48, "n_heads": 25},
+  }
+  
+  CHOOSE_MODEL = "gpt2-medium (355M)"
+- c1842 [definition | bkUkcyL_Xxc @ 137-176s]
+  Alpaca prompt style is a specific formatting convention for converting instruction-input-output pairs into prompts for fine-tuning large language models, maintained by Stanford in the Stanford Alpaca repository.
+- c1846 [code | bkUkcyL_Xxc @ 270-306s]
+  def formatInput(entry):
+      # Converts instruction-input-output pairs into alpaca prompt format
+      # Takes entry with instruction, input, and output keys
+      # Returns formatted prompt with instruction, input, and response sections
+- c1848 [definition | bkUkcyL_Xxc @ 388-432s]
+  Batching the dataset means converting multiple data samples into a batch where each sample is represented as a numerical array (row) with uniform dimensions.
+- c1854 [definition | bkUkcyL_Xxc @ 548-569s]
+  Tokenization is the process of converting data into a numerical representation by converting sentences into token IDs.
+- c1861 [definition | bkUkcyL_Xxc @ 694-709s]
+  Padding is the process of adjusting the length of token ID sequences so that all samples in a batch have the same length.
+- c1863 [definition | bkUkcyL_Xxc @ 787-813s]
+  The end-of-text token is a special token used for padding sequences; in GPT-2, it has token ID 50256.
+- c1868 [definition | bkUkcyL_Xxc @ 909-956s]
+  Target token IDs are created by shifting the input tokens to the right by 1 position and padding with an additional token to maintain equal length between input and target sequences.
+- c1886 [definition | bkUkcyL_Xxc @ 1674-1684s]
+  A custom collate function takes a batch of sequences and requires a padding token ID (50256) and target device (cpu) as inputs.
+- c1894 [definition | bkUkcyL_Xxc @ 1970-1980s]
+  Target token IDs are created by shifting the input tokens to the right by one position and appending a padding token at the end.
+- c1896 [code | bkUkcyL_Xxc @ 1992-2002s]
+  targets = inputs[1:] # Shift inputs right by one by removing first element
+- c1902 [code | bkUkcyL_Xxc @ 2271-2330s]
+  def custom_collate_function(batch, padding_token_id, ignore_index):
+      # Get inputs and targets
+      # Create mask for all padding token indices
+      mask = (target_tensor == padding_token_id)
+      # Ignore the first occurrence of padding_token_id
+      mask[0] = False
+      # Replace all remaining padding tokens with ignore_index (-100)
+      target_tensor[mask] = ignore_index
+      return input_tensor, target_tensor
+- c1917 [code | bkUkcyL_Xxc @ 3000-3006s]
+  To mask target token IDs, replace the token IDs of instruction and input portions in the target text with -100.
+- c2284 [definition | egFqsJQ9kuY @ 27-47s]
+  Data loaders are an efficient way to collect different batches sequentially and access them in an iterative manner during model training.
+- c2289 [definition | egFqsJQ9kuY @ 159-168s]
+  Alpaca format is a template used for formatting instruction, input, and output data during instruction fine-tuning.
+- c2291 [definition | egFqsJQ9kuY @ 218-242s]
+  The Alpaca prompt template structures instruction fine-tuning data as: 'Below is an instruction that describes a task paired with an input that provides further context. Write a response that appropriately completes the request.' followed by the instruction, input, and response.
+- c2294 [definition | egFqsJQ9kuY @ 308-327s]
+  Data batching consists of five main steps: (1) format data using prompt template, (2) tokenize the formatted data, (3) pad sequences to equal length, (4) create target pairs shifted by one token, and (5) replace padding tokens with -100.
+- c2298 [definition | egFqsJQ9kuY @ 430-451s]
+  Target pairs are created by shifting the input sequence to the right by one token and appending an end-of-text token.
+- c2303 [code | egFqsJQ9kuY @ 631-658s]
+  # Custom collate function for creating batches
+  # Converts tokens to token IDs, pads sequences to equal length within batch,
+  # replaces padding tokens (50256) with -100, and creates input and target tensors
+- c2309 [code | egFqsJQ9kuY @ 839-847s]
+  device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+- c2314 [code | egFqsJQ9kuY @ 992-996s]
+  train_dataset = InstructionDataset(training_data)
+- c2323 [definition | egFqsJQ9kuY @ 1179-1186s]
+  The target tensor is the input tensor shifted to the right by one position.
+- c3095 [definition | r7unILsP0Es @ 5-11s]
+  Cross-entropy loss is used as the loss function for fine-tuning, the same loss function used during pre-training.
+- c3100 [definition | r7unILsP0Es @ 328-336s]
+  The backward pass calculates the gradient of the loss, which is the partial derivative of the loss with respect to all model parameters.
+- c3102 [definition | r7unILsP0Es @ 344-351s]
+  Gradient descent is a gradient-based optimizer used to update model parameters.
+- c3103 [equation | r7unILsP0Es @ 351-360s]
+  w_new = w_old - α * (∂L/∂w), where w_new is the updated weight, w_old is the previous weight, α is the learning rate, and ∂L/∂w is the partial derivative of loss with respect to w.
+- c3112 [definition | r7unILsP0Es @ 497-503s]
+  The loss function used for finetuning is cross entropy loss.
+- c3113 [definition | r7unILsP0Es @ 506-517s]
+  Cross entropy loss is conceptually the negative of the logarithm of the probability.
+- c3118 [definition | r7unILsP0Es @ 586-595s]
+  Cross-entropy loss is used to calculate the loss on a batch of data.
+- c3123 [definition | r7unILsP0Es @ 746-753s]
+  AdamW is the Adam optimizer with weight decay, implemented as torch.optim.AdamW.
+- c3130 [definition | r7unILsP0Es @ 861-868s]
+  Evaluation iterations specifies after how many iterations the loss on the evaluation dataset is calculated.
+- c171 [fact | 1bLhvqZzdaQ @ 100-108s]
+  The lecture series covers building a personal assistant through instruction-based fine-tuning over 5 to 6 lectures.
+- c714 [fact | 7m2jV7BOFkA @ 3100-3123s]
+  The instruction fine-tuning pipeline covered nine steps: data preparation, fine-tuning, evaluation, response extraction, qualitative evaluation, and quantitative scoring using OLLAMA.
+- c587 [architecture | 7m2jV7BOFkA @ 5-11s]
+  The instruction fine-tuning process consists of three stages: Stage 1 (dataset preparation with download, batching, and data loader creation), Stage 2 (loading pretrained LLM and instruction fine-tuning), and Stage 3 (evaluation with response extraction, qualitative evaluation, and scoring).
+- c182 [design_decision | 1bLhvqZzdaQ @ 518-524s]
+  The instruction fine-tuning process begins by loading a training dataset consisting of instruction-response pairs.
+- c186 [design_decision | 1bLhvqZzdaQ @ 537-543s]
+  The fine-tuning workflow includes: fine-tuning the LLM, inspecting the loss, extracting responses, performing evaluation, and scoring.
+- c1921 [fact | bkUkcyL_Xxc @ 3075-3089s]
+  Upcoming lectures will cover creating data loaders, loading pre-trained LLMs, instruction fine-tuning, loss and accuracy inspection, response generation, and evaluation.
+- c3087 [fact | r7unILsP0Es @ 28-36s]
+  The instruction fine-tuning process consists of three stages: preparing the dataset, fine-tuning the LLM, and evaluating performance.
+- c646 [design_decision | 7m2jV7BOFkA @ 1449-1463s]
+  Step 7 of evaluating a fine-tuned LLM involves implementing automated response evaluation using a larger pre-trained LLM.
+- c3116 [fact | r7unILsP0Es @ 567-575s]
+  The dataset processing, batching, and data loaders have already been implemented before the fine-tuning training loop.
+- c1761 [design_decision | __OiQznq4ao @ 1107-1121s]
+  Fine-tuning the LLM on instruction data will modify the weights and parameters of the GPT model to understand instruction input-output pairs from a specific dataset.
+- c591 [fact | 7m2jV7BOFkA @ 141-195s]
+  A pretrained GPT-2 model with 355 million weights was loaded as the foundation for instruction fine-tuning.
+- c695 [fact | 7m2jV7BOFkA @ 2825-2830s]
+  Stanford Alpaca repository contains a dataset of 52,000 instruction-output pairs for fine-tuning.
+- c1763 [fact | __OiQznq4ao @ 1143-1153s]
+  The upcoming lecture will cover fine-tuning the model, extracting responses, and evaluating responses.
+- c707 [fact | 7m2jV7BOFkA @ 2995-3004s]
+  The lecture covered fine-tuning a model on an instruction dataset from scratch.
+- c1875 [architecture | bkUkcyL_Xxc @ 1350-1401s]
+  Data batching for instruction fine-tuning consists of five steps: (1) format data using prompt template, (2) convert prompt template to token IDs, (3) append padding tokens (50256) to equalize sequence lengths, (4) create target token IDs by shifting input right by one, (5) replace padding tokens in targets with -100.
+- c698 [design_decision | 7m2jV7BOFkA @ 2866-2876s]
+  To improve fine-tuning performance, consider using a larger pre-trained model which may have greater capacity to capture complex patterns and generate more accurate responses.
+- c697 [design_decision | 7m2jV7BOFkA @ 2857-2865s]
+  To improve fine-tuning performance, experiment with different prompts or instruction formats to guide model responses more effectively.
+- c588 [fact | 7m2jV7BOFkA @ 67-75s]
+  The instruction dataset used for fine-tuning consists of 1100 instruction input and output pairs.
+- c2335 [fact | egFqsJQ9kuY @ 1426-1436s]
+  Stage one of instruction fine-tuning focuses on preparing the dataset itself.
+- c3088 [fact | r7unILsP0Es @ 36-54s]
+  Stage 1 involves downloading data, formatting it using the Alpaca prompt format, and creating training, testing, and validation data loaders.
+- c1911 [architecture | bkUkcyL_Xxc @ 2780-2820s]
+  The instruction fine-tuning batching process consists of five steps: convert data to Alpaca prompt template, tokenize formatted data into token IDs, pad sequences to equal length within each batch, create target token IDs by shifting input token IDs right by one, and replace padding tokens with -100 (except the first end-of-text token).
+- c1764 [fact | __OiQznq4ao @ 1149-1158s]
+  The code file provided can be used to perform fine-tuning and a wide range of instruction fine-tuning tasks.
+- c1733 [fact | __OiQznq4ao @ 313-321s]
+  Fine-tuning on a specific dataset after loading pre-trained weights requires significantly less computational time than training from scratch.
+- c1915 [fact | bkUkcyL_Xxc @ 2961-2985s]
+  A recent paper titled 'Instruction Tuning With Loss Over Instructions' demonstrated that not masking the instruction tokens actually benefits LLM performance during instruction fine-tuning.
+- c198 [fact | 1bLhvqZzdaQ @ 927-951s]
+  There are two main ways to format instruction-input-output datasets: Alpaca prompt style and Phi-3 prompt style.
+- c3117 [fact | r7unILsP0Es @ 575-580s]
+  Loss calculation and training functions from pre-training are reused for fine-tuning.
+- c2292 [fact | egFqsJQ9kuY @ 246-277s]
+  During instruction fine-tuning, the LLM is trained using next token prediction, where the entire formatted prompt serves as both input and target pairs.
+- c193 [fact | 1bLhvqZzdaQ @ 815-826s]
+  Stanford Alpaca is a specific prompt format for instruction-following LLaMA models.

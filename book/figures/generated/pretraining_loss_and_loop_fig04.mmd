@@ -1,0 +1,15 @@
+flowchart LR
+    A["Raw Text"] --> B["Tokenizer"]
+    B --> C["DataLoader"]
+    C --> D["Training Loop"]
+    D --> E["Forward"]
+    E --> F["Loss"]
+    F --> G["Backward"]
+    G --> H["Update"]
+    H --> I["Evaluate"]
+    I --> J["Generate Sample"]
+    style D fill:#e1f5ff
+    style E fill:#fff3e0
+    style F fill:#fff3e0
+    style G fill:#fff3e0
+    style H fill:#fff3e0

@@ -1,0 +1,17 @@
+graph TD
+    A["(1) Data Preparation"] --> D["Building an LLM"]
+    B["(2) Attention Mechanism"] --> D
+    C["(3) LLM Architecture"] --> D
+    D --> E["(4) Training loop"]
+    E --> F["(5) Model evaluation"]
+    F --> G["(6) Load pretrained"]
+    G --> H["Foundation model"]
+    H --> I["(7) Finetuning"]
+    I --> J["Classifier"]
+    I --> K["Personal assistant"]
+    L["Instruction dataset"] --> K
+    
+    style D fill:#e1f5ff
+    style H fill:#e1f5ff
+    style J fill:#e1f5ff
+    style K fill:#e1f5ff

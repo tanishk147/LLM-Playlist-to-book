@@ -1,0 +1,2072 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## The Attention Mechanism: From Simplified to Multi-Head",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "Attention is the engine at the heart of every modern large language model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 2,
+      "text": "Without it, transformers would not exist, and GPT-style models would be impossible.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 3,
+      "text": "Yet the idea is surprisingly approachable: at its core, attention is just a principled way of asking \"when I am processing this token, which other tokens in the sequence should I care about, and how much?\"",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "This chapter builds the attention mechanism from the ground up.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 5,
+      "text": "We start with the historical motivation\u2014why older sequence models struggled and what researchers did about it\u2014then construct a simplified, weight-free version of self-attention to build intuition.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 6,
+      "text": "From there we add trainable weight matrices (the Query, Key, and Value projections), introduce causal masking and dropout to make the mechanism suitable for autoregressive language modeling, and finally assemble the full multi-head attention module that appears in real LLM architectures.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 7,
+      "text": "Every piece of code in this chapter is runnable PyTorch; every equation is the real thing.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 8,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 9,
+      "text": "### Why Attention? A Brief History",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 10,
+      "text": "To appreciate why attention was invented, it helps to understand what came before it.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 11,
+      "text": "#### Recurrent Neural Networks and Their Limits",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 12,
+      "text": "Before transformers, the dominant approach to sequence modeling was the Recurrent Neural Network (RNN).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 13,
+      "text": "RNNs are designed to work with sequential data by maintaining a hidden state that captures information about previous inputs [c1535].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1535"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 14,
+      "text": "The hidden state is, in fact, the key innovation of RNNs that enables them to process sequential data at all [c1538].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1538"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 15,
+      "text": "The encoder\u2013decoder architecture built on top of RNNs works roughly as follows: an encoder reads the input sequence token by token, updating its hidden state at each step.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 16,
+      "text": "The final hidden state from the encoder is called the context vector [c1504], and it is handed to the decoder to generate the output sequence.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1504"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 17,
+      "text": "The hidden state in an RNN captures memory of previous inputs in the sequence [c1502].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1502"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 18,
+      "text": "The problem is that compressing an entire input sequence into a single fixed-size vector is a lossy operation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 19,
+      "text": "Loss of context is the problem that occurs when an RNN decoder struggles to capture longer dependencies and contextual information because it relies on only one final hidden state [c1517].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1517"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 20,
+      "text": "Long-term dependencies in sentences\u2014complex sentence structures where multiple clauses or phrases are connected\u2014make it difficult for language models to identify relationships between distant words [c1481].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1481"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 21,
+      "text": "LSTMs (Long Short-Term Memory networks) were one response to this problem.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 22,
+      "text": "LSTMs solve the vanishing gradient problem by maintaining both a long-term memory route and a short-term memory route [c1541].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1541"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 23,
+      "text": "But even LSTMs still funnel everything through a single context vector at the end of the encoder, which remains a bottleneck.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 24,
+      "text": "#### The Bahdanau Attention Breakthrough",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 25,
+      "text": "The key insight that broke the bottleneck came from Bahdanau et al.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 26,
+      "text": "In attention mechanisms, when decoding a particular part, the decoder has access to all of the input tokens and decides how much attention to give to each input [c1557].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1557"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 27,
+      "text": "The Bahdanau attention mechanism allows the decoder to selectively access different parts of the input sequence at each decoding step, rather than relying only on the final hidden state [c1525].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1525"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 28,
+      "text": "The crucial property that makes this work is *dynamic focus*: the ability of the decoder to selectively choose which inputs to focus on and how much attention to give to each input at every decoding step [c1533].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1533"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 29,
+      "text": "The Bahdanau attention mechanism allows the decoder to have access to each input state during decoding and selectively decide which inputs to give more attention to [c1544].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1544"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 30,
+      "text": "This is a fundamentally different paradigm from the single-context-vector approach.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 31,
+      "text": "Instead of one summary, the decoder gets a weighted combination of *all* encoder states, with the weights recomputed fresh at every decoding step.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 32,
+      "text": "#### From Attention to Self-Attention",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 33,
+      "text": "Traditional attention looks at one input sequence and one output sequence, determining which parts of the output sequence are more related to which parts of the input sequence [c1558].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1558"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 34,
+      "text": "Self-attention takes this idea one step further: it looks at one sequence and examines how different parts of that *same* sequence are related with respect to each other [c1559].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1559"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 35,
+      "text": "More precisely, self-attention is a mechanism that allows each position of an input sequence to attend to all positions in the same sequence [c1548].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1548"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 36,
+      "text": "The term \"self\" refers to the attention mechanism's ability to compute attention weights by relating different positions in a single input sequence [c1553].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1553"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 37,
+      "text": "Self-attention is the foundation of the transformer architecture and, by extension, of every LLM we will build in this book.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 38,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 39,
+      "text": "### Simplified Self-Attention (No Trainable Weights)",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 40,
+      "text": "Before introducing the full machinery of queries, keys, and values, it is instructive to build a simplified version of self-attention that has no learnable parameters at all [c2158].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2158"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 41,
+      "text": "This is the purest and most basic form of the attention technique [c1487], and working through it carefully will make the full version much easier to understand.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1487"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 42,
+      "text": "#### Tokens, Embeddings, and the Goal",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 43,
+      "text": "Recall that each token in the input is represented as a vector.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 44,
+      "text": "In the notation we will use throughout this chapter, $x_i$ denotes the vector representation of the $i$-th token, where $x_1$ is the first token, $x_2$ is the second token, and so on [c2176].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2176"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 45,
+      "text": "An input embedding is a vector representation of a token that encodes semantic meaning but does not carry information about how other words in the sentence relate to it [c2603].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2603"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 46,
+      "text": "Vector embeddings capture semantic meaning, such that semantically related words like \"journey\" and \"starts\" are positioned closer to each other in vector space [c2181].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2181"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 47,
+      "text": "But the raw embedding for a token is context-free\u2014it says nothing about how the word is being used in this particular sentence.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 48,
+      "text": "The goal of self-attention is to produce a *context vector* for each token: an enriched embedding vector that combines contributions from all input embedding vectors weighted by their corresponding attention weights [c2236].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2236"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 49,
+      "text": "A context vector for a query contains information about both the query token itself and all other input elements in the sequence [c2184].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2184"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 50,
+      "text": "The context vector, denoted by $z$, is derived from attention weights and input vectors [c2179].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2179"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 51,
+      "text": "#### Attention Scores",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 52,
+      "text": "The first step is to compute *attention scores*\u2014intermediate values that quantify how much importance or attention should be paid to each input word relative to a query word [c2187].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2187"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 53,
+      "text": "A *query* is the element or token being examined [c2183].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2183"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 54,
+      "text": "For each query token, we compute its attention score against every other token in the sequence.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 55,
+      "text": "The natural tool for measuring similarity between two vectors is the dot product: the dot product of two vectors $a$ and $b$ is calculated as $a \\cdot b = \\sum(a_i \\times b_i)$, which equals $|a||b|\\cos\\theta$, where $\\theta$ is the angle between the vectors [c2193].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2193"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 56,
+      "text": "A higher dot product means the two vectors point in more similar directions, which we interpret as higher relevance.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 57,
+      "text": "#### Normalizing to Attention Weights",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 58,
+      "text": "Raw dot products are not directly usable as weights because they can be arbitrarily large or small and do not sum to one.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 59,
+      "text": "Normalization is the process of transforming attention scores so that they sum to one, enabling interpretable statements about attention allocation as percentages [c2207].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2207"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 60,
+      "text": "The standard normalization function is softmax.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 61,
+      "text": "Softmax normalization takes the exponent of every element and divides by the summation of all exponents:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 62,
+      "text": "$$\\text{softmax}(x_i) = \\frac{e^{x_i}}{\\sum_j e^{x_j}}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 63,
+      "text": "[c2216]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2216"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "Naive softmax attention weights are computed by taking the exponent of each attention score and dividing by the summation of the exponents [c2224].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2224"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 65,
+      "text": "In PyTorch, `torch.nn.Softmax(dim=None)` applies the Softmax function to rescale n-dimensional input tensor elements to the range $[0, 1]$ and sum to 1 [c2229].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2229"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 66,
+      "text": "The `dim` parameter in `torch.softmax` specifies the dimension of the input tensor along which the normalization will be computed [c2265].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2265"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 67,
+      "text": "Attention weights determine how much attention to give to each input token when computing the context vector for any embedding vector [c2178].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2178"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 68,
+      "text": "An attention weight matrix is a matrix where each row represents the attention weights for one particular query word, and each column represents the attention weight between that query and a key word [c2250].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2250"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 69,
+      "text": "#### Computing the Context Vector",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 70,
+      "text": "Once we have attention weights, the context vector for token $i$ is:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 71,
+      "text": "$$Z_i = \\sum_j \\text{attention\\_weight}_j \\times \\text{embedding\\_vector}_j$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 72,
+      "text": "[c2246]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2246"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 73,
+      "text": "Intuitively, this is a weighted average of all the input embeddings, where the weights reflect how relevant each token is to the query.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 74,
+      "text": "Tokens that are highly relevant get a large weight and contribute more to the context vector; irrelevant tokens contribute almost nothing.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 75,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 76,
+      "text": "### Scaled Dot-Product Self-Attention with Trainable Weights",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 77,
+      "text": "The simplified version above is useful for building intuition, but it has a critical limitation: there are no learnable parameters.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 78,
+      "text": "Every token's relationship to every other token is determined entirely by the raw similarity of their embeddings, with no room for the model to learn task-specific notions of relevance.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 79,
+      "text": "The solution is to introduce trainable weight matrices.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 80,
+      "text": "Self-attention introduces trainable weights which form the basis of the actual mechanism used in LLMs [c1488].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1488"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 81,
+      "text": "#### The Query, Key, and Value Matrices",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 82,
+      "text": "The self-attention mechanism is implemented using three trainable weight matrices: Query ($W_Q$), Key ($W_K$), and Value ($W_V$) [c1350].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1350"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 83,
+      "text": "These names come from an analogy to database retrieval: a query is like a search query, a key is like a database index, and a value is the actual content retrieved.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 84,
+      "text": "More precisely:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 85,
+      "text": "- **Query** in the attention mechanism is analogous to a search query in a database and represents the current token the model is focusing on [c1469].\n- **Key** in the attention mechanism represents items in the input sequence and is used to match with the query [c1470].\n- **Value** in the attention mechanism represents the actual content or representation of the input items themselves [c1471].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1469",
+        "c1470",
+        "c1471"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 86,
+      "text": "$W_Q$, $W_K$, and $W_V$ are trainable weight matrices whose parameters need to be trained based on input data as part of LLM training [c2608].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2608"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 87,
+      "text": "In PyTorch, `torch.nn.Parameter` is a Tensor subclass used to mark tensors as module parameters, which are automatically added to the module's parameter list and appear in the `parameters()` iterator [c1367].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1367"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 88,
+      "text": "Query, Key, and Value weight matrices are initialized as `torch.nn.Parameter` objects with random values and shape `(D_in, D_out)` [c1368].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1368"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 89,
+      "text": "#### Computing Queries, Keys, and Values",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 90,
+      "text": "Given an input matrix $x$ (where each row is a token embedding), we project into the query, key, and value spaces:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 91,
+      "text": "# Source: [c1443]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 92,
+      "text": "keys = x @ W_key",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 93,
+      "text": "Or equivalently, using named weight matrices:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 94,
+      "text": "# Source: [c1373]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 95,
+      "text": "keys = inputs @ W_k",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 96,
+      "text": "Each of these projections is a learned linear transformation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 97,
+      "text": "The model can learn, for example, that certain dimensions of the embedding are more useful for determining relevance (keys and queries) versus for constructing the output representation (values).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 98,
+      "text": "#### Scaling by $\\sqrt{d_k}$",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 99,
+      "text": "Attention scores are computed as queries multiplied by keys transpose: $Q \\times K^T$ [c1933].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1933"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 100,
+      "text": "However, raw dot products can grow large in magnitude when the embedding dimension is high, which pushes the softmax into regions where its gradient is very small.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "The fix is to scale by the square root of the key embedding dimension.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 102,
+      "text": "Attention weights are computed by scaling attention scores by the square root of the key embedding dimension, then applying softmax [c1403]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1403"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 103,
+      "text": "# Source: [c1406]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "d_k = keys.shape[-1]  # Extract key embedding dimension from last axis",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 105,
+      "text": "In a more compact form:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 106,
+      "text": "# Source: [c1445]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 107,
+      "text": "attention_scores = attention_scores / (keys.shape[-1] ** 0.5)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 108,
+      "text": "#### Computing the Final Context Vectors",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 109,
+      "text": "Context vectors are computed by multiplying attention weights with the values matrix [c1938].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1938"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 110,
+      "text": "An attention weight between two tokens (e.g., between \"journey\" and \"your\") indicates how much the model should attend to the second token when processing the first token as the query [c1465].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1465"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 111,
+      "text": "# Source: [c1448]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 112,
+      "text": "context_vector = attention_weights @ values",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 113,
+      "text": "Each element in an attention score matrix row encodes how much a particular token relates to the query token, or how much importance should be paid to that token when processing the query [c1934].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1934"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 114,
+      "text": "After multiplying by the values matrix, each row of the result is the context vector for the corresponding query token\u2014a weighted blend of all value vectors, shaped by what the model has learned to find relevant.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 115,
+      "text": "[FIGURE: Diagram showing the full scaled dot-product attention computation: input embeddings \u2192 three linear projections (W_Q, W_K, W_V) \u2192 Q\u00d7K^T \u2192 scale by sqrt(d_k) \u2192 softmax \u2192 multiply by V \u2192 context vectors]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 116,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 117,
+      "text": "### Causal (Masked) Attention",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 118,
+      "text": "The self-attention mechanism described so far allows every token to attend to every other token in the sequence\u2014both past and future.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 119,
+      "text": "This is fine for tasks like sentence classification, where the entire input is available at once.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 120,
+      "text": "But for language modeling, where the model must predict the next token given only the tokens seen so far, allowing the model to \"look ahead\" at future tokens would be cheating.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 121,
+      "text": "#### The Concept of Causal Attention",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 122,
+      "text": "Causal attention is a special form of self-attention [c2618], also called masked attention [c2617].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2618",
+        "c2617"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 123,
+      "text": "Causal attention restricts the model to only consider the previous and current inputs in a sequence when processing any given token [c2619].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2619"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 124,
+      "text": "More precisely, causal attention is designed to prevent future tokens from influencing past tokens [c2640].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2640"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 125,
+      "text": "The causal attention mask is the set of attention weights above the diagonal that are masked out [c2627].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2627"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 126,
+      "text": "Intuitively, if we lay out the attention weight matrix with query tokens as rows and key tokens as columns, then position $(i, j)$ represents how much token $i$ attends to token $j$.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 127,
+      "text": "For causal attention, we want to zero out all positions where $j > i$\u2014that is, all positions above the diagonal.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 128,
+      "text": "[FIGURE: Attention weight matrix with the upper triangle (above diagonal) shaded/masked, showing that token i can only attend to tokens 1 through i]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 129,
+      "text": "#### Triangular Matrices",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "To implement the mask, we need to understand two types of triangular matrices:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 131,
+      "text": "- An **upper triangular matrix** has all elements below the diagonal set to zero [c2630].\n- A **lower triangular matrix** has all elements above the diagonal set to zero [c2631].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2630",
+        "c2631"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 132,
+      "text": "For causal masking, we want a lower triangular mask (ones on and below the diagonal, zeros above).",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 133,
+      "text": "PyTorch provides `torch.tril` for this:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 134,
+      "text": "# Source: [c2632]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 135,
+      "text": "mask_simple = torch.tril(torch.ones(context_length, context_length))",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 136,
+      "text": "#### Approach 1: Multiply and Renormalize",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 137,
+      "text": "One straightforward approach is to multiply the attention weights element-wise by the mask (zeroing out future positions) and then renormalize:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 138,
+      "text": "# Source: [c2636]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 139,
+      "text": "masked_attn_weights = attn_weights * mask_simple",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "After masking, the rows no longer sum to one, so we renormalize:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 141,
+      "text": "# Source: [c2638]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 142,
+      "text": "mask_simple_normalized = masked_attn_weights / masked_attn_weights.sum(dim=1, keepdim=True)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 143,
+      "text": "This approach works but is slightly inefficient because it requires an extra division step after the softmax.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 144,
+      "text": "#### Approach 2: Mask Before Softmax (Preferred)",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 145,
+      "text": "A cleaner approach is to apply the mask *before* the softmax, by setting future positions to $-\\infty$.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 146,
+      "text": "Masking in transformers sets attention scores for future tokens to large negative values, making their influence in softmax calculation effectively zero [c2653].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2653"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 147,
+      "text": "When softmax exponentiates $-\\infty$, it produces exactly zero, so the masked positions contribute nothing to the weighted sum\u2014and the remaining weights automatically sum to one.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 148,
+      "text": "We use `torch.triu` (upper triangular) with `diagonal=1` to create a mask of the positions we want to zero out:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 149,
+      "text": "# Source: [c2649]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 150,
+      "text": "mask = torch.triu(torch.ones(seq_len, seq_len), diagonal=1)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 151,
+      "text": "Then we fill those positions with $-\\infty$:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 152,
+      "text": "# Source: [c2650]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 153,
+      "text": "attention_scores = attention_scores.masked_fill(mask == 1, float('-inf'))",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 154,
+      "text": "Then apply softmax as usual:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 155,
+      "text": "# Source: [c2651]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 156,
+      "text": "attention_weights = torch.softmax(attention_scores / sqrt(d_k), dim=-1)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 157,
+      "text": "The `diagonal=1` argument to `torch.triu` means we keep the main diagonal (a token can attend to itself) and zero out everything strictly above it.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 158,
+      "text": "#### Dropout in Attention",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 159,
+      "text": "In practice, we also apply dropout to the attention weights after the softmax.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 160,
+      "text": "Dropout is a deep learning technique where neurons in different layers are randomly switched to zero during training [c2654].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2654"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 161,
+      "text": "This regularization prevents the model from over-relying on any particular attention pattern.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 162,
+      "text": "`torch.nn.Dropout(p=0.5)` creates a dropout layer that randomly zeroes elements with probability 0.5 and scales remaining elements by $1/(1-0.5) = 2$ [c2670].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2670"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 163,
+      "text": "The scaling ensures that the expected value of the output is the same whether dropout is active or not.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 164,
+      "text": "#### Putting It Together: The CausalAttention Forward Pass",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 165,
+      "text": "The input `x` to the causal attention class has shape `(batch_size, num_tokens, input_dimensions)` [c1941].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1941"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 166,
+      "text": "Here is the core of the forward computation, combining scaled dot-product attention, causal masking, and dropout:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 167,
+      "text": "# Source: [c2687]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 168,
+      "text": "attn_scores = queries @ keys.transpose(1, 2)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 169,
+      "text": "Notice the slice `[:num_tokens, :num_tokens]` applied to the mask.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 170,
+      "text": "The mask slicing `[:, :T]` ensures the causal mask is created only up to the number of tokens $T$ in the batch, handling cases where batch tokens are smaller than the supported context size [c2696].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2696"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 171,
+      "text": "This is important because the mask is typically pre-allocated for the maximum context length, but individual batches may be shorter.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 172,
+      "text": "[FIGURE: Side-by-side comparison of full self-attention (all tokens attend to all tokens) vs. causal attention (each token attends only to itself and previous tokens), showing the masked upper triangle]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 173,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 174,
+      "text": "### Multi-Head Attention",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "So far we have built a single attention mechanism.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 176,
+      "text": "In practice, LLMs use *multi-head attention*, which runs several attention mechanisms in parallel and combines their outputs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 177,
+      "text": "The intuition is that different heads can learn to attend to different types of relationships simultaneously\u2014one head might focus on syntactic dependencies, another on semantic similarity, and so on.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 178,
+      "text": "#### What Is Multi-Head Attention?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 179,
+      "text": "Multi-head attention refers to dividing the attention mechanism into multiple heads, where each head operates independently [c1952].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1952"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 180,
+      "text": "Multi-head attention is called \"multi-head\" because it aggregates the output of multiple independent attention heads [c1962].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1962"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 181,
+      "text": "More concretely, multi-head attention involves creating multiple instances of the self-attention mechanism, each with its own weights, and then combining their outputs [c1964].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1964"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 182,
+      "text": "[FIGURE: Multi-head attention diagram showing input being processed by H parallel attention heads, each with its own W_Q, W_K, W_V matrices, with outputs concatenated and projected]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 183,
+      "text": "#### The Wrapper Approach",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 184,
+      "text": "The simplest way to implement multi-head attention is to create multiple instances of the causal attention module and run them in parallel.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 185,
+      "text": "This is sometimes called the \"wrapper\" approach because it wraps several single-head attention modules.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 186,
+      "text": "In the forward method, `torch.cat` is used with `dimension=-1` to concatenate outputs along the columns [c1966].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1966"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 187,
+      "text": "This concatenation combines the context vectors from all heads into a single, wider vector. $D_{out}$ is the output dimension of each attention head [c1969].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1969"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 188,
+      "text": "Intuitively, if each head produces a context vector of dimension $D_{out}$, and we have $H$ heads, the concatenated output has dimension $H \\times D_{out}$.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 189,
+      "text": "This concatenated vector is then typically projected back down to the model dimension with a learned linear layer.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 190,
+      "text": "#### The Efficient Weight-Split Approach",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 191,
+      "text": "The wrapper approach is conceptually clean but computationally inefficient: it runs $H$ separate matrix multiplications sequentially (or requires explicit parallelism).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 192,
+      "text": "A more efficient approach is to perform a single large matrix multiplication and then split the result across heads.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 193,
+      "text": "The key insight is that concatenating $H$ separate $W_Q$ matrices of shape $(D_{in}, D_{out})$ is mathematically equivalent to a single $W_Q$ matrix of shape $(D_{in}, H \\times D_{out})$, followed by a reshape.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 194,
+      "text": "This means we can compute all heads' queries, keys, and values in one batched matrix multiply, then reshape and transpose to get the per-head tensors.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 195,
+      "text": "[FIGURE: Diagram contrasting the wrapper approach (H separate attention modules) with the weight-split approach (one large projection followed by reshape into H heads)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 196,
+      "text": "The weight-split approach is what is used in production implementations.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 197,
+      "text": "It achieves the same mathematical result as the wrapper approach but with significantly better hardware utilization, because modern GPUs are highly optimized for large matrix multiplications.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 198,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 199,
+      "text": "### The Mathematics of Scaling by $\\sqrt{d_k}$",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 200,
+      "text": "It is worth pausing to understand *why* we scale by $\\sqrt{d_k}$ rather than some other constant.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 201,
+      "text": "Consider the dot product of two random vectors $q$ and $k$, each of dimension $d_k$, with components drawn independently from a distribution with mean 0 and variance 1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 202,
+      "text": "The dot product $q \\cdot k = \\sum_{i=1}^{d_k} q_i k_i$ is a sum of $d_k$ independent random variables, each with mean 0 and variance 1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 203,
+      "text": "By the properties of variance, the sum has variance $d_k$, and therefore standard deviation $\\sqrt{d_k}$.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 204,
+      "text": "As $d_k$ grows, the dot products grow in magnitude proportionally to $\\sqrt{d_k}$.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 205,
+      "text": "Large dot products push the softmax into its saturated regime, where the gradient is nearly zero and learning slows dramatically.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 206,
+      "text": "Dividing by $\\sqrt{d_k}$ brings the dot products back to unit variance, keeping the softmax in a well-behaved regime regardless of the embedding dimension.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 207,
+      "text": "Attention weights are computed by scaling attention scores by the square root of the key embedding dimension, then applying softmax [c1403].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1403"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 208,
+      "text": "This is not an arbitrary choice\u2014it is a principled normalization that keeps the attention mechanism numerically stable across a wide range of model sizes.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 209,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 210,
+      "text": "### Putting It All Together",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 211,
+      "text": "Let us trace through the complete flow of a single forward pass through a multi-head causal attention module, from input to output:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 212,
+      "text": "1. **Input**: A batch of token sequences, each token represented as an embedding vector.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 213,
+      "text": "The input `x` has shape `(batch_size, num_tokens, input_dimensions)` [c1941].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1941"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 214,
+      "text": "2. **Linear projections**: Each token embedding is projected into query, key, and value spaces using learned weight matrices $W_Q$, $W_K$, $W_V$ [c1350].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1350"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 215,
+      "text": "3. **Attention scores**: Queries are multiplied by the transpose of keys: $Q \\times K^T$ [c1933].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1933"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 216,
+      "text": "Each element in the resulting matrix encodes how much a particular token relates to the query token [c1934].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1934"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 217,
+      "text": "4. **Scaling**: Scores are divided by $\\sqrt{d_k}$ to prevent saturation [c1403].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1403"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 218,
+      "text": "5. **Causal masking**: Future positions are filled with $-\\infty$ [c2653], so that after softmax they contribute zero weight.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2653"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 219,
+      "text": "6. **Softmax**: Scores are converted to attention weights that sum to one [c2216].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2216"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 220,
+      "text": "7. **Dropout**: Attention weights are randomly zeroed during training for regularization [c2654].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2654"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 221,
+      "text": "8. **Weighted sum**: Attention weights are multiplied by the values matrix to produce context vectors [c1938].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1938"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 222,
+      "text": "9. **Multi-head combination**: Context vectors from all heads are concatenated [c1966] and projected to the output dimension.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1966"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 223,
+      "text": "The result is a set of context vectors\u2014one per token\u2014that encode not just the token's own meaning but its meaning *in context*, informed by all the tokens it is allowed to attend to.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 224,
+      "text": "[FIGURE: End-to-end flow diagram of multi-head causal attention: input embeddings \u2192 Q/K/V projections \u2192 scaled dot-product attention with causal mask \u2192 dropout \u2192 concatenate heads \u2192 output context vectors]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 225,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 226,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 227,
+      "text": "This chapter has built the attention mechanism from first principles:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 228,
+      "text": "- **Motivation**: RNNs compress entire sequences into a single context vector, losing information about long-range dependencies [c1517].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1517"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 229,
+      "text": "The Bahdanau attention mechanism solved this by giving the decoder dynamic access to all encoder states [c1525].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1525"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 230,
+      "text": "- **Self-attention**: Rather than attending across encoder and decoder, self-attention allows each position in a single sequence to attend to all other positions in that same sequence [c1548].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1548"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 231,
+      "text": "- **Simplified self-attention**: Without trainable weights, attention scores are raw dot products between embeddings, normalized by softmax to produce attention weights, which are then used to compute weighted sums of the input embeddings [c2158].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2158"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 232,
+      "text": "- **Scaled dot-product attention**: Adding trainable $W_Q$, $W_K$, $W_V$ matrices [c1350] and scaling by $\\sqrt{d_k}$ [c1403] gives the model the ability to learn what to attend to.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1350",
+        "c1403"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 233,
+      "text": "- **Causal masking**: Setting future attention scores to $-\\infty$ before softmax [c2653] ensures the model cannot look ahead, making it suitable for autoregressive language modeling [c2640].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2653",
+        "c2640"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 234,
+      "text": "- **Dropout**: Randomly zeroing attention weights during training [c2654] provides regularization.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2654"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 235,
+      "text": "- **Multi-head attention**: Running multiple independent attention heads [c1952] and concatenating their outputs [c1966] allows the model to attend to different types of relationships simultaneously.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1952",
+        "c1966"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 236,
+      "text": "In the next chapter, we will use this multi-head attention module as a building block to assemble the full transformer architecture, adding layer normalization, feed-forward networks, and residual connections to create a complete GPT-style model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    }
+  ],
+  "summary": {
+    "grounded": 79,
+    "unsupported": 76,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 82
+  }
+}

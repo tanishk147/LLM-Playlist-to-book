@@ -67,7 +67,13 @@ def run(cfg: Config) -> None:
     # Supersession: tag older claims that a later video has refactored.
     # We run this before TOC design so the LLM never sees stale code/APIs.
     log.info("Detecting cross-video supersession")
-    links = detect_supersession(store, manifest)
+    links = detect_supersession(
+        store,
+        manifest,
+        embed_threshold=cfg.threshold("supersession_embed_threshold"),
+        code_token_threshold=cfg.threshold("supersession_code_token_threshold"),
+        code_embed_threshold=cfg.threshold("supersession_code_embed_threshold"),
+    )
     if links:
         applied = apply_supersession(store, links)
         log.warning(

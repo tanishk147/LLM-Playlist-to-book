@@ -1,0 +1,632 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "Before writing a single line of model code, it pays to have a clear map of the territory: what are the exact numbers that define a GPT-2 model, and which training knobs will we be turning throughout this book?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing question with no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "This chapter answers both questions.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Connective tissue describing chapter purpose."
+    },
+    {
+      "index": 3,
+      "text": "Think of it as a reference you can flip back to whenever you need to double-check a dimension, a layer count, or a learning rate.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Framing statement about chapter usage."
+    },
+    {
+      "index": 4,
+      "text": "GPT-2 was released in four sizes.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "Factual claim about GPT-2 release with no citation. Not contradicted by claims but not explicitly supported either."
+    },
+    {
+      "index": 5,
+      "text": "Each size shares the same fundamental architecture\u2014transformer blocks stacked on top of a token embedding layer\u2014but differs in how wide and how deep that stack is.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement about architectural similarities and differences; no specific factual claim requiring citation."
+    },
+    {
+      "index": 6,
+      "text": "Understanding the relationship between these sizes gives you intuition for how scaling works in practice.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Pedagogical framing with no factual claim."
+    },
+    {
+      "index": 7,
+      "text": "The smallest member of the family is **GPT-2 small**, which has 124 million parameters [c2841].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2841"
+      ],
+      "status": "grounded",
+      "reason": "Claim c2841 directly states GPT-2 small model has 124 million parameters."
+    },
+    {
+      "index": 8,
+      "text": "It uses an embedding dimension of 768, 12 transformer layers, and 12 attention heads [c3536].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3536"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3536 states GPT-2 small (124M) has embedding dimension 768, 12 layers, and 12 attention heads."
+    },
+    {
+      "index": 9,
+      "text": "Its context length\u2014the maximum number of tokens the model can attend to at once\u2014is 1024 [c3490].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3490"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3490 states GPT-2 small model context length is 1024."
+    },
+    {
+      "index": 10,
+      "text": "This is the model we will build from scratch in the early chapters of this book, and the hyperparameter values shown throughout those chapters correspond to this configuration [c3496].",
+      "type": "narrative",
+      "cited_claim_ids": [
+        "c3496"
+      ],
+      "status": "narrative_ok",
+      "reason": "Pedagogical statement about which model will be built; c3496 supports that the values shown are for the 124M model."
+    },
+    {
+      "index": 11,
+      "text": "Moving up in scale, **GPT-2 medium** has 345 million parameters [c3434] (sometimes cited as 355 million [c1748, c3537]).",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3434",
+        "c1748",
+        "c3537"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3434 states GPT-2 Medium has 345 million parameters. Claims c1748 and c3537 both reference 355 million, supporting the parenthetical note about alternative citations."
+    },
+    {
+      "index": 12,
+      "text": "It widens and deepens the architecture considerably: the embedding dimension grows to 1024, the number of layers doubles to 24, and the number of attention heads increases to 16 [c3537].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3537"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3537 states GPT-2 medium (355M) has embedding dimension 1024, 24 layers, and 16 attention heads."
+    },
+    {
+      "index": 13,
+      "text": "Its context size remains 1024 tokens [c1737].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1737"
+      ],
+      "status": "grounded",
+      "reason": "Claim c1737 states GPT-2 medium has a context size of 1024 tokens."
+    },
+    {
+      "index": 14,
+      "text": "As a general pattern, as GPT-2 model complexity increases, the number of transformer blocks also increases [c3499].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3499"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3499 directly states this pattern."
+    },
+    {
+      "index": 15,
+      "text": "**GPT-2 large** reaches 774 million parameters with an embedding dimension of 1280, 36 layers, and 20 attention heads [c3538].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3538"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3538 states GPT-2 large (774M) has embedding dimension 1280, 36 layers, and 20 attention heads."
+    },
+    {
+      "index": 16,
+      "text": "Finally, **GPT-2 XL** tops out at 1558 million parameters, using an embedding dimension of 1600, 48 layers, and 25 attention heads [c3539].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3539"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3539 states GPT-2 XL (1558M) has embedding dimension 1600, 48 layers, and 25 attention heads."
+    },
+    {
+      "index": 17,
+      "text": "The table below summarizes the full family at a glance.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement introducing a figure."
+    },
+    {
+      "index": 18,
+      "text": "[FIGURE: Table with five columns\u2014Model, Parameters, Embedding Dim, Layers, Attention Heads, Context Length\u2014and four rows for GPT-2 small (124M, 768, 12, 12, 1024), GPT-2 medium (345M, 1024, 24, 16, 1024), GPT-2 large (774M, 1280, 36, 20, 1024), GPT-2 XL (1558M, 1600, 48, 25, 1024)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 19,
+      "text": "Throughout this book we represent a model's configuration as a plain Python dictionary.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Pedagogical statement about representation choice."
+    },
+    {
+      "index": 20,
+      "text": "Here is the canonical configuration for GPT-2 small (124M) that we will use as our starting point:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement before code block."
+    },
+    {
+      "index": 21,
+      "text": "GPT_CONFIG_124M = {\n    \"vocab_size\": 50257,           # Vocabulary size\n    \"context_length\": 1024,        # Context length\n    \"emb_dim\": 768,                # Embedding dimension\n    \"n_heads\": 12,                 # Number of attention heads\n    \"n_layers\": 12,                # Number of layers\n    \"drop_rate\": 0.1,              # Dropout rate\n    \"qkv_bias\": False              # Query-Key-Value bias\n}",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c438"
+      ],
+      "status": "grounded",
+      "reason": "Claim c438 contains the exact code block with all matching values."
+    },
+    {
+      "index": 22,
+      "text": "Every key in this dictionary corresponds to a meaningful architectural choice.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Framing statement about the configuration dictionary."
+    },
+    {
+      "index": 23,
+      "text": "We will walk through each one in turn.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 24,
+      "text": "The vocabulary size is 50257 tokens [c526, c529].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c526",
+        "c529"
+      ],
+      "status": "grounded",
+      "reason": "Both c526 and c529 state that GPT-2 has a vocabulary size of 50257 tokens."
+    },
+    {
+      "index": 25,
+      "text": "This is the number of unique tokens that the model's embedding layer must handle\u2014one learned vector per token.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about what vocabulary size means; no factual claim requiring citation."
+    },
+    {
+      "index": 26,
+      "text": "Intuitively, this is the size of the model's \"alphabet,\" and every input token ID must fall within the range `[0, vocab_size - 1]`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation with no factual claim requiring citation."
+    },
+    {
+      "index": 27,
+      "text": "The context length is 1024 for the full GPT-2 small model [c3490].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3490"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3490 states GPT-2 small model context length is 1024."
+    },
+    {
+      "index": 28,
+      "text": "This is the maximum sequence length the model can process in a single forward pass; tokens beyond this limit simply cannot be attended to.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about what context length means."
+    },
+    {
+      "index": 29,
+      "text": "The full specification of a GPT model configuration requires this value to be set explicitly [c3847].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3847"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3847 states that the GPT model configuration requires specification of context length."
+    },
+    {
+      "index": 30,
+      "text": "For the hands-on tutorials in this book, we reduce the context length to 256 tokens [c537, c1671].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c537",
+        "c1671"
+      ],
+      "status": "grounded",
+      "reason": "Both c537 and c1671 state that context length is reduced to 256 tokens for the tutorial."
+    },
+    {
+      "index": 31,
+      "text": "This reduction is deliberate: it cuts memory and compute requirements enough that the training examples can run on a laptop [c537].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c537"
+      ],
+      "status": "grounded",
+      "reason": "Claim c537 states the reduction is to reduce computational resource requirements and allow execution on laptops."
+    },
+    {
+      "index": 32,
+      "text": "Functionally the model is identical; only the maximum sequence length changes [c494].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c494"
+      ],
+      "status": "grounded",
+      "reason": "Claim c494 states that a context length of 256 tokens is used instead of 1024 for computational efficiency in the tutorial, implying functional equivalence."
+    },
+    {
+      "index": 33,
+      "text": "The embedding dimension is 768 [c531, c1673].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c531",
+        "c1673"
+      ],
+      "status": "grounded",
+      "reason": "Both c531 and c1673 state that embedding dimension is 768."
+    },
+    {
+      "index": 34,
+      "text": "This is the size of the vector space into which each token ID is projected; for GPT-2 small, every token is represented as a 768-dimensional vector [c3492].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3492"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3492 states that for GPT-2 small, each token is represented as a 768-dimensional vector."
+    },
+    {
+      "index": 35,
+      "text": "The same dimensionality flows through every subsequent layer\u2014attention, feed-forward, and layer normalization\u2014so this single number has a large influence on the model's total parameter count.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about architectural implications; no specific factual claim requiring citation."
+    },
+    {
+      "index": 36,
+      "text": "`n_heads` is the number of attention heads present in each transformer block [c3494].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3494"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3494 defines n_heads as the number of attention heads present in each transformer block."
+    },
+    {
+      "index": 37,
+      "text": "For GPT-2 small this is 12 [c532, c1674].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c532",
+        "c1674"
+      ],
+      "status": "grounded",
+      "reason": "Both c532 and c1674 state that number of attention heads is 12."
+    },
+    {
+      "index": 38,
+      "text": "Multi-head attention splits the embedding dimension across heads, so each head operates on a $768 / 12 = 64$-dimensional subspace.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about how multi-head attention works; the arithmetic is a straightforward consequence of stated values."
+    },
+    {
+      "index": 39,
+      "text": "Intuitively, different heads can learn to attend to different kinds of relationships in the input simultaneously.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Intuitive explanation with no factual claim requiring citation."
+    },
+    {
+      "index": 40,
+      "text": "`n_layers` is the number of transformer blocks stacked in the model [c3495].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3495"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3495 defines n_layers as the number of transformer blocks in the model."
+    },
+    {
+      "index": 41,
+      "text": "GPT-2 small uses 12 [c533, c888, c1675].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c533",
+        "c888",
+        "c1675"
+      ],
+      "status": "grounded",
+      "reason": "All three claims state that GPT-2 small uses 12 transformer blocks/layers."
+    },
+    {
+      "index": 42,
+      "text": "Each block contains its own multi-head self-attention sublayer and feed-forward sublayer, so doubling `n_layers` roughly doubles the depth\u2014and a significant portion of the parameter count\u2014of the network.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about architectural implications; no specific factual claim requiring citation."
+    },
+    {
+      "index": 43,
+      "text": "The dropout rate is 0.1 in the standard GPT-2 small configuration [c534, c1676].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c534",
+        "c1676"
+      ],
+      "status": "grounded",
+      "reason": "Both c534 and c1676 state that dropout rate is 0.1."
+    },
+    {
+      "index": 44,
+      "text": "Dropout is a regularization technique; setting it to 0.1 means that during training, 10% of activations are randomly zeroed out at each dropout layer.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about what dropout does; standard technical knowledge."
+    },
+    {
+      "index": 45,
+      "text": "When experimenting or debugging, it is common to set this to zero [c498], which disables regularization and makes the forward pass fully deterministic.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c498"
+      ],
+      "status": "grounded",
+      "reason": "Claim c498 states that dropout rate can be set to zero and is a regularization parameter."
+    },
+    {
+      "index": 46,
+      "text": "The query, key, and value weight matrices are initialized without bias terms\u2014`qkv_bias` is `False` [c499, c535, c1677].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c499",
+        "c535",
+        "c1677"
+      ],
+      "status": "grounded",
+      "reason": "All three claims state that query, key, and value bias is set to false or that these matrices are initialized without bias terms."
+    },
+    {
+      "index": 47,
+      "text": "This is a deliberate design decision that matches the original GPT-2 implementation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Contextual statement about design choice; no specific factual claim requiring citation."
+    },
+    {
+      "index": 48,
+      "text": "Omitting these biases slightly reduces the parameter count and has been found to work well in practice.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General statement about practical implications; no specific factual claim requiring citation."
+    },
+    {
+      "index": 49,
+      "text": "It is worth noting that not all GPT-2 configurations use exactly the same defaults.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement introducing variation across configurations."
+    },
+    {
+      "index": 50,
+      "text": "When loading pretrained GPT-2 weights (as opposed to training from scratch), the base configuration sets the dropout rate to 0.0 [c1741] and sets `qkv_bias` to `True` [c1742].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1741",
+        "c1742"
+      ],
+      "status": "grounded",
+      "reason": "Claim c1741 states GPT-2 base configuration uses dropout rate of 0.0. Claim c1742 states GPT-2 base configuration sets query-key-value bias to true."
+    },
+    {
+      "index": 51,
+      "text": "These differences matter when you are trying to match a pretrained checkpoint exactly.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Contextual statement about practical implications."
+    },
+    {
+      "index": 52,
+      "text": "For instruction fine-tuning experiments later in the book, GPT-2 medium (355M) is preferred over the 124M model because the smaller model does not perform well on instruction-following tasks [c1748].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1748"
+      ],
+      "status": "grounded",
+      "reason": "Claim c1748 states that GPT-2 medium (355M) is chosen instead of the smaller 124M model because the smaller model does not perform well in instruction fine-tuning tasks."
+    },
+    {
+      "index": 53,
+      "text": "Beyond the model architecture, several training hyperparameters appear repeatedly in the code examples throughout this book.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement introducing training hyperparameters."
+    },
+    {
+      "index": 54,
+      "text": "They are collected here for easy reference.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Framing statement about section purpose."
+    },
+    {
+      "index": 55,
+      "text": "We use the AdamW optimizer with a learning rate of `0.00005` (5e-5) [c3125] and a weight decay of `0.1` [c3126].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3125",
+        "c3126"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3125 states learning rate is set to 0.00005 for AdamW. Claim c3126 states weight decay is set to 0.1 for AdamW."
+    },
+    {
+      "index": 56,
+      "text": "In some earlier experiments the Adam optimizer is used with a learning rate of `5e-4` and the same weight decay of `0.1` [c3569].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3569"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3569 states the Adam optimizer is used with a learning rate of 5e-4 and weight decay of 0.1."
+    },
+    {
+      "index": 57,
+      "text": "For the pretraining demonstrations, the number of epochs is set to 1 [c3128].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3128"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3128 states number of epochs is set to 1 for the training process."
+    },
+    {
+      "index": 58,
+      "text": "This is intentionally short\u2014the goal is to verify that the training loop works correctly, not to produce a fully converged model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Contextual explanation of design choice."
+    },
+    {
+      "index": 59,
+      "text": "Results are printed after every 5 batches [c3129], and the evaluation loss is calculated over 5 batches at each evaluation step [c3131].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3129",
+        "c3131"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3129 states evaluation frequency is set to 5 batches. Claim c3131 states evaluation iterations is set to 5."
+    },
+    {
+      "index": 60,
+      "text": "This gives a reasonable signal about training progress without spending too much time on evaluation.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Contextual explanation of design choice."
+    },
+    {
+      "index": 61,
+      "text": "The training data loader is created with a batch size of 2, a maximum sequence length of 256 (matching the reduced context length), a stride of 256, `drop_last=True`, `shuffle=True`, and `num_workers=0` [c3834].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3834"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3834 specifies all these training data loader parameters exactly."
+    },
+    {
+      "index": 62,
+      "text": "The validation data loader uses the same batch size and sequence length but without shuffling [c3836].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3836"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3836 specifies validation data loader with batch_size=2, max_length=256, stride=256 (no shuffle mentioned)."
+    },
+    {
+      "index": 63,
+      "text": "When generating text to inspect model quality, a temperature of 1.5 is used [c3557], and top-K sampling with $K = 50$ restricts token selection to the 50 most likely candidates at each step [c3558].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3557",
+        "c3558"
+      ],
+      "status": "grounded",
+      "reason": "Claim c3557 states temperature is set to 1.5. Claim c3558 states top-K sampling with K=50 restricts token selection to the 50 most likely candidates."
+    },
+    {
+      "index": 64,
+      "text": "The table below consolidates the key hyperparameters used in this book's tutorial setting alongside the full GPT-2 small specification for comparison.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement introducing a summary table."
+    },
+    {
+      "index": 65,
+      "text": "[FIGURE: Two-column comparison table: left column \"Full GPT-2 Small\", right column \"Tutorial Setting\". Rows: vocab_size (50257 / 50257), context_length (1024 / 256), emb_dim (768 / 768), n_heads (12 / 12), n_layers (12 / 12), drop_rate (0.1 / 0.0 or 0.1), qkv_bias (False / False), learning rate (5e-5 / 5e-5), weight decay (0.1 / 0.1), batch size (\u2014 / 2), epochs (\u2014 / 1)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 66,
+      "text": "With these numbers firmly in hand, we are ready to start building the model itself.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Concluding transition statement."
+    },
+    {
+      "index": 67,
+      "text": "Every architectural choice made in the coming chapters traces back to one of the values defined here.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Concluding framing statement."
+    }
+  ],
+  "summary": {
+    "grounded": 48,
+    "unsupported": 1,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 18
+  }
+}

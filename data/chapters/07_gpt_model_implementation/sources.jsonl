@@ -1,0 +1,192 @@
+## Claims (cite these by ID inline as [cNNN])
+- c366 [definition | 4i23dYoXp-A @ 326-337s]
+  The transformer block is the most important part of the large language model architecture and consists of multiple different aspects linked together.
+- c369 [definition | 4i23dYoXp-A @ 416-422s]
+  The feed forward neural network in the transformer block uses GELU activation.
+- c390 [definition | 4i23dYoXp-A @ 1034-1044s]
+  Number of attention heads refers to the count of separate query, key, and value matrix sets created in multi-head attention.
+- c425 [code | 4i23dYoXp-A @ 2000-2023s]
+  self.pos_emb = nn.Embedding(context_length, embedding_dimension)
+- c426 [code | 4i23dYoXp-A @ 2045-2064s]
+  pos = torch.arange(sequence_length) creates a tensor [0, 1, 2, ..., sequence_length-1] to index into the positional embedding matrix.
+- c432 [definition | 4i23dYoXp-A @ 2223-2233s]
+  Logits are the final output matrices from a transformer model that contain probability scores for each token in the vocabulary at each position in the sequence.
+- c438 [code | 4i23dYoXp-A @ 2542-2554s]
+  GPT_CONFIG_124M = {
+      "vocab_size": 50257,           # Vocabulary size
+      "context_length": 1024,        # Context length
+      "emb_dim": 768,                # Embedding dimension
+      "n_heads": 12,                 # Number of attention heads
+      "n_layers": 12,                # Number of layers
+      "drop_rate": 0.1,              # Dropout rate
+      "qkv_bias": False              # Query-Key-Value bias
+  }
+- c805 [definition | F1Sm7z2R96w @ 49-58s]
+  A large language model generates tokens given a sequence of input tokens.
+- c856 [definition | F1Sm7z2R96w @ 1266-1329s]
+  The generate_text_simple function takes a model (instance of GPT model class), input token indices (idx), maximum number of new tokens to generate, and context size as arguments.
+- c859 [code | F1Sm7z2R96w @ 1384-1424s]
+  idx_cond = idx[:, -context_size:]
+- c863 [code | F1Sm7z2R96w @ 1472-1561s]
+  logits = logits[:, -1, :]
+- c865 [code | F1Sm7z2R96w @ 1622-1640s]
+  probas = torch.softmax(logits, dim=-1)
+- c867 [code | F1Sm7z2R96w @ 1680-1702s]
+  idx_next = torch.argmax(probas, dim=-1, keepdim=True)
+- c869 [code | F1Sm7z2R96w @ 1702-1734s]
+  idx = torch.cat((idx, idx_next), dim=1)
+- c872 [code | F1Sm7z2R96w @ 1437-1443s]
+  with torch.no_grad():
+      logits = model(idx_cond)
+- c911 [code | G3-JgHckzjw @ 5-11s]
+  class DummyGPTModel(nn.Module):
+      def __init__(self, cfg):
+          super().__init__()
+          self.tok_emb = nn.Embedding(cfg["vocab_size"], cfg["emb_dim"])
+          self.pos_emb = nn.Embedding(cfg["context_length"], cfg["emb_dim"])
+          self.drop_emb = nn.Dropout(cfg["drop_rate"])
+          self.trf_blocks = nn.Sequential(
+              *[DummyTransformerBlock(cfg) for _ in range(cfg["n_layers"])])
+          self.final_norm = DummyLayerNorm(cfg["emb_dim"])
+          self.out_head = nn.Linear(
+              cfg["emb_dim"], cfg["vocab_size"], bias=False
+          )
+      
+      def forward(self, in_idx):
+          batch_size, seq_len = in_idx.shape
+          tok_embeds = self.tok_emb(in_idx)
+          pos_embeds = self.pos_emb(torch.arange(seq_len, device=in_idx.device))
+          x = tok_embeds + pos_embeds
+          x = self.drop_emb(x)
+          x = self.trf_blocks(x)
+          x = self.final_norm(x)
+          logits = self.out_head(x)
+          return logits
+- c926 [definition | G3-JgHckzjw @ 827-851s]
+  Positional embedding is a vector representation of the position of a token within a sequence.
+- c930 [equation | G3-JgHckzjw @ 923-1041s]
+  Input embedding = token embedding + positional embedding
+- c932 [definition | G3-JgHckzjw @ 1072-1079s]
+  Dropout randomly turns off some elements of every input embedding to zero.
+- c943 [definition | G3-JgHckzjw @ 1336-1358s]
+  Layer normalization is a technique that normalizes token embeddings by setting the mean to zero and variance to one for each token independently.
+- c945 [definition | G3-JgHckzjw @ 1410-1418s]
+  Masked multi-head attention converts embedding vectors into context vectors that capture both semantic meaning and attention relationships between tokens.
+- c947 [definition | G3-JgHckzjw @ 1429-1462s]
+  A context vector is an embedding that captures both the semantic meaning of a token and how much attention should be given to all other tokens in the sequence.
+- c950 [definition | G3-JgHckzjw @ 1565-1590s]
+  A shortcut connection (residual connection) adds the output of a layer back to its input to provide an alternative gradient flow path and prevent the vanishing gradient problem.
+- c963 [definition | G3-JgHckzjw @ 2001-2010s]
+  Layer normalization normalizes embedding values for each token such that the mean of the resultant embedding values is zero and the variance is equal to one.
+- c965 [definition | G3-JgHckzjw @ 2019-2025s]
+  The output head is a neural network at the final stage of the GPT model that transforms token embeddings into logits for vocabulary prediction.
+- c968 [definition | G3-JgHckzjw @ 2057-2061s]
+  The logits matrix is the output produced by passing token embeddings through the output head neural network.
+- c1004 [code | G3-JgHckzjw @ 3238-3250s]
+  p.numel() - method to count the total number of parameters in model's parameter tensors
+- c1006 [definition | G3-JgHckzjw @ 3277-3313s]
+  Weight tying is a technique where the original GPT-2 architecture reuses the weights from the token embedding layer in its output layer.
+- c811 [architecture | F1Sm7z2R96w @ 194-263s]
+  GPT model pipeline: input sentence → token IDs → token embeddings → add positional embeddings → input embeddings → dropout → transformer block → layer normalization → output head → output tensor.
+- c992 [architecture | G3-JgHckzjw @ 2980-3000s]
+  The GPT model forward pass applies dropout to input embeddings, chains 12 transformer blocks using nn.Sequential, applies layer normalization, and outputs logits.
+- c818 [architecture | F1Sm7z2R96w @ 332-344s]
+  The GPT pipeline begins with token IDs that are converted into token embeddings of dimension 768.
+- c912 [fact | G3-JgHckzjw @ 328-331s]
+  Token embeddings are added to positional embeddings in the GPT model forward pass.
+- c1020 [design_decision | G3-JgHckzjw @ 3588-3602s]
+  The forward method of the GPT model takes a batch of input tokens, computes their embeddings, applies positional embeddings, passes the sequence through transformer blocks, normalizes the final output, and computes logits representing the next token's unnormalized probabilities.
+- c895 [fact | F1Sm7z2R96w @ 2173-2181s]
+  The full GPT architecture has been implemented and a GPT model instance has been initialized with random weights.
+- c1000 [architecture | G3-JgHckzjw @ 3208-3212s]
+  The GPT model architecture consists of 12 transformer blocks chained together.
+- c854 [fact | F1Sm7z2R96w @ 1070-1091s]
+  Starting with input 'hello i am' and max_new_tokens=6, the GPT model generates the complete output 'hello i am a model ready to help'.
+- c403 [architecture | 4i23dYoXp-A @ 1298-1340s]
+  The dummy GPT model class has a forward method that takes an input (words) and outputs the next word prediction.
+- c888 [hyperparameter | F1Sm7z2R96w @ 2030-2037s]
+  The GPT model configuration uses 12 transformer blocks.
+- c878 [fact | F1Sm7z2R96w @ 1885-1900s]
+  In GPT training, sampling techniques will modify the softmax output so the model does not always select the most likely token, introducing variability and creativity in generated text.
+- c810 [architecture | F1Sm7z2R96w @ 28-188s]
+  LLM text generation is an autoregressive process where the input context grows with each iteration as newly generated tokens are appended, and generation continues until the maximum number of new tokens is reached.
+- c411 [architecture | 4i23dYoXp-A @ 1503-1516s]
+  Token ids are converted to token embeddings before being passed to the GPT model class.
+- c897 [fact | F1Sm7z2R96w @ 2200-2206s]
+  The model can take an input, run inference through the 124 million parameter GPT architecture, and predict outputs on a laptop.
+- c994 [architecture | G3-JgHckzjw @ 3084-3100s]
+  The output of the GPT model is logits with shape (batch_size, sequence_length, vocabulary_size).
+- c845 [design_decision | F1Sm7z2R96w @ 905-916s]
+  To generate text from GPT output, extract the last row of the output tensor to obtain logits for the next token prediction.
+- c901 [fact | F1Sm7z2R96w @ 2259-2268s]
+  All sub-modules of the GPT architecture were implemented and coded from scratch in this lecture series.
+- c939 [architecture | G3-JgHckzjw @ 1219-1237s]
+  The preprocessing pipeline before the transformer block consists of: tokenization, token embedding, positional embedding, input embedding computation, and dropout.
+- c890 [fact | F1Sm7z2R96w @ 2061-2085s]
+  The generate_text_sample function is called with parameters: model, inputs, max_new_tokens=6, and context_size=1024.
+- c1009 [design_decision | G3-JgHckzjw @ 3375-3385s]
+  Weight tying reduces memory footprint from 163 million to 124 million parameters and reduces computational complexity.
+- c817 [fact | F1Sm7z2R96w @ 281-300s]
+  The goal of this lecture is to convert the output tensor from the GPT model into predictions of the next word.
+- c906 [fact | F1Sm7z2R96w @ 2392-2405s]
+  The next set of lectures will focus on training the GPT-2 model with 124 million parameters.
+- c814 [design_decision | F1Sm7z2R96w @ 210-216s]
+  Dropout layer is applied after token embeddings and positional embeddings are combined into input embeddings.
+- c990 [fact | G3-JgHckzjw @ 2798-2822s]
+  The GPT model input is a tensor of shape (batch_size, sequence_length) containing token IDs.
+- c1008 [fact | G3-JgHckzjw @ 3365-3375s]
+  When output layer parameters are removed from the total, the parameter count becomes exactly 124 million, matching the original GPT-2 model size.
+- c1019 [fact | G3-JgHckzjw @ 3527-3529s]
+  The core GPT model implementation can be expressed in approximately 8 lines of code.
+- c469 [design_decision | 4i23dYoXp-A @ 2816-2821s]
+  A lecture on the entire GPT model implementation is planned.
+- c1021 [fact | G3-JgHckzjw @ 3605-3611s]
+  The model outputs logits which will be converted into tokens and text outputs in a subsequent lecture.
+- c379 [fact | 4i23dYoXp-A @ 660-672s]
+  Each token ID in GPT-2 is converted into a vector of 768 dimensions, and the output is generated such that dimensions are matched to the input token embedding dimensions.
+- c903 [fact | F1Sm7z2R96w @ 2279-2290s]
+  Six to seven lectures were conducted covering the complete GPT architecture module.
+- c916 [fact | G3-JgHckzjw @ 228-232s]
+  The GPT model outputs logits that can be decoded to predict the next token.
+- c855 [design_decision | F1Sm7z2R96w @ 1154-1182s]
+  The text generation algorithm consists of five sequential steps: (1) examine the output tensor, (2) extract the last vector, (3) convert logits to probabilities, (4) identify the index of the largest value, (5) append the token ID to previous inputs, and repeat until max_new_tokens is reached.
+- c1015 [fact | G3-JgHckzjw @ 3479-3483s]
+  The GPT model architecture outputs numerical tensors.
+- c917 [fact | G3-JgHckzjw @ 240-244s]
+  The main task of the GPT model is next token prediction.
+- c364 [architecture | 4i23dYoXp-A @ 275-303s]
+  The LLM architecture begins with tokenization, followed by vector embedding and positional embedding, then converts embeddings into context vectors through masked multi-head attention.
+- c920 [fact | G3-JgHckzjw @ 176-180s]
+  The transformer block is the key component of the entire GPT model.
+- c844 [architecture | F1Sm7z2R96w @ 871-891s]
+  GPT model outputs a tensor with shape (batch_size, number_of_tokens, vocabulary_size).
+- c1010 [design_decision | G3-JgHckzjw @ 3385-3399s]
+  Using separate token embedding and output layers results in better training and model performance compared to weight tying.
+- c807 [fact | F1Sm7z2R96w @ 86-104s]
+  In autoregressive text generation, the token generated in the previous iteration is appended to the input tokens for the next iteration.
+- c824 [design_decision | F1Sm7z2R96w @ 420-434s]
+  Multi-head attention is a key architectural component that enables coherent and meaningful outputs in modern GPT models like GPT-4.
+- c874 [design_decision | F1Sm7z2R96w @ 1792-1804s]
+  In the generate_text function, softmax is applied to convert logits into a probability distribution before finding the index with the highest value using argmax.
+- c448 [architecture | 4i23dYoXp-A @ 2610-2616s]
+  The combined embeddings pass through a dropout layer.
+- c973 [fact | G3-JgHckzjw @ 2174-2191s]
+  The output head is the only stage in the GPT model where the input dimensions change from (batch_size, num_tokens, 768) to (batch_size, num_tokens, 50257).
+- c388 [fact | 4i23dYoXp-A @ 1008-1021s]
+  In GPT-2, the embedding layer is trained to learn token representations that capture semantic meaning.
+- c843 [fact | F1Sm7z2R96w @ 852-859s]
+  Text generation continues by repeating the prediction process until reaching the maximum number of new tokens.
+- c358 [fact | 4i23dYoXp-A @ 47-56s]
+  Stage 1 of LLM development covers data preparation and sampling, which includes tokenization, vector embeddings, and positional embeddings.
+- c996 [fact | G3-JgHckzjw @ 3120-3126s]
+  A GPT model instance is created by passing in a model configuration object.
+- c850 [fact | F1Sm7z2R96w @ 956-990s]
+  Text generation proceeds sequentially by repeating the token prediction process multiple iterations until reaching a user-specified maximum number of new tokens.
+- c902 [fact | F1Sm7z2R96w @ 2268-2310s]
+  The implementation reached the stage where given a text input, the model can predict output tokens.
+- c421 [fact | 4i23dYoXp-A @ 1844-1862s]
+  After token embeddings are obtained, positional embeddings are added as the next step in the forward pass.
+- c820 [architecture | F1Sm7z2R96w @ 361-367s]
+  Token embeddings and positional embeddings are summed to produce input embeddings for each token.
+- c1007 [fact | G3-JgHckzjw @ 3332-3346s]
+  The token embedding layer and output layer in the implemented model both have shape (50257, 768).

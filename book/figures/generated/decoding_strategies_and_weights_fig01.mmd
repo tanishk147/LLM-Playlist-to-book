@@ -1,0 +1,7 @@
+graph LR
+    A["GPT logits"] --> B["Top-K mask"]
+    B --> C["Replace with -inf"]
+    C --> D["Divide by T"]
+    D --> E["Softmax"]
+    E --> F["Multinomial sample"]
+    F --> G["Next token"]

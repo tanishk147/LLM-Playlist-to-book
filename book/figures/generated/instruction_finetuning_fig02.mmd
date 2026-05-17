@@ -1,0 +1,15 @@
+graph LR
+    A["Forward Pass"] --> B["Compute Cross-Entropy Loss"]
+    B --> C["Backward Pass"]
+    C --> D["AdamW Weight Update"]
+    D --> E{"Periodic Evaluation?"}
+    E -->|Yes| F["Evaluate on Validation Set"]
+    F --> A
+    E -->|No| A
+    
+    style A fill:#e1f5ff
+    style B fill:#fff3e0
+    style C fill:#f3e5f5
+    style D fill:#e8f5e9
+    style E fill:#fce4ec
+    style F fill:#e0f2f1

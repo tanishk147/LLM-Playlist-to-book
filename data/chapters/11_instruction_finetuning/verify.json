@@ -1,0 +1,1908 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Instruction Fine-Tuning: Building a Personal Assistant",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "By this point in the book, you have built a GPT-style language model from scratch, pre-trained it on raw text, and loaded weights from OpenAI's publicly released GPT-2 checkpoints.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 2,
+      "text": "The model can complete sentences and generate coherent prose, but it does not yet behave like an assistant.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 3,
+      "text": "Ask it \"What is the capital of France?\" and it is just as likely to continue with more questions as it is to answer.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "The gap between a raw language model and a useful assistant is bridged by **instruction fine-tuning**, and that is the subject of this chapter.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 5,
+      "text": "We will walk through the entire pipeline end to end: formatting data, batching it correctly, loading a pre-trained foundation, running the training loop, extracting responses, and evaluating quality\u2014both by hand and automatically using a second LLM as a judge.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 6,
+      "text": "By the end you will have a working personal assistant built on GPT-2 medium (355 M parameters).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 7,
+      "text": "The pipeline breaks naturally into three stages [c587]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c587"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 8,
+      "text": "- **Stage 1 \u2013 Dataset preparation:** download the instruction dataset, format it with the Alpaca prompt template, tokenize, pad, and wrap everything in PyTorch `DataLoader` objects.\n- **Stage 2 \u2013 Fine-tuning:** load the pre-trained GPT-2 weights and run the supervised training loop.\n- **Stage 3 \u2013 Evaluation:** extract model responses, inspect them qualitatively, and score them automatically using a locally running LLaMA-3 model via Ollama.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 9,
+      "text": "Let's begin.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 10,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 11,
+      "text": "### What Is Instruction Fine-Tuning?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 12,
+      "text": "A **foundation model** is a pre-trained large language model that has been trained on large-scale data and can be fine-tuned for downstream tasks [c169].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c169"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 13,
+      "text": "The pre-training phase teaches the model grammar, facts, and reasoning patterns, but it does not teach the model to *follow instructions*.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 14,
+      "text": "That second step is instruction fine-tuning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 15,
+      "text": "**Instruction fine-tuning** (also called supervised instruction fine-tuning) is the process of training a pretrained LLM with a specific dataset to teach it to correctly follow instructions [c1722].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1722"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 16,
+      "text": "More precisely, it is the approach of providing a large set of instruction-response pairs to train a language model to follow instructions [c181].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c181"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 17,
+      "text": "Fine-tuning on a specific dataset after loading pre-trained weights requires significantly less computational time than training from scratch [c1733], which is why we always start from a pre-trained checkpoint rather than random weights.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1733"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 18,
+      "text": "Fine-tuning the LLM on instruction data modifies the weights and parameters of the GPT model to understand instruction input-output pairs from a specific dataset [c1761].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1761"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 19,
+      "text": "Intuitively, the model already knows *how* to predict the next token; we are now steering it so that the tokens it predicts form helpful responses rather than arbitrary continuations.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 20,
+      "text": "Here are three concrete examples of the kind of instruction-response pairs we will train on:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 21,
+      "text": "Instruction: convert 45 km to meters",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 22,
+      "text": "[c178]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c178"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 23,
+      "text": "Instruction: provide a synonym for bright",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 24,
+      "text": "[c179]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c179"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 25,
+      "text": "Instruction: edit the following sentence to remove all passive voice.",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 26,
+      "text": "[c180]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c180"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 27,
+      "text": "These examples illustrate the breadth of tasks a single fine-tuned model can handle: unit conversion, vocabulary, and grammar editing\u2014all from the same model, trained on the same dataset.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 28,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 29,
+      "text": "### Stage 1: Dataset Preparation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 30,
+      "text": "#### The Instruction Dataset",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 31,
+      "text": "The instruction dataset used for fine-tuning in this chapter consists of 1,100 instruction input and output pairs [c588].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c588"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 32,
+      "text": "For reference, the Stanford Alpaca repository contains a dataset of 52,000 instruction-output pairs [c695]; our 1,100-pair dataset is a smaller, self-contained version suitable for experimentation.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c695"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 33,
+      "text": "Each instruction-response pair in the dataset contains three keys: `instruction`, `input`, and `output` [c188].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c188"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 34,
+      "text": "The `instruction` field describes the task, the `input` field provides optional context, and the `output` field contains the expected response.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 35,
+      "text": "The fine-tuning workflow includes: fine-tuning the LLM, inspecting the loss, extracting responses, performing evaluation, and scoring [c186].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c186"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 36,
+      "text": "But before any of that, we need to get the data into a form the model can consume.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 37,
+      "text": "Stage 1 specifically involves downloading data, formatting it using the Alpaca prompt format, and creating training, testing, and validation data loaders [c3088].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3088"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 38,
+      "text": "#### The Alpaca Prompt Format",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 39,
+      "text": "Raw instruction-input-output triples cannot be fed directly to a language model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 40,
+      "text": "We need a consistent text template that tells the model where the instruction ends and where the response should begin.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 41,
+      "text": "The dominant convention is the **Alpaca prompt format**.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 42,
+      "text": "Alpaca prompt style is a specific formatting convention for converting instruction-input-output pairs into prompts for fine-tuning large language models, maintained by Stanford in the Stanford Alpaca repository [c1842].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1842"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 43,
+      "text": "Stanford Alpaca is a specific prompt format for instruction-following LLaMA models [c193].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c193"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 44,
+      "text": "The Stanford Alpaca prompt format consists of a template [c196]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c196"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 45,
+      "text": "> *Below is an instruction that describes a task paired with an input that provides further context.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 46,
+      "text": "Write a response that appropriately completes the request.*",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "followed by the instruction, input, and output fields.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "In Alpaca prompt style, the instruction and input fields are separated in the prompt template [c199].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c199"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 49,
+      "text": "There are two main ways to format instruction-input-output datasets: Alpaca prompt style and Phi-3 prompt style [c198].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c198"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 50,
+      "text": "In Phi-3 prompt style, the instruction and input are fused together in a `user` field, and the output is placed in an `assistant` field [c200].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c200"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 51,
+      "text": "We will use Alpaca style throughout this chapter because it is more transparent and easier to inspect.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 52,
+      "text": "The Alpaca prompt template structures instruction fine-tuning data as [c2291]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2291"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 53,
+      "text": "Below is an instruction that describes a task paired with an input that",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 54,
+      "text": "When no `input` context is provided, the `### Input:` section is omitted entirely.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 55,
+      "text": "#### Implementing `format_input`",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 56,
+      "text": "The following function converts a dataset entry into a formatted Alpaca prompt.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 57,
+      "text": "It handles both the case where an `input` field is present and the case where it is absent.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 58,
+      "text": "# Source: [c201]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 59,
+      "text": "def format_input(entry):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 60,
+      "text": "The function returns only the *input* side of the prompt\u2014the instruction and optional context\u2014without the response.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 61,
+      "text": "During training, the response is appended separately so that the model learns to predict it token by token.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 62,
+      "text": "A companion function `formatInput` follows the same logic [c1846]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1846"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 63,
+      "text": "# Source: [c1846]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 64,
+      "text": "def formatInput(entry):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 65,
+      "text": "#### Data Batching: Five Steps",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 66,
+      "text": "Once the data is formatted, we need to convert it into batches of tensors that PyTorch can process.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 67,
+      "text": "Batching the dataset means converting multiple data samples into a batch where each sample is represented as a numerical array (row) with uniform dimensions [c1848].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1848"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 68,
+      "text": "Data batching for instruction fine-tuning consists of five steps [c1875]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1875"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 69,
+      "text": "1. **Format** data using the prompt template.\n2. **Tokenize** the formatted prompt into token IDs.\n3. **Pad** sequences to equal length within each batch.\n4. **Create target token IDs** by shifting the input right by one position.\n5. **Replace padding tokens** in the targets with `-100`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 70,
+      "text": "Let's examine each step in detail.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 71,
+      "text": "#### Step 1: Format",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 72,
+      "text": "We have already covered this with `format_input`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 73,
+      "text": "The Alpaca format is a template used for formatting instruction, input, and output data during instruction fine-tuning [c2289].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2289"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 74,
+      "text": "#### Step 2: Tokenize",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 75,
+      "text": "Tokenization is the process of converting data into a numerical representation by converting sentences into token IDs [c1854].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1854"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 76,
+      "text": "Each formatted prompt string is passed through the GPT-2 tokenizer to produce a sequence of integer token IDs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 77,
+      "text": "#### Step 3: Pad",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 78,
+      "text": "Tokenized sequences will have different lengths because instructions vary in complexity.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 79,
+      "text": "Padding is the process of adjusting the length of token ID sequences so that all samples in a batch have the same length [c1861].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1861"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 80,
+      "text": "The end-of-text token is a special token used for padding sequences; in GPT-2, it has token ID `50256` [c1863].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1863"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 81,
+      "text": "We append copies of token `50256` to shorter sequences until all sequences in the batch share the same length.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 82,
+      "text": "#### Step 4: Create Target Pairs",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 83,
+      "text": "During instruction fine-tuning, the LLM is trained using next-token prediction, where the entire formatted prompt serves as both input and target pairs [c2292].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2292"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 84,
+      "text": "Target token IDs are created by shifting the input tokens to the right by one position and padding with an additional token to maintain equal length between input and target sequences [c1868].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1868"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 85,
+      "text": "Concretely, if the input sequence is `[t\u2080, t\u2081, t\u2082, ..., t\u2099]`, the target sequence is `[t\u2081, t\u2082, ..., t\u2099, <pad>]`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 86,
+      "text": "The target tensor is the input tensor shifted to the right by one position [c2323].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2323"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 87,
+      "text": "Target pairs are created by shifting the input sequence to the right by one token and appending an end-of-text token [c2298].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2298"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 88,
+      "text": "In code, this shift is expressed as:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 89,
+      "text": "# Source: [c1896]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 90,
+      "text": "targets = inputs[1:]  # Shift inputs right by one by removing first element",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 91,
+      "text": "#### Step 5: Replace Padding Tokens with -100",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 92,
+      "text": "Here is a subtle but important detail.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 93,
+      "text": "After creating the target tensor, the positions that correspond to padding tokens should not contribute to the loss.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 94,
+      "text": "If we let the model be penalized for failing to predict padding tokens, we are training it to reproduce padding\u2014which is meaningless.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 95,
+      "text": "The solution is to replace padding token IDs in the target tensor with the special value `-100`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 96,
+      "text": "PyTorch's cross-entropy loss function ignores positions where the target is `-100` by default, so those positions contribute zero gradient.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 97,
+      "text": "To mask target token IDs, replace the token IDs of instruction and input portions in the target text with `-100` [c1917].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1917"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 98,
+      "text": "The custom collate function implements this masking:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 99,
+      "text": "# Source: [c1902]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 100,
+      "text": "def custom_collate_function(batch, padding_token_id, ignore_index):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "Notice that the first occurrence of the padding token is *not* replaced.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 102,
+      "text": "This is intentional: the first end-of-text token marks the boundary between the response and the padding, and we want the model to learn to generate it [c1911].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1911"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 103,
+      "text": "A custom collate function takes a batch of sequences and requires a padding token ID (`50256`) and target device (`cpu`) as inputs [c1886].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1886"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 104,
+      "text": "The full collate function iterates through all sequences in the batch, tokenizes them, pads them to equal length, and applies the `-100` masking:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 105,
+      "text": "# Source: [c2303]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 106,
+      "text": "# Custom collate function for creating batches",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 107,
+      "text": "[FIGURE: Five-step data batching pipeline showing a single instruction-response pair flowing through: (1) Alpaca formatting \u2192 (2) tokenization \u2192 (3) padding to batch max length \u2192 (4) target shift by one \u2192 (5) -100 masking of padding positions in target]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 108,
+      "text": "#### A Note on Masking the Instruction Tokens",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 109,
+      "text": "An interesting research question is whether we should also mask the *instruction* tokens in the target\u2014that is, replace the token IDs corresponding to the instruction and input portions with `-100` so the model is only trained to predict the response tokens.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 110,
+      "text": "Intuitively this seems sensible: why penalize the model for not predicting the instruction it was given?",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 111,
+      "text": "A recent paper titled *Instruction Tuning With Loss Over Instructions* demonstrated that not masking the instruction tokens actually benefits LLM performance during instruction fine-tuning [c1915].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1915"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 112,
+      "text": "This is a good reminder that intuitions about what \"should\" help do not always hold empirically.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 113,
+      "text": "For this chapter we follow the simpler approach and do not mask instruction tokens, but the custom collate function can be extended to do so.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 114,
+      "text": "#### Building the DataLoader",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 115,
+      "text": "Data loaders are an efficient way to collect different batches sequentially and access them in an iterative manner during model training [c2284].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2284"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 116,
+      "text": "Once the `InstructionDataset` class and the custom collate function are in place, creating a dataset object is straightforward:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 117,
+      "text": "# Source: [c2314]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 118,
+      "text": "train_dataset = InstructionDataset(training_data)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 119,
+      "text": "The `DataLoader` wraps this dataset, calls the custom collate function on each batch, and handles shuffling and multi-process loading automatically.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 120,
+      "text": "To ensure tensors are sent to the correct device:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 121,
+      "text": "# Source: [c2309]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 122,
+      "text": "device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 123,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 124,
+      "text": "### Stage 2: Loading the Pre-Trained Model and Fine-Tuning",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 125,
+      "text": "#### Loading GPT-2 Medium (355 M)",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 126,
+      "text": "We use GPT-2 medium as our foundation model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 127,
+      "text": "A pretrained GPT-2 model with 355 million weights was loaded as the foundation for instruction fine-tuning [c591].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c591"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 128,
+      "text": "The configuration and model selection code is:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 129,
+      "text": "# Source: [c1744]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "from gpt_download3 import download_and_load_gpt2",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 131,
+      "text": "The `BASE_CONFIG` dictionary specifies parameters shared across all GPT-2 variants: a vocabulary of 50,257 tokens, a context window of 1,024 tokens, no dropout during fine-tuning (`drop_rate: 0.0`), and query-key-value bias enabled (`qkv_bias: True`) [c1744].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1744"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 132,
+      "text": "The `model_configs` dictionary then provides the variant-specific embedding dimension, number of layers, and number of attention heads.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 133,
+      "text": "[FIGURE: GPT-2 model size comparison table showing the four variants (small 124M, medium 355M, large 774M, xl 1558M) with their embedding dimensions, layer counts, and head counts]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 134,
+      "text": "#### The Fine-Tuning Training Loop",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 135,
+      "text": "The dataset processing, batching, and data loaders have already been implemented before the fine-tuning training loop [c3116].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3116"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 136,
+      "text": "Loss calculation and training functions from pre-training are reused for fine-tuning [c3117].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3117"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 137,
+      "text": "The instruction fine-tuning process consists of three stages: preparing the dataset, fine-tuning the LLM, and evaluating performance [c3087].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3087"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 138,
+      "text": "We are now in stage 2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 139,
+      "text": "**Loss function.** Cross-entropy loss is used as the loss function for fine-tuning, the same loss function used during pre-training [c3095].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3095"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 140,
+      "text": "Cross-entropy loss is conceptually the negative of the logarithm of the probability [c3113].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3113"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 141,
+      "text": "Cross-entropy loss is used to calculate the loss on a batch of data [c3118].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3118"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 142,
+      "text": "**Optimizer.** AdamW is the Adam optimizer with weight decay, implemented as `torch.optim.AdamW` [c3123].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3123"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 143,
+      "text": "The gradient descent update rule is [c3103]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3103"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 144,
+      "text": "$$w_{\\text{new}} = w_{\\text{old}} - \\alpha \\cdot \\frac{\\partial L}{\\partial w}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 145,
+      "text": "where $w_{\\text{new}}$ is the updated weight, $w_{\\text{old}}$ is the previous weight, $\\alpha$ is the learning rate, and $\\partial L / \\partial w$ is the partial derivative of loss with respect to $w$ [c3103].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3103"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 146,
+      "text": "**Backward pass.** The backward pass calculates the gradient of the loss, which is the partial derivative of the loss with respect to all model parameters [c3100].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3100"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 147,
+      "text": "Gradient descent is a gradient-based optimizer used to update model parameters [c3102].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3102"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "**Evaluation frequency.** Evaluation iterations specifies after how many iterations the loss on the evaluation dataset is calculated [c3130].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3130"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 149,
+      "text": "Monitoring both training and validation loss during fine-tuning lets you detect overfitting early\u2014if training loss keeps falling while validation loss rises, the model is memorizing the training set rather than generalizing.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 150,
+      "text": "[FIGURE: Training loop diagram showing the cycle: forward pass \u2192 compute cross-entropy loss \u2192 backward pass \u2192 AdamW weight update \u2192 repeat, with periodic evaluation on validation set]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 151,
+      "text": "#### Saving and Loading the Fine-Tuned Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 152,
+      "text": "After training, save the model weights so you do not have to retrain from scratch every time:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 153,
+      "text": "# Source: [c640]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 154,
+      "text": "torch.save(model.state_dict(), 'gpt2medium355_million_sft.pth')",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 155,
+      "text": "To reload the weights later:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 156,
+      "text": "# Source: [c641]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 157,
+      "text": "model.load_state_dict(torch.load('gpt2medium355_million_sft.pth'))",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 158,
+      "text": "The suffix `sft` stands for *supervised fine-tuning*, a common convention in the field.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 159,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 160,
+      "text": "### Stage 3: Evaluation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 161,
+      "text": "Training a model is only half the work.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 162,
+      "text": "We also need to know whether the fine-tuned model actually follows instructions well.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 163,
+      "text": "The evaluation stage has two parts: qualitative inspection (reading the outputs yourself) and quantitative scoring (using a second LLM as an automated judge).",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 164,
+      "text": "The instruction fine-tuning pipeline covered nine steps: data preparation, fine-tuning, evaluation, response extraction, qualitative evaluation, and quantitative scoring using Ollama [c714].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c714"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 165,
+      "text": "#### Extracting Responses",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 166,
+      "text": "The first task is to run the fine-tuned model on the test set and collect its responses.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 167,
+      "text": "The code iterates through all instruction-input pairs in the test data, calls the generate function on each pair, and appends the model response to the `instruction_data_with_response` file [c636].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c636"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 168,
+      "text": "For a quick sanity check during development, loop over the test data and select the first three entries, generate output from the fine-tuned LLM, convert token IDs to text, remove the instruction input from the output to isolate the response, and print the instruction, correct response, and model response [c607].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c607"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 169,
+      "text": "[FIGURE: Response extraction diagram showing: test entry \u2192 format_input \u2192 model.generate \u2192 decode token IDs \u2192 strip instruction prefix \u2192 isolated response string]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 170,
+      "text": "#### Qualitative Evaluation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 171,
+      "text": "Human preference comparison is an evaluation method where a human uses their own intuition and understanding to benchmark or compare LLMs [c626].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c626"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 172,
+      "text": "This is the simplest form of evaluation: read a sample of model outputs side by side with the expected outputs and judge whether the model is on the right track.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 173,
+      "text": "Qualitative evaluation is fast and catches obvious failures\u2014a model that always outputs the same phrase, or one that ignores the instruction entirely\u2014but it does not scale to thousands of examples.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 174,
+      "text": "#### Automated Evaluation with Ollama and LLaMA-3",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "For systematic evaluation across the full test set, we use a second, larger LLM as an automated judge.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 176,
+      "text": "Step 7 of evaluating a fine-tuned LLM involves implementing automated response evaluation using a larger pre-trained LLM [c646].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c646"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 177,
+      "text": "Method 3 LLM evaluation involves comparing the true expected output against the model response by asking a large language model to assign a score based on this comparison [c627].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c627"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 178,
+      "text": "The judge LLM receives the instruction, the expected response, and the model's actual response, and returns a numeric score.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 179,
+      "text": "**What is Ollama?** Ollama is an efficient application to run large language models on your laptop [c648].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c648"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 180,
+      "text": "Ollama is a tool for generating text using LLM inference and does not support training or fine-tuning LLMs [c657].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c657"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 181,
+      "text": "It provides a simple command-line interface and a local HTTP API, making it easy to query a large model like LLaMA-3 from Python without sending data to an external server.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 182,
+      "text": "To start a LLaMA-3 session interactively:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 183,
+      "text": "# Source: [c660]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 184,
+      "text": "ollama run llama3",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 185,
+      "text": "To start the Ollama server so it can accept API requests from Python:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 186,
+      "text": "# Source: [c662]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 187,
+      "text": "ollama serve",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 188,
+      "text": "Once the server is running, your Python evaluation script can send HTTP POST requests to `localhost` with the instruction, expected output, and model response, and receive a numeric score in return.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 189,
+      "text": "[FIGURE: Automated evaluation pipeline: test entry \u2192 fine-tuned model \u2192 model response \u2192 Ollama/LLaMA-3 judge (receives instruction + expected + model response) \u2192 numeric score 0-100]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 190,
+      "text": "The full evaluation loop iterates over every entry in the test set, generates a response from the fine-tuned model, and sends the triple (instruction, expected output, model response) to the Ollama judge for scoring [c636].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c636"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 191,
+      "text": "Aggregating these scores gives a single number that summarizes model quality across the entire test set, making it easy to compare different checkpoints or hyperparameter settings.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 192,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 193,
+      "text": "### Putting It All Together",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 194,
+      "text": "Let's step back and review the complete pipeline as a numbered sequence [c714]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c714"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 195,
+      "text": "1. **Download the dataset** \u2013 1,100 instruction-input-output triples [c588].\n2. **Format with Alpaca template** \u2013 wrap each entry using `format_input` [c201].\n3. **Tokenize** \u2013 convert formatted strings to token ID sequences [c1854].\n4. **Pad** \u2013 equalize sequence lengths within each batch using token `50256` [c1863].\n5. **Create target pairs** \u2013 shift input right by one, append end-of-text token [c2298].\n6. **Mask padding in targets** \u2013 replace padding token IDs with `-100` [c1875].\n7. **Build DataLoaders** \u2013 wrap datasets with the custom collate function [c2284].\n8. **Load GPT-2 medium (355 M)** \u2013 initialize from pre-trained weights [c591].\n9. **Fine-tune** \u2013 run the training loop with cross-entropy loss and AdamW [c3095, c3123].\n10. **Save checkpoint** \u2013 `torch.save(model.state_dict(), ...)` [c640].\n11. **Extract responses** \u2013 generate on the test set and strip the instruction prefix [c636].\n12. **Qualitative evaluation** \u2013 read a sample of outputs by hand [c626].\n13. **Automated scoring** \u2013 query Ollama/LLaMA-3 for numeric scores [c627].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c588",
+        "c201",
+        "c1854",
+        "c1863",
+        "c2298",
+        "c1875",
+        "c2284",
+        "c591",
+        "c3095",
+        "c3123",
+        "c640",
+        "c636",
+        "c626",
+        "c627"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 196,
+      "text": "[FIGURE: End-to-end pipeline flowchart with three labeled stages: Stage 1 (steps 1-7, dataset preparation), Stage 2 (steps 8-10, fine-tuning), Stage 3 (steps 11-13, evaluation)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 197,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 198,
+      "text": "### Improving Fine-Tuning Performance",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 199,
+      "text": "Once you have a working baseline, there are several levers you can pull to improve quality.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 200,
+      "text": "**Use a larger pre-trained model.** To improve fine-tuning performance, consider using a larger pre-trained model which may have greater capacity to capture complex patterns and generate more accurate responses [c698].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c698"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 201,
+      "text": "The `model_configs` dictionary already includes GPT-2 large (774 M) and GPT-2 XL (1,558 M); switching is a one-line change to `CHOOSE_MODEL` [c1744].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1744"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 202,
+      "text": "**Experiment with prompt formats.** To improve fine-tuning performance, experiment with different prompts or instruction formats to guide model responses more effectively [c697].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c697"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 203,
+      "text": "The Phi-3 style, which fuses instruction and input into a single `user` field [c200], is one alternative worth trying.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c200"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 204,
+      "text": "**Use a larger dataset.** The Stanford Alpaca dataset contains 52,000 instruction-output pairs [c695], compared to the 1,100 pairs used here.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c695"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 205,
+      "text": "Training on more diverse examples generally improves generalization.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 206,
+      "text": "[GAP: Specific guidance on number of training epochs, learning rate schedule, and LoRA (Low-Rank Adaptation) hyperparameters for instruction fine-tuning]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 207,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 208,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 209,
+      "text": "In this chapter we built a complete instruction fine-tuning pipeline on top of a pre-trained GPT-2 medium model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 210,
+      "text": "The key ideas are:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 211,
+      "text": "- **Instruction fine-tuning** teaches a pre-trained language model to follow instructions by training on instruction-response pairs using supervised learning [c1722, c181].\n- **The Alpaca prompt format** provides a consistent text template that separates the instruction, optional input context, and expected response [c1842, c196].\n- **Data batching** requires five steps: format, tokenize, pad, shift targets, and mask padding with `-100` [c1875].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1722",
+        "c181",
+        "c1842",
+        "c196",
+        "c1875"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 212,
+      "text": "The `-100` masking ensures that padding positions do not contribute to the cross-entropy loss [c1902].\n- **The training loop** reuses the same cross-entropy loss and AdamW optimizer from pre-training [c3095, c3123].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1902",
+        "c3095",
+        "c3123"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 213,
+      "text": "The only change is the dataset.\n- **Evaluation** combines qualitative human inspection [c626] with automated LLM-based scoring via Ollama [c627, c648], giving both interpretable examples and a scalar metric.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c626",
+        "c627",
+        "c648"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 214,
+      "text": "The fine-tuned model is a foundation for further work.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 215,
+      "text": "You can push quality higher by training longer, using more data, switching to a larger base model, or applying parameter-efficient methods like LoRA.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 216,
+      "text": "The pipeline you have built here is the same one used\u2014at larger scale\u2014to produce the instruction-following models that power modern AI assistants.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    }
+  ],
+  "summary": {
+    "grounded": 70,
+    "unsupported": 73,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 74
+  }
+}

@@ -1,0 +1,1679 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Pre-Training vs. Fine-Tuning: Concepts and Motivation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "Building a large language model is not a single-step process.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 2,
+      "text": "Whether you are reading about GPT-4, experimenting with open-source models, or planning to deploy an LLM in a production system, you will encounter the same two-stage lifecycle again and again.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 3,
+      "text": "Understanding what each stage does\u2014and why both exist\u2014is foundational to everything that follows in this book.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 4,
+      "text": "This chapter unpacks that lifecycle in depth.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 5,
+      "text": "We will look at what pre-training actually accomplishes, why it is not always sufficient on its own, and when and how fine-tuning enters the picture.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 6,
+      "text": "Along the way, we will examine real-world case studies that illustrate why companies invest in fine-tuning rather than simply calling a general-purpose API.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 7,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 8,
+      "text": "### The Two-Stage Lifecycle",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 9,
+      "text": "At the highest level, creating an LLM consists of two stages: pre-training and fine-tuning [c1, c9].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1",
+        "c9"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 10,
+      "text": "These two stages are not interchangeable\u2014they serve fundamentally different purposes, operate on different kinds of data, and produce models with different capabilities.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 11,
+      "text": "[FIGURE: A horizontal pipeline diagram showing Stage 1 (Pre-training on raw text corpus \u2192 Base/Foundational Model) feeding into Stage 2 (Fine-tuning on labeled data \u2192 Task-Specific Model)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 12,
+      "text": "Before diving into each stage, it helps to have a shared vocabulary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 13,
+      "text": "Throughout this chapter, a *token* is approximately equal to one word [c13].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c13"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 14,
+      "text": "LLM stands for Large Language Model [c4].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c4"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 15,
+      "text": "And when we say *transformer*, we mean the neural network architecture that underlies models like GPT and BERT\u2014though it is worth noting upfront that not all transformers are LLMs, and not all LLMs are transformers [c1304, c1308].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1304",
+        "c1308"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 16,
+      "text": "We will return to that distinction later in the chapter.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 17,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 18,
+      "text": "### Pre-Training: Building the Foundation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 19,
+      "text": "#### What Pre-Training Is",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 20,
+      "text": "Pre-training means training an LLM on a huge amount of data so that it can perform a wide range of tasks [c23].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c23"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 21,
+      "text": "More precisely, it is the first training stage of an LLM, and the model it produces is called a *base model* or *foundational model* [c38].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c38"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 22,
+      "text": "Pre-training is also described simply as training on a large, diverse dataset [c1246].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1246"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 23,
+      "text": "The scale involved is difficult to overstate.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 24,
+      "text": "Pre-training requires a huge amount of data\u2014billions or even trillions of words\u2014and significant computational power, making it inaccessible to most individuals [c32].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c32"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 25,
+      "text": "LLMs are typically trained on billions of documents [c3165].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3165"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 26,
+      "text": "This is why pre-training is almost exclusively the domain of large research labs and well-funded companies.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 27,
+      "text": "#### The Training Objective: Next-Word Prediction",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 28,
+      "text": "The core task that drives pre-training is deceptively simple. *Word completion* is the task where an LLM is given a set of words and must predict the next word [c18].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c18"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 29,
+      "text": "The model sees raw text\u2014regular text without any labeling information [c37]\u2014and learns by trying to predict what comes next, over and over, across billions of examples.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c37"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 30,
+      "text": "Intuitively, this seems like it should produce a model that is only good at finishing sentences.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 31,
+      "text": "The surprising empirical finding is that it produces much more than that.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 32,
+      "text": "#### Emergent Capabilities",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 33,
+      "text": "LLMs trained only for next-word prediction can perform translation, multiple-choice questions, text summarization, sentiment analysis, linguistic acceptability, and question answering\u2014without specific training on any of these tasks [c21].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c21"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 34,
+      "text": "In other words, the model learns to do far more than it was explicitly taught.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 35,
+      "text": "This is a sharp contrast with the traditional approach to NLP.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 36,
+      "text": "In traditional NLP, separate models must be trained for different tasks like translation, question answering, and emotion detection, whereas pre-trained LLMs can perform all these tasks with a single model [c22].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c22"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 37,
+      "text": "The pre-trained LLM is a generalist; the traditional pipeline is a collection of specialists.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 38,
+      "text": "Why does next-word prediction produce such broad capability?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 39,
+      "text": "The intuition is that to predict the next word accurately across a diverse corpus, the model must implicitly learn grammar, facts about the world, reasoning patterns, and even stylistic conventions.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 40,
+      "text": "The training signal is simple, but the knowledge required to satisfy it is vast.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 41,
+      "text": "LLMs interact effectively with users because they are trained on a huge and diverse set of data [c11].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c11"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 42,
+      "text": "That diversity is not incidental\u2014it is the mechanism by which the model acquires general-purpose knowledge.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 43,
+      "text": "#### What Pre-Training Data Looks Like",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 44,
+      "text": "Two commonly cited data sources illustrate the kind of material used in pre-training:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 45,
+      "text": "- **Common Crawl** is a huge and open repository of all the data on the internet [c16].\n- **WebText2** is a corpus consisting of Reddit submissions, blog posts, Stack Overflow articles, and code [c17].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c16",
+        "c17"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 46,
+      "text": "Together, these sources expose the model to an enormous variety of writing styles, topics, languages, and domains.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "The breadth is intentional: the more diverse the training data, the more general the resulting model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 48,
+      "text": "#### The Output: A Foundational Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 49,
+      "text": "After pre-training, you have a base model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 50,
+      "text": "GPT-4, for example, is a pre-trained model capable of text completion and other tasks such as sentiment analysis and question answering [c39].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c39"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 51,
+      "text": "GPT stands for Generative Pre-trained Transformers [c1289], and it is explicitly a pre-trained or foundational model [c1290].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1289",
+        "c1290"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 52,
+      "text": "GPT generates one word at a time [c1293] and processes text from left to right, predicting only the rightmost unknown information [c1296].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1293",
+        "c1296"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 53,
+      "text": "This left-to-right, generative design is what makes GPT-style models well suited to text completion and open-ended generation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 54,
+      "text": "[FIGURE: Diagram contrasting GPT (left-to-right, decoder-only, generates next token) with BERT (bidirectional, encoder-only, predicts masked tokens)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 55,
+      "text": "For contrast, consider BERT\u2014Bidirectional Encoder Representations from Transformers [c1324].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1324"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 56,
+      "text": "BERT randomly masks some words during training and attempts to predict those masked words [c1292].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1292"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 57,
+      "text": "Rather than predicting the next word, BERT predicts hidden or masked words in a given sentence [c1291].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1291"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 58,
+      "text": "BERT is bidirectional, attending to different parts of the sentence from both left and right directions [c1297], and it uses only an encoder architecture without a decoder [c1326].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1297",
+        "c1326"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 59,
+      "text": "Because BERT can capture nuances and relationships between words by looking at the entire sentence from both directions [c1299], it can differentiate between different meanings of the same word\u2014for example, \"bank\" as a financial institution versus \"bank\" as a river bank\u2014by examining surrounding words [c1300].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1299",
+        "c1300"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 60,
+      "text": "This makes BERT particularly well suited to classification tasks: BERT is commonly used for sentiment analysis [c1301, c1327].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1301",
+        "c1327"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 61,
+      "text": "Both BERT and GPT have the word \"transformers\" in their names because they originated from the transformer architecture [c1303].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1303"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 62,
+      "text": "The original transformer architecture was developed for machine translation tasks, specifically translating English text into German and French [c1319].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1319"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 63,
+      "text": "The simplified transformer architecture consists of eight steps: tokenization, encoding, decoding with partial output, and word-by-word generation [c1320].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1320"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "BERT uses an encoder architecture [c1295], while GPT uses a decoder-style design.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1295"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 65,
+      "text": "The key takeaway for this chapter is that pre-training\u2014regardless of the specific architecture\u2014produces a model with broad, general-purpose capabilities.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 66,
+      "text": "That is both its greatest strength and, in certain production contexts, its limitation.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 67,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 68,
+      "text": "### The Limits of Pre-Training Alone",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 69,
+      "text": "A foundational model is powerful, but it is not always sufficient.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 70,
+      "text": "Pre-trained models like GPT-4 may not have access to company-specific data and therefore produce generic rather than domain-specific responses [c26].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c26"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 71,
+      "text": "Think about what this means in practice.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 72,
+      "text": "If you ask GPT-4 a question about your company's internal policies, your proprietary codebase, or the specific legal cases relevant to your jurisdiction, the model has no knowledge of those things.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 73,
+      "text": "It was trained on public internet data, not on your data.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 74,
+      "text": "Its answers will be plausible-sounding but generic\u2014and in high-stakes domains, generic is not good enough.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 75,
+      "text": "This is the core motivation for fine-tuning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 76,
+      "text": "Fine-tuning is needed when building applications specific to a particular task or domain, rather than for general-purpose use [c25].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c25"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 77,
+      "text": "General users and students can use pre-trained models like GPT-4 directly without fine-tuning, but companies and startups deploying LLM applications in production need fine-tuning [c36].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c36"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 78,
+      "text": "The distinction is worth sitting with.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 79,
+      "text": "If you are a student experimenting with language models, the base model is probably fine.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 80,
+      "text": "If you are building a product that will be used by real customers in a specific domain, you almost certainly need fine-tuning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 81,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 82,
+      "text": "### Fine-Tuning: Specializing the Foundation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 83,
+      "text": "#### What Fine-Tuning Is",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 84,
+      "text": "Fine-tuning is the second training stage.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 85,
+      "text": "Where pre-training operates on raw, unlabeled text at massive scale, fine-tuning typically requires a labeled dataset [c43].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c43"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 86,
+      "text": "The model has already learned general language understanding from pre-training; fine-tuning steers that understanding toward a specific task or domain.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 87,
+      "text": "The three main steps for building an LLM are: (1) training on a large corpus of raw text data, (2) pre-training to create a foundational model, and (3) fine-tuning on labeled data for specific tasks [c47].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c47"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 88,
+      "text": "Stage 3 of building an LLM involves fine-tuning on smaller, specific datasets to build applications such as classifiers or personal assistants [c3161].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3161"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 89,
+      "text": "Intuitively, fine-tuning is like hiring a generalist and then giving them specialized on-the-job training.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 90,
+      "text": "The generalist already knows how to read, write, reason, and communicate.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 91,
+      "text": "The specialized training teaches them the specific knowledge and conventions of your domain.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 92,
+      "text": "#### Types of Fine-Tuning",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 93,
+      "text": "There are two main flavors of fine-tuning worth distinguishing at this stage.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 94,
+      "text": "**Instruction fine-tuning** involves providing instruction-answer pairs as labeled data to teach the model specific tasks like language translation [c41].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c41"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 95,
+      "text": "The training examples look like: \"Translate the following sentence into French: [sentence]\" \u2192 \"[translation]\".",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 96,
+      "text": "The model learns to follow instructions by seeing many such pairs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 97,
+      "text": "**Classification fine-tuning** adapts the model to produce categorical outputs\u2014for example, labeling a piece of text as positive or negative sentiment, or routing a customer query to the correct department.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 98,
+      "text": "Fine-tuned LLMs can be used for specific tasks such as classification, summarization, translation, and building custom chatbots [c45].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c45"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 99,
+      "text": "Large companies building custom chatbots perform fine-tuning on foundational models rather than using foundational models alone [c46].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c46"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 100,
+      "text": "This is a consistent pattern across industries: the foundational model provides the language capability, and fine-tuning provides the domain knowledge and task alignment.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "[FIGURE: Branching diagram showing a pre-trained base model being fine-tuned into multiple specialized models: a classifier, a summarizer, a translation model, and a custom chatbot]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 102,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 103,
+      "text": "### Real-World Case Studies",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "The motivation for fine-tuning becomes concrete when you look at how real organizations have deployed it.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 105,
+      "text": "The following three case studies illustrate different domains and different reasons for choosing fine-tuning over a general-purpose model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 106,
+      "text": "#### SK Telecom: Customer Service in Korean",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 107,
+      "text": "SK Telecom fine-tuned a model to improve customer service interactions for telecom-related conversations in Korean, resulting in a 35% increase in conversation summarization quality and a 33% increase in intent recognition accuracy [c27].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c27"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 108,
+      "text": "This case study highlights two important points.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 109,
+      "text": "First, domain specificity matters: telecom customer service has its own vocabulary, its own common issues, and its own conversational patterns.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 110,
+      "text": "A general-purpose model trained on English internet text is poorly positioned to handle Korean telecom conversations well.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 111,
+      "text": "Second, the improvements are measurable and substantial\u201435% and 33% are not marginal gains.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 112,
+      "text": "Fine-tuning produced a qualitatively better product for this specific use case.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 113,
+      "text": "#### Harvey: Legal AI",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 114,
+      "text": "Harvey is an AI legal tool that was fine-tuned on legal case history data to assist attorneys and lawyers, addressing the limitation that foundational models lacked extensive knowledge of legal cases [c28].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c28"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 115,
+      "text": "The legal domain is a particularly clear example of why generic models fall short.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 116,
+      "text": "Legal reasoning depends on specific precedents, statutes, and jurisdictional rules.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 117,
+      "text": "A model that has not been trained on legal case history cannot reliably reason about those precedents.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 118,
+      "text": "Harvey's fine-tuning on legal case data directly addresses this gap\u2014the model learns the specific knowledge that attorneys need, rather than relying on whatever legal content happened to appear in the pre-training corpus.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 119,
+      "text": "This also illustrates a risk management dimension.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 120,
+      "text": "In high-stakes professional contexts like law, a model that produces plausible-but-wrong answers is not just unhelpful\u2014it is potentially harmful.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 121,
+      "text": "Fine-tuning on domain-specific data is one way to reduce that risk.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 122,
+      "text": "#### JPMorgan Chase: Proprietary Financial Data",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 123,
+      "text": "JPMorgan Chase developed a fine-tuned AI-powered LLM suite specifically for their employees using their proprietary data, rather than relying solely on GPT-4 [c30].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c30"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 124,
+      "text": "This case study adds a dimension that the previous two do not: data privacy and competitive advantage.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 125,
+      "text": "A financial institution's proprietary data\u2014trading strategies, client information, internal research\u2014is not something that can or should be sent to a third-party API.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 126,
+      "text": "By fine-tuning their own model on their own data, JPMorgan Chase keeps that data in-house while still benefiting from the language capabilities of a large pre-trained model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 127,
+      "text": "This pattern\u2014fine-tune a foundational model on proprietary data, deploy internally\u2014is increasingly common among large enterprises.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 128,
+      "text": "The foundational model provides the expensive, compute-intensive language understanding; the fine-tuning provides the domain-specific knowledge that makes the model useful for the organization's specific needs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 129,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 130,
+      "text": "### Connecting the Stages: A Unified View",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 131,
+      "text": "It is worth stepping back and seeing how pre-training and fine-tuning fit together as a coherent system.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 132,
+      "text": "Building a large language model from scratch typically proceeds in three stages: Stage 1 (understanding LLM basics), Stage 2 (pre-training), and Stage 3 (fine-tuning) [c3158].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3158"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 133,
+      "text": "The three main steps are: training on a large corpus of raw text data, pre-training to create a foundational model, and fine-tuning on labeled data for specific tasks [c47].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c47"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 134,
+      "text": "[FIGURE: Three-stage pipeline: Stage 1 (raw text corpus) \u2192 Stage 2 (pre-training \u2192 base model) \u2192 Stage 3 (fine-tuning on labeled data \u2192 specialized model)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 135,
+      "text": "The relationship between the stages is not just sequential\u2014it is also economical.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 136,
+      "text": "Pre-training is the expensive part.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 137,
+      "text": "It requires billions or trillions of tokens and massive computational resources [c32].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c32"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 138,
+      "text": "Fine-tuning, by contrast, operates on smaller, specific datasets [c3161].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3161"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 139,
+      "text": "By separating the two stages, the field has made it possible for organizations to benefit from the expensive pre-training work done by large labs, and then apply relatively affordable fine-tuning to adapt the result to their needs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "This division of labor is one of the most practically important ideas in applied LLM development.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 141,
+      "text": "You do not need to train a model from scratch to build a useful product.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 142,
+      "text": "You need to understand what the foundational model already knows, identify the gap between that and what your application requires, and close that gap through fine-tuning.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 143,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 144,
+      "text": "### When to Pre-Train vs. When to Fine-Tune",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 145,
+      "text": "Given everything above, a practical question emerges: when should you do each?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 146,
+      "text": "The answer is almost always \"fine-tune, don't pre-train from scratch\"\u2014unless you are a large research organization with the resources to do otherwise.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 147,
+      "text": "Pre-training requires a huge amount of data and significant computational power, making it inaccessible to most individuals [c32].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c32"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "For the vast majority of practitioners, pre-training is something you consume (by downloading a foundational model) rather than something you perform.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 149,
+      "text": "Fine-tuning, on the other hand, is where most practitioners will spend their time.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 150,
+      "text": "The decision to fine-tune is driven by a few key factors:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 151,
+      "text": "1. **Domain specificity**: Does your application require knowledge that is unlikely to appear in general internet text?",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 152,
+      "text": "Legal case history, proprietary financial data, and specialized technical documentation are all examples [c28, c30].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c28",
+        "c30"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 153,
+      "text": "2. **Task specificity**: Does your application require a specific output format or behavior that a general-purpose model does not reliably produce?",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 154,
+      "text": "Instruction fine-tuning can teach the model to follow specific formats [c41].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c41"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 155,
+      "text": "3. **Language and cultural specificity**: Does your application serve users in a specific language or cultural context that may be underrepresented in the pre-training data?",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 156,
+      "text": "SK Telecom's Korean telecom use case is an example [c27].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c27"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 157,
+      "text": "4. **Data privacy**: Does your application require the model to reason about data that cannot be shared with a third-party API?",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 158,
+      "text": "Fine-tuning on proprietary data, deployed internally, addresses this [c30].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c30"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 159,
+      "text": "If none of these factors apply\u2014if you are a student, a researcher, or a developer building a general-purpose tool\u2014then a pre-trained model used directly may be entirely sufficient [c36].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c36"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 160,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 161,
+      "text": "### The Broader Landscape: Transformers, LLMs, and Their Relationship",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 162,
+      "text": "Before closing this chapter, it is worth clarifying a conceptual boundary that trips up many newcomers: the relationship between transformers and LLMs.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 163,
+      "text": "The terms \"transformers\" and \"large language models\" should not be used interchangeably, as they are different concepts [c1316].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1316"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 164,
+      "text": "Not all transformers are large language models [c1304], and not all large language models are based on transformer architecture [c1308].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1304",
+        "c1308"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 165,
+      "text": "Transformers can be used for computer vision tasks in addition to language tasks [c1305].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1305"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 166,
+      "text": "Vision Transformers (ViT) are transformer models applied to computer vision tasks such as image recognition and image classification [c1306], and they achieve comparable or better results than Convolutional Neural Networks (CNNs) while requiring substantially fewer computational resources for pre-training [c1307].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1306",
+        "c1307"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 167,
+      "text": "Transformers can also be used for image segmentation [c1330].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1330"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 168,
+      "text": "On the other side of the boundary, before transformers became dominant, other architectures were used for sequence modeling.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 169,
+      "text": "Recurrent Neural Networks (RNNs) maintain a feedback loop to incorporate memory [c1313], and Long Short-Term Memory (LSTM) networks incorporate two separate paths: one for short-term memories and one for long-term memories [c1314].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1313",
+        "c1314"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 170,
+      "text": "Both RNNs and LSTMs could perform sequence modeling and text completion tasks [c1312].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1312"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 171,
+      "text": "These are LLM-adjacent architectures that are not transformers.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 172,
+      "text": "The practical implication is that when you encounter a new model, you should not assume it is a transformer just because it is a language model, or assume it is a language model just because it uses transformer architecture.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 173,
+      "text": "The two concepts overlap substantially in current practice, but they are not identical.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 174,
+      "text": "---",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "### Summary",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 176,
+      "text": "This chapter has covered the two-stage LLM lifecycle in depth.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 177,
+      "text": "Here are the key ideas to carry forward:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 178,
+      "text": "- **Pre-training** trains a model on a massive corpus of raw, unlabeled text using next-word prediction (or masked-word prediction, in the case of BERT) [c23, c43].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c23",
+        "c43"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 179,
+      "text": "The result is a foundational model with broad, general-purpose capabilities [c38].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c38"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 180,
+      "text": "- **The emergent capabilities** of pre-trained models are remarkable: a model trained only on next-word prediction can perform translation, summarization, sentiment analysis, and question answering without task-specific training [c21].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c21"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 181,
+      "text": "- **The limitation** of pre-trained models is that they lack domain-specific knowledge and may produce generic responses when applied to specialized tasks [c26].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c26"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 182,
+      "text": "- **Fine-tuning** adapts a foundational model to a specific task or domain using labeled data [c43, c47].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c43",
+        "c47"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 183,
+      "text": "It is needed for production applications in specialized domains [c25].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c25"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 184,
+      "text": "- **Real-world examples**\u2014SK Telecom [c27], Harvey [c28], and JPMorgan Chase [c30]\u2014demonstrate that fine-tuning produces measurable improvements in domain-specific performance.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c27",
+        "c28",
+        "c30"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 185,
+      "text": "- **Instruction fine-tuning** and **classification fine-tuning** are the two main approaches, suited to different output types [c41, c45].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c41",
+        "c45"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 186,
+      "text": "- **Transformers and LLMs are related but distinct concepts** [c1316].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1316"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 187,
+      "text": "Not every transformer is an LLM, and not every LLM is a transformer [c1304, c1308].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c1304",
+        "c1308"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 188,
+      "text": "In the next chapter, we will move from concepts to mechanics, beginning with the data preparation pipeline: how raw text is tokenized, how tokens are assigned IDs, and how those IDs are converted into the vector embeddings that an LLM actually processes [c3162, c3166, c3173].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3162",
+        "c3166",
+        "c3173"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    }
+  ],
+  "summary": {
+    "grounded": 68,
+    "unsupported": 63,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 58
+  }
+}

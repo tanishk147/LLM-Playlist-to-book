@@ -1,0 +1,2023 @@
+{
+  "sentences": [
+    {
+      "index": 0,
+      "text": "## Classification Fine-Tuning: Spam Detection from Scratch",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 1,
+      "text": "Fine-tuning is the process of adapting a pre-trained model to a specific task by training the model on additional data [c2337, c3575].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2337",
+        "c3575"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 2,
+      "text": "Rather than training a model from scratch\u2014which requires enormous compute and data\u2014we start from a foundation model that has already learned rich representations of language, then nudge its weights toward a narrower objective [c169].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c169"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 3,
+      "text": "This chapter walks through every step of that process for a concrete, practical task: teaching a GPT-2 model to distinguish spam text messages from legitimate ones.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 4,
+      "text": "The project is deliberately built from scratch [c2894].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2894"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 5,
+      "text": "By the end of this chapter you will have downloaded and balanced a real dataset, written a custom PyTorch `Dataset` and `DataLoader`, surgically modified the GPT-2 architecture to output class logits instead of vocabulary logits, frozen the right subset of parameters, implemented accuracy and loss utilities, run a full training loop, and tested the resulting classifier on messages it has never seen [c2893].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2893"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 6,
+      "text": "### 10.1 The Big Picture: Classification Fine-Tuning",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 7,
+      "text": "Before diving into code, it is worth understanding where classification fine-tuning sits in the broader landscape of fine-tuning approaches.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 8,
+      "text": "#### 10.1.1 Two Flavors of Fine-Tuning",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 9,
+      "text": "LLM fine-tuning has two broad categories: instruction fine-tuning and classification fine-tuning [c3596].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3596"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 10,
+      "text": "Instruction fine-tuning trains the model to follow natural-language instructions and produce free-form text responses.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 11,
+      "text": "Classification fine-tuning, by contrast, uses a large language model to classify inputs into predefined categories without explicit instructions [c3600].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3600"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 12,
+      "text": "The practical difference matters.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 13,
+      "text": "Instruction fine-tuning requires greater computational power than classification fine-tuning because the model must search the entire corpus based on given instructions and perform non-specific actions [c3605].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3605"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 14,
+      "text": "For spam detection, we do not need the model to generate a sentence explaining its reasoning\u2014we just need it to output one of two labels.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 15,
+      "text": "In classification fine-tuning for spam detection, no instruction is given to the LLM; only the input text is provided and the model classifies it as spam or not spam [c3601].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3601"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 16,
+      "text": "The model architecture is augmented at the end to be suitable for binary classification with outputs of either spam (1) or no spam (0) [c3649].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3649"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 17,
+      "text": "[FIGURE: Side-by-side comparison of instruction fine-tuning (input \u2192 instruction + text \u2192 free-form output) versus classification fine-tuning (input \u2192 text only \u2192 discrete class label)]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 18,
+      "text": "#### 10.1.2 Parameter-Efficient Alternatives",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 19,
+      "text": "For completeness, it is worth knowing that full fine-tuning is not the only option.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 20,
+      "text": "Parameter efficient fine-tuning updates only a subset of parameters while freezing the rest, reducing the number of trainable parameters and memory requirements [c3610].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3610"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 21,
+      "text": "LoRA, for instance, is a fine-tuning method where instead of fine-tuning all weights in a weight matrix, two smaller matrices that approximate the larger matrix are fine-tuned [c3611].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3611"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 22,
+      "text": "QLoRA takes this further by quantizing the weights of LoRA adapters to lower precision [c3612].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3612"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 23,
+      "text": "This chapter focuses on selective full fine-tuning\u2014freezing most of the model but fully updating the layers we care about\u2014which strikes a good balance between simplicity and effectiveness.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 24,
+      "text": "#### 10.1.3 The Three Stages",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 25,
+      "text": "The fine-tuning process is divided into three main stages: dataset preparation, model initialization and modification, and fine-tuning with evaluation [c3615].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3615"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 26,
+      "text": "- **Stage 1 \u2013 Dataset preparation:** Download the SMS Spam Collection dataset, balance it, tokenize messages, pad sequences, and wrap everything in PyTorch `Dataset` and `DataLoader` objects.\n- **Stage 2 \u2013 Model initialization and modification:** Load pre-trained GPT-2 weights, replace the output head with a two-class linear layer, and freeze all but the last transformer block and final layer normalization [c3617].\n- **Stage 3 \u2013 Fine-tuning and evaluation:** Run the training loop, track loss and accuracy on train and validation splits, and finally test on held-out data and new messages [c3618].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3617",
+        "c3618"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 27,
+      "text": "### 10.2 The SMS Spam Collection Dataset",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 28,
+      "text": "#### 10.2.1 Dataset Overview",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 29,
+      "text": "The fine-tuning classification project uses the SMS Spam Collection dataset from the UCI machine learning repository [c48].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c48"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 30,
+      "text": "The dataset consists of text messages labeled as either spam or not spam [c49].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c49"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 31,
+      "text": "The label for non-spam messages is called HAM [c2341].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2341"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 32,
+      "text": "The SMS Spam Collection dataset contains 425 spam messages manually extracted from the Grumbletext website, among other sources [c3623].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3623"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 33,
+      "text": "The original dataset is imbalanced: there are 4,825 ham (non-spam) messages and 747 spam messages [c2828].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2828"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 34,
+      "text": "This imbalance\u2014roughly 6.5 ham messages for every spam message\u2014would cause a naive classifier to achieve high accuracy simply by predicting \"ham\" for everything.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 35,
+      "text": "We will address this by balancing the dataset before training.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 36,
+      "text": "#### 10.2.2 Downloading the Dataset",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 37,
+      "text": "The following snippet downloads the dataset archive, extracts it, and renames the file to give it a `.csv` extension:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 38,
+      "text": "# Source: [c3630]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 39,
+      "text": "# Create an unverified SSL context",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 40,
+      "text": "The unverified SSL context is a pragmatic workaround for environments where certificate verification causes download failures.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 41,
+      "text": "In production code you would want proper certificate handling.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 42,
+      "text": "#### 10.2.3 Balancing the Dataset",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 43,
+      "text": "Because the original dataset has approximately 4,800 ham messages and 747 spam messages [c50], we need to downsample the majority class.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c50"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 44,
+      "text": "The goal is to create a balanced dataset where both classes have the same number of examples.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 45,
+      "text": "Intuitively, a balanced dataset prevents the model from learning a trivial shortcut\u2014predicting the majority class every time.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 46,
+      "text": "After balancing, we split the data into training, validation, and test sets.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 47,
+      "text": "The following function performs a random split:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 48,
+      "text": "# Source: [c3640]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 49,
+      "text": "def random_split(df, train_frac=0.7, validation_frac=0.2):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 50,
+      "text": "Applying this split to the balanced dataset yields the following counts:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 51,
+      "text": "# Source: [c3644]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 52,
+      "text": "train_df, validation_df, test_df = random_split(balanced_df)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 53,
+      "text": "The training set contains 1,045 examples, the validation set 149, and the test set 300 [c3644].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3644"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 54,
+      "text": "The validation set is used during training to monitor generalization; the test set is held out until the very end [c137].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c137"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 55,
+      "text": "### 10.3 Building the SpamDataset",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 56,
+      "text": "#### 10.3.1 Dataset vs. DataLoader",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 57,
+      "text": "Two PyTorch abstractions are central here.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 58,
+      "text": "A `Dataset` stores the samples and their corresponding labels [c2350].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2350"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 59,
+      "text": "A `DataLoader` wraps an iterable around the `Dataset` to enable easy access to the samples [c2351].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2351"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 60,
+      "text": "A PyTorch dataset specifies how data is loaded and processed before instantiating a data loader [c2374].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2374"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 61,
+      "text": "#### 10.3.2 Tokenization",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 62,
+      "text": "The `SpamDataset` class uses TikToken to convert text into token IDs [c2364].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2364"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 63,
+      "text": "TikToken is a tokenizer library developed by OpenAI that converts sentences into token IDs [c2364].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2364"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 64,
+      "text": "It uses a byte pair encoder\u2014a sub-word tokenizer that breaks words into smaller units, not mapping each word to a single token [c2365].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2365"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 65,
+      "text": "The vocabulary is a dictionary mapping tokens to their corresponding token IDs [c2370].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2370"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 66,
+      "text": "An end-of-text token is a special token used to mark the end of a document or sentence in tokenization [c2363].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2363"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 67,
+      "text": "This token is appended to each message so the model knows where the input ends.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 68,
+      "text": "#### 10.3.3 The SpamDataset Class",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 69,
+      "text": "The spam dataset class performs three steps: identifying the longest sequence in the training dataset, converting each text message into token IDs, and padding all sequences to match the longest sequence length [c2375].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2375"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 70,
+      "text": "The class loads data from CSV files, tokenizes text using the GPT-2 tokenizer from TikToken, and pads or truncates sequences to uniform length [c2385].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2385"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 71,
+      "text": "[FIGURE: Diagram showing three text messages of different lengths being tokenized and then padded with end-of-text tokens to the length of the longest sequence]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 72,
+      "text": "Padding is necessary because PyTorch's `DataLoader` requires all sequences in a batch to have the same length.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 73,
+      "text": "Using the end-of-text token as the padding token is a natural choice\u2014it is already in the vocabulary and the model has seen it during pre-training.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 74,
+      "text": "The large language model architecture takes input text and outputs a classification of whether the email is spam or not spam [c2348].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2348"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 75,
+      "text": "The dataset class is the bridge between raw CSV rows and the tensor inputs that architecture expects.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 76,
+      "text": "#### 10.3.4 Creating the DataLoaders",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 77,
+      "text": "Once the `SpamDataset` is defined for each split, we instantiate three `DataLoader` objects\u2014one each for training, validation, and testing.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 78,
+      "text": "The `DataLoader` handles shuffling (for the training set), batching, and iteration.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 79,
+      "text": "This is standard PyTorch practice and keeps the training loop clean.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 80,
+      "text": "### 10.4 Modifying the GPT-2 Architecture",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 81,
+      "text": "#### 10.4.1 Loading Pre-Trained Weights",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 82,
+      "text": "Fine-tuning involves using pre-trained weights from GPT-2 and then running the training procedure again on a specific dataset [c152].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c152"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 83,
+      "text": "The project uses a GPT-based LLM architecture that will be modified for classification fine-tuning [c2837].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2837"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 84,
+      "text": "The following function downloads and loads the GPT-2 model files:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 85,
+      "text": "# Source: [c2844]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 86,
+      "text": "def download_and_load_gpt2(model_size, models_dir):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 87,
+      "text": "GPT-2 weights are stored in TensorFlow checkpoint format.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 88,
+      "text": "The following helper loads them into a nested Python dictionary:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 89,
+      "text": "# Source: [c2847]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 90,
+      "text": "def load_gpt2_params_from_tf_ckpt(ckpt_path, settings):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 91,
+      "text": "Once loaded, these parameters are copied into our PyTorch GPT model.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 92,
+      "text": "The consequence is that the model starts fine-tuning from a strong initialization rather than random weights.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 93,
+      "text": "#### 10.4.2 Why the Pre-Trained Model Cannot Classify Spam Out of the Box",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 94,
+      "text": "The pre-trained GPT-2 model without fine-tuning struggles to follow instructions and lacks classification capabilities for tasks like spam detection [c2851].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2851"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 95,
+      "text": "Without fine-tuning, the pre-trained GPT model could not correctly answer spam classification prompts even when given explicit instructions [c159].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c159"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 96,
+      "text": "This is expected: GPT-2 was trained to predict the next token, not to output a class label.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 97,
+      "text": "We need to modify its architecture.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 98,
+      "text": "#### 10.4.3 Replacing the Output Head",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 99,
+      "text": "A classification head is a small linear layer added on top of a pre-trained language model (like GPT) to adapt it for classification tasks by mapping hidden states to class logits [c2857].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2857"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 100,
+      "text": "The original GPT-2 output layer maps the 768-dimensional hidden state to 50,257 vocabulary logits\u2014one per token in the vocabulary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 101,
+      "text": "For binary classification we only need two logits.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 102,
+      "text": "To adapt GPT-2 for text classification, we replace the original 768\u219250257 output layer with a 768\u21922 linear layer that outputs logits for two classes (spam vs. no spam) [c2854].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2854"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 103,
+      "text": "In code, this replacement looks like:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 104,
+      "text": "# Source: [c2873]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 105,
+      "text": "model.output_head = Linear(in_features=768, out_features=num_classes)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 106,
+      "text": "For fine-tuning a language model for classification, we replace the original output layer that maps to vocabulary size with a smaller output layer that maps to the number of classes [c2867].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2867"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 107,
+      "text": "The original output layer was replaced with a classification head that takes input of size 768 and outputs 2 values (for spam or no spam classification) [c60].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c60"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 108,
+      "text": "[FIGURE: GPT-2 architecture diagram showing the original 768\u219250257 output head being replaced by a 768\u21922 classification head]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 109,
+      "text": "#### 10.4.4 Which Tokens to Use",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 110,
+      "text": "A GPT model processes a sequence of tokens and produces an output vector for each position.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 111,
+      "text": "For spam classification, we focus fine-tuning on the last output token rather than all output rows, since the last token contains all necessary information [c2879].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2879"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 112,
+      "text": "Intuitively, by the time the model processes the final token, it has attended to every preceding token in the sequence\u2014so the last hidden state is a compressed summary of the entire input.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 113,
+      "text": "In PyTorch, extracting the last token's output from a batch of sequences is:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 114,
+      "text": "# Source: [c2880]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 115,
+      "text": "outputs[:, -1, :]",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 116,
+      "text": "Extracting the last output token from a 4-token sequence yields a vector with two class logits (e.g., -3.5898 and 3.9902 for spam/not-spam classification) [c2882].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2882"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 117,
+      "text": "The larger logit wins: in this example the model would predict \"not spam.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 118,
+      "text": "#### 10.4.5 Deciding Which Parameters to Train",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 119,
+      "text": "Before training, the parameters in the new output head, final transformer block, and final layer normalization are still random and have not been trained on the classification dataset [c2878].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2878"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 120,
+      "text": "We need to train them.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 121,
+      "text": "But we do not want to train the entire model\u2014that would be slow and risk destroying the pre-trained representations.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 122,
+      "text": "Three components will be fine-tuned: the classification head, the final (12th) transformer block, and the final layer normalization module [c2863].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2863"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 123,
+      "text": "Everything else is frozen.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 124,
+      "text": "To unfreeze the final transformer block:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 125,
+      "text": "# Source: [c2875]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 126,
+      "text": "for param in model.transformer.h[-1].parameters():",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 127,
+      "text": "To unfreeze the final layer normalization:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 128,
+      "text": "# Source: [c2876]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 129,
+      "text": "for param in model.ln_f.parameters():",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 130,
+      "text": "The model passed to the training function is a GPT model class with a modified architecture that includes a classification head on top [c118].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c118"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 131,
+      "text": "By freezing the bulk of the network and only training the top layers, we preserve the general language understanding learned during pre-training while adapting the model's output behavior to our specific task.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 132,
+      "text": "[FIGURE: GPT-2 layer stack with frozen layers (grey) and trainable layers highlighted: classification head, final transformer block, and final layer norm]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 133,
+      "text": "### 10.5 Evaluation Utilities: Accuracy and Loss",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 134,
+      "text": "Before writing the training loop, we need two measurement tools: an accuracy function and a loss function.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 135,
+      "text": "These let us monitor whether the model is actually learning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 136,
+      "text": "#### 10.5.1 Classification Accuracy",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 137,
+      "text": "Classification accuracy measures the percentage of correct predictions across a dataset [c67].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c67"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 138,
+      "text": "The formula is straightforward:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 139,
+      "text": "$$\\text{Accuracy} = \\frac{\\text{correct\\_predictions}}{\\text{total\\_number\\_of\\_examples}}$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 140,
+      "text": "[c80]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c80"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 141,
+      "text": "Predicted labels are the class predictions generated by applying argmax to model logits [c70].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c70"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 142,
+      "text": "Output labels are also called target labels, representing the true values in the dataset [c69].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c69"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 143,
+      "text": "The argmax operation picks the index of the largest logit\u2014in a two-class setting, index 0 means \"ham\" and index 1 means \"spam.\"",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 144,
+      "text": "The following function computes accuracy over a data loader, with an optional `num_batches` argument to limit evaluation to a subset of batches:",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 145,
+      "text": "# Source: [c71]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 146,
+      "text": "def calculate_accuracy(loader, num_batches=None):",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 147,
+      "text": "Evaluation frequency specifies how many batches must be processed before printing training and validation loss metrics [c110].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c110"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 148,
+      "text": "Evaluation iteration specifies the number of batches to use for evaluation; using fewer batches (e.g., 5 or 10) saves computation time during evaluation [c112].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c112"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 149,
+      "text": "The `num_batches` parameter in `calculate_accuracy` serves exactly this purpose\u2014during training we can pass a small number to get a quick estimate without waiting for a full pass over the data.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 150,
+      "text": "#### 10.5.2 Cross-Entropy Loss",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 151,
+      "text": "Categorical cross-entropy loss is defined as: negative sum over all class labels of $(y_i \\cdot \\log(p_i))$, where $y_i$ is the true value and $p_i$ is the predicted probability [c88].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c88"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 152,
+      "text": "$$\\mathcal{L} = -\\sum_{i} y_i \\log(p_i)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 153,
+      "text": "Intuitively, this loss penalizes confident wrong predictions heavily (because $\\log(p_i)$ is very negative when $p_i$ is close to zero) and rewards confident correct predictions.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 154,
+      "text": "In PyTorch, we use the built-in function for this computation:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 155,
+      "text": "# Source: [c93]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 156,
+      "text": "torch.nn.functional.cross_entropy()",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 157,
+      "text": "`torch.nn.functional.cross_entropy()` is the PyTorch function used to compute categorical cross-entropy loss [c93].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c93"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 158,
+      "text": "It accepts raw logits (not probabilities), applies softmax internally, and computes the negative log-likelihood.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 159,
+      "text": "This is both numerically stable and convenient.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 160,
+      "text": "### 10.6 The Fine-Tuning Training Loop",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 161,
+      "text": "#### 10.6.1 Training Loop Structure",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 162,
+      "text": "With the dataset, model, and evaluation utilities in place, we can write the training loop.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 163,
+      "text": "One epoch is one complete pass through the entire dataset [c96].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c96"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 164,
+      "text": "The loop iterates over epochs, and within each epoch iterates over batches from the training `DataLoader`.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 165,
+      "text": "The high-level structure is:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 166,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 167,
+      "text": "For each batch, run a forward pass to get logits.\n2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 168,
+      "text": "Compute cross-entropy loss between logits and target labels.\n3.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 169,
+      "text": "Run a backward pass to compute gradients.\n4.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 170,
+      "text": "Update parameters to minimize loss.\n5.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 171,
+      "text": "At regular intervals (controlled by evaluation frequency), compute and print training and validation loss [c110].\n6.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c110"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 172,
+      "text": "After every epoch, calculate and print training accuracy and validation accuracy [c114].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c114"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 173,
+      "text": "The lecture covers implementing two metrics (accuracy and loss function), a backward pass for training, parameter modification to minimize loss, and testing on unseen data [c66].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c66"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 174,
+      "text": "#### 10.6.2 Epoch-Level Evaluation",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 175,
+      "text": "Step 7 of the fine-tuning training process: after every epoch, calculate and print training accuracy and validation accuracy [c114].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c114"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 176,
+      "text": "This gives us a coarser but complete picture of model performance\u2014we see how the model is doing on the full training set and the full validation set at the end of each epoch, not just on a few sampled batches.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 177,
+      "text": "[FIGURE: Training curve plot showing training loss and validation loss decreasing over epochs, with accuracy increasing on both splits]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 178,
+      "text": "#### 10.6.3 Saving the Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 179,
+      "text": "After training, we save the model weights so they can be reloaded without retraining.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 180,
+      "text": "PyTorch's `torch.save` handles this:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 181,
+      "text": "# Source: [c156]",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 182,
+      "text": "torch.save(obj, f, pickle_module=pickle, pickle_protocol=DEFAULT_PROTOCOL, _use_new_zipfile_serialization=True)",
+      "type": "code_block",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 183,
+      "text": "Fine-tuning is the process of changing model parameters and retraining on a specific dataset so the model performs well on that particular task [c160].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c160"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 184,
+      "text": "Saving the fine-tuned weights is the natural endpoint of that process\u2014the saved file captures everything the model learned during fine-tuning.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 185,
+      "text": "### 10.7 Evaluating the Fine-Tuned Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 186,
+      "text": "#### 10.7.1 Train, Validation, and Test Accuracy",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 187,
+      "text": "Once training is complete, we evaluate the model on all three splits using `calculate_accuracy`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 188,
+      "text": "The training and validation accuracies were monitored during training; the test accuracy is the number we care about most, because it reflects performance on data the model has never seen [c137].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c137"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 189,
+      "text": "The email classification project involves training a large language model to classify emails as spam or no spam [c3614].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3614"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 190,
+      "text": "The final stage of the spam classification project involves testing the fine-tuned model on new data that it has not seen before [c137].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c137"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 191,
+      "text": "#### 10.7.2 Comparing to the Unmodified Model",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 192,
+      "text": "It is instructive to run the unmodified pre-trained GPT-2 (before fine-tuning) on a few spam classification prompts.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 193,
+      "text": "The pre-trained GPT-2 model without fine-tuning struggles to follow instructions and lacks classification capabilities for tasks like spam detection [c2851].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2851"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 194,
+      "text": "Without fine-tuning, the pre-trained GPT model could not correctly answer spam classification prompts even when given explicit instructions [c159].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c159"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 195,
+      "text": "This contrast motivates the entire fine-tuning pipeline: the pre-trained model has powerful language representations but no mechanism to produce a class label.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 196,
+      "text": "### 10.8 Running Inference on New Messages",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 197,
+      "text": "The final stage includes fine-tuning the model, evaluating the fine-tuned model, and using the model on new data [c3618].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3618"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 198,
+      "text": "After training and evaluation, we want to use the model in practice\u2014feeding it a raw text message and getting back a prediction.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 199,
+      "text": "The inference procedure mirrors the training forward pass:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 200,
+      "text": "1.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 201,
+      "text": "Tokenize the input message using TikToken's GPT-2 tokenizer.\n2.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 202,
+      "text": "Pad or truncate to the expected sequence length.\n3.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 203,
+      "text": "Run a forward pass through the modified GPT-2 model.\n4.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 204,
+      "text": "Extract the last token's output: `outputs[:, -1, :]` [c2880].\n5.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2880"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 205,
+      "text": "Apply argmax to the two logits to get the predicted class.\n6.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 206,
+      "text": "Map the class index back to a human-readable label: 0 \u2192 \"ham\", 1 \u2192 \"spam\".",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 207,
+      "text": "[FIGURE: Inference pipeline diagram: raw text message \u2192 tokenizer \u2192 padded token IDs \u2192 GPT-2 + classification head \u2192 two logits \u2192 argmax \u2192 \"spam\" or \"ham\" label]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "figure directive"
+    },
+    {
+      "index": 208,
+      "text": "The classification fine-tuning project involves predicting whether text messages are spam or not spam [c2824].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2824"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 209,
+      "text": "With a well-trained model, this pipeline should correctly flag messages like \"Congratulations!",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 210,
+      "text": "You've won a free prize, call now!\" as spam while passing through legitimate messages.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 211,
+      "text": "### 10.9 Putting It All Together",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 212,
+      "text": "Let us step back and trace the full pipeline from raw data to a working spam classifier.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 213,
+      "text": "**Stage 1 \u2013 Data preparation:**\n- Download the SMS Spam Collection dataset from the UCI repository [c48].\n- Observe the class imbalance: 4,825 ham vs. 747 spam [c2828].\n- Downsample ham to match the spam count, creating a balanced dataset [c50].\n- Split into train (1,045), validation (149), and test (300) sets [c3644].\n- Build the `SpamDataset` class: tokenize with TikToken, pad to the longest sequence in the training set [c2375, c2385].\n- Wrap each split in a `DataLoader` [c2351].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c48",
+        "c2828",
+        "c50",
+        "c3644",
+        "c2375",
+        "c2385",
+        "c2351"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 214,
+      "text": "**Stage 2 \u2013 Model initialization and modification:**\n- Download GPT-2 weights using `download_and_load_gpt2` [c2844].\n- Load TensorFlow checkpoint parameters with `load_gpt2_params_from_tf_ckpt` [c2847].\n- Replace the 768\u219250257 output head with a 768\u21922 classification head [c2854, c2873].\n- Freeze all parameters except the classification head, the final transformer block, and the final layer normalization [c2863, c2875, c2876].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2844",
+        "c2847",
+        "c2854",
+        "c2873",
+        "c2863",
+        "c2875",
+        "c2876"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 215,
+      "text": "**Stage 3 \u2013 Fine-tuning and evaluation:**\n- Implement `calculate_accuracy` [c71] and use `torch.nn.functional.cross_entropy` for loss [c93].\n- Run the training loop: forward pass, loss computation, backward pass, parameter update [c66].\n- Print loss every `eval_freq` batches [c110]; print accuracy every epoch [c114].\n- After training, evaluate on the test set [c137].\n- Save the fine-tuned weights with `torch.save` [c156].\n- Run inference on new messages [c3618].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c71",
+        "c93",
+        "c66",
+        "c110",
+        "c114",
+        "c137",
+        "c156",
+        "c3618"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 216,
+      "text": "[FIGURE: End-to-end pipeline flowchart: SMS Spam Collection CSV \u2192 balanced dataset \u2192 SpamDataset \u2192 DataLoader \u2192 pre-trained GPT-2 \u2192 replace output head \u2192 freeze layers \u2192 training loop \u2192 fine-tuned classifier \u2192 inference on new messages]",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "no citation"
+    },
+    {
+      "index": 217,
+      "text": "### 10.10 Summary and What Comes Next",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "no factual content"
+    },
+    {
+      "index": 218,
+      "text": "This chapter built a complete classification fine-tuning pipeline from scratch [c2894].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2894"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 219,
+      "text": "We started from the observation that LLM fine-tuning has two broad categories\u2014instruction fine-tuning and classification fine-tuning [c3596]\u2014and focused on the latter because it is computationally lighter [c3605] and well-suited to the spam detection task [c2824].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3596",
+        "c3605",
+        "c2824"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 220,
+      "text": "The key architectural insight is the classification head: a small linear layer (768\u21922) that replaces the original vocabulary projection layer [c2857, c2854].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2857",
+        "c2854"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 221,
+      "text": "By freezing most of the pre-trained model and only training the classification head, the final transformer block, and the final layer normalization [c2863], we preserve the general language understanding encoded in GPT-2's weights while teaching the model to produce class labels.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2863"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 222,
+      "text": "The evaluation utilities\u2014accuracy [c80] and cross-entropy loss [c88]\u2014give us concrete numbers to track during training.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c80",
+        "c88"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 223,
+      "text": "The `num_batches` parameter in the accuracy function lets us trade off evaluation speed against precision during training [c112], while full-dataset evaluation at the end of each epoch gives us the complete picture [c114].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c112",
+        "c114"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 224,
+      "text": "LLM fine-tuning involves the additional training of a pre-existing model that has previously acquired patterns and features from an extensive dataset using a smaller domain-specific dataset [c3587].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3587"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 225,
+      "text": "The SMS Spam Collection dataset, with its 1,494 balanced examples after preprocessing, is a perfect illustration of how a small, well-curated dataset can be enough to adapt a powerful pre-trained model to a new task [c154].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c154"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 226,
+      "text": "The techniques introduced here\u2014selective layer unfreezing, classification head replacement, and the train/val/test evaluation discipline\u2014generalize directly to other classification tasks: sentiment analysis, topic classification, intent detection, and more [c3602].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3602"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    },
+    {
+      "index": 227,
+      "text": "The next natural step is instruction fine-tuning, where instead of predicting a class label the model learns to follow natural-language instructions and generate free-form responses [c2826].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2826"
+      ],
+      "status": "grounded",
+      "reason": "citations match available claims"
+    }
+  ],
+  "summary": {
+    "grounded": 81,
+    "unsupported": 60,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 87
+  }
+}

@@ -1,0 +1,163 @@
+## Claims (cite these by ID inline as [cNNN])
+- c474 [equation | 7TKCrt--bWI @ 20-31s]
+  Mean Bias Error: \mathcal{L}_{MBE} = \frac{1}{N} \sum_{i=1}^{N} (y_i - f(x_i))
+- c475 [equation | 7TKCrt--bWI @ 20-31s]
+  Mean Absolute Error: \mathcal{L}_{MAE} = \frac{1}{N} \sum_{i=1}^{N} |y_i - f(x_i)|
+- c476 [equation | 7TKCrt--bWI @ 20-31s]
+  Mean Squared Error: \mathcal{L}_{MSE} = \frac{1}{N} \sum_{i=1}^{N} (y_i - f(x_i))^2
+- c477 [equation | 7TKCrt--bWI @ 20-31s]
+  Root Mean Squared Error: \mathcal{L}_{RMSE} = \sqrt{\frac{1}{N} \sum_{i=1}^{N} (y_i - f(x_i))^2}
+- c478 [equation | 7TKCrt--bWI @ 20-31s]
+  Huber Loss: \mathcal{L}_{Huber} = \begin{cases} \frac{(y_i - f(x_i))^2}{2} & \text{if } |y_i - f(x_i)| \leq \delta \\ \delta|y_i - f(x_i)| - \frac{\delta}{2} & \text{otherwise} \end{cases}
+- c479 [equation | 7TKCrt--bWI @ 20-31s]
+  Log-Cosh Loss: \mathcal{L}_{LogCosh} = \frac{1}{N} \sum_{i=1}^{N} \log(\cosh(f(x_i) - y_i))
+- c480 [equation | 7TKCrt--bWI @ 20-31s]
+  Binary Cross-Entropy Loss: \mathcal{L}_{BCE} = -\frac{1}{N} \sum_{i=1}^{N} [y_i \log(p_i) + (1-y_i) \log(1-p_i)]
+- c481 [equation | 7TKCrt--bWI @ 20-31s]
+  Hinge Loss: \mathcal{L}_{Hinge} = max(0, 1 - (f(x) \cdot y))
+- c482 [equation | 7TKCrt--bWI @ 20-31s]
+  Cross-Entropy Loss: \mathcal{L}_{CE} = -\frac{1}{N} \sum_{i=1}^{N} \sum_{c=1}^{M} y_{i,c} \log(f(x_i)_c)
+- c483 [equation | 7TKCrt--bWI @ 20-31s]
+  Kullback-Leibler Divergence: \mathcal{L}_{KL} = -\sum_{i=1}^{N} y_i \cdot \log\left(\frac{y_i}{f(x_i)}\right)
+- c495 [definition | 7TKCrt--bWI @ 390-401s]
+  Embedding dimension is the size of the vector space into which token embeddings are projected to capture semantic meaning.
+- c496 [definition | 7TKCrt--bWI @ 401-412s]
+  The number of attention heads specifies how many self-attention mechanism blocks exist within one transformer block.
+- c502 [definition | 7TKCrt--bWI @ 514-522s]
+  In the context of language model training, 'target' refers to the true values that the model should predict.
+- c538 [definition | 7TKCrt--bWI @ 1381-1400s]
+  The text_to_token_ids function converts text input into token IDs using the tiktoken tokenizer.
+- c539 [definition | 7TKCrt--bWI @ 1400-1405s]
+  The token_ids_to_text function converts token IDs back into text, serving as the reverse of text_to_token_ids.
+- c542 [definition | 7TKCrt--bWI @ 1515-1526s]
+  Targets are the input token sequence shifted by one position, creating input-output pairs for training.
+- c547 [code | 7TKCrt--bWI @ 1673-1695s]
+  torch.argmax(input, dim=-1) returns the indices of the maximum value along the last dimension (columns).
+- c550 [definition | 7TKCrt--bWI @ 2369-2385s]
+  Cross entropy loss measures the difference between two probability distributions, specifically between predicted logits and target indices in language model training.
+- c552 [equation | 7TKCrt--bWI @ 2135-2148s]
+  Cross entropy loss is computed as: negative mean of log probabilities at target indices, or -1/N * Σ(log(p_i)) where p_i are probabilities at target indices.
+- c555 [code | 7TKCrt--bWI @ 2511-2528s]
+  torch.nn.functional.cross_entropy(logits_flat, targets_flat)
+- c569 [code | 7TKCrt--bWI @ 2999-3052s]
+  logits_flat = logits.view(-1, 50257)  # Flatten first two dimensions from (2, 3, 50257) to (6, 50257)
+  targets_flat = targets.view(-1)  # Flatten from (2, 3) to (6,)
+  loss = torch.nn.functional.cross_entropy(logits_flat, targets_flat)
+- c572 [definition | 7TKCrt--bWI @ 3079-3090s]
+  Perplexity measures how well the probability distribution predicted by the model matches the actual distribution of words in the dataset.
+- c574 [equation | 7TKCrt--bWI @ 3109-3116s]
+  Perplexity = exp(loss)
+- c581 [code | 7TKCrt--bWI @ 3257-3262s]
+  torch.nn.functional.cross_entropy(logit_tensor, target_tensor)
+- c582 [definition | 7TKCrt--bWI @ 3268-3280s]
+  Perplexity is a metric for measuring loss that is calculated as e raised to the loss value (exp(loss)).
+- c1613 [definition | Zxf-34voZss @ 680-684s]
+  One epoch is going through the entire training set once.
+- c1618 [equation | Zxf-34voZss @ 727-753s]
+  p_new = p_old - step_size * loss_gradient
+- c1624 [code | Zxf-34voZss @ 895-898s]
+  loss.backward()
+- c1630 [equation | Zxf-34voZss @ 1046-1054s]
+  Token embedding parameters = vocabulary size × embedding dimension
+- c1631 [equation | Zxf-34voZss @ 1055-1060s]
+  Positional embedding parameters = context size × embedding dimension
+- c1644 [equation | Zxf-34voZss @ 1178-1184s]
+  Final layer parameters = embedding dimension × vocabulary size
+- c1719 [definition | Zxf-34voZss @ 2520-2529s]
+  Temperature scaling is a decoding strategy used to control randomness in model predictions.
+- c3753 [definition | zuj_NJNouAA @ 423-432s]
+  Large language models are autoregressive models where input-output pairs are constructed from the text itself without pre-labeling.
+- c3754 [definition | zuj_NJNouAA @ 462-467s]
+  Context size is the maximum number of tokens an LLM can see before it predicts the next token.
+- c3758 [definition | zuj_NJNouAA @ 674-679s]
+  Stride is the step size used to move through the dataset when constructing consecutive input-output pairs.
+- c3763 [definition | zuj_NJNouAA @ 843-853s]
+  X represents the input tensor and Y represents the target tensor (the actual desired output values) in LLM input-output pair construction.
+- c3767 [definition | zuj_NJNouAA @ 906-926s]
+  Input-target pairs are created from training data by pairing inputs with their corresponding target outputs.
+- c3770 [definition | zuj_NJNouAA @ 994-1009s]
+  Target output is the expected output sequence that corresponds to a given input sequence, which the LLM should learn to predict during training.
+- c3775 [definition | zuj_NJNouAA @ 1072-1087s]
+  The transformer block is the main engine of the GPT architecture that transforms input embedding vectors into context vectors.
+- c3776 [definition | zuj_NJNouAA @ 1088-1125s]
+  Context vectors are richer representations than input embedding vectors because they encode both semantic meaning of a token and information about how that token relates to other tokens in the sequence.
+- c3779 [definition | zuj_NJNouAA @ 1185-1195s]
+  Logits are the raw output values produced by the GPT model architecture before normalization into probabilities.
+- c3785 [definition | zuj_NJNouAA @ 1338-1349s]
+  A logit tensor is converted into a softmax tensor, which is a probability tensor.
+- c3790 [definition | zuj_NJNouAA @ 1476-1488s]
+  Cross-entropy loss is computed by taking the logarithm of the target probabilities, summing them, taking the mean, and then negating the result.
+- c3791 [definition | zuj_NJNouAA @ 1488-1495s]
+  Negative log likelihood (NLL) is the negative of the logarithm of the target probabilities.
+- c3817 [definition | zuj_NJNouAA @ 2110-2115s]
+  Tiktoken provides a byte pair encoder that operates at character and sub-word level.
+- c3821 [definition | zuj_NJNouAA @ 2157-2170s]
+  A dataloader loops over the entire dataset and creates input-output pairs based on a specified context size and stride.
+- c3822 [definition | zuj_NJNouAA @ 2171-2180s]
+  max_length parameter specifies the context size (number of tokens to consider at once).
+- c3823 [definition | zuj_NJNouAA @ 2171-2180s]
+  stride parameter specifies how many steps to advance before creating the next input-output pair.
+- c3826 [definition | zuj_NJNouAA @ 2243-2253s]
+  PyTorch DataLoader is useful for processing data in batches and makes batch processing more convenient.
+- c3828 [definition | zuj_NJNouAA @ 2300-2308s]
+  The shuffle parameter shuffles the dataset order when batches are created, which is sometimes useful for generalization.
+- c3829 [definition | zuj_NJNouAA @ 2308-2323s]
+  The drop_last parameter drops the last batch if its size is smaller than the specified batch size.
+- c3851 [code | zuj_NJNouAA @ 2975-2988s]
+  nn.functional.cross_entropy(flattened_logits, flattened_target_batch)
+- c3869 [design_decision | zuj_NJNouAA @ 3409-3421s]
+  An LLM training function will be defined in the next lecture to implement backpropagation and minimize training and validation loss.
+- c1659 [design_decision | Zxf-34voZss @ 1450-1466s]
+  An evaluation step is performed during training to monitor training loss and validation loss as the model trains.
+- c1622 [design_decision | Zxf-34voZss @ 859-869s]
+  The pre-training algorithm consists of finding the loss, performing the backward pass to get loss gradients, and updating parameters based on those gradients.
+- c1614 [design_decision | Zxf-34voZss @ 684-703s]
+  The training set is divided into batches, and the pre-training loop processes one batch per iteration.
+- c3728 [fact | zuj_NJNouAA @ 5-11s]
+  The lecture covers LLM training and validation loss computation.
+- c1616 [fact | Zxf-34voZss @ 715-721s]
+  The backward pass is the most important step in the pre-training loop because it calculates the gradients of the loss.
+- c3792 [fact | zuj_NJNouAA @ 1495-1526s]
+  The goal of training an LLM is to minimize the negative log likelihood loss to approach zero.
+- c1611 [design_decision | Zxf-34voZss @ 630-649s]
+  LLM pre-training involves minimizing the loss function to make model outputs as close as possible to target value tensors.
+- c3737 [fact | zuj_NJNouAA @ 117-152s]
+  This lecture will calculate training loss and validation loss on an actual dataset.
+- c1717 [fact | Zxf-34voZss @ 2488-2494s]
+  A training loop has been implemented where the loss function is minimized and the large language model learns.
+- c1621 [design_decision | Zxf-34voZss @ 786-802s]
+  The pre-training loop processes all batches in the training set, then repeats for multiple training epochs.
+- c1612 [design_decision | Zxf-34voZss @ 649-654s]
+  Back propagation is used to calculate loss gradients during LLM pre-training.
+- c3863 [fact | zuj_NJNouAA @ 3348-3353s]
+  The function execution produces both training loss and validation loss values as output.
+- c1657 [architecture | Zxf-34voZss @ 1430-1441s]
+  The pretraining loop has two nested loops: an outer loop iterating over epochs and an inner loop iterating over batches in the training dataset.
+- c1707 [fact | Zxf-34voZss @ 2372-2384s]
+  Divergence between training and validation loss, with validation loss much larger than training loss, indicates the model is overfitting to the training data.
+- c3868 [fact | zuj_NJNouAA @ 3402-3409s]
+  Obtaining training and validation loss enables backpropagation in the next step.
+- c1665 [design_decision | Zxf-34voZss @ 1759-1778s]
+  During model evaluation, the model is set to evaluation mode with gradient tracking disabled and dropout disabled to compute loss without gradient updates.
+- c490 [fact | 7TKCrt--bWI @ 237-308s]
+  The training pipeline for LLMs consists of 7 steps, starting with text generation and text evaluation.
+- c1626 [design_decision | Zxf-34voZss @ 926-977s]
+  The pre-training workflow is fully differentiable, allowing back propagation to compute partial derivatives of the loss with respect to all model parameters.
+- c1608 [fact | Zxf-34voZss @ 585-593s]
+  Cross-entropy loss (negative log likelihood) is employed to measure the difference between predicted probabilities and target token indices.
+- c1609 [design_decision | Zxf-34voZss @ 563-599s]
+  The goal of LLM training is to minimize the cross-entropy loss function so that predicted probabilities for target tokens approach one.
+- c3873 [fact | zuj_NJNouAA @ 3495-3498s]
+  The next lecture will cover LLM pre-training.
+- c1667 [fact | Zxf-34voZss @ 1729-1741s]
+  The pretraining loop is approximately 15 to 20 lines of code in Python, with the loss.backward() method and optimizer.step() being the core gradient update mechanism.
+- c1660 [architecture | Zxf-34voZss @ 1459-1482s]
+  The evaluate_model function calculates loss for both the training loader and validation loader over the entire dataset.
+- c3730 [fact | zuj_NJNouAA @ 12-27s]
+  This section applies loss computation to the entire dataset, split into training and validation portions.
+- c3766 [fact | zuj_NJNouAA @ 885-893s]
+  The loss calculated between LLM output and target is the objective that needs to be minimized during training.
+- c1615 [design_decision | Zxf-34voZss @ 706-714s]
+  Cross entropy loss is calculated for the entire batch during each training iteration.
+- c3870 [fact | zuj_NJNouAA @ 3429-3439s]
+  The developed code is generalizable and can be applied to custom datasets for pre-training.

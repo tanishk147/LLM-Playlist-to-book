@@ -1,0 +1,186 @@
+## Claims (cite these by ID inline as [cNNN])
+- c211 [definition | 2r0QahNdwMw @ 5-11s]
+  Shortcut connections are also known as skip connections or residual connections.
+- c217 [definition | 2r0QahNdwMw @ 155-165s]
+  Shortcut connections are also known as skip connections or residual connections.
+- c224 [definition | 2r0QahNdwMw @ 298-323s]
+  The vanishing gradient problem occurs when gradients become extremely small or approach zero during backpropagation through deep layers, preventing weight updates and causing training stagnancy.
+- c228 [definition | 2r0QahNdwMw @ 410-419s]
+  Shortcut connections are achieved by adding the output of one layer to the output of a later layer.
+- c236 [equation | 2r0QahNdwMw @ 728-740s]
+  The partial derivative of loss with respect to y_l can be expressed using the chain rule as: ∂L/∂y_l = (∂L/∂y_{l+1}) × (∂y_{l+1}/∂y_l)
+- c237 [equation | 2r0QahNdwMw @ 740-753s]
+  When y_{l+1} = f(y_l) + y_l, the partial derivative ∂y_{l+1}/∂y_l = ∂f(y_l)/∂y_l + 1
+- c241 [definition | 2r0QahNdwMw @ 883-889s]
+  Shortcut connections are also called skip connections.
+- c248 [definition | 2r0QahNdwMw @ 1007-1047s]
+  A deep neural network class takes layer_sizes as an argument, which specifies the number of neurons in each layer (e.g., [3, 3, 3, 3, 1] means 5 layers with 3 neurons each and a final layer with 1 neuron).
+- c255 [code | 2r0QahNdwMw @ 1351-1357s]
+  x = x + layer_output
+- c260 [definition | 2r0QahNdwMw @ 1531-1540s]
+  The loss function is defined as the squared difference between the model output and the ground truth target: loss = (Y - target)².
+- c262 [code | 2r0QahNdwMw @ 1575-1585s]
+  loss = (model(x) - target) ** 2
+  loss.backward()
+- c1038 [definition | G3W-LT79LSI @ 567-595s]
+  Internal covariate shift is the problem where the input distribution to each layer changes across training iterations, making weight updates difficult and delaying convergence.
+- c1044 [equation | G3W-LT79LSI @ 716-728s]
+  Mean (μ) = (X1 + X2 + X3 + X4) / 4 = 2.15
+- c1045 [equation | G3W-LT79LSI @ 728-745s]
+  Variance (σ²) = (1/4) * [(X1 - μ)² + (X2 - μ)² + (X3 - μ)² + (X4 - μ)²]
+- c1046 [equation | G3W-LT79LSI @ 746-776s]
+  Normalized value = (X - μ) / √(variance)
+- c1057 [code | G3W-LT79LSI @ 1208-1212s]
+  torch.manual_seed(123)
+  batch_example = torch.randn(2, 5)
+  layer = nn.Sequential(nn.Linear(5, 6), nn.ReLU())
+  out = layer(batch_example)
+  print(out)
+- c1058 [definition | G3W-LT79LSI @ 1212-1233s]
+  Layer normalization normalizes each sample in a batch independently by subtracting the mean and dividing by the square root of variance computed across the features for that sample.
+- c1059 [equation | G3W-LT79LSI @ 1234-1284s]
+  Layer normalization formula: y_normalized = (y - μ) / √(variance), applied independently to each sample in the batch.
+- c1060 [code | G3W-LT79LSI @ 1299-1315s]
+  mean = output.mean(dim=-1, keepdim=True)
+- c1062 [code | G3W-LT79LSI @ 1370-1374s]
+  variance = output.var(dim=-1, keepdim=True)
+- c1063 [code | G3W-LT79LSI @ 1451-1468s]
+  normalized_output = (output - mean) / torch.sqrt(variance)
+- c1066 [definition | G3W-LT79LSI @ 1564-1579s]
+  Layer normalization is a class that takes the output of a layer and applies normalization to it.
+- c1073 [code | G3W-LT79LSI @ 1712-1729s]
+  The forward method of the layer normalization class takes input with certain number of rows and embedding dimension columns.
+- c1078 [definition | G3W-LT79LSI @ 1774-1804s]
+  Scale and shift are trainable parameters in layer normalization that have the same dimension as the input and are applied to the normalized output.
+- c1083 [definition | G3W-LT79LSI @ 1927-1936s]
+  Bessel's correction is the use of n − 1 instead of n in the formula for the sample variance and sample standard deviation, where n is the number of observations in a sample.
+- c1097 [definition | G3W-LT79LSI @ 2228-2236s]
+  Layer normalization normalizes along the feature dimension (columns).
+- c1099 [definition | G3W-LT79LSI @ 2242-2250s]
+  Layer normalization normalizes the output of every layer based on the mean and standard deviation.
+- c1100 [definition | G3W-LT79LSI @ 2250-2253s]
+  Batch normalization performs normalization for an entire batch.
+- c2000 [definition | d_PiwZe8UF4 @ 243-249s]
+  GELU (Gaussian Error Linear Unit) is commonly called JLU in this lecture.
+- c2002 [definition | d_PiwZe8UF4 @ 276-287s]
+  ReLU activation function returns the input value for x > 0 and returns zero for x < 0.
+- c2005 [definition | d_PiwZe8UF4 @ 319-342s]
+  Dead neuron problem occurs when a neuron's output becomes negative, ReLU sets it to zero, and the neuron stops contributing to the learning process.
+- c2006 [equation | d_PiwZe8UF4 @ 373-399s]
+  GELU(x) = x * Φ(x), where Φ(x) is the cumulative distribution function of the standard Gaussian distribution.
+- c2009 [equation | d_PiwZe8UF4 @ 475-489s]
+  GELU(x) ≈ 0.5 * x * (1 + tanh(√(2/π) * (x + 0.044715 * x³)))
+- c2017 [code | d_PiwZe8UF4 @ 690-710s]
+  class GELU:
+      def forward(self, x):
+          return 0.5 * x * (1 + tanh(sqrt(2 / pi) * x + 0.044 * x**3))
+- c2033 [definition | d_PiwZe8UF4 @ 1205-1221s]
+  nn.Sequential is a PyTorch module that chains neural network layers together by forwarding outputs sequentially to inputs of subsequent modules.
+- c2051 [definition | dvH6lFGhFrs @ 167-177s]
+  A transformer block is the fundamental building block of GPT and other LLM architectures.
+- c2058 [definition | dvH6lFGhFrs @ 240-252s]
+  The five components of a transformer block are: masked multi-head attention, layer normalization, dropout, feed-forward neural network, and GELU activation function.
+- c2059 [definition | dvH6lFGhFrs @ 279-316s]
+  Multi-head attention takes an input matrix X and multiplies it with trainable queries, keys, and values matrices to produce context vectors.
+- c2064 [definition | dvH6lFGhFrs @ 463-492s]
+  Layer normalization normalizes layer outputs so that the mean becomes 0 and the variance becomes 1.
+- c2068 [definition | dvH6lFGhFrs @ 567-630s]
+  Dropout randomly turns off some layer outputs during training to improve generalization and prevent overfitting.
+- c2070 [definition | dvH6lFGhFrs @ 637-706s]
+  The feed-forward neural network in a transformer block has an expansion layer followed by a compression layer, preserving input and output dimensions.
+- c2075 [definition | dvH6lFGhFrs @ 756-772s]
+  GELU (Gaussian Error Linear Unit) is a smooth activation function that is differentiable at x=0, unlike ReLU.
+- c2079 [definition | dvH6lFGhFrs @ 843-864s]
+  Shortcut connections add the output of one layer to the output of the previous layer, creating an alternative path for gradient flow.
+- c2084 [definition | dvH6lFGhFrs @ 993-1004s]
+  In a transformer block, each element of an input sequence is represented by a fixed-size vector equal to the embedding dimension.
+- c2091 [definition | dvH6lFGhFrs @ 1118-1135s]
+  The self-attention block analyzes the relationship between input elements and assigns attention scores based on how one input element relates to other input elements.
+- c2092 [definition | dvH6lFGhFrs @ 1141-1160s]
+  The feedforward neural network in a transformer block processes each element separately without considering relationships with other elements.
+- c2104 [definition | dvH6lFGhFrs @ 1288-1309s]
+  LayerNorm normalizes input by subtracting the mean and dividing by the square root of variance, with a small epsilon value added to prevent division by zero.
+- c2107 [code | dvH6lFGhFrs @ 1288-1329s]
+  class LayerNorm(nn.Module):
+      def __init__(self, emb_dim):
+          super().__init__()
+          self.eps = 1e-5
+          self.scale = nn.Parameter(torch.ones(emb_dim))
+          self.shift = nn.Parameter(torch.zeros(emb_dim))
+      
+      def forward(self, x):
+          mean = x.mean(dim=-1, keepdim=True)
+          var = x.var(dim=-1, keepdim=True, unbiased=False)
+          norm_x = (x - mean) / torch.sqrt(var + self.eps)
+          return self.scale * norm_x + self.shift
+- c2108 [definition | dvH6lFGhFrs @ 1406-1436s]
+  GELU activation function is approximated using the formula: 0.5 * x * (1 + tanh(sqrt(2/π) * (x + 0.044715 * x³))), which is the approximation used in GPT-2.
+- c2109 [code | dvH6lFGhFrs @ 1406-1436s]
+  class GELU(nn.Module):
+      def __init__(self):
+          super().__init__()
+      
+      def forward(self, x):
+          return 0.5 * x * (1 + torch.tanh(
+              torch.sqrt(torch.tensor(2.0 / torch.pi)) *
+              (x + 0.044715 * torch.pow(x, 3))
+- c2113 [definition | dvH6lFGhFrs @ 1670-1697s]
+  The ATT object is an instance of the multi-head attention class that takes embedding vectors and converts them into context vectors, with input and output dimensions equal to the embedding dimension.
+- c2119 [definition | dvH6lFGhFrs @ 1757-1787s]
+  The FF object is an instance of the feed-forward class that takes the embedding dimension from configuration and creates layers with GELU activation function, initializing weights randomly.
+- c2121 [definition | dvH6lFGhFrs @ 1802-1816s]
+  norm_one is the first layer normalization layer applied before the multi-head attention, and norm_two is the second layer normalization layer applied before the feed-forward neural network.
+- c2123 [definition | dvH6lFGhFrs @ 1825-1844s]
+  The drop_shortcut object is a dropout layer from PyTorch (torch.nn.Dropout).
+- c2130 [fact | dvH6lFGhFrs @ 2068-2078s]
+  The original transformer model applied layer normalization after the self-attention and feed forward neural network, a pattern called post-layer norm.
+- c2083 [architecture | dvH6lFGhFrs @ 959-987s]
+  The transformer block stacking order is: layer normalization → multi-head attention → dropout → shortcut connection → layer normalization → feed-forward neural network with GELU → dropout → shortcut connection.
+- c2132 [design_decision | dvH6lFGhFrs @ 2089-2092s]
+  Modern transformer implementations use pre-layer norm instead of post-layer norm.
+- c2129 [design_decision | dvH6lFGhFrs @ 2055-2067s]
+  Layer normalization is applied before the multi-head attention mechanism and before the feed forward neural network, a pattern called pre-layer norm.
+- c2133 [architecture | dvH6lFGhFrs @ 2093-2111s]
+  The transformer block implements shortcut connections (residual connections) that add the input of the block to the output of each component.
+- c277 [fact | 2r0QahNdwMw @ 1913-1920s]
+  Previous lectures covered layer normalization, GELU activation, and feed-forward neural networks as building blocks for transformers.
+- c2120 [architecture | dvH6lFGhFrs @ 1787-1797s]
+  The feed-forward network processes input through expansion, GELU activation, and contraction, with output dimensions matching the input dimensions.
+- c2148 [architecture | dvH6lFGhFrs @ 2486-2518s]
+  The GPT architecture has four key components: layer normalization, GELU activation, feed-forward neural network, and shortcut connections.
+- c2067 [fact | dvH6lFGhFrs @ 543-554s]
+  Layer normalization is implemented twice within the transformer block: before the multi-head attention and before the feed-forward neural network.
+- c1999 [fact | d_PiwZe8UF4 @ 206-235s]
+  The goal of this lecture is to implement a feed-forward neural network sub-module that is part of the LLM Transformer block.
+- c278 [fact | 2r0QahNdwMw @ 1920-1927s]
+  Shortcut connections are covered in detail as a building block for understanding the transformer block.
+- c2049 [fact | d_PiwZe8UF4 @ 1606-1621s]
+  The GPT architecture consists of four main components: the GPT backbone, layer normalization, GELU activation function, and feed-forward neural network.
+- c2038 [fact | d_PiwZe8UF4 @ 1288-1325s]
+  The feedforward module uses GELU activation function between the expansion and contraction layers.
+- c275 [fact | 2r0QahNdwMw @ 1892-1895s]
+  Shortcut connections help transformers solve the vanishing gradient problem.
+- c216 [fact | 2r0QahNdwMw @ 116-148s]
+  Shortcut connections in the transformer block are represented by plus symbols with associated arrows that bypass the linear flow of data.
+- c2128 [architecture | dvH6lFGhFrs @ 2042-2050s]
+  A transformer block class in PyTorch includes a multi-head attention mechanism and a feed forward neural network.
+- c234 [architecture | 2r0QahNdwMw @ 619-636s]
+  In a residual block with shortcut connections, the output of layer l+1 is f(y_l) + y_l, where f(y_l) is the output of the neural network transformation and y_l is the output of the previous layer.
+- c274 [design_decision | 2r0QahNdwMw @ 1889-1891s]
+  Shortcut connections can be added between any layers of the transformer block.
+- c2082 [fact | dvH6lFGhFrs @ 901-926s]
+  With shortcut connections, gradient magnitude remains stable across layers, preventing the vanishing gradient problem.
+- c2141 [fact | dvH6lFGhFrs @ 2274-2281s]
+  A dropout layer and residual shortcut connection are applied after the feed-forward network to prevent vanishing gradients.
+- c2110 [architecture | dvH6lFGhFrs @ 1467-1493s]
+  The FeedForward neural network consists of three layers: an expansion layer that increases dimension to 4 times the embedding dimension, a GELU activation function, and a contraction layer that reduces back to the original embedding dimension.
+- c2031 [architecture | d_PiwZe8UF4 @ 1143-1174s]
+  The feed forward network implementation uses a first linear layer projecting 768 dimensions to 3072, followed by a GELU activation function, followed by a second linear layer projecting 3072 dimensions back to 768.
+- c2004 [fact | d_PiwZe8UF4 @ 307-324s]
+  ReLU activation function leads to the dead neuron problem in neural networks when output from a layer is negative.
+- c2050 [architecture | d_PiwZe8UF4 @ 1621-1639s]
+  Shortcut connections in transformer blocks are represented as plus signs with arrows that add residual connections between layers.
+- c2072 [fact | dvH6lFGhFrs @ 676-685s]
+  The expansion layer in the feed-forward network has a hidden layer with neurons four times larger than the embedding dimension.
+- c247 [architecture | 2r0QahNdwMw @ 970-989s]
+  A neural network with shortcut connections allows the output of any layer to be added to the input of the previous layer.

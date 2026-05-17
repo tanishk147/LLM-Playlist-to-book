@@ -1,0 +1,37 @@
+{
+  "chapter_id": "decoding_strategies_and_weights",
+  "title": "Decoding Strategies, Model Persistence, and Loading Pre-Trained GPT-2 Weights",
+  "summary": {
+    "grounded": 127,
+    "unsupported": 25,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 6
+  },
+  "stripped_sentence_indices": [
+    10,
+    17,
+    20,
+    21,
+    27,
+    34,
+    39,
+    40,
+    41,
+    42,
+    46,
+    47,
+    67,
+    76,
+    83,
+    84,
+    118,
+    123,
+    124,
+    129,
+    141,
+    142,
+    145,
+    147
+  ]
+}

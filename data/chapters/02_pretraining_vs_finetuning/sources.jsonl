@@ -1,0 +1,161 @@
+## Claims (cite these by ID inline as [cNNN])
+- c1 [definition | -bsa3fCNGg4 @ 6-14s]
+  Creating an LLM consists of two stages: Pretraining and Finetuning.
+- c4 [definition | -bsa3fCNGg4 @ 23-34s]
+  LLM is an abbreviation for Large Language Models.
+- c9 [definition | -bsa3fCNGg4 @ 106-125s]
+  Creating an LLM involves two stages: pre-training and fine-tuning.
+- c11 [fact | -bsa3fCNGg4 @ 166-194s]
+  LLMs interact effectively with users because they are trained on a huge and diverse set of data.
+- c13 [definition | -bsa3fCNGg4 @ 228-242s]
+  For the purposes of this lecture, one token is approximately equal to one word.
+- c16 [definition | -bsa3fCNGg4 @ 253-261s]
+  Common Crawl is a huge and open repository of all the data on the internet.
+- c17 [definition | -bsa3fCNGg4 @ 282-301s]
+  WebText2 is a corpus consisting of Reddit submissions, blog posts, Stack Overflow articles, and code.
+- c18 [definition | -bsa3fCNGg4 @ 358-389s]
+  Word completion is the task where an LLM is given a set of words and must predict the next word.
+- c19 [fact | -bsa3fCNGg4 @ 395-407s]
+  LLMs trained on word completion can perform a wide range of other tasks without being specifically trained on them.
+- c21 [fact | -bsa3fCNGg4 @ 454-486s]
+  LLMs trained only for next word prediction can perform translation, multiple choice questions, text summarization, sentiment analysis, linguistic acceptability, and question answering without specific training on these tasks.
+- c22 [fact | -bsa3fCNGg4 @ 491-519s]
+  In traditional NLP, separate models must be trained for different tasks like translation, question answering, and emotion detection, whereas pre-trained LLMs can perform all these tasks with a single model.
+- c23 [definition | -bsa3fCNGg4 @ 600-608s]
+  Pre-training means training an LLM on a huge amount of data so that it can perform a wide range of tasks.
+- c26 [fact | -bsa3fCNGg4 @ 666-688s]
+  Pre-trained models like GPT-4 may not have access to company-specific data and therefore produce generic rather than domain-specific responses.
+- c25 [fact | -bsa3fCNGg4 @ 745-752s]
+  Fine-tuning is needed when building applications specific to a particular task or domain, rather than for general-purpose use.
+- c27 [fact | -bsa3fCNGg4 @ 788-839s]
+  SK Telecom fine-tuned a model to improve customer service interactions for telecom-related conversations in Korean, resulting in a 35% increase in conversation summarization quality and 33% increase in intent recognition accuracy.
+- c28 [fact | -bsa3fCNGg4 @ 848-954s]
+  Harvey is an AI legal tool that was fine-tuned on legal case history data to assist attorneys and lawyers, addressing the limitation that foundational models lacked extensive knowledge of legal cases.
+- c30 [fact | -bsa3fCNGg4 @ 962-1000s]
+  JPMorgan Chase developed a fine-tuned AI-powered LLM suite specifically for their employees using their proprietary data, rather than relying solely on GPT-4.
+- c36 [fact | -bsa3fCNGg4 @ 1015-1027s]
+  General users and students can use pre-trained models like GPT-4 directly without fine-tuning, but companies and startups deploying LLM applications in production need fine-tuning.
+- c32 [fact | -bsa3fCNGg4 @ 1086-1117s]
+  Pre-training requires a huge amount of data (billions or even trillions of words) and significant computational power, making it inaccessible to most individuals.
+- c47 [architecture | -bsa3fCNGg4 @ 1336-1599s]
+  The three main steps for building an LLM are: (1) training on a large corpus of raw text data, (2) pre-training to create a foundational model, and (3) fine-tuning on labeled data for specific tasks.
+- c37 [definition | -bsa3fCNGg4 @ 1342-1372s]
+  Raw text is regular text without any labeling information, used for training large language models on a large corpus of text data.
+- c38 [fact | -bsa3fCNGg4 @ 1378-1390s]
+  Pre-training is the first training stage of an LLM that creates an initially pre-trained model, also called a base or foundational model.
+- c39 [fact | -bsa3fCNGg4 @ 1390-1416s]
+  GPT-4 is a pre-trained model capable of text completion and other tasks such as sentiment analysis and question answering.
+- c41 [fact | -bsa3fCNGg4 @ 1464-1504s]
+  Instruction fine-tuning involves providing instruction-answer pairs as labeled data to teach the model specific tasks like language translation.
+- c43 [fact | -bsa3fCNGg4 @ 1549-1568s]
+  Pre-training does not require labeled data, whereas fine-tuning typically requires a labeled dataset.
+- c45 [fact | -bsa3fCNGg4 @ 1599-1611s]
+  Fine-tuned LLMs can be used for specific tasks such as classification, summarization, translation, and building custom chatbots.
+- c46 [fact | -bsa3fCNGg4 @ 1616-1633s]
+  Large companies building custom chatbots perform fine-tuning on foundational models rather than using foundational models alone.
+- c1246 [definition | NLn4eetGmf8 @ 24-38s]
+  Pre-training is training on a large diverse dataset.
+- c1289 [definition | NLn4eetGmf8 @ 1588-1596s]
+  GPT stands for Generative Pre-trained Transformers.
+- c1290 [fact | NLn4eetGmf8 @ 1598-1603s]
+  GPT is a pre-trained or foundational model.
+- c1291 [fact | NLn4eetGmf8 @ 1616-1625s]
+  BERT predicts hidden or masked words in a given sentence.
+- c1292 [fact | NLn4eetGmf8 @ 1620-1625s]
+  BERT randomly masks some words during training and attempts to predict those masked words.
+- c1293 [fact | NLn4eetGmf8 @ 1727-1728s]
+  GPT generates one word at a time.
+- c1296 [fact | NLn4eetGmf8 @ 1733-1740s]
+  GPT processes text from left to right, predicting only rightmost unknown information.
+- c1297 [fact | NLn4eetGmf8 @ 1744-1748s]
+  BERT is bidirectional, attending to different parts of the sentence from both left and right directions.
+- c1298 [fact | NLn4eetGmf8 @ 1750-1752s]
+  BERT performs very well in sentiment analysis tasks.
+- c1299 [fact | NLn4eetGmf8 @ 1790-1797s]
+  BERT can capture nuances and relationships between words by looking at the entire sentence from both directions.
+- c1300 [fact | NLn4eetGmf8 @ 1801-1807s]
+  BERT can differentiate between different meanings of the same word, such as 'bank' as a financial institution versus 'bank' as a river bank, by examining surrounding words.
+- c1301 [fact | NLn4eetGmf8 @ 1821-1822s]
+  BERT is commonly used for sentiment analysis tasks.
+- c1302 [fact | NLn4eetGmf8 @ 1841-1845s]
+  GPT can complete missing text and perform sentiment analysis, though sentiment analysis is a specialty of BERT.
+- c1303 [fact | NLn4eetGmf8 @ 1857-1862s]
+  Both BERT and GPT have the word 'transformers' in their names because they originated from the transformer architecture.
+- c1295 [architecture | NLn4eetGmf8 @ 1877-1878s]
+  BERT uses an encoder architecture.
+- c1304 [fact | NLn4eetGmf8 @ 1898-1900s]
+  Not all transformers are large language models (LLMs).
+- c1305 [fact | NLn4eetGmf8 @ 1910-1918s]
+  Transformers can be used for computer vision tasks in addition to language tasks.
+- c1306 [definition | NLn4eetGmf8 @ 1921-1926s]
+  Vision Transformers (ViT) are transformer models applied to computer vision tasks such as image recognition and image classification.
+- c1307 [fact | NLn4eetGmf8 @ 1947-1958s]
+  Vision Transformers (ViT) achieve comparable or better results than Convolutional Neural Networks (CNNs) while requiring substantially fewer computational resources for pre-training.
+- c1308 [fact | NLn4eetGmf8 @ 1996-2002s]
+  Not all large language models (LLMs) are based on transformer architecture.
+- c1312 [fact | NLn4eetGmf8 @ 2028-2033s]
+  Both Recurrent Neural Networks and Long Short-Term Memory networks could perform sequence modeling and text completion tasks.
+- c1313 [definition | NLn4eetGmf8 @ 2051-2060s]
+  Recurrent Neural Networks (RNNs) maintain a feedback loop to incorporate memory.
+- c1314 [definition | NLn4eetGmf8 @ 2061-2074s]
+  Long Short-Term Memory (LSTM) networks incorporate two separate paths: one for short-term memories and one for long-term memories.
+- c1316 [fact | NLn4eetGmf8 @ 2113-2119s]
+  The terms 'transformers' and 'large language models' should not be used interchangeably as they are different concepts.
+- c1319 [fact | NLn4eetGmf8 @ 2174-2182s]
+  The original transformer architecture was developed for machine translation tasks, specifically translating English text into German and French.
+- c1320 [fact | NLn4eetGmf8 @ 2186-2212s]
+  The simplified transformer architecture consists of 8 steps: tokenization, encoding, decoding with partial output, and word-by-word generation.
+- c1324 [definition | NLn4eetGmf8 @ 2284-2297s]
+  BERT (Bidirectional Encoder Representations from Transformers) is a transformer variation that predicts hidden or masked words in a sentence.
+- c1325 [fact | NLn4eetGmf8 @ 2302-2310s]
+  BERT pays attention to a sentence from both left and right directions, making it bidirectional.
+- c1326 [fact | NLn4eetGmf8 @ 2310-2314s]
+  BERT has only an encoder architecture and does not have a decoder.
+- c1327 [fact | NLn4eetGmf8 @ 2315-2327s]
+  BERT models are commonly used for sentiment analysis because they can capture the meanings of different words and how they relate to each other.
+- c1328 [definition | NLn4eetGmf8 @ 2330-2343s]
+  GPT (Generative Pre-trained Transformer) performs left-to-right analysis, receiving incomplete text and predicting the next word one word at a time.
+- c1330 [fact | NLn4eetGmf8 @ 2361-2370s]
+  Transformers can be used for computer vision tasks such as image classification and image segmentation.
+- c1563 [fact | Xpr8D6LeAtw @ 23-35s]
+  Dr. Raj Dandekar graduated from MIT with a Ph.D. in Machine Learning in 2022.
+- c1564 [fact | Xpr8D6LeAtw @ 53-67s]
+  The teaching philosophy followed is to teach everything from the basics without assuming prior knowledge, covering the nuts and bolts of every concept.
+- c1565 [fact | Xpr8D6LeAtw @ 88-109s]
+  A common mistake learners make when studying large language models is directly switching to applications and running code without understanding how LLMs actually work.
+- c1567 [fact | Xpr8D6LeAtw @ 154-160s]
+  By the end of this playlist, viewers will have built an LLM from scratch successfully.
+- c1568 [fact | Xpr8D6LeAtw @ 161-169s]
+  After building an LLM from scratch, application-focused content will become significantly easier to understand.
+- c1569 [fact | Xpr8D6LeAtw @ 182-185s]
+  Detailed lecture notes will be provided for each lecture in this series.
+- c1570 [fact | Xpr8D6LeAtw @ 186-192s]
+  All videos in this series will be available completely for free.
+- c3158 [fact | rsy5Ragmso8 @ 96-139s]
+  Building a large language model from scratch typically proceeds in three stages: Stage 1 (understanding LLM basics), Stage 2 (pre-training), and Stage 3 (fine-tuning).
+- c3161 [fact | rsy5Ragmso8 @ 127-139s]
+  Stage 3 of building an LLM involves fine-tuning on smaller, specific datasets to build applications such as classifiers or personal assistants.
+- c3162 [fact | rsy5Ragmso8 @ 147-159s]
+  Tokenization falls under the category of data preparation and sampling in the LLM building process.
+- c3164 [fact | rsy5Ragmso8 @ 180-189s]
+  LLMs are neural networks that take data as input, optimize parameters, and produce output.
+- c3165 [fact | rsy5Ragmso8 @ 204-207s]
+  LLMs are typically trained on billions of documents.
+- c3166 [fact | rsy5Ragmso8 @ 208-221s]
+  Documents are not fed directly to LLMs as input text; instead, documents must be tokenized and individual tokens are fed to the model.
+- c3168 [fact | rsy5Ragmso8 @ 242-258s]
+  Step one of tokenization is splitting text into individual words and sub-word tokens.
+- c3171 [fact | rsy5Ragmso8 @ 319-340s]
+  In the example 'This is an example', the text is tokenized into four individual word tokens: 'This', 'is', 'an', 'example'.
+- c3172 [fact | rsy5Ragmso8 @ 341-363s]
+  Each token is assigned a unique token ID; for example, 'This' is assigned ID 1401, 'is' is assigned ID 2201, 'an' is assigned ID 3002, and 'example' is assigned ID 1134.
+- c3173 [fact | rsy5Ragmso8 @ 370-383s]
+  Token IDs are converted into token embeddings or vector embeddings, which are then fed as input data to the LLM.
+- c3174 [fact | rsy5Ragmso8 @ 387-397s]
+  Preprocessing steps including tokenization must be completed before the training stage of an LLM.
+- c3175 [fact | rsy5Ragmso8 @ 448-453s]
+  The dataset used for this demonstration is 'The Verdict' by Edith Wharton.
+- c3176 [fact | rsy5Ragmso8 @ 470-473s]
+  The Verdict by Edith Wharton was published in 1908.
+- c3177 [fact | rsy5Ragmso8 @ 476-489s]
+  The Verdict is available for free download and is included in a repository by Sebastian.

@@ -61,8 +61,9 @@ def _build_video_order(manifest: list[dict]) -> dict[str, int]:
 def detect_supersession(
     store: ClaimStore,
     manifest: list[dict],
-    embed_threshold: float = 0.82,
-    code_token_threshold: float = 0.6,
+    embed_threshold: float = 0.88,
+    code_token_threshold: float = 0.75,
+    code_embed_threshold: float = 0.75,
 ) -> list[SupersessionLink]:
     """Find pairs of cross-video claims where the older is superseded by the newer.
 
@@ -118,7 +119,7 @@ def detect_supersession(
                 trigger = False
                 reason = ""
                 if ctype == "code":
-                    if jac >= code_token_threshold and sim >= 0.6:
+                    if jac >= code_token_threshold and sim >= code_embed_threshold:
                         trigger = True
                         reason = f"code refactor (jaccard={jac:.2f}, embed={sim:.2f})"
                 else:

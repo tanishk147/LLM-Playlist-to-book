@@ -20,11 +20,11 @@ how to rebuild from scratch.
 ### 1. System dependencies
 
 ```bash
-# Ubuntu / Debian
+# Linux
 sudo apt-get install -y ffmpeg pandoc texlive-xetex texlive-latex-extra texlive-fonts-recommended
 npm install -g @mermaid-js/mermaid-cli  # Optional: for rendering architecture diagrams
 
-# macOS (Homebrew)
+# macOS 
 brew install ffmpeg pandoc yt-dlp mermaid-cli
 brew install --cask mactex          # ~5GB; or --cask basictex for a lighter install
 ```
@@ -38,12 +38,14 @@ python3.12 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 ```
 
-### 3. Anthropic API key
+### 3. Anthropic API key (Api key is needed only if you want to run it from start full model again i used cached data that i have already added in dataset )
 
 Create a `.env` file in the repo root with your key:
 
+*(Note: You can just run this command and leave it as it is - no need to change anything! The pipeline uses the cached dataset I already provided that in data folder all of it.)*
+
 ```bash
-echo 'ANTHROPIC_API_KEY=sk-ant-...' > .env
+echo 'ANTHROPIC_API_KEY=sk-ant-fake-key' > .env
 ```
 
 Get a key at <https://console.anthropic.com> → API Keys → Create Key. The pipeline

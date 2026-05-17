@@ -1,0 +1,19 @@
+graph LR
+    A["Raw text message"] --> B["Tokenizer"]
+    B --> C["Padded token IDs"]
+    C --> D["GPT-2 +<br/>Classification Head"]
+    D --> E["Two logits"]
+    E --> F["Argmax"]
+    F --> G{"Label"}
+    G -->|spam| H["spam"]
+    G -->|ham| I["ham"]
+    
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#fff3e0
+    style E fill:#f3e5f5
+    style F fill:#f3e5f5
+    style G fill:#c8e6c9
+    style H fill:#a5d6a7
+    style I fill:#a5d6a7

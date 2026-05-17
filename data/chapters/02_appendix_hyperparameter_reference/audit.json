@@ -1,0 +1,14 @@
+{
+  "chapter_id": "appendix_hyperparameter_reference",
+  "title": "GPT-2 Model Configurations and Key Hyperparameters",
+  "summary": {
+    "grounded": 48,
+    "unsupported": 1,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 18
+  },
+  "stripped_sentence_indices": [
+    4
+  ]
+}

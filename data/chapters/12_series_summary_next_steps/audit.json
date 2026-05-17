@@ -1,0 +1,16 @@
+{
+  "chapter_id": "series_summary_next_steps",
+  "title": "Putting It All Together: Summary and Next Steps",
+  "summary": {
+    "grounded": 125,
+    "unsupported": 2,
+    "contradicted": 0,
+    "needs_external_check": 3,
+    "narrative_ok": 9
+  },
+  "stripped_sentence_indices": [
+    117,
+    123,
+    126
+  ]
+}

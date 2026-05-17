@@ -1,0 +1,172 @@
+## Claims (cite these by ID inline as [cNNN])
+- c2696 [code | h94TQOK7NRA @ 3172-3201s]
+  The mask slicing [:, :T] ensures the causal mask is created only up to the number of tokens T in the batch, handling cases where batch tokens are smaller than the supported context size.
+- c2687 [code | h94TQOK7NRA @ 2890-2924s]
+  attn_scores = queries @ keys.transpose(1, 2)
+  attn_scores.masked_fill_(self.mask.bool()[:num_tokens, :num_tokens], -torch.inf)
+  attn_weights = torch.softmax(attn_scores / keys.shape[-1]**0.5, dim=-1)
+  attn_weights = self.dropout(attn_weights)
+  context_vec = attn_weights @ values
+- c2670 [code | h94TQOK7NRA @ 2232-2239s]
+  torch.nn.Dropout(p=0.5) creates a dropout layer that randomly zeroes elements with probability 0.5 and scales remaining elements by 1/(1-0.5) = 2.
+- c2654 [definition | h94TQOK7NRA @ 1977-1984s]
+  Dropout is a deep learning technique where neurons in different layers are randomly switched to zero during training.
+- c2653 [definition | h94TQOK7NRA @ 1925-1936s]
+  Masking in transformers sets attention scores for future tokens to large negative values, making their influence in softmax calculation effectively zero.
+- c2651 [code | h94TQOK7NRA @ 1873-1881s]
+  attention_weights = torch.softmax(attention_scores / sqrt(d_k), dim=-1)
+- c2650 [code | h94TQOK7NRA @ 1814-1866s]
+  attention_scores = attention_scores.masked_fill(mask == 1, float('-inf'))
+- c2649 [code | h94TQOK7NRA @ 1750-1777s]
+  mask = torch.triu(torch.ones(seq_len, seq_len), diagonal=1)
+- c2640 [definition | h94TQOK7NRA @ 1487-1496s]
+  Causal attention is designed to prevent future tokens from influencing past tokens.
+- c2638 [code | h94TQOK7NRA @ 1440-1454s]
+  mask_simple_normalized = masked_attn_weights / masked_attn_weights.sum(dim=1, keepdim=True)
+- c2636 [code | h94TQOK7NRA @ 1360-1375s]
+  masked_attn_weights = attn_weights * mask_simple
+- c2632 [code | h94TQOK7NRA @ 1268-1306s]
+  mask_simple = torch.tril(torch.ones(context_length, context_length))
+- c2631 [definition | h94TQOK7NRA @ 1208-1218s]
+  A lower triangular matrix has all elements above the diagonal set to zero.
+- c2630 [definition | h94TQOK7NRA @ 1192-1201s]
+  An upper triangular matrix has all elements below the diagonal set to zero.
+- c2627 [definition | h94TQOK7NRA @ 855-865s]
+  The causal attention mask is the set of attention weights above the diagonal that are masked out.
+- c2619 [definition | h94TQOK7NRA @ 590-601s]
+  Causal attention restricts the model to only consider the previous and current inputs in a sequence when processing any given token.
+- c2618 [definition | h94TQOK7NRA @ 587-589s]
+  Causal attention is a special form of self-attention.
+- c2617 [definition | h94TQOK7NRA @ 576-586s]
+  Causal attention is also called masked attention.
+- c2608 [definition | h94TQOK7NRA @ 297-333s]
+  WQ, WK, and WV are trainable weight matrices whose parameters need to be trained based on input data as part of LLM training.
+- c2603 [definition | h94TQOK7NRA @ 201-239s]
+  An input embedding is a vector representation of a token that encodes semantic meaning but does not carry information about how other words in the sentence relate to it.
+- c2596 [definition | h94TQOK7NRA @ 5-11s]
+  Causal attention, also known as masked attention, is a special form of self-attention that restricts the model to only consider previous tokens.
+- c2265 [definition | eSRhpYLerw4 @ 3681-3692s]
+  The dim parameter in torch.softmax specifies the dimension of the input tensor along which the normalization will be computed.
+- c2250 [definition | eSRhpYLerw4 @ 3131-3150s]
+  An attention weight matrix is a matrix where each row represents the attention weights for one particular query word, and each column represents the attention weight between that query and a key word.
+- c2246 [equation | eSRhpYLerw4 @ 2930-2955s]
+  Context vector Z_i = sum over all tokens j of (attention_weight_j * embedding_vector_j)
+- c2236 [definition | eSRhpYLerw4 @ 2632-2639s]
+  A context vector is an enriched embedding vector that combines contributions from all input embedding vectors weighted by their corresponding attention weights.
+- c2229 [code | eSRhpYLerw4 @ 2405-2410s]
+  torch.nn.Softmax(dim=None) applies the Softmax function to rescale n-dimensional input Tensor elements to the range [0,1] and sum to 1.
+- c2224 [definition | eSRhpYLerw4 @ 2270-2277s]
+  Naive Softmax attention weights are computed by taking the exponent of each attention score and dividing by the summation of the exponents.
+- c2216 [definition | eSRhpYLerw4 @ 2065-2096s]
+  Softmax normalization takes the exponent of every element and divides by the summation of all exponents: softmax(x_i) = e^x_i / Σ(e^x_j).
+- c2207 [definition | eSRhpYLerw4 @ 1590-1661s]
+  Normalization is the process of transforming attention scores so that they sum to one, enabling interpretable statements about attention allocation as percentages.
+- c2193 [definition | eSRhpYLerw4 @ 1166-1174s]
+  The dot product of two vectors a and b is calculated as a · b = Σ(a_i * b_i), which equals |a||b| cos θ, where θ is the angle between the vectors.
+- c2187 [definition | eSRhpYLerw4 @ 891-927s]
+  Attention scores are intermediate values that quantify how much importance or attention should be paid to each input word relative to a query word.
+- c2184 [definition | eSRhpYLerw4 @ 837-858s]
+  A context vector (z2) for a query contains information about both the query token itself and all other input elements in the sequence.
+- c2183 [definition | eSRhpYLerw4 @ 801-830s]
+  A query is the element or token being examined; in this example, the word 'journey' (x2) is the query.
+- c2181 [definition | eSRhpYLerw4 @ 653-672s]
+  Vector embeddings capture semantic meaning, such that semantically related words like 'journey' and 'starts' are positioned closer to each other in vector space.
+- c2179 [definition | eSRhpYLerw4 @ 498-515s]
+  The context vector, denoted by z, is derived from attention weights and input vectors.
+- c2178 [definition | eSRhpYLerw4 @ 485-505s]
+  Attention weights determine how much attention to give to each input token when computing the context vector for any embedding vector.
+- c2176 [definition | eSRhpYLerw4 @ 404-423s]
+  In the notation used, x_i denotes the vector representation of the i-th token, where x_1 is the first token, x_2 is the second token, and so on.
+- c2158 [definition | eSRhpYLerw4 @ 40-47s]
+  A simplified self-attention mechanism without trainable weights is a variant of self-attention that does not include learnable parameters.
+- c2155 [definition | eSRhpYLerw4 @ 5-11s]
+  Self-attention is a mechanism that transforms an input vector (token embedding) into a context vector through attention weights computed from all input vectors.
+- c1969 [definition | cPaBCoNdCtE @ 1381-1384s]
+  D_out is the output dimension of each attention head.
+- c1966 [code | cPaBCoNdCtE @ 1303-1316s]
+  In the forward method, torch.cat is used with dimension=-1 to concatenate outputs along the columns.
+- c1964 [definition | cPaBCoNdCtE @ 1237-1248s]
+  Multi-head attention involves creating multiple instances of the self-attention mechanism, each with its own weights, and then combining their outputs.
+- c1962 [definition | cPaBCoNdCtE @ 1184-1194s]
+  Multi-head attention is called 'multi-head' because it aggregates the output of multiple independent attention heads.
+- c1952 [definition | cPaBCoNdCtE @ 807-818s]
+  Multi-head attention refers to dividing the attention mechanism into multiple heads, where each head operates independently.
+- c1941 [definition | cPaBCoNdCtE @ 605-614s]
+  The input x to the causal attention class has shape (batch_size, num_tokens, input_dimensions).
+- c1938 [equation | cPaBCoNdCtE @ 502-509s]
+  Context vectors are computed by multiplying attention weights with the values matrix.
+- c1934 [definition | cPaBCoNdCtE @ 309-339s]
+  Each element in an attention score matrix row encodes how much a particular token relates to the query token, or how much importance should be paid to that token when processing the query.
+- c1933 [equation | cPaBCoNdCtE @ 293-302s]
+  Attention scores are computed as: queries multiplied by keys transpose (Q × K^T).
+- c1924 [definition | cPaBCoNdCtE @ 5-11s]
+  Multi-head attention refers to dividing the attention mechanism into multiple heads, each operating independently.
+- c1559 [definition | XN7sevVxyUM @ 2970-2981s]
+  Self-attention looks at one sequence and examines how different parts of that same sequence are related with respect to each other.
+- c1558 [definition | XN7sevVxyUM @ 2950-2970s]
+  Traditional attention looks at one input sequence and one output sequence, determining which parts of the output sequence are more related to which parts of the input sequence.
+- c1557 [definition | XN7sevVxyUM @ 2920-2944s]
+  In attention mechanisms, when decoding a particular part, the decoder has access to all of the input tokens and decides how much attention to give to each input.
+- c1553 [definition | XN7sevVxyUM @ 2811-2828s]
+  In self-attention, the term 'self' refers to the attention mechanism's ability to compute attention weights by relating different positions in a single input sequence.
+- c1548 [definition | XN7sevVxyUM @ 2662-2675s]
+  Self-attention is a mechanism that allows each position of an input sequence to attend to all positions in the same sequence.
+- c1544 [definition | XN7sevVxyUM @ 2576-2588s]
+  The Bahdanau attention mechanism allows the decoder to have access to each input state during decoding and selectively decide which inputs to give more attention to.
+- c1541 [definition | XN7sevVxyUM @ 2564-2571s]
+  LSTMs solve the vanishing gradient problem by maintaining both a long-term memory route and a short-term memory route.
+- c1538 [definition | XN7sevVxyUM @ 2542-2548s]
+  The hidden state is the key innovation of RNNs that enables them to process sequential data.
+- c1535 [definition | XN7sevVxyUM @ 2537-2542s]
+  Recurrent Neural Networks (RNNs) are designed to work with sequential data by maintaining a hidden state that captures information about previous inputs.
+- c1533 [definition | XN7sevVxyUM @ 2233-2256s]
+  Dynamic focus is the key property of the attention mechanism that allows the decoder to selectively choose which inputs to focus on and how much attention to give to each input at every decoding step.
+- c1525 [definition | XN7sevVxyUM @ 1806-1842s]
+  The Bahdanau attention mechanism allows the decoder to selectively access different parts of the input sequence at each decoding step, rather than relying only on the final hidden state.
+- c1517 [definition | XN7sevVxyUM @ 1463-1614s]
+  Loss of context is the problem that occurs when an RNN decoder struggles to capture longer dependencies and contextual information because it relies on only one final hidden state.
+- c1504 [definition | XN7sevVxyUM @ 1071-1084s]
+  The final hidden state from the encoder is called the context vector.
+- c1502 [definition | XN7sevVxyUM @ 1036-1047s]
+  The hidden state in an RNN captures memory of previous inputs in the sequence.
+- c1488 [definition | XN7sevVxyUM @ 430-436s]
+  Self-attention introduces trainable weights which form the basis of the actual mechanism used in LLMs.
+- c1487 [definition | XN7sevVxyUM @ 416-423s]
+  Simplified self-attention is the purest and most basic form of the attention technique.
+- c1481 [definition | XN7sevVxyUM @ 234-238s]
+  Long-term dependencies in sentences are complex sentence structures where multiple clauses or phrases are connected, making it difficult for language models to identify relationships between distant words.
+- c1471 [definition | UjdRN80c6p8 @ 4593-4602s]
+  Value in attention mechanism represents the actual content or representation of the input items themselves.
+- c1470 [definition | UjdRN80c6p8 @ 4570-4581s]
+  Key in attention mechanism represents items in the input sequence and is used to match with the query.
+- c1469 [definition | UjdRN80c6p8 @ 4539-4560s]
+  Query in attention mechanism is analogous to a search query in a database and represents the current token the model is focusing on.
+- c1465 [definition | UjdRN80c6p8 @ 4451-4468s]
+  An attention weight between two tokens (e.g., between 'journey' and 'your') indicates how much the model should attend to the second token when processing the first token as the query.
+- c1448 [code | UjdRN80c6p8 @ 3952-3965s]
+  context_vector = attention_weights @ values
+- c1445 [code | UjdRN80c6p8 @ 3887-3942s]
+  attention_scores = attention_scores / (keys.shape[-1] ** 0.5)
+  attention_weights = softmax(attention_scores, dim=-1)
+- c1443 [code | UjdRN80c6p8 @ 3836-3852s]
+  keys = x @ W_key
+  queries = x @ W_query
+  values = x @ W_value
+- c1406 [code | UjdRN80c6p8 @ 2459-2521s]
+  d_k = keys.shape[-1]  # Extract key embedding dimension from last axis
+  attention_scores_scaled = attention_scores / (d_k ** 0.5)  # Scale by sqrt(d_k)
+  attention_weights = softmax(attention_scores_scaled, dim=-1)  # Apply softmax over columns
+- c1403 [definition | UjdRN80c6p8 @ 2411-2416s]
+  Attention weights are computed by scaling attention scores by the square root of the key embedding dimension, then applying softmax.
+- c1395 [definition | UjdRN80c6p8 @ 2189-2208s]
+  Attention weights are normalized attention scores where each row sums to one, making them interpretable as probability distributions over tokens.
+- c1373 [code | UjdRN80c6p8 @ 1381-1396s]
+  keys = inputs @ W_k
+  values = inputs @ W_v
+  queries = inputs @ W_q
+- c1368 [code | UjdRN80c6p8 @ 1084-1115s]
+  Query, Key, and Value weight matrices are initialized as torch.nn.Parameter objects with random values and shape (D_in, D_out).
+- c1367 [code | UjdRN80c6p8 @ 1067-1082s]
+  torch.nn.Parameter is a Tensor subclass used to mark tensors as module parameters, which are automatically added to the module's parameter list and appear in the parameters() iterator.
+- c1350 [definition | UjdRN80c6p8 @ 520-536s]
+  Self-attention mechanism is implemented using three trainable weight matrices: Query (WQ), Key (WK), and Value (WV).

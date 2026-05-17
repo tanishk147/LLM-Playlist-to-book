@@ -1,0 +1,1480 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "By this point in the book, you have a working GPT model that can generate text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Contextual framing, no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "The problem is that the text it generates is probably not very good\u2014either it repeats itself, or it sounds robotic, or it is outright incoherent.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing, no specific factual claim."
+    },
+    {
+      "index": 3,
+      "text": "This chapter addresses three interconnected topics that move the model from \"technically functional\" to \"practically useful.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Chapter overview, no factual claim."
+    },
+    {
+      "index": 4,
+      "text": "First, we look at *decoding strategies*: the algorithms that decide which token to pick at each generation step.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing."
+    },
+    {
+      "index": 5,
+      "text": "The naive approach has real problems, and we will replace it with temperature scaling and top-k sampling.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement, no specific factual claim."
+    },
+    {
+      "index": 6,
+      "text": "Second, we look at *model persistence*: how to save and reload both model weights and optimizer state so that long training runs are not lost.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Topic introduction."
+    },
+    {
+      "index": 7,
+      "text": "Third, we put everything together by loading OpenAI's publicly released GPT-2 weights into our custom model class, verifying that the result produces coherent text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Topic introduction."
+    },
+    {
+      "index": 8,
+      "text": "The simplest possible decoding strategy is *greedy decoding*: at every step, pick the token with the highest probability [c3045].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3045"
+      ],
+      "status": "grounded",
+      "reason": "c3045 defines greedy decoding as selecting the token with highest probability using torch.argmax."
+    },
+    {
+      "index": 9,
+      "text": "In PyTorch terms, this is a call to `torch.argmax`.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3045"
+      ],
+      "status": "grounded",
+      "reason": "c3045 explicitly mentions torch.argmax for greedy decoding."
+    },
+    {
+      "index": 10,
+      "text": "Greedy decoding is deterministic\u2014given the same prompt, you always get the same output\u2014and it tends to produce repetitive, low-diversity text.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this characterization of greedy decoding's behavior."
+    },
+    {
+      "index": 11,
+      "text": "More importantly for training, a model that always picks the maximum-probability token can effectively memorize passages from its training data [c797].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c797"
+      ],
+      "status": "grounded",
+      "reason": "c797 states that probabilistic decoding strategies prevent the GPT model from memorizing passages, implying greedy decoding allows memorization."
+    },
+    {
+      "index": 12,
+      "text": "LLM decoding strategies are techniques used to control randomness and improve quality when generating the next token in sequence [c750].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c750"
+      ],
+      "status": "grounded",
+      "reason": "c750 provides this exact definition."
+    },
+    {
+      "index": 13,
+      "text": "The naive strategy selects the generated token corresponding to the largest probability score among all tokens in the vocabulary [c751].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c751"
+      ],
+      "status": "grounded",
+      "reason": "c751 defines naive decoding strategy exactly as stated."
+    },
+    {
+      "index": 14,
+      "text": "We need something better.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 15,
+      "text": "Temperature scaling is a technique used in large language models to control randomness and diversity in generated text [c3025].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3025"
+      ],
+      "status": "grounded",
+      "reason": "c3025 provides this exact definition."
+    },
+    {
+      "index": 16,
+      "text": "Concretely, temperature scaling divides the logits by a number greater than zero before applying softmax to convert them into probabilities [c3058, c753].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3058",
+        "c753"
+      ],
+      "status": "grounded",
+      "reason": "Both c3058 and c753 support this definition of temperature scaling."
+    },
+    {
+      "index": 17,
+      "text": "$$\\text{probabilities} = \\text{softmax}\\!\\left(\\frac{\\text{logits}}{T}\\right)$$",
+      "type": "equation",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this equation. While it is a standard formulation, it should be cited to a claim."
+    },
+    {
+      "index": 18,
+      "text": "where $T$ is the temperature parameter.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Notation explanation."
+    },
+    {
+      "index": 19,
+      "text": "Temperature controls the entropy of the probability distribution over tokens [c3074].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3074"
+      ],
+      "status": "grounded",
+      "reason": "c3074 defines temperature as controlling entropy of the probability distribution."
+    },
+    {
+      "index": 20,
+      "text": "Intuitively, dividing by a small $T$ (say, 0.1) makes the largest logit relatively much larger than the others, sharpening the distribution toward a near-deterministic choice.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this intuitive explanation of low-temperature behavior."
+    },
+    {
+      "index": 21,
+      "text": "Dividing by a large $T$ (say, 5.0) compresses the differences between logits, flattening the distribution so that many tokens have similar probability.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this intuitive explanation of high-temperature behavior."
+    },
+    {
+      "index": 22,
+      "text": "Temperature scaling adjusts the sharpness of probability distributions to either sharpen or flatten them, helping prevent overfitting through multinomial sampling [c801].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c801"
+      ],
+      "status": "grounded",
+      "reason": "c801 provides this exact definition."
+    },
+    {
+      "index": 23,
+      "text": "Here is what low-temperature scaling looks like in code:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code block."
+    },
+    {
+      "index": 24,
+      "text": "next_token_logits_2 = next_token_logits / 0.1\nprobabilities = softmax(next_token_logits_2)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3061"
+      ],
+      "status": "grounded",
+      "reason": "c3061 provides this exact code."
+    },
+    {
+      "index": 25,
+      "text": "And high-temperature scaling:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition to next code block."
+    },
+    {
+      "index": 26,
+      "text": "next_token_logits_3 = next_token_logits / 5\nprobabilities = softmax(next_token_logits_3)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3063"
+      ],
+      "status": "grounded",
+      "reason": "c3063 provides this exact code."
+    },
+    {
+      "index": 27,
+      "text": "A temperature of 0.1 produces a very sharp distribution\u2014almost greedy\u2014while a temperature of 5 produces a very flat one where even low-probability tokens have a reasonable chance of being selected.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this characterization of temperature effects."
+    },
+    {
+      "index": 28,
+      "text": "Once we have a probability distribution, we need a way to sample from it that is not just \"take the maximum.\"",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 29,
+      "text": "The probability distribution used for sampling the next token is the multinomial probability distribution [c3036].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3036"
+      ],
+      "status": "grounded",
+      "reason": "c3036 provides this exact statement."
+    },
+    {
+      "index": 30,
+      "text": "Sampling from a distribution means drawing values where the outcome is not predetermined; for a multinomial distribution, samples are drawn according to the probability scores of mutually exclusive outcomes [c3037].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3037"
+      ],
+      "status": "grounded",
+      "reason": "c3037 provides this exact definition."
+    },
+    {
+      "index": 31,
+      "text": "The multinomial distribution is used for $k$ mutually exclusive outcomes, each with corresponding probabilities, where $n$ independent trials are conducted to predict outcomes [c3038].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3038"
+      ],
+      "status": "grounded",
+      "reason": "c3038 provides this exact definition."
+    },
+    {
+      "index": 32,
+      "text": "The multinomial function samples the next token proportional to its probability score [c3049].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3049"
+      ],
+      "status": "grounded",
+      "reason": "c3049 provides this exact statement."
+    },
+    {
+      "index": 33,
+      "text": "Multinomial distribution sampling selects the next token probabilistically proportional to its probability score rather than deterministically choosing the maximum probability token [c754].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c754"
+      ],
+      "status": "grounded",
+      "reason": "c754 provides this exact definition."
+    },
+    {
+      "index": 34,
+      "text": "PyTorch's `torch.multinomial` implements this directly.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this statement about PyTorch's implementation."
+    },
+    {
+      "index": 35,
+      "text": "Here are three illustrative examples:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code examples."
+    },
+    {
+      "index": 36,
+      "text": "weights = torch.tensor([0, 10, 3, 0], dtype=torch.float)\ntorch.multinomial(weights, 2)\n# Returns: tensor([1, 2])",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3039"
+      ],
+      "status": "grounded",
+      "reason": "c3039 provides this exact code."
+    },
+    {
+      "index": 37,
+      "text": "torch.multinomial(weights, 5)  # ERROR without replacement\n# RuntimeError: cannot sample n_sample > prob_dist.size(-1) samples without replacement",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3040"
+      ],
+      "status": "grounded",
+      "reason": "c3040 provides this exact code and error message."
+    },
+    {
+      "index": 38,
+      "text": "torch.multinomial(weights, 4, replacement=True)\n# Returns: tensor([2, 1, 1, 1])",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3041"
+      ],
+      "status": "grounded",
+      "reason": "c3041 provides this exact code."
+    },
+    {
+      "index": 39,
+      "text": "The first example draws 2 samples without replacement from a weight vector where index 1 has weight 10 and index 2 has weight 3\u2014so index 1 is much more likely to appear first.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the first example."
+    },
+    {
+      "index": 40,
+      "text": "The second example shows that you cannot draw more samples than there are elements without enabling replacement.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the second example."
+    },
+    {
+      "index": 41,
+      "text": "The third enables replacement, allowing the same index to be drawn multiple times.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the third example."
+    },
+    {
+      "index": 42,
+      "text": "Even with temperature scaling and multinomial sampling, there is a risk that very low-probability tokens occasionally get selected, producing nonsensical output.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this characterization of the risk."
+    },
+    {
+      "index": 43,
+      "text": "Top-K sampling addresses this by restricting the sampled tokens to the top K most likely tokens and excluding all other tokens [c760, c762].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c760",
+        "c762"
+      ],
+      "status": "grounded",
+      "reason": "Both c760 and c762 provide this definition of top-k sampling."
+    },
+    {
+      "index": 44,
+      "text": "Top-k sampling is a method that selects only the top k tokens with the highest logits for the next token prediction [c769].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c769"
+      ],
+      "status": "grounded",
+      "reason": "c769 provides this exact definition."
+    },
+    {
+      "index": 45,
+      "text": "Top-k sampling restricts sampled tokens to the top k most likely tokens, preventing random or low-probability tokens from becoming the next token [c802].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c802"
+      ],
+      "status": "grounded",
+      "reason": "c802 provides this exact definition."
+    },
+    {
+      "index": 46,
+      "text": "The mechanism is straightforward: find the K highest logits, then replace every other logit with negative infinity.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this description of the mechanism."
+    },
+    {
+      "index": 47,
+      "text": "After softmax, negative-infinity logits become zero probability, so they can never be sampled.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of softmax behavior with negative infinity."
+    },
+    {
+      "index": 48,
+      "text": "PyTorch provides `torch.topk` for finding the top values:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 49,
+      "text": "torch.topk(logits, k=3) returns the top 3 values and their indices",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c771"
+      ],
+      "status": "grounded",
+      "reason": "c771 provides this exact code."
+    },
+    {
+      "index": 50,
+      "text": "And `torch.where` for replacing the rest:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 51,
+      "text": "torch.where(condition, logits, -inf) replaces logits that don't meet the condition with negative infinity",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c773"
+      ],
+      "status": "grounded",
+      "reason": "c773 provides this exact code."
+    },
+    {
+      "index": 52,
+      "text": "The complete decoding workflow combines both strategies [c804]:",
+      "type": "narrative",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "narrative_ok",
+      "reason": "Transition statement citing the architecture claim."
+    },
+    {
+      "index": 53,
+      "text": "1. Obtain the logit tensor from the GPT model.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies this as the first step in the decoding workflow."
+    },
+    {
+      "index": 54,
+      "text": "2. Apply top-k sampling: keep only the top-k logits.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies this as the second step."
+    },
+    {
+      "index": 55,
+      "text": "3. Replace all non-top-k logits with negative infinity.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies this as the third step."
+    },
+    {
+      "index": 56,
+      "text": "4. Apply temperature scaling: divide the remaining logits by the temperature $T$.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies this as the fourth step."
+    },
+    {
+      "index": 57,
+      "text": "5. Apply softmax to convert logits to probabilities.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies this as the fifth step."
+    },
+    {
+      "index": 58,
+      "text": "6. Sample from the multinomial distribution to predict the next token.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies this as the sixth step."
+    },
+    {
+      "index": 59,
+      "text": "[FIGURE: Flowchart showing the six-step decoding pipeline: GPT logits \u2192 top-k mask \u2192 replace with -inf \u2192 divide by T \u2192 softmax \u2192 multinomial sample \u2192 next token]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 60,
+      "text": "Text generation strategies including temperature scaling and top-k sampling can be integrated together to reduce overfitting in text generation [c724].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c724"
+      ],
+      "status": "grounded",
+      "reason": "c724 provides this exact statement."
+    },
+    {
+      "index": 61,
+      "text": "Top-k sampling and temperature scaling are decoding strategies that help avoid overfitting [c798].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c798"
+      ],
+      "status": "grounded",
+      "reason": "c798 provides this exact statement."
+    },
+    {
+      "index": 62,
+      "text": "Probabilistic decoding strategies prevent the GPT model from memorizing passages when predicting next words [c797].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c797"
+      ],
+      "status": "grounded",
+      "reason": "c797 provides this exact statement."
+    },
+    {
+      "index": 63,
+      "text": "This is also why ChatGPT produces new output each time: it uses decoding strategies like top-k sampling and temperature scaling rather than memorizing user input [c799].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c799"
+      ],
+      "status": "grounded",
+      "reason": "c799 provides this exact statement."
+    },
+    {
+      "index": 64,
+      "text": "Here is an example call to the `generate` function using both strategies:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 65,
+      "text": "generate(model, input_token_ids=['every', 'effort', 'moves', 'you'], max_new_tokens=25, temperature=1.5, top_k=50)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3556"
+      ],
+      "status": "grounded",
+      "reason": "c3556 provides this exact code."
+    },
+    {
+      "index": 66,
+      "text": "Top-k sampling was introduced as a second decoding strategy to reduce loss and overfitting [c3457].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3457"
+      ],
+      "status": "grounded",
+      "reason": "c3457 provides this exact statement."
+    },
+    {
+      "index": 67,
+      "text": "Training a large language model takes significant time and compute.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this general statement."
+    },
+    {
+      "index": 68,
+      "text": "Loading and saving model weights is especially important when dealing with large models like the large language model built in this series [c719].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c719"
+      ],
+      "status": "grounded",
+      "reason": "c719 provides this exact statement."
+    },
+    {
+      "index": 69,
+      "text": "Saving and loading model weights helps save memory and time [c720].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c720"
+      ],
+      "status": "grounded",
+      "reason": "c720 provides this exact statement."
+    },
+    {
+      "index": 70,
+      "text": "Building the foundation for weight saving and loading is also necessary for working with pre-trained weights from OpenAI [c729].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c729"
+      ],
+      "status": "grounded",
+      "reason": "c729 provides this exact statement."
+    },
+    {
+      "index": 71,
+      "text": "This lecture focuses on learning how to load and save PyTorch model weights [c718].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c718"
+      ],
+      "status": "grounded",
+      "reason": "c718 provides this exact statement."
+    },
+    {
+      "index": 72,
+      "text": "The two main PyTorch functions for saving and loading model parameters are `torch.save()` and `model.load_state_dict()` [c730].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c730"
+      ],
+      "status": "grounded",
+      "reason": "c730 provides this exact statement."
+    },
+    {
+      "index": 73,
+      "text": "`model.state_dict()` is a dictionary mapping each layer of a PyTorch model to its parameter tensors [c731].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c731"
+      ],
+      "status": "grounded",
+      "reason": "c731 provides this exact definition."
+    },
+    {
+      "index": 74,
+      "text": "Learnable parameters of any `torch.nn.Module` are contained in `model.parameters()` [c733].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c733"
+      ],
+      "status": "grounded",
+      "reason": "c733 provides this exact statement."
+    },
+    {
+      "index": 75,
+      "text": "[FIGURE: Diagram showing a GPT model with its layers (embedding, transformer blocks, output head) and arrows pointing to key-value pairs in the state_dict]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 76,
+      "text": "When resuming training\u2014not just inference\u2014you also need to save the optimizer state.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this statement about resuming training."
+    },
+    {
+      "index": 77,
+      "text": "The optimizer state dictionary stores both hyperparameters (such as learning rate and weight decay) and historical data used by the optimizer (such as past gradient values and squared gradient values) [c742].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c742"
+      ],
+      "status": "grounded",
+      "reason": "c742 provides this exact definition."
+    },
+    {
+      "index": 78,
+      "text": "`optimizer.state_dict()` returns the state of the optimizer as a dictionary containing two entries: `'state'` (a dict holding current optimization state per parameter) and `'param_groups'` (a list containing all parameter groups) [c746].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c746"
+      ],
+      "status": "grounded",
+      "reason": "c746 provides this exact definition."
+    },
+    {
+      "index": 79,
+      "text": "Saving and loading model and optimizer states is especially important for training large language models to avoid losing progress and having to restart from scratch [c749].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c749"
+      ],
+      "status": "grounded",
+      "reason": "c749 provides this exact statement."
+    },
+    {
+      "index": 80,
+      "text": "To resume from a saved checkpoint, you reconstruct both the model and the optimizer, then load their respective state dictionaries.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code pattern."
+    },
+    {
+      "index": 81,
+      "text": "Here is the complete pattern:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 82,
+      "text": "checkpoint = torch.load('model_and_optimizer.pth')\nmodel = GPTModel()\nmodel.load_state_dict(checkpoint['model'])\noptimizer = torch.optim.AdamW(model.parameters())\noptimizer.load_state_dict(checkpoint['optimizer'])\nmodel.train()",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c747"
+      ],
+      "status": "grounded",
+      "reason": "c747 provides this exact code."
+    },
+    {
+      "index": 83,
+      "text": "The key insight here is that `GPTModel()` is instantiated with its architecture (so PyTorch knows the shape of every tensor), and then the saved weights are injected via `load_state_dict`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the loading pattern."
+    },
+    {
+      "index": 84,
+      "text": "The optimizer is similarly reconstructed and then populated with its historical state, so momentum and adaptive learning rate estimates are preserved exactly where training left off.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of optimizer state preservation."
+    },
+    {
+      "index": 85,
+      "text": "We now have all the pieces: a working GPT model class, decoding strategies, and the ability to load weights from disk.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 86,
+      "text": "The next step is to load OpenAI's publicly released GPT-2 weights into our custom model class and verify that the result generates coherent text [c3453, c726].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3453",
+        "c726"
+      ],
+      "status": "grounded",
+      "reason": "Both c3453 and c726 support this statement about loading GPT-2 weights."
+    },
+    {
+      "index": 87,
+      "text": "The lecture series is building a GPT model from scratch using a custom-defined GPT model class [c3452].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3452"
+      ],
+      "status": "grounded",
+      "reason": "c3452 provides this exact statement."
+    },
+    {
+      "index": 88,
+      "text": "The GPT-2 weights will be loaded into this GPT model class and used for text generation [c3468].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3468"
+      ],
+      "status": "grounded",
+      "reason": "c3468 provides this exact statement."
+    },
+    {
+      "index": 89,
+      "text": "GPT-2 model sizes available include 124M, 355M, 774M, and 1.5B parameters [c3461].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3461"
+      ],
+      "status": "grounded",
+      "reason": "c3461 provides this exact statement."
+    },
+    {
+      "index": 90,
+      "text": "The four variants differ in embedding dimension, number of layers, and number of attention heads:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 91,
+      "text": "model_configs = {\n    \"gpt2-small (124M)\": {\"emb_dim\": 768, \"n_layers\": 12, \"n_heads\": 12},\n    \"gpt2-medium (355M)\": {\"emb_dim\": 1024, \"n_layers\": 24, \"n_heads\": 16},\n    \"gpt2-large (774M)\": {\"emb_dim\": 1280, \"n_layers\": 36, \"n_heads\": 20},\n    \"gpt2-xl (1558M)\": {\"emb_dim\": 1600, \"n_layers\": 48, \"n_heads\": 25},\n}\n\nmodel_name = \"gpt2-small (124M)\"\nNEW_CONFIG = GPT_CONFIG_124M.copy()\nNEW_CONFIG.update(model_configs[model_name])",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3533"
+      ],
+      "status": "grounded",
+      "reason": "c3533 provides this exact code."
+    },
+    {
+      "index": 92,
+      "text": "[FIGURE: Table comparing the four GPT-2 model sizes with their parameter counts, embedding dimensions, layer counts, and head counts]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 93,
+      "text": "The embedding dimension is the size of the vector space into which each token ID is converted; for GPT-2 small, each token is represented as a 768-dimensional vector [c3492].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3492"
+      ],
+      "status": "grounded",
+      "reason": "c3492 provides this exact definition."
+    },
+    {
+      "index": 94,
+      "text": "N_heads is the number of attention heads present in each transformer block [c3494].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3494"
+      ],
+      "status": "grounded",
+      "reason": "c3494 provides this exact definition."
+    },
+    {
+      "index": 95,
+      "text": "N_layers is the number of transformer blocks in the model [c3495].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3495"
+      ],
+      "status": "grounded",
+      "reason": "c3495 provides this exact definition."
+    },
+    {
+      "index": 96,
+      "text": "OpenAI originally saved GPT-2 weights using TensorFlow, while the lecture series code uses PyTorch [c3469].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3469"
+      ],
+      "status": "grounded",
+      "reason": "c3469 provides this exact statement."
+    },
+    {
+      "index": 97,
+      "text": "Pre-processing steps are required after downloading GPT-2 weights before they can be integrated with the GPT architecture [c3476].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3476"
+      ],
+      "status": "grounded",
+      "reason": "c3476 provides this exact statement."
+    },
+    {
+      "index": 98,
+      "text": "The download function handles fetching all necessary files from OpenAI's public storage:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 99,
+      "text": "def download_and_load_gpt2(model_size, models_dir):\n    allowed_sizes = (\"124M\", \"355M\", \"774M\", \"1558M\")\n    if model_size not in allowed_sizes:\n        raise ValueError(f\"Model size not in {allowed_sizes}\")\n    model_dir = os.path.join(models_dir, model_size)\n    base_url = \"https://openaipublic.blob.core.windows.net/gpt-2/models\"\n    filenames = [\"checkpoint\", \"encoder.json\", \"params.json\", \"model.ckpt.data-00000-of-00001\", \"model.ckpt.index\", \"model.ckpt.meta\", \"vocab.bpe\"]\n    os.makedirs(model_dir, exist_ok=True)\n    for filename in filenames:\n        file_url = os.path.join(base_url, model_size, filename)\n        file_path = os.path.join(model_dir, filename)\n        download_file(file_url, file_path)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3462"
+      ],
+      "status": "grounded",
+      "reason": "c3462 provides this exact code."
+    },
+    {
+      "index": 100,
+      "text": "To invoke it:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 101,
+      "text": "from gpt_download3 import download_and_load_gpt2\n\nsettings, params = download_and_load_gpt2(model_size=\"124M\", models_dir=\"gpt2\")",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3479"
+      ],
+      "status": "grounded",
+      "reason": "c3479 provides this exact code."
+    },
+    {
+      "index": 102,
+      "text": "Each downloaded file serves a specific purpose:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for list."
+    },
+    {
+      "index": 103,
+      "text": "**checkpoint**: Contains the path where all current parameters and weights of the GPT-2 model are stored [c3481].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3481"
+      ],
+      "status": "grounded",
+      "reason": "c3481 provides this exact definition."
+    },
+    {
+      "index": 104,
+      "text": "**model.ckpt files**: Store all the weights of the GPT-2 model [c3482].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3482"
+      ],
+      "status": "grounded",
+      "reason": "c3482 provides this exact statement."
+    },
+    {
+      "index": 105,
+      "text": "**encoder.json**: A vocabulary mapping tokens to their corresponding token IDs [c3483].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3483"
+      ],
+      "status": "grounded",
+      "reason": "c3483 provides this exact definition."
+    },
+    {
+      "index": 106,
+      "text": "**vocab.bpe**: Contains a list of byte-pair encoded token merges, ordered by merge frequency with the highest probability merges at the top [c3485].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3485"
+      ],
+      "status": "grounded",
+      "reason": "c3485 provides this exact definition."
+    },
+    {
+      "index": 107,
+      "text": "Byte-pair encoding is a sub-word tokenization scheme that merges the most frequently occurring pairs of tokens into single tokens [c3486].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3486"
+      ],
+      "status": "grounded",
+      "reason": "c3486 provides this exact definition."
+    },
+    {
+      "index": 108,
+      "text": "**hparams.json**: Contains all the hyperparameter settings and configuration values for the GPT-2 model [c3488].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3488"
+      ],
+      "status": "grounded",
+      "reason": "c3488 provides this exact definition."
+    },
+    {
+      "index": 109,
+      "text": "[FIGURE: Directory tree showing the downloaded GPT-2 files and a brief annotation of each file's role]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 110,
+      "text": "After calling `download_and_load_gpt2`, you receive two dictionaries.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement."
+    },
+    {
+      "index": 111,
+      "text": "The `settings` dictionary contains the same hyperparameters as those in hparams.json: vocabulary size, context length, embedding dimension, number of attention heads, and number of transformer blocks [c3503].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3503"
+      ],
+      "status": "grounded",
+      "reason": "c3503 provides this exact definition."
+    },
+    {
+      "index": 112,
+      "text": "The `params` dictionary for GPT-2 has five keys [c3505]:",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3505"
+      ],
+      "status": "grounded",
+      "reason": "c3505 states the params dictionary has five keys."
+    },
+    {
+      "index": 113,
+      "text": "| Key | Contents |\n|-----|----------|\n| `WTE` | Token embedding parameters [c3506] |\n| `WPE` | Positional embedding parameters [c3507] |\n| `blocks` | All trainable weights within the transformer blocks [c3511] |\n| `G` | Final layer normalization scale [c3505] |\n| `B` | Final layer normalization shift [c3505] |",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3506",
+        "c3507",
+        "c3511",
+        "c3505"
+      ],
+      "status": "grounded",
+      "reason": "All cited claims support the table entries."
+    },
+    {
+      "index": 114,
+      "text": "WTE (token embeddings) stores parameters for converting input token IDs into token embeddings [c3506].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3506"
+      ],
+      "status": "grounded",
+      "reason": "c3506 provides this exact definition."
+    },
+    {
+      "index": 115,
+      "text": "WPE (positional embeddings) stores parameters for adding positional information to token embeddings [c3507].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3507"
+      ],
+      "status": "grounded",
+      "reason": "c3507 provides this exact definition."
+    },
+    {
+      "index": 116,
+      "text": "The blocks key contains all trainable weights and parameters within the transformer blocks, including attention layers, feed-forward networks, output projections, and layer normalization parameters [c3511].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3511"
+      ],
+      "status": "grounded",
+      "reason": "c3511 provides this exact definition."
+    },
+    {
+      "index": 117,
+      "text": "One important structural difference: in GPT-2, the query, key, and value weight matrices in the attention layer are fused into a single large matrix called `C_ATTN` [c3513].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3513"
+      ],
+      "status": "grounded",
+      "reason": "c3513 provides this exact statement."
+    },
+    {
+      "index": 118,
+      "text": "Our custom model stores them separately, so we need to split this matrix when loading.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this statement about splitting the matrix."
+    },
+    {
+      "index": 119,
+      "text": "Layer normalization in GPT-2 includes trainable scale (G) and shift (B) parameters applied after mean subtraction and variance normalization [c3517].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3517"
+      ],
+      "status": "grounded",
+      "reason": "c3517 provides this exact definition."
+    },
+    {
+      "index": 120,
+      "text": "[FIGURE: Diagram showing how the fused C_ATTN matrix in GPT-2 maps to separate Q, K, V matrices in the custom model]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive, no factual claim."
+    },
+    {
+      "index": 121,
+      "text": "Because OpenAI saved the weights in TensorFlow format, we need a helper function to read them and organize them into a Python dictionary that mirrors our model's structure:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 122,
+      "text": "def load_gpt2_params_from_tf_ckpt(ckpt_path, settings):\n    # Initialize parameters dictionary with empty blocks for each layer\n    params = {\"blocks\": [{} for _ in range(settings[\"n_layer\"])]}\n    \n    # Iterate over each variable in the checkpoint\n    for name, _ in tf.train.list_variables(ckpt_path):\n        # Load the variable and remove singleton dimensions\n        variable_array = np.squeeze(tf.train.load_variable(ckpt_path, name))\n        \n        # Process the variable name to extract relevant parts\n        variable_name_parts = name.split(\"/\")[1:] # Skip the 'model/' prefix\n        \n        # Identify the target dictionary for the variable\n        target_dict = params\n        if variable_name_parts[0].startswith(\"h\"):\n            layer_number = int(variable_name_parts[0][1:])\n            target_dict = params[\"blocks\"][layer_number]\n        \n        # Recursively access or create nested dictionaries\n        for key in variable_name_parts[1:-1]:\n            target_dict = target_dict.setdefault(key, {})\n        \n        # Assign the variable array to the last key\n        last_key = variable_name_parts[-1]\n        target_dict[last_key] = variable_array",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3521"
+      ],
+      "status": "grounded",
+      "reason": "c3521 provides this exact code."
+    },
+    {
+      "index": 123,
+      "text": "This function iterates over every variable in the TensorFlow checkpoint, strips the `model/` prefix from the variable name, and uses the remaining path components to build a nested Python dictionary.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the function's behavior."
+    },
+    {
+      "index": 124,
+      "text": "Variables whose names start with `h` (e.g., `h0`, `h1`, ...) are routed into the corresponding entry of `params[\"blocks\"]`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of variable routing."
+    },
+    {
+      "index": 125,
+      "text": "Once the `params` dictionary is populated, we assign its values to the corresponding tensors in our PyTorch model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement."
+    },
+    {
+      "index": 126,
+      "text": "A shape-checking helper ensures we do not silently load mismatched weights:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 127,
+      "text": "def assign(left, right):\n    if left.shape != right.shape:\n        raise ValueError(f\"Shape mismatch: {left.shape} vs {right.shape}\")\n    return right",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3544"
+      ],
+      "status": "grounded",
+      "reason": "c3544 provides this exact code."
+    },
+    {
+      "index": 128,
+      "text": "The GPT model class initializes token embeddings, positional embeddings, transformer blocks, layer normalization, and an output head layer [c3540].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3540"
+      ],
+      "status": "grounded",
+      "reason": "c3540 provides this exact statement."
+    },
+    {
+      "index": 129,
+      "text": "Each of these components receives its weights from the corresponding key in `params`.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this statement about weight assignment."
+    },
+    {
+      "index": 130,
+      "text": "The output projection layer weights and biases from GPT-2 are assigned to the attention object's output projection [c3548].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3548"
+      ],
+      "status": "grounded",
+      "reason": "c3548 provides this exact statement."
+    },
+    {
+      "index": 131,
+      "text": "Feed forward neural network weights and biases for both the fully connected layer and projection layer are assigned from downloaded GPT-2 values [c3550].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3550"
+      ],
+      "status": "grounded",
+      "reason": "c3550 provides this exact statement."
+    },
+    {
+      "index": 132,
+      "text": "After all assignments are complete, we can call `download_and_load_gpt2` one more time to confirm the full pipeline:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 133,
+      "text": "from gpt_download3 import download_and_load_gpt2\n\nsettings, params = download_and_load_gpt2(model_size=\"124M\", models_dir=\"gpt2\")",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3524"
+      ],
+      "status": "grounded",
+      "reason": "c3524 provides this exact code."
+    },
+    {
+      "index": 134,
+      "text": "The proof is in the output.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transition statement."
+    },
+    {
+      "index": 135,
+      "text": "Without GPT-2 weights, the model generates incoherent output [c3561].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3561"
+      ],
+      "status": "grounded",
+      "reason": "c3561 provides this exact statement."
+    },
+    {
+      "index": 136,
+      "text": "With pre-trained GPT-2 weights loaded, inference execution is fast because the model does not require training [c3562].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3562"
+      ],
+      "status": "grounded",
+      "reason": "c3562 provides this exact statement."
+    },
+    {
+      "index": 137,
+      "text": "Output from the pre-trained GPT-2 model is more coherent than output from the untrained model [c3564].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3564"
+      ],
+      "status": "grounded",
+      "reason": "c3564 provides this exact statement."
+    },
+    {
+      "index": 138,
+      "text": "Model weights are loaded correctly when the model produces coherent text [c3571].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3571"
+      ],
+      "status": "grounded",
+      "reason": "c3571 provides this exact statement."
+    },
+    {
+      "index": 139,
+      "text": "Here is an example generation call that exercises both decoding strategies with the loaded model:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement for code."
+    },
+    {
+      "index": 140,
+      "text": "generate(model, input_token_ids=['every', 'effort', 'moves', 'you'], max_new_tokens=25, temperature=1.5, top_k=50)",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3556"
+      ],
+      "status": "grounded",
+      "reason": "c3556 provides this exact code."
+    },
+    {
+      "index": 141,
+      "text": "With `temperature=1.5` and `top_k=50`, the model samples from the top 50 most likely tokens at each step, with a relatively high temperature that encourages diversity.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the temperature and top_k parameters."
+    },
+    {
+      "index": 142,
+      "text": "The result should be grammatically coherent English that continues the prompt naturally.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this expectation about the output."
+    },
+    {
+      "index": 143,
+      "text": "One might ask: if OpenAI already provides GPT-2, why go through the effort of building a custom model class and loading weights into it?",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Rhetorical question introducing a section."
+    },
+    {
+      "index": 144,
+      "text": "The custom-built GPT model allows exploration of hyperparameter tuning and architectural modifications that are not possible with ChatGPT [c3567].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3567"
+      ],
+      "status": "grounded",
+      "reason": "c3567 provides this exact statement."
+    },
+    {
+      "index": 145,
+      "text": "By owning the model code, you can change the number of layers, swap out the attention mechanism, experiment with different normalization schemes, or fine-tune on domain-specific data\u2014none of which is possible through an API.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this explanation of the benefits of owning the model code."
+    },
+    {
+      "index": 146,
+      "text": "This chapter covered three major topics:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Summary introduction."
+    },
+    {
+      "index": 147,
+      "text": "**1. Decoding strategies.** Greedy decoding is deterministic and prone to repetition.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No citation provided for this characterization of greedy decoding."
+    },
+    {
+      "index": 148,
+      "text": "Temperature scaling divides logits by a temperature parameter before softmax, sharpening or flattening the probability distribution [c753, c3058].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c753",
+        "c3058"
+      ],
+      "status": "grounded",
+      "reason": "Both c753 and c3058 support this definition."
+    },
+    {
+      "index": 149,
+      "text": "Multinomial sampling draws the next token proportionally to its probability rather than always taking the maximum [c754, c3049].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c754",
+        "c3049"
+      ],
+      "status": "grounded",
+      "reason": "Both c754 and c3049 support this definition."
+    },
+    {
+      "index": 150,
+      "text": "Top-k sampling restricts the candidate set to the K most likely tokens, preventing low-probability tokens from ever being selected [c760, c802].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c760",
+        "c802"
+      ],
+      "status": "grounded",
+      "reason": "Both c760 and c802 support this definition."
+    },
+    {
+      "index": 151,
+      "text": "The full decoding pipeline applies these in sequence: top-k masking \u2192 temperature scaling \u2192 softmax \u2192 multinomial sample [c804].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c804"
+      ],
+      "status": "grounded",
+      "reason": "c804 specifies the decoding workflow in this order."
+    },
+    {
+      "index": 152,
+      "text": "**2. Model persistence.** `model.state_dict()` captures all learnable parameters as a dictionary [c731].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c731"
+      ],
+      "status": "grounded",
+      "reason": "c731 provides this exact definition."
+    },
+    {
+      "index": 153,
+      "text": "`optimizer.state_dict()` captures both hyperparameters and historical gradient information [c742, c746].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c742",
+        "c746"
+      ],
+      "status": "grounded",
+      "reason": "Both c742 and c746 support this statement."
+    },
+    {
+      "index": 154,
+      "text": "Saving and reloading both is essential for resuming long training runs without losing progress [c749].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c749"
+      ],
+      "status": "grounded",
+      "reason": "c749 provides this exact statement."
+    },
+    {
+      "index": 155,
+      "text": "**3. Loading pre-trained GPT-2 weights.** OpenAI's GPT-2 comes in four sizes (124M, 355M, 774M, 1558M) [c3461]",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3461"
+      ],
+      "status": "grounded",
+      "reason": "c3461 provides this exact statement."
+    },
+    {
+      "index": 156,
+      "text": "and was originally saved in TensorFlow format [c3469].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3469"
+      ],
+      "status": "grounded",
+      "reason": "c3469 provides this exact statement."
+    },
+    {
+      "index": 157,
+      "text": "A download-and-parse pipeline converts these weights into a nested Python dictionary, which is then assigned to the corresponding tensors in our custom PyTorch model using a shape-checking `assign` helper [c3544].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3544"
+      ],
+      "status": "grounded",
+      "reason": "c3544 provides the assign helper code, and the overall process is described in the chapter."
+    },
+    {
+      "index": 158,
+      "text": "The result is a model that generates coherent text immediately, without any additional training [c3562, c3564].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3562",
+        "c3564"
+      ],
+      "status": "grounded",
+      "reason": "Both c3562 and c3564 support this statement about the result."
+    }
+  ],
+  "summary": {
+    "grounded": 127,
+    "unsupported": 25,
+    "contradicted": 0,
+    "needs_external_check": 0,
+    "narrative_ok": 6
+  }
+}

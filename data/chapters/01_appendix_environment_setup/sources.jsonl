@@ -1,0 +1,84 @@
+## Claims (cite these by ID inline as [cNNN])
+- c115 [fact | 0PpxZ3kNPWo @ 1863-1881s]
+  The training process on a MacBook Air 2020 took approximately 8.8 minutes; on laptops with i5, i7, or comparable MacBooks, it should take 7 to 10 minutes.
+- c642 [fact | 7m2jV7BOFkA @ 1306-1315s]
+  Fine-tuning the GPT-2 medium model took 4 hours on the author's PC.
+- c648 [definition | 7m2jV7BOFkA @ 1495-1502s]
+  Ollama is an efficient application to run large language models on your laptop.
+- c649 [fact | 7m2jV7BOFkA @ 1506-1509s]
+  Ollama supports running LLAMA 3, developed by Meta.
+- c650 [fact | 7m2jV7BOFkA @ 1510-1512s]
+  Ollama supports running Phi 3, developed by Microsoft.
+- c651 [fact | 7m2jV7BOFkA @ 1513-1514s]
+  Ollama supports running Mistral.
+- c652 [fact | 7m2jV7BOFkA @ 1514-1515s]
+  Ollama supports running Gemma 2.
+- c653 [design_decision | 7m2jV7BOFkA @ 1519-1525s]
+  Using Ollama, you perform inference only, not pre-training; the model is already pre-trained.
+- c657 [definition | 7m2jV7BOFkA @ 1633-1642s]
+  Ollama is a tool for generating text using LLM inference and does not support training or fine-tuning LLMs.
+- c658 [fact | 7m2jV7BOFkA @ 1673-1680s]
+  Ollama is available for download on Mac OS, Linux, and Windows.
+- c659 [fact | 7m2jV7BOFkA @ 1685-1688s]
+  The Ollama Mac OS installer file is 177 MB.
+- c660 [code | 7m2jV7BOFkA @ 1711-1730s]
+  ollama run llama3
+- c661 [fact | 7m2jV7BOFkA @ 1711-1733s]
+  On Mac, the command to run Ollama with LLAMA 3 is 'ollama run llama3'.
+- c662 [code | 7m2jV7BOFkA @ 1740-1748s]
+  ollama serve
+- c663 [fact | 7m2jV7BOFkA @ 1740-1748s]
+  On Windows, the command sequence is 'ollama serve' followed by 'ollama run llama3'.
+- c664 [fact | 7m2jV7BOFkA @ 1771-1778s]
+  The LLAMA 3 model files downloaded through Ollama are 4.7 GB in size.
+- c665 [fact | 7m2jV7BOFkA @ 1784-1790s]
+  Downloading the LLAMA 3 8 billion parameter model through Ollama takes approximately 15 to 20 minutes.
+- c666 [fact | 7m2jV7BOFkA @ 1798-1808s]
+  When Ollama successfully loads LLAMA 3, right-hand side arrows appear in the terminal indicating the model is ready for interaction.
+- c667 [fact | 7m2jV7BOFkA @ 1830-1841s]
+  Ollama can run multiple LLMs including Phi 3, Mistral, and Gemma 2 on a laptop.
+- c668 [design_decision | 7m2jV7BOFkA @ 1856-1862s]
+  Ollama must remain running in the terminal for code execution; shutting down the terminal will stop Ollama.
+- c669 [fact | 7m2jV7BOFkA @ 1888-1914s]
+  A code block can verify that the Ollama session is running properly by checking if 'ollama_running' equals true.
+- c670 [design_decision | 7m2jV7BOFkA @ 1923-1931s]
+  Instead of using the ollama run command in the terminal each time, interact with the llama model using an API through Python.
+- c688 [fact | 7m2jV7BOFkA @ 2686-2693s]
+  Running the full evaluation function on a MacBook Air M3 takes approximately one minute.
+- c2306 [design_decision | egFqsJQ9kuY @ 750-764s]
+  The custom collate function includes code to move input and target tensors to a specific device (CPU, CUDA, or MPS) during data loading.
+- c2307 [fact | egFqsJQ9kuY @ 757-764s]
+  The device can be CPU, CUDA for GPUs, or MPS for Macs with Apple silicon chips.
+- c2308 [design_decision | egFqsJQ9kuY @ 766-834s]
+  Performing device transfer in the custom collate function (outside the training loop) allows the transfer to happen as a background process, preventing it from blocking the GPU during model training.
+- c2309 [code | egFqsJQ9kuY @ 839-847s]
+  device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+- c2310 [fact | egFqsJQ9kuY @ 869-878s]
+  For MacBooks with Apple silicon chips, the device can be set to torch.device('mps') for faster execution.
+- c2487 [fact | fKd8s29e-l4 @ 2462-2474s]
+  Implementing BPE from scratch is relatively complicated, so the tutorial uses the tiktoken Python library instead.
+- c2489 [fact | fKd8s29e-l4 @ 2488-2497s]
+  The tiktoken library has approximately 11,000 stars and 780 forks on its repository.
+- c2490 [code | fKd8s29e-l4 @ 2549-2556s]
+  import tiktoken
+  tokenizer = tiktoken.get_encoding('gpt2')
+- c3135 [fact | r7unILsP0Es @ 967-994s]
+  The code is run on a MacBook Air 2020 with 8 GB of RAM using CPU instead of GPU.
+- c3136 [fact | r7unILsP0Es @ 1022-1027s]
+  Training for 1 epoch on CPU took 2 hours to complete.
+- c3137 [fact | r7unILsP0Es @ 1028-1032s]
+  Training for 2 epochs would take 4 to 5 hours and crash the system.
+- c3469 [fact | yXrGeDNuymY @ 259-271s]
+  OpenAI originally saved GPT-2 weights using TensorFlow, while the lecture series code uses PyTorch.
+- c3470 [design_decision | yXrGeDNuymY @ 271-279s]
+  TensorFlow must be installed to load the GPT-2 weights, which were originally saved in TensorFlow format.
+- c3471 [design_decision | yXrGeDNuymY @ 271-279s]
+  TQDM library is installed to track the download progress of the weights.
+- c3472 [hyperparameter | yXrGeDNuymY @ 286-294s]
+  TensorFlow version should be greater than or equal to 2.15.
+- c3473 [hyperparameter | yXrGeDNuymY @ 286-294s]
+  TQDM library version should be greater than or equal to 4.66.
+- c3688 [fact | z9fgKz1Drlc @ 484-490s]
+  Sample text generation for visual inspection is performed during the LLM training procedure.
+- c3861 [design_decision | zuj_NJNouAA @ 3288-3299s]
+  The code can run on CPU, CUDA GPU, or Apple silicon chips, with Apple silicon being approximately 2x faster than Apple CPU.

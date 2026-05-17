@@ -4,18 +4,18 @@
   \node[blue, font=\Large\bfseries] at (0, 3.7) {AI};
   
   % Second circle: ML
-  \draw[thick, green] (0,0) circle (3cm);
-  \node[green, font=\Large\bfseries] at (0, 2.7) {ML};
+  \draw[thick, green] (0,0) circle (3.2cm);
+  \node[green, font=\Large\bfseries] at (0, 2.9) {ML};
   
   % Third circle: DL
-  \draw[thick, orange] (0,0) circle (2cm);
-  \node[orange, font=\Large\bfseries] at (0, 1.7) {DL};
+  \draw[thick, orange] (0,0) circle (2.4cm);
+  \node[orange, font=\Large\bfseries] at (0, 2.1) {DL};
   
   % Innermost circle: LLMs
-  \draw[thick, red] (0,0) circle (1cm);
+  \draw[thick, red] (0,0) circle (1.2cm);
   \node[red, font=\Large\bfseries] at (0, 0) {LLMs};
   
-  % Generative AI oval overlapping DL and LLMs
-  \draw[thick, purple, dashed] (0.5, -1.5) ellipse (1.2cm and 0.8cm);
-  \node[purple, font=\Large\bfseries] at (0.5, -1.5) {Gen AI};
+  % Generative AI overlay (ellipse spanning DL and LLMs)
+  \draw[thick, dashed, purple] (-1.8, -0.8) ellipse (1.5cm and 1.2cm);
+  \node[purple, font=\Large\bfseries] at (-1.8, -2.2) {Generative AI};
 end{tikzpicture}
