@@ -160,21 +160,28 @@ The "no hallucinations" guarantee in the assignment is operationalized as
 9. **External refs** (Raschka book, "Attention Is All You Need", etc.) may
    only *confirm* playlist-derived claims, never introduce new ones.
 
-Read `reports/grounding_audit.html` after a run. The header shows the
-percentage of sentences in each grounding category.
+## 📊 Reports & Hallucination Checking
+
+Run `make reports` to generate interactive HTML audit files in the `reports/` folder.
+
+- **`reports/cost_report.html`**: A detailed breakdown of API token usage and costs across all stages.
+- **`reports/grounding_audit.html`**: The "Zero-Hallucination" proof sheet! It scores every single sentence in the book with one of five statuses:
+  - 🟢 **grounded**: Proven 100% true by a specific video timestamp/slide.
+  - ⚫ **narrative_ok**: Safe, non-technical connecting text (e.g. "Let's move on").
+  - 🔵 **external_ok**: Verified by the Canonical Reference Library (e.g. standard PyTorch docs).
+  - 🟠 **needs_external_check**: Ambiguous claim flagged for manual review.
+  - 🔴 **unsupported**: Hallucinated/extrapolated claim (these are automatically *deleted* from the book).
+
+**Tracing claims to YouTube:**
+If you see a claim ID (like `c2914`) in the grounding audit report, you can instantly trace it back to the exact video timestamp using the included `query.py` script:
+```bash
+python3 query.py 2914
+```
+This will print the exact extracted text, the timestamp, and a clickable YouTube URL (e.g., `&t=423s`) that jumps right to the source moment in the video.
 
 ## Repo layout
 
-See `docs/ARCHITECTURE.md` for the full layout. Top level:
-
-```
-config/      pinned settings, glossary, playlist URL
-src/         pipeline code (stages/, llm/, grounding/, verification/, utils/)
-data/        gitignored artifacts (raw, transcripts, frames, claims.sqlite, chapters/)
-book/        manuscript.md, manuscript.tex, manuscript.pdf, figures/
-reports/     cost_report.html, grounding_audit.html
-tests/       pytest suite
-```
+See `docs/ARCHITECTURE.md` for the full layout
 
 ## License & ethics
 
