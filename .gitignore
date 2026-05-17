@@ -1,6 +1,7 @@
 # Environments
 .env
 .venv
+.claude
 env/
 venv/
 ENV/
@@ -13,7 +14,7 @@ data/raw/
 
 # Ignore the typeset marker and outputs so the book is built fresh for anyone who clones it
 data/.stage/11_typeset
-book/manuscript.pdf
+# book/manuscript.pdf
 book/manuscript.tex
 book/manuscript.md
 reports/

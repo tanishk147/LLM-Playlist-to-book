@@ -1,0 +1,65 @@
+## Claims (cite these by ID inline as [cNNN])
+- c588 [fact | 7m2jV7BOFkA @ 67-75s]
+  The instruction dataset used for fine-tuning consists of 1100 instruction input and output pairs.
+- c603 [fact | 7m2jV7BOFkA @ 437-445s]
+  The dataset contains 1100 instruction input-output pairs total.
+- c691 [fact | 7m2jV7BOFkA @ 2798-2802s]
+  The training dataset used contained 1100 instruction input-output pairs.
+- c695 [fact | 7m2jV7BOFkA @ 2825-2830s]
+  Stanford Alpaca repository contains a dataset of 52,000 instruction-output pairs for fine-tuning.
+- c696 [fact | 7m2jV7BOFkA @ 2831-2835s]
+  The Stanford Alpaca dataset is 50 times larger than the 1100 instruction-output pair dataset used in the example.
+- c1597 [fact | Zxf-34voZss @ 73-103s]
+  The dataset used is 'The Verdict', a book written in 1906, containing approximately 20,000 characters and 5,000 tokens.
+- c2723 [fact | iQZFH8dr2yI @ 603-630s]
+  The Verdict is a short story published in 1908 used as the dataset for this tutorial.
+- c2725 [fact | iQZFH8dr2yI @ 688-699s]
+  The Verdict short story, when tokenized with byte pair encoding, produces 5145 tokens.
+- c2910 [fact | mk-6cFebjis @ 257-264s]
+  The dataset used for demonstration is a book called 'The Verdict' written in 1908.
+- c2911 [fact | mk-6cFebjis @ 351-351s]
+  The Verdict text file contains 20479 total characters.
+- c3175 [fact | rsy5Ragmso8 @ 448-453s]
+  The dataset used for this demonstration is 'The Verdict' by Edith Wharton.
+- c3176 [fact | rsy5Ragmso8 @ 470-473s]
+  The Verdict by Edith Wharton was published in 1908.
+- c3177 [fact | rsy5Ragmso8 @ 476-489s]
+  The Verdict is available for free download and is included in a repository by Sebastian.
+- c3391 [fact | xbaYCf2FHSY @ 1136-1147s]
+  Common Crawl is a free and open repository of web crawl data that has maintained over 250 million pages spanning 17 years since 2007.
+- c3389 [fact | xbaYCf2FHSY @ 1148-1158s]
+  GPT-3 uses 410 billion tokens from the Common Crawl dataset, which constitutes 60% of the entire training dataset.
+- c3393 [fact | xbaYCf2FHSY @ 1199-1208s]
+  WebText2 is an enhanced version of the original WebText corpus that covers Reddit submissions from 2005 to 2020.
+- c3392 [fact | xbaYCf2FHSY @ 1220-1227s]
+  GPT-3 uses 19 billion words from the WebText2 dataset, which constitutes 22% of the training data.
+- c3394 [fact | xbaYCf2FHSY @ 1228-1235s]
+  The remaining 18-19% of GPT-3 training data comes from books and Wikipedia.
+- c3395 [fact | xbaYCf2FHSY @ 1239-1245s]
+  GPT-3 was trained on a total of 300 billion tokens.
+- c3421 [fact | xbaYCf2FHSY @ 1796-1800s]
+  The training dataset for GPT-3 includes 410 billion tokens from Common Crawl (60% weight), 19 billion tokens from WebText2 (22% weight), and 12 billion tokens from Books1 (8% weight).
+- c3623 [fact | yZpy_hsC1bE @ 1006-1012s]
+  The SMS Spam Collection dataset contains 425 spam messages manually extracted from the Grumbletext website.
+- c3629 [fact | yZpy_hsC1bE @ 1083-1090s]
+  The downloaded SMS Spam Collection dataset is saved as a tab-separated values file named SMSSpamCollection.tsv.
+- c3631 [fact | yZpy_hsC1bE @ 1128-1137s]
+  The SMS Spam Collection dataset can be loaded into a pandas DataFrame for easier data manipulation.
+- c3632 [fact | yZpy_hsC1bE @ 1143-1149s]
+  The SMS Spam Collection dataset contains a total of 5,572 emails.
+- c3635 [fact | yZpy_hsC1bE @ 1230-1249s]
+  After balancing, the dataset contains 747 instances of each class (ham and spam).
+- c3743 [fact | zuj_NJNouAA @ 216-222s]
+  The book used in this dataset is 'The Verdict' written by Edith Wharton and published in 1906.
+- c3744 [fact | zuj_NJNouAA @ 223-228s]
+  The book is publicly available to download.
+- c3746 [fact | zuj_NJNouAA @ 232-245s]
+  A short book is used for this example to ensure fast execution on laptops.
+- c3745 [fact | zuj_NJNouAA @ 246-256s]
+  The dataset contains 20,000 characters.
+- c3815 [fact | zuj_NJNouAA @ 2061-2065s]
+  The total number of characters in the dataset is 20479.
+- c3818 [fact | zuj_NJNouAA @ 2116-2126s]
+  The entire text data is encoded using the tiktoken encoder, resulting in 5145 tokens.
+- c3819 [fact | zuj_NJNouAA @ 2127-2133s]
+  The dataset with 5145 tokens is very short for training an LLM but is suitable for educational purposes.

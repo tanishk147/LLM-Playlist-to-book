@@ -1,0 +1,514 @@
+{
+  "sentences": [
+    {
+      "index": 1,
+      "text": "Every machine learning project lives or dies by its data, and building a language model from scratch is no exception.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory framing statement with no factual claim."
+    },
+    {
+      "index": 2,
+      "text": "This chapter catalogs every dataset that appears throughout this series\u2014what each one contains, where it comes from, how large it is, and what role it plays.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement of chapter scope."
+    },
+    {
+      "index": 3,
+      "text": "Having this reference in one place will save you from hunting through later chapters when you need to recall why a particular dataset was chosen or how to obtain it.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Motivational framing."
+    },
+    {
+      "index": 4,
+      "text": "We cover four distinct categories: a small literary text used for pre-training demonstrations, a spam-classification corpus used for fine-tuning experiments, a compact instruction-following dataset used for instruction fine-tuning, and finally the massive corpora that were used to train GPT-3 in the real world.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Overview of chapter structure."
+    },
+    {
+      "index": 5,
+      "text": "The first three are datasets you will actually work with in code; the last is context that helps you understand the scale gap between educational examples and production systems.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Framing the distinction between practical and reference datasets."
+    },
+    {
+      "index": 6,
+      "text": "The primary dataset for pre-training demonstrations throughout this series is *The Verdict*, a short story by Edith Wharton [c3175].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3175"
+      ],
+      "status": "grounded",
+      "reason": "c3175 confirms The Verdict is by Edith Wharton and is used as the dataset for this tutorial."
+    },
+    {
+      "index": 7,
+      "text": "The story was published in 1908 [c3176] and is in the public domain, making it freely available to download [c3744].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3176",
+        "c3744"
+      ],
+      "status": "grounded",
+      "reason": "c3176 confirms publication in 1908; c3744 confirms the book is publicly available to download."
+    },
+    {
+      "index": 8,
+      "text": "It is included directly in the companion repository for this series so you do not need to track it down yourself [c3177].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3177"
+      ],
+      "status": "grounded",
+      "reason": "c3177 confirms The Verdict is available in a repository by Sebastian."
+    },
+    {
+      "index": 9,
+      "text": "A short book is used for this example specifically to ensure fast execution on laptops [c3746].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3746"
+      ],
+      "status": "grounded",
+      "reason": "c3746 directly supports this statement."
+    },
+    {
+      "index": 10,
+      "text": "You should be able to run every pre-training experiment in this series on consumer hardware in a reasonable amount of time, and *The Verdict* makes that possible.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory framing of the choice; no specific factual claim requiring citation."
+    },
+    {
+      "index": 11,
+      "text": "In concrete terms, the text file contains **20,479 total characters** [c2911, c3815].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2911",
+        "c3815"
+      ],
+      "status": "grounded",
+      "reason": "Both c2911 and c3815 confirm the text file contains 20,479 total characters."
+    },
+    {
+      "index": 12,
+      "text": "When tokenized using byte pair encoding (specifically the `tiktoken` encoder), the story produces **5,145 tokens** [c2725, c3818].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c2725",
+        "c3818"
+      ],
+      "status": "grounded",
+      "reason": "c2725 states The Verdict produces 5145 tokens when tokenized with byte pair encoding; c3818 confirms 5145 tokens with tiktoken encoder."
+    },
+    {
+      "index": 13,
+      "text": "To put that in perspective, 5,145 tokens is an extremely short corpus for training a language model [c3819].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3819"
+      ],
+      "status": "grounded",
+      "reason": "c3819 states the dataset with 5145 tokens is very short for training an LLM."
+    },
+    {
+      "index": 14,
+      "text": "A production model would be trained on hundreds of billions of tokens.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "needs_external_check",
+      "reason": "This is a general statement about production models but is not directly supported by the provided claims. It is plausible canonical knowledge but should be verified against external references."
+    },
+    {
+      "index": 15,
+      "text": "However, for the purposes of learning how the data pipeline, the model architecture, and the training loop all fit together, this dataset is entirely suitable [c3819].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3819"
+      ],
+      "status": "grounded",
+      "reason": "c3819 confirms the dataset is suitable for educational purposes."
+    },
+    {
+      "index": 16,
+      "text": "[FIGURE: Bar chart comparing The Verdict's 5,145 tokens against GPT-3's 300 billion tokens, with a logarithmic y-axis to make both visible]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 17,
+      "text": "When the series moves from pre-training to fine-tuning for classification, a different dataset takes center stage: the **SMS Spam Collection**.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional framing statement."
+    },
+    {
+      "index": 18,
+      "text": "This corpus is used to demonstrate how a pre-trained language model can be adapted to perform binary text classification\u2014distinguishing spam messages from legitimate ones (commonly called \"ham\").",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement of the dataset's purpose."
+    },
+    {
+      "index": 19,
+      "text": "The dataset contains a total of **5,572 messages** [c3632].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3632"
+      ],
+      "status": "grounded",
+      "reason": "c3632 confirms the SMS Spam Collection dataset contains a total of 5,572 emails (messages)."
+    },
+    {
+      "index": 20,
+      "text": "Of these, 425 spam messages were manually extracted from the Grumbletext website [c3623].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3623"
+      ],
+      "status": "grounded",
+      "reason": "c3623 confirms 425 spam messages were manually extracted from the Grumbletext website."
+    },
+    {
+      "index": 21,
+      "text": "The dataset is distributed as a tab-separated values file named `SMSSpamCollection.tsv` [c3629], which can be loaded directly into a pandas DataFrame for manipulation [c3631].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3629",
+        "c3631"
+      ],
+      "status": "grounded",
+      "reason": "c3629 confirms the dataset is saved as a tab-separated values file named SMSSpamCollection.tsv; c3631 confirms it can be loaded into a pandas DataFrame."
+    },
+    {
+      "index": 22,
+      "text": "One practical issue with spam datasets is class imbalance: there are typically far more legitimate messages than spam.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General explanatory statement about spam datasets; no specific factual claim requiring citation."
+    },
+    {
+      "index": 23,
+      "text": "To address this, the dataset is balanced before training.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional statement describing the approach taken."
+    },
+    {
+      "index": 24,
+      "text": "After balancing, the dataset contains **747 instances of each class** (ham and spam) [c3635], giving a total of 1,494 examples for the classification experiments.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3635"
+      ],
+      "status": "grounded",
+      "reason": "c3635 confirms that after balancing, the dataset contains 747 instances of each class. The arithmetic (747 \u00d7 2 = 1,494) is correct."
+    },
+    {
+      "index": 25,
+      "text": "The third dataset appears in the instruction fine-tuning portion of the series, where the goal is to teach a model to follow natural-language instructions rather than simply continue text.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive framing of the instruction fine-tuning task."
+    },
+    {
+      "index": 26,
+      "text": "The dataset used for these demonstrations consists of **1,100 instruction\u2013input\u2013output pairs** [c588, c603, c691].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c588",
+        "c603",
+        "c691"
+      ],
+      "status": "grounded",
+      "reason": "All three claims (c588, c603, c691) confirm the dataset contains 1100 instruction input-output pairs."
+    },
+    {
+      "index": 27,
+      "text": "Each example in the dataset has three fields: an instruction describing the task, an optional input providing context, and an output giving the expected response.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Descriptive statement of the dataset structure; no specific factual claim requiring external citation."
+    },
+    {
+      "index": 28,
+      "text": "This format is the backbone of instruction fine-tuning and mirrors the structure used by much larger, publicly available datasets.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General explanatory statement."
+    },
+    {
+      "index": 29,
+      "text": "For comparison, the **Stanford Alpaca** repository contains a dataset of **52,000 instruction\u2013output pairs** [c695]\u2014roughly **50 times larger** than the 1,100-pair dataset used in these examples [c696].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c695",
+        "c696"
+      ],
+      "status": "grounded",
+      "reason": "c695 confirms Stanford Alpaca contains 52,000 instruction-output pairs; c696 confirms it is 50 times larger than the 1100-pair dataset."
+    },
+    {
+      "index": 30,
+      "text": "The Alpaca dataset is a well-known reference point in the open-source instruction-tuning community.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General contextual statement about the Alpaca dataset's status in the community."
+    },
+    {
+      "index": 31,
+      "text": "The smaller 1,100-pair dataset is used here for the same reason *The Verdict* is used for pre-training: it keeps training times manageable on a laptop while still illustrating every step of the fine-tuning pipeline.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory framing of the choice; connects to earlier reasoning."
+    },
+    {
+      "index": 32,
+      "text": "[FIGURE: Side-by-side comparison of dataset sizes: 1,100 pairs (this series) vs. 52,000 pairs (Stanford Alpaca), shown as stacked bars]",
+      "type": "figure_directive",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Figure directive; no factual claim to verify."
+    },
+    {
+      "index": 33,
+      "text": "To ground your intuition about what production pre-training actually looks like, it is worth examining the data that went into GPT-3.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Transitional framing statement."
+    },
+    {
+      "index": 34,
+      "text": "GPT-3 was trained on a total of **300 billion tokens** [c3395].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3395"
+      ],
+      "status": "grounded",
+      "reason": "c3395 confirms GPT-3 was trained on a total of 300 billion tokens."
+    },
+    {
+      "index": 35,
+      "text": "The training data was assembled from several sources, each weighted differently during training.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to the breakdown of sources."
+    },
+    {
+      "index": 36,
+      "text": "The dominant source is **Common Crawl**, a free and open repository of web crawl data that has maintained over **250 million pages** spanning **17 years** since 2007 [c3391].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3391"
+      ],
+      "status": "grounded",
+      "reason": "c3391 confirms Common Crawl is a free and open repository that has maintained over 250 million pages spanning 17 years since 2007."
+    },
+    {
+      "index": 37,
+      "text": "GPT-3 draws **410 billion tokens** from Common Crawl, which constitutes **60%** of the entire training dataset [c3389, c3421].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3389",
+        "c3421"
+      ],
+      "status": "grounded",
+      "reason": "Both c3389 and c3421 confirm GPT-3 uses 410 billion tokens from Common Crawl at 60% weight."
+    },
+    {
+      "index": 38,
+      "text": "The sheer size of Common Crawl makes it the backbone of most large language model training runs.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General explanatory statement about Common Crawl's role."
+    },
+    {
+      "index": 39,
+      "text": "The second major source is **WebText2**, an enhanced version of the original WebText corpus that covers Reddit submissions from 2005 to 2020 [c3393].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3393"
+      ],
+      "status": "grounded",
+      "reason": "c3393 confirms WebText2 is an enhanced version of WebText that covers Reddit submissions from 2005 to 2020."
+    },
+    {
+      "index": 40,
+      "text": "GPT-3 uses **19 billion words** from WebText2, accounting for **22%** of the training data [c3392, c3421].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3392",
+        "c3421"
+      ],
+      "status": "grounded",
+      "reason": "Both c3392 and c3421 confirm GPT-3 uses 19 billion words from WebText2 at 22% weight."
+    },
+    {
+      "index": 41,
+      "text": "The remaining **18\u201319%** of GPT-3's training data comes from books and Wikipedia [c3394].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3394"
+      ],
+      "status": "grounded",
+      "reason": "c3394 confirms the remaining 18-19% of GPT-3 training data comes from books and Wikipedia."
+    },
+    {
+      "index": 42,
+      "text": "Within the books component, the Books1 corpus alone contributes **12 billion tokens** at an **8% weight** [c3421].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3421"
+      ],
+      "status": "grounded",
+      "reason": "c3421 confirms Books1 contributes 12 billion tokens at 8% weight."
+    },
+    {
+      "index": 43,
+      "text": "The table below summarizes the composition of GPT-3's training data:",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Introductory statement to the table."
+    },
+    {
+      "index": 44,
+      "text": "| Source | Tokens | Weight |\n|---|---|---|\n| Common Crawl | 410 billion | 60% |\n| WebText2 | 19 billion words | 22% |\n| Books1 | 12 billion | 8% |\n| Books + Wikipedia (remainder) | \u2014 | ~10% |\n| **Total** | **300 billion tokens** | **100%** |",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c3389",
+        "c3392",
+        "c3394",
+        "c3395",
+        "c3421"
+      ],
+      "status": "grounded",
+      "reason": "The table summarizes data from the cited claims: c3389/c3421 (Common Crawl), c3392/c3421 (WebText2), c3421 (Books1), c3394 (Books+Wikipedia remainder), and c3395 (total 300B tokens). All values match the claims."
+    },
+    {
+      "index": 45,
+      "text": "Intuitively, the weighting scheme matters as much as the raw token counts.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about the importance of weighting."
+    },
+    {
+      "index": 46,
+      "text": "A source can be sampled more or less frequently than its size alone would suggest, allowing the training process to emphasize higher-quality text (such as curated books or filtered web pages) relative to noisier sources.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "General explanatory statement about training data weighting strategies."
+    },
+    {
+      "index": 47,
+      "text": "*The Verdict* is in the public domain and is included directly in the series repository [c3177].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3177"
+      ],
+      "status": "grounded",
+      "reason": "c3177 confirms The Verdict is available in a repository."
+    },
+    {
+      "index": 48,
+      "text": "The SMS Spam Collection is a well-known benchmark dataset available for research use [c3629].",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3629"
+      ],
+      "status": "grounded",
+      "reason": "c3629 confirms the SMS Spam Collection dataset is available (as a downloadable file)."
+    },
+    {
+      "index": 49,
+      "text": "The 1,100-pair instruction dataset is provided alongside the series materials.",
+      "type": "factual",
+      "cited_claim_ids": [],
+      "status": "unsupported",
+      "reason": "No claim provided confirms this statement about the instruction dataset being provided with the series materials."
+    },
+    {
+      "index": 50,
+      "text": "Common Crawl is a free and open repository [c3391], though working with it at full scale requires significant storage and compute resources that go well beyond a laptop setup.",
+      "type": "factual",
+      "cited_claim_ids": [
+        "c3391"
+      ],
+      "status": "grounded",
+      "reason": "c3391 confirms Common Crawl is a free and open repository. The statement about resource requirements is general knowledge and reasonable."
+    },
+    {
+      "index": 51,
+      "text": "For the purposes of this series, you will only need to download *The Verdict* and the SMS Spam Collection.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Practical guidance statement."
+    },
+    {
+      "index": 52,
+      "text": "Everything else is either provided in the repository or is reference material describing production-scale systems rather than something you will run locally.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Explanatory statement about what is provided vs. reference material."
+    },
+    {
+      "index": 53,
+      "text": "| Dataset | Size | Purpose |\n|---|---|---|\n| *The Verdict* (Edith Wharton, 1908) | 20,479 chars / 5,145 tokens | Pre-training demonstrations |\n| SMS Spam Collection | 5,572 messages (balanced: 747 per class) | Classification fine-tuning |\n| Instruction dataset | 1,100 pairs | Instruction fine-tuning |\n| Stanford Alpaca | 52,000 pairs | Reference / comparison |\n| GPT-3 corpora | 300 billion tokens total | Production-scale context |",
+      "type": "code_block",
+      "cited_claim_ids": [
+        "c2911",
+        "c3818",
+        "c3632",
+        "c3635",
+        "c588",
+        "c695",
+        "c3395"
+      ],
+      "status": "grounded",
+      "reason": "Summary table values match cited claims: The Verdict (c2911/c3818), SMS Spam Collection (c3632/c3635), Instruction dataset (c588), Stanford Alpaca (c695), GPT-3 (c3395)."
+    },
+    {
+      "index": 54,
+      "text": "With these datasets in hand\u2014and a clear sense of why each one was chosen\u2014you are ready to move into the chapters that build the actual data-loading and tokenization pipelines that feed them into a model.",
+      "type": "narrative",
+      "cited_claim_ids": [],
+      "status": "narrative_ok",
+      "reason": "Closing transitional statement."
+    }
+  ],
+  "summary": {
+    "grounded": 45,
+    "unsupported": 1,
+    "contradicted": 0,
+    "needs_external_check": 1,
+    "narrative_ok": 7
+  }
+}

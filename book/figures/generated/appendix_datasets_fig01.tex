@@ -1,0 +1,22 @@
+\begin{tikzpicture}[scale=1.2]
+  % Set up axes with logarithmic y-axis
+  \begin{axis}[
+    xlabel={Model},
+    ylabel={Tokens (log scale)},
+    ymode=log,
+    ymin=1e2,
+    ymax=1e12,
+    xtick={1,2},
+    xticklabels={The Verdict, GPT-3},
+    ytick={1e3, 1e6, 1e9, 1e12},
+    yticklabel={$10^3$, $10^6$, $10^9$, $10^{12}$},
+    bar width=0.6cm,
+    width=10cm,
+    height=6cm,
+    grid=major,
+    grid style={gray!30},
+  ]
+    \addplot[fill=steelblue, draw=black] coordinates {(1, 5145)};
+    \addplot[fill=coral, draw=black] coordinates {(2, 300e9)};
+  \end{axis}
+\end{tikzpicture}

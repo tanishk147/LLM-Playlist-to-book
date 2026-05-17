@@ -1,0 +1,8 @@
+graph TD
+    A["For each epoch"] --> B["For each batch in training set"]
+    B --> C["Reset loss gradients"]
+    C --> D["Forward pass: Calculate loss"]
+    D --> E["Backward pass: Calculate gradients"]
+    E --> F["Optimizer step: Update weights"]
+    F --> B
+    B -.->|next epoch| A

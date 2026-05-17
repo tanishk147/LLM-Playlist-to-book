@@ -1,0 +1,17 @@
+graph LR
+    A["raw text"] --> B["tokenizer"]
+    B --> C["token IDs"]
+    C --> D["DataLoader<br/>(sliding window, batching)"]
+    D --> E["token embedding layer"]
+    F["positional embedding layer"] --> G["input embeddings"]
+    E --> G
+    G --> H["LLM"]
+    
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#fff3e0
+    style E fill:#f3e5f5
+    style F fill:#f3e5f5
+    style G fill:#e8f5e9
+    style H fill:#fce4ec

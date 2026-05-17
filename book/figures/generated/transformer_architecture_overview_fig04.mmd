@@ -1,0 +1,19 @@
+graph TD
+    A["Input"] --> B["Layer Normalization"]
+    B --> C["Masked Multi-Head Attention"]
+    C --> D{"Add"}
+    A --> D
+    D --> E["Layer Normalization"]
+    E --> F["Feed-Forward Network<br/>(with GELU activation)"]
+    F --> G{"Add"}
+    E --> G
+    G --> H["Output"]
+    
+    style A fill:#e1f5ff
+    style H fill:#e1f5ff
+    style B fill:#fff9c4
+    style C fill:#f3e5f5
+    style E fill:#fff9c4
+    style F fill:#f3e5f5
+    style D fill:#c8e6c9
+    style G fill:#c8e6c9

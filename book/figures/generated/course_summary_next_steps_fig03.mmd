@@ -1,0 +1,17 @@
+graph LR
+    A["LayerNorm"] --> B["Multi-Head Attention"]
+    B --> C["Dropout"]
+    C --> D{"Residual Add"}
+    D --> E["LayerNorm"]
+    E --> F["FFN"]
+    F --> G["Dropout"]
+    G --> H{"Residual Add"}
+    H --> I["Output"]
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e1f5ff
+    style F fill:#e1f5ff
+    style G fill:#fff3e0
+    style H fill:#f3e5f5

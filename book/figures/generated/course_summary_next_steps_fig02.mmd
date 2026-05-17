@@ -1,0 +1,13 @@
+graph LR
+    A["Q, K, V<br/>Projections"] --> B["Scaled<br/>Dot-Product"]
+    B --> C["Causal Mask"]
+    C --> D["Softmax"]
+    D --> E["Weighted Sum<br/>of V"]
+    E --> F["Context Vector"]
+    
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#fff3e0
+    style D fill:#f3e5f5
+    style E fill:#e8f5e9
+    style F fill:#fce4ec

@@ -1,0 +1,15 @@
+graph TD
+    A["α₂₁ × x₁"] --> SUM["z₂ = Σ α₂ᵢ × xᵢ"]
+    B["α₂₂ × x₂"] --> SUM
+    C["α₂₃ × x₃"] --> SUM
+    D["..."] --> SUM
+    E["α₂ₙ × xₙ"] --> SUM
+    SUM --> F["Context vector z₂<br/>for query 'journey'"]
+    
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#f5f5f5
+    style E fill:#e1f5ff
+    style SUM fill:#fff9c4
+    style F fill:#c8e6c9

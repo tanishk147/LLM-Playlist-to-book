@@ -1,0 +1,13 @@
+graph LR
+    A["<b>1st iteration:</b><br/>Input: Hello"] --> B["Next token: I"]
+    B --> C["Append to input"]
+    C --> D["<b>2nd iteration:</b><br/>Input: Hello I am a"]
+    D --> E["Next token: model"]
+    E --> F["Append to input"]
+    F --> G["<b>3rd iteration:</b><br/>Input grows..."]
+    
+    style A fill:#e1f5ff
+    style D fill:#e1f5ff
+    style G fill:#e1f5ff
+    style B fill:#fff9c4
+    style E fill:#fff9c4

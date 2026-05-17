@@ -1,0 +1,17 @@
+graph LR
+    A["1. Tokenize<br/>source text"] --> B["2. Embed<br/>tokens"]
+    B --> C["3. Add positional<br/>encoding"]
+    C --> D["4. Encoder<br/>attention layers"]
+    D --> E["5. Encoder<br/>embeddings"]
+    E --> F["6. Decoder input<br/>encoder embeddings +<br/>partial target"]
+    F --> G["7. Decoder<br/>attention layers"]
+    G --> H["8. Generate next<br/>output word"]
+    H -."repeat steps 6-8".-> F
+    style A fill:#e1f5ff
+    style B fill:#e1f5ff
+    style C fill:#e1f5ff
+    style D fill:#fff3e0
+    style E fill:#fff3e0
+    style F fill:#f3e5f5
+    style G fill:#f3e5f5
+    style H fill:#f3e5f5
