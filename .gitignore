@@ -17,7 +17,7 @@ data/.stage/11_typeset
 # book/manuscript.pdf
 book/manuscript.tex
 book/manuscript.md
-reports/
+/reports/
 
 # Python artifacts
 __pycache__/
